@@ -1,0 +1,228 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+using FLImagingCLR;
+using FLImagingCLR.Base;
+using FLImagingCLR.Foundation;
+using FLImagingCLR.GUI;
+using FLImagingCLR.ImageProcessing;
+using FLImagingCLR.AdvancedFunctions;
+
+namespace Match
+{
+	class Program
+	{
+		public static void ErrorPrint(CResult cResult, string str)
+		{
+			if(str.Length > 1)
+				Console.WriteLine(str);
+
+			Console.WriteLine("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
+			Console.WriteLine("\n");
+			Console.ReadKey();
+		}
+
+		[STAThread]
+		static void Main(string[] args)
+		{
+			// 이미지 객체 선언 // Declare the image object
+			CFLImage fliLearnImage = new CFLImage();
+			CFLImage fliFindImage = new CFLImage();
+
+			// 이미지 뷰 선언 // Declare the image view
+			CGUIViewImage viewImageLearn = new CGUIViewImage();
+			CGUIViewImage viewImageFind = new CGUIViewImage();
+
+			CResult eResult = new CResult();
+
+			do
+			{
+				// 이미지 로드 // Load image
+				if((eResult = fliLearnImage.Load("../../ExampleImages/Matching/Pattern Single Learn.flif")).IsFail())
+					break;
+
+				if((eResult = fliFindImage.Load("../../ExampleImages/Matching/Pattern Single Find.flif")).IsFail())
+					break;
+
+				// 이미지 뷰 생성 // Create image view
+				if((eResult = viewImageLearn.Create(400, 0, 912, 384)).IsFail())
+					break;
+
+				if((eResult = viewImageFind.Create(912, 0, 1680, 576)).IsFail())
+					break;
+
+				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
+				if((eResult = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
+					break;
+
+				if((eResult = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
+					break;
+
+				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
+				if((eResult = viewImageLearn.SynchronizeWindow(ref viewImageFind)).IsFail())
+					break;
+
+				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
+				CGUIViewImageLayer layerFind = viewImageFind.GetLayer(1);
+
+				layerLearn.Clear();
+				layerFind.Clear();
+
+				CFLPoint<double> flp00 = new CFLPoint<double>(0, 0);
+
+				if((eResult = layerLearn.DrawTextCanvas(flp00, "LEARN", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+					break;
+
+				if((eResult = layerFind.DrawTextCanvas(flp00, "FIND", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+					break;
+
+				// Pattern Match 객체 생성 // Create Pattern Match object
+				CPatternMatch FLPatternMatch = new CPatternMatch();
+
+				// 학습할 이미지 설정 // Set the image to learn
+				FLPatternMatch.SetLearnImage(ref fliLearnImage);
+
+				// 학습할 영역을 설정합니다. // Set the area to learn.
+				CFLRect<double> learnRegion = new CFLRect<double>(90.457883, 97.838013, 420.282937, 402.447084);
+				CFLPoint<double> flpLearnPivot = new CFLPoint<double>(learnRegion.GetCenter());
+				FLPatternMatch.SetLearnROI(learnRegion);
+				FLPatternMatch.SetLearnPivot(flpLearnPivot);
+
+				// 알고리즘 수행 // Execute the Algoritm
+				if((eResult = FLPatternMatch.Learn()).IsFail())
+					break;
+
+				// 측정 영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the measurement area is
+				if((eResult = layerLearn.DrawFigureImage(learnRegion, EColor.BLACK, 3)).IsFail())
+					break;
+
+				if((eResult = layerLearn.DrawFigureImage(learnRegion, EColor.CYAN)).IsFail())
+					break;
+
+				// 설정된 중심점의 위치를 디스플레이 한다 // Display the position of the set center point
+				CFLFigureArray flfaPointPivot = flpLearnPivot.MakeCrossHair(3, false);
+
+				if((eResult = layerLearn.DrawFigureImage(flfaPointPivot, EColor.BLACK, 3)).IsFail())
+					break;
+
+				if((eResult = layerLearn.DrawFigureImage(flfaPointPivot, EColor.LIME)).IsFail())
+					break;
+
+				// 학습한 정보에 대해 Console창에 출력한다 // Print the learned information to the console window
+				Console.WriteLine(" ▷ Learn Information");
+				Console.WriteLine("  1. ROI Shape Type : Rectangle");
+				Console.WriteLine("    left   : {0}", learnRegion.left);
+				Console.WriteLine("    right  : {0}", learnRegion.right);
+				Console.WriteLine("    top    : {0}", learnRegion.top);
+				Console.WriteLine("    bottom : {0}", learnRegion.bottom);
+				Console.WriteLine("    angle  : {0}", learnRegion.angle);
+				Console.WriteLine("  2. Interest Pivot : ({0}, {1})", flpLearnPivot.x, flpLearnPivot.y);
+				Console.WriteLine("");
+
+				// 검출할 이미지 설정 // Set image to detect
+				FLPatternMatch.SetSourceImage(ref fliFindImage);
+
+				// 검출 시 사용될 파라미터를 설정합니다. // Set the parameters to be used for detection.
+				// 검출 시 사용될 유효 변경 크기범위를 설정합니다. // Set the effective change size range to be used for detection.
+				FLPatternMatch.SetScaleRange(0.95, 1.05);
+				// 검출 시 사용될 기본 각도를 설정합니다. // Set the default angle to be used for detection.
+				FLPatternMatch.SetAngleBias(0.0);
+				// 검출 시 사용될 각도의 탐색범위를 설정합니다. // Set the search range of the angle to be used for detection.
+				// 각도는 기본 각도를 기준으로 (기본 각도 - AngleTolerance, 기본 각도 + AngleTolerance)가 최종 탐색범위 // The angle is based on the basic angle (default angle - AngleTolerance, basic angle + AngleTolerance) is the final search range
+				FLPatternMatch.SetAngleTolerance(10.0);
+				// 검출 시 최적화 정도를 설정합니다. // Set the degree of optimization for detection.
+				// 0 ~ 1범위에서 0에 가까울수록 정확성은 낮아질 수 있으나, 속도가 상향됩니다. // From 0 to 1, the closer to 0, the lower the accuracy, but the higher the speed.
+				FLPatternMatch.SetAccuracy(0.5);
+				// 검출 시 사용될 최소 탐색점수를 설정합니다. // Set the minimum search score to be used for detection.
+				FLPatternMatch.SetMinimumDetectionScore(0.7);
+				// 검출 시 사용될 최대 탐색객체 수를 설정합니다. // Set the maximum number of search objects to be used for detection.
+				FLPatternMatch.SetMaxObject(1);
+				// 검출 시 보간법 사용 유무에 대해 설정합니다. // Set whether to use interpolation when detecting.
+				FLPatternMatch.EnableInterpolation(true);
+
+				// 알고리즘 수행 // Execute the Algoritm
+				if((eResult = FLPatternMatch.Execute()).IsFail())
+				{
+					ErrorPrint(eResult, "Failed to execute");
+					break;
+				}
+
+				// 기하학적 패턴 검출 결과를 가져옵니다.
+				long i64ResultCount = FLPatternMatch.GetResultCount();
+
+				Console.WriteLine(" ▶ Find Information");
+
+				for(long i = 0; i < i64ResultCount; ++i)
+				{
+					CPatternMatch.SResult results;
+
+					FLPatternMatch.GetResult(i, out results);
+
+					float f32Score = results.f32Score;
+					float f32Angle = results.f32Angle;
+					float f32Scale = results.f32Scale;
+					CFLPoint<double> flpPivot = new CFLPoint<double>(results.pFlpPivot);
+					CFLFigure pFlfRegion = new CFLRect<double>(results.pFlfRegion);
+					CFLRect<double> pFlrResultRegion = new CFLRect<double>(pFlfRegion);
+
+					CFLRect<double> flrResultRegion = pFlrResultRegion;
+
+					CFLPoint<double> flpResultRegion = new CFLPoint<double>(flrResultRegion.left, flrResultRegion.top);
+
+					// 패턴 검출 결과를 Console창에 출력합니다. // Output the pattern detection result to the console window.
+					Console.WriteLine(" < Instance : {0} >", i);
+					Console.WriteLine("  1. ROI Shape Type : Rectangle");
+					Console.WriteLine("    left   : {0}", flrResultRegion.left);
+					Console.WriteLine("    right  : {0}", flrResultRegion.right);
+					Console.WriteLine("    top    : {0}", flrResultRegion.top);
+					Console.WriteLine("    bottom : {0}", flrResultRegion.bottom);
+					Console.WriteLine("    angle  : {0}", flrResultRegion.angle);
+					Console.WriteLine("  2. Interest Pivot : ({0}, {1})", flpResultRegion.x, flpResultRegion.y);
+					Console.WriteLine("  3. Score : {0}\n  4. Angle : {1}\n  5. Scale : {2}", f32Score, flrResultRegion.angle, f32Scale);
+					Console.WriteLine("");
+
+					// 검출 결과의 중심점을 디스플레이 한다 // Display the center point of the detection result
+					CFLFigureArray flfaPoint = flpPivot.MakeCrossHair(3, false);
+					flfaPoint.Rotate(f32Angle, flpPivot);
+
+					if((eResult = layerFind.DrawFigureImage(flfaPoint, EColor.BLACK, 3)).IsFail())
+						break;
+
+					if((eResult = layerFind.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
+						break;
+
+					// 결과 영역을 디스플레이 한다 // Display the result area
+					if((eResult = layerFind.DrawFigureImage(flrResultRegion, EColor.BLACK, 3)).IsFail())
+						break;
+
+					if((eResult = layerFind.DrawFigureImage(flrResultRegion, EColor.LIME)).IsFail())
+						break;
+
+					TPoint<double> tpPosition = new TPoint<double>();
+					tpPosition.x = flpPivot.x;
+					tpPosition.y = flpPivot.y;
+
+					string strText = String.Format("Score : {0}\nAngle : {1}\nScale : x{2}\n", f32Score, f32Angle, f32Scale);
+
+					if((eResult = layerFind.DrawTextImage(tpPosition, strText, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_CENTER)).IsFail())
+					{
+						ErrorPrint(eResult, "Failed to draw text");
+						break;
+					}
+				}
+
+				// 이미지 뷰를 갱신 합니다. // Update the image view.
+				viewImageLearn.Invalidate(true);
+				viewImageFind.Invalidate(true);
+
+				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
+				while(viewImageLearn.IsAvailable())
+					Thread.Sleep(1);
+			}
+			while(false);
+		}
+	}
+}
