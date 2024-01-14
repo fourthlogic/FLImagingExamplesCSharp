@@ -260,19 +260,16 @@ namespace SemanticSegmentation
 				{
 					Thread.Sleep(1);
 
-					// 마지막 미니 배치 최대 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MaxIteration = 0;
-					SemanticSegmentation.GetLastMaxIteration(out i32MaxIteration);
+					// 마지막 미니 배치 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
+					int i32MiniBatchCount = SemanticSegmentation.GetLastMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = 0;
-					SemanticSegmentation.GetLastIteration(out i32Iteration);
+					int i32Iteration = SemanticSegmentation.GetLastIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = 0;
-					SemanticSegmentation.GetLastEpoch(out i32Epoch);
-
+					int i32Epoch = SemanticSegmentation.GetLastEpoch();
+			
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
-					if(i32Epoch != i32PrevEpoch && i32Iteration == i32MaxIteration && i32Epoch > 0)
+					if(i32Epoch != i32PrevEpoch && i32Iteration == i32MiniBatchCount && i32Epoch > 0)
 					{
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
 						float f32CurrCost;

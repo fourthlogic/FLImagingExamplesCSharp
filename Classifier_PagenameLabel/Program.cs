@@ -178,14 +178,11 @@ namespace Classifier
 					Thread.Sleep(1);
 
 					// 마지막 미니 배치 최대 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MaxIteration = 0;
-					classifier.GetLastMaxIteration(out i32MaxIteration);
+					int i32MaxIteration = classifier.GetLastMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = 0;
-					classifier.GetLastIteration(out i32Iteration);
+					int i32Iteration = classifier.GetLastIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = 0;
-					classifier.GetLastEpoch(out i32Epoch);
+					int i32Epoch = classifier.GetLastEpoch();
 
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
