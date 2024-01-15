@@ -223,46 +223,49 @@ namespace Classifier
 						classifier.GetResultCostHistory(out vctCosts);
 						classifier.GetResultValidationHistory(out vctValidations);
 
-						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
-						float f32CurrCost = vctCosts.Last();
-						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32Validation = vctValidations.Last();
-
-						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-						Console.WriteLine("Cost : {0:F6} Validation : {1:F6} Epoch {2} / {3}", f32CurrCost, f32Validation, i32Epoch, i32MaxEpoch);
-
-						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
-						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
+						if(vctCosts.Count != 0)
 						{
-							viewGraph.LockUpdate();
+							// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
+							float f32CurrCost = vctCosts.Last();
+							// 마지막 검증 결과 받기 // Get the last validation result
+							float f32Validation = vctValidations.Last();
 
-							// 이전 그래프의 데이터를 삭제 // Clear previous grpah data
-							viewGraph.Clear();
-							// Graph View 데이터 입력 // Input Graph View Data
-							viewGraph.Plot(vctCosts, EChartType.Line, EColor.RED, "Cost");
+							// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
+							Console.WriteLine("Cost : {0:F6} Validation : {1:F6} Epoch {2} / {3}", f32CurrCost, f32Validation, i32Epoch, i32MaxEpoch);
 
-							int i32Step = classifier.GetLearnValidationStep();
-							List<float> flaX = new List<float>();
+							// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
+							if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
+							{
+								viewGraph.LockUpdate();
 
-							for(long i = 0; i < vctValidations.Count() - 1; ++i)
-								flaX.Add((float)(i * i32Step));
+								// 이전 그래프의 데이터를 삭제 // Clear previous grpah data
+								viewGraph.Clear();
+								// Graph View 데이터 입력 // Input Graph View Data
+								viewGraph.Plot(vctCosts, EChartType.Line, EColor.RED, "Cost");
 
-							flaX.Add((float)(vctCosts.Count() - 1));
-							// Graph View 데이터 입력 // Input Graph View Data
-							viewGraph.Plot(flaX, vctValidations, EChartType.Line, EColor.BLUE, "Validation");
+								int i32Step = classifier.GetLearnValidationStep();
+								List<float> flaX = new List<float>();
 
-							viewGraph.UnlockUpdate();
-							viewGraph.Invalidate();
+								for(long i = 0; i < vctValidations.Count() - 1; ++i)
+									flaX.Add((float)(i * i32Step));
+
+								flaX.Add((float)(vctCosts.Count() - 1));
+								// Graph View 데이터 입력 // Input Graph View Data
+								viewGraph.Plot(flaX, vctValidations, EChartType.Line, EColor.BLUE, "Validation");
+
+								viewGraph.UnlockUpdate();
+								viewGraph.Invalidate();
+							}
+
+							// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
+							// If the validation result is 1.0, stop learning and classify images 
+							if(f32Validation == 1.0f)
+								classifier.Stop();
+
+							i32PrevEpoch = i32Epoch;
+							i32PrevCostCount = vctCosts.Count();
+							i32PrevValidationCount = vctValidations.Count();
 						}
-
-						// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
-						// If the validation result is 1.0, stop learning and classify images 
-						if(f32Validation == 1.0f)
-							classifier.Stop();
-
-						i32PrevEpoch = i32Epoch;
-						i32PrevCostCount = vctCosts.Count();
-						i32PrevValidationCount = vctValidations.Count();
 					}
 
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
