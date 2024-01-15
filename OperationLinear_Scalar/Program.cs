@@ -41,7 +41,7 @@ namespace OperationLinear
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((eResult = fliSourceImage.Load("../../ExampleImages/OperationLinearPolynomial/Space.flif")).IsFail())
+				if((eResult = fliSourceImage.Load("../../ExampleImages/OperationLinear/Space.flif")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the image file. \n");
 					break;

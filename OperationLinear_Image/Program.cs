@@ -45,21 +45,21 @@ namespace OperationLinear
 			do
             {
                 // Source 이미지 로드 // Load the source image
-                if ((eResult = fliSourceImage.Load("../../ExampleImages/OperationLinearPolynomial/Space.flif")).IsFail())
+                if ((eResult = fliSourceImage.Load("../../ExampleImages/OperationLinear/Space.flif")).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Operand1 이미지 로드 // Loads the operand image
-                if ((eResult = fliOperandImage1.Load("../../ExampleImages/OperationLinearPolynomial/circle.flif")).IsFail())
+                if ((eResult = fliOperandImage1.Load("../../ExampleImages/OperationLinear/circle.flif")).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Operand2 이미지 로드 // Loads the operand image
-                if ((eResult = fliOperandImage2.Load("../../ExampleImages/OperationLinearPolynomial/Sky.flif")).IsFail())
+                if ((eResult = fliOperandImage2.Load("../../ExampleImages/OperationLinear/Sky.flif")).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to load the image file. \n");
                     break;
