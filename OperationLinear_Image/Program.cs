@@ -171,23 +171,23 @@ namespace OperationLinear
                 }
 
 				// OperationLinear 객체 생성 // Create OperationLinear object
-				COperationLinear LPolynomial = new COperationLinear();
+				COperationLinear Linear = new COperationLinear();
 
                 // Source 이미지 설정 // Set the source image
-                LPolynomial.SetSourceImage(ref fliSourceImage);
+                Linear.SetSourceImage(ref fliSourceImage);
 
 				// Operand 이미지 설정 // Set the operand image
-				LPolynomial.SetOperandImage(ref fliOperandImage1);
-				LPolynomial.SetOperandImage2(ref fliOperandImage2);
+				Linear.SetOperandImage(ref fliOperandImage1);
+				Linear.SetOperandImage2(ref fliOperandImage2);
 
 				// Destination 이미지 설정 // Set the destination image
-				LPolynomial.SetDestinationImage(ref fliDestinationImage);
+				Linear.SetDestinationImage(ref fliDestinationImage);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                LPolynomial.SetOperationSource(EOperationSource.Image);
+                Linear.SetOperationSource(EOperationSource.Image);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = LPolynomial.Execute()).IsFail())
+                if ((eResult = Linear.Execute()).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to execute operation Linear. \n");
                     break;
