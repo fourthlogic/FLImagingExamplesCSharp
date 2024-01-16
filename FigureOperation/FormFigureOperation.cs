@@ -72,8 +72,24 @@ namespace FigureOperation
 				if (!m_viewImage.IsAvailable())
 					break;
 
-				EFigureTemplateType eTemplateType = (EFigureTemplateType)comboBoxTemplateType.SelectedIndex + 1;
+				EFigureTemplateType eTemplateType = EFigureTemplateType.Double;
 
+				switch(comboBoxTemplateType.SelectedIndex)
+				{
+				case 0: // Int32
+					eTemplateType = EFigureTemplateType.Int32;
+					break;
+				case 1: // Int64
+					eTemplateType = EFigureTemplateType.Int64;
+					break;
+				case 2: // Float
+					eTemplateType = EFigureTemplateType.Float;
+					break;
+				case 3: // Double
+					eTemplateType = EFigureTemplateType.Double;
+					break;
+				}
+				
 				// 이미지 뷰의 캔버스 영역을 얻어온다.
 				CFLRect<int> flrlCanvas = m_viewImage.GetClientRectCanvasRegion();
 
@@ -460,7 +476,7 @@ namespace FigureOperation
                 if (comboBoxDeclType.DroppedDown == false && (SelectedDeclType() == EFigureDeclType.CubicSpline || SelectedDeclType() == EFigureDeclType.Region || SelectedDeclType() == EFigureDeclType.ComplexRegion))
 				{
 					if (comboBoxTemplateType.SelectedIndex != 0)
-						comboBoxTemplateType.SelectedIndex = (int)EFigureTemplateType.Double - 1;
+						comboBoxTemplateType.SelectedIndex = 3; // Double
 
 					if (comboBoxTemplateType.Enabled == true)
 						comboBoxTemplateType.Enabled = false;
