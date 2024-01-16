@@ -43,14 +43,14 @@ namespace OperationBinaryComplement
 			do
 	        {
                 // Source 이미지 로드 // Load the source image
-                if ((eResult = fliSourceImage.Load("../../ExampleImages/OperationBinaryComplement/circle.flif")).IsFail())
+                if ((eResult = fliSourceImage.Load("../../ExampleImages/OperationBinaryComplement/square.flif")).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Operand 이미지 로드 // Loads the operand image
-                if ((eResult = fliOperandImage.Load("../../ExampleImages/OperationBinaryComplement/square.flif")).IsFail())
+                if ((eResult = fliOperandImage.Load("../../ExampleImages/OperationBinaryComplement/circle.flif")).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to load the image file. \n");
                     break;
