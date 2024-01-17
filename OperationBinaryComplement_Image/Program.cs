@@ -56,8 +56,9 @@ namespace OperationBinaryComplement
                     break;
                 }
 
-                // Destination 이미지 생성
-                if ((eResult = fliDestinationImage.Create(250, 250)).IsFail())
+
+				// Destination 이미지 생성
+				if ((eResult = fliDestinationImage.Assign(fliSourceImage)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image file. \n");
                     break;
