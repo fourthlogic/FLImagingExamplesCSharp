@@ -259,8 +259,8 @@ namespace OperationBitwiseAnd
                 power.SetDestinationImage(ref arrFliImage1[2]);
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Image);
-                // Operation Mode Overflow 옵션으로 설정 // Set Operation Mode to overflow option
-                power.SetOperationMode(EOperationMode.Overflow);
+				// Overflow Method Wrapping 옵션으로 설정 // Set Overflow Method to Wrapping option
+				power.SetOverflowMethod(EOverflowMethod.Wrapping);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((eResult = power.Execute()).IsFail())

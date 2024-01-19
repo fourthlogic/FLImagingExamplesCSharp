@@ -230,8 +230,8 @@ namespace OperationBitwiseAnd
                 power.SetDestinationImage(ref arrFliImage[1]);
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Scalar);
-                // Operation Mode Saturated 옵션으로 설정 // Set Operation Mode to saturated option
-                power.SetOperationMode(EOperationMode.Saturated);
+				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
+				power.SetOverflowMethod(EOverflowMethod.Saturated);
                 // Exponent 값 설정 // Set Exponent value
                 power.SetScalarValue(mvScalr1);
 
@@ -246,8 +246,8 @@ namespace OperationBitwiseAnd
 				power.SetDestinationImage(ref arrFliImage[2]);
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Scalar);
-                // Operation Mode Saturated 옵션으로 설정 // Set Operation Mode to saturated option
-                power.SetOperationMode(EOperationMode.Saturated);
+				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
+				power.SetOverflowMethod(EOverflowMethod.Saturated);
                 // Exponent 값 설정 // Set Exponent value
                 power.SetScalarValue(mvScalr2);
 
@@ -262,8 +262,8 @@ namespace OperationBitwiseAnd
 				power.SetDestinationImage(ref arrFliImage[3]);
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Scalar);
-		        // Operation Mode Overflow 옵션으로 설정 // Set Operation Mode to overflow option
-	        	power.SetOperationMode(EOperationMode.Overflow);
+				// Overflow Method Wrapping 옵션으로 설정 // Set Overflow Method to Wrapping option
+				power.SetOverflowMethod(EOverflowMethod.Wrapping);
                 // Exponent 값 설정 // Set Exponent value
                 power.SetScalarValue(mvScalr3);
 
@@ -278,8 +278,8 @@ namespace OperationBitwiseAnd
 				power.SetDestinationImage(ref arrFliImage[4]);
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Scalar);
-                // Operation Mode Saturated 옵션으로 설정 // Set Operation Mode to saturated option
-                power.SetOperationMode(EOperationMode.Saturated);
+				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
+				power.SetOverflowMethod(EOverflowMethod.Saturated);
                 // Exponent 값 설정 // Set Exponent value
                 power.SetScalarValue(mvScalr4);
 
@@ -295,8 +295,8 @@ namespace OperationBitwiseAnd
 				power.SetDestinationImage(ref arrFliImage[5]);
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Scalar);
-                // Operation Mode Overflow 옵션으로 설정 // Set Operation Mode to overflow option
-                power.SetOperationMode(EOperationMode.Overflow);
+				// Overflow Method Wrapping 옵션으로 설정 // Set Overflow Method to Wrapping option
+				power.SetOverflowMethod(EOverflowMethod.Wrapping);
                 // Exponent 값 설정 // Set Exponent value
                 power.SetScalarValue(mvScalr5);
 
