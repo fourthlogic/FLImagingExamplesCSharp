@@ -160,28 +160,26 @@ namespace Classifier
 				CClassifierDL classifier = new CClassifierDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
-				COptimizerSpec optSpec = new COptimizerSpec();
+				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				classifier.SetLearnImage(ref fliLearnImage);
+				classifier.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
-				classifier.SetLearnValidationImage(ref fliSourceImage);
+				classifier.SetLearningValidationImage(ref fliSourceImage);
 				// 분류할 이미지 설정 // Set the image to classify
 				classifier.SetSourceImage(ref fliSourceImage);
 
 				// 학습할 Classifier 모델 설정 // Set up the Classifier model to learn
 				classifier.SetModel(CClassifierDL.EModel.LeNet);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				classifier.SetLearnEpoch(150);
+				classifier.SetLearningEpoch(150);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				classifier.SetInterpoloationMethod(EInterpolationMethod.Bilinear);
 
-				// Classifier의 Optimizer 타입 설정 // Set Optimizer type of Classifier
-				optSpec.SetOptimizerType(COptimizerSpec.EOptimizerType.AdamGradientDescent);
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(1e-3f);
 				// 설정한 Optimizer를 Classifier에 적용 // Apply Optimizer that we set up to Classifier
-				classifier.SetLearnOptimizerSpec(optSpec);
+				classifier.SetLearningOptimizerSpec(optSpec);
 
 				// Classifier learn function을 진행하는 스레드 생성 // Create the Classifier Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
@@ -195,7 +193,7 @@ namespace Classifier
 				while(!classifier.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
-				int i32MaxEpoch = classifier.GetLearnEpoch();
+				int i32MaxEpoch = classifier.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
 				int i32PrevValidationCount = 0;
@@ -205,9 +203,9 @@ namespace Classifier
 					Thread.Sleep(1);
 
 					// 마지막 미니 배치 최대 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MaxIteration = classifier.GetLastMiniBatchCount();
+					int i32MaxIteration = classifier.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = classifier.GetLastIteration();
+					int i32Iteration = classifier.GetCurrentIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
 					int i32Epoch = classifier.GetLastEpoch();
 
@@ -220,8 +218,7 @@ namespace Classifier
 						List<float> vctCosts = new List<float>();
 						List<float> vctValidations = new List<float>();
 
-						classifier.GetResultCostHistory(out vctCosts);
-						classifier.GetResultValidationHistory(out vctValidations);
+						classifier.GetLearningResultAllHistory(out vctCosts, out vctValidations);
 
 						if(vctCosts.Count != 0)
 						{
@@ -243,7 +240,7 @@ namespace Classifier
 								// Graph View 데이터 입력 // Input Graph View Data
 								viewGraph.Plot(vctCosts, EChartType.Line, EColor.RED, "Cost");
 
-								int i32Step = classifier.GetLearnValidationStep();
+								int i32Step = classifier.GetLearningValidationStep();
 								List<float> flaX = new List<float>();
 
 								for(long i = 0; i < vctValidations.Count() - 1; ++i)
@@ -274,7 +271,7 @@ namespace Classifier
 				}
 
 				// 추론 결과 정보에 대한 설정 // Set for the inference result information
-				classifier.SetClassfierResult(CClassifierDL.EClassifierResult.ClassNum_ClassName_Percentage);
+				classifier.SetInferenceResultItemSettings(CClassifierDL.EInferenceResultItemSettings.ClassNum_ClassName_Percentage);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((eResult = classifier.Execute()).IsFail())
