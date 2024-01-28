@@ -274,19 +274,19 @@ namespace SemanticSegmentation
 						semanticSegmentation.GetLearningResultLastCost(out f32CurrCost);
 						// 마지막 검증 결과 받기 // Get the last validation result
 						float f32ValidationPa = 0;
-						float f32ValidationPaMIoU = 0;
+						float f32ValidationPaMeanIoU = 0;
 						semanticSegmentation.GetLearningResultLastPixelAccuracy(out f32ValidationPa);//SemanticSegmentation.GetLastValidationPixelAccuracy(out f32ValidationPa);
-						semanticSegmentation.GetLearningResultLastMIoU(out f32ValidationPaMIoU);//SemanticSegmentation.GetLastValidationMIoU(out f32ValidationPaMIoU);
+						semanticSegmentation.GetLearningResultLastMeanIoU(out f32ValidationPaMeanIoU);//SemanticSegmentation.GetLastValidationMeanIoU(out f32ValidationPaMeanIoU);
 																							// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Epoch {3} / {4}", f32CurrCost, f32ValidationPa, f32ValidationPaMIoU, i32Epoch, i32MaxEpoch);
+						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Epoch {3} / {4}", f32CurrCost, f32ValidationPa, f32ValidationPaMeanIoU, i32Epoch, i32MaxEpoch);
 
 						// 학습 결과 비용과 검증 결과 기록을 받아 그래프 뷰에 출력  
 						// Get the history of cost and validation and print it at graph view
 						List<float> vctCosts = new List<float>();
 						List<float> vctValidations = new List<float>();
-						List<float> vctMIoU = new List<float>();
+						List<float> vctMeanIoU = new List<float>();
 				
-						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMIoU);
+						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
@@ -307,7 +307,7 @@ namespace SemanticSegmentation
 							viewGraph.Plot(vctCosts, EChartType.Line, EColor.RED, "Cost");
 							// Graph View 데이터 입력 // Input Graph View Data
 							viewGraph.Plot(flaX, vctValidations, EChartType.Line, EColor.CYAN, "Validation");
-							viewGraph.Plot(flaX, vctMIoU, EChartType.Line, EColor.PINK, "mIoU");
+							viewGraph.Plot(flaX, vctMeanIoU, EChartType.Line, EColor.PINK, "mIoU");
 							viewGraph.UnlockUpdate();
 
 							viewGraph.UpdateWindow();
