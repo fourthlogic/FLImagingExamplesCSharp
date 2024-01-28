@@ -231,7 +231,7 @@ namespace OperationBitwiseAnd
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Scalar);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				power.SetOverflowMethod(EOverflowMethod.Saturated);
+				power.SetOverflowMethod(EOverflowMethod.Clamping);
                 // Exponent 값 설정 // Set Exponent value
                 power.SetScalarValue(mvScalr1);
 
@@ -247,7 +247,7 @@ namespace OperationBitwiseAnd
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Scalar);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				power.SetOverflowMethod(EOverflowMethod.Saturated);
+				power.SetOverflowMethod(EOverflowMethod.Clamping);
                 // Exponent 값 설정 // Set Exponent value
                 power.SetScalarValue(mvScalr2);
 
@@ -279,7 +279,7 @@ namespace OperationBitwiseAnd
                 // Image Operation 모드로 설정 // Set operation mode to image
                 power.SetOperationSource(EOperationSource.Scalar);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				power.SetOverflowMethod(EOverflowMethod.Saturated);
+				power.SetOverflowMethod(EOverflowMethod.Clamping);
                 // Exponent 값 설정 // Set Exponent value
                 power.SetScalarValue(mvScalr4);
 

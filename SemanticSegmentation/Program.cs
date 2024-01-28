@@ -200,31 +200,31 @@ namespace SemanticSegmentation
 				viewImageResultLabelFigure.RedrawWindow();
 
 				// SemanticSegmentation 객체 생성 // Create SemanticSegmentation object
-				CSemanticSegmentationDL SemanticSegmentation = new CSemanticSegmentationDL();
+				CSemanticSegmentationDL semanticSegmentation = new CSemanticSegmentationDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				SemanticSegmentation.SetLearningImage(ref fliLearnImage);
+				semanticSegmentation.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
-				SemanticSegmentation.SetLearningValidationImage(ref fliValidationImage);
+				semanticSegmentation.SetLearningValidationImage(ref fliValidationImage);
 				// 분류할 이미지 설정 // Set the image to classify
-				SemanticSegmentation.SetSourceImage(ref fliValidationImage);
+				semanticSegmentation.SetSourceImage(ref fliValidationImage);
 
 				// 학습할 SemanticSegmentation 모델 설정 // Set up the SemanticSegmentation model to learn
-				SemanticSegmentation.SetModel(CSemanticSegmentationDL.EModel.FL_SS_GP);
+				semanticSegmentation.SetModel(CSemanticSegmentationDL.EModel.FL_SS_GP);
 				// 학습할 SemanticSegmentation 모델 Version 설정 // Set up the SemanticSegmentation model version to learn
-				SemanticSegmentation.SetModelVersion(CSemanticSegmentationDL.EModelVersion.FL_SS_GP_V1_512);
+				semanticSegmentation.SetModelVersion(CSemanticSegmentationDL.EModelVersion.FL_SS_GP_V1_512);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				SemanticSegmentation.SetLearningEpoch(120);
+				semanticSegmentation.SetLearningEpoch(120);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				SemanticSegmentation.SetInterpoloationMethod(EInterpolationMethod.Bilinear);
+				semanticSegmentation.SetInterpoloationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.0001f);
 				// 설정한 Optimizer를 SemanticSegmentation에 적용 // Apply Optimizer that we set up to SemanticSegmentation
-				SemanticSegmentation.SetLearningOptimizerSpec(optSpec);
+				semanticSegmentation.SetLearningOptimizerSpec(optSpec);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
@@ -235,21 +235,21 @@ namespace SemanticSegmentation
 				augSpec.SetRotationParam(180.0, false);
 				augSpec.EnableFlip(true);
 				augSpec.EnableGaussianNoise(true);
-				SemanticSegmentation.SetLearningAugmentationSpec(augSpec);
+				semanticSegmentation.SetLearningAugmentationSpec(augSpec);
 
 				// SemanticSegmentation learn function을 진행하는 스레드 생성 // Create the SemanticSegmentation Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					if((eResult = SemanticSegmentation.Learn()).IsFail())
+					if((eResult = semanticSegmentation.Learn()).IsFail())
 						ErrorPrint(eResult, "Failed to execute Learn.\n");
 					
 					bTerminated = true;
 				}, null);
 
-				while(!SemanticSegmentation.IsRunning() && !bTerminated)
+				while(!semanticSegmentation.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
-				int i32MaxEpoch = SemanticSegmentation.GetLearningEpoch();
+				int i32MaxEpoch = semanticSegmentation.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
 				int i32PrevValidationCount = 0;
@@ -259,11 +259,11 @@ namespace SemanticSegmentation
 					Thread.Sleep(1);
 
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MiniBatchCount = SemanticSegmentation.GetActualMiniBatchCount();
+					int i32MiniBatchCount = semanticSegmentation.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = SemanticSegmentation.GetCurrentIteration();
+					int i32Iteration = semanticSegmentation.GetCurrentIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = SemanticSegmentation.GetLastEpoch();
+					int i32Epoch = semanticSegmentation.GetLastEpoch();
 			
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
@@ -271,12 +271,12 @@ namespace SemanticSegmentation
 					{
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
 						float f32CurrCost;
-						SemanticSegmentation.GetLearningResultLastCost(out f32CurrCost);
+						semanticSegmentation.GetLearningResultLastCost(out f32CurrCost);
 						// 마지막 검증 결과 받기 // Get the last validation result
 						float f32ValidationPa = 0;
 						float f32ValidationPaMIoU = 0;
-						SemanticSegmentation.GetLearningResultLastPixelAccuracy(out f32ValidationPa);//SemanticSegmentation.GetLastValidationPixelAccuracy(out f32ValidationPa);
-						SemanticSegmentation.GetLearningResultLastMIoU(out f32ValidationPaMIoU);//SemanticSegmentation.GetLastValidationMIoU(out f32ValidationPaMIoU);
+						semanticSegmentation.GetLearningResultLastPixelAccuracy(out f32ValidationPa);//SemanticSegmentation.GetLastValidationPixelAccuracy(out f32ValidationPa);
+						semanticSegmentation.GetLearningResultLastMIoU(out f32ValidationPaMIoU);//SemanticSegmentation.GetLastValidationMIoU(out f32ValidationPaMIoU);
 																							// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Epoch {3} / {4}", f32CurrCost, f32ValidationPa, f32ValidationPaMIoU, i32Epoch, i32MaxEpoch);
 
@@ -286,12 +286,12 @@ namespace SemanticSegmentation
 						List<float> vctValidations = new List<float>();
 						List<float> vctMIoU = new List<float>();
 				
-						SemanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMIoU);
+						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMIoU);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
 						{
-							int i32Step = SemanticSegmentation.GetLearningValidationStep();
+							int i32Step = semanticSegmentation.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
 
 							for(long i = 0; i < vctValidations.Count() - 1; ++i)
@@ -318,7 +318,7 @@ namespace SemanticSegmentation
 						// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is 1.0, stop learning and classify images 
 						if(f32ValidationPa == 1.0f)
-							SemanticSegmentation.Stop();
+							semanticSegmentation.Stop();
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = vctCosts.Count();
@@ -326,19 +326,19 @@ namespace SemanticSegmentation
 					}
 
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
-					if(!SemanticSegmentation.IsRunning())
+					if(!semanticSegmentation.IsRunning())
 						break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = SemanticSegmentation.Execute()).IsFail())
+				if((eResult = semanticSegmentation.Execute()).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to execute");
 					break;
 				}
 
 				// ResultLabelImage 받아오기 // Get The ResultLabelImage
-				SemanticSegmentation.GetInferenceResultImage(out fliResultLabelImage);
+				semanticSegmentation.GetInferenceResultImage(out fliResultLabelImage);
 
 				// ResultImage를 ResultFigureImage에 복사 // Copy ResultImage to resultFigureImage
 				fliResultLabelFigureImage.Assign(fliResultLabelImage, false);
@@ -347,8 +347,8 @@ namespace SemanticSegmentation
 				CSegmentationRegionExtractor semanticRE = new CSegmentationRegionExtractor();
 
 				// Blob 파라미터 셋팅 // Set the blob's parameters
-				Tuple<int, int> falRange = new Tuple<int, int>((int)1, (int)SemanticSegmentation.GetLearningtResultLabelCategoryCount());
-		
+				Tuple<int, int> falRange = new Tuple<int, int>((int)1, (int)semanticSegmentation.GetLearningResultClassCount());
+
 				semanticRE.SetResultType(CBlob.EBlobResultType.Contour);
 				semanticRE.AddRangesToInclude(falRange);
 				semanticRE.SetContourResultType(CBlob.EContourResultType.Perforated);
@@ -380,7 +380,7 @@ namespace SemanticSegmentation
 					List<string> flaNames = new List<string>();
 					Int64 i64RealClassNum = flaLabelList[(int)i];
 					CFLFigureArray flfaResultContoursCur = (CFLFigureArray)flfaResultContours.GetAt(i);
-					SemanticSegmentation.GetLearningResultClassNames(i64RealClassNum, out flaNames);
+					semanticSegmentation.GetLearningResultClassNames(i64RealClassNum, out flaNames);
 
 					string flsLabel = string.Format("{0}({1})", i64RealClassNum, flaNames[0]);
 
@@ -389,7 +389,7 @@ namespace SemanticSegmentation
 				}
 
 				// ResultLabl 뷰에 Floating Value Range를 설정
-				viewImageResultLabel.SetFloatingImageValueRange(0, (float)SemanticSegmentation.GetLearningResultClassCount());
+				viewImageResultLabel.SetFloatingImageValueRange(0, (float)semanticSegmentation.GetLearningResultClassCount());
 
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
