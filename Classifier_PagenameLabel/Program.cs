@@ -144,6 +144,8 @@ namespace Classifier
 
 				// 학습할 Classifier 모델 설정 // Set up the Classifier model to learn
 				classifier.SetModel(CClassifierDL.EModel.FL_CF_C);
+				// 학습할 Classifier 모델 설정 // Set up the Classifier model to learn
+				classifier.SetModelVersion(CClassifierDL.EModelVersion.FL_CF_C_V1_32);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				classifier.SetLearningEpoch(150);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
@@ -155,11 +157,11 @@ namespace Classifier
 				classifier.SetLearningOptimizerSpec(optSpec);
 
 				// Classifier learn function을 진행하는 스레드 생성 // Create the Classifier Learn function thread
+				CResult eLearnResult = new CResult();
+
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					if((eResult = classifier.Learn()).IsFail())
-						ErrorPrint(eResult, "Failed to execute Learn.\n");
-
+					eLearnResult = classifier.Learn();
 					bTerminated = true;
 				}, null);
 
@@ -241,6 +243,12 @@ namespace Classifier
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
 					if(!classifier.IsRunning())
 						break;
+				}
+
+				if(eLearnResult.IsFail())
+				{
+					ErrorPrint(eLearnResult, "Failed to learn");
+					break;
 				}
 
 				// 추론 결과 정보에 대한 설정 // Set for the inference result information
