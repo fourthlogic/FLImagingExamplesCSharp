@@ -87,7 +87,7 @@ namespace GraphViewDisplayMinMax
 				for(int k = 0; k < 3; ++k)
 				{
 					// 랜덤으로 100개의 데이터를 생성
-					Random rand = new Random();
+					Random rand = new Random(k * 2 + Environment.TickCount);
 					const int i32DataCount = 100;
 					double[] arrF64DataX = new double[i32DataCount];
 					double[] arrF64DataY = new double[i32DataCount];
@@ -122,10 +122,10 @@ namespace GraphViewDisplayMinMax
 
 
 				// 전체 차트에 대한 Y 축의 최솟값과 차트 이름 표시 // Display the Y-Axis minimum value for the entire charts and name.
-				arrViewGraph[0].IndicateEntireChart(EViewGraphExtrema.MinX, EViewGraphIndicateType.Value | EViewGraphIndicateType.Name);
+				arrViewGraph[0].IndicateEntireChart(EViewGraphExtrema.MinY, EViewGraphIndicateType.Value | EViewGraphIndicateType.Name | EViewGraphIndicateType.Arrow);
 
 				// 전체 차트에 대한 Y 축의 최댓값과 이름 표시 // Display the Y-Axis maximum value for the entire charts and name.
-				arrViewGraph[0].IndicateEntireChart(EViewGraphExtrema.MaxY, EViewGraphIndicateType.Value | EViewGraphIndicateType.Name);
+				arrViewGraph[0].IndicateEntireChart(EViewGraphExtrema.MaxY, EViewGraphIndicateType.Value | EViewGraphIndicateType.Name | EViewGraphIndicateType.Arrow);
 
 
 				// 모든 차트에 각각 X 축의 최대, 최솟값과 Y 축의 최대, 최솟값을 표시 // Display the range and label for every individual chart.
