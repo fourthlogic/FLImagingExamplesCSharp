@@ -55,14 +55,14 @@ namespace OperationBinaryComplement
 		        }
 
                 // Source 이미지 뷰 생성 // Create source image view
-                if ((eResult = viewImageSrc.Create(100, 0, 612, 512)).IsFail())
+                if ((eResult = viewImageSrc.Create(100, 0, 600, 545)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create the destination image view
-                if ((eResult = viewImageDst.Create(612, 0, 1124, 512)).IsFail())
+                if ((eResult = viewImageDst.Create(600, 0, 1100, 545)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image view. \n");
                     break;
@@ -145,13 +145,13 @@ namespace OperationBinaryComplement
                 // 이미지 뷰 정보 표시 // Display image view information
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-		        if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+		        if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 		        {
                     ErrorPrint(eResult, "Failed to draw text. \n");
                     break;
 		        }
 
-		        if ((eResult = layerDestination.DrawTextCanvas(flpPoint, "Source & Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+		        if ((eResult = layerDestination.DrawTextCanvas(flpPoint, "Source & Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 		        {
                     ErrorPrint(eResult, "Failed to draw text. \n");
 		        	break;

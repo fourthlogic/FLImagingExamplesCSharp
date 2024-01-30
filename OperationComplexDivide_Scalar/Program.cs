@@ -57,19 +57,18 @@ namespace OperationComplexDivide
 				}
 
 				// Source 이미지 뷰 생성 // Create source image view
-				if((eResult = viewImageSrc.Create(100, 0, 600, 500)).IsFail())
+				if((eResult = viewImageSrc.Create(100, 0, 600, 545)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to create the image view. \n");
 					break;
 				}
 
 				// Destination1 이미지 뷰 생성 // Create destination1 image view
-				if((eResult = viewImageDst.Create(600, 0, 1100, 500)).IsFail())
+				if((eResult = viewImageDst.Create(600, 0, 1100, 545)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to create the image view. \n");
 					break;
 				}
-
 
 				// 두 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the two image views
 				if((eResult = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
@@ -138,13 +137,13 @@ namespace OperationComplexDivide
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text. \n");
 					break;
 				}
 
-				if((eResult = layerDestination.DrawTextCanvas(flpPoint, "Destination Image(Divided by 5 + 1i)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((eResult = layerDestination.DrawTextCanvas(flpPoint, "Destination Image(Divided by 5 + 1i)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text. \n");
 					break;

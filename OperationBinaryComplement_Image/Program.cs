@@ -65,21 +65,21 @@ namespace OperationBinaryComplement
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
-                if ((eResult = viewImageSource.Create(100, 0, 600, 500)).IsFail())
+                if ((eResult = viewImageSource.Create(100, 0, 600, 545)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Operand 이미지 뷰 생성 // Create operand image view
-                if ((eResult = viewImageOperand.Create(600, 0, 1100, 500)).IsFail())
+                if ((eResult = viewImageOperand.Create(600, 0, 1100, 545)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
-                if ((eResult = viewImageDestination.Create(1100, 0, 1600, 500)).IsFail())
+                if ((eResult = viewImageDestination.Create(1100, 0, 1600, 545)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image view. \n");
                     break;
@@ -174,19 +174,19 @@ namespace OperationBinaryComplement
                 // 이미지 뷰 정보 표시 // Display image view information
                 CFLPoint<double> flpPoint = new CFLPoint<double> (0, 0);
 
-                if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 		        {
                     ErrorPrint(eResult, "Failed to draw text. \n");
 		        	break;
 		        }
 
-                if ((eResult = layerOperand.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerOperand.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 		        {
                     ErrorPrint(eResult, "Failed to draw text. \n");
 		        	break;
 		        }
 
-                if ((eResult = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 		        {
                     ErrorPrint(eResult, "Failed to draw text. \n");
 		        	break;
