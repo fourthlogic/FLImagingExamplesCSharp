@@ -386,6 +386,8 @@ namespace SemanticSegmentation
 
 					flfaResultContoursCur.SetName(flsLabel);
 					fliResultLabelFigureImage.PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flfaResultContoursCur));
+					//ResultLabel 이미지의 세그먼테이션 라벨 텍스트 설정 // Set segmentation label text for tthe result label image
+					viewImageResultLabel.SetSegmentationLabelText(0, (double)i64RealClassNum, flsLabel);
 				}
 
 				// ResultLabl 뷰에 Floating Value Range를 설정
