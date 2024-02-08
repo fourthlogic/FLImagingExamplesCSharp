@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3588EBC1-C246-4A93-8AA3-7E918BDCBB75}</ProjectGuid>
+    <ProjectGuid>{1AC8A15B-6C92-40EC-A3FB-FACFF0607746}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DrawingMatch</RootNamespace>
-    <AssemblyName>DrawingMatch</AssemblyName>
+    <RootNamespace>DrawingMatch_UsingGerber</RootNamespace>
+    <AssemblyName>DrawingMatch_UsingGerber</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
