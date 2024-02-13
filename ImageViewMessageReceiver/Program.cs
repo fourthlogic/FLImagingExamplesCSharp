@@ -48,7 +48,7 @@ namespace ImageViewMessageReceiver
 				// 메세지의 채널을 확인
 				switch(message.GetChannel())
 				{
-				case (uint)EGUIBroadcast.ViewImage_MouseMove:
+				case (uint)EGUIBroadcast.ViewImage_PostMouseMove:
 					{
 						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅
 						CBroadcastMessage_GUI_ViewImage_MouseEvent msgMouseEvent = message as CBroadcastMessage_GUI_ViewImage_MouseEvent;
