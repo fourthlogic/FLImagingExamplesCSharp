@@ -167,8 +167,8 @@ namespace Classifier
 				// 검증할 이미지 설정 // Set the image to validate
 				classifier.SetLearningValidationImage(ref fliSourceImage);
 				// 분류할 이미지 설정 // Set the image to classify
-				classifier.SetSourceImage(ref fliSourceImage);
-
+				classifier.SetInferenceImage(ref fliSourceImage);
+				
 				// 학습할 Classifier 모델 설정 // Set up the Classifier model to learn
 				classifier.SetModel(CClassifierDL.EModel.FL_CF_C);
 				// 학습할 Classifier 모델 설정 // Set up the Classifier model to learn

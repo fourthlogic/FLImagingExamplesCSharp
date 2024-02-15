@@ -210,8 +210,8 @@ namespace SemanticSegmentation
 				// 검증할 이미지 설정 // Set the image to validate
 				semanticSegmentation.SetLearningValidationImage(ref fliValidationImage);
 				// 분류할 이미지 설정 // Set the image to classify
-				semanticSegmentation.SetSourceImage(ref fliValidationImage);
-
+				semanticSegmentation.SetInferenceImage(ref fliValidationImage);
+		
 				// 학습할 SemanticSegmentation 모델 설정 // Set up the SemanticSegmentation model to learn
 				semanticSegmentation.SetModel(CSemanticSegmentationDL.EModel.FL_SS_GP);
 				// 학습할 SemanticSegmentation 모델 Version 설정 // Set up the SemanticSegmentation model version to learn
@@ -233,7 +233,8 @@ namespace SemanticSegmentation
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
 				augSpec.SetRotationParam(180.0, false);
-				augSpec.EnableFlip(true);
+				augSpec.EnableHorizontalFlip(true);
+				augSpec.EnableVerticalFlip(true);
 				augSpec.EnableGaussianNoise(true);
 				semanticSegmentation.SetLearningAugmentationSpec(augSpec);
 
@@ -285,8 +286,10 @@ namespace SemanticSegmentation
 						List<float> vctCosts = new List<float>();
 						List<float> vctValidations = new List<float>();
 						List<float> vctMeanIoU = new List<float>();
-				
-						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU);
+						List<float> vctValidationsZE = new List<float>();
+						List<float> vctMeanIoUZE = new List<float>();
+
+						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU, out vctValidationsZE, out vctMeanIoUZE);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
@@ -330,15 +333,12 @@ namespace SemanticSegmentation
 						break;
 				}
 
-				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = semanticSegmentation.Execute()).IsFail())
+			// 알고리즘 수행 // Execute the algorithm
+			if((eResult = semanticSegmentation.Execute()).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to execute");
 					break;
 				}
-
-				// ResultLabelImage 받아오기 // Get The ResultLabelImage
-				semanticSegmentation.GetInferenceResultImage(out fliResultLabelImage);
 
 				// ResultImage를 ResultFigureImage에 복사 // Copy ResultImage to resultFigureImage
 				fliResultLabelFigureImage.Assign(fliResultLabelImage, false);
