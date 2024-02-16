@@ -271,14 +271,12 @@ namespace SemanticSegmentation
 					if(i32Epoch != i32PrevEpoch && i32Iteration == i32MiniBatchCount && i32Epoch > 0)
 					{
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
-						float f32CurrCost;
-						semanticSegmentation.GetLearningResultLastCost(out f32CurrCost);
+						float f32CurrCost = semanticSegmentation.GetLearningResultLastCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32ValidationPa = 0;
-						float f32ValidationPaMeanIoU = 0;
-						semanticSegmentation.GetLearningResultLastPixelAccuracy(out f32ValidationPa);//SemanticSegmentation.GetLastValidationPixelAccuracy(out f32ValidationPa);
-						semanticSegmentation.GetLearningResultLastMeanIoU(out f32ValidationPaMeanIoU);//SemanticSegmentation.GetLastValidationMeanIoU(out f32ValidationPaMeanIoU);
-																							// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
+						float f32ValidationPa = semanticSegmentation.GetLearningResultLastPixelAccuracy();//SemanticSegmentation.GetLastValidationPixelAccuracy(out f32ValidationPa);
+						float f32ValidationPaMeanIoU = semanticSegmentation.GetLearningResultLastMeanIoU();//SemanticSegmentation.GetLastValidationMeanIoU(out f32ValidationPaMeanIoU);
+
+						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Epoch {3} / {4}", f32CurrCost, f32ValidationPa, f32ValidationPaMeanIoU, i32Epoch, i32MaxEpoch);
 
 						// 학습 결과 비용과 검증 결과 기록을 받아 그래프 뷰에 출력  
