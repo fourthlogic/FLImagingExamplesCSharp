@@ -203,13 +203,13 @@ namespace GetPointsOfMaximumDistance
 
 				// Console 출력 // Console output
 				Console.Write("Source1 CFLCircle<double>\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flcSource1));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flcSource1));
 
 				Console.Write("Operand1 CFLQuad<double>\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flqOperand1));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flqOperand1));
 
 				Console.Write("Result1 Points of Maximum distance\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flpaResult1));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flpaResult1));
 
 				Console.Write("Result1 Maximum distance\n");
 				Console.Write("{0}\n\n", f64MaximumDistance1);
@@ -217,13 +217,13 @@ namespace GetPointsOfMaximumDistance
 				Console.Write("\n\n");
 
 				Console.Write("Source2 CFLFigureArray\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaSource2));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaSource2));
 
 				Console.Write("Operand2 CFLFigureArray\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaOperand2));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaOperand2));
 
 				Console.Write("Result2 Points of Maximum distance\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flpaResult2));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flpaResult2));
 
 				Console.Write("Result2 Maximum distance\n");
 				Console.Write("{0}\n\n", f64MaximumDistance2);

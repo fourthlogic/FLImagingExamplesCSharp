@@ -108,7 +108,7 @@ namespace ImageViewInToDialog
                     break;
 
                 // Figure 를 문자열로 얻어온다.
-                string strFigure = CROIUtilities.ConvertFigureObjectToString(flFigure);
+                string strFigure = CFigureUtils.ConvertFigureObjectToString(flFigure);
 
                 strFigureInfo = strFigure;
             }

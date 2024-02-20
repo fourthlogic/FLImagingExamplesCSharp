@@ -226,10 +226,10 @@ namespace GetIndexOfMinimumDistance
 
 				// Console 출력 // Console output
 				Console.Write("Source1 CFLPointArray\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flpaSource1));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flpaSource1));
 
 				Console.Write("Destination1 CFLCircle<double>\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flcDestination1));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flcDestination1));
 
 				Console.Write("Result1 Index of Minimum distance\n");
 				Console.Write("{0}\n\n", flvSrc.v);
@@ -237,10 +237,10 @@ namespace GetIndexOfMinimumDistance
 				Console.Write("\n\n");
 
 				Console.Write("Source2 CFLFigureArray\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaSource2));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaSource2));
 
 				Console.Write("Destination2 CFLFigureArray\n");
-				Console.Write("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaDestination2));
+				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaDestination2));
 
 				Console.Write("Src Result2 Index of Minimum distance\n");
 				Console.Write("Depth1 : {0}\nDepth2 : {1}\n\n", flvSrcDepth1.v, flvSrcDepth2.v);

@@ -108,7 +108,7 @@ namespace CircleGauge
 
 				for(int i = 0; i < flfa.GetCount(); ++i)
 				{
-					strFigure = String.Format("[{0}]\n {1}\n", i, CROIUtilities.ConvertFigureObjectToString(flfa.GetAt(i)));
+					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtils.ConvertFigureObjectToString(flfa.GetAt(i)));
 					Console.WriteLine("{0}", strFigure);
 				}
 
@@ -134,7 +134,7 @@ namespace CircleGauge
 
 				for(int i = 0; i < flfa.GetCount(); ++i)
 				{
-					strFigure = String.Format("[{0}]\n {1}\n", i, CROIUtilities.ConvertFigureObjectToString(flfaCenter.GetAt(i)));
+					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtils.ConvertFigureObjectToString(flfaCenter.GetAt(i)));
 					Console.WriteLine("{0}", strFigure);
 				}
 
@@ -185,7 +185,7 @@ namespace CircleGauge
 
 				for(int i = 0; i < flfa.GetCount(); ++i)
 				{
-					strFigure = String.Format("[{0}]\n {1}\n", i, CROIUtilities.ConvertFigureObjectToString(flfaCenterOfGravity.GetAt(i)));
+					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtils.ConvertFigureObjectToString(flfaCenterOfGravity.GetAt(i)));
 					Console.WriteLine("{0}", strFigure);
 				}
 
@@ -208,7 +208,7 @@ namespace CircleGauge
 
 				for(int i = 0; i < flfa.GetCount(); ++i)
 				{
-					strFigure = String.Format("[{0}]\n {1}\n", i, CROIUtilities.ConvertFigureObjectToString(flfaMER.GetAt(i)));
+					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtils.ConvertFigureObjectToString(flfaMER.GetAt(i)));
 					Console.WriteLine("{0}", strFigure);
 				}
 

@@ -148,31 +148,31 @@ namespace Tiling
 
 				flRect.SetName("0");
 				arrFliImage[0].SelectPage(0);
-				arrFliImage[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
-				arrViewImages[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrViewImages[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
 
 				flRect.Set(260, 135, 415, 440);
 				flRect.SetName("1");
-				arrFliImage[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
-				arrViewImages[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrViewImages[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
 
 				flRect.Set(280, 250, 480, 480);
 				flRect.SetName("0");
 				arrFliImage[0].SelectPage(1);
-				arrFliImage[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
-				arrViewImages[1].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrViewImages[1].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
 
 				flRect.Set(110, 150, 350, 440);
 				flRect.SetName("0");
 				arrFliImage[0].SelectPage(2);
-				arrFliImage[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
-				arrViewImages[2].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrViewImages[2].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
 
 				flRect.Set(220, 230, 470, 450);
 				flRect.SetName("0");
 				arrFliImage[0].SelectPage(3);
-				arrFliImage[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
-				arrViewImages[3].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrViewImages[3].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
 
 				// Destination 이미지에 ROI 추가 // Add ROI to destination image
 				arrFliImage[1].PushBackFigure("D(79.292035, 67.964602, 292.247788, 267.327434, INFO[NAME(0_0)])");

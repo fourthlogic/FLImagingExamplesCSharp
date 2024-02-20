@@ -281,16 +281,16 @@ namespace RemoveFigure
 
 				// Console 출력 // Console output
 				Console.WriteLine("Source1 Figure Array\n");
-				Console.WriteLine("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaSource1));
+				Console.WriteLine("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaSource1));
 
 				Console.WriteLine("Result1 Figure that vertexcount > 1 or area > 400 || (center.x > 300 || center.y < 100)\n");
-				Console.WriteLine("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaResult1));
+				Console.WriteLine("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaResult1));
 
 				Console.WriteLine("Source2 Figure Array\n");
-				Console.WriteLine("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaSource2));
+				Console.WriteLine("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaSource2));
 
 				Console.WriteLine("Result2 Figure that area >= mean('area')\n");
-				Console.WriteLine("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaResult2));
+				Console.WriteLine("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaResult2));
 
 
 				// 이미지 뷰를 갱신 합니다. // Update image view

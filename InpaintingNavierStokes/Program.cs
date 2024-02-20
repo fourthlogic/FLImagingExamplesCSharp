@@ -166,7 +166,7 @@ namespace InpaintingNavierStokes
 				}
 
 				// Painting region을 source image에 디스플레이 // Display painting region on the source image
-				if(arrFliImage[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flfaInpaintingRegion)) == -1)
+				if(arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flfaInpaintingRegion)) == -1)
 				{
 					ErrorPrint(eResult, "Failed to push figure on image\n");
 					break;

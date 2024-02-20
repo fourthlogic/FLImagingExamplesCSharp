@@ -99,8 +99,8 @@ namespace FigureWarp
 				// Create a TargetRegion Quad with a Quad that spreads the SourceRegion Quad in the form of a rectangle
 				CFLQuad<double> flqTargetRegion = new CFLQuad<double>(new CFLPoint<double>(397.5, 227.0), new CFLPoint<double>(1065.0, 227.0), new CFLPoint<double>(1065.5, 822.5), new CFLPoint<double>(397.5, 822.5));
 
-				Console.WriteLine("Source Quad Region : {0}", CROIUtilities.ConvertFigureObjectToString(flqSourceRegion));
-				Console.WriteLine("Target Quad Region : {0}\n", CROIUtilities.ConvertFigureObjectToString(flqTargetRegion));
+				Console.WriteLine("Source Quad Region : {0}", CFigureUtils.ConvertFigureObjectToString(flqSourceRegion));
+				Console.WriteLine("Target Quad Region : {0}\n", CFigureUtils.ConvertFigureObjectToString(flqTargetRegion));
 
 				// Warp 결과를 받아올 FigureArray // FigureArray to receive the warp result
 				CFLFigureArray flfaResult;

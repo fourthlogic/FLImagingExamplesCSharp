@@ -151,12 +151,12 @@ namespace GetFigureWithinRegion
 				String strFigure;
 				Console.WriteLine("Source Figure Array\n");
 
-				strFigure = string.Format("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaSource));
+				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaSource));
 				Console.WriteLine("{0}", strFigure);
 
 				Console.WriteLine("Region1\n");
 
-				strFigure = string.Format("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flcrRegion1));
+				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flcrRegion1));
 				Console.WriteLine("{0}", strFigure);
 
 				// SourceView1의 0번 레이어에 Source Figure, Region1 그리기 // Draw Source Figure, Region1 on Layer 0 of SourceView1
@@ -165,7 +165,7 @@ namespace GetFigureWithinRegion
 
 				Console.WriteLine("Region2\n");
 
-				strFigure = string.Format("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flcrRegion2));
+				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flcrRegion2));
 				Console.WriteLine("{0}", strFigure);
 
 				// SourceView2의 0번 레이어에 Source Figure, Region2 그리기 // Draw Source Figure, Region2 on Layer 0 of SourceView2
@@ -178,7 +178,7 @@ namespace GetFigureWithinRegion
 
 				Console.WriteLine("Result Figure Within Region1\n");
 
-				strFigure = string.Format("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaResult1));
+				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaResult1));
 				Console.WriteLine("{0}", strFigure);
 
 				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1
@@ -192,7 +192,7 @@ namespace GetFigureWithinRegion
 
 				Console.WriteLine("Result Figure Within Region2\n");
 
-				strFigure = string.Format("{0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaResult2));
+				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaResult2));
 				Console.WriteLine("{0}", strFigure);
 
 				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1

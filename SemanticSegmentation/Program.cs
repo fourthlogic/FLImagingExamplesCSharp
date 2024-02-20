@@ -384,7 +384,7 @@ namespace SemanticSegmentation
 					string flsLabel = string.Format("{0}({1})", i64RealClassNum, flaNames[0]);
 
 					flfaResultContoursCur.SetName(flsLabel);
-					fliResultLabelFigureImage.PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flfaResultContoursCur));
+					fliResultLabelFigureImage.PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flfaResultContoursCur));
 					//ResultLabel 이미지의 세그먼테이션 라벨 텍스트 설정 // Set segmentation label text for tthe result label image
 					viewImageResultLabel.SetSegmentationLabelText(0, (double)i64RealClassNum, flsLabel);
 				}

@@ -265,14 +265,14 @@ namespace InpaintingTexture
 				}
 
 				// Painting region을 source image에 디스플레이 // Display painting region on the source image
-				if(arrFliImage[0].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flfaPaintingRegion)) == -1)
+				if(arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flfaPaintingRegion)) == -1)
 				{
 					ErrorPrint(eResult, "Failed to push figure on image\n");
 					break;
 				}
 
 				// Painting region 2을 source image 2에 디스플레이 // Display painting region on the source image
-				if(arrFliImage[2].PushBackFigure(CROIUtilities.ConvertFigureObjectToString(flfaPaintingRegion2)) == -1)
+				if(arrFliImage[2].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flfaPaintingRegion2)) == -1)
 				{
 					ErrorPrint(eResult, "Failed to push figure on image\n");
 					break;

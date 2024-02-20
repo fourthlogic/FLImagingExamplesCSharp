@@ -91,10 +91,10 @@ namespace CircleGauge
 				String strFigure;
 				Console.WriteLine("Figure To Save\n");
 
-				strFigure = String.Format("Rect : {0}\n", CROIUtilities.ConvertFigureObjectToString(flr));
+				strFigure = String.Format("Rect : {0}\n", CFigureUtils.ConvertFigureObjectToString(flr));
 				Console.WriteLine("{0}", strFigure);
 
-				strFigure = String.Format("Figure Array : {0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfa));
+				strFigure = String.Format("Figure Array : {0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfa));
 				Console.WriteLine("{0}", strFigure);
 
 				// SourceView의 0번 레이어에 그리기 // Draw on Layer 0 of SourceView
@@ -132,10 +132,10 @@ namespace CircleGauge
 
 				Console.WriteLine("Loaded Figure\n");
 
-				strFigure = String.Format("Rect : {0}\n", CROIUtilities.ConvertFigureObjectToString(flrLoad));
+				strFigure = String.Format("Rect : {0}\n", CFigureUtils.ConvertFigureObjectToString(flrLoad));
 				Console.WriteLine("{0}", strFigure);
 
-				strFigure = String.Format("Figure Array : {0}\n\n", CROIUtilities.ConvertFigureObjectToString(flfaLoad));
+				strFigure = String.Format("Figure Array : {0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaLoad));
 				Console.WriteLine("{0}", strFigure);
 
 				// DestinationView의 0번 레이어에 그리기 // Draw on Layer 0 of DestinationView
