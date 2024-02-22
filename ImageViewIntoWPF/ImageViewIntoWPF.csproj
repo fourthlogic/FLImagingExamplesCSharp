@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="C:\Program Files\FLImaging\FLImaging\BuildProperty.props" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E6A7AA36-DC6A-4B25-A2BE-3975684D1E1D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ImageViewIntoWPF</RootNamespace>
+    <AssemblyName>ImageViewIntoWPF</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\ZDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\ZRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FLImagingGUI.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(BuildFileNameBase)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameBase)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameFoundation)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameFoundation)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameGUI)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameGUI)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameImgProcBase)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcBase)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameImgProcOperation)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcOperation)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameImgProcConvolution)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcConvolution)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameImgProcMorphology)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcMorphology)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameImgProcTransform)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcTransform)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameImageProcessing)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImageProcessing)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameAdvancedImageProcessing)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAdvancedImageProcessing)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameAdvancedFunctions)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAdvancedFunctions)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameDevices)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameDevices)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="$(BuildFileNameThreeDim)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameThreeDim)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FLImagingGUI.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameBase)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameFoundation)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameGUI)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcBase)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcOperation)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcConvolution)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcMorphology)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcTransform)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcTransform)_Cuda_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImageProcessing)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImageProcessing)_Cuda_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAdvancedFunctions)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAdvancedFunctions)_Cuda_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAdvancedImageProcessing)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameDevices)_X64.dll" .\
+copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameThreeDim)_X64.dll" .\
+Set ERRORLEVEL=0</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

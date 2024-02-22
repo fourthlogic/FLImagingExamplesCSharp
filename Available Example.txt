@@ -466,6 +466,9 @@
     - ImageViewIntoDialog 
       - The example of inserting an image view into a dialog and using it.
       - 이미지 뷰를 다이얼로그에 삽입해서 사용하는 예제.
+	- ImageViewIntoWPF 
+      - The example of inserting an image view into a WPF and using it.
+      - 이미지 뷰를 WPF에 삽입해서 사용하는 예제.
     - ImageViewMessageReceiver
       - The Example of image view using message receiver.
       - 이미지 뷰의 메세지 리시버 사용에 관한 예제.
