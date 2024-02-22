@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace RandomGenerator
+namespace RandomImageGenerator
 {
 	class Program
 	{
@@ -31,7 +31,7 @@ namespace RandomGenerator
 		{
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliISrcImage = new CFLImage();
-			CFLImage fliIRandomGeneratorImage = new CFLImage();
+			CFLImage fliIDstImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] viewImage = new CGUIViewImage[2];
@@ -43,13 +43,13 @@ namespace RandomGenerator
 			{
 				CResult eResult;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/RandomGenerator/Figure.flif")).IsFail())
+				if((eResult = fliISrcImage.Load("../../ExampleImages/RandomImageGenerator/Figure.flif")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the image file.\n");
 					break;
 				}
 
-				fliIRandomGeneratorImage.Assign(fliISrcImage);
+				fliIDstImage.Assign(fliISrcImage);
 
 				// 이미지 뷰 생성 // Create image view
 				if((eResult = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
@@ -86,30 +86,30 @@ namespace RandomGenerator
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[1].SetImagePtr(ref fliIRandomGeneratorImage)).IsFail())
+				if((eResult = viewImage[1].SetImagePtr(ref fliIDstImage)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				// Random Generator  객체 생성 // Create Random Generator object
-				CRandomGenerator RandomGenerator = new CRandomGenerator();
+				// RandomImageGenerator  객체 생성 // Create RandomImageGenerator object
+				CRandomImageGenerator RandomImageGenerator = new CRandomImageGenerator();
 
-				// Random Generator ROI 지정 // Create ROI range
+				// RandomImageGenerator ROI 지정 // Create ROI range
 				CFLFigureArray flfaSrcROI = new CFLFigureArray();
 
-				flfaSrcROI.Load("../../ExampleImages/RandomGenerator/FigureROI.fig");
+				flfaSrcROI.Load("../../ExampleImages/RandomImageGenerator/FigureROI.fig");
 
 				// Source 이미지 설정 // Set source image 
-				RandomGenerator.SetSourceImage(ref fliIRandomGeneratorImage);
+				RandomImageGenerator.SetSourceImage(ref fliIDstImage);
 
-				// Random Generator 영역 지정 // set source ROI 
-				RandomGenerator.SetSourceROI(flfaSrcROI);
+				// RandomImageGenerator 영역 지정 // set source ROI 
+				RandomImageGenerator.SetSourceROI(flfaSrcROI);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (RandomGenerator.Execute())).IsFail())
+				if((eResult = (RandomImageGenerator.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Random Generator.");
+					ErrorPrint(eResult, "Failed to execute RandomImageGenerator.");
 					break;
 				}
 
@@ -123,10 +123,10 @@ namespace RandomGenerator
 				if((eResult = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(eResult, "Failed to draw text.\n");
 
-				if((eResult = layer2.DrawTextImage(flpTemp, "RandomGenerator Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((eResult = layer2.DrawTextImage(flpTemp, "RandomImageGenerator Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(eResult, "Failed to draw text.\n");
 
-				// RandomGenerator 영역 표기 // RandomGenerator Area draw
+				// RandomImageGenerator 영역 표기 // RandomImageGenerator Area draw
 				if((eResult = layer1.DrawFigureImage(flfaSrcROI, EColor.LIME)).IsFail())
 					ErrorPrint(eResult, "Failed to draw figure.\n");
 
