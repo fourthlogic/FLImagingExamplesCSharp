@@ -45,14 +45,14 @@ namespace OperationScaledSubtract_Image
 			{
 				CResult eResult;
 				// 이미지 로드 // Load image
-				if((eResult = (arrFliImage[0].Load("../../ExampleImages/OperationScaledSubtract/House.flif"))).IsFail())
+				if((eResult = (arrFliImage[0].Load("../../ExampleImages/OperationScaledSubtract/CityNight.flif"))).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 로드 // Load image
-				if((eResult = (arrFliImage[1].Load("../../ExampleImages/OperationScaledSubtract/Sunset.flif"))).IsFail())
+				if((eResult = (arrFliImage[1].Load("../../ExampleImages/OperationScaledSubtract/Gradation.flif"))).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the image file.\n");
 					break;
@@ -171,19 +171,19 @@ namespace OperationScaledSubtract_Image
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-				if((eResult = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((eResult = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((eResult = (arrLayer[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((eResult = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
