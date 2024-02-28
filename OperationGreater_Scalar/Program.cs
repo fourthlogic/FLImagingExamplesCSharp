@@ -158,13 +158,13 @@ namespace OperationGreater
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-                if ((result = arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((result = arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(result, "Failed to draw text\n");
                     break;
                 }
 
-                if ((result = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image(Greater 128)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((result = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image(Greater 128)", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(result, "Failed to draw text\n");
                     break;

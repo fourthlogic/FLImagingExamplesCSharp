@@ -145,8 +145,8 @@ namespace OperationBitwiseXor
                 // Image Operation 소스로 설정 // Set Operation Source to image
                 bitwiseXor.SetOperationSource(EOperationSource.Scalar);
 
-                // BitwiseOr 값 설정 // Set BitwiseOr value
-                CMultiVar<double> mvScalar = new CMultiVar<double>(64, 64, 64);
+				// BitwiseXor 값 설정 // Set BitwiseXor value
+				CMultiVar<double> mvScalar = new CMultiVar<double>(64, 64, 64);
                 bitwiseXor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
@@ -162,8 +162,8 @@ namespace OperationBitwiseXor
                 // Image Operation 소스로 설정 // Set Operation Source to image
                 bitwiseXor.SetOperationSource(EOperationSource.Scalar);
 
-                // BitwiseOr 값 설정 // Set BitwiseOr value
-                mvScalar = new CMultiVar<double>(128, 128, 128);
+				// BitwiseXor 값 설정 // Set BitwiseXor value
+				mvScalar = new CMultiVar<double>(128, 128, 128);
                 bitwiseXor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
@@ -187,19 +187,19 @@ namespace OperationBitwiseXor
                 // 이미지 뷰 정보 표시 // Display image view information
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-                if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to draw text. \n");
                     break;
                 }
 
-                if ((eResult = layerDestination1.DrawTextCanvas(flpPoint, "Destination1 Image(BitwiseOr 64)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerDestination1.DrawTextCanvas(flpPoint, "Destination1 Image(BitwiseXor 64)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to draw text. \n");
                     break;
                 }
 
-                if ((eResult = layerDestination2.DrawTextCanvas(flpPoint, "Destination2 Image(BitwiseOr 128)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerDestination2.DrawTextCanvas(flpPoint, "Destination2 Image(BitwiseXor 128)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to draw text. \n");
                     break;

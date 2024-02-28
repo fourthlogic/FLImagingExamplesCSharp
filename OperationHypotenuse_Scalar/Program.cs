@@ -188,19 +188,19 @@ namespace OperationBitwiseAnd
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-				if((eResult = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((eResult = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 18))).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Image(Hypotenuse 100, 100, 100)", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((eResult = (arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Image(Hypotenuse 100, 100, 100)", EColor.YELLOW, EColor.BLACK, 18))).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Image(Hypotenuse 0, 0, 0)", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((eResult = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Image(Hypotenuse 0, 0, 0)", EColor.YELLOW, EColor.BLACK, 18))).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;

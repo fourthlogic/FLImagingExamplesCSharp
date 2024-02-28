@@ -187,19 +187,19 @@ namespace OperationLogicalXor
                 // 이미지 뷰 정보 표시 // Display image view information
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-                if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to draw text. \n");
                     break;
                 }
 
-                if ((eResult = layerDestination1.DrawTextCanvas(flpPoint, "Destination1 Image(LogicalXor 0)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerDestination1.DrawTextCanvas(flpPoint, "Destination1 Image(LogicalXor 0)", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to draw text. \n");
                     break;
                 }
 
-                if ((eResult = layerDestination2.DrawTextCanvas(flpPoint, "Destination2 Image(LogicalXor 255)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = layerDestination2.DrawTextCanvas(flpPoint, "Destination2 Image(LogicalXor 255)", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to draw text. \n");
                     break;
