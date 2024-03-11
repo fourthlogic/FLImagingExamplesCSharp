@@ -1140,7 +1140,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LeastCommonMultiple", "Leas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationLeastCommonMultiple_Image", "OperationLeastCommonMultiple_Image\OperationLeastCommonMultiple_Image.csproj", "{96DCB9AD-DDAE-4DFC-B883-5B3235528B6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationGreatestCommonDivisor_Scalar", "OperationLeastCommonMultiple_Scalar\OperationGreatestCommonDivisor_Scalar.csproj", "{B6DC648B-67EC-469D-9739-E994AD551E10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationLeastCommonMultiple_Scalar", "OperationLeastCommonMultiple_Scalar\OperationLeastCommonMultiple_Scalar.csproj", "{B6DC648B-67EC-469D-9739-E994AD551E10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
