@@ -61,17 +61,17 @@ namespace OperationLeastCommonMultiple_Scalar
 					break;
 				}
 
-				// Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
-				if((eResult = (arrFliImage[(int)EType.Destination1].Assign(arrFliImage[(int)EType.Source]))).IsFail())
+				// Destination1 이미지를 16-bit 이미지로 로드 // Load the 16-bit destination image
+				if((eResult = arrFliImage[(int)EType.Destination1].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to assign the image file.\n");
 					break;
 				}
 
-				// Destination2 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination2 image as same as source image
-				if((eResult = (arrFliImage[(int)EType.Destination2].Assign(arrFliImage[(int)EType.Source]))).IsFail())
+				// Destination2 이미지를 16-bit 이미지로 로드 // Load the 16-bit destination image
+				if((eResult = arrFliImage[(int)EType.Destination2].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file.\n");
+					ErrorPrint(eResult, "Failed to load  image file.\n");
 					break;
 				}
 

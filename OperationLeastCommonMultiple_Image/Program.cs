@@ -68,10 +68,10 @@ namespace OperationLeastCommonMultiple_Image
 					break;
 				}
 
-				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-				if((eResult = (arrFliImage[(int)EType.Destination].Assign(arrFliImage[(int)EType.Source]))).IsFail())
+				// Destination 이미지 로드 // Loads the destination image
+				if((eResult = arrFliImage[(int)EType.Destination].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file.\n");
+					ErrorPrint(eResult, "Failed to load the image file.\n");
 					break;
 				}
 
