@@ -214,7 +214,7 @@ namespace SemanticSegmentation
 				semanticSegmentation.SetInferenceResultImage(ref fliResultLabelImage);
 
 				// 학습할 SemanticSegmentation 모델 설정 // Set up the SemanticSegmentation model to learn
-				semanticSegmentation.SetModel(CSemanticSegmentationDL.EModel.FLNet);
+				semanticSegmentation.SetModel(CSemanticSegmentationDL.EModel.FLSegNet);
 				// 학습할 SemanticSegmentation 모델 Version 설정 // Set up the SemanticSegmentation model version to learn
 				semanticSegmentation.SetModelVersion(CSemanticSegmentationDL.EModelVersion.FL_SS_MV_V1_512_B1);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
@@ -230,10 +230,10 @@ namespace SemanticSegmentation
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
-				augSpec.SetCommonIOUThreshold(0.5);
+				augSpec.SetCommonActivationRatio(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(180.0, false);
+				augSpec.SetRotationParam(180.0, false, true);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 				augSpec.EnableGaussianNoise(true);
@@ -274,8 +274,8 @@ namespace SemanticSegmentation
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
 						float f32CurrCost = semanticSegmentation.GetLearningResultLastCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32ValidationPa = semanticSegmentation.GetLearningResultLastPixelAccuracy();//SemanticSegmentation.GetLastValidationPixelAccuracy(out f32ValidationPa);
-						float f32ValidationPaMeanIoU = semanticSegmentation.GetLearningResultLastMeanIoU();//SemanticSegmentation.GetLastValidationMeanIoU(out f32ValidationPaMeanIoU);
+						float f32ValidationPa = semanticSegmentation.GetLearningResultLastAccuracy();
+						float f32ValidationPaMeanIoU = semanticSegmentation.GetLearningResultLastMeanIoU();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Epoch {3} / {4}", f32CurrCost, f32ValidationPa, f32ValidationPaMeanIoU, i32Epoch, i32MaxEpoch);
@@ -370,7 +370,7 @@ namespace SemanticSegmentation
 
 				List<Int64> flaLabelList;
 				// ResultContours 인덱스와 매칭 되는 라벨 번호배열을 가져오기 // ResultContours Get an array of label numbers matching the index.
-				semanticRE.GetResultSegmentationList(out flaLabelList);
+				semanticRE.GetResultSegmentationLabels(out flaLabelList);
 
 				Int64 i64ResultCount = flaLabelList.Count();
 
