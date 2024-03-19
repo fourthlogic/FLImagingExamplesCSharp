@@ -287,8 +287,9 @@ namespace SemanticSegmentation
 						List<float> vctMeanIoU = new List<float>();
 						List<float> vctValidationsZE = new List<float>();
 						List<float> vctMeanIoUZE = new List<float>();
+						List<int> vctValidationEpoch = new List<int>();
 
-						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU, out vctValidationsZE, out vctMeanIoUZE);
+						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU, out vctValidationsZE, out vctMeanIoUZE, out vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))

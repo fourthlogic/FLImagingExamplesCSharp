@@ -193,8 +193,9 @@ namespace Classifier
 						List<float> vctCosts = new List<float>();
 						List<float> vctValidations = new List<float>();
 						List<float> vctF1Score = new List<float>();
+						List<int> vctValidationEpoch = new List<int>();
 
-						classifier.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctF1Score);
+						classifier.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctF1Score, out vctValidationEpoch);
 
 						if(vctCosts.Count != 0)
 						{
