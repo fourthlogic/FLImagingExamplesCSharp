@@ -373,13 +373,15 @@ namespace SemanticSegmentation
 				// ResultContours 인덱스와 매칭 되는 라벨 번호배열을 가져오기 // ResultContours Get an array of label numbers matching the index.
 				semanticRE.GetResultSegmentationLabels(out flaLabelList);
 
-				Int64 i64ResultCount = flaLabelList.Count();
+				Int64 i64ResultCount = flfaResultContours.GetCount();
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{
-					List<string> flaNames = new List<string>();
-					Int64 i64RealClassNum = flaLabelList[(int)i];
 					CFLFigureArray flfaResultContoursCur = (CFLFigureArray)flfaResultContours.GetAt(i);
+					List<string> flaNames = new List<string>();
+					Int64 i64RealClassNum = Convert.ToInt32(flfaResultContoursCur.GetName());
+					//flaLabelList[(int)i];
+					
 					semanticSegmentation.GetLearningResultClassNames(i64RealClassNum, out flaNames);
 
 					string flsLabel = string.Format("{0}({1})", i64RealClassNum, flaNames[0]);
