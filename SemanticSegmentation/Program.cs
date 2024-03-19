@@ -377,7 +377,7 @@ namespace SemanticSegmentation
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{
-					CFLFigureArray flfaResultContoursCur = (CFLFigureArray)flfaResultContours.GetAt(i);
+					CFLRegion flfaResultContoursCur = (CFLRegion)flfaResultContours.GetAt(i);
 					List<string> flaNames = new List<string>();
 					Int64 i64RealClassNum = Convert.ToInt32(flfaResultContoursCur.GetName());
 					//flaLabelList[(int)i];
