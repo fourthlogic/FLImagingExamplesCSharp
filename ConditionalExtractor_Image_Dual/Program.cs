@@ -30,12 +30,12 @@ namespace ConditionalExtractor
         static void Main(string[] args)
         {
             // 이미지 객체 선언 // Declare the image object
-            CFLImage[] arrFliImage = new CFLImage[3];
+            CFLImage[] arrFliImage = new CFLImage[4];
 
             // 이미지 뷰 선언 // Declare the image view
-            CGUIViewImage[] arrViewImage = new CGUIViewImage[3];
+            CGUIViewImage[] arrViewImage = new CGUIViewImage[4];
 
-            for(int i = 0; i < 3; ++i)
+            for(int i = 0; i < 4; ++i)
             {
                 arrFliImage[i] = new CFLImage();
                 arrViewImage[i] = new CGUIViewImage();
@@ -52,36 +52,50 @@ namespace ConditionalExtractor
                     break;
                 }
 
-                // Operand 이미지 로드 // Loads the operand image
-                if ((eResult = arrFliImage[1].Load("../../ExampleImages/ConditionalExtractor/CatOperand.flif")).IsFail())
+                // Operand1 이미지 로드 // Loads the operand1 image
+                if ((eResult = arrFliImage[1].Load("../../ExampleImages/ConditionalExtractor/CatOperandDual1.flif")).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to load the image file.\n");
                     break;
                 }
 
-                // Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-                if ((eResult = arrFliImage[2].Assign(arrFliImage[0])).IsFail())
+				// Operand2 이미지 로드 // Loads the operand2 image
+				if((eResult = arrFliImage[2].Load("../../ExampleImages/ConditionalExtractor/CatOperandDual2.flif")).IsFail())
+				{
+					ErrorPrint(eResult, "Failed to load the image file.\n");
+					break;
+				}
+
+				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
+				if ((eResult = arrFliImage[3].Assign(arrFliImage[0])).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to assign the image file.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
-                if ((eResult = arrViewImage[0].Create(100, 0, 612, 512)).IsFail())
+                if ((eResult = arrViewImage[0].Create(100, 0, 500, 400)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image view.\n");
                     break;
                 }
 
-                // Operand 이미지 뷰 생성 // Create operand image view
-                if ((eResult = arrViewImage[1].Create(612, 0, 1124, 512)).IsFail())
+                // Operand1 이미지 뷰 생성 // Create operand image view
+                if ((eResult = arrViewImage[1].Create(500, 0, 900, 400)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image view.\n");
                     break;
                 }
 
-                // Destination 이미지 뷰 생성 // Create destination image view
-                if ((eResult = arrViewImage[2].Create(1124, 0, 1636, 512)).IsFail())
+				// Operand2 이미지 뷰 생성 // Create operand image view
+				if((eResult = arrViewImage[2].Create(900, 0, 1300, 400)).IsFail())
+				{
+					ErrorPrint(eResult, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Destination 이미지 뷰 생성 // Create destination image view
+				if ((eResult = arrViewImage[3].Create(1300, 0, 1700, 400)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to create the image view.\n");
                     break;
@@ -90,7 +104,7 @@ namespace ConditionalExtractor
                 bool bError = false;
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-                for (int i = 0; i < 3; ++i)
+                for (int i = 0; i < 4; ++i)
                 {
                     if ((eResult = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
                     {
@@ -103,22 +117,29 @@ namespace ConditionalExtractor
                 if (bError)
                     break;
 
-                // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
+				// Source 이미지 뷰와 Operand1 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the source view and the operand1 view
+				if((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to synchronize view\n");
                     break;
                 }
 
-                // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2])).IsFail())
+				// Source 이미지 뷰와 Operand2 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the source view and the operand2 view
+				if((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2])).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to synchronize view\n");
                     break;
                 }
 
-                // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
+				// Source 이미지 뷰와 Destination 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the source view and the destination view
+				if((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[3])).IsFail())
+				{
+					ErrorPrint(eResult, "Failed to synchronize view\n");
+					break;
+				}
+
+				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
+				if ((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to synchronize window.\n");
                     break;
@@ -131,14 +152,23 @@ namespace ConditionalExtractor
                     break;
                 }
 
-                // Conditional Extractor 객체 생성 // Create Conditional Extractor object
-                CConditionalExtractor conditionalExtractor = new CConditionalExtractor();
+				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
+				if((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[3])).IsFail())
+				{
+					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					break;
+				}
+
+				// Conditional Extractor 객체 생성 // Create Conditional Extractor object
+				CConditionalExtractor conditionalExtractor = new CConditionalExtractor();
                 // Source 이미지 설정 // Set the source image
                 conditionalExtractor.SetSourceImage(ref arrFliImage[0]);
-                // Operand 이미지 설정 // Set the operand image
+                // Operand1 이미지 설정 // Set the operand image
                 conditionalExtractor.SetOperandImage(ref arrFliImage[1]);
+                // Operand2 이미지 설정 // Set the operand image
+                conditionalExtractor.SetOperandImage2(ref arrFliImage[2]);
                 // Destination 이미지 설정 // Set the destination image
-                conditionalExtractor.SetDestinationImage(ref arrFliImage[2]);
+                conditionalExtractor.SetDestinationImage(ref arrFliImage[3]);
 
                 // Operation Source 설정 // Set the Operation Source
                 conditionalExtractor.SetOperationSource(EOperationSource.Image);
@@ -147,7 +177,7 @@ namespace ConditionalExtractor
                 conditionalExtractor.SetThresholdMode(EThresholdMode.Dual_Or);
 
                 // 1채널 논리조건 설정 // Set the 1Channel logical condition
-                conditionalExtractor.SetLogicalCondition((long)ELogicalCondition.Less);
+                conditionalExtractor.SetLogicalCondition((long)ELogicalCondition.Greater);
                 conditionalExtractor.SetLogicalCondition((long)ELogicalCondition.Equal, EThresholdIndex.Second);
 
                 // 조건이 거짓일 경우 Out of Range 값 설정 여부 결정 // Determine the Out of Range value if the condition is false
@@ -166,9 +196,9 @@ namespace ConditionalExtractor
                     break;
                 }
 
-                CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[3];
+                CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[4];
 
-                for (int i = 0; i < 3; ++i)
+                for (int i = 0; i < 4; ++i)
                 {
                     // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
                     // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
@@ -193,13 +223,19 @@ namespace ConditionalExtractor
                     break;
                 }
 
-                if ((eResult = arrLayer[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((eResult = arrLayer[1].DrawTextCanvas(tpPosition, "Operand1 Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image\nDual Or(Less, Equal)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((eResult = arrLayer[2].DrawTextCanvas(tpPosition, "Operand2 Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				{
+					ErrorPrint(eResult, "Failed to draw text.\n");
+					break;
+				}
+
+				if ((eResult = arrLayer[3].DrawTextCanvas(tpPosition, "Destination Image\nDual Or(Greater, Equal)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(eResult, "Failed to draw text.\n");
                     break;
@@ -209,11 +245,13 @@ namespace ConditionalExtractor
                 arrViewImage[0].Invalidate(true);
                 arrViewImage[1].Invalidate(true);
                 arrViewImage[2].Invalidate(true);
+                arrViewImage[3].Invalidate(true);
 
                 // 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
                 while (arrViewImage[0].IsAvailable()
                       && arrViewImage[1].IsAvailable()
-                      && arrViewImage[2].IsAvailable())
+                      && arrViewImage[2].IsAvailable()
+                      && arrViewImage[3].IsAvailable())
                     Thread.Sleep(1);
             }
             while (false);
