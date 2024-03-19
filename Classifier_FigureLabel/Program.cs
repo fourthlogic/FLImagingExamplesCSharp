@@ -219,8 +219,9 @@ namespace Classifier
 						// Get the history of cost and validation and print it at graph view
 						List<float> vctCosts = new List<float>();
 						List<float> vctValidations = new List<float>();
+						List<float> vctF1Score = new List<float>();
 
-						classifier.GetLearningResultAllHistory(out vctCosts, out vctValidations);
+						classifier.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctF1Score);
 
 						if(vctCosts.Count != 0)
 						{
@@ -228,9 +229,11 @@ namespace Classifier
 							float f32CurrCost = vctCosts.Last();
 							// 마지막 검증 결과 받기 // Get the last validation result
 							float f32Validation = vctValidations.Last();
+							// 마지막 F1점수 결과 받기 // Get the last F1 Score result
+							float f32F1Score = vctF1Score.Last();
 
 							// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-							Console.WriteLine("Cost : {0:F6} Validation : {1:F6} Epoch {2} / {3}", f32CurrCost, f32Validation, i32Epoch, i32MaxEpoch);
+							Console.WriteLine("Cost : {0:F6} Validation : {1:F6} F1 Score : {2:F6} Epoch {2} / {3}", f32CurrCost, f32Validation, f32F1Score, i32Epoch, i32MaxEpoch);
 
 							// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 							if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
