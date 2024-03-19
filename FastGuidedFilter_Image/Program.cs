@@ -148,9 +148,6 @@ namespace FastGuidedFilter
 				// Destination 이미지 설정 // Set the destination image
 				fastGuidedFilter.SetDestinationImage(ref fliDestinationImage);
 
-				// Image Operation 소스로 설정 // Set Operation Source to image
-				fastGuidedFilter.SetOperationSource(EOperationSource.Image);
-
 				// filter mask radius = 3 설정 // Set the filter mask radius = 3
 				fastGuidedFilter.SetRadius(3);
 
