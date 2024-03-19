@@ -228,9 +228,9 @@ namespace Classifier
 							// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
 							float f32CurrCost = vctCosts.Last();
 							// 마지막 검증 결과 받기 // Get the last validation result
-							float f32Validation = vctValidations.Last();
+							float f32Validation = vctValidations.Count != 0 ? vctValidations.Last() : 0;
 							// 마지막 F1점수 결과 받기 // Get the last F1 Score result
-							float f32F1Score = vctF1Score.Last();
+							float f32F1Score = vctF1Score.Count != 0 ? vctF1Score.Last() : 0;
 
 							// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 							Console.WriteLine("Cost : {0:F6} Validation : {1:F6} F1 Score : {2:F6} Epoch {2} / {3}", f32CurrCost, f32Validation, f32F1Score, i32Epoch, i32MaxEpoch);
