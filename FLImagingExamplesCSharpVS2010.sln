@@ -1126,8 +1126,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomImageGenerator", "Ran
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fast Guided Filter", "Fast Guided Filter", "{78AF3206-B091-4B19-8F63-F9445C93B63B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastGuidedFilter_Image", "FastGuidedFilter_Image\FastGuidedFilter_Image.csproj", "{67763045-2BBE-4DCC-B960-CB6874C44638}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreatestCommonDivisor", "GreatestCommonDivisor", "{385979C0-E150-4461-9E6A-99EC50D8CD61}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationGreatestCommonDivisor_Image", "OperationGreatestCommonDivisor_Image\OperationGreatestCommonDivisor_Image.csproj", "{F6CF18A3-ECC7-4F24-8DDD-D3EA5DA9303C}"
@@ -1141,6 +1139,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationLeastCommonMultiple_Image", "OperationLeastCommonMultiple_Image\OperationLeastCommonMultiple_Image.csproj", "{96DCB9AD-DDAE-4DFC-B883-5B3235528B6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationLeastCommonMultiple_Scalar", "OperationLeastCommonMultiple_Scalar\OperationLeastCommonMultiple_Scalar.csproj", "{B6DC648B-67EC-469D-9739-E994AD551E10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastGuidedFilter", "FastGuidedFilter\FastGuidedFilter.csproj", "{67763045-2BBE-4DCC-B960-CB6874C44638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2676,10 +2676,6 @@ Global
 		{8E8D6B1C-7DB5-4F5A-ACB6-AEA8628CAAB3}.Debug|x64.Build.0 = Debug|x64
 		{8E8D6B1C-7DB5-4F5A-ACB6-AEA8628CAAB3}.Release|x64.ActiveCfg = Release|x64
 		{8E8D6B1C-7DB5-4F5A-ACB6-AEA8628CAAB3}.Release|x64.Build.0 = Release|x64
-		{67763045-2BBE-4DCC-B960-CB6874C44638}.Debug|x64.ActiveCfg = Debug|x64
-		{67763045-2BBE-4DCC-B960-CB6874C44638}.Debug|x64.Build.0 = Debug|x64
-		{67763045-2BBE-4DCC-B960-CB6874C44638}.Release|x64.ActiveCfg = Release|x64
-		{67763045-2BBE-4DCC-B960-CB6874C44638}.Release|x64.Build.0 = Release|x64
 		{F6CF18A3-ECC7-4F24-8DDD-D3EA5DA9303C}.Debug|x64.ActiveCfg = Debug|x64
 		{F6CF18A3-ECC7-4F24-8DDD-D3EA5DA9303C}.Debug|x64.Build.0 = Debug|x64
 		{F6CF18A3-ECC7-4F24-8DDD-D3EA5DA9303C}.Release|x64.ActiveCfg = Release|x64
@@ -2700,6 +2696,10 @@ Global
 		{B6DC648B-67EC-469D-9739-E994AD551E10}.Debug|x64.Build.0 = Debug|x64
 		{B6DC648B-67EC-469D-9739-E994AD551E10}.Release|x64.ActiveCfg = Release|x64
 		{B6DC648B-67EC-469D-9739-E994AD551E10}.Release|x64.Build.0 = Release|x64
+		{67763045-2BBE-4DCC-B960-CB6874C44638}.Debug|x64.ActiveCfg = Debug|x64
+		{67763045-2BBE-4DCC-B960-CB6874C44638}.Debug|x64.Build.0 = Debug|x64
+		{67763045-2BBE-4DCC-B960-CB6874C44638}.Release|x64.ActiveCfg = Release|x64
+		{67763045-2BBE-4DCC-B960-CB6874C44638}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

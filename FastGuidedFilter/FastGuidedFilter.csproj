@@ -9,8 +9,8 @@
     <ProjectGuid>{67763045-2BBE-4DCC-B960-CB6874C44638}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FastGuidedFilter_Image</RootNamespace>
-    <AssemblyName>FastGuidedFilter_Image</AssemblyName>
+    <RootNamespace>FastGuidedFilter</RootNamespace>
+    <AssemblyName>FastGuidedFilter</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
