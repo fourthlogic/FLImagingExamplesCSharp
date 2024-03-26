@@ -142,8 +142,8 @@ namespace WienerDeconvolutionFilter
                 // SNR 값 설정 // Set the SNR value
                 WienerDeconvolutionFilter.SetSNR(0.00001);
 
-                // Motion Blur 값 설정 // Set the Motion Blur value
-                WienerDeconvolutionFilter.EnableMotionBlur(true);
+				// Motion Blur 값 설정 // Set the Motion Blur value
+				WienerDeconvolutionFilter.SetOperationType(CWienerDeconvolutionFilter.EOperationType.Convolution);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((eResult = WienerDeconvolutionFilter.Execute()).IsFail())
@@ -162,10 +162,10 @@ namespace WienerDeconvolutionFilter
 				WienerDeconvolutionFilter.SetResultFrequency(ref arrFliImage[(int)EType.Destination4]);
 
 				// Motion Blur 값 설정 // Set the Motion Blur value
-				WienerDeconvolutionFilter.EnableMotionBlur(false);
+				WienerDeconvolutionFilter.SetOperationType(CWienerDeconvolutionFilter.EOperationType.Deconvolution);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = WienerDeconvolutionFilter.Execute()).IsFail())
+				if((eResult = WienerDeconvolutionFilter.Execute()).IsFail())
 				{
                     ErrorPrint(eResult, "Failed to execute WienerDeconvolutionFilter.");
 					break;
