@@ -43,7 +43,6 @@ namespace SemanticSegmentation
 			CGUIViewImage viewImageResultValidation = new CGUIViewImage();
 
 			CResult eResult = new CResult();
-			bool bTerminated = false;
 
 			do
 			{
@@ -156,7 +155,7 @@ namespace SemanticSegmentation
 				// Validation Set에 최소한 몇 개의 클래스가 1개 이상 씩 포함될 것인지 설정 // Set how many classes each will be included in the Validation Set
 				int i32MinimumClassIncluded = 2;
 
-				if((eResult = CValidationImageExtractorDL.Extract(ref fliSourceImage, f32Ratio, eDatasetType, i32MinimumClassIncluded, out fliResultLearnImage, out fliResultValidationImage)).IsFail())
+				if((eResult = CValidationImageExtractorDL.Extract(ref fliSourceImage, f32Ratio, eDatasetType, out fliResultLearnImage, out fliResultValidationImage, i32MinimumClassIncluded)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to process\n");
 					break;
