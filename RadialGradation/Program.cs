@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace Gradation
+namespace RadialGradation
 {
 	class Program
 	{
@@ -43,7 +43,7 @@ namespace Gradation
 			{
 				CResult eResult;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/Gradation/House.flif")).IsFail())
+				if((eResult = fliISrcImage.Load("../../ExampleImages/RadialGradation/Moon.flif")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the image file.\n");
 					break;
@@ -90,40 +90,45 @@ namespace Gradation
 					break;
 				}
 
-				// Gradation  객체 생성 // Create Gradation object
-				CGradation Gradation = new CGradation();
+				// Load Radial Gradation Region 객체 // Load Radial Gradation Region Figure object
+				CFLCircle<double> flcRadialRegion = new CFLCircle<double>();
+				flcRadialRegion.Load("../../ExampleImages/RadialGradation/RadialRegion.fig");
+
+				// RadialGradation  객체 생성 // Create RadialGradation object
+				CRadialGradation RadialGradation = new CRadialGradation();
 
 				// Source 이미지 설정 // Set source image 
-				Gradation.SetSourceImage(ref fliISrcImage);
+				RadialGradation.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				Gradation.SetDestinationImage(ref fliIDstImage);
+				RadialGradation.SetDestinationImage(ref fliIDstImage);
+
+				// Source ROI 설정 // Set source ROI 
+				RadialGradation.SetSourceROI(flcRadialRegion);
 
 				// 시작 Alpha 값 설정 // Set start alpha value
-				CMultiVar<double> mvStartAlpha = new CMultiVar<double>(0, 0, 0);
-				Gradation.SetStartAlpha(mvStartAlpha);
+				CMultiVar<double> mvStartAlpha = new CMultiVar<double>(1.0, 0.3, 0.3);
+				RadialGradation.SetStartAlpha(mvStartAlpha);
 
-				// 끝 Alpha 값 설정 // Set end alpha value
-				CMultiVar<double> mvEndAlpha = new CMultiVar<double>(0.1, 0.6, 0.9);
-				Gradation.SetEndAlpha(mvEndAlpha);
+				// 끝 Alpha 값 설정 // Set start alpha value
+				CMultiVar<double> mvEndAlpha = new CMultiVar<double>(0.1, 0.5, 0.5);
+				RadialGradation.SetEndAlpha(mvEndAlpha);
 
-				// Gradation Start Value 설정(3Ch) // Set Gradation Start Value(3Ch)
-				CMultiVar<double> mvStartValue = new CMultiVar<double>(255, 0, 0);
-				Gradation.SetStartValue(mvStartValue);
+				// RadialGradation Start Value 설정(3Ch) // Set RadialGradation Start Value(3Ch)
+				CMultiVar<double> mvStartValue = new CMultiVar<double>(0, 0, 0);
+				RadialGradation.SetStartValue(mvStartValue);
 
-				// Gradation End Value 설정(3Ch) // Set Gradation End Value(3Ch)
-				CMultiVar<double> mvEndValue = new CMultiVar<double>(0, 0, 255);
-				Gradation.SetEndValue(mvEndValue);
+				// RadialGradation End Value 설정(3Ch) // Set RadialGradation End Value(3Ch)
+				CMultiVar<double> mvEndValue = new CMultiVar<double>(100, 255, 255);
+				RadialGradation.SetEndValue(mvEndValue);
 
-				// Gradation Vector Figure 객체 // Gradation Vector Figure object
-				CFLLine<double> fllVector = new CFLLine<double>();
-				fllVector.Load("../../ExampleImages/Gradation/Vector.fig");
-				Gradation.SetVector(fllVector);
+				// RadialGradation Region 설정 // Set RadialGradation Region 
+				RadialGradation.SetRadialRegion(flcRadialRegion);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (Gradation.Execute())).IsFail())
+				if((eResult = (RadialGradation.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Gradation.");
+					ErrorPrint(eResult, "Failed to execute RadialGradation.");
 					break;
 				}
 
@@ -131,57 +136,34 @@ namespace Gradation
 				CGUIViewImageLayer layer1 = viewImage[0].GetLayer(0);
 				CGUIViewImageLayer layer2 = viewImage[1].GetLayer(0);
 
-				// Draw Figure 객체 // Gradation Vector Figure object
-				CFLLine<double> fllDrawVector = new CFLLine<double>();
-				fllDrawVector.Load("../../ExampleImages/Gradation/DrawVector.fig");
+				// Draw Figure 객체 // RadialGradation Vector Figure object
+				CFLFigureArray flfaDrawArrow;
+				CFLLine<double> fllArrow = new CFLLine<double>();
+				CFLPoint<double> flpCenter = new CFLPoint<double>();
 
-				CFLRect<double> fllRect1 = new CFLRect<double>();
-				CFLRect<double> fllRect2 = new CFLRect<double>();
+				flpCenter = flcRadialRegion.GetCenter();
+				flpCenter.y += flcRadialRegion.radius - 10;
+				fllArrow.flpPoints[0] = flcRadialRegion.GetCenter();
+				fllArrow.flpPoints[1] = flcRadialRegion.GetCenter();
+				fllArrow.flpPoints[1].y += flcRadialRegion.radius;
+				flfaDrawArrow = fllArrow.MakeArrowWithLength(5);
 
-				fllRect1.left = fllVector.flpPoints[0].x - 15;
-				fllRect1.top = fllVector.flpPoints[0].y - 15;
-				fllRect1.right = fllVector.flpPoints[0].x + 15;
-				fllRect1.bottom = fllVector.flpPoints[0].y + 15;
-
-				fllRect2.left = fllVector.flpPoints[1].x - 15;
-				fllRect2.top = fllVector.flpPoints[1].y - 15;
-				fllRect2.right = fllVector.flpPoints[1].x + 15;
-				fllRect2.bottom = fllVector.flpPoints[1].y + 15;
-
-				if((eResult = layer1.DrawFigureImage(fllRect1, EColor.BLUE, 5, EColor.BLUE, EGUIViewImagePenStyle.Solid)).IsFail())
+				// Arrow Figure 를 출력합니다. // Display Arrow Figure.
+				if((eResult = layer1.DrawFigureImage(flfaDrawArrow, EColor.RED, 3)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
-					break;
-				}
-
-				if((eResult = layer1.DrawFigureImage(fllRect2, EColor.RED, 5, EColor.RED, EGUIViewImagePenStyle.Solid)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
-					break;
-				}
-
-				// Gradation Vector 출력 // Draw gradation vector
-				if((eResult = layer1.DrawFigureImage(fllVector, EColor.BLACK, 5)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
-					break;
-				}
-
-				if((eResult = layer1.DrawFigureImage(fllVector, EColor.LIME, 3)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw Figure.\n");
 					break;
 				}
 
 				// text를 출력합니다. // Display text.
-				if((eResult = layer1.DrawTextImage(fllVector.flpPoints[0], "Start Value(255, 0, 0)/Start Alpha(0, 0, 0)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.RIGHT)).IsFail())
+				if((eResult = layer1.DrawTextImage(flcRadialRegion.GetCenter(), "Start Value(255, 0, 0)\nStart Alpha(1.0, 0.3, 0.3)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
 				// View 정보를 디스플레이 합니다. // Display View information.
-				if((eResult = layer1.DrawTextImage(fllVector.flpPoints[1], "End(0, 0, 255)/Start Alpha(0.1, 0.6, 0.9)", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				if((eResult = layer1.DrawTextImage(flpCenter, "End Value(100, 255, 255)\nEnd Alpha(0.1, 0.5, 0.5)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
@@ -191,7 +173,7 @@ namespace Gradation
 				if((eResult = layer1.DrawTextImage(new CFLPoint<double>(50, 0), "Source Image", EColor.RED)).IsFail())
 					ErrorPrint(eResult, "Failed to draw text.\n");
 
-				if((eResult = layer2.DrawTextImage(new CFLPoint<double>(0, 0), "Gradation Image", EColor.RED)).IsFail())
+				if((eResult = layer2.DrawTextImage(new CFLPoint<double>(50, 0), "Destination Image", EColor.RED)).IsFail())
 					ErrorPrint(eResult, "Failed to draw text.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
