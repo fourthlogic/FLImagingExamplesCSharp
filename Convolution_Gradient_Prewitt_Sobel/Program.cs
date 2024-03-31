@@ -56,34 +56,34 @@ namespace Convolution_Gradient_Prewitt_Sobel
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if((eResult = fliSrcImage.Load("../../ExampleImages/Convolution/Building.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/Convolution/Building.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create the source image view
-				if((eResult = viewImageSrc.Create(400, 0, 800, 400)).IsFail())
+				if((res = viewImageSrc.Create(400, 0, 800, 400)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((eResult = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				for(int i = 0; i < (long)EDst.EDstCount; ++i)
 				{
 					// Destination 이미지를 Src 이미지와 동일한 이미지로 생성
-					if((eResult = arrFliDstImage[i].Assign(fliSrcImage)).IsFail())
+					if((res = arrFliDstImage[i].Assign(fliSrcImage)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to assign the image file.\n");
+						ErrorPrint(res, "Failed to assign the image file.\n");
 						bError = true;
 						break;
 					}
@@ -92,33 +92,33 @@ namespace Convolution_Gradient_Prewitt_Sobel
 					int i32Y = (i + 1) / 2;
 
 					// Destination 이미지 뷰 생성 // Create the destination image view
-					if((eResult = arrViewImageDst[i].Create(i32X * 400 + 400, i32Y * 400, i32X * 400 + 400 + 400, i32Y * 400 + 400)).IsFail())
+					if((res = arrViewImageDst[i].Create(i32X * 400 + 400, i32Y * 400, i32X * 400 + 400 + 400, i32Y * 400 + 400)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to create the image view.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");
 						bError = true;
 						break;
 					}
 
 					// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-					if((eResult = arrViewImageDst[i].SetImagePtr(ref arrFliDstImage[i])).IsFail())
+					if((res = arrViewImageDst[i].SetImagePtr(ref arrFliDstImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
 						break;
 					}
 
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((eResult = viewImageSrc.SynchronizePointOfView(ref arrViewImageDst[i])).IsFail())
+					if((res = viewImageSrc.SynchronizePointOfView(ref arrViewImageDst[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize view\n");
+						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;
 						break;
 					}
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((eResult = viewImageSrc.SynchronizeWindow(ref arrViewImageDst[i])).IsFail())
+					if((res = viewImageSrc.SynchronizeWindow(ref arrViewImageDst[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;
 						break;
 					}
@@ -145,9 +145,9 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				convolutionGradient.SetKernelMethod(CConvolutionGradient.EKernel.Gradient);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = convolutionGradient.Execute()).IsFail())
+				if((res = convolutionGradient.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute convolution gradient.");
+					ErrorPrint(res, "Failed to execute convolution gradient.");
 					break;
 				}
 
@@ -167,9 +167,9 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				convolutionPrewitt.SetKernelMethod(CConvolutionPrewitt.EKernel.Prewitt);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = convolutionPrewitt.Execute()).IsFail())
+				if((res = convolutionPrewitt.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute convolution prewitt.");
+					ErrorPrint(res, "Failed to execute convolution prewitt.");
 					break;
 				}
 
@@ -189,9 +189,9 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				convolutionSobel.SetKernelMethod(CConvolutionSobel.EKernel.Sobel);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = convolutionSobel.Execute()).IsFail())
+				if((res = convolutionSobel.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute convolution sobel.");
+					ErrorPrint(res, "Failed to execute convolution sobel.");
 					break;
 				}
 
@@ -219,17 +219,17 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
 				// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
 				// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
-				if((eResult = layerSrc.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+				if((res = layerSrc.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure.\n");
 
-				if((eResult = arrLayerDst[(int)EDst.Gradient].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+				if((res = arrLayerDst[(int)EDst.Gradient].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure.\n");
 
-				if((eResult = arrLayerDst[(int)EDst.Prewitt].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+				if((res = arrLayerDst[(int)EDst.Prewitt].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure.\n");
 
-				if((eResult = arrLayerDst[(int)EDst.Sobel].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+				if((res = arrLayerDst[(int)EDst.Sobel].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure.\n");
 
 
 				// View 정보를 디스플레이 한다. // Display view information
@@ -239,17 +239,17 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-				if((eResult = layerSrc.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layerSrc.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = arrLayerDst[(int)EDst.Gradient].DrawTextCanvas(new CFLPoint<double>(0, 0), "Gradient Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = arrLayerDst[(int)EDst.Gradient].DrawTextCanvas(new CFLPoint<double>(0, 0), "Gradient Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = arrLayerDst[(int)EDst.Prewitt].DrawTextCanvas(new CFLPoint<double>(0, 0), "Prewitt Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = arrLayerDst[(int)EDst.Prewitt].DrawTextCanvas(new CFLPoint<double>(0, 0), "Prewitt Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = arrLayerDst[(int)EDst.Sobel].DrawTextCanvas(new CFLPoint<double>(0, 0), "Sobel Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = arrLayerDst[(int)EDst.Sobel].DrawTextCanvas(new CFLPoint<double>(0, 0), "Sobel Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
 
 				// 이미지 뷰를 갱신 합니다. // Update image view

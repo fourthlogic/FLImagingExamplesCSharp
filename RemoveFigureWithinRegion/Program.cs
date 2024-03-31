@@ -36,32 +36,32 @@ namespace RemoveFigureWithinRegion
 			for(int i = 0; i < 4; ++i)
 				viewImage[i] = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(400, 0, 912, 384)).IsFail())
+				if((res = viewImage[0].Create(400, 0, 912, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
+				if((res = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[2].Create(400, 400, 912, 794)).IsFail())
+				if((res = viewImage[2].Create(400, 400, 912, 794)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[3].Create(912, 400, 1424, 794)).IsFail())
+				if((res = viewImage[3].Create(912, 400, 1424, 794)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
@@ -79,9 +79,9 @@ namespace RemoveFigureWithinRegion
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
 				for(int i = 1; i < 4; ++i)
 				{
-					if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizePointOfView(ref viewImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize view\n");
+						ErrorPrint(res, "Failed to synchronize view\n");
 						break;
 					}
 				}
@@ -89,9 +89,9 @@ namespace RemoveFigureWithinRegion
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 				for(int i = 1; i < 4; ++i)
 				{
-					if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
@@ -99,9 +99,9 @@ namespace RemoveFigureWithinRegion
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 				for(int i = 1; i < 4; ++i)
 				{
-					if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
@@ -151,12 +151,12 @@ namespace RemoveFigureWithinRegion
 				String strFigure;
 				Console.WriteLine("Source Figure Array\n");
 
-				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaSource));
+				strFigure = string.Format("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaSource));
 				Console.WriteLine("{0}", strFigure);
 
 				Console.WriteLine("Region1\n");
 
-				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flcrRegion1));
+				strFigure = string.Format("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flcrRegion1));
 				Console.WriteLine("{0}", strFigure);
 
 				// SourceView1의 0번 레이어에 Source Figure, Region1 그리기 // Draw Source Figure, Region1 on Layer 0 of SourceView1
@@ -165,7 +165,7 @@ namespace RemoveFigureWithinRegion
 
 				Console.WriteLine("Region2\n");
 
-				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flcrRegion2));
+				strFigure = string.Format("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flcrRegion2));
 				Console.WriteLine("{0}", strFigure);
 
 				// SourceView2의 0번 레이어에 Source Figure, Region2 그리기 // Draw Source Figure, Region2 on Layer 0 of SourceView2
@@ -178,7 +178,7 @@ namespace RemoveFigureWithinRegion
 
 				Console.WriteLine("Result Figure Within Region1\n");
 
-				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaResult1));
+				strFigure = string.Format("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaResult1));
 				Console.WriteLine("{0}", strFigure);
 
 				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1
@@ -192,7 +192,7 @@ namespace RemoveFigureWithinRegion
 
 				Console.WriteLine("Result Figure Within Region2\n");
 
-				strFigure = string.Format("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaResult2));
+				strFigure = string.Format("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaResult2));
 				Console.WriteLine("{0}", strFigure);
 
 				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1

@@ -33,28 +33,28 @@ namespace CameraCalibrator
 
             // 이미지 뷰 선언 // Declare the image view
             CGUIViewImage viewImage = new CGUIViewImage();
-            CResult eResult = new CResult();
+            CResult res = new CResult();
 
             do
             {
                 // 이미지 로드 // Load image
-                if ((eResult = fliImage.Load("../../ExampleImages/GridOfDotsDetector/GridOfDots.flif")).IsFail())
+                if ((res = fliImage.Load("../../ExampleImages/GridOfDotsDetector/GridOfDots.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
-                if ((eResult = viewImage.Create(400, 0, 1040, 480)).IsFail())
+                if ((res = viewImage.Create(400, 0, 1040, 480)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+                    ErrorPrint(res, "Failed to set image object on the image view.\n");
                     break;
                 }
 
@@ -65,9 +65,9 @@ namespace CameraCalibrator
                 gridofDots.SetSourceImage(ref fliImage);
 
                 // 알고리즘 수행 // Execute the Algoritm
-                if ((eResult = gridofDots.Execute()).IsFail())
+                if ((res = gridofDots.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute Grid Of Dots Detector.");
+                    ErrorPrint(res, "Failed to execute Grid Of Dots Detector.");
                     break;
                 }
 
@@ -94,21 +94,21 @@ namespace CameraCalibrator
                 double f64Width = flpPoint0.GetDistance(flpPoint1);
                 double f64Angle = flpPoint0.GetAngle(flpPoint1);
 
-                if ((eResult = layer.DrawFigureImage(flqRegion, EColor.BLACK, 3)).IsFail())
+                if ((res = layer.DrawFigureImage(flqRegion, EColor.BLACK, 3)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw figure.\n");
+                    ErrorPrint(res, "Failed to draw figure.\n");
                     break;
                 }
 
-                if ((eResult = layer.DrawFigureImage(flqRegion, EColor.YELLOW, 1)).IsFail())
+                if ((res = layer.DrawFigureImage(flqRegion, EColor.YELLOW, 1)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw figure.\n");
+                    ErrorPrint(res, "Failed to draw figure.\n");
                     break;
                 }
 
-                if ((eResult = layer.DrawTextImage(flpPoint0, String.Format("({0} X {1}) Pitch [{2}]", i64ResultCol, i64ResultRow, f64AverageCellPitch), EColor.YELLOW, EColor.BLACK, (int)(f64Width / 16), true, f64Angle, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+                if ((res = layer.DrawTextImage(flpPoint0, String.Format("({0} X {1}) Pitch [{2}]", i64ResultCol, i64ResultRow, f64AverageCellPitch), EColor.YELLOW, EColor.BLACK, (int)(f64Width / 16), true, f64Angle, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
@@ -137,15 +137,15 @@ namespace CameraCalibrator
 
                         CFLLine<double> fll = new CFLLine<double>(flpLastPoint, fla20);
 
-                        if ((eResult = layer.DrawFigureImage(fll, EColor.BLACK, 5)).IsFail())
+                        if ((res = layer.DrawFigureImage(fll, EColor.BLACK, 5)).IsFail())
                         {
-                            ErrorPrint(eResult, "Failed to draw figure.\n");
+                            ErrorPrint(res, "Failed to draw figure.\n");
                             break;
                         }
 
-                        if ((eResult = layer.DrawFigureImage(fll, EColor.YELLOW, 3)).IsFail())
+                        if ((res = layer.DrawFigureImage(fll, EColor.YELLOW, 3)).IsFail())
                         {
-                            ErrorPrint(eResult, "Failed to draw figure.\n");
+                            ErrorPrint(res, "Failed to draw figure.\n");
                             break;
                         }
                     }
@@ -160,15 +160,15 @@ namespace CameraCalibrator
 
                             CFLLine<double> fll = new CFLLine<double>(flpLastPoint, fla2k);
 
-                            if ((eResult = layer.DrawFigureImage(fll, EColor.BLACK, 5)).IsFail())
+                            if ((res = layer.DrawFigureImage(fll, EColor.BLACK, 5)).IsFail())
                             {
-                                ErrorPrint(eResult, "Failed to draw figure.\n");
+                                ErrorPrint(res, "Failed to draw figure.\n");
                                 break;
                             }
 
-                            if ((eResult = layer.DrawFigureImage(fll, crTable[i32LineTransition++ % 3], 3)).IsFail())
+                            if ((res = layer.DrawFigureImage(fll, crTable[i32LineTransition++ % 3], 3)).IsFail())
                             {
-                                ErrorPrint(eResult, "Failed to draw figure.\n");
+                                ErrorPrint(res, "Failed to draw figure.\n");
                                 break;
                             }
                         }
@@ -230,9 +230,9 @@ namespace CameraCalibrator
                         flpDisPlay.x = fla2[(int)k].x;
                         flpDisPlay.y = fla2[(int)k].y;
 
-                        if ((eResult = layer.DrawTextImage(flpDisPlay, String.Format("{0}", i32VertexNumber++), crTextColor, EColor.BLACK, (int)(f64Pitch / 3), true, f64Angle)).IsFail())
+                        if ((res = layer.DrawTextImage(flpDisPlay, String.Format("{0}", i32VertexNumber++), crTextColor, EColor.BLACK, (int)(f64Pitch / 3), true, f64Angle)).IsFail())
                         {
-                            ErrorPrint(eResult, "Failed to draw text.\n");
+                            ErrorPrint(res, "Failed to draw text.\n");
                             break;
                         }
 

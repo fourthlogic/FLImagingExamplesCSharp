@@ -36,60 +36,60 @@ namespace NoiseGenerator
 			CGUIViewImage[] viewImage = new CGUIViewImage[2];
             viewImage[0] = new CGUIViewImage();
             viewImage[1] = new CGUIViewImage();
-            CResult eResult = new CResult();
+            CResult res = new CResult();
 
             do
             {
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/NoiseGenerator/Plate.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/NoiseGenerator/Plate.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.");
+                    ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
-                if ((eResult = fliDestinationImage.Load("../../ExampleImages/NoiseGenerator/Plate.flif")).IsFail())
+                if ((res = fliDestinationImage.Load("../../ExampleImages/NoiseGenerator/Plate.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.");
+                    ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
 				// 이미지 뷰 생성 // Create imageview
-				if((eResult = viewImage[0].Create(400, 0, 912, 384)).IsFail())
+				if((res = viewImage[0].Create(400, 0, 912, 384)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.");
+                    ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
-                if ((eResult = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
+                if ((res = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.");
+                    ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
 				// 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view");
+                    ErrorPrint(res, "Failed to synchronize view");
                     break;
                 }
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the imageview
-				if((eResult = viewImage[0].SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.");
+                    ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
-                if ((eResult = viewImage[1].SetImagePtr(ref fliDestinationImage)).IsFail())
+                if ((res = viewImage[1].SetImagePtr(ref fliDestinationImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.");
+                    ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window.");
+                    ErrorPrint(res, "Failed to synchronize window.");
                     break;
                 }
 
@@ -112,9 +112,9 @@ namespace NoiseGenerator
 				noiseGenerator.SetGaussianDistNoise(0.0, 0.05);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = noiseGenerator.Execute()).IsFail())
+				if((res = noiseGenerator.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute noise generator.");
+                    ErrorPrint(res, "Failed to execute noise generator.");
                     break;
                 }
 
@@ -125,30 +125,30 @@ namespace NoiseGenerator
                 layerDst.Clear();
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
-				if((eResult = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+				if((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
-				if((eResult = layerDst.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+				if((res = layerDst.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPosition00 = new CFLPoint<double>(0, 0);
 
-                if ((eResult = layer.DrawTextCanvas(flpPosition00, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layer.DrawTextCanvas(flpPosition00, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text");
+                    ErrorPrint(res, "Failed to draw text");
                     break;
                 }
 
-                if ((eResult = layerDst.DrawTextCanvas(flpPosition00, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerDst.DrawTextCanvas(flpPosition00, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text");
+                    ErrorPrint(res, "Failed to draw text");
                     break;
                 }
 

@@ -37,25 +37,25 @@ namespace HoughTransformLine
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/HoughTransform/Sudoku.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/HoughTransform/Sudoku.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(300, 0, 300 + 520, 430)).IsFail())
+				if((res = viewImage.Create(300, 0, 300 + 520, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -85,9 +85,9 @@ namespace HoughTransformLine
 				HoughTransform.SetNearbyLineFilter(5);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (HoughTransform.Execute())).IsFail())
+				if((res = (HoughTransform.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute HoughTransform.");
+					ErrorPrint(res, "Failed to execute HoughTransform.");
 					break;
 				}
 
@@ -110,9 +110,9 @@ namespace HoughTransformLine
 					HoughTransform.GetResultLine(i, out fllLine);
 
 					// line 출력 // display line
-					if((eResult = (layer.DrawFigureImage(fllLine, EColor.LIME, 1))).IsFail())
+					if((res = (layer.DrawFigureImage(fllLine, EColor.LIME, 1))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw Figure");
+						ErrorPrint(res, "Failed to draw Figure");
 						break;
 					}
 				}

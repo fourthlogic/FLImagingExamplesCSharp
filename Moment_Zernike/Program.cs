@@ -33,28 +33,28 @@ namespace Moment
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
             do
             {
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/Moment/airEdge.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/Moment/airEdge.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.");
+                    ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
 				// 이미지 뷰 생성 // Create imageview
-				if((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.");
+                    ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the imageview
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.");
+                    ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
@@ -80,9 +80,9 @@ namespace Moment
                 moment.AddZernike(3, 3);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = moment.Execute()).IsFail())
+				if((res = moment.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute moment.");
+                    ErrorPrint(res, "Failed to execute moment.");
                     break;
                 }
 
@@ -101,9 +101,9 @@ namespace Moment
                 layer.Clear();
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
-				if((eResult = layer.DrawFigureImage(flrROI, EColor.BLUE)).IsFail())
+				if((res = layer.DrawFigureImage(flrROI, EColor.BLUE)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 

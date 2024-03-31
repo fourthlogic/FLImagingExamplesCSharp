@@ -38,33 +38,33 @@ namespace Blob
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(200, 0, 812, 512)).IsFail())
+				if((res = viewImage.Create(200, 0, 812, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImage.ZoomFit()).IsFail())
+				if((res = viewImage.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 
@@ -80,23 +80,23 @@ namespace Blob
 				sBlob.SetThreshold(127);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = sBlob.Execute()).IsFail())
+				if((res = sBlob.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Blob.");
+					ErrorPrint(res, "Failed to execute Blob.");
 					break;
 				}
 
 				// 20보다 같거나 작은 장변 길이를 가진 객체들을 제거
-				if((eResult = sBlob.Filter(CBlob.EFilterItem.BoundaryRectWidth, 20, ELogicalCondition.LessEqual)).IsFail())
+				if((res = sBlob.Filter(CBlob.EFilterItem.BoundaryRectWidth, 20, ELogicalCondition.LessEqual)).IsFail())
 				{
-					ErrorPrint(eResult, "Blob filtering algorithm error occurs.");
+					ErrorPrint(res, "Blob filtering algorithm error occurs.");
 					break;
 				}
 
 				// circularity 가 0.9보다 작은 객체들을 제거
-				if((eResult = sBlob.Filter(CBlob.EFilterItem.Circularity, 0.9, ELogicalCondition.Less)).IsFail())
+				if((res = sBlob.Filter(CBlob.EFilterItem.Circularity, 0.9, ELogicalCondition.Less)).IsFail())
 				{
-					ErrorPrint(eResult, "Blob filtering algorithm error occurred.");
+					ErrorPrint(res, "Blob filtering algorithm error occurred.");
 					break;
 				}
 
@@ -116,7 +116,7 @@ namespace Blob
 				// Blob 결과들 중 Contour 를 얻어옴
 				if(sBlob.GetResultContours(out flfaContour).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get boundary rects from the Blob object.");
+					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
 				}
 
@@ -131,7 +131,7 @@ namespace Blob
 
 					if(imgStatistics.GetMin(out mvMin).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get Min Value from the Blob object.");
+						ErrorPrint(res, "Failed to get Min Value from the Blob object.");
 						break;
 					}
 
@@ -142,7 +142,7 @@ namespace Blob
 
 					if(imgStatistics.GetMax(out mvMax).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get Max Value from the Blob object.");
+						ErrorPrint(res, "Failed to get Max Value from the Blob object.");
 						break;
 					}
 
@@ -158,9 +158,9 @@ namespace Blob
 				layer.Clear();
 				CFLPoint<double> flp = new CFLPoint<double>();
 
-				if((eResult = layer.DrawTextCanvas(flp, ("Source"), EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layer.DrawTextCanvas(flp, ("Source"), EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text on the image view.\n");
+					ErrorPrint(res, "Failed to draw text on the image view.\n");
 					break;
 				}
 
@@ -171,7 +171,7 @@ namespace Blob
 				// 파라미터 순서 : 레이어 . Figure 객체 . 선 색 . 선 두께 . 면 색 . 펜 스타일 . 선 알파값(불투명도) . 면 알파값 (불투명도)
 				if(layer.DrawFigureImage(flfaContour, EColor.RED, 1, EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, .25f).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 					break;
 				}
 

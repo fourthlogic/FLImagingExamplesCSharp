@@ -38,58 +38,58 @@ namespace MultiFocus
 			CGUIViewImage viewImageDst = new CGUIViewImage();
 
 			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
 				// 이미지 로드 // Load image
-                if ((eResult = fliSrcImage.Load("../../ExampleImages/MultiFocus/Source.flif")).IsFail())
+                if ((res = fliSrcImage.Load("../../ExampleImages/MultiFocus/Source.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				fliSrcImage.SelectPage(0);
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImageSrc.Create(400, 0, 1012, 550)).IsFail())
+				if((res = viewImageSrc.Create(400, 0, 1012, 550)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Destination 이미지 뷰 생성 // Create the destination image view
-				if((eResult = viewImageDst.Create(1012, 0, 1624, 550)).IsFail())
+				if((res = viewImageDst.Create(1012, 0, 1624, 550)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((eResult = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
+				if((res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if((eResult = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+                if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view.\n");
+                    ErrorPrint(res, "Failed to synchronize view.\n");
                     break;
                 }
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImageSrc.ZoomFit()).IsFail())
+				if((res = viewImageSrc.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit.\n");
+					ErrorPrint(res, "Failed to zoom fit.\n");
 					break;
 				}
 
@@ -105,16 +105,16 @@ namespace MultiFocus
 				multiFocus.SetKernelHalfSize(20);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = multiFocus.Execute()).IsFail())
+				if((res = multiFocus.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute algorithm.\n");
+					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImageDst.ZoomFit()).IsFail())
+				if((res = viewImageDst.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit.\n");
+					ErrorPrint(res, "Failed to zoom fit.\n");
 					break;
 				}
 
@@ -135,15 +135,15 @@ namespace MultiFocus
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flp = new CFLPoint<double>();
 
-				if((eResult = layerSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = layerDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

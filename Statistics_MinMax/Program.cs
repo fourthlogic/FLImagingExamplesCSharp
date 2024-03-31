@@ -34,28 +34,28 @@ namespace Statistics
             // 이미지 뷰 선언 // Declare the image view
             CGUIViewImage viewImage = new CGUIViewImage();
 
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
             {
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/Statistics/StatisticsSource.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/Statistics/StatisticsSource.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.");
+					ErrorPrint(res, "Failed to load the image file.");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(400, 0, 1150, 500)).IsFail())
+				if((res = viewImage.Create(400, 0, 1150, 500)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.");
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if ((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.");
+                    ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
@@ -75,16 +75,16 @@ namespace Statistics
                 CMultiVar<double> mvMax = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
-				if((eResult = statistics.GetMin(out mvMin)).IsFail())
+				if((res = statistics.GetMin(out mvMin)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to process.");
+                    ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
-				if((eResult = statistics.GetMax(out mvMax)).IsFail())
+				if((res = statistics.GetMax(out mvMax)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to process.");
+                    ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
@@ -97,16 +97,16 @@ namespace Statistics
                 CMultiVar<double> mvTrimmingMax = new CMultiVar<double>();
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
-                if((eResult = statistics.GetMin(out mvTrimmingMin)).IsFail())
+                if((res = statistics.GetMin(out mvTrimmingMin)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to process.");
+                    ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
-                if((eResult = statistics.GetMax(out mvTrimmingMax)).IsFail())
+                if((res = statistics.GetMax(out mvTrimmingMax)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to process.");
+                    ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
@@ -118,8 +118,8 @@ namespace Statistics
                 layer.Clear();
 
                 // ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
-                if ((eResult = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-                    ErrorPrint(eResult, "Failed to draw figure");
+                if ((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+                    ErrorPrint(res, "Failed to draw figure");
 
                 string strMinValue, strMaxValue;
                 strMinValue = String.Format("Min Of Region : {0}", mvMin.GetAt(0));
@@ -140,45 +140,45 @@ namespace Statistics
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((eResult = layer.DrawTextCanvas(flpPoint, strMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 flpPoint.Offset(0, 30);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((eResult = layer.DrawTextCanvas(flpPoint, strMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 flpPoint.Offset(0, 30);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((eResult = layer.DrawTextCanvas(flpPoint, strTrimming, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimming, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 flpPoint.Offset(0, 30);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((eResult = layer.DrawTextCanvas(flpPoint, strTrimmingMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 flpPoint.Offset(0, 30);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((eResult = layer.DrawTextCanvas(flpPoint, strTrimmingMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
@@ -187,14 +187,14 @@ namespace Statistics
                 flrMinRegion.Inflate(0.5);
                 flrMaxRegion.Inflate(0.5);
 
-                if ((eResult = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-                    ErrorPrint(eResult, "Failed to draw figure.\n");
+                if ((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+                    ErrorPrint(res, "Failed to draw figure.\n");
 
-                if ((eResult = layer.DrawFigureImage(flrMinRegion, EColor.BLUE, 1, EColor.LIGHTBLUE, EGUIViewImagePenStyle.Solid, 0.5F, 0.5F)).IsFail())
-                    ErrorPrint(eResult, "Failed to draw figure.\n");
+                if ((res = layer.DrawFigureImage(flrMinRegion, EColor.BLUE, 1, EColor.LIGHTBLUE, EGUIViewImagePenStyle.Solid, 0.5F, 0.5F)).IsFail())
+                    ErrorPrint(res, "Failed to draw figure.\n");
 
-                if ((eResult = layer.DrawFigureImage(flrMaxRegion, EColor.LIGHTRED, 1, EColor.RED, EGUIViewImagePenStyle.Solid, 0.5F, 0.5F)).IsFail())
-                    ErrorPrint(eResult, "Failed to draw figure.\n");
+                if ((res = layer.DrawFigureImage(flrMaxRegion, EColor.LIGHTRED, 1, EColor.RED, EGUIViewImagePenStyle.Solid, 0.5F, 0.5F)).IsFail())
+                    ErrorPrint(res, "Failed to draw figure.\n");
 
                 // 이미지 뷰를 갱신 합니다. // Update image view
                 viewImage.Invalidate(true);

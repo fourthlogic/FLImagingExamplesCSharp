@@ -38,33 +38,33 @@ namespace Blob
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(200, 0, 968, 576)).IsFail())
+				if((res = viewImage.Create(200, 0, 968, 576)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImage.ZoomFit()).IsFail())
+				if((res = viewImage.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 
@@ -87,16 +87,16 @@ namespace Blob
 				sBlob.SetResultType((CBlob.EBlobResultType)i32ResultTypeMask);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = sBlob.Execute()).IsFail())
+				if((res = sBlob.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Blob.");
+					ErrorPrint(res, "Failed to execute Blob.");
 					break;
 				}
 
 				// Circularity가 0.85 보다 작은 객체들을 제거(원형에 가깝지 않은 객체 제거, 최대값 : 1.0)
-				if((eResult = sBlob.Filter(CBlob.EFilterItem.Circularity, 0.85, ELogicalCondition.Less)).IsFail())
+				if((res = sBlob.Filter(CBlob.EFilterItem.Circularity, 0.85, ELogicalCondition.Less)).IsFail())
 				{
-					ErrorPrint(eResult, "Blob filtering algorithm error occurred.");
+					ErrorPrint(res, "Blob filtering algorithm error occurred.");
 					break;
 				}
 
@@ -105,16 +105,16 @@ namespace Blob
 				List<double> flaCircularity;
 
 				// Blob 결과들 중 Contours 을 얻어옴
-				if((eResult = sBlob.GetResultContours(out flfaContours)).IsFail())
+				if((res = sBlob.GetResultContours(out flfaContours)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get contours from the Blob object.");
+					ErrorPrint(res, "Failed to get contours from the Blob object.");
 					break;
 				}
 
 				// Blob 결과들 중 Circularity 을 얻어옴
-				if((eResult = sBlob.GetResultCircularities(out flaCircularity)).IsFail())
+				if((res = sBlob.GetResultCircularities(out flaCircularity)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get circularities from the Blob object.");
+					ErrorPrint(res, "Failed to get circularities from the Blob object.");
 					break;
 				}
 
@@ -130,9 +130,9 @@ namespace Blob
 				// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
 				// 여기서 0.25이므로 옅은 반투명 상태라고 볼 수 있다.
 				// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
-				if((eResult = layer.DrawFigureImage(flfaContours, EColor.RED, 1, EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, .25f)).IsFail())
+				if((res = layer.DrawFigureImage(flfaContours, EColor.RED, 1, EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, .25f)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 					break;
 				}
 

@@ -68,87 +68,87 @@ namespace FPP
 			vctSrcImages.Add(fliSrcImage[1]);
 
 			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
 				// Learn 이미지 로드 // Load the reference plane image for calibration
-				if((eResult = vctLrnImages[0].Load("../../ExampleImages/Moire3D/Learn0/")).IsFail())
+				if((res = vctLrnImages[0].Load("../../ExampleImages/Moire3D/Learn0/")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				vctLrnImages[0].SelectPage(0);
 
 				// Source 이미지 로드 // Load the source image
-				if((eResult = vctSrcImages[0].Load("../../ExampleImages/Moire3D/Object0/")).IsFail())
+				if((res = vctSrcImages[0].Load("../../ExampleImages/Moire3D/Object0/")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				vctSrcImages[0].SelectPage(0);
 
 				// Learn 이미지 로드 // Load the reference plane image for calibration
-				if((eResult = vctLrnImages[1].Load("../../ExampleImages/Moire3D/Learn1/")).IsFail())
+				if((res = vctLrnImages[1].Load("../../ExampleImages/Moire3D/Learn1/")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				vctLrnImages[1].SelectPage(0);
 
 				// Source 이미지 로드 // Load the source image
-				if((eResult = vctSrcImages[1].Load("../../ExampleImages/Moire3D/Object1/")).IsFail())
+				if((res = vctSrcImages[1].Load("../../ExampleImages/Moire3D/Object1/")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				vctSrcImages[1].SelectPage(0);
 
 				// Learn 이미지 뷰 생성 // Create the learn image view
-				if((eResult = viewImageLrn[0].Create(100, 0, 548, 348)).IsFail())
+				if((res = viewImageLrn[0].Create(100, 0, 548, 348)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Learn 이미지 뷰 생성 // Create the destination image view
-				if((eResult = viewImageLrn[1].Create(548, 0, 996, 348)).IsFail())
+				if((res = viewImageLrn[1].Create(548, 0, 996, 348)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create the Source image view
-				if((eResult = viewImageSrc[0].Create(100, 348, 548, 696)).IsFail())
+				if((res = viewImageSrc[0].Create(100, 348, 548, 696)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create the destination image view
-				if((eResult = viewImageSrc[1].Create(548, 348, 996, 696)).IsFail())
+				if((res = viewImageSrc[1].Create(548, 348, 996, 696)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Dst 이미지 뷰 생성 // Create the destination image view
-				if((eResult = viewImageDst.Create(996, 348, 1444, 696)).IsFail())
+				if((res = viewImageDst.Create(996, 348, 1444, 696)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Learn 이미지 뷰에 이미지를 디스플레이 // Display the image in the Learn image view
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((eResult = viewImageLrn[i32I].SetImagePtr(ref fliLrnImage[i32I])).IsFail())
+					if((res = viewImageLrn[i32I].SetImagePtr(ref fliLrnImage[i32I])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
 					}
 				}
@@ -156,89 +156,89 @@ namespace FPP
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the Source image view
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((eResult = viewImageSrc[i32I].SetImagePtr(ref fliSrcImage[i32I])).IsFail())
+					if((res = viewImageSrc[i32I].SetImagePtr(ref fliSrcImage[i32I])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
 					}
 				}
 
 				// Dst 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((eResult = viewImageDst.SetImagePtr(ref fliImageDst)).IsFail())
+				if((res = viewImageDst.SetImagePtr(ref fliImageDst)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two view windows
-				if((eResult = viewImageLrn[1].SynchronizeWindow(ref viewImageLrn[0])).IsFail())
+				if((res = viewImageLrn[1].SynchronizeWindow(ref viewImageLrn[0])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two view windows
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((eResult = viewImageSrc[i32I].SynchronizeWindow(ref viewImageLrn[0])).IsFail())
+					if((res = viewImageSrc[i32I].SynchronizeWindow(ref viewImageLrn[0])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
 
 				// 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two view windows
-				if((eResult = viewImageDst.SynchronizeWindow(ref viewImageLrn[0])).IsFail())
+				if((res = viewImageDst.SynchronizeWindow(ref viewImageLrn[0])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views. 
-				if((eResult = viewImageLrn[1].SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
+				if((res = viewImageLrn[1].SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view.\n");
+					ErrorPrint(res, "Failed to synchronize view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views. 
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((eResult = viewImageSrc[i32I].SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
+					if((res = viewImageSrc[i32I].SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize view.\n");
+						ErrorPrint(res, "Failed to synchronize view.\n");
 						break;
 					}
 				}
 
 				// 두 이미지 뷰의 페이지를 동기화 한다. // Synchronize the page of the two image views. 
-				if((eResult = viewImageDst.SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
+				if((res = viewImageDst.SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 페이지를 동기화 한다. // Synchronize the page of the two image views. 
-				if((eResult = viewImageLrn[1].SynchronizePageIndex(ref viewImageLrn[0])).IsFail())
+				if((res = viewImageLrn[1].SynchronizePageIndex(ref viewImageLrn[0])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view.\n");
+					ErrorPrint(res, "Failed to synchronize view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 페이지를 동기화 한다. // Synchronize the page of the two image views. 
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((eResult = viewImageSrc[i32I].SynchronizePageIndex(ref viewImageLrn[0])).IsFail())
+					if((res = viewImageSrc[i32I].SynchronizePageIndex(ref viewImageLrn[0])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize view.\n");
+						ErrorPrint(res, "Failed to synchronize view.\n");
 						break;
 					}
 				}
 
 				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
-				if((eResult = view3DDst.Create(400, 200, 1300, 800)).IsFail())
+				if((res = view3DDst.Create(400, 200, 1300, 800)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
@@ -268,23 +268,23 @@ namespace FPP
 				Moire3D.EnableNoiseReduction(true);
 
 				// 앞서 설정된 파라미터 대로 Calibration 수행 // Calibrate algorithm according to previously set parameters
-				if((eResult = Moire3D.Calibrate()).IsFail())
+				if((res = Moire3D.Calibrate()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to calibrate.");
+					ErrorPrint(res, "Failed to calibrate.");
 					break;
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = Moire3D.Execute()).IsFail())
+				if((res = Moire3D.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute algorithm.");
+					ErrorPrint(res, "Failed to execute algorithm.");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImageDst.ZoomFit()).IsFail())
+				if((res = viewImageDst.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 
@@ -312,54 +312,54 @@ namespace FPP
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flp = new CFLPoint<double>();
 
-				if((eResult = layerLrn0.DrawTextCanvas(flp, "Learn Image[0]", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerLrn0.DrawTextCanvas(flp, "Learn Image[0]", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = layerLrn1.DrawTextCanvas(flp, "Learn Image[1]", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerLrn1.DrawTextCanvas(flp, "Learn Image[1]", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = layerSrc0.DrawTextCanvas(flp, "Source Image[0]", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSrc0.DrawTextCanvas(flp, "Source Image[0]", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = layerSrc1.DrawTextCanvas(flp, "Source Image[1]", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSrc1.DrawTextCanvas(flp, "Source Image[1]", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if((eResult = view3DDst.SetHeightMap(fliImageDst)).IsFail())
+				if((res = view3DDst.SetHeightMap(fliImageDst)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Texture 이미지 로드 // Load the texture image
-				if((eResult = fliTxtImage.Load("../../ExampleImages/Moire3D/text.flif")).IsFail())
+				if((res = fliTxtImage.Load("../../ExampleImages/Moire3D/text.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 3D 이미지 뷰에 Texture 이미지를 디스플레이 // Display the texture image on the 3D image view
-				if((eResult = view3DDst.SetTexture(fliTxtImage)).IsFail())
+				if((res = view3DDst.SetTexture(fliTxtImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((eResult = layer3D.DrawTextCanvas(flp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer3D.DrawTextCanvas(flp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

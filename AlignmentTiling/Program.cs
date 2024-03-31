@@ -47,14 +47,14 @@ namespace AlignmentTiling
 			for(int i = 0; i < i32SrcImageCount; ++i)
 				arrViewImageSrc[i] = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((eResult = (fliSrcImage.Load("../../ExampleImages/AlignmentTiling/AlignmentTilingExampleImage.flif"))).IsFail())
+				if((res = (fliSrcImage.Load("../../ExampleImages/AlignmentTiling/AlignmentTilingExampleImage.flif"))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
@@ -63,17 +63,17 @@ namespace AlignmentTiling
 				{
 					if(i < 2)
 					{
-						if((eResult = (arrViewImageSrc[i].Create(100 + 300 * i, 0, 400 + 300 * i, 300))).IsFail())
+						if((res = (arrViewImageSrc[i].Create(100 + 300 * i, 0, 400 + 300 * i, 300))).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to create the image view.\n");
+							ErrorPrint(res, "Failed to create the image view.\n");
 							break;
 						}
 					}
 					else
 					{
-						if((eResult = (arrViewImageSrc[i].Create(100 + 300 * (i - 2), 300, 400 + 300 * (i - 2), 600))).IsFail())
+						if((res = (arrViewImageSrc[i].Create(100 + 300 * (i - 2), 300, 400 + 300 * (i - 2), 600))).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to create the image view.\n");
+							ErrorPrint(res, "Failed to create the image view.\n");
 							break;
 						}
 					}
@@ -94,41 +94,41 @@ namespace AlignmentTiling
 
 					// 얕은 복사된 해당 페이지를 선택한 이미지를 뷰에 디스플레이
 					// Display the selected image of the shallow-copied page in the view
-					if((eResult = (arrViewImageSrc[i].SetImagePtr(ref fliSrcImages[i]))).IsFail())
+					if((res = (arrViewImageSrc[i].SetImagePtr(ref fliSrcImages[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
 					}
 				}
 
 
 				// Destination 이미지 뷰 생성 // Create the destination image view
-				if((eResult = (viewImageDst.Create(912, 0, 1424, 612))).IsFail())
+				if((res = (viewImageDst.Create(912, 0, 1424, 612))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((eResult = (viewImageDst.SetImagePtr(ref fliDstImage))).IsFail())
+				if((res = (viewImageDst.SetImagePtr(ref fliDstImage))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰 윈도우의 위치를 맞춤 // Align the position of the image view window
 				for(int i = 1; i < i32SrcImageCount; ++i)
 				{
-					if((eResult = (arrViewImageSrc[0].SynchronizeWindow(ref arrViewImageSrc[i]))).IsFail())
+					if((res = (arrViewImageSrc[0].SynchronizeWindow(ref arrViewImageSrc[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
 
-				if((eResult = (arrViewImageSrc[0].SynchronizeWindow(ref viewImageDst))).IsFail())
+				if((res = (arrViewImageSrc[0].SynchronizeWindow(ref viewImageDst))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -160,17 +160,17 @@ namespace AlignmentTiling
 				alignmentTiling.SetPivotPageIndex(1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (alignmentTiling.Execute())).IsFail())
+				if((res = (alignmentTiling.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute alignment tiling.");
+					ErrorPrint(res, "Failed to execute alignment tiling.");
 					break;
 				}
 
 				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다.
 				// With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
-				if((eResult = (viewImageDst.ZoomFit())).IsFail())
+				if((res = (viewImageDst.ZoomFit())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit of the image view.\n");
+					ErrorPrint(res, "Failed to zoom fit of the image view.\n");
 					break;
 				}
 
@@ -205,8 +205,8 @@ namespace AlignmentTiling
 					// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
 					// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
 					// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
-					if((eResult = (layerDst.DrawFigureImage(flqResult, EColor.LIME))).IsFail())
-						ErrorPrint(eResult, "Failed to draw figure.\n");
+					if((res = (layerDst.DrawFigureImage(flqResult, EColor.LIME))).IsFail())
+						ErrorPrint(res, "Failed to draw figure.\n");
 				}
 
 				// View 정보를 디스플레이 한다. // Display view information
@@ -222,16 +222,16 @@ namespace AlignmentTiling
 				{
 					string str = string.Format("Source Image {0}", i);
 
-					if((eResult = (arrLayerSrc[i].DrawTextCanvas(flpZero, str, EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+					if((res = (arrLayerSrc[i].DrawTextCanvas(flpZero, str, EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw text.\n");
+						ErrorPrint(res, "Failed to draw text.\n");
 						break;
 					}
 				}
 
-				if((eResult = (layerDst.DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (layerDst.DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

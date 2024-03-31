@@ -34,28 +34,28 @@ namespace Gauge
 
             // 이미지 뷰 선언 // Declare the image view
             CGUIViewImage viewImage = new CGUIViewImage();
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
                 // 이미지 로드 // Load image
-                if ((eResult = fliImage.Load("../../ExampleImages/Gauge/ellipse.flif")).IsFail())
+                if ((res = fliImage.Load("../../ExampleImages/Gauge/ellipse.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
-                if ((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+                if ((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+                    ErrorPrint(res, "Failed to set image object on the image view.\n");
                     break;
                 }
 
@@ -89,9 +89,9 @@ namespace Gauge
 				ellipseGauge.SetOutliersThresholdCount(3);
 
                 // 알고리즘 수행 // Execute the Algoritm
-                if ((eResult = ellipseGauge.Execute()).IsFail())
+                if ((res = ellipseGauge.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute Ellipse gauge.");
+                    ErrorPrint(res, "Failed to execute Ellipse gauge.");
                     break;
                 }
 
@@ -110,10 +110,10 @@ namespace Gauge
                 layer.Clear();
 
                 // 측정 영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the measurement area is
-                CFLEllipse<double> fleResult;
+                CFLEllipse<double> flres;
                 double f64Tolerance = new double();
 
-                ellipseGauge.GetMeasuredObject(out fleResult, 0);
+                ellipseGauge.GetMeasuredObject(out flres, 0);
 
                 CFLEllipse<double> fleRegion = ellipseGauge.GetMeasurementRegion();
 
@@ -141,42 +141,42 @@ namespace Gauge
                 fleOuter.radius1 += f64Radius1Tolerance;
                 fleOuter.radius2 += f64Radius2Tolerance;
 
-                if ((eResult = layer.DrawFigureImage(fleInner, EColor.RED)).IsFail())
+                if ((res = layer.DrawFigureImage(fleInner, EColor.RED)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
-				if((eResult = layer.DrawFigureImage(fleOuter, EColor.RED)).IsFail())
+				if((res = layer.DrawFigureImage(fleOuter, EColor.RED)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
-				if((eResult).IsOK())
+				if((res).IsOK())
                 {
 					// 추정된 타원을 디스플레이 합니다. // Display the estimated ellipse.
-					if((eResult = layer.DrawFigureImage(fleResult, EColor.BLACK, 5)).IsFail())
+					if((res = layer.DrawFigureImage(flres, EColor.BLACK, 5)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
-					if((eResult = layer.DrawFigureImage(fleResult, EColor.CYAN, 3)).IsFail())
+					if((res = layer.DrawFigureImage(flres, EColor.CYAN, 3)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
 					// 타원의 정보를 Console창에 출력합니다. // Output the information of the ellipse to the console window.
 					float f64RadiusResult1 = new float(), f64RadiusResult2 = new float();
-                    double f64AngleResult = new double();
-                    fleResult.GetRadius1(out f64RadiusResult1);
-                    fleResult.GetRadius2(out f64RadiusResult2);
-                    f64AngleResult = fleResult.GetAngle();
-                    CFLPoint<double> flpLineCenter = fleResult.GetCenter();
+                    double f64Anglres = new double();
+                    flres.GetRadius1(out f64RadiusResult1);
+                    flres.GetRadius2(out f64RadiusResult2);
+                    f64Anglres = flres.GetAngle();
+                    CFLPoint<double> flpLineCenter = flres.GetCenter();
 					Console.WriteLine("Ellipse Center : ({0}, {1})\nRadius X : {2} pixels\nRadius Y : {3} pixels\nAngle : {4}˚",
-                        flpLineCenter.x, flpLineCenter.y, f64RadiusResult1, f64RadiusResult2, f64AngleResult);
+                        flpLineCenter.x, flpLineCenter.y, f64RadiusResult1, f64RadiusResult2, f64Anglres);
                 }
 
                 for (long i64Index = 0; i64Index < flfaResultsValid.GetCount(); ++i64Index)
@@ -188,9 +188,9 @@ namespace Gauge
 
                     CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-                    if ((eResult = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
+                    if ((res = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
@@ -204,16 +204,16 @@ namespace Gauge
 
                     CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-                    if ((eResult = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
+                    if ((res = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
 
-				if ((eResult = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
+				if ((res = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figures objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
 					break;
 				}
 

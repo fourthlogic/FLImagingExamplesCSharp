@@ -38,56 +38,56 @@ namespace Homography
 			CGUIViewImage viewImageSource = new CGUIViewImage();
 			CGUIViewImage viewImageDestination = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((eResult = fliSourceImage.Load("../../ExampleImages/Homography/calendar.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/Homography/calendar.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file. \n");
+					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
 				// Destination 이미지 로드 // Load the destination image
-				if((eResult = fliDestinationImage.Load("../../ExampleImages/Homography/space.flif")).IsFail())
+				if((res = fliDestinationImage.Load("../../ExampleImages/Homography/space.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file. \n");
+					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create source image view
-				if((eResult = viewImageSource.Create(400, 0, 912, 384)).IsFail())
+				if((res = viewImageSource.Create(400, 0, 912, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// Destination 이미지 뷰 생성 // Create destination image view
-				if((eResult = viewImageDestination.Create(912, 0, 1424, 384)).IsFail())
+				if((res = viewImageDestination.Create(912, 0, 1424, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((eResult = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((eResult = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
+				if((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window. \n");
+					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
@@ -138,7 +138,7 @@ namespace Homography
 				flpaDestinationProjection.PushBack(new CFLPoint<double>(1.266525, 182.189349));
 
 				// Destination 이미지의 투영 영역 지정 // Set the projection area of ​​the destination image
-				eResult = homography.SetDestinationProjection(flpaDestinationProjection);
+				res = homography.SetDestinationProjection(flpaDestinationProjection);
 
 				// 보간법 설정 (Bicubic / Bilinear / NearestNeighbor) // Set interpolation method (Bicubic / Bilinear / NearestNeighbor)
 				homography.SetInterpolationMethod(EInterpolationMethod.Bicubic);
@@ -155,9 +155,9 @@ namespace Homography
 				homography.EnableFillBlankColorMode(true);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (homography.Execute())).IsFail())
+				if((res = (homography.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute homography. \n");
+					ErrorPrint(res, "Failed to execute homography. \n");
 					break;
 				}
 
@@ -172,31 +172,31 @@ namespace Homography
 
 				// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능 // FLImaging's figure objects can be displayed with a single function, regardless of the shape of the figure
 				// Source Projection 영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the Source Projection area is
-				if((eResult = layerSource.DrawFigureImage(flpaSourceProjection, EColor.LIME, 3)).IsFail())
+				if((res = layerSource.DrawFigureImage(flpaSourceProjection, EColor.LIME, 3)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure. \n");
+					ErrorPrint(res, "Failed to draw figure. \n");
 					break;
 				}
 
 				// Destination Projection 영역이 어디인지 알기 위해 디스플레이한다. // Display to know where the Destination Projection area is.
-				if((eResult = layerDestination.DrawFigureImage(flpaDestinationProjection, EColor.LIME, 3)).IsFail())
+				if((res = layerDestination.DrawFigureImage(flpaDestinationProjection, EColor.LIME, 3)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+					ErrorPrint(res, "Failed to draw figure.\n");
 					break;
 				}
 
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
-				if((eResult = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 

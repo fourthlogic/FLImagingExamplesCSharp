@@ -40,39 +40,39 @@ namespace Histogram
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/Histogram/Escherichia coli.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/Histogram/Escherichia coli.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(100, 0, 100 + 440, 340)).IsFail())
+				if((res = viewImage.Create(100, 0, 100 + 440, 340)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Graph 뷰 생성 // Create graph view
-				if((eResult = viewGraph.Create(100 + 440 * 1, 0, 100 + 440 * 2, 340)).IsFail())
+				if((res = viewGraph.Create(100 + 440 * 1, 0, 100 + 440 * 2, 340)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 윈도우의 위치를 동기화 한다 // / Synchronize the positions of windows
-				if((eResult = viewImage.SynchronizeWindow(ref viewGraph)).IsFail())
+				if((res = viewImage.SynchronizeWindow(ref viewGraph)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -89,9 +89,9 @@ namespace Histogram
 				Histogram.SetSourceROI(flrSrcROI);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (Histogram.Execute())).IsFail())
+				if((res = (Histogram.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Histogram.");
+					ErrorPrint(res, "Failed to execute Histogram.");
 					break;
 				}
 
@@ -116,7 +116,7 @@ namespace Histogram
 					listResult.Clear();
 
 					// Histogram 결과 값 가져오기 // get histogram result
-					if((eResult = (Histogram.GetResult(i, out listResult))).IsFail())
+					if((res = (Histogram.GetResult(i, out listResult))).IsFail())
 					{
 						Console.WriteLine("No Result.");
 						break;
@@ -132,8 +132,8 @@ namespace Histogram
 				CGUIViewImageLayer layer1 = viewImage.GetLayer(0);
 
 				// ROI 영역 표기 // ROI Area draw
-				if((eResult = layer1.DrawFigureImage(flrSrcROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+				if((res = layer1.DrawFigureImage(flrSrcROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure.\n");
 
 				viewImage.Invalidate(true);
 

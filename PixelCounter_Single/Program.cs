@@ -39,25 +39,25 @@ namespace PixelCounter
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/PixelCounter/Semiconductor.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/PixelCounter/Semiconductor.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
+				if((res = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -81,9 +81,9 @@ namespace PixelCounter
 				PixelCounter.SetLogicalCondition((long)ELogicalCondition.Greater, EThresholdIndex.First);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (PixelCounter.Execute())).IsFail())
+				if((res = (PixelCounter.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute PixelCounter.");
+					ErrorPrint(res, "Failed to execute PixelCounter.");
 					break;
 				}
 
@@ -107,12 +107,12 @@ namespace PixelCounter
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// Text 출력 // Display Text 
-				if((eResult = layer1.DrawTextImage(flpTemp, flsDrawText, EColor.RED)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer1.DrawTextImage(flpTemp, flsDrawText, EColor.RED)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
 				// Source ROI 출력 // Display Source ROI 
-				if((eResult = layer1.DrawFigureImage(flfSourceROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw Source ROI .\n");
+				if((res = layer1.DrawFigureImage(flfSourceROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw Source ROI .\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				viewImage[0].Invalidate(true);

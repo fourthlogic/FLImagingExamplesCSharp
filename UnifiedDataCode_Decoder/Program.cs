@@ -38,33 +38,33 @@ namespace UnifiedDataCode
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/UnifiedDataCode/FLImaging.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/UnifiedDataCode/FLImaging.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImage.ZoomFit()).IsFail())
+				if((res = viewImage.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 
@@ -75,9 +75,9 @@ namespace UnifiedDataCode
 				qrCodeDecoder.SetSourceImage(ref fliImage);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = qrCodeDecoder.Execute()).IsFail())
+				if((res = qrCodeDecoder.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute UnifiedData Code decoder.");
+					ErrorPrint(res, "Failed to execute UnifiedData Code decoder.");
 					break;
 				}
 
@@ -98,16 +98,16 @@ namespace UnifiedDataCode
 					CFLQuad<double> flqdRegion;
 
 					// UnifiedData Code Decoder 결과들 중 Data Region 을 얻어옴
-					if((eResult = qrCodeDecoder.GetResultDataRegion(i, out flqdRegion)).IsFail())
+					if((res = qrCodeDecoder.GetResultDataRegion(i, out flqdRegion)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get data region from the UnifiedData Code decoder object.");
+						ErrorPrint(res, "Failed to get data region from the UnifiedData Code decoder object.");
 						continue;
 					}
 
 					// UnifiedData Code 의 영역을 디스플레이 한다.
-					if((eResult = layer.DrawFigureImage(flqdRegion, EColor.LIME, 2)).IsFail())
+					if((res = layer.DrawFigureImage(flqdRegion, EColor.LIME, 2)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure object on the image view.\n");
+						ErrorPrint(res, "Failed to draw figure object on the image view.\n");
 						continue;
 					}
 
@@ -115,9 +115,9 @@ namespace UnifiedDataCode
 					string strDecoded = "";
 
 					// UnifiedData Code Decoder 결과들 중 Decoded String 을 얻어옴
-					if((eResult = qrCodeDecoder.GetResultDecodedString(i, out strDecoded)).IsFail())
+					if((res = qrCodeDecoder.GetResultDecodedString(i, out strDecoded)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get decoded string from the UnifiedData Code decoder object.");
+						ErrorPrint(res, "Failed to get decoded string from the UnifiedData Code decoder object.");
 						continue;
 					}
 
@@ -133,9 +133,9 @@ namespace UnifiedDataCode
 					//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 					// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 					//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-					if((eResult = layer.DrawTextImage(flplPos, strDecoded, EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_TOP)).IsFail())
+					if((res = layer.DrawTextImage(flplPos, strDecoded, EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_TOP)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw string object on the image view.\n");
+						ErrorPrint(res, "Failed to draw string object on the image view.\n");
 						continue;
 					}
 				}

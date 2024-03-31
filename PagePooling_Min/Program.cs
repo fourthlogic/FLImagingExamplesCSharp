@@ -39,84 +39,84 @@ namespace PagePooling
             CGUIViewImage viewImageIndex = new CGUIViewImage();
 
 			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
                 // Source 이미지 로드 // Load the source image
-                if ((eResult = fliSourceImage.Load("../../ExampleImages/PagePooling/Multiple File_Min.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/PagePooling/Multiple File_Min.flif")).IsFail())
                 {
-					ErrorPrint(eResult, "Failed to load the image file. \n");
+					ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
 				// Source 이미지 뷰 생성 // Create source image view
-				if ((eResult = viewImageSource.Create(200, 0, 712, 512)).IsFail())
+				if ((res = viewImageSource.Create(200, 0, 712, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// Destination 이미지 뷰 생성 // Create destination image view
-				if ((eResult = viewImageDestination.Create(712, 0, 1224, 512)).IsFail())
+				if ((res = viewImageDestination.Create(712, 0, 1224, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// Index 이미지 뷰 생성 // Create index image view
-				if ((eResult = viewImageIndex.Create(1224, 0, 1736, 512)).IsFail())
+				if ((res = viewImageIndex.Create(1224, 0, 1736, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if ((eResult = viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
+				if ((res = viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view. \n");
+                    ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = viewImageDestination.SynchronizePointOfView(ref viewImageIndex)).IsFail())
+                if ((res = viewImageDestination.SynchronizePointOfView(ref viewImageIndex)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view. \n");
+                    ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
+                if ((res = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window. \n");
+                    ErrorPrint(res, "Failed to synchronize window. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = viewImageDestination.SynchronizeWindow(ref viewImageIndex)).IsFail())
+                if ((res = viewImageDestination.SynchronizeWindow(ref viewImageIndex)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window. \n");
+                    ErrorPrint(res, "Failed to synchronize window. \n");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-                if ((eResult = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+                if ((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+                    ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-                if ((eResult = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
+                if ((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+                    ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Index 이미지 뷰에 이미지를 디스플레이 // Display the image in the Index image view
-                if((eResult = viewImageIndex.SetImagePtr(ref fliIndexImage)).IsFail())
+                if((res = viewImageIndex.SetImagePtr(ref fliIndexImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+                    ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
@@ -150,9 +150,9 @@ namespace PagePooling
 				//	- Mean : 입력된 이미지들의 평균 값을 출력합니다. (최대 16843009 장 까지 지원됩니다.) // Mean: Outputs the average value of the entered images. (Up to 16843009 pages are supported.)
 				pagePooling.SetSamplingMethod(CPagePooling.ESamplingMethod.Min);
 
-                if((eResult = pagePooling.Execute()).IsFail())
+                if((res = pagePooling.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute Page Pooling.\n");
+                    ErrorPrint(res, "Failed to execute Page Pooling.\n");
                     break;
                 }
 
@@ -176,21 +176,21 @@ namespace PagePooling
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if ((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 
-                if ((eResult = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 
-                if ((eResult = layerIndex.DrawTextCanvas(flpPoint, "Index Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerIndex.DrawTextCanvas(flpPoint, "Index Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text. \n");
+                    ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 

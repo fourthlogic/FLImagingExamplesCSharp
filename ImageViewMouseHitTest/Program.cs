@@ -189,33 +189,33 @@ namespace ImageViewMouseHitTest
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/PagePooling/Multiple File_Min.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/PagePooling/Multiple File_Min.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(300, 0, 300 + 520, 430)).IsFail())
+				if((res = viewImage.Create(300, 0, 300 + 520, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImage.ZoomFit()).IsFail())
+				if((res = viewImage.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 

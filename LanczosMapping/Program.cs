@@ -36,52 +36,52 @@ namespace LanczosMapping
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] viewImage = { new CGUIViewImage(), new CGUIViewImage(), new CGUIViewImage() };
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// Source Coordinate View 생성 // Create Source Coordinate View
-				if((eResult = (viewImage[0].Create(200, 0, 700, 500))).IsFail())
+				if((res = (viewImage[0].Create(200, 0, 700, 500))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Destination Coordinate View 생성 // Create Destination Coordinate View
-				if((eResult = (viewImage[1].Create(700, 0, 1200, 500))).IsFail())
+				if((res = (viewImage[1].Create(700, 0, 1200, 500))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Restore Coordinate View 생성 // Create Restore Coordinate View
-				if((eResult = (viewImage[2].Create(1200, 0, 1700, 500))).IsFail())
+				if((res = (viewImage[2].Create(1200, 0, 1700, 500))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 각 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoint of each image view.
-				if((eResult = (viewImage[0].SynchronizePointOfView(ref viewImage[1]))).IsFail())
+				if((res = (viewImage[0].SynchronizePointOfView(ref viewImage[1]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
-				if((eResult = (viewImage[1].SynchronizePointOfView(ref viewImage[2]))).IsFail())
+				if((res = (viewImage[1].SynchronizePointOfView(ref viewImage[2]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 각 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of each image view window
-				if((eResult = (viewImage[0].SynchronizeWindow(ref viewImage[1]))).IsFail())
+				if((res = (viewImage[0].SynchronizeWindow(ref viewImage[1]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
-				if((eResult = (viewImage[1].SynchronizeWindow(ref viewImage[2]))).IsFail())
+				if((res = (viewImage[1].SynchronizeWindow(ref viewImage[2]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -112,7 +112,7 @@ namespace LanczosMapping
 				// 만약 기존 저장된 매핑 데이터가 있다면 해당 데이터를 로드합니다. // If there is previously saved mapping data, load the data.
 				// 두번째 실행부터는 파일이 생성될 것이기 때문에 아래 세팅과정을 수행하지 않고 지나가게 됩니다. // Since the file will be created from the second execution, the setting process below will be skipped.
 				// 계속 새로 데이터를 생성하는것을 테스트 하려 한다면 아래 Load함수와 관련된 if문 1줄을 삭제하면 됩니다. // If you want to test continuously creating new data, you can delete one line of the if statement related to the Load function below.
-				if((eResult = (lczm.Load("MappingData.fllcz"))).IsFail())
+				if((res = (lczm.Load("MappingData.fllcz"))).IsFail())
 				{
 					// 그리드를 (5,5)로 초기화하면서, 가상 확장 영역을 3으로 지정
 					// 확장영역 밖으로 값을 변환하려고 하면 값이 나오지 않기때문에 적절한 크기로 확장을 해야 하며,
@@ -148,9 +148,9 @@ namespace LanczosMapping
 					// 반드시 이 함수를 호출해서 결과가 OK가 나와야 매핑 사용이 가능합니다.
 					// We proceed with the finishing work so that the set data can be mapped.
 					// You must call this function and the result must be OK to use the mapping.
-					if((eResult = (lczm.Finish())).IsFail())
+					if((res = (lczm.Finish())).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to finalize\n");
+						ErrorPrint(res, "Failed to finalize\n");
 						break;
 					}
 
@@ -158,9 +158,9 @@ namespace LanczosMapping
 					// 추후 Load함수를 통해 로드 시 위의 Initialize -> Set -> Finalize 과정을 생략할 수 있습니다.
 					// If Finalize is completed, it can be saved to a file through Save.
 					// When loading through the Load function later, the above Initialize -> Set -> Finalize process can be omitted.
-					if((eResult = (lczm.Save("MappingData.fllcz"))).IsFail())
+					if((res = (lczm.Save("MappingData.fllcz"))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to save mapping data\n");
+						ErrorPrint(res, "Failed to save mapping data\n");
 						break;
 					}
 				}
@@ -184,14 +184,14 @@ namespace LanczosMapping
 							// Target Vertex를 각 View Layer에 Drawing // Drawing the target vertex to each view layer
 							if(layer[i].DrawFigureImage(flpTarget, EColor.BLUE, 3).IsFail())
 							{
-								ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+								ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 								break;
 							}
 
 							// Source Vertex를 각 View Layer에 Drawing // Drawing source vertex to each view layer
-							if((eResult = (layer[i].DrawFigureImage(flpSource, EColor.RED, 3))).IsFail())
+							if((res = (layer[i].DrawFigureImage(flpSource, EColor.RED, 3))).IsFail())
 							{
-								ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+								ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 								break;
 							}
 						}
@@ -219,9 +219,9 @@ namespace LanczosMapping
 						flpdSource.x = x / f64Slice;
 
 						// 연산을 수행할 Source 좌표를 View에 Display // Display the source coordinates to perform the operation on the View
-						if((eResult = (layer[0].DrawFigureImage(flpdSource, EColor.YELLOW))).IsFail())
+						if((res = (layer[0].DrawFigureImage(flpdSource, EColor.YELLOW))).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+							ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 							break;
 						}
 
@@ -229,9 +229,9 @@ namespace LanczosMapping
 						if(lczm.ConvertSourceToTarget(flpdSource, out flpdTarget).IsOK())
 						{
 							// Source 좌표에서 Target 좌표로 변환된 좌표를 View에 Display // Display coordinates converted from source coordinates to target coordinates on the View
-							if((eResult = (layer[1].DrawFigureImage(flpdTarget, EColor.LIME))).IsFail())
+							if((res = (layer[1].DrawFigureImage(flpdTarget, EColor.LIME))).IsFail())
 							{
-								ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+								ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 								break;
 							}
 
@@ -242,9 +242,9 @@ namespace LanczosMapping
 								Console.WriteLine("Source ({0:.000},{1:.000}) -> Target ({2:.000},{3:.000}) -> Source ({4:.000},{5:.000})", flpdSource.x, flpdSource.y, flpdTarget.x, flpdTarget.y, flpdConvertedSource.x, flpdConvertedSource.y);
 
 								// 변환된 좌표를 View에 Display // Display the converted coordinates in the View
-								if((eResult = (layer[2].DrawFigureImage(flpdConvertedSource, EColor.CYAN))).IsFail())
+								if((res = (layer[2].DrawFigureImage(flpdConvertedSource, EColor.CYAN))).IsFail())
 								{
-									ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+									ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 									break;
 								}
 							}

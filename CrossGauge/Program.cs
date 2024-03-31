@@ -32,28 +32,28 @@ namespace Gauge
 
             // 이미지 뷰 선언 // Declare the image view
             CGUIViewImage viewImage = new CGUIViewImage();
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
                 // 이미지 로드 // Load image
-                if ((eResult = fliImage.Load("../../ExampleImages/Gauge/CrossImage.flif")).IsFail())
+                if ((res = fliImage.Load("../../ExampleImages/Gauge/CrossImage.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
-                if ((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+                if ((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+                    ErrorPrint(res, "Failed to set image object on the image view.\n");
                     break;
                 }
 
@@ -91,9 +91,9 @@ namespace Gauge
 				CrossGauge.SetMeasurementMarginRatio(0.3, 0.1);
 
 				// 알고리즘 수행 // Execute the Algoritm
-				if((eResult = CrossGauge.Execute()).IsFail())
+				if((res = CrossGauge.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute Cross gauge.");
+                    ErrorPrint(res, "Failed to execute Cross gauge.");
                     break;
                 }
 
@@ -121,7 +121,7 @@ namespace Gauge
 				layer.DrawFigureImage(flfaResultLine, EColor.BLACK, 5);
 				layer.DrawFigureImage(flfaResultLine, EColor.CYAN, 3);
 
-				if(eResult.IsOK())
+				if(res.IsOK())
                 {
 					double f64ResultAngle;
 					CrossGauge.GetMeasuredAngle(out f64ResultAngle);
@@ -138,9 +138,9 @@ namespace Gauge
 
                     CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-                    if ((eResult = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
+                    if ((res = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
@@ -154,16 +154,16 @@ namespace Gauge
 
                     CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-                    if ((eResult = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
+                    if ((res = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
 
-				if ((eResult = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
+				if ((res = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figures objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
 					break;
 				}
 

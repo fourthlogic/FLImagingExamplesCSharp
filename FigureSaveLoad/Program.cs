@@ -37,20 +37,20 @@ namespace CircleGauge
 			viewImage[1] = new CGUIViewImage();
 
 
-			CResult eResult = new CResult(EResult.UnknownError);
+			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(400, 0, 912, 384)).IsFail())
+				if((res = viewImage[0].Create(400, 0, 912, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
+				if((res = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
@@ -62,16 +62,16 @@ namespace CircleGauge
 				DstLayer0.DrawTextCanvas(new TPoint<double>(0, 0), "Loaded Figure", EColor.YELLOW, EColor.BLACK, 15);
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -91,10 +91,10 @@ namespace CircleGauge
 				String strFigure;
 				Console.WriteLine("Figure To Save\n");
 
-				strFigure = String.Format("Rect : {0}\n", CFigureUtils.ConvertFigureObjectToString(flr));
+				strFigure = String.Format("Rect : {0}\n", CFigureUtilities.ConvertFigureObjectToString(flr));
 				Console.WriteLine("{0}", strFigure);
 
-				strFigure = String.Format("Figure Array : {0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfa));
+				strFigure = String.Format("Figure Array : {0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfa));
 				Console.WriteLine("{0}", strFigure);
 
 				// SourceView의 0번 레이어에 그리기 // Draw on Layer 0 of SourceView
@@ -105,7 +105,7 @@ namespace CircleGauge
 				flr.Save("FLRect.fig");
 
 				// 확장자명 없이 저장하는 것도 가능 // It is also possible to save without an extension name
-				eResult = flfa.Save("FigureArray");
+				res = flfa.Save("FigureArray");
 
 				//////// Load
 				//다른 DeclType 인 파일을 Load할 경우 반환값이 EResult_OK 가 아닌 다른 반환값을 반환
@@ -113,29 +113,29 @@ namespace CircleGauge
 				CFLRect<double> flrLoad = new CFLRect<double>();
 
 				// Rect 에 FigureArray 로드했으므로 실패 // Failed because we loaded FigureArray into Rect
-				eResult = flrLoad.Load("FigureArray");
+				res = flrLoad.Load("FigureArray");
 
 				// Rect 에 Rect 파일을 로드했으므로 파일을 로드했으므로 성공 EResult_OK 반환
 				// Loaded the Rect file into Rect, so we loaded the file, so return EResult_OK
-				eResult = flrLoad.Load("FLRect");
+				res = flrLoad.Load("FLRect");
 
 				//다른 DeclType 인 파일을 Load할 경우 반환값이 EResult_OK 가 아닌 다른 반환값을 반환
 				// When loading a file with a different DeclType, return value other than EResult_OK is returned
 				CFLFigureArray flfaLoad = new CFLFigureArray();
 
 				// FigureArray 에 Rect 파일을 로드했으므로 실패 // Failed because Rect file was loaded into FigureArray
-				eResult = flfaLoad.Load("FLRect");
+				res = flfaLoad.Load("FLRect");
 
 				// FigureArray 에 FigureArray 파일을 로드했으므로 성공 EResult_OK 반환
 				// Success returned EResult_OK because FigureArray file was loaded into FigureArray
-				eResult = flfaLoad.Load("FigureArray");
+				res = flfaLoad.Load("FigureArray");
 
 				Console.WriteLine("Loaded Figure\n");
 
-				strFigure = String.Format("Rect : {0}\n", CFigureUtils.ConvertFigureObjectToString(flrLoad));
+				strFigure = String.Format("Rect : {0}\n", CFigureUtilities.ConvertFigureObjectToString(flrLoad));
 				Console.WriteLine("{0}", strFigure);
 
-				strFigure = String.Format("Figure Array : {0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaLoad));
+				strFigure = String.Format("Figure Array : {0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaLoad));
 				Console.WriteLine("{0}", strFigure);
 
 				// DestinationView의 0번 레이어에 그리기 // Draw on Layer 0 of DestinationView

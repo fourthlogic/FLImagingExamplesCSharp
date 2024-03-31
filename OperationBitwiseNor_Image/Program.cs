@@ -38,98 +38,98 @@ namespace OperationBitwiseNor
             CGUIViewImage viewImageOperand = new CGUIViewImage();
             CGUIViewImage viewImageDestination = new CGUIViewImage();
 
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 	        {
                 // Source 이미지 로드 // Load the source image
-                if ((eResult = fliSourceImage.Load("../../ExampleImages/OperationBitwiseNor/circle.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/OperationBitwiseNor/circle.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file. \n");
+                    ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Operand 이미지 로드 // Loads the operand image
-                if ((eResult = fliOperandImage.Load("../../ExampleImages/OperationBitwiseNor/square.flif")).IsFail())
+                if ((res = fliOperandImage.Load("../../ExampleImages/OperationBitwiseNor/square.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file. \n");
+                    ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Destination 이미지 생성
-                if ((eResult = fliDestinationImage.Create(250, 250)).IsFail())
+                if ((res = fliDestinationImage.Create(250, 250)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image file. \n");
+                    ErrorPrint(res, "Failed to create the image file. \n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
-                if ((eResult = viewImageSource.Create(100, 0, 600, 500)).IsFail())
+                if ((res = viewImageSource.Create(100, 0, 600, 500)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view. \n");
+                    ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Operand 이미지 뷰 생성 // Create operand image view
-                if ((eResult = viewImageOperand.Create(600, 0, 1100, 500)).IsFail())
+                if ((res = viewImageOperand.Create(600, 0, 1100, 500)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view. \n");
+                    ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
-                if ((eResult = viewImageDestination.Create(1100, 0, 1600, 500)).IsFail())
+                if ((res = viewImageDestination.Create(1100, 0, 1600, 500)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view. \n");
+                    ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Source 이미지 뷰와 Operand 이미지 뷰의 시점을 동기화 한다
-                if ((eResult = viewImageSource.SynchronizePointOfView(ref viewImageOperand)).IsFail())
+                if ((res = viewImageSource.SynchronizePointOfView(ref viewImageOperand)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view. \n");
+                    ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
+                if ((res = viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view. \n");
+                    ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-                if ((eResult = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+                if ((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+                    ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Operand 이미지 뷰에 이미지를 디스플레이
-                if ((eResult = viewImageOperand.SetImagePtr(ref fliOperandImage)).IsFail())
+                if ((res = viewImageOperand.SetImagePtr(ref fliOperandImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+                    ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destiantion 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-                if ((eResult = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
+                if ((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+                    ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = viewImageSource.SynchronizeWindow(ref viewImageOperand)).IsFail())
+                if ((res = viewImageSource.SynchronizeWindow(ref viewImageOperand)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window. \n");
+                    ErrorPrint(res, "Failed to synchronize window. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
+                if ((res = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window. \n");
+                    ErrorPrint(res, "Failed to synchronize window. \n");
                     break;
                 }
 
@@ -153,9 +153,9 @@ namespace OperationBitwiseNor
                 bitnor.EnableFillBlankColorMode(false);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = bitnor.Execute()).IsFail())
+                if ((res = bitnor.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute Operation BitwiseNor.");
+                    ErrorPrint(res, "Failed to execute Operation BitwiseNor.");
                     break;
                 }
 
@@ -173,21 +173,21 @@ namespace OperationBitwiseNor
                 // 이미지 뷰 정보 표시 // Display image view information
                 CFLPoint<double> flpPoint = new CFLPoint<double> (0, 0);
 
-                if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 		        {
-                    ErrorPrint(eResult, "Failed to draw text. \n");
+                    ErrorPrint(res, "Failed to draw text. \n");
 		        	break;
 		        }
 
-                if ((eResult = layerOperand.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerOperand.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 		        {
-                    ErrorPrint(eResult, "Failed to draw text. \n");
+                    ErrorPrint(res, "Failed to draw text. \n");
 		        	break;
 		        }
 
-                if ((eResult = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 		        {
-                    ErrorPrint(eResult, "Failed to draw text. \n");
+                    ErrorPrint(res, "Failed to draw text. \n");
 		        	break;
 		        }
 

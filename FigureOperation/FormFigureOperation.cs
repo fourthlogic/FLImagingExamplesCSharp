@@ -438,10 +438,10 @@ namespace FigureOperation
 			m_viewImage = new CGUIViewImage();
 
 			// 이미지 뷰 생성 // Create image view
-            CResult eResult = m_viewImage.Create(0, 0, 540, 490);
+            CResult res = m_viewImage.Create(0, 0, 540, 490);
 
-            if (eResult.IsFail())
-                ErrorMessageBox(eResult, "");
+            if (res.IsFail())
+                ErrorMessageBox(res, "");
 
 			// 이미지 뷰의 윈도우를 얻어온다.
 			ulong hWndImageView = m_viewImage.GetWindowHandle();

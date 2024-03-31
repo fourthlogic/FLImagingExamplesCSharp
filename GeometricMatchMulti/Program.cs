@@ -42,7 +42,7 @@ namespace Match
 				viewImageLearn[i] = new CGUIViewImage();
 			}
 
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			// Geometric Match Multi 객체 생성 // Create Geometric Match Multi object
 			CGeometricMatchMulti FLGeometricMatchMulti = new CGeometricMatchMulti();
@@ -116,10 +116,10 @@ namespace Match
 						break;
 
 					// 측정 영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the measurement area is
-					if((eResult = layerLearn.DrawFigureImage(learnRegion, EColor.BLACK, 3)).IsFail())
+					if((res = layerLearn.DrawFigureImage(learnRegion, EColor.BLACK, 3)).IsFail())
 						break;
 
-					if((eResult = layerLearn.DrawFigureImage(learnRegion, arrColor[i64DataIdx])).IsFail())
+					if((res = layerLearn.DrawFigureImage(learnRegion, arrColor[i64DataIdx])).IsFail())
 						break;
 
 					// 설정된 중심점의 위치를 디스플레이 한다 // Display the position of the set center point
@@ -127,10 +127,10 @@ namespace Match
 
 					layerLearn.DrawFigureImage(flfaPointPivot, EColor.BLACK, 3);
 
-					if((eResult = layerLearn.DrawFigureImage(flfaPointPivot, EColor.BLACK, 3)).IsFail())
+					if((res = layerLearn.DrawFigureImage(flfaPointPivot, EColor.BLACK, 3)).IsFail())
 						break;
 
-					if((eResult = layerLearn.DrawFigureImage(flfaPointPivot, EColor.LIME)).IsFail())
+					if((res = layerLearn.DrawFigureImage(flfaPointPivot, EColor.LIME)).IsFail())
 						break;
 
 
@@ -145,7 +145,7 @@ namespace Match
 
 					CFLPoint<double> flpPosition00 = new CFLPoint<double>(0, 0);
 
-					if((eResult = layerLearn.DrawTextCanvas(flpPosition00, strStatus, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+					if((res = layerLearn.DrawTextCanvas(flpPosition00, strStatus, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 						break;
 
 					// 학습한 정보에 대해 Console창에 출력한다 // Print the learned information to the console window
@@ -164,21 +164,21 @@ namespace Match
 				}
 
 				// 이미지 로드 // Load image
-				if((eResult = fliFindImage.Load("../../ExampleImages/Matching/Geometric Mult Find.flif")).IsFail())
+				if((res = fliFindImage.Load("../../ExampleImages/Matching/Geometric Mult Find.flif")).IsFail())
 					break;
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImageFind.Create(400, 384, 1168, 960)).IsFail())
+				if((res = viewImageFind.Create(400, 384, 1168, 960)).IsFail())
 					break;
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((eResult = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
+				if((res = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
 					break;
 
 				for(long i64DataIdx = 0; i64DataIdx < 3; ++i64DataIdx)
 				{
 					// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-					if((eResult = viewImageFind.SynchronizeWindow(ref viewImageLearn[i64DataIdx])).IsFail())
+					if((res = viewImageFind.SynchronizeWindow(ref viewImageLearn[i64DataIdx])).IsFail())
 						break;
 				}
 
@@ -187,7 +187,7 @@ namespace Match
 
 				CFLPoint<double> flp00 = new CFLPoint<double>(0, 0);
 
-				if((eResult = layerFind.DrawTextCanvas(flp00, "FIND", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerFind.DrawTextCanvas(flp00, "FIND", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 					break;
 
 				// 검출할 이미지 설정 // Set image to detect
@@ -225,9 +225,9 @@ namespace Match
 				FLGeometricMatchMulti.EnablePreprocessing(false);
 
 				// 알고리즘 수행 // Execute the Algoritm
-				if((eResult = FLGeometricMatchMulti.Execute()).IsFail())
+				if((res = FLGeometricMatchMulti.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute");
+					ErrorPrint(res, "Failed to execute");
 					break;
 				}
 
@@ -289,10 +289,10 @@ namespace Match
 					CFLFigureArray flfaPoint = flpPivot.MakeCrossHair(3, false);
 					flfaPoint.Rotate(f32Angle, flpPivot);
 
-					if((eResult = layerFind.DrawFigureImage(flfaPoint, EColor.BLACK, 3)).IsFail())
+					if((res = layerFind.DrawFigureImage(flfaPoint, EColor.BLACK, 3)).IsFail())
 						break;
 
-					if((eResult = layerFind.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
+					if((res = layerFind.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
 						break;
 
 					TPoint<double> tpPosition = new TPoint<double>();
@@ -303,20 +303,20 @@ namespace Match
 					string strText = String.Format("Score : {0}\nAngle : {1}\nScale : x{2}\n", f32Score, f32Angle, f32Scale);
 
 					// 결과 특징점을 디스플레이 한다 // Display the resulting feature point
-					if((eResult = layerFind.DrawFigureImage(flfaResultPoints, arrColor[i64Idx])).IsFail())
+					if((res = layerFind.DrawFigureImage(flfaResultPoints, arrColor[i64Idx])).IsFail())
 						break;
 
-					if((eResult = layerFind.DrawTextImage(tpPosition, strText, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_CENTER)).IsFail())
+					if((res = layerFind.DrawTextImage(tpPosition, strText, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_CENTER)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw text");
+						ErrorPrint(res, "Failed to draw text");
 						break;
 					}
 
 					tpPosition.x -= 10;
 
-					if((eResult = layerFind.DrawTextImage(tpPosition, wstrClassName, EColor.YELLOW, EColor.BLACK, 30, false, 0, EGUIViewImageTextAlignment.CENTER)).IsFail())
+					if((res = layerFind.DrawTextImage(tpPosition, wstrClassName, EColor.YELLOW, EColor.BLACK, 30, false, 0, EGUIViewImageTextAlignment.CENTER)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw text");
+						ErrorPrint(res, "Failed to draw text");
 						break;
 					}
 				}

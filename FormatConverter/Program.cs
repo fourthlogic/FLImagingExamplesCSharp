@@ -39,51 +39,51 @@ namespace FormatConverter
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliSourceImage.Load("../../ExampleImages/FormatConverter/city_3.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/FormatConverter/city_3.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImageSource.Create(112, 0, 912, 534)).IsFail())
+				if((res = viewImageSource.Create(112, 0, 912, 534)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImageConverted.Create(913, 0, 1713, 534)).IsFail())
+				if((res = viewImageConverted.Create(913, 0, 1713, 534)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImageConverted.SetImagePtr(ref fliConvertedImage)).IsFail())
+				if((res = viewImageConverted.SetImagePtr(ref fliConvertedImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((eResult = viewImageSource.SynchronizePointOfView(ref viewImageConverted)).IsFail())
+				if((res = viewImageSource.SynchronizePointOfView(ref viewImageConverted)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImageSource.SynchronizeWindow(ref viewImageConverted)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(ref viewImageConverted)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -99,15 +99,15 @@ namespace FormatConverter
 				CFLPoint<double> resultRegion = new CFLPoint<double>(0, 0);
 
 				// View 정보를 디스플레이 합니다. // Display View information.
-				if((eResult = layerSource.DrawTextCanvas(resultRegion, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerSource.DrawTextCanvas(resultRegion, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
-				if((eResult = layerConverted.DrawTextCanvas(resultRegion, "Converted Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerConverted.DrawTextCanvas(resultRegion, "Converted Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
@@ -115,37 +115,37 @@ namespace FormatConverter
 				CFormatConverter formatConverter = new CFormatConverter();
 
 				// Source 이미지 설정 // Set source image 
-				if((eResult = formatConverter.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = formatConverter.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Source Image.");
+					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((eResult = formatConverter.SetDestinationImage(ref fliConvertedImage)).IsFail())
+				if((res = formatConverter.SetDestinationImage(ref fliConvertedImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Source ROI.");
+					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
 				}
 
 				// 변환할 픽셀 포멧 입력(C3_U8 -> C1_U8) // Set the pixel format to convert(C3_U8 -> C1_U8)
-				if((eResult = (formatConverter.SetPixelFormat(EPixelFormat.C1_U8))).IsFail())
+				if((res = (formatConverter.SetPixelFormat(EPixelFormat.C1_U8))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set PixelFormat.");
+					ErrorPrint(res, "Failed to set PixelFormat.");
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (formatConverter.Execute())).IsFail())
+				if((res = (formatConverter.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 
 				// 이미지 뷰의 zoom fit // image view zoom fit
-				if((eResult = viewImageConverted.ZoomFit()).IsFail())
+				if((res = viewImageConverted.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 

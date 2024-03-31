@@ -52,26 +52,26 @@ namespace Paste
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// Source 이미지 로드 // Load the source image
-				if((eResult = arrFliImage[(int)EType.Source].Load("../../ExampleImages/Paste/ChessBoard.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/Paste/ChessBoard.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Destination1 이미지 로드. // Load the destination1 image
-				if((eResult = arrFliImage[(int)EType.Destination1].Load("../../ExampleImages/Paste/Floor.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Destination1].Load("../../ExampleImages/Paste/Floor.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Destination2 이미지를 Destination1 이미지와 동일한 이미지로 생성
-				if((eResult = (arrFliImage[(int)EType.Destination2].Assign(arrFliImage[(int)EType.Destination1]))).IsFail())
+				if((res = (arrFliImage[(int)EType.Destination2].Assign(arrFliImage[(int)EType.Destination1]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file.\n");
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
@@ -83,17 +83,17 @@ namespace Paste
 					int y = i / 3;
 
 					// 이미지 뷰 생성 // Create image view
-					if((eResult = (arrViewImage[i].Create(x * 512 + 100, y * 512, x * 512 + 100 + 512, y * 512 + 512))).IsFail())
+					if((res = (arrViewImage[i].Create(x * 512 + 100, y * 512, x * 512 + 100 + 512, y * 512 + 512))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to create the image view.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");
 						bError = true;
 						break;
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((eResult = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
+					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
 						break;
 					}
@@ -102,17 +102,17 @@ namespace Paste
 						continue;
 
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((eResult = (arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i]))).IsFail())
+					if((res = (arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize view\n");
+						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;
 						break;
 					}
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((eResult = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
+					if((res = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;
 						break;
 					}
@@ -122,9 +122,9 @@ namespace Paste
 					break;
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = arrViewImage[(int)EType.Source].ZoomFit()).IsFail())
+				if((res = arrViewImage[(int)EType.Source].ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 
@@ -132,9 +132,9 @@ namespace Paste
 				CBlob sBlob = new CBlob();
 
 				// 처리할 이미지 설정 // Set the image to process
-				if((eResult = sBlob.SetSourceImage(ref arrFliImage[(int)EType.Source])).IsFail())
+				if((res = sBlob.SetSourceImage(ref arrFliImage[(int)EType.Source])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set source image.\n");
+					ErrorPrint(res, "Failed to set source image.\n");
 					break;
 				}
 
@@ -157,9 +157,9 @@ namespace Paste
 				sBlob.SetContourResultType(CBlob.EContourResultType.Perforated);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = sBlob.Execute()).IsFail())
+				if((res = sBlob.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Blob.");
+					ErrorPrint(res, "Failed to execute Blob.");
 					break;
 				}
 
@@ -167,9 +167,9 @@ namespace Paste
 				CFLFigureArray flfaContours;
 
 				// Blob 결과들 중 Contour를 얻어옴 // Get Contour from Blob results
-				if((eResult = sBlob.GetResultContours(out flfaContours)).IsFail())
+				if((res = sBlob.GetResultContours(out flfaContours)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get boundary rects from the Blob object.");
+					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
 				}
 
@@ -193,9 +193,9 @@ namespace Paste
 				sPaste.SetBlankColor(mv);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = sPaste.Execute()).IsFail())
+				if((res = sPaste.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Paste.");
+					ErrorPrint(res, "Failed to execute Paste.");
 					break;
 				}
 
@@ -216,15 +216,15 @@ namespace Paste
 				// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
 				// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
 				// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
-				if((eResult = arrLayer[(int)EType.Source].DrawFigureImage(flfaContours, EColor.LIME)).IsFail())
+				if((res = arrLayer[(int)EType.Source].DrawFigureImage(flfaContours, EColor.LIME)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figures objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Destination2].DrawFigureImage(flfaContours, EColor.LIME)).IsFail())
+				if((res = arrLayer[(int)EType.Destination2].DrawFigureImage(flfaContours, EColor.LIME)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figures objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
 					break;
 				}
 
@@ -237,21 +237,21 @@ namespace Paste
 				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-				if((eResult = arrLayer[(int)EType.Source].DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Source].DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Destination1].DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Destination2].DrawTextCanvas(flp, ("Result Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flp, ("Result Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

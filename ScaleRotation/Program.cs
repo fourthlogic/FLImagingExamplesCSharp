@@ -51,14 +51,14 @@ namespace ScaleRotation
 			for(int i = 0; i < (int)EType.ETypeCount; ++i)
 				arrViewImage[i] = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// 이미지 로드 // Load image
-				if((eResult = arrFliImage[(int)EType.Source].Load("../../ExampleImages/Affine/Sea.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/Affine/Sea.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
@@ -67,9 +67,9 @@ namespace ScaleRotation
 				for(int i = (int)EType.Destination1; i < (int)EType.ETypeCount; ++i)
 				{
 					// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-					if((eResult = (arrFliImage[i].Assign(arrFliImage[(int)EType.Source]))).IsFail())
+					if((res = (arrFliImage[i].Assign(arrFliImage[(int)EType.Source]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to assign the image file.\n");
+						ErrorPrint(res, "Failed to assign the image file.\n");
 						bError = true;
 						break;
 					}
@@ -84,17 +84,17 @@ namespace ScaleRotation
 					int y = i / 2;
 
 					// 이미지 뷰 생성 // Create image view
-					if((eResult = (arrViewImage[i].Create(x * 400 + 400, y * 400, x * 400 + 400 + 400, y * 400 + 400))).IsFail())
+					if((res = (arrViewImage[i].Create(x * 400 + 400, y * 400, x * 400 + 400 + 400, y * 400 + 400))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to create the image view.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");
 						bError = true;
 						break;
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((eResult = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
+					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
 						break;
 					}
@@ -103,9 +103,9 @@ namespace ScaleRotation
 						continue;
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((eResult = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
+					if((res = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;
 						break;
 					}
@@ -126,9 +126,9 @@ namespace ScaleRotation
 				scaleRotation.SetAngle(30.0);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (scaleRotation.Execute())).IsFail())
+				if((res = (scaleRotation.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute scaleRotation.");
+					ErrorPrint(res, "Failed to execute scaleRotation.");
 					break;
 				}
 
@@ -142,9 +142,9 @@ namespace ScaleRotation
 				scaleRotation.SetResizeMethod(EResizeMethod.Resize);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (scaleRotation.Execute())).IsFail())
+				if((res = (scaleRotation.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute scaleRotation.");
+					ErrorPrint(res, "Failed to execute scaleRotation.");
 					break;
 				}
 
@@ -160,9 +160,9 @@ namespace ScaleRotation
 				scaleRotation.EnableRotationFirst(true);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (scaleRotation.Execute())).IsFail())
+				if((res = (scaleRotation.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute scaleRotation.");
+					ErrorPrint(res, "Failed to execute scaleRotation.");
 					break;
 				}
 
@@ -187,27 +187,27 @@ namespace ScaleRotation
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flpZero = new CFLPoint<double>(0, 0);
 
-				if((eResult = (arrLayer[(int)EType.Source].DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[(int)EType.Source].DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[(int)EType.Destination3].DrawTextCanvas(flpZero, "Destination3 Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[(int)EType.Destination3].DrawTextCanvas(flpZero, "Destination3 Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

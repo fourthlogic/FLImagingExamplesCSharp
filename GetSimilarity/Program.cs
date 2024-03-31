@@ -36,35 +36,35 @@ namespace GetSimilarity
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] viewImage = { new CGUIViewImage(), new CGUIViewImage(), new CGUIViewImage() };
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// Source Coordinate View 생성 // Create Source Coordinate View
-				if((eResult = (viewImage[0].Create(200, 0, 700, 500))).IsFail())
+				if((res = (viewImage[0].Create(200, 0, 700, 500))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Destination Coordinate View 생성 // Create Destination Coordinate View
-				if((eResult = (viewImage[1].Create(700, 0, 1200, 500))).IsFail())
+				if((res = (viewImage[1].Create(700, 0, 1200, 500))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 각 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoint of each image view.
-				if((eResult = (viewImage[0].SynchronizePointOfView(ref viewImage[1]))).IsFail())
+				if((res = (viewImage[0].SynchronizePointOfView(ref viewImage[1]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 각 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of each image view window
-				if((eResult = (viewImage[0].SynchronizeWindow(ref viewImage[1]))).IsFail())
+				if((res = (viewImage[0].SynchronizeWindow(ref viewImage[1]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -82,9 +82,9 @@ namespace GetSimilarity
 				CFLEllipse<double> fleSourceFig = new CFLEllipse<double>();
 
 				// Source Figure 불러오기 // Load source figure
-				if((eResult = fleSourceFig.Load("../../ExampleImages/Figure/Ellipse1.fig")).IsFail())
+				if((res = fleSourceFig.Load("../../ExampleImages/Figure/Ellipse1.fig")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the figure file.\n");
+					ErrorPrint(res, "Failed to load the figure file.\n");
 					break;
 				}
 
@@ -134,9 +134,9 @@ namespace GetSimilarity
 
 				// Similarity 행렬 계산 // Calculate the similarity matrix
 				CMatrix<double> matResult;
-				if((eResult = CMatrix<double>.GetSimilarity(flpaSource, flpaTransformedWithNoise, out matResult)).IsFail())
+				if((res = CMatrix<double>.GetSimilarity(flpaSource, flpaTransformedWithNoise, out matResult)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to calculate.\n");
+					ErrorPrint(res, "Failed to calculate.\n");
 					break;
 				}
 
@@ -193,9 +193,9 @@ namespace GetSimilarity
 					matA.SetValue(1, 0, flpaSourceGrid.GetAt(i).y);
 					matA.SetValue(2, 0, 1);
 
-					if((eResult = matResult.Multiply(matA, out matB)).IsFail())
+					if((res = matResult.Multiply(matA, out matB)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to calculate Matrix Operation\n");
+						ErrorPrint(res, "Failed to calculate Matrix Operation\n");
 						break;
 					}
 

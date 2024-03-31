@@ -39,39 +39,39 @@ namespace Projection
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/Projection/mountains.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/Projection/mountains.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(100, 0, 100 + 440, 340)).IsFail())
+				if((res = viewImage.Create(100, 0, 100 + 440, 340)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Graph 뷰 생성 // Create graph view
-				if((eResult = viewGraph.Create(100 + 440 * 1, 0, 100 + 440 * 2, 340)).IsFail())
+				if((res = viewGraph.Create(100 + 440 * 1, 0, 100 + 440 * 2, 340)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 윈도우의 위치를 동기화 한다 // / Synchronize the positions of windows
-				if((eResult = viewImage.SynchronizeWindow(ref viewGraph)).IsFail())
+				if((res = viewImage.SynchronizeWindow(ref viewGraph)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -85,9 +85,9 @@ namespace Projection
 				Projection.SetProjectionMode(CProjection.EProjectionDirection.Column);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (Projection.Execute())).IsFail())
+				if((res = (Projection.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Projection.");
+					ErrorPrint(res, "Failed to execute Projection.");
 					break;
 				}
 
@@ -112,9 +112,9 @@ namespace Projection
 					listResult.Clear();
 
 					// Projection 결과 값 가져오기 // get projection result
-					if((eResult = (Projection.GetResult(i, out listResult))).IsFail())
+					if((res = (Projection.GetResult(i, out listResult))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to Get Result.");
+						ErrorPrint(res, "Failed to Get Result.");
 						break;
 					}
 
@@ -129,8 +129,8 @@ namespace Projection
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// Text 출력 // Display Text 
-				if((eResult = layer.DrawTextImage(flpTemp, "Source Image", EColor.RED)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer.DrawTextImage(flpTemp, "Source Image", EColor.RED)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewGraph.IsAvailable())

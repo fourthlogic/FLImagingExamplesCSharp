@@ -37,14 +37,14 @@ namespace CameraCalibrator
             bool bResult = false;
 
             
-            CResult eResult = new CResult();
+            CResult res = new CResult();
 
             do
             {
                 // Learn 이미지 설정 // Learn image settings
-                if ((eResult = sCC.SetLearnImageForCameraCalibration(ref fliLearnImage)).IsFail())
+                if ((res = sCC.SetLearnImageForCameraCalibration(ref fliLearnImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image");
+                    ErrorPrint(res, "Failed to set image");
                     break;
                 }
 
@@ -54,9 +54,9 @@ namespace CameraCalibrator
 				sCC.SetOptimalSolutionAccuracy(1e-5);
 
                 // Calibration 실행 // Execute Calibration
-                if ((eResult = sCC.Calibrate()).IsFail())
+                if ((res = sCC.Calibrate()).IsFail())
                 {
-                    ErrorPrint(eResult, "Calibration failed");
+                    ErrorPrint(res, "Calibration failed");
                     break;
                 }
 
@@ -72,35 +72,35 @@ namespace CameraCalibrator
             bool bResult = false;
 
             
-            CResult eResult = new CResult();
+            CResult res = new CResult();
 
             do
             {
                 // Source 이미지 설정 // Set Source image
-                if ((eResult = sCC.SetSourceImage(ref fliSourceImage)).IsFail())
+                if ((res = sCC.SetSourceImage(ref fliSourceImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load image");
+                    ErrorPrint(res, "Failed to load image");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set destination image
-                if ((eResult = sCC.SetDestinationImage(ref fliDestinationImage)).IsFail())
+                if ((res = sCC.SetDestinationImage(ref fliDestinationImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load image");
+                    ErrorPrint(res, "Failed to load image");
                     break;
                 }
 
                 // Interpolation 알고리즘 설정 // Set the Interpolation Algorithm
-                if ((eResult = sCC.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
+                if ((res = sCC.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set interpolation method");
+                    ErrorPrint(res, "Failed to set interpolation method");
                     break;
                 }
 
                 // Undistortion 실행 // Execute Undistortion
-                if ((eResult = sCC.Execute()).IsFail())
+                if ((res = sCC.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Undistortion failed");
+                    ErrorPrint(res, "Undistortion failed");
                     break;
                 }
 
@@ -132,14 +132,14 @@ namespace CameraCalibrator
 
             // Camera Calibrator 객체 생성 // Create Camera Calibrator object
             CCameraCalibrator sCC = new CCameraCalibrator();
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
                 // Learn 이미지 로드 // Load the Learn image
-                if ((eResult = fliLearnImage.Load("../../ExampleImages/CameraCalibrator/ChessBoard/Multiple ChessBoard.flif")).IsFail())
+                if ((res = fliLearnImage.Load("../../ExampleImages/CameraCalibrator/ChessBoard/Multiple ChessBoard.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.");
+                    ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
@@ -154,16 +154,16 @@ namespace CameraCalibrator
                 for (int i = 0; i < 3; ++i)
                 {
                     // Learn 이미지 뷰 생성 // Create the Learn image view
-                    if ((eResult = viewImageLearn[i].Create(300 + 480 * i, 0, 300 + 480 * (i + 1), 360)).IsFail())
+                    if ((res = viewImageLearn[i].Create(300 + 480 * i, 0, 300 + 480 * (i + 1), 360)).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to create the image view.");
+                        ErrorPrint(res, "Failed to create the image view.");
                         break;
                     }
 
                     // Learn 이미지 뷰에 이미지를 디스플레이 // Display the image in the Learn image view
-                    if ((eResult = viewImageLearn[i].SetImagePtr(ref arrFliDisplay[i])).IsFail())
+                    if ((res = viewImageLearn[i].SetImagePtr(ref arrFliDisplay[i])).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to set image object on the image view.");
+                        ErrorPrint(res, "Failed to set image object on the image view.");
                         break;
                     }
                 }
@@ -172,18 +172,18 @@ namespace CameraCalibrator
                     break;
 
                 // Source 이미지 로드 // Load the source image
-                if ((eResult = fliSourceImage.Load("../../ExampleImages/CameraCalibrator/ChessBoard/UndistortionImage/Undistortion_Image.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/CameraCalibrator/ChessBoard/UndistortionImage/Undistortion_Image.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.");
+                    ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
                 CMultiVar<long> mvBlank = new CMultiVar<long>(0);
 
                 // Destination 이미지 생성 // Create destination image
-                if ((eResult = fliDestinationImage.Create(fliSourceImage.GetWidth(), fliSourceImage.GetHeight(), mvBlank, fliSourceImage.GetPixelFormat())).IsFail())
+                if ((res = fliDestinationImage.Create(fliSourceImage.GetWidth(), fliSourceImage.GetHeight(), mvBlank, fliSourceImage.GetPixelFormat())).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image file.");
+                    ErrorPrint(res, "Failed to create the image file.");
                     break;
                 }
 
@@ -231,15 +231,15 @@ namespace CameraCalibrator
 							TPoint<double> pFlpGridPoint2 = (sArrGridDisplay[i].sGridData.arrGridData[i64Row][i64Col + 1]);
 							CFLLine<double> fllDrawLine = new CFLLine<double>(pFlpGridPoint1, pFlpGridPoint2);
 
-							if((eResult = layerLearn.DrawFigureImage(fllDrawLine, EColor.BLACK, 5)).IsFail())
+							if((res = layerLearn.DrawFigureImage(fllDrawLine, EColor.BLACK, 5)).IsFail())
 							{
-								ErrorPrint(eResult, "Failed to draw figure");
+								ErrorPrint(res, "Failed to draw figure");
 								break;
 							}
 
-							if((eResult = layerLearn.DrawFigureImage(fllDrawLine, colorPool[i64GridIdx % 3], 3)).IsFail())
+							if((res = layerLearn.DrawFigureImage(fllDrawLine, colorPool[i64GridIdx % 3], 3)).IsFail())
 							{
-								ErrorPrint(eResult, "Failed to draw figure");
+								ErrorPrint(res, "Failed to draw figure");
 								break;
 							}
 						}
@@ -251,15 +251,15 @@ namespace CameraCalibrator
 							CFLLine<double> fllDrawLine = new CFLLine<double>();
 							fllDrawLine.Set(pFlpGridPoint1, pFlpGridPoint2);
 
-							if((eResult = layerLearn.DrawFigureImage(fllDrawLine, EColor.BLACK, 5)).IsFail())
+							if((res = layerLearn.DrawFigureImage(fllDrawLine, EColor.BLACK, 5)).IsFail())
 							{
-								ErrorPrint(eResult, "Failed to draw figure.\n");
+								ErrorPrint(res, "Failed to draw figure.\n");
 								break;
 							}
 
-							if((eResult = layerLearn.DrawFigureImage(fllDrawLine, EColor.YELLOW, 3)).IsFail())
+							if((res = layerLearn.DrawFigureImage(fllDrawLine, EColor.YELLOW, 3)).IsFail())
 							{
-								ErrorPrint(eResult, "Failed to draw figure.\n");
+								ErrorPrint(res, "Failed to draw figure.\n");
 								break;
 							}
 						}
@@ -320,9 +320,9 @@ namespace CameraCalibrator
                             if (i64Col == i64GridCol - 1)
                                 colorText = EColor.YELLOW;
 
-                            if ((eResult = layerLearn.DrawTextImage(tpGridPoint1, wstrGridIdx, colorText, EColor.BLACK, (int)(f64PointDist / 2), true, f64AngleIner)).IsFail())
+                            if ((res = layerLearn.DrawTextImage(tpGridPoint1, wstrGridIdx, colorText, EColor.BLACK, (int)(f64PointDist / 2), true, f64AngleIner)).IsFail())
                             {
-                                ErrorPrint(eResult, "Failed to draw figure.\n");
+                                ErrorPrint(res, "Failed to draw figure.\n");
                                 break;
                             }
                         }
@@ -336,16 +336,16 @@ namespace CameraCalibrator
                     string wstringData;
                     wstringData = string.Format("[{0}] ({1} X {2})", sArrGridDisplay[i].sGridData.i64ID, sArrGridDisplay[i].sGridData.i64Columns, sArrGridDisplay[i].sGridData.i64Rows);
 
-                    if ((eResult = layerLearn.DrawFigureImage(flqBoardRegion, EColor.YELLOW, 3)).IsFail())
+                    if ((res = layerLearn.DrawFigureImage(flqBoardRegion, EColor.YELLOW, 3)).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to draw figure.\n");
+                        ErrorPrint(res, "Failed to draw figure.\n");
                         break;
                     }
 
 
-                    if ((eResult = layerLearn.DrawTextImage(flpPoint1, wstringData, EColor.YELLOW, EColor.BLACK, 15, false, f64Angle, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+                    if ((res = layerLearn.DrawTextImage(flpPoint1, wstringData, EColor.YELLOW, EColor.BLACK, 15, false, f64Angle, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to draw text.\n");
+                        ErrorPrint(res, "Failed to draw text.\n");
                         break;
                     }
 
@@ -353,60 +353,60 @@ namespace CameraCalibrator
                 }
 
                 // Source 이미지 뷰 생성 // Create Source image view
-                if ((eResult = viewImageSource.Create(300, 360, 780, 720)).IsFail())
+                if ((res = viewImageSource.Create(300, 360, 780, 720)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.");
+                    ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create the Destination image view
-                if ((eResult = viewImageDestination.Create(780, 360, 1260, 720)).IsFail())
+                if ((res = viewImageDestination.Create(780, 360, 1260, 720)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.");
+                    ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the Source ImageView
-                if ((eResult = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+                if ((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.");
+                    ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the Destination image view
-                if ((eResult = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
+                if ((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.");
+                    ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 for (int i = 0; i < 3; ++i)
                 {
                     // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-                    if ((eResult = viewImageLearn[i].SynchronizePointOfView(ref viewImageSource)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizePointOfView(ref viewImageSource)).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to synchronize view");
+                        ErrorPrint(res, "Failed to synchronize view");
                         break;
                     }
 
                     // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-                    if ((eResult = viewImageLearn[i].SynchronizePointOfView(ref viewImageDestination)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizePointOfView(ref viewImageDestination)).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to synchronize view");
+                        ErrorPrint(res, "Failed to synchronize view");
                         break;
                     }
 
                     // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                    if ((eResult = viewImageLearn[i].SynchronizeWindow(ref viewImageSource)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizeWindow(ref viewImageSource)).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to synchronize window.");
+                        ErrorPrint(res, "Failed to synchronize window.");
                         break;
                     }
 
                     // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                    if ((eResult = viewImageLearn[i].SynchronizeWindow(ref viewImageDestination)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizeWindow(ref viewImageDestination)).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to synchronize window.");
+                        ErrorPrint(res, "Failed to synchronize window.");
                         break;
                     }
                 }
@@ -428,33 +428,33 @@ namespace CameraCalibrator
                
                 TPoint<double> tpScreen = new TPoint<double>(0, 0);
 
-                if ((eResult = layerSource.DrawTextCanvas(tpScreen, "Intrinsic Parameters: ", EColor.YELLOW, EColor.BLACK, 13)).IsFail())
+                if ((res = layerSource.DrawTextCanvas(tpScreen, "Intrinsic Parameters: ", EColor.YELLOW, EColor.BLACK, 13)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 tpScreen.y += 20;
 
-                if ((eResult = layerSource.DrawTextCanvas(tpScreen, strMatrix, EColor.YELLOW, EColor.BLACK, 13)).IsFail())
+                if ((res = layerSource.DrawTextCanvas(tpScreen, strMatrix, EColor.YELLOW, EColor.BLACK, 13)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 tpScreen.y += 20;
 
-                if ((eResult = layerSource.DrawTextCanvas(tpScreen, "Distortion Coefficients: ", EColor.YELLOW, EColor.BLACK, 13)).IsFail())
+                if ((res = layerSource.DrawTextCanvas(tpScreen, "Distortion Coefficients: ", EColor.YELLOW, EColor.BLACK, 13)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 tpScreen.y += 20;
 
-                if ((eResult = layerSource.DrawTextCanvas(tpScreen, strDistVal, EColor.YELLOW, EColor.BLACK, 13)).IsFail())
+                if ((res = layerSource.DrawTextCanvas(tpScreen, strDistVal, EColor.YELLOW, EColor.BLACK, 13)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
@@ -464,9 +464,9 @@ namespace CameraCalibrator
 
                 CFLPoint<double> ptTop = new CFLPoint<double>(20, 20);
 
-                if ((eResult = layerDestination.DrawTextImage(ptTop, "Undistortion - Bilinear method", EColor.GREEN, EColor.BLACK, 20)).IsFail())
+                if ((res = layerDestination.DrawTextImage(ptTop, "Undistortion - Bilinear method", EColor.GREEN, EColor.BLACK, 20)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text");
+                    ErrorPrint(res, "Failed to draw text");
                     break;
                 }
 

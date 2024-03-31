@@ -200,10 +200,10 @@ namespace GraphLeastSquares
             m_viewGraph = new CGUIViewGraph();
 
             // 그래프 뷰 생성
-            CResult eResult = m_viewGraph.Create(0, 0, 540, 435);
+            CResult res = m_viewGraph.Create(0, 0, 540, 435);
 
-            if(eResult.IsFail())
-                ErrorMessageBox(eResult, "");
+            if(res.IsFail())
+                ErrorMessageBox(res, "");
 
             // 그래프 뷰의 윈도우를 얻어온다.
             ulong hWndGraphView = m_viewGraph.GetWindowHandle();

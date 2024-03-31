@@ -32,28 +32,28 @@ namespace Gauge
 
             // 이미지 뷰 선언 // Declare the image view
             CGUIViewImage viewImage = new CGUIViewImage();
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
                 // 이미지 로드 // Load image
-                if ((eResult = fliImage.Load("../../ExampleImages/Gauge/rect.flif")).IsFail())
+                if ((res = fliImage.Load("../../ExampleImages/Gauge/rect.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
-                if ((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+                if ((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+                    ErrorPrint(res, "Failed to set image object on the image view.\n");
                     break;
                 }
 
@@ -93,9 +93,9 @@ namespace Gauge
 				rectangleGauge.SetTolerance(tolerance, CRectangleGauge.ETolerance.All);
 
 				// 알고리즘 수행 // Execute the Algoritm
-				if((eResult = rectangleGauge.Execute()).IsFail())
+				if((res = rectangleGauge.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute Rectangle gauge.");
+                    ErrorPrint(res, "Failed to execute Rectangle gauge.");
                     break;
                 }
 
@@ -170,9 +170,9 @@ namespace Gauge
                 {
                     CFLPoint<double> flpPosition = flrInner.GetCenter();
 
-                    if ((eResult = layer.DrawFigureImage(flpPosition, EColor.RED)).IsFail())
+                    if ((res = layer.DrawFigureImage(flpPosition, EColor.RED)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
@@ -182,9 +182,9 @@ namespace Gauge
                     flrInner.Multiply(((double)flrRegion.GetWidth() - arrF64Tolerance[0] * 2.0) / (double)flrRegion.GetWidth(), ((double)flrRegion.GetHeight() - arrF64Tolerance[1] * 2.0) / (double)flrRegion.GetHeight());
                     flrInner.Offset(flpCent);
 
-                    if ((eResult = layer.DrawFigureImage(flrInner, EColor.RED)).IsFail())
+                    if ((res = layer.DrawFigureImage(flrInner, EColor.RED)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
@@ -193,24 +193,24 @@ namespace Gauge
                 flrOuter.Multiply(((double)flrRegion.GetWidth() + arrF64Tolerance[0] * 2.0) / (double)flrRegion.GetWidth(), ((double)flrRegion.GetHeight() + arrF64Tolerance[1] * 2.0) / (double)flrRegion.GetHeight());
                 flrOuter.Offset(flpCent);
 
-                if ((eResult = layer.DrawFigureImage(flrOuter, EColor.RED)).IsFail())
+                if ((res = layer.DrawFigureImage(flrOuter, EColor.RED)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
-				if(eResult.IsOK())
+				if(res.IsOK())
                 {
 					// 추정된 사각형을 디스플레이 합니다. // Display the estimated rectangle.
-					if((eResult = layer.DrawFigureImage(flrResult, EColor.BLACK, 5)).IsFail())
+					if((res = layer.DrawFigureImage(flrResult, EColor.BLACK, 5)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
-					if((eResult = layer.DrawFigureImage(flrResult, EColor.CYAN, 3)).IsFail())
+					if((res = layer.DrawFigureImage(flrResult, EColor.CYAN, 3)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
@@ -232,9 +232,9 @@ namespace Gauge
 
                     CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-                    if ((eResult = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
+                    if ((res = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
@@ -248,14 +248,14 @@ namespace Gauge
 
                     CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-                    if ((eResult = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
+                    if ((res = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
 
-				if ((eResult = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
+				if ((res = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
 				{
 					Console.WriteLine("Failed to draw figures objects on the image view.\n");
 					break;

@@ -67,7 +67,7 @@ namespace DeviceCameraMulticam
         [STAThread]
         static void Main(string[] args)
         {
-            CResult eResult = new CResult(EResult.UnknownError);
+            CResult res = new CResult(EResult.UnknownError);
 
 	        // 이미지 뷰 선언 // Declare image view
 	        CGUIViewImage viewImage = new CGUIViewImage();
@@ -149,25 +149,25 @@ namespace DeviceCameraMulticam
 		        camMulticam.SetBoardTopology(eBoardTopology);
 
 		        // 카메라를 초기화 합니다.
-		        if((eResult = camMulticam.Initialize()).IsFail())
+		        if((res = camMulticam.Initialize()).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to initialize the camera.\n");
+			        ErrorPrint(res, "Failed to initialize the camera.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
-		        if((eResult = viewImage.Create(0, 0, 1000, 1000)).IsFail())
+		        if((res = viewImage.Create(0, 0, 1000, 1000)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to create the image view.\n");
+			        ErrorPrint(res, "Failed to create the image view.\n");
 			        break;
 		        }
 
 		        eventImage.SetViewImage(viewImage);
 
 		        // 카메라를 Live 합니다.
-		        if((eResult = camMulticam.Live()).IsFail())
+		        if((res = camMulticam.Live()).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to live the camera.\n");
+			        ErrorPrint(res, "Failed to live the camera.\n");
 			        break;
 		        }
 

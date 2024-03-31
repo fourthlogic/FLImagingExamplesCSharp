@@ -36,7 +36,7 @@ namespace InpaintingTexture
             CGUIViewImage[] arrViewImage = new CGUIViewImage[4];
 
 			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			for(int i = 0; i < 4; ++i)
             {
@@ -47,58 +47,58 @@ namespace InpaintingTexture
             do
             {
                 // Source 이미지 로드 // Load the source image
-                if ((eResult = arrFliImage[0].Load("../../ExampleImages/InpaintingTexture/Seville.flif")).IsFail())
+                if ((res = arrFliImage[0].Load("../../ExampleImages/InpaintingTexture/Seville.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
 				}
 
 				// Source 이미지 2 로드 // Load the source image
-				if((eResult = arrFliImage[2].Load("../../ExampleImages/InpaintingTexture/Wood.flif")).IsFail())
+				if((res = arrFliImage[2].Load("../../ExampleImages/InpaintingTexture/Wood.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-				if ((eResult = arrFliImage[1].Assign(arrFliImage[0])).IsFail())
+				if ((res = arrFliImage[1].Assign(arrFliImage[0])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to assign the image file.\n");
+                    ErrorPrint(res, "Failed to assign the image file.\n");
                     break;
 				}
 
 				// Destination 이미지 2를 Source 이미지 2와 동일한 이미지로 생성 // Create destination image as same as source image
-				if((eResult = arrFliImage[3].Assign(arrFliImage[2])).IsFail())
+				if((res = arrFliImage[3].Assign(arrFliImage[2])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file.\n");
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create source image view
-				if ((eResult = arrViewImage[0].Create(400, 0, 800, 400)).IsFail())
+				if ((res = arrViewImage[0].Create(400, 0, 800, 400)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
 				// Source 이미지 뷰 2 생성 // Create source image view 2
-				if((eResult = arrViewImage[2].Create(400, 400, 800, 800)).IsFail())
+				if((res = arrViewImage[2].Create(400, 400, 800, 800)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Destination 이미지 뷰 생성 // Create destination image view
-				if ((eResult = arrViewImage[1].Create(800, 0, 1200, 400)).IsFail())
+				if ((res = arrViewImage[1].Create(800, 0, 1200, 400)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
 				}
 
 				// Destination 이미지 2 뷰 생성 // Create destination image view 2
-				if((eResult = arrViewImage[3].Create(800, 400, 1200, 800)).IsFail())
+				if((res = arrViewImage[3].Create(800, 400, 1200, 800)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
@@ -107,9 +107,9 @@ namespace InpaintingTexture
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 4; ++i)
                 {
-                    if ((eResult = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
+                    if ((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+                        ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
                         break;
                     }
@@ -119,37 +119,37 @@ namespace InpaintingTexture
                     break;
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
+                if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view\n");
+                    ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
+                if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window.\n");
+                    ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((eResult = arrViewImage[2].SynchronizePointOfView(ref arrViewImage[3])).IsFail())
+				if((res = arrViewImage[2].SynchronizePointOfView(ref arrViewImage[3])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((eResult = arrViewImage[2].SynchronizeWindow(ref arrViewImage[1])).IsFail())
+				if((res = arrViewImage[2].SynchronizeWindow(ref arrViewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((eResult = arrViewImage[2].SynchronizeWindow(ref arrViewImage[3])).IsFail())
+				if((res = arrViewImage[2].SynchronizeWindow(ref arrViewImage[3])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -171,9 +171,9 @@ namespace InpaintingTexture
 				CFLFigureArray flfaPaintingRegion = new CFLFigureArray();
 
                 // 미리 그려둔 Painting region Figure Array 불러오기 // Load Pre-drawn Painting Region Figure Array
-				if((eResult = flfaPaintingRegion.Load("../../ExampleImages/InpaintingTexture/PaintingRegion.fig")).IsFail())
+				if((res = flfaPaintingRegion.Load("../../ExampleImages/InpaintingTexture/PaintingRegion.fig")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the figure file.");
+					ErrorPrint(res, "Failed to load the figure file.");
 					break;
 				}
 
@@ -181,9 +181,9 @@ namespace InpaintingTexture
 				InpaintingTexture.SetPaintingRegion(flfaPaintingRegion);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = InpaintingTexture.Execute()).IsFail())
+				if((res = InpaintingTexture.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute algorithm.\n");
+					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;
                 }
 
@@ -203,9 +203,9 @@ namespace InpaintingTexture
 				CFLFigureArray flfaPaintingRegion2 = new CFLFigureArray();
 
 				// 미리 그려둔 Painting region 2 Figure Array 불러오기 // Load Pre-drawn Painting Region 2 Figure Array
-				if((eResult = flfaPaintingRegion2.Load("../../ExampleImages/InpaintingTexture/PaintingRegion2.fig")).IsFail())
+				if((res = flfaPaintingRegion2.Load("../../ExampleImages/InpaintingTexture/PaintingRegion2.fig")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the figure file.");
+					ErrorPrint(res, "Failed to load the figure file.");
 					break;
 				}
 
@@ -213,9 +213,9 @@ namespace InpaintingTexture
 				InpaintingTexture.SetPaintingRegion(flfaPaintingRegion2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = InpaintingTexture.Execute()).IsFail())
+				if((res = InpaintingTexture.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute algorithm.\n");
+					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;
 				}
 
@@ -240,41 +240,41 @@ namespace InpaintingTexture
                 //                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
                 TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-                if ((eResult = arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
 				}
 
-				if((eResult = arrLayer[2].DrawTextCanvas(tpPosition, "Source Image 2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = arrLayer[2].DrawTextCanvas(tpPosition, "Source Image 2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[3].DrawTextCanvas(tpPosition, "Destination Image 2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = arrLayer[3].DrawTextCanvas(tpPosition, "Destination Image 2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
 				// Painting region을 source image에 디스플레이 // Display painting region on the source image
-				if(arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flfaPaintingRegion)) == -1)
+				if(arrFliImage[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flfaPaintingRegion)) == -1)
 				{
-					ErrorPrint(eResult, "Failed to push figure on image\n");
+					ErrorPrint(res, "Failed to push figure on image\n");
 					break;
 				}
 
 				// Painting region 2을 source image 2에 디스플레이 // Display painting region on the source image
-				if(arrFliImage[2].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flfaPaintingRegion2)) == -1)
+				if(arrFliImage[2].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flfaPaintingRegion2)) == -1)
 				{
-					ErrorPrint(eResult, "Failed to push figure on image\n");
+					ErrorPrint(res, "Failed to push figure on image\n");
 					break;
 				}
 

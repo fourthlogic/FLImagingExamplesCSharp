@@ -38,33 +38,33 @@ namespace Barcode
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/Barcode/Barcode.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/Barcode/Barcode.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImage.ZoomFit()).IsFail())
+				if((res = viewImage.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 
@@ -79,8 +79,8 @@ namespace Barcode
 				sBarcode.SetBarcodeSymbolToDetect(EBarcodeSymbol.EAN13);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = sBarcode.Execute()).IsFail())				
-					ErrorPrint(eResult, "Failed to execute Barcode decoder.");
+				if((res = sBarcode.Execute()).IsFail())				
+					ErrorPrint(res, "Failed to execute Barcode decoder.");
 				
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
@@ -100,9 +100,9 @@ namespace Barcode
 					CFLQuad<double> flqRegion;
 
 					// Barcode Decoder 결과들 중 Data Region 을 얻어옴
-					if((eResult = sBarcode.GetResultDataRegion(i, out flqRegion)).IsFail())
+					if((res = sBarcode.GetResultDataRegion(i, out flqRegion)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get data region from the barcode decoder object.");
+						ErrorPrint(res, "Failed to get data region from the barcode decoder object.");
 						continue;
 					}
 
@@ -111,18 +111,18 @@ namespace Barcode
 					// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
 					// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
 					// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
-					if((eResult = layer.DrawFigureImage(flqRegion, EColor.LIME, 2, 0, EGUIViewImagePenStyle.Solid, 1, 0)).IsFail())
+					if((res = layer.DrawFigureImage(flqRegion, EColor.LIME, 2, 0, EGUIViewImagePenStyle.Solid, 1, 0)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure object on the image view.\n");
+						ErrorPrint(res, "Failed to draw figure object on the image view.\n");
 						continue;
 					}
 
 					string strDecodedMsg = "";
 
 					// Barcode Decoder 결과들 중 Decoded String 을 얻어옴
-					if((eResult = sBarcode.GetResultDecodedString(i, out strDecodedMsg)).IsFail())
+					if((res = sBarcode.GetResultDecodedString(i, out strDecodedMsg)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get decoded string from the barcode decoder object.");
+						ErrorPrint(res, "Failed to get decoded string from the barcode decoder object.");
 						continue;
 					}
 
@@ -208,15 +208,15 @@ namespace Barcode
 					//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 					// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 					//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-					if((eResult = layer.DrawTextImage(flqRegion.flpPoints[0], strSymbol, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+					if((res = layer.DrawTextImage(flqRegion.flpPoints[0], strSymbol, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw string object on the image view.");
+						ErrorPrint(res, "Failed to draw string object on the image view.");
 						continue;
 					}
 
-					if((eResult = layer.DrawTextImage(flqRegion.flpPoints[3], strDecodedMsg, EColor.CYAN, EColor.BLACK, 20)).IsFail())
+					if((res = layer.DrawTextImage(flqRegion.flpPoints[3], strDecodedMsg, EColor.CYAN, EColor.BLACK, 20)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw string object on the image view.");
+						ErrorPrint(res, "Failed to draw string object on the image view.");
 						continue;
 					}
 				}

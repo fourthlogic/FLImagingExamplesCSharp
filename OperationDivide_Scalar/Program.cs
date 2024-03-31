@@ -40,97 +40,97 @@ namespace OperationDivide
 			CGUIViewImage viewImageDst1 = new CGUIViewImage();
 			CGUIViewImage viewImageDst2 = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((eResult = fliSourceImage.Load("../../ExampleImages/OperationDivide/FlowerWall.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationDivide/FlowerWall.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file. \n");
+					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
 				// Destination 이미지를 Src 이미지와 동일한 이미지로 생성
-				if((eResult = fliDestinationImage1.Assign(fliSourceImage)).IsFail())
+				if((res = fliDestinationImage1.Assign(fliSourceImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file. \n");
+					ErrorPrint(res, "Failed to assign the image file. \n");
 					break;
 				}
 
-				if((eResult = fliDestinationImage2.Assign(fliSourceImage)).IsFail())
+				if((res = fliDestinationImage2.Assign(fliSourceImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file. \n");
+					ErrorPrint(res, "Failed to assign the image file. \n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create source image view
-				if((eResult = viewImageSrc.Create(100, 0, 612, 512)).IsFail())
+				if((res = viewImageSrc.Create(100, 0, 612, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// Destination1 이미지 뷰 생성 // Create destination1 image view
-				if((eResult = viewImageDst1.Create(612, 0, 1124, 512)).IsFail())
+				if((res = viewImageDst1.Create(612, 0, 1124, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// Destination2 이미지 뷰 생성 // Create destination2 image view
-				if((eResult = viewImageDst2.Create(1124, 0, 1636, 512)).IsFail())
+				if((res = viewImageDst2.Create(1124, 0, 1636, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((eResult = viewImageSrc.SynchronizePointOfView(ref viewImageDst1)).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst1)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view. \n");
+					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((eResult = viewImageSrc.SynchronizePointOfView(ref viewImageDst2)).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst2)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view. \n");
+					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((eResult = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// Destination1 이미지 뷰에 이미지를 디스플레이
-				if((eResult = viewImageDst1.SetImagePtr(ref fliDestinationImage1)).IsFail())
+				if((res = viewImageDst1.SetImagePtr(ref fliDestinationImage1)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// Destination2 이미지 뷰에 이미지를 디스플레이
-				if((eResult = viewImageDst2.SetImagePtr(ref fliDestinationImage2)).IsFail())
+				if((res = viewImageDst2.SetImagePtr(ref fliDestinationImage2)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImageSrc.SynchronizeWindow(ref viewImageDst1)).IsFail())
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst1)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window. \n");
+					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImageSrc.SynchronizeWindow(ref viewImageDst2)).IsFail())
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst2)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window. \n");
+					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
@@ -151,9 +151,9 @@ namespace OperationDivide
 				divide.SetScalarValue(mvScalar);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = divide.Execute()).IsFail())
+				if((res = divide.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute operation divide.");
+					ErrorPrint(res, "Failed to execute operation divide.");
 					break;
 				}
 
@@ -165,9 +165,9 @@ namespace OperationDivide
 				divide.SetScalarValue(mvScalar);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = divide.Execute()).IsFail())
+				if((res = divide.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute operation divide. \n");
+					ErrorPrint(res, "Failed to execute operation divide. \n");
 					break;
 				}
 
@@ -190,21 +190,21 @@ namespace OperationDivide
 				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
-				if((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
-				if((eResult = layerDestination1.DrawTextCanvas(flpPoint, "Destination1 Image(Divide 1.5)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerDestination1.DrawTextCanvas(flpPoint, "Destination1 Image(Divide 1.5)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
-				if((eResult = layerDestination2.DrawTextCanvas(flpPoint, "Destination2 Image(Divide 3.0)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerDestination2.DrawTextCanvas(flpPoint, "Destination2 Image(Divide 3.0)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 

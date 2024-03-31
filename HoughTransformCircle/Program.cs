@@ -36,28 +36,28 @@ namespace HoughTransformCircle
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/HoughTransform/coins.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/HoughTransform/coins.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(300, 0, 300 + 600, 600)).IsFail())
+				if((res = viewImage.Create(300, 0, 300 + 600, 600)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -107,9 +107,9 @@ namespace HoughTransformCircle
 
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (HoughTransform.Execute())).IsFail())
+				if((res = (HoughTransform.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute HoughTransform.");
+					ErrorPrint(res, "Failed to execute HoughTransform.");
 					break;
 				}
 
@@ -132,9 +132,9 @@ namespace HoughTransformCircle
 					HoughTransform.GetResultCircle(i, out flcResult);
 
 					// 이미지 뷰에 검출된 원 객체 출력 // Output the detected original object to the image view
-					if((eResult = (layer.DrawFigureImage(flcResult, EColor.LIGHTGREEN, 1))).IsFail())
+					if((res = (layer.DrawFigureImage(flcResult, EColor.LIGHTGREEN, 1))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw Figure");
+						ErrorPrint(res, "Failed to draw Figure");
 						break;
 					}
 				}

@@ -50,28 +50,28 @@ namespace OperationLeastCommonMultiple_Scalar
 			for(int i = 0; i < (int)EType.ETypeCount; ++i)
 				arrViewImage[i] = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((eResult = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationLeastCommonMultiple/Plate.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationLeastCommonMultiple/Plate.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Destination1 이미지를 16-bit 이미지로 로드 // Load the 16-bit destination image
-				if((eResult = arrFliImage[(int)EType.Destination1].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Destination1].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file.\n");
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
 				// Destination2 이미지를 16-bit 이미지로 로드 // Load the 16-bit destination image
-				if((eResult = arrFliImage[(int)EType.Destination2].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Destination2].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load  image file.\n");
+					ErrorPrint(res, "Failed to load  image file.\n");
 					break;
 				}
 
@@ -80,17 +80,17 @@ namespace OperationLeastCommonMultiple_Scalar
 				for(int i = 0; i < (int)EType.ETypeCount; ++i)
 				{
 					// 이미지 뷰 생성 // Create image view
-					if((eResult = (arrViewImage[i].Create(i * 512 + 100, 0, i * 512 + 100 + 512, 512))).IsFail())
+					if((res = (arrViewImage[i].Create(i * 512 + 100, 0, i * 512 + 100 + 512, 512))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to create the image view.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");
 						bError = true;
 						break;
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((eResult = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
+					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
 						break;
 					}
@@ -99,17 +99,17 @@ namespace OperationLeastCommonMultiple_Scalar
 						continue;
 
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((eResult = (arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i]))).IsFail())
+					if((res = (arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize view\n");
+						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;
 						break;
 					}
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((eResult = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
+					if((res = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;
 						break;
 					}
@@ -131,9 +131,9 @@ namespace OperationLeastCommonMultiple_Scalar
 				lcm.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (lcm.Execute())).IsFail())
+				if((res = (lcm.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute operation LCM.");
+					ErrorPrint(res, "Failed to execute operation LCM.");
 					break;
 				}
 
@@ -144,9 +144,9 @@ namespace OperationLeastCommonMultiple_Scalar
 				lcm.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (lcm.Execute())).IsFail())
+				if((res = (lcm.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute operation LCM.");
+					ErrorPrint(res, "Failed to execute operation LCM.");
 					break;
 				}
 
@@ -171,21 +171,21 @@ namespace OperationLeastCommonMultiple_Scalar
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flpZero = new CFLPoint<double>(0, 0);
 
-				if((eResult = (arrLayer[(int)EType.Source].DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[(int)EType.Source].DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(LCM 255)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(LCM 255)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(LCM 251)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(LCM 251)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

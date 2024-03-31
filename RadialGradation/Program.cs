@@ -41,52 +41,52 @@ namespace RadialGradation
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/RadialGradation/Moon.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/RadialGradation/Moon.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
+				if((res = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
+				if((res = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window\n");
+					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[1].SetImagePtr(ref fliIDstImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(ref fliIDstImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -126,9 +126,9 @@ namespace RadialGradation
 				RadialGradation.SetRadialRegion(flcRadialRegion);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (RadialGradation.Execute())).IsFail())
+				if((res = (RadialGradation.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute RadialGradation.");
+					ErrorPrint(res, "Failed to execute RadialGradation.");
 					break;
 				}
 
@@ -149,32 +149,32 @@ namespace RadialGradation
 				flfaDrawArrow = fllArrow.MakeArrowWithLength(5);
 
 				// Arrow Figure 를 출력합니다. // Display Arrow Figure.
-				if((eResult = layer1.DrawFigureImage(flfaDrawArrow, EColor.RED, 3)).IsFail())
+				if((res = layer1.DrawFigureImage(flfaDrawArrow, EColor.RED, 3)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw Figure.\n");
+					ErrorPrint(res, "Failed to draw Figure.\n");
 					break;
 				}
 
 				// text를 출력합니다. // Display text.
-				if((eResult = layer1.DrawTextImage(flcRadialRegion.GetCenter(), "Start Value(255, 0, 0)\nStart Alpha(1.0, 0.3, 0.3)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
+				if((res = layer1.DrawTextImage(flcRadialRegion.GetCenter(), "Start Value(255, 0, 0)\nStart Alpha(1.0, 0.3, 0.3)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
 				// View 정보를 디스플레이 합니다. // Display View information.
-				if((eResult = layer1.DrawTextImage(flpCenter, "End Value(100, 255, 255)\nEnd Alpha(0.1, 0.5, 0.5)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
+				if((res = layer1.DrawTextImage(flpCenter, "End Value(100, 255, 255)\nEnd Alpha(0.1, 0.5, 0.5)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
 				// Text 출력 // Display Text
-				if((eResult = layer1.DrawTextImage(new CFLPoint<double>(50, 0), "Source Image", EColor.RED)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer1.DrawTextImage(new CFLPoint<double>(50, 0), "Source Image", EColor.RED)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = layer2.DrawTextImage(new CFLPoint<double>(50, 0), "Destination Image", EColor.RED)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer2.DrawTextImage(new CFLPoint<double>(50, 0), "Destination Image", EColor.RED)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				viewImage[0].Invalidate(true);

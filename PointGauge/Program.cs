@@ -32,28 +32,28 @@ namespace Gauge
 
             // 이미지 뷰 선언 // Declare the image view
             CGUIViewImage viewImage = new CGUIViewImage();
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
                 // 이미지 로드 // Load image
-                if ((eResult = fliImage.Load("../../ExampleImages/Gauge/Plate.flif")).IsFail())
+                if ((res = fliImage.Load("../../ExampleImages/Gauge/Plate.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.");
+                    ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
-                if ((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+                if ((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.");
+                    ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to set image object on the image view.");
+                    ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
@@ -82,9 +82,9 @@ namespace Gauge
 				pointGauge.SetThickness(1);
 
                 // 알고리즘 수행 // Execute the Algoritm
-                if ((eResult = pointGauge.Execute()).IsFail())
+                if ((res = pointGauge.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute point gauge.");
+                    ErrorPrint(res, "Failed to execute point gauge.");
                     break;
                 }
 
@@ -105,22 +105,22 @@ namespace Gauge
                     if (pointGauge.GetMeasuredObject(out flp, i32Index).IsFail())
                         break;
 
-                    if((eResult = layer.DrawFigureImage(flp.MakeCrossHair(7, true), EColor.BLACK, 3)).IsFail())
+                    if((res = layer.DrawFigureImage(flp.MakeCrossHair(7, true), EColor.BLACK, 3)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
-					if((eResult = layer.DrawFigureImage(flp.MakeCrossHair(7, true), EColor.YELLOW)).IsFail())
+					if((res = layer.DrawFigureImage(flp.MakeCrossHair(7, true), EColor.YELLOW)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
 					Console.WriteLine("Index {0} : ({1}, {2})", i32Index, flp.x, flp.y);
                 }
                  
-                if ((eResult = layer.DrawFigureImage(fllLine, EColor.BLUE)).IsFail())
+                if ((res = layer.DrawFigureImage(fllLine, EColor.BLUE)).IsFail())
                     break;
 
                 // 이미지 뷰를 갱신 합니다. // Update the image view.

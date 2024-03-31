@@ -36,28 +36,28 @@ namespace HarrisCornerDetector
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/HarrisCornerDetector/Chip.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/HarrisCornerDetector/Chip.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(400, 0, 1168, 540)).IsFail())
+				if((res = viewImage.Create(400, 0, 1168, 540)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -75,51 +75,51 @@ namespace HarrisCornerDetector
 				CFLRect<int> flrROI = new CFLRect<int>(100, 50, 450, 450);
 
 				// 처리할 이미지 설정 // Set the image to process
-				if((eResult = harris.SetSourceImage(ref fliImage)).IsFail())
+				if((res = harris.SetSourceImage(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Source Image.");
+					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// 처리할 ROI 설정
-				if((eResult = (harris.SetSourceROI(flrROI))).IsFail())
+				if((res = (harris.SetSourceROI(flrROI))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Source ROI.");
+					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
 				}
 
 				// 코너를 검출하는 이미지의 Scale 값을 설정
-				if((eResult = (harris.SetScale(1.0))).IsFail())
+				if((res = (harris.SetScale(1.0))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set scale.");
+					ErrorPrint(res, "Failed to set scale.");
 					break;
 				}
 
 				// 검출할 최대 점의 개수를 설정
-				if((eResult = (harris.SetMaxPoints(500))).IsFail())
+				if((res = (harris.SetMaxPoints(500))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set max points.");
+					ErrorPrint(res, "Failed to set max points.");
 					break;
 				}
 
 				// 검출할 점수의 임계값을 설정
-				if((eResult = (harris.SetScoreThreshold(0.8f))).IsFail())
+				if((res = (harris.SetScoreThreshold(0.8f))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set score threshold.");
+					ErrorPrint(res, "Failed to set score threshold.");
 					break;
 				}
 
 				// 해리스 코너 디텍터의 파리미터 K를 설정
-				if((eResult = (harris.SetParamK(0.04f))).IsFail())
+				if((res = (harris.SetParamK(0.04f))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set param K.");
+					ErrorPrint(res, "Failed to set param K.");
 					break;
 				}
 
 				// 해리스 코너 디텍터 실행 함수
-				if((eResult = (harris.Execute())).IsFail())
+				if((res = (harris.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 
@@ -127,9 +127,9 @@ namespace HarrisCornerDetector
 				CFLFigureArray flfaResultPoints;
 
 				// 검출된 점을 가져오는 함수
-				if((eResult = (harris.GetResultPoints(out flfaResultPoints))).IsFail())
+				if((res = (harris.GetResultPoints(out flfaResultPoints))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get result.");
+					ErrorPrint(res, "Failed to get result.");
 					break;
 				}
 
@@ -145,9 +145,9 @@ namespace HarrisCornerDetector
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
 				// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
-				if((eResult = (layer.DrawFigureImage(flrROI, EColor.BLUE))).IsFail())
+				if((res = (layer.DrawFigureImage(flrROI, EColor.BLUE))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figures objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
 					break;
 				}
 

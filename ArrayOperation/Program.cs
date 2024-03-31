@@ -38,48 +38,48 @@ namespace CircleGauge
 			for(int i = 0; i < i32ViewCount; ++i)
 				viewImage[i] = new CGUIViewImage();
 
-			CResult eResult = new CResult(EResult.UnknownError);
+			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(400, 0, 912, 384)).IsFail())
+				if((res = viewImage[0].Create(400, 0, 912, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
+				if((res = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[2].Create(400, 384, 912, 768)).IsFail())
+				if((res = viewImage[2].Create(400, 384, 912, 768)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[3].Create(912, 384, 1424, 768)).IsFail())
+				if((res = viewImage[3].Create(912, 384, 1424, 768)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				for(int i = 1; i < i32ViewCount; ++i)
 				{
 					// 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoint of the image view
-					if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizePointOfView(ref viewImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize view\n");
+						ErrorPrint(res, "Failed to synchronize view\n");
 						break;
 					}
 
 					// 이미지 뷰 윈도우의 위치를 맞춤 // Align the position of the image view window
-					if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
@@ -108,7 +108,7 @@ namespace CircleGauge
 
 				for(int i = 0; i < flfa.GetCount(); ++i)
 				{
-					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtils.ConvertFigureObjectToString(flfa.GetAt(i)));
+					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtilities.ConvertFigureObjectToString(flfa.GetAt(i)));
 					Console.WriteLine("{0}", strFigure);
 				}
 
@@ -134,7 +134,7 @@ namespace CircleGauge
 
 				for(int i = 0; i < flfa.GetCount(); ++i)
 				{
-					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtils.ConvertFigureObjectToString(flfaCenter.GetAt(i)));
+					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtilities.ConvertFigureObjectToString(flfaCenter.GetAt(i)));
 					Console.WriteLine("{0}", strFigure);
 				}
 
@@ -185,7 +185,7 @@ namespace CircleGauge
 
 				for(int i = 0; i < flfa.GetCount(); ++i)
 				{
-					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtils.ConvertFigureObjectToString(flfaCenterOfGravity.GetAt(i)));
+					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtilities.ConvertFigureObjectToString(flfaCenterOfGravity.GetAt(i)));
 					Console.WriteLine("{0}", strFigure);
 				}
 
@@ -208,7 +208,7 @@ namespace CircleGauge
 
 				for(int i = 0; i < flfa.GetCount(); ++i)
 				{
-					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtils.ConvertFigureObjectToString(flfaMER.GetAt(i)));
+					strFigure = String.Format("[{0}]\n {1}\n", i, CFigureUtilities.ConvertFigureObjectToString(flfaMER.GetAt(i)));
 					Console.WriteLine("{0}", strFigure);
 				}
 

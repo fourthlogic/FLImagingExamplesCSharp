@@ -36,28 +36,28 @@ namespace OrientedFASTandRotatedBRIEF
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// 이미지 로드 // Load image
-                if ((eResult = fliImage.Load("../../ExampleImages/OrientedFASTandRotatedBRIEF/Chip.flif")).IsFail())
+                if ((res = fliImage.Load("../../ExampleImages/OrientedFASTandRotatedBRIEF/Chip.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(400, 0, 1168, 540)).IsFail())
+				if((res = viewImage.Create(400, 0, 1168, 540)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -75,58 +75,58 @@ namespace OrientedFASTandRotatedBRIEF
 				CFLRect<int> flrROI = new CFLRect<int>(100, 50, 450, 450);
 
 				// 처리할 이미지 설정 // Set the image to process
-                if ((eResult = ORB.SetSourceImage(ref fliImage)).IsFail())
+                if ((res = ORB.SetSourceImage(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Source Image.");
+					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// 처리할 ROI 설정
-                if ((eResult = (ORB.SetSourceROI(flrROI))).IsFail())
+                if ((res = (ORB.SetSourceROI(flrROI))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Source ROI.");
+					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
 				}
 
 				// 특징점을 추출할 NLevels 수를 설정
-				if((eResult = (ORB.SetNLevels(4))).IsFail())
+				if((res = (ORB.SetNLevels(4))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set NLevels.");
+					ErrorPrint(res, "Failed to set NLevels.");
 					break;
 				}
 
 				// 특징점을 추출할 Nfeature 수를 설정
-				if((eResult = (ORB.SetNfeature(500))).IsFail())
+				if((res = (ORB.SetNfeature(500))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Nfeature.");
+					ErrorPrint(res, "Failed to set Nfeature.");
 					break;
 				}
 
 				// 특징점을 추출할 ScoreType 설정
-				if((eResult = (ORB.SetScoreType(COrientedFASTandRotatedBRIEF.EScoreType.FastScore))).IsFail())
+				if((res = (ORB.SetScoreType(COrientedFASTandRotatedBRIEF.EScoreType.FastScore))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Score Type.");
+					ErrorPrint(res, "Failed to set Score Type.");
 					break;
 				}
 
 				// 추출할 특징점의 FAST Threshold 설정
-				if((eResult = (ORB.SetFASTThreshold(10))).IsFail())
+				if((res = (ORB.SetFASTThreshold(10))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set FAST Threshold.");
+					ErrorPrint(res, "Failed to set FAST Threshold.");
 					break;
                 }
 
 				// ORB의 파라미터 Scale Factor 설정
-				if((eResult = (ORB.SetScaleFactor(1.2f))).IsFail())
+				if((res = (ORB.SetScaleFactor(1.2f))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set Scale Factor.");
+					ErrorPrint(res, "Failed to set Scale Factor.");
 					break;
                 }
 
 				// ORB 실행 함수
-                if ((eResult = (ORB.Execute())).IsFail())
+                if ((res = (ORB.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 
@@ -134,9 +134,9 @@ namespace OrientedFASTandRotatedBRIEF
 				CFLPointArray flfaResultPoints;
 
 				// 검출된 점을 가져오는 함수
-                if ((eResult = (ORB.GetResultPoints(out flfaResultPoints))).IsFail())
+                if ((res = (ORB.GetResultPoints(out flfaResultPoints))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get result.");
+					ErrorPrint(res, "Failed to get result.");
 					break;
 				}
 
@@ -145,9 +145,9 @@ namespace OrientedFASTandRotatedBRIEF
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
 				// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
-				if((eResult = (layer.DrawFigureImage(flrROI, EColor.BLUE))).IsFail())
+				if((res = (layer.DrawFigureImage(flrROI, EColor.BLUE))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figures objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
 					break;
 				}
 

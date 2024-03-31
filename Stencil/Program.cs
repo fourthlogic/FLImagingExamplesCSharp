@@ -34,14 +34,14 @@ namespace Stencil
 			CGUIViewImage viewImage = new CGUIViewImage();
 
 			// 수행 결과 객체 선언 // Declare the execution result object
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// Image View 생성 // Create image view
-				if((eResult = viewImage.Create(200, 0, 800, 500)).IsFail())
+				if((res = viewImage.Create(200, 0, 800, 500)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
@@ -53,44 +53,44 @@ namespace Stencil
 				CStencil stencil = new CStencil();
 
 				// 줄 간격 설정 // Set the line spacing.
-				if((eResult = stencil.SetLineSpacing(0.2f)).IsFail())
+				if((res = stencil.SetLineSpacing(0.2f)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set line spacing.\n");
+					ErrorPrint(res, "Failed to set line spacing.\n");
 					break;
 				}
 
 				// 자간 설정 // Set the letter spacing.
-				if((eResult = stencil.SetLetterSpacing(0.3f)).IsFail())
+				if((res = stencil.SetLetterSpacing(0.3f)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set letter spacing.\n");
+					ErrorPrint(res, "Failed to set letter spacing.\n");
 					break;
 				}
 
 				// 폰트 크기 설정 // Set the font size.
-				if((eResult = stencil.SetFontSize(24)).IsFail())
+				if((res = stencil.SetFontSize(24)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set font size.\n");
+					ErrorPrint(res, "Failed to set font size.\n");
 					break;
 				}
 
 				// Arial 폰트를 미리 로드 // Load font "Arial"
-				if((eResult = stencil.LoadFont("Arial")).IsFail())
+				if((res = stencil.LoadFont("Arial")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load font : Arial.\n");
+					ErrorPrint(res, "Failed to load font : Arial.\n");
 					break;
 				}
 
 				// Cambria 폰트를 미리 로드 // Load font "Cambria"
-				if((eResult = stencil.LoadFont("Cambria")).IsFail())
+				if((res = stencil.LoadFont("Cambria")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load font : Cambria.\n");
+					ErrorPrint(res, "Failed to load font : Cambria.\n");
 					break;
 				}
 
 				// 미리 로드한 Arial 폰트 선택 // Select preloaded font "Arial"
-				if((eResult = stencil.SelectFont("Arial")).IsFail())
+				if((res = stencil.SelectFont("Arial")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to select font : Arial.\n");
+					ErrorPrint(res, "Failed to select font : Arial.\n");
 					break;
 				}
 
@@ -98,9 +98,9 @@ namespace Stencil
 				String strFontName = "";
 
 				// 선택한 폰트의 이름 얻어 오기 // Get selected font name.
-				if((eResult = stencil.GetSelectedFontName(out strFontName)).IsFail())
+				if((res = stencil.GetSelectedFontName(out strFontName)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get selected font name.\n");
+					ErrorPrint(res, "Failed to get selected font name.\n");
 					break;
 				}
 
@@ -111,9 +111,9 @@ namespace Stencil
 				String strText = "[Arial]\nFourthLogic CStencil class...";
 
 				// 선택한 폰트로 문자열을 도형으로 변환 // Convert the text to figure
-				if((eResult = stencil.ConvertStringToFigure(strText, out flfaRes)).IsFail())
+				if((res = stencil.ConvertStringToFigure(strText, out flfaRes)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to convert string to figure.\n");
+					ErrorPrint(res, "Failed to convert string to figure.\n");
 					break;
 				}
 
@@ -121,23 +121,23 @@ namespace Stencil
 				layer.DrawFigureImage(flfaRes, EColor.BLACK, 1, EColor.YELLOW);
 
 				// 미리 로드한 Cambria 폰트 선택
-				if((eResult = stencil.SelectFont("Cambria")).IsFail())
+				if((res = stencil.SelectFont("Cambria")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to select font : Cambria.\n");
+					ErrorPrint(res, "Failed to select font : Cambria.\n");
 					break;
 				}
 
 				// 줄 간격 설정 // Set the line spacing.
-				if((eResult = stencil.SetLineSpacing(1.0f)).IsFail())
+				if((res = stencil.SetLineSpacing(1.0f)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set line spacing.\n");
+					ErrorPrint(res, "Failed to set line spacing.\n");
 					break;
 				}
 
 				// 자간 설정 // Set the letter spacing.
-				if((eResult = stencil.SetLetterSpacing(0)).IsFail())
+				if((res = stencil.SetLetterSpacing(0)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set letter spacing.\n");
+					ErrorPrint(res, "Failed to set letter spacing.\n");
 					break;
 				}
 
@@ -145,9 +145,9 @@ namespace Stencil
 				strText = "[Cambria]\nFourthLogic CStencil class...";
 
 				// 선택한 폰트로 문자열을 도형으로 변환 // Convert the string to figure.
-				if((eResult = stencil.ConvertStringToFigure(strText, out flfaRes)).IsFail())
+				if((res = stencil.ConvertStringToFigure(strText, out flfaRes)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to convert string to figure.\n");
+					ErrorPrint(res, "Failed to convert string to figure.\n");
 					break;
 				}
 

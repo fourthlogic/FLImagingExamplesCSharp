@@ -129,10 +129,10 @@ namespace View3DIntoDialog
             m_view3D = new CGUIView3D();
             
             // 3D 뷰 생성
-            CResult eResult = m_view3D.Create(0, 0, 540, 435);
+            CResult res = m_view3D.Create(0, 0, 540, 435);
 
-            if (eResult.IsFail())
-                ErrorMessageBox(eResult, "");
+            if (res.IsFail())
+                ErrorMessageBox(res, "");
 
             // 3D 뷰의 윈도우을 얻어온다.
             ulong hWndImageView = m_view3D.GetWindowHandle();

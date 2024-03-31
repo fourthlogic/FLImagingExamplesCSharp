@@ -34,32 +34,32 @@ namespace GetIndexOfMaximumDistance
 			for(int i = 0; i < 4; ++i)
 				viewImage[i] = new CGUIViewImage();
 
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(400, 0, 812, 384)).IsFail())
+				if((res = viewImage[0].Create(400, 0, 812, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].Create(812, 0, 1224, 384)).IsFail())
+				if((res = viewImage[1].Create(812, 0, 1224, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[2].Create(400, 384, 812, 768)).IsFail())
+				if((res = viewImage[2].Create(400, 384, 812, 768)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[3].Create(812, 384, 1224, 768)).IsFail())
+				if((res = viewImage[3].Create(812, 384, 1224, 768)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
@@ -78,25 +78,25 @@ namespace GetIndexOfMaximumDistance
 				Dst2Layer0.DrawTextCanvas(new TPoint<double>(0, 20), "Index of Maximum Distance", EColor.CYAN, EColor.BLACK);
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((eResult = viewImage[2].SynchronizePointOfView(ref viewImage[3])).IsFail())
+				if((res = viewImage[2].SynchronizePointOfView(ref viewImage[3])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 				for(int i = 1; i < 4; ++i)
 				{
-					if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
@@ -108,46 +108,46 @@ namespace GetIndexOfMaximumDistance
 				CFLFigureArray flfaDestination2 = new CFLFigureArray();
 
 				// Source Figure 불러오기 // Load Source figure
-				if((eResult = flpaSource1.Load("../../ExampleImages/Figure/PointArray1.fig")).IsFail())
+				if((res = flpaSource1.Load("../../ExampleImages/Figure/PointArray1.fig")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the figure file.\n");
+					ErrorPrint(res, "Failed to load the figure file.\n");
 					break;
 				}
 
-				if((eResult = flfaSource2.Load("../../ExampleImages/Figure/various_arrays.fig")).IsFail())
+				if((res = flfaSource2.Load("../../ExampleImages/Figure/various_arrays.fig")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the figure file.\n");
+					ErrorPrint(res, "Failed to load the figure file.\n");
 					break;
 				}
 
 				// Destination Figure 불러오기 // Load Destination Figure
-				if((eResult = flcDestination1.Load("../../ExampleImages/Figure/Circle2.fig")).IsFail())
+				if((res = flcDestination1.Load("../../ExampleImages/Figure/Circle2.fig")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the figure file.\n");
+					ErrorPrint(res, "Failed to load the figure file.\n");
 					break;
 				}
 
-				if((eResult = flfaDestination2.Load("../../ExampleImages/Figure/Circles2.fig")).IsFail())
+				if((res = flfaDestination2.Load("../../ExampleImages/Figure/Circles2.fig")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the figure file.\n");
+					ErrorPrint(res, "Failed to load the figure file.\n");
 					break;
 				}
 
 				// Figure 사이의 최소 거리를 나타내는 인덱스를 추출 // Get the index of representing the minimum distance between figures
 				CFLFigureArray flfaResultSrc1;
 
-				if((eResult = flpaSource1.GetIndexOfMaximumDistance(flcDestination1, out flfaResultSrc1)).IsFail())
+				if((res = flpaSource1.GetIndexOfMaximumDistance(flcDestination1, out flfaResultSrc1)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to process.\n");
+					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
 				CFLFigureArray flfaResultSrc2;
 				CFLFigureArray flfaResultDst2;
 
-				if((eResult = flfaSource2.GetIndexOfMaximumDistance(flfaDestination2, out flfaResultSrc2, true, true, out flfaResultDst2)).IsFail())
+				if((res = flfaSource2.GetIndexOfMaximumDistance(flfaDestination2, out flfaResultSrc2, true, true, out flfaResultDst2)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to process.\n");
+					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
@@ -226,10 +226,10 @@ namespace GetIndexOfMaximumDistance
 
 				// Console 출력 // Console output
 				Console.Write("Source1 CFLPointArray\n");
-				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flpaSource1));
+				Console.Write("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flpaSource1));
 
 				Console.Write("Destination1 CFLCircle<double>\n");
-				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flcDestination1));
+				Console.Write("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flcDestination1));
 
 				Console.Write("Result1 Index of Maximum distance\n");
 				Console.Write("{0}\n\n", flvSrc.v);
@@ -237,10 +237,10 @@ namespace GetIndexOfMaximumDistance
 				Console.Write("\n\n");
 
 				Console.Write("Source2 CFLFigureArray\n");
-				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaSource2));
+				Console.Write("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaSource2));
 
 				Console.Write("Destination2 CFLFigureArray\n");
-				Console.Write("{0}\n\n", CFigureUtils.ConvertFigureObjectToString(flfaDestination2));
+				Console.Write("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaDestination2));
 
 				Console.Write("Src Result2 Index of Maximum distance\n");
 				Console.Write("Depth1 : {0}\nDepth2 : {1}\n\n", flvSrcDepth1.v, flvSrcDepth2.v);

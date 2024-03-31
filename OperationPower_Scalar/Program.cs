@@ -35,7 +35,7 @@ namespace OperationBitwiseAnd
             CGUIViewImage[] arrViewImage = new CGUIViewImage[6];
 
 			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			for(int i = 0; i < 6; ++i)
             {
@@ -46,86 +46,86 @@ namespace OperationBitwiseAnd
             do
             {
                 // Source 이미지 로드 // Load the source image
-                if ((eResult = arrFliImage[0].Load("../../ExampleImages/OperationPower/Space3Ch.flif")).IsFail())
+                if ((res = arrFliImage[0].Load("../../ExampleImages/OperationPower/Space3Ch.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
-                if ((eResult = arrFliImage[1].Assign(arrFliImage[0])).IsFail())
+                if ((res = arrFliImage[1].Assign(arrFliImage[0])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to assign the image file.\n");
+                    ErrorPrint(res, "Failed to assign the image file.\n");
                     break;
                 }
 
 				// Destination2 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination2 image as same as source image
-				if((eResult = arrFliImage[2].Assign(arrFliImage[0])).IsFail())
+				if((res = arrFliImage[2].Assign(arrFliImage[0])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file.\n");
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
 				// Destination3 이미지 로드. // Load the destination3 image
-				if ((eResult = arrFliImage[3].Load("../../ExampleImages/OperationPower/Dst16Depth.flif")).IsFail())
+				if ((res = arrFliImage[3].Load("../../ExampleImages/OperationPower/Dst16Depth.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Destination4 이미지 로드. // Load the destination4 image
-                if ((eResult = arrFliImage[4].Load("../../ExampleImages/OperationPower/Dst16Depth.flif")).IsFail())
+                if ((res = arrFliImage[4].Load("../../ExampleImages/OperationPower/Dst16Depth.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Destination5 이미지 로드. // Load the destination5 image
-                if ((eResult = arrFliImage[5].Load("../../ExampleImages/OperationPower/Dst64Depth.flif")).IsFail())
+                if ((res = arrFliImage[5].Load("../../ExampleImages/OperationPower/Dst64Depth.flif")).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to load the image file.\n");
+                    ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
-                if ((eResult = arrViewImage[0].Create(100, 0, 548, 448)).IsFail())
+                if ((res = arrViewImage[0].Create(100, 0, 548, 448)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination1 이미지 뷰 생성 // Create destination1 image view
-                if ((eResult = arrViewImage[1].Create(548, 0, 996, 448)).IsFail())
+                if ((res = arrViewImage[1].Create(548, 0, 996, 448)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination2 이미지 뷰 생성 // Create destination2 image view
-                if ((eResult = arrViewImage[2].Create(996, 0, 1444, 448)).IsFail())
+                if ((res = arrViewImage[2].Create(996, 0, 1444, 448)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination3 이미지 뷰 생성 // Create the destination3 image view
-                if ((eResult = arrViewImage[3].Create(100, 448, 548, 896)).IsFail())
+                if ((res = arrViewImage[3].Create(100, 448, 548, 896)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination4 이미지 뷰 생성 // Create the destination4 image view
-                if ((eResult = arrViewImage[4].Create(548, 448, 996, 896)).IsFail())
+                if ((res = arrViewImage[4].Create(548, 448, 996, 896)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination5 이미지 뷰 생성 // Create the destination5 image view
-                if ((eResult = arrViewImage[5].Create(996, 448, 1444, 896)).IsFail())
+                if ((res = arrViewImage[5].Create(996, 448, 1444, 896)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view.\n");
+                    ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
@@ -134,9 +134,9 @@ namespace OperationBitwiseAnd
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 6; ++i)
                 {
-                    if ((eResult = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
+                    if ((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
                     {
-                        ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+                        ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
                         break;
                     }
@@ -146,72 +146,72 @@ namespace OperationBitwiseAnd
                     break;
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
+                if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view\n");
+                    ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2])).IsFail())
+                if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view\n");
+                    ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
+                if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window.\n");
+                    ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[2])).IsFail())
+                if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[2])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window.\n");
+                    ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[3])).IsFail())
+                if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[3])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view\n");
+                    ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[4])).IsFail())
+                if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[4])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view\n");
+                    ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((eResult = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[5])).IsFail())
+                if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[5])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize view\n");
+                    ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[3])).IsFail())
+                if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[3])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window.\n");
+                    ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[4])).IsFail())
+                if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[4])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window.\n");
+                    ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((eResult = arrViewImage[0].SynchronizeWindow(ref arrViewImage[5])).IsFail())
+                if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[5])).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to synchronize window.\n");
+                    ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
@@ -236,9 +236,9 @@ namespace OperationBitwiseAnd
                 power.SetScalarValue(mvScalr1);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = power.Execute()).IsFail())
+                if ((res = power.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute operation Power.\n");
+                    ErrorPrint(res, "Failed to execute operation Power.\n");
                     break;
                 }
 
@@ -252,9 +252,9 @@ namespace OperationBitwiseAnd
                 power.SetScalarValue(mvScalr2);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = power.Execute()).IsFail())
+                if ((res = power.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute operation Power.\n");
+                    ErrorPrint(res, "Failed to execute operation Power.\n");
                     break;
                 }
 
@@ -268,9 +268,9 @@ namespace OperationBitwiseAnd
                 power.SetScalarValue(mvScalr3);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = power.Execute()).IsFail())
+                if ((res = power.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute operation Power.\n");
+                    ErrorPrint(res, "Failed to execute operation Power.\n");
                     break;
                 }
 
@@ -284,10 +284,10 @@ namespace OperationBitwiseAnd
                 power.SetScalarValue(mvScalr4);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = power.Execute()).IsFail())
+                if ((res = power.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute operation Power.");
-                    Console.WriteLine(eResult.GetString());
+                    ErrorPrint(res, "Failed to execute operation Power.");
+                    Console.WriteLine(res.GetString());
                     break;
                 }
 
@@ -301,9 +301,9 @@ namespace OperationBitwiseAnd
                 power.SetScalarValue(mvScalr5);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = power.Execute()).IsFail())
+                if ((res = power.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute operation Power.\n");
+                    ErrorPrint(res, "Failed to execute operation Power.\n");
                     break;
                 }
 
@@ -335,68 +335,68 @@ namespace OperationBitwiseAnd
                 TPoint<double> tpPosition0 = new TPoint<double>(5, 0);
                 TPoint<double> tpPosition1 = new TPoint<double>(5, 22);
 
-                if ((eResult = arrLayer[0].DrawTextCanvas(tpPosition0, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = arrLayer[0].DrawTextCanvas(tpPosition0, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[1].DrawTextCanvas(tpPosition0, "Destination1 Image(Power 1.1, 1.2, 1.5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[1].DrawTextCanvas(tpPosition0, "Destination1 Image(Power 1.1, 1.2, 1.5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[1].DrawTextCanvas(tpPosition1, "Unsigned Int / 8 / Saturation", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+                if ((res = arrLayer[1].DrawTextCanvas(tpPosition1, "Unsigned Int / 8 / Saturation", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[2].DrawTextCanvas(tpPosition0, "Destination2 Image(Power 0.8, 0.8, 1.1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[2].DrawTextCanvas(tpPosition0, "Destination2 Image(Power 0.8, 0.8, 1.1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[2].DrawTextCanvas(tpPosition1, "Unsigned Int / 8 / Saturation", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+                if ((res = arrLayer[2].DrawTextCanvas(tpPosition1, "Unsigned Int / 8 / Saturation", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[3].DrawTextCanvas(tpPosition0, "Destination3 Image(Power 2.5, 2.5, 2.5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[3].DrawTextCanvas(tpPosition0, "Destination3 Image(Power 2.5, 2.5, 2.5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[3].DrawTextCanvas(tpPosition1, "Unsigned Int / 16 / Overflow", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+                if ((res = arrLayer[3].DrawTextCanvas(tpPosition1, "Unsigned Int / 16 / Overflow", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[4].DrawTextCanvas(tpPosition0, "Destination4 Image(Power 2.5, 2.5, 2.5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[4].DrawTextCanvas(tpPosition0, "Destination4 Image(Power 2.5, 2.5, 2.5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[4].DrawTextCanvas(tpPosition1, "Unsigned Int / 16 / Saturation", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+                if ((res = arrLayer[4].DrawTextCanvas(tpPosition1, "Unsigned Int / 16 / Saturation", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((eResult = arrLayer[5].DrawTextCanvas(tpPosition0, "Destination5 Image(Power 10, 10, 10)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[5].DrawTextCanvas(tpPosition0, "Destination5 Image(Power 10, 10, 10)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
-                if ((eResult = arrLayer[5].DrawTextCanvas(tpPosition1, "Unsigned Int / 64 / Overflow", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+                if ((res = arrLayer[5].DrawTextCanvas(tpPosition1, "Unsigned Int / 64 / Overflow", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text.\n");
+                    ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 

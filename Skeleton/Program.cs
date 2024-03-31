@@ -36,63 +36,63 @@ namespace Skeleton
             CGUIViewImage viewImageSrc = new CGUIViewImage();
             CGUIViewImage viewImageDst = new CGUIViewImage();
 
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 	        {
                 // Source 이미지 로드 // Load the source image
-                if ((eResult = fliSourceImage.Load("../../ExampleImages/Skeleton/SkeletonSource.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/Skeleton/SkeletonSource.flif")).IsFail())
 		        {
-                    ErrorPrint(eResult, "Failed to load the image file. \n");
+                    ErrorPrint(res, "Failed to load the image file. \n");
 		        	break;
 		        }
 
                 // Destination 이미지 로드 // Load the destination image
-                if ((eResult = fliDestinationImage.Load("../../ExampleImages/Skeleton/SkeletonSource.flif")).IsFail())
+                if ((res = fliDestinationImage.Load("../../ExampleImages/Skeleton/SkeletonSource.flif")).IsFail())
 		        {
-                    ErrorPrint(eResult, "Failed to load the image file. \n");
+                    ErrorPrint(res, "Failed to load the image file. \n");
 		        	break;
 		        }
 
                 // Source 이미지 뷰 생성 // Create source image view
-                if ((eResult = viewImageSrc.Create(100, 0, 550, 480)).IsFail())
+                if ((res = viewImageSrc.Create(100, 0, 550, 480)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view. \n");
+                    ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
-                if ((eResult = viewImageDst.Create(550, 0, 1000, 480)).IsFail())
+                if ((res = viewImageDst.Create(550, 0, 1000, 480)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to create the image view. \n");
+                    ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-	        	if ((eResult = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+	        	if ((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 	        	{
-                    ErrorPrint(eResult, "Failed to synchronize view. \n");
+                    ErrorPrint(res, "Failed to synchronize view. \n");
 	        		break;
 	        	}
 
 	        	// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-	        	if ((eResult = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
+	        	if ((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
 	        	{
-                    ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+                    ErrorPrint(res, "Failed to set image object on the image view. \n");
 	        		break;
 	        	}
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-	        	if ((eResult = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
+	        	if ((res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
 	        	{
-                    ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+                    ErrorPrint(res, "Failed to set image object on the image view.\n");
 	        		break;
 	        	}
 
 	        	// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-	        	if ((eResult = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+	        	if ((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 	        	{
-                    ErrorPrint(eResult, "Failed to synchronize window. \n");
+                    ErrorPrint(res, "Failed to synchronize window. \n");
 	        		break;
 	        	}
 
@@ -106,9 +106,9 @@ namespace Skeleton
                 skeleton.SetDestinationImage(ref fliDestinationImage);
 
 	        	// skeleton 알고리즘 수행
-                if ((eResult = skeleton.Execute()).IsFail())
+                if ((res = skeleton.Execute()).IsFail())
 	        	{
-                    ErrorPrint(eResult, "Failed to execute Skeleton. \n");
+                    ErrorPrint(res, "Failed to execute Skeleton. \n");
 	        		break;
 	        	}
 
@@ -124,15 +124,15 @@ namespace Skeleton
                 // 이미지 뷰 정보 표시 // Display image view information
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-                if ((eResult = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text. \n");
+                    ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 
-                if ((eResult = layerOperand.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerOperand.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to draw text. \n");
+                    ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 

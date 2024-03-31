@@ -40,68 +40,68 @@ namespace Mask
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// Source 이미지 로드 // Load the source image
-				if((eResult = (fliSrcImage.Load("../../ExampleImages/Mask/ChessBoard.flif"))).IsFail())
+				if((res = (fliSrcImage.Load("../../ExampleImages/Mask/ChessBoard.flif"))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.");
+					ErrorPrint(res, "Failed to load the image file.");
 					break;
 				}
 
 				// 원본 이미지와의 결과 비교를 위해 이미지를 복사 // Copy the image to compare the result with the original image
-				if((eResult = (fliMaskImage.Assign(fliSrcImage))).IsFail())
+				if((res = (fliMaskImage.Assign(fliSrcImage))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file.\n");
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create the source image view
-				if((eResult = (viewImageSrc.Create(400, 0, 912, 612))).IsFail())
+				if((res = (viewImageSrc.Create(400, 0, 912, 612))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.");
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((eResult = (viewImageSrc.SetImagePtr(ref fliSrcImage))).IsFail())
+				if((res = (viewImageSrc.SetImagePtr(ref fliSrcImage))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.");
+					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
 				}
 
 				// Mask 이미지 뷰 생성 // Create mask image view
-				if((eResult = viewImageMask.Create(912, 0, 1424, 612)).IsFail())
+				if((res = viewImageMask.Create(912, 0, 1424, 612)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Mask 이미지 뷰에 이미지를 디스플레이 // Display the image in the Mask image view
-				if((eResult = viewImageMask.SetImagePtr(ref fliMaskImage)).IsFail())
+				if((res = viewImageMask.SetImagePtr(ref fliMaskImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((eResult = (viewImageSrc.SynchronizePointOfView(ref viewImageMask))).IsFail())
+				if((res = (viewImageSrc.SynchronizePointOfView(ref viewImageMask))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((eResult = (viewImageSrc.SynchronizeWindow(ref viewImageMask))).IsFail())
+				if((res = (viewImageSrc.SynchronizeWindow(ref viewImageMask))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImageSrc.ZoomFit()).IsFail())
+				if((res = viewImageSrc.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 
@@ -109,9 +109,9 @@ namespace Mask
 				CBlob sBlob = new CBlob();
 
 				// 처리할 이미지 설정 // Set the image to process
-				if((eResult = sBlob.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = sBlob.SetSourceImage(ref fliSrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set source image.\n");
+					ErrorPrint(res, "Failed to set source image.\n");
 					break;
 				}
 
@@ -136,9 +136,9 @@ namespace Mask
 				sBlob.SetContourResultType(CBlob.EContourResultType.Perforated);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = sBlob.Execute()).IsFail())
+				if((res = sBlob.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Blob.");
+					ErrorPrint(res, "Failed to execute Blob.");
 					break;
 				}
 
@@ -146,9 +146,9 @@ namespace Mask
 				CFLFigureArray flfaContours;
 
 				// Blob 결과들 중 Contour를 얻어옴 // Get Contour from Blob results
-				if((eResult = sBlob.GetResultContours(out flfaContours)).IsFail())
+				if((res = sBlob.GetResultContours(out flfaContours)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get boundary rects from the Blob object.");
+					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
 				}
 
@@ -164,9 +164,9 @@ namespace Mask
 				sMask.SetMask(mvMaskValue);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = sMask.Execute()).IsFail())
+				if((res = sMask.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute mask.");
+					ErrorPrint(res, "Failed to execute mask.");
 					break;
 				}
 
@@ -181,24 +181,24 @@ namespace Mask
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
 				// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
-				if((eResult = (layerSrc.DrawFigureImage(flfaContours, EColor.LIME))).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure");
+				if((res = (layerSrc.DrawFigureImage(flfaContours, EColor.LIME))).IsFail())
+					ErrorPrint(res, "Failed to draw figure");
 
-				if((eResult = (layerMask.DrawFigureImage(flfaContours, EColor.LIME))).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure");
+				if((res = (layerMask.DrawFigureImage(flfaContours, EColor.LIME))).IsFail())
+					ErrorPrint(res, "Failed to draw figure");
 
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPosition00 = new CFLPoint<double>(0, 0);
 
-				if((eResult = (layerSrc.DrawTextCanvas(flpPosition00, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (layerSrc.DrawTextCanvas(flpPosition00, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
-				if((eResult = (layerMask.DrawTextCanvas(flpPosition00, "Mask Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (layerMask.DrawTextCanvas(flpPosition00, "Mask Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 

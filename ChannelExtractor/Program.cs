@@ -39,53 +39,53 @@ namespace ChannelExtractor
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliSourceImage.Load("../../ExampleImages/ChannelExtractor/deer.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelExtractor/deer.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImageSource.Create(400, 0, 1052, 427)).IsFail())
+				if((res = viewImageSource.Create(400, 0, 1052, 427)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImageDestination.Create(1052, 0, 1692, 427)).IsFail())
+				if((res = viewImageDestination.Create(1052, 0, 1692, 427)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. .
-				if((eResult = viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
+				if((res = viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view. \n");
+					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window. \n");
+					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
+				if((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
@@ -102,9 +102,9 @@ namespace ChannelExtractor
 				channelExtractor.SetExtractionChannel(EChannelSelection.Channel_0);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (channelExtractor.Execute())).IsFail())
+				if((res = (channelExtractor.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Channel Extractor. \n");
+					ErrorPrint(res, "Failed to execute Channel Extractor. \n");
 					break;
 				}
 
@@ -120,15 +120,15 @@ namespace ChannelExtractor
 				// View 정보를 디스플레이 합니다. // Display View information.
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if((eResult = (layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
-				if((eResult = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
@@ -137,9 +137,9 @@ namespace ChannelExtractor
 				viewImageDestination.Invalidate(true);
 
 				// 이미지와 이미지 뷰의 Sync 를 동일하게 맞춥니다.
-				if((eResult = (viewImageDestination.ZoomFit())).IsFail())
+				if((res = (viewImageDestination.ZoomFit())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit. \n");
+					ErrorPrint(res, "Failed to zoom fit. \n");
 					break;
 				}
 

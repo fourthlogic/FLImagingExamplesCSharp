@@ -51,17 +51,17 @@ namespace ImageInsertion
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = arrFliImage[(int)EType.Src].Load("../../ExampleImages/Affine/Generator.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Src].Load("../../ExampleImages/Affine/Generator.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				if((eResult = arrFliImage[(int)EType.Opr].Load("../../ExampleImages/Affine/Sunset.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Opr].Load("../../ExampleImages/Affine/Sunset.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
@@ -71,31 +71,31 @@ namespace ImageInsertion
 					int i32Y = i / (int)EType.Count;
 
 					// 이미지 뷰 생성 // Create image view
-					if((eResult = arrViewImage[i].Create(i32X * 400 + 400, i32Y * 400, i32X * 400 + 400 + 400, i32Y * 400 + 400)).IsFail())
+					if((res = arrViewImage[i].Create(i32X * 400 + 400, i32Y * 400, i32X * 400 + 400 + 400, i32Y * 400 + 400)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to create the image view.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");
 						break;
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-					if((eResult = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
+					if((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
 					}
 
 					if(i != (int)EType.Src && i != (int)EType.Dst)
 					{
 						// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-						if((eResult = arrViewImage[(int)EType.Src].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
+						if((res = arrViewImage[(int)EType.Src].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to synchronize view\n");
+							ErrorPrint(res, "Failed to synchronize view\n");
 							break;
 						}
 						// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-						if((eResult = arrViewImage[(int)EType.Src].SynchronizeWindow(ref arrViewImage[i])).IsFail())
+						if((res = arrViewImage[(int)EType.Src].SynchronizeWindow(ref arrViewImage[i])).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to synchronize window\n");
+							ErrorPrint(res, "Failed to synchronize window\n");
 							break;
 						}
 
@@ -123,9 +123,9 @@ namespace ImageInsertion
 				sImageInsertion.SetOperandROI(flrROI);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (sImageInsertion.Execute())).IsFail())
+				if((res = (sImageInsertion.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute ImageInsertion.");
+					ErrorPrint(res, "Failed to execute ImageInsertion.");
 					break;
 				}
 
@@ -139,18 +139,18 @@ namespace ImageInsertion
 
 
 				// Text 출력 // Display Text 
-				if((eResult = arrLayer[(int)EType.Src].DrawTextImage(flpTmp, "Source Image", EColor.YELLOW, EColor.BLACK)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = arrLayer[(int)EType.Src].DrawTextImage(flpTmp, "Source Image", EColor.YELLOW, EColor.BLACK)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = arrLayer[(int)EType.Opr].DrawTextImage(flpTmp, "Operand Image", EColor.YELLOW, EColor.BLACK)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = arrLayer[(int)EType.Opr].DrawTextImage(flpTmp, "Operand Image", EColor.YELLOW, EColor.BLACK)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = arrLayer[(int)EType.Dst].DrawTextImage(flpTmp, "Destination Image", EColor.YELLOW, EColor.BLACK)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = arrLayer[(int)EType.Dst].DrawTextImage(flpTmp, "Destination Image", EColor.YELLOW, EColor.BLACK)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
 				// ImageInsertion 영역 표기 // ImageInsertion Area draw
-				if((eResult = arrLayer[(int)EType.Opr].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+				if((res = arrLayer[(int)EType.Opr].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				for(int i = (int)EType.Count - 1; i >= 0; --i)

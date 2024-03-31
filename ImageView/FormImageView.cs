@@ -62,10 +62,10 @@ namespace ImageView
                     break;
 
                 // 이미지 뷰 생성 // Create image view
-                CResult eResult = m_viewImage.Create(0, 0, 500, 500);
+                CResult res = m_viewImage.Create(0, 0, 500, 500);
 
-                if (eResult.IsFail())
-                    ErrorMessageBox(eResult, "");
+                if (res.IsFail())
+                    ErrorMessageBox(res, "");
             }
             while (false);
         }
@@ -78,10 +78,10 @@ namespace ImageView
                     break;
 
                 // 이미지 뷰를 종료한다.
-                CResult eResult = m_viewImage.Destroy();
+                CResult res = m_viewImage.Destroy();
 
-                if (eResult.IsFail())
-                    ErrorMessageBox(eResult, "");
+                if (res.IsFail())
+                    ErrorMessageBox(res, "");
             }
             while (false);
         }
@@ -397,7 +397,7 @@ namespace ImageView
                     break;
 
                 // Figure 를 문자열로 얻어온다.
-                string strFigure = CFigureUtils.ConvertFigureObjectToString(flFigure);
+                string strFigure = CFigureUtilities.ConvertFigureObjectToString(flFigure);
 
                 strFigureInfo = strFigure;
             }

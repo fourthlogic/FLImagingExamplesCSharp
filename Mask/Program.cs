@@ -36,28 +36,28 @@ namespace Mask
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
 				// 이미지 로드 // Load image
-				if((eResult = (fliImage.Load("../../ExampleImages/Mask/Moon.flif"))).IsFail())
+				if((res = (fliImage.Load("../../ExampleImages/Mask/Moon.flif"))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.");
+					ErrorPrint(res, "Failed to load the image file.");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = (viewImage.Create(400, 0, 912, 612))).IsFail())
+				if((res = (viewImage.Create(400, 0, 912, 612))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.");
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = (viewImage.SetImagePtr(ref fliImage))).IsFail())
+				if((res = (viewImage.SetImagePtr(ref fliImage))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.");
+					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
 				}
 
@@ -76,9 +76,9 @@ namespace Mask
 				mask.SetMask(mvMaskValue);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (mask.Execute())).IsFail())
+				if((res = (mask.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute mask.");
+					ErrorPrint(res, "Failed to execute mask.");
 					break;
 				}
 
@@ -91,15 +91,15 @@ namespace Mask
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
 				// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
-				if((eResult = (layer.DrawFigureImage(flcROI, EColor.LIME))).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure");
+				if((res = (layer.DrawFigureImage(flcROI, EColor.LIME))).IsFail())
+					ErrorPrint(res, "Failed to draw figure");
 
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPosition00 = new CFLPoint<double>(0, 0);
 
-				if((eResult = (layer.DrawTextCanvas(flpPosition00, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (layer.DrawTextCanvas(flpPosition00, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 

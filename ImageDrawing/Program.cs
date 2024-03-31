@@ -43,54 +43,54 @@ namespace ImageDrawing
 	        do
 	        {
                 // 수행 결과 객체 선언 // Declare the execution result object
-			    CResult eResult;
+			    CResult res;
 
 		        // 이미지 로드 // Load image
-		        if((eResult = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
+		        if((res = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to load the image file.\n");
+			        ErrorPrint(res, "Failed to load the image file.\n");
 			        break;
 		        }
 
 		        // Drawing 이미지를 Src 이미지와 동일한 이미지로 생성
-		        if((eResult = fliImageDrawing.Assign(fliImage)).IsFail())
+		        if((res = fliImageDrawing.Assign(fliImage)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to assign the image file.\n");
+			        ErrorPrint(res, "Failed to assign the image file.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
-		        if((eResult = viewImageSrc.Create(400, 0, 800, 400)).IsFail())
+		        if((res = viewImageSrc.Create(400, 0, 800, 400)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to create the image view.\n");
+			        ErrorPrint(res, "Failed to create the image view.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
-		        if((eResult = viewImageDst.Create(800, 0, 1200, 400)).IsFail())
+		        if((res = viewImageDst.Create(800, 0, 1200, 400)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to create the image view.\n");
+			        ErrorPrint(res, "Failed to create the image view.\n");
 			        break;
 		        }
 
 		        // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-		        if((eResult = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+		        if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to synchronize view\n");
+			        ErrorPrint(res, "Failed to synchronize view\n");
 			        break;
 		        }
 
 		        // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-		        if((eResult = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+		        if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to synchronize window.\n");
+			        ErrorPrint(res, "Failed to synchronize window.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-		        if((eResult = viewImageSrc.SetImagePtr(ref fliImage)).IsFail())
+		        if((res = viewImageSrc.SetImagePtr(ref fliImage)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;
 		        }
 
@@ -105,16 +105,16 @@ namespace ImageDrawing
 				sBlob.SetThreshold(127);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = sBlob.Execute()).IsFail())
+				if((res = sBlob.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Blob.");
+					ErrorPrint(res, "Failed to execute Blob.");
 					break;
 				}
 
 				// 면적이 500보다 작은 객체들을 제거
-				if((eResult = sBlob.Filter(CBlob.EFilterItem.Area, 500, ELogicalCondition.LessEqual)).IsFail())
+				if((res = sBlob.Filter(CBlob.EFilterItem.Area, 500, ELogicalCondition.LessEqual)).IsFail())
 				{
-					ErrorPrint(eResult, "Blob filtering algorithm error occurred.");
+					ErrorPrint(res, "Blob filtering algorithm error occurred.");
 					break;
 				}
 
@@ -122,9 +122,9 @@ namespace ImageDrawing
 				CFLFigureArray flfaBoundaryRects;
 
 				// Blob 결과들 중 Boundary Rectangle 을 얻어옴
-				if((eResult = sBlob.GetResultBoundaryRects(out flfaBoundaryRects)).IsFail())
+				if((res = sBlob.GetResultBoundaryRects(out flfaBoundaryRects)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to get boundary rects from the Blob object.");
+					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
 				}
 
@@ -140,9 +140,9 @@ namespace ImageDrawing
 		        layer3.Clear();
 
 		        // 이미지 뷰 정보 표시 // Display image view information
-		        if((eResult = layer3.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+		        if((res = layer3.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to draw text\n");
+			        ErrorPrint(res, "Failed to draw text\n");
 			        break;
 		        }
 
@@ -151,9 +151,9 @@ namespace ImageDrawing
 				// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
 				// 여기서 0.25이므로 옅은 반투명 상태라고 볼 수 있다.
 				// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
-				if((eResult = layer1.DrawFigureImage(flfaBoundaryRects, EColor.RED, 1, EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, .25f)).IsFail())
+				if((res = layer1.DrawFigureImage(flfaBoundaryRects, EColor.RED, 1, EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, .25f)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+					ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 					break;
 				}
 
@@ -196,37 +196,37 @@ namespace ImageDrawing
 		        layer.Clear();
 
 		        // 기존 레이어에 드로잉된 원소들을 해당 레이어 뒤쪽에 추가합니다. // Add elements drawn from an existing layer to the back of that layer.
-		        if((eResult = layer.PushBack(layer1)).IsFail())
+		        if((res = layer.PushBack(layer1)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to push back.\n");
+			        ErrorPrint(res, "Failed to push back.\n");
 			        break;
 		        }
 
-		        if((eResult = layer.PushBack(layer2)).IsFail())
+		        if((res = layer.PushBack(layer2)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to push back.\n");
+			        ErrorPrint(res, "Failed to push back.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 정보 표시 // Display image view information
-		        if((eResult = layer.DrawTextImage(new CFLPoint<double>(0, 0), "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+		        if((res = layer.DrawTextImage(new CFLPoint<double>(0, 0), "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to draw text\n");
+			        ErrorPrint(res, "Failed to draw text\n");
 			        break;
 		        }
 
 		        // 이미지에 그립니다. // Draw in the image.
-		        if((eResult = fliImageDrawing.Draw()).IsFail())
+		        if((res = fliImageDrawing.Draw()).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to draw.\n");
+			        ErrorPrint(res, "Failed to draw.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 CFLImage fliTemp = (CFLImage)fliImageDrawing;
-                if ((eResult = viewImageDst.SetImagePtr(ref fliTemp)).IsFail())
+                if ((res = viewImageDst.SetImagePtr(ref fliTemp)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;
 		        }
 

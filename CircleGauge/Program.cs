@@ -33,28 +33,28 @@ namespace Gauge
 
 	        // 이미지 뷰 선언 // Declare the image view
 	        CGUIViewImage viewImage = new CGUIViewImage();
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 	        do
 	        {
 		        // 이미지 로드 // Load image
-		        if((eResult = fliImage.Load("../../ExampleImages/Gauge/circle.flif")).IsFail())
+		        if((res = fliImage.Load("../../ExampleImages/Gauge/circle.flif")).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to load the image file.");
+			        ErrorPrint(res, "Failed to load the image file.");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
-		        if((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+		        if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to create the image view.");
+			        ErrorPrint(res, "Failed to create the image view.");
 			        break;
 		        }
 
 		        // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-		        if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+		        if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to set image object on the image view.");
+			        ErrorPrint(res, "Failed to set image object on the image view.");
 			        break;
 		        }
 
@@ -88,9 +88,9 @@ namespace Gauge
 				circleGauge.SetOutliersThresholdCount(3);
 
 		        // 알고리즘 수행 // Execute the Algoritm
-		        if((eResult = circleGauge.Execute()).IsFail())
+		        if((res = circleGauge.Execute()).IsFail())
 		        {
-			        ErrorPrint(eResult, "Failed to execute Circle gauge.");
+			        ErrorPrint(res, "Failed to execute Circle gauge.");
 					break;
 		        }
 
@@ -113,7 +113,7 @@ namespace Gauge
 		        // 측정 영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the measurement area is
 		        CFLCircle<double> flcResult;
 
-		        eResult = circleGauge.GetMeasuredObject(out flcResult, 0);
+		        res = circleGauge.GetMeasuredObject(out flcResult, 0);
 
 		        CFLCircle<double> flcRegion = circleGauge.GetMeasurementRegion();
 
@@ -130,30 +130,30 @@ namespace Gauge
 
 		        flcOuter.Set((float)flcRegion.GetCenter().x, (float)flcRegion.GetCenter().y, flcRegion.radius + f64Tolerance);
 
-				if((eResult = layer.DrawFigureImage(flcInner, EColor.RED)).IsFail())
+				if((res = layer.DrawFigureImage(flcInner, EColor.RED)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
-				if((eResult = layer.DrawFigureImage(flcOuter, EColor.RED)).IsFail())
+				if((res = layer.DrawFigureImage(flcOuter, EColor.RED)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
-				if(eResult.IsOK())
+				if(res.IsOK())
 		        {
 					// 추정된 원을 디스플레이 합니다. // Display the estimated circle.
-					if((eResult = layer.DrawFigureImage(flcResult, EColor.BLACK, 5)).IsFail())
+					if((res = layer.DrawFigureImage(flcResult, EColor.BLACK, 5)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
-					if((eResult = layer.DrawFigureImage(flcResult, EColor.CYAN, 3)).IsFail())
+					if((res = layer.DrawFigureImage(flcResult, EColor.CYAN, 3)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
@@ -175,9 +175,9 @@ namespace Gauge
 
 			        CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-			        if((eResult = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
+			        if((res = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
@@ -192,17 +192,17 @@ namespace Gauge
 
 			        CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-			        if((eResult = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
+			        if((res = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
 
 				// 측정 영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the measurement area is
-				if((eResult = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
+				if((res = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw figures objects on the image view.");
+					ErrorPrint(res, "Failed to draw figures objects on the image view.");
 					break;
 				}
 		

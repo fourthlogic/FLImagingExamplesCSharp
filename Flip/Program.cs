@@ -147,7 +147,7 @@ namespace OperationBitwiseAnd
                 }
 
                 // 알고리즘 동작 결과 // Algorithm execution result
-                CResult eResult = new CResult();
+                CResult res = new CResult();
 
                 // Utility Flip 객체 생성 // Create Utility Flip object
                 CFlip flip = new CFlip();
@@ -159,10 +159,10 @@ namespace OperationBitwiseAnd
                 flip.SetDirection(CFlip.EDirection.Horizontal);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = flip.Execute()).IsFail())
+                if ((res = flip.Execute()).IsFail())
                 {
                     Console.WriteLine("Failed to execute flip.");
-                    Console.WriteLine(eResult.GetString());
+                    Console.WriteLine(res.GetString());
                     break;
                 }
 
@@ -172,10 +172,10 @@ namespace OperationBitwiseAnd
                 flip.SetDirection(CFlip.EDirection.Vertical);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = flip.Execute()).IsFail())
+                if ((res = flip.Execute()).IsFail())
                 {
                     Console.WriteLine("Failed to execute flip.");
-                    Console.WriteLine(eResult.GetString());
+                    Console.WriteLine(res.GetString());
                     break;
                 }
 
@@ -185,10 +185,10 @@ namespace OperationBitwiseAnd
                 flip.SetDirection(CFlip.EDirection.Both);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((eResult = flip.Execute()).IsFail())
+                if ((res = flip.Execute()).IsFail())
                 {
                     Console.WriteLine("Failed to execute flip.");
-                    Console.WriteLine(eResult.GetString());
+                    Console.WriteLine(res.GetString());
                     break;
                 }
 

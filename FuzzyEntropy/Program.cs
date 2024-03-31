@@ -34,28 +34,28 @@ namespace Statistics
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
 
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/FuzzyEntropy/FuzzyEntropySource.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/FuzzyEntropy/FuzzyEntropySource.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.");
+					ErrorPrint(res, "Failed to load the image file.");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(400, 0, 912, 612)).IsFail())
+				if((res = viewImage.Create(400, 0, 912, 612)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.");
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.");
+					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
 				}
 
@@ -79,9 +79,9 @@ namespace Statistics
 				fuzzyentropy.SetParameterC(out mvParameterC);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (fuzzyentropy.Execute())).IsFail())
+				if((res = (fuzzyentropy.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Fuzzy Entropy.");
+					ErrorPrint(res, "Failed to execute Fuzzy Entropy.");
 					break;
 				}
 
@@ -89,9 +89,9 @@ namespace Statistics
 				CMultiVar<double> mvFuzzyEntropy = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 Fuzzy Entropy를 구하는 함수 // Function that calculate the fuzzy entropy of the image(or the region of ROI)
-				if((eResult = fuzzyentropy.GetResultFuzzyEntropy(out mvFuzzyEntropy)).IsFail())
+				if((res = fuzzyentropy.GetResultFuzzyEntropy(out mvFuzzyEntropy)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to process.");
+					ErrorPrint(res, "Failed to process.");
 					break;
 				}
 
@@ -103,8 +103,8 @@ namespace Statistics
 				layer.Clear();
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
-				if((eResult = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure");
+				if((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure");
 
 				string strFuzzyEntropy;
 				strFuzzyEntropy = String.Format("Fuzzy Entropy Of Region : {0}", mvFuzzyEntropy.GetAt(0));
@@ -113,16 +113,16 @@ namespace Statistics
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
 				// 이미지 뷰 정보 표시 // Display image view information
-				if((eResult = layer.DrawTextCanvas(flpPoint, strFuzzyEntropy, EColor.YELLOW, EColor.BLACK, 25)).IsFail())
+				if((res = layer.DrawTextCanvas(flpPoint, strFuzzyEntropy, EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
 				flpPoint.Offset(0, 30);
 
-				if((eResult = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+				if((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				viewImage.Invalidate(true);

@@ -30,7 +30,7 @@ namespace LanczosWarping
 		static void Main(string[] args)
 		{
 			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage[] arrFliImage = new CFLImage[4];
@@ -49,35 +49,35 @@ namespace LanczosWarping
                 // Source 이미지 로드 // Load the source image
                 if ((arrFliImage[0].Load("../../ExampleImages/LanczosWarping/chess.flif")).IsFail())
                 {
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
-               if ((eResult=arrViewImage[0].Create(100, 0, 612, 512)).IsFail())
+               if ((res=arrViewImage[0].Create(100, 0, 612, 512)).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to create the image view.\n");
+                    ErrorPrint(res,"Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
-               if ((eResult=arrViewImage[1].Create(612, 0, 1124, 512)).IsFail())
+               if ((res=arrViewImage[1].Create(612, 0, 1124, 512)).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to create the image view.\n");
+                    ErrorPrint(res,"Failed to create the image view.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 2 생성 // Create Source image view2
                 if((arrViewImage[2].Create(100, 512, 612, 1024)).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to create the image view.\n");
+                    ErrorPrint(res,"Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination 이미지 뷰 2 생성 // Create destination2 image view
                 if((arrViewImage[3].Create(612, 512, 1124, 1024)).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to create the image view.\n");
+                    ErrorPrint(res,"Failed to create the image view.\n");
                     break;
                 }
 
@@ -86,9 +86,9 @@ namespace LanczosWarping
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 4; ++i)
                 {
-                   if ((eResult=arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
+                   if ((res=arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
                     {
-                        ErrorPrint(eResult,"Failed to set image object on the image view.\n");
+                        ErrorPrint(res,"Failed to set image object on the image view.\n");
                         bError = true;
                         break;
                     }
@@ -98,30 +98,30 @@ namespace LanczosWarping
                     break;
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-               if ((eResult=arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
+               if ((res=arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to synchronize view\n");
+                    ErrorPrint(res,"Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-               if ((eResult=arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
+               if ((res=arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to synchronize window.\n");
+                    ErrorPrint(res,"Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-               if ((eResult=arrViewImage[2].SynchronizePointOfView(ref arrViewImage[3])).IsFail())
+               if ((res=arrViewImage[2].SynchronizePointOfView(ref arrViewImage[3])).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to synchronize view\n");
+                    ErrorPrint(res,"Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-               if ((eResult=arrViewImage[3].SynchronizeWindow(ref arrViewImage[2])).IsFail())
+               if ((res=arrViewImage[3].SynchronizeWindow(ref arrViewImage[2])).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to synchronize window.\n");
+                    ErrorPrint(res,"Failed to synchronize window.\n");
                     break;
                 }
 
@@ -202,21 +202,21 @@ namespace LanczosWarping
                     // Target Vertex를 각 View Layer에 Drawing // Drawing the target vertex on each view layer
                     if(layer.DrawFigureImage(flpTarget, EColor.BLUE, 1).IsFail())
                     {
-                        ErrorPrint(eResult,"Failed to draw figure objects on the image view.\n");
+                        ErrorPrint(res,"Failed to draw figure objects on the image view.\n");
                         break;
                     }
 
                     // Source Vertex를 각 View Layer에 Drawing // Drawing the source vertex on each view layer
                     if(layer.DrawFigureImage(flpSource, EColor.RED, 1).IsFail())
                     {
-                        ErrorPrint(eResult,"Failed to draw figure objects on the image view.\n");
+                        ErrorPrint(res,"Failed to draw figure objects on the image view.\n");
                         break;
                     }
 
                     // Source Vertex를 각 View Layer에 Drawing // Drawing the source vertex on each view layer
                     if(layer.DrawFigureImage(flfaArrow, EColor.YELLOW, 1).IsFail())
                     {
-                        ErrorPrint(eResult,"Failed to draw figure objects on the image view.\n");
+                        ErrorPrint(res,"Failed to draw figure objects on the image view.\n");
                         break;
                     }
                 }
@@ -224,16 +224,16 @@ namespace LanczosWarping
                 // 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
                 if((LanczosWarping.Calibrate()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to calibrate LanczosWarping.");
-                    ErrorPrint(eResult,eResult.GetString());
+                    ErrorPrint(res, "Failed to calibrate LanczosWarping.");
+                    ErrorPrint(res,res.GetString());
                     break;
                 }
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-               if ((eResult= LanczosWarping.Execute()).IsFail())
+               if ((res= LanczosWarping.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute LanczosWarping.");
-                    ErrorPrint(eResult,eResult.GetString());
+                    ErrorPrint(res, "Failed to execute LanczosWarping.");
+                    ErrorPrint(res,res.GetString());
                     break;
                 }
 
@@ -252,16 +252,16 @@ namespace LanczosWarping
                 // 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
                 if((LanczosWarping.Calibrate()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to calibrate LanczosWarping.");
-                    ErrorPrint(eResult,eResult.GetString());
+                    ErrorPrint(res, "Failed to calibrate LanczosWarping.");
+                    ErrorPrint(res,res.GetString());
                     break;
                 }
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-               if ((eResult= LanczosWarping.Execute()).IsFail())
+               if ((res= LanczosWarping.Execute()).IsFail())
                 {
-                    ErrorPrint(eResult, "Failed to execute LanczosWarping.");
-                    ErrorPrint(eResult,eResult.GetString());
+                    ErrorPrint(res, "Failed to execute LanczosWarping.");
+                    ErrorPrint(res,res.GetString());
                     break;
                 }
 
@@ -284,21 +284,21 @@ namespace LanczosWarping
 					// Target Vertex를 각 View Layer에 Drawing // Drawing the target vertex on each view layer
 					if(layer.DrawFigureImage(flpTarget, EColor.BLUE, 1).IsFail())
                     {
-                        ErrorPrint(eResult,"Failed to draw figure objects on the image view.\n");
+                        ErrorPrint(res,"Failed to draw figure objects on the image view.\n");
                         break;
                     }
 
                     // Source Vertex를 각 View Layer에 Drawing // Drawing the source vertex on each view layer
                     if(layer.DrawFigureImage(flpSource, EColor.RED, 1).IsFail())
                     {
-                        ErrorPrint(eResult,"Failed to draw figure objects on the image view.\n");
+                        ErrorPrint(res,"Failed to draw figure objects on the image view.\n");
                         break;
                     }
 
 					// Source Vertex를 각 View Layer에 Drawing // Drawing the source vertex on each view layer
 					if(layer.DrawFigureImage(flfaArrow, EColor.YELLOW, 1).IsFail())
                     {
-                        ErrorPrint(eResult,"Failed to draw figure objects on the image view.\n");
+                        ErrorPrint(res,"Failed to draw figure objects on the image view.\n");
                         break;
                     }
                 }
@@ -324,27 +324,27 @@ namespace LanczosWarping
                 //                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
                 TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-               if ((eResult=arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+               if ((res=arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to draw text\n");
+                    ErrorPrint(res,"Failed to draw text\n");
                     break;
                 }
 
-               if ((eResult=arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+               if ((res=arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to draw text\n");
+                    ErrorPrint(res,"Failed to draw text\n");
                     break;
                 }
 
-               if ((eResult=arrLayer[2].DrawTextCanvas(tpPosition, "Source Image 2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+               if ((res=arrLayer[2].DrawTextCanvas(tpPosition, "Source Image 2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to draw text\n");
+                    ErrorPrint(res,"Failed to draw text\n");
                     break;
                 }
 
-               if ((eResult=arrLayer[3].DrawTextCanvas(tpPosition, "Destination Image 2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+               if ((res=arrLayer[3].DrawTextCanvas(tpPosition, "Destination Image 2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
-                    ErrorPrint(eResult,"Failed to draw text\n");
+                    ErrorPrint(res,"Failed to draw text\n");
                     break;
                 }
 

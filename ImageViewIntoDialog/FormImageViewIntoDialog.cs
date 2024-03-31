@@ -108,7 +108,7 @@ namespace ImageViewInToDialog
                     break;
 
                 // Figure 를 문자열로 얻어온다.
-                string strFigure = CFigureUtils.ConvertFigureObjectToString(flFigure);
+                string strFigure = CFigureUtilities.ConvertFigureObjectToString(flFigure);
 
                 strFigureInfo = strFigure;
             }
@@ -121,10 +121,10 @@ namespace ImageViewInToDialog
             m_viewImage = new CGUIViewImage();
             
             // 이미지 뷰 생성 // Create image view
-            CResult eResult = m_viewImage.Create(0, 0, 540, 435);
+            CResult res = m_viewImage.Create(0, 0, 540, 435);
 
-            if (eResult.IsFail())
-                ErrorMessageBox(eResult, "");
+            if (res.IsFail())
+                ErrorMessageBox(res, "");
 
             // 이미지 뷰의 윈도우을 얻어온다.
             ulong hWndImageView = m_viewImage.GetWindowHandle();

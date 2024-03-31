@@ -41,54 +41,54 @@ namespace Crop
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/Crop/bacteria.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/Crop/bacteria.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				fliICropImage.Assign(fliISrcImage);
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
+				if((res = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
+				if((res = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window\n");
+					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[1].SetImagePtr(ref fliICropImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(ref fliICropImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -105,9 +105,9 @@ namespace Crop
 				Crop.SetSourceROI(flrCropROI);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (Crop.Execute())).IsFail())
+				if((res = (Crop.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Crop.");
+					ErrorPrint(res, "Failed to execute Crop.");
 					break;
 				}
 
@@ -118,15 +118,15 @@ namespace Crop
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// Text 출력 // Display Text 
-				if((eResult = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = layer2.DrawTextImage(flpTemp, "Crop Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer2.DrawTextImage(flpTemp, "Crop Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
 				// Crop 영역 표기 // Crop Area draw
-				if((eResult = layer1.DrawFigureImage(flrCropROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure.\n");
+				if((res = layer1.DrawFigureImage(flrCropROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				for(int i = 1; i >= 0; --i)

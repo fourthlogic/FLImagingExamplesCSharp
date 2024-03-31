@@ -47,123 +47,123 @@ namespace FilterGeneratorFD
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/FilterGeneratorFD/Sea1Ch.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/FilterGeneratorFD/Sea1Ch.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
+				if((res = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
+				if((res = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[2].Create(300 + 520 * 2, 0, 300 + 520 * 3, 430)).IsFail())
+				if((res = viewImage[2].Create(300 + 520 * 2, 0, 300 + 520 * 3, 430)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[3].Create(300, 0 + 430, 300 + 520, 430 * 2)).IsFail())
+				if((res = viewImage[3].Create(300, 0 + 430, 300 + 520, 430 * 2)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[4].Create(300 + 520, 0 + 430, 300 + 520 * 2, 430 * 2)).IsFail())
+				if((res = viewImage[4].Create(300 + 520, 0 + 430, 300 + 520 * 2, 430 * 2)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[2])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[2])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[3])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[3])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[4])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[4])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window\n");
+					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[2])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[2])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window\n");
+					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[3])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[3])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window\n");
+					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[4])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[4])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window\n");
+					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].SetImagePtr(ref fliIFFTImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(ref fliIFFTImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[2].SetImagePtr(ref fliIFilterImage)).IsFail())
+				if((res = viewImage[2].SetImagePtr(ref fliIFilterImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[3].SetImagePtr(ref fliIMultiplyImage)).IsFail())
+				if((res = viewImage[3].SetImagePtr(ref fliIMultiplyImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[4].SetImagePtr(ref fliIDstImage)).IsFail())
+				if((res = viewImage[4].SetImagePtr(ref fliIDstImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -183,9 +183,9 @@ namespace FilterGeneratorFD
 				FourierTransform.SetShiftSpectrum(EFourierTransformShiftSpectrum.Shift);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (FourierTransform.Execute())).IsFail())
+				if((res = (FourierTransform.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute FourierTransform.");
+					ErrorPrint(res, "Failed to execute FourierTransform.");
 					break;
 				}
 
@@ -208,9 +208,9 @@ namespace FilterGeneratorFD
 				filterGenerator.SetFrequency(0.4);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (filterGenerator.Execute())).IsFail())
+				if((res = (filterGenerator.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute FilterGeneratorIdealFD.");
+					ErrorPrint(res, "Failed to execute FilterGeneratorIdealFD.");
 					break;
 				}
 
@@ -230,9 +230,9 @@ namespace FilterGeneratorFD
 				multiply.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (multiply.Execute())).IsFail())
+				if((res = (multiply.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute operation multiply.");
+					ErrorPrint(res, "Failed to execute operation multiply.");
 					break;
 				}
 
@@ -243,9 +243,9 @@ namespace FilterGeneratorFD
 				FourierTransform.SetDestinationImage(ref fliIDstImage);
 
 				// 알고리즘 수행(IFFT) // Execute the algorithm(IFFT)
-				if((eResult = (FourierTransform.Execute())).IsFail())
+				if((res = (FourierTransform.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Fourier Transform.");
+					ErrorPrint(res, "Failed to execute Fourier Transform.");
 					break;
 				}
 
@@ -259,20 +259,20 @@ namespace FilterGeneratorFD
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// View 정보를 디스플레이 합니다. // Display View information.
-				if((eResult = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = layer2.DrawTextImage(flpTemp, "FFT Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer2.DrawTextImage(flpTemp, "FFT Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = layer3.DrawTextImage(flpTemp, "Destination Image(Filter)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer3.DrawTextImage(flpTemp, "Destination Image(Filter)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = layer4.DrawTextImage(flpTemp, "Filtering FFT Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer4.DrawTextImage(flpTemp, "Filtering FFT Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = layer5.DrawTextImage(flpTemp, "Filtering Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer5.DrawTextImage(flpTemp, "Filtering Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.

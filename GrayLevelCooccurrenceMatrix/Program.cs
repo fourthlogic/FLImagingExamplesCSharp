@@ -34,28 +34,28 @@ namespace GrayLevelCooccurrenceMatrix
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
 
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
 				// 이미지 로드 // Load image
-				if((eResult = fliImage.Load("../../ExampleImages/GrayLevelCooccurrenceMatrix/Texture.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/GrayLevelCooccurrenceMatrix/Texture.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.");
+					ErrorPrint(res, "Failed to load the image file.");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(400, 0, 912, 612)).IsFail())
+				if((res = viewImage.Create(400, 0, 912, 612)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.");
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.");
+					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
 				}
 
@@ -77,9 +77,9 @@ namespace GrayLevelCooccurrenceMatrix
 				flaGLCM.SetDirection(CGrayLevelCooccurrenceMatrix.EDirection.Degree0);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (flaGLCM.Execute())).IsFail())
+				if((res = (flaGLCM.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Gray Level Cooccurrence Matrix.");
+					ErrorPrint(res, "Failed to execute Gray Level Cooccurrence Matrix.");
 					break;
 				}
 
@@ -90,30 +90,30 @@ namespace GrayLevelCooccurrenceMatrix
 				List<List<double>> listContrast = new List<List<double>>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 Energy를 구하는 함수 // Function that calculate Energy of the image(or the region of ROI)
-				if((eResult = flaGLCM.GetResultEnergy(out listEnergy)).IsFail())
+				if((res = flaGLCM.GetResultEnergy(out listEnergy)).IsFail())
 				{
-					ErrorPrint(eResult, "No Result");
+					ErrorPrint(res, "No Result");
 					break;
 				}
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 Correlation를 구하는 함수 // Function that calculate Correlation of the image(or the region of ROI)
-				if((eResult = flaGLCM.GetResultCorrelation(out listCorrelation)).IsFail())
+				if((res = flaGLCM.GetResultCorrelation(out listCorrelation)).IsFail())
 				{
-					ErrorPrint(eResult, "No Result");
+					ErrorPrint(res, "No Result");
 					break;
 				}
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 Homogeneity를 구하는 함수 // Function that calculate Homogeneity of the image(or the region of ROI)
-				if((eResult = flaGLCM.GetResultHomogeneity(out listHomogeneity)).IsFail())
+				if((res = flaGLCM.GetResultHomogeneity(out listHomogeneity)).IsFail())
 				{
-					ErrorPrint(eResult, "No Result");
+					ErrorPrint(res, "No Result");
 					break;
 				}
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 Contrast를 구하는 함수 // Function that calculate Contrast of the image(or the region of ROI)
-				if((eResult = flaGLCM.GetResultContrast(out listContrast)).IsFail())
+				if((res = flaGLCM.GetResultContrast(out listContrast)).IsFail())
 				{
-					ErrorPrint(eResult, "No Result");
+					ErrorPrint(res, "No Result");
 					break;
 				}
 
@@ -125,8 +125,8 @@ namespace GrayLevelCooccurrenceMatrix
 				layer.Clear();
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
-				if((eResult = layer.DrawFigureImage(flfSourceROI, EColor.LIME)).IsFail())
-					ErrorPrint(eResult, "Failed to draw figure");
+				if((res = layer.DrawFigureImage(flfSourceROI, EColor.LIME)).IsFail())
+					ErrorPrint(res, "Failed to draw figure");
 
 				string strText = "";
 
@@ -150,9 +150,9 @@ namespace GrayLevelCooccurrenceMatrix
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
 				// 이미지 뷰 정보 표시 // Display image view information
-				if((eResult = layer.DrawTextCanvas(flpPoint, strText, EColor.YELLOW, EColor.BLACK, 25)).IsFail())
+				if((res = layer.DrawTextCanvas(flpPoint, strText, EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

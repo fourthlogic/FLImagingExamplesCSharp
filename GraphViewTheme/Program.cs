@@ -41,26 +41,26 @@ namespace GraphViewTheme
 			do
 			{
 				// 동작 결과 // operation result
-				CResult eResult;
+				CResult res;
 
 				// Graph 뷰 생성 // Create graph view
-				if((eResult = viewGraphDark.Create(100, 0, 100 + 440, 340)).IsFail())
+				if((res = viewGraphDark.Create(100, 0, 100 + 440, 340)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the graph view.\n");
+					ErrorPrint(res, "Failed to create the graph view.\n");
 					break;
 				}
 				
 				// Graph 뷰 생성 // Create graph view
-				if((eResult = viewGraphLight.Create(100 + 440 * 1, 0, 100 + 440 * 2, 340)).IsFail())
+				if((res = viewGraphLight.Create(100 + 440 * 1, 0, 100 + 440 * 2, 340)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the graph view.\n");
+					ErrorPrint(res, "Failed to create the graph view.\n");
 					break;
 				}
 
 				// 윈도우의 위치를 동기화 한다 // / Synchronize the positions of windows
-				if((eResult = viewGraphLight.SynchronizeWindow(ref viewGraphDark)).IsFail())
+				if((res = viewGraphLight.SynchronizeWindow(ref viewGraphDark)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 

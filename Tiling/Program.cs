@@ -53,7 +53,7 @@ namespace Tiling
 				arrViewImage[i] = new CGUIViewImage();
 			}
 
-			CResult eResult;
+			CResult res;
 
 			do
 			{
@@ -62,9 +62,9 @@ namespace Tiling
 				{
 					string strFileName = "../../ExampleImages/Tiling/TilingSourceImage" + i.ToString() + ".flif";
 
-					if((eResult = (arrViewImages[i].Load(strFileName))).IsFail())
+					if((res = (arrViewImages[i].Load(strFileName))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to load the image file.\n");
+						ErrorPrint(res, "Failed to load the image file.\n");
 						break;
 					}
 				}
@@ -77,9 +77,9 @@ namespace Tiling
 					arrFliImage[0].PushBackPage(arrViewImages[i]);
 				}
 
-				if((eResult = (arrFliImage[1].Load("../../ExampleImages/Tiling/TilingDestinationImage.flif"))).IsFail())
+				if((res = (arrFliImage[1].Load("../../ExampleImages/Tiling/TilingDestinationImage.flif"))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 				// Source 이미지 뷰 생성 // Create the source image view
@@ -87,17 +87,17 @@ namespace Tiling
 				{
 					if(i < 2)
 					{
-						if((eResult = (arrViewImage[i].Create(100 + 300 * i, 0, 400 + 300 * i, 300))).IsFail())
+						if((res = (arrViewImage[i].Create(100 + 300 * i, 0, 400 + 300 * i, 300))).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to create the image view.\n");
+							ErrorPrint(res, "Failed to create the image view.\n");
 							break;
 						}
 					}
 					else
 					{
-						if((eResult = (arrViewImage[i].Create(100 + 300 * (i - 2), 300, 400 + 300 * (i - 2), 600))).IsFail())
+						if((res = (arrViewImage[i].Create(100 + 300 * (i - 2), 300, 400 + 300 * (i - 2), 600))).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to create the image view.\n");
+							ErrorPrint(res, "Failed to create the image view.\n");
 							break;
 						}
 					}
@@ -111,33 +111,33 @@ namespace Tiling
 				{					
 					// 이미지를 뷰에 디스플레이
 					// Display the image
-					if((eResult = (arrViewImage[i].SetImagePtr(ref arrViewImages[i]))).IsFail())
+					if((res = (arrViewImage[i].SetImagePtr(ref arrViewImages[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
 					}
 				}
 
 				// Destination 이미지 뷰 생성 // Create the destination image view
-				if((eResult = (arrViewImage[i32SrcImageCount].Create(912, 0, 1424, 612))).IsFail())
+				if((res = (arrViewImage[i32SrcImageCount].Create(912, 0, 1424, 612))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((eResult = (arrViewImage[i32SrcImageCount].SetImagePtr(ref arrFliImage[1]))).IsFail())
+				if((res = (arrViewImage[i32SrcImageCount].SetImagePtr(ref arrFliImage[1]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰 윈도우의 위치를 맞춤 // Align the position of the image view window
 				for(int i = 1; i < 5; ++i)
 				{
-					if((eResult = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
+					if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
@@ -148,31 +148,31 @@ namespace Tiling
 
 				flRect.SetName("0");
 				arrFliImage[0].SelectPage(0);
-				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
-				arrViewImages[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
+				arrViewImages[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
 
 				flRect.Set(260, 135, 415, 440);
 				flRect.SetName("1");
-				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
-				arrViewImages[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
+				arrViewImages[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
 
 				flRect.Set(280, 250, 480, 480);
 				flRect.SetName("0");
 				arrFliImage[0].SelectPage(1);
-				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
-				arrViewImages[1].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
+				arrViewImages[1].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
 
 				flRect.Set(110, 150, 350, 440);
 				flRect.SetName("0");
 				arrFliImage[0].SelectPage(2);
-				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
-				arrViewImages[2].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
+				arrViewImages[2].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
 
 				flRect.Set(220, 230, 470, 450);
 				flRect.SetName("0");
 				arrFliImage[0].SelectPage(3);
-				arrFliImage[0].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
-				arrViewImages[3].PushBackFigure(CFigureUtils.ConvertFigureObjectToString(flRect));
+				arrFliImage[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
+				arrViewImages[3].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flRect));
 
 				// Destination 이미지에 ROI 추가 // Add ROI to destination image
 				arrFliImage[1].PushBackFigure("D(79.292035, 67.964602, 292.247788, 267.327434, INFO[NAME(0_0)])");
@@ -192,17 +192,17 @@ namespace Tiling
 				tiling.SetDestinationImage(ref arrFliImage[1]);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = (tiling.Execute())).IsFail())
+				if((res = (tiling.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute tiling.");
+					ErrorPrint(res, "Failed to execute tiling.");
 					break;
 				}
 
 				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다.
 				// With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
-				if((eResult = (arrViewImage[i32SrcImageCount].ZoomFit())).IsFail())
+				if((res = (arrViewImage[i32SrcImageCount].ZoomFit())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit of the image view.\n");
+					ErrorPrint(res, "Failed to zoom fit of the image view.\n");
 					break;
 				}
 
@@ -238,16 +238,16 @@ namespace Tiling
 				{
 					string str = string.Format("Source Image {0}", i);
 
-					if((eResult = (arrLayerSrc[i].DrawTextCanvas(flpZero, str, EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+					if((res = (arrLayerSrc[i].DrawTextCanvas(flpZero, str, EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw text.\n");
+						ErrorPrint(res, "Failed to draw text.\n");
 						break;
 					}
 				}
 
-				if((eResult = (layerDst.DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (layerDst.DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

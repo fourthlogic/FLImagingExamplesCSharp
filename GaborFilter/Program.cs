@@ -44,39 +44,39 @@ namespace GaborFilter
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = (arrFliImage[0].Load("../../ExampleImages/GaborFilter/ComputerBoard.flif"))).IsFail())
+				if((res = (arrFliImage[0].Load("../../ExampleImages/GaborFilter/ComputerBoard.flif"))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-				if((eResult = (arrFliImage[2].Assign(arrFliImage[0]))).IsFail())
+				if((res = (arrFliImage[2].Assign(arrFliImage[0]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to assign the image file.\n");
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = (arrViewImage[0].Create(100, 0, 612, 512))).IsFail())
+				if((res = (arrViewImage[0].Create(100, 0, 612, 512))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = (arrViewImage[1].Create(612, 0, 1124, 512))).IsFail())
+				if((res = (arrViewImage[1].Create(612, 0, 1124, 512))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = (arrViewImage[2].Create(1124, 0, 1636, 512))).IsFail())
+				if((res = (arrViewImage[2].Create(1124, 0, 1636, 512))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
@@ -85,9 +85,9 @@ namespace GaborFilter
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
 				for(int i = 0; i < 3; ++i)
 				{
-					if((eResult = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
+					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
 						break;
 					}
@@ -97,23 +97,23 @@ namespace GaborFilter
 					break;
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((eResult = (arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2]))).IsFail())
+				if((res = (arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[1]))).IsFail())
+				if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[1]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[2]))).IsFail())
+				if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[2]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.\n");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -125,18 +125,18 @@ namespace GaborFilter
 				gaborfilter.SetDestinationImage(ref arrFliImage[2]);
 
 				// 커널 이미지 // Get Kernel Image 
-				if((eResult = (gaborfilter.GetKernelImage(ref arrFliImage[1]))).IsFail())
+				if((res = (gaborfilter.GetKernelImage(ref arrFliImage[1]))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to Get Kernel Image.");
-					Console.WriteLine(eResult.GetString());
+					ErrorPrint(res, "Failed to Get Kernel Image.");
+					Console.WriteLine(res.GetString());
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (gaborfilter.Execute())).IsFail())
+				if((res = (gaborfilter.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute gabor filter.");
-					Console.WriteLine(eResult.GetString());
+					ErrorPrint(res, "Failed to execute gabor filter.");
+					Console.WriteLine(res.GetString());
 					break;
 				}
 
@@ -160,21 +160,21 @@ namespace GaborFilter
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-				if((eResult = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[1].DrawTextCanvas(tpPosition, "Kernel Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Kernel Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

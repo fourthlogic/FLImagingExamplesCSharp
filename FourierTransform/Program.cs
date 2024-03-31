@@ -43,77 +43,77 @@ namespace FourierTransform
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 				// 이미지 로드 // Load image
-				if((eResult = fliISrcImage.Load("../../ExampleImages/FourierTransform/TempleNoise.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/FourierTransform/TempleNoise.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage[0].Create(300, 0, 300 + 512, 384)).IsFail())
+				if((res = viewImage[0].Create(300, 0, 300 + 512, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].Create(300 + 512, 0, 300 + 512 * 2, 384)).IsFail())
+				if((res = viewImage[1].Create(300 + 512, 0, 300 + 512 * 2, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((eResult = viewImage[2].Create(300 + 512 * 2, 0, 300 + 512 * 3, 384)).IsFail())
+				if((res = viewImage[2].Create(300 + 512 * 2, 0, 300 + 512 * 3, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((eResult = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].SynchronizePointOfView(ref viewImage[2])).IsFail())
+				if((res = viewImage[1].SynchronizePointOfView(ref viewImage[2])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window\n");
+					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((eResult = viewImage[1].SynchronizeWindow(ref viewImage[2])).IsFail())
+				if((res = viewImage[1].SynchronizeWindow(ref viewImage[2])).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window\n");
-					break;
-				}
-
-				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[1].SetImagePtr(ref fliFTImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((eResult = viewImage[2].SetImagePtr(ref fliIFFTImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(ref fliFTImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
+				if((res = viewImage[2].SetImagePtr(ref fliIFFTImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -133,9 +133,9 @@ namespace FourierTransform
 				FourierTransform.SetShiftSpectrum(EFourierTransformShiftSpectrum.Shift);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((eResult = (FourierTransform.Execute())).IsFail())
+				if((res = (FourierTransform.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute FourierTransform.");
+					ErrorPrint(res, "Failed to execute FourierTransform.");
 					break;
 				}
 
@@ -150,9 +150,9 @@ namespace FourierTransform
 				CFLFigureArray flfArray = new CFLFigureArray();
 
 				// 미리 그려둔 Mask region Figure Array 불러오기 // Load Pre-drawn Mask Region Figure Array
-				if((eResult = flfArray.Load("../../ExampleImages/FourierTransform/FFTRegion.fig")).IsFail())
+				if((res = flfArray.Load("../../ExampleImages/FourierTransform/FFTRegion.fig")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the figure file.");
+					ErrorPrint(res, "Failed to load the figure file.");
 					break;
 				}
 
@@ -163,9 +163,9 @@ namespace FourierTransform
 				Mask.SetMask(0.0);
 
 				// 알고리즘 수행(mask) // Execute the algorithm(mask)		
-				if((eResult = (Mask.Execute())).IsFail())
+				if((res = (Mask.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Image Mask.");
+					ErrorPrint(res, "Failed to execute Image Mask.");
 					break;
 				}
 
@@ -176,9 +176,9 @@ namespace FourierTransform
 				FourierTransform.SetDestinationImage(ref fliIFFTImage);
 
 				// 알고리즘 수행(IFFT) // Execute the algorithm(IFFT)
-				if((eResult = (FourierTransform.Execute())).IsFail())
+				if((res = (FourierTransform.Execute())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Fourier Transform.");
+					ErrorPrint(res, "Failed to execute Fourier Transform.");
 					break;
 				}
 
@@ -190,14 +190,14 @@ namespace FourierTransform
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// Text 출력 // Display Text 
-				if((eResult = layer1.DrawTextImage(flpTemp, "Spatial Domain", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer1.DrawTextImage(flpTemp, "Spatial Domain", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = layer2.DrawTextImage(flpTemp, "Frequency Domain", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer2.DrawTextImage(flpTemp, "Frequency Domain", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((eResult = layer3.DrawTextImage(flpTemp, "Inverse FFT Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(eResult, "Failed to draw text.\n");
+				if((res = layer3.DrawTextImage(flpTemp, "Inverse FFT Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				for(int i = 0; i < 3; ++i)

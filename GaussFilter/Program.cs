@@ -48,7 +48,7 @@ namespace Convolution_Gaussian
 			CGUIViewImage[] arrViewImage = new CGUIViewImage[(int)EType.ETypeCount];
 
 			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			for(int i = 0; i < (int)EType.ETypeCount; ++i)
 				arrViewImage[i] = new CGUIViewImage();
@@ -56,9 +56,9 @@ namespace Convolution_Gaussian
 			do
 			{
 				// 이미지 로드 // Load image
-                if ((eResult = arrFliImage[(int)EType.Source].Load("../../ExampleImages/GaussFilter/notredame.flif")).IsFail())
+                if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/GaussFilter/notredame.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
@@ -67,9 +67,9 @@ namespace Convolution_Gaussian
 				for(int i = (int)EType.Destination1; i < (int)EType.ETypeCount; ++i)
 				{
 					// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-					if((eResult = arrFliImage[i].Assign(arrFliImage[(int)EType.Source])).IsFail())
+					if((res = arrFliImage[i].Assign(arrFliImage[(int)EType.Source])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to assign the image file.\n");
+						ErrorPrint(res, "Failed to assign the image file.\n");
 						bError = true;
 						break;
 					}
@@ -84,17 +84,17 @@ namespace Convolution_Gaussian
 					int y = i / 3;
 
 					// 이미지 뷰 생성 // Create image view
-					if((eResult = arrViewImage[i].Create(x * 400 + 400, y * 400, x * 400 + 400 + 400, y * 400 + 400)).IsFail())
+					if((res = arrViewImage[i].Create(x * 400 + 400, y * 400, x * 400 + 400 + 400, y * 400 + 400)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to create the image view.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");
 						bError = true;
 						break;
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((eResult = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
+					if((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
 						break;
 					}
@@ -103,17 +103,17 @@ namespace Convolution_Gaussian
 						continue;
 
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((eResult = arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
+					if((res = arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize view\n");
+						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;
 						break;
 					}
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((eResult = arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i])).IsFail())
+					if((res = arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;
 						break;
 					}
@@ -141,9 +141,9 @@ namespace Convolution_Gaussian
 				GaussFilter.SetSigma(0.5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = GaussFilter.Execute()).IsFail())
+				if((res = GaussFilter.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute gauss filter.");
+					ErrorPrint(res, "Failed to execute gauss filter.");
 					break;
 				}
 
@@ -156,9 +156,9 @@ namespace Convolution_Gaussian
                 GaussFilter.SetSigma(1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = GaussFilter.Execute()).IsFail())
+				if((res = GaussFilter.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute gauss filter.");
+					ErrorPrint(res, "Failed to execute gauss filter.");
 					break;
 				}
 
@@ -171,9 +171,9 @@ namespace Convolution_Gaussian
                 GaussFilter.SetSigma(3);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = GaussFilter.Execute()).IsFail())
+				if((res = GaussFilter.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute gauss filter.");
+					ErrorPrint(res, "Failed to execute gauss filter.");
 					break;
 				}
 
@@ -186,9 +186,9 @@ namespace Convolution_Gaussian
                 GaussFilter.SetSigma(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = GaussFilter.Execute()).IsFail())
+				if((res = GaussFilter.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute gauss filter.");
+					ErrorPrint(res, "Failed to execute gauss filter.");
 					break;
 				}
 
@@ -208,8 +208,8 @@ namespace Convolution_Gaussian
 					// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
 					// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
 					// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
-					if((eResult = arrLayer[i].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-						ErrorPrint(eResult, "Failed to draw figure.\n");
+					if((res = arrLayer[i].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+						ErrorPrint(res, "Failed to draw figure.\n");
 				}
 
 				// View 정보를 디스플레이 한다. // Display view information
@@ -221,33 +221,33 @@ namespace Convolution_Gaussian
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flpZero = new CFLPoint<double>(0, 0);
 
-				if((eResult = arrLayer[(int)EType.Source].DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Source].DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image (Sigma 0.5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image (Sigma 0.5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image (Sigma 1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image (Sigma 1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Destination3].DrawTextCanvas(flpZero, "Destination3 Image (Sigma 3)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination3].DrawTextCanvas(flpZero, "Destination3 Image (Sigma 3)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Destination4].DrawTextCanvas(flpZero, "Destination4 Image (Sigma 5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination4].DrawTextCanvas(flpZero, "Destination4 Image (Sigma 5)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

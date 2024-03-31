@@ -35,40 +35,40 @@ namespace Match
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageFind = new CGUIViewImage();
 
-			CResult eResult = new CResult();
+			CResult res = new CResult();
 
 			do
 			{
-				if((eResult = fliFindImage.Load("../../ExampleImages/Matching/DrawingImage.flif")).IsFail())
+				if((res = fliFindImage.Load("../../ExampleImages/Matching/DrawingImage.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.");
+					ErrorPrint(res, "Failed to load the image file.");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImageLearn.Create(400, 0, 912, 384)).IsFail())
+				if((res = viewImageLearn.Create(400, 0, 912, 384)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.");
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
 				}
 
-				if((eResult = viewImageFind.Create(912, 0, 1680, 576)).IsFail())
+				if((res = viewImageFind.Create(912, 0, 1680, 576)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.");
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((eResult = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
+				if((res = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.");
+					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((eResult = viewImageLearn.SynchronizeWindow(ref viewImageFind)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageFind)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to synchronize window.");
+					ErrorPrint(res, "Failed to synchronize window.");
 					break;
 				}
 
@@ -80,15 +80,15 @@ namespace Match
 
 				TPoint<double> tpPosition00 = new TPoint<double>(0, 0);
 
-				if((eResult = layerLearn.DrawTextCanvas(tpPosition00, "LEARN", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerLearn.DrawTextCanvas(tpPosition00, "LEARN", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
-				if((eResult = layerFind.DrawTextCanvas(tpPosition00, "FIND", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerFind.DrawTextCanvas(tpPosition00, "FIND", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
@@ -116,9 +116,9 @@ namespace Match
 				FLDrawingMatch.EnablePreprocessing(false);
 
 				// 알고리즘 수행 // Execute the Algoritm
-				if((eResult = FLDrawingMatch.Learn()).IsFail())
+				if((res = FLDrawingMatch.Learn()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Learn.");
+					ErrorPrint(res, "Failed to execute Learn.");
 					break;
 				}
 
@@ -161,11 +161,11 @@ namespace Match
 				FLDrawingMatch.EnablePreprocessing(false);
 
 				// 알고리즘 수행 // Execute the Algoritm
-				eResult = FLDrawingMatch.Execute();
+				res = FLDrawingMatch.Execute();
 
-				if(eResult.IsFail())
+				if(res.IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute");
+					ErrorPrint(res, "Failed to execute");
 					break;
 				}
 
@@ -211,15 +211,15 @@ namespace Match
 					CFLFigureArray flfaPointPivot = flpPivot.MakeCrossHair(3, false);
 					flfaPointPivot.Rotate(f32Angle, flpPivot);
 
-					if((eResult = layerFind.DrawFigureImage(flfaPointPivot, EColor.BLACK, 3)).IsFail())
+					if((res = layerFind.DrawFigureImage(flfaPointPivot, EColor.BLACK, 3)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
-					if((eResult = layerFind.DrawFigureImage(flfaPointPivot, EColor.LIME)).IsFail())
+					if((res = layerFind.DrawFigureImage(flfaPointPivot, EColor.LIME)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure");
+						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 
@@ -232,9 +232,9 @@ namespace Match
 					// 결과 특징점을 디스플레이 한다 // Display the resulting feature point
 					layerFind.DrawFigureImage(pFlfRegion, EColor.CYAN);
 
-					if((eResult = layerFind.DrawTextImage(tpPosition, strText, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_CENTER)).IsFail())
+					if((res = layerFind.DrawTextImage(tpPosition, strText, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_CENTER)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw text");
+						ErrorPrint(res, "Failed to draw text");
 						break;
 					}
 				}

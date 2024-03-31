@@ -56,12 +56,12 @@ namespace Convolution_UserDefinedKernel
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// Source 이미지 로드 // Load the source image
-				if((eResult = arrFliImage[(int)EType.Src].Load("../../ExampleImages/Convolution/Sun.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Src].Load("../../ExampleImages/Convolution/Sun.flif")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
@@ -70,9 +70,9 @@ namespace Convolution_UserDefinedKernel
 					// Destination 이미지를 Src 이미지와 동일한 이미지로 생성
 					if(i != (int)EType.Src)
 					{
-						if((eResult = arrFliImage[i].Assign(arrFliImage[(int)EType.Src])).IsFail())
+						if((res = arrFliImage[i].Assign(arrFliImage[(int)EType.Src])).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to assign the image file.\n");
+							ErrorPrint(res, "Failed to assign the image file.\n");
 							bError = true;
 							break;
 						}
@@ -82,17 +82,17 @@ namespace Convolution_UserDefinedKernel
 					int i32Y = i / 2;
 
 					// 이미지 뷰 생성 // Create image view
-					if((eResult = arrViewImage[i].Create(i32X * 400 + 400, i32Y * 400, i32X * 400 + 400 + 400, i32Y * 400 + 400)).IsFail())
+					if((res = arrViewImage[i].Create(i32X * 400 + 400, i32Y * 400, i32X * 400 + 400 + 400, i32Y * 400 + 400)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to create the image view.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");
 						bError = true;
 						break;
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((eResult = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
+					if((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
 						break;
 					}
@@ -100,17 +100,17 @@ namespace Convolution_UserDefinedKernel
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
 					if(i != (int)EType.Src)
 					{
-						if((eResult = arrViewImage[(int)EType.Src].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
+						if((res = arrViewImage[(int)EType.Src].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to synchronize view\n");
+							ErrorPrint(res, "Failed to synchronize view\n");
 							bError = true;
 							break;
 						}
 
 						// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-						if((eResult = arrViewImage[(int)EType.Src].SynchronizeWindow(ref arrViewImage[i])).IsFail())
+						if((res = arrViewImage[(int)EType.Src].SynchronizeWindow(ref arrViewImage[i])).IsFail())
 						{
-							ErrorPrint(eResult, "Failed to synchronize window.\n");
+							ErrorPrint(res, "Failed to synchronize window.\n");
 							bError = true;
 							break;
 						}
@@ -161,9 +161,9 @@ namespace Convolution_UserDefinedKernel
 				convolution.SetDestinationImage(ref arrFliImage[(int)EType.Dst1]);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = convolution.Execute()).IsFail())
+				if((res = convolution.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute convolution.");
+					ErrorPrint(res, "Failed to execute convolution.");
 					break;
 				}
 
@@ -198,9 +198,9 @@ namespace Convolution_UserDefinedKernel
 				convolution.SetDestinationImage(ref arrFliImage[(int)EType.Dst2]);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = convolution.Execute()).IsFail())
+				if((res = convolution.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute convolution.");
+					ErrorPrint(res, "Failed to execute convolution.");
 					break;
 				}
 
@@ -236,9 +236,9 @@ namespace Convolution_UserDefinedKernel
 				convolution.SetDestinationImage(ref arrFliImage[(int)EType.Dst3]);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = convolution.Execute()).IsFail())
+				if((res = convolution.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute convolution.");
+					ErrorPrint(res, "Failed to execute convolution.");
 					break;
 				}
 
@@ -258,27 +258,27 @@ namespace Convolution_UserDefinedKernel
 				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-				if((eResult = arrLayer[(int)EType.Src].DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Src].DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Dst1].DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image1", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Dst1].DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image1", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Dst2].DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image2", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Dst2].DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image2", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((eResult = arrLayer[(int)EType.Dst3].DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image3", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Dst3].DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image3", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 

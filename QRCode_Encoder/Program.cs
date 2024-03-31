@@ -37,12 +37,12 @@ namespace QRCode
 
 			do
 			{
-				CResult eResult;
+				CResult res;
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewImage.Create(400, 0, 1424, 768)).IsFail())
+				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
@@ -70,23 +70,23 @@ namespace QRCode
 				qrCodeEncoder.SetQRCodeEncodingSpec(codeSpec);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = qrCodeEncoder.Execute()).IsFail())
+				if((res = qrCodeEncoder.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute QR Code Encoder.");
+					ErrorPrint(res, "Failed to execute QR Code Encoder.");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((eResult = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((eResult = viewImage.ZoomFit()).IsFail())
+				if((res = viewImage.ZoomFit()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
 
@@ -107,9 +107,9 @@ namespace QRCode
 				qrCodeDecoder.SetColorMode(EDataCodeColor.Auto);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = qrCodeDecoder.Execute()).IsFail())
+				if((res = qrCodeDecoder.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute QRCode decoder.");
+					ErrorPrint(res, "Failed to execute QRCode decoder.");
 					break;
 				}
 
@@ -123,16 +123,16 @@ namespace QRCode
 					CFLQuad<double> flqRegion;
 
 					// QR Code Decoder 결과들 중 Data Region 을 얻어옴
-					if((eResult = qrCodeDecoder.GetResultDataRegion(i, out flqRegion)).IsFail())
+					if((res = qrCodeDecoder.GetResultDataRegion(i, out flqRegion)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get data region from the QR Code decoder object.");
+						ErrorPrint(res, "Failed to get data region from the QR Code decoder object.");
 						continue;
 					}
 
 					// QR Code 의 영역을 디스플레이 한다.
-					if((eResult = layer.DrawFigureImage(flqRegion, EColor.LIME, 2)).IsFail())
+					if((res = layer.DrawFigureImage(flqRegion, EColor.LIME, 2)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure object on the image view.\n");
+						ErrorPrint(res, "Failed to draw figure object on the image view.\n");
 						continue;
 					}
 
@@ -140,16 +140,16 @@ namespace QRCode
 					CFLFigureArray flfaGridRegion;
 
 					// QR Code Decoder 결과들 중 Grid Region 을 얻어옴
-					if((eResult = qrCodeDecoder.GetResultGridRegion(i, out flfaGridRegion)).IsFail())
+					if((res = qrCodeDecoder.GetResultGridRegion(i, out flfaGridRegion)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get grid region from the QR Code decoder object.");
+						ErrorPrint(res, "Failed to get grid region from the QR Code decoder object.");
 						continue;
 					}
 
 					// QR Code 의 Grid Region 을 디스플레이 한다.
-					if((eResult = layer.DrawFigureImage(flfaGridRegion, EColor.LIME, 2)).IsFail())
+					if((res = layer.DrawFigureImage(flfaGridRegion, EColor.LIME, 2)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw figure objects on the image view.\n");
+						ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 						continue;
 					}
 
@@ -157,9 +157,9 @@ namespace QRCode
 					string strDecoded = "";
 
 					// QR Code Decoder 결과들 중 Decoded String 을 얻어옴
-					if((eResult = qrCodeDecoder.GetResultDecodedString(i, out strDecoded)).IsFail())
+					if((res = qrCodeDecoder.GetResultDecodedString(i, out strDecoded)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to get decoded string from the QR Code decoder object.");
+						ErrorPrint(res, "Failed to get decoded string from the QR Code decoder object.");
 						continue;
 					}
 
@@ -237,15 +237,15 @@ namespace QRCode
 					//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 					// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 					//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-					if((eResult = layer.DrawTextImage(flqRegion.flpPoints[0], strAdditionalData, EColor.YELLOW, EColor.BLACK, 15, false, flqRegion.flpPoints[0].GetAngle(flqRegion.flpPoints[1]), EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+					if((res = layer.DrawTextImage(flqRegion.flpPoints[0], strAdditionalData, EColor.YELLOW, EColor.BLACK, 15, false, flqRegion.flpPoints[0].GetAngle(flqRegion.flpPoints[1]), EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw string object on the image view.");
+						ErrorPrint(res, "Failed to draw string object on the image view.");
 						continue;
 					}
 
-					if((eResult = layer.DrawTextImage(flqRegion.flpPoints[3], strDecoded, EColor.CYAN, EColor.BLACK, 20, false, flqRegion.flpPoints[3].GetAngle(flqRegion.flpPoints[2]))).IsFail())
+					if((res = layer.DrawTextImage(flqRegion.flpPoints[3], strDecoded, EColor.CYAN, EColor.BLACK, 20, false, flqRegion.flpPoints[3].GetAngle(flqRegion.flpPoints[2]))).IsFail())
 					{
-						ErrorPrint(eResult, "Failed to draw string object on the image view.");
+						ErrorPrint(res, "Failed to draw string object on the image view.");
 						continue;
 					}
 				}
