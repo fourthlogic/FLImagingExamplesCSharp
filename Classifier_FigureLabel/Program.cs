@@ -49,19 +49,19 @@ namespace Classifier
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("../../ExampleImages/Classifier/board_label 3.flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/Classifier/CircleLabel_Learn.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				if((res = fliSourceImage.Load("../../ExampleImages/Classifier/board_label 1.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/Classifier/CircleLabel_Validation.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				if((res = fliValidateIamge.Load("../../ExampleImages/Classifier/board_label 1.flif")).IsFail())
+				if((res = fliValidateIamge.Load("../../ExampleImages/Classifier/CircleLabel_Validation.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
@@ -144,7 +144,7 @@ namespace Classifier
 					break;
 				}
 
-				if((res = layerSource.DrawTextCanvas(flpPoint, "SOURCE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerSource.DrawTextCanvas(flpPoint, "INFERENCE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
@@ -168,6 +168,7 @@ namespace Classifier
 				classifier.SetLearningValidationImage(ref fliSourceImage);
 				// 분류할 이미지 설정 // Set the image to classify
 				classifier.SetInferenceImage(ref fliSourceImage);
+				classifier.SetInferenceResultImage(ref fliSourceImage);
 				
 				// 학습할 Classifier 모델 설정 // Set up the Classifier model to learn
 				classifier.SetModel(CClassifierDL.EModel.FL_CF_C);
@@ -234,7 +235,7 @@ namespace Classifier
 							float f32F1Score = vctF1Score.Count != 0 ? vctF1Score.Last() : 0;
 
 							// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-							Console.WriteLine("Cost : {0:F6} Validation : {1:F6} F1 Score : {2:F6} Epoch {2} / {3}", f32CurrCost, f32Validation, f32F1Score, i32Epoch, i32MaxEpoch);
+							Console.WriteLine("Cost : {0:F6} Validation : {1:F6} F1 Score : {2:F6} Epoch {3} / {4}", f32CurrCost, f32Validation, f32F1Score, i32Epoch, i32MaxEpoch);
 
 							// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 							if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
