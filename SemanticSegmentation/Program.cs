@@ -187,7 +187,7 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				if((res = layerResultLabelFigure.DrawTextCanvas(flpPoint, "RESULT LABEL", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerResultLabelFigure.DrawTextCanvas(flpPoint, "RESULT LABEL FIGURE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
@@ -333,15 +333,13 @@ namespace SemanticSegmentation
 						break;
 				}
 
-			// 알고리즘 수행 // Execute the algorithm
-			if((res = semanticSegmentation.Execute()).IsFail())
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = semanticSegmentation.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute");
 					break;
 				}
 
-				// ResultImage를 ResultFigureImage에 복사 // Copy ResultImage to resultFigureImage
-				fliResultLabelFigureImage.Assign(fliResultLabelImage, false);
 				// SegmentationRegionExtractor를 이용하여 라벨 이미지를 피겨로 추출 // Extract label image into figure using SegmentationRegionExtractor
 				// SegmentationRegionExtractor 객체 생성 // Create the SegmentationRegionExtractor object
 				CSegmentationRegionExtractor semanticRE = new CSegmentationRegionExtractor();
@@ -352,7 +350,7 @@ namespace SemanticSegmentation
 				semanticRE.SetResultType(CBlob.EBlobResultType.Contour);
 				semanticRE.AddRangesToInclude(falRange);
 				semanticRE.SetContourResultType(CBlob.EContourResultType.Perforated);
-				semanticRE.SetSourceImage(ref fliResultLabelFigureImage);
+				semanticRE.SetSourceImage(ref fliResultLabelImage);
 
 				// 결과를 추출하여 이미지에 붙여넣기 // Extract results and paste them into image
 				if((res = semanticRE.Execute()).IsFail())
