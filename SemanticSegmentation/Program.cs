@@ -223,7 +223,8 @@ namespace SemanticSegmentation
 				semanticSegmentation.SetInterpoloationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
-				optSpec.SetLearningRate(.0001f);
+				optSpec.SetLearningRate(.001f);
+
 				// 설정한 Optimizer를 SemanticSegmentation에 적용 // Apply Optimizer that we set up to SemanticSegmentation
 				semanticSegmentation.SetLearningOptimizerSpec(optSpec);
 
@@ -236,7 +237,7 @@ namespace SemanticSegmentation
 				augSpec.SetRotationParam(180.0, false, true);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
-				augSpec.EnableGaussianNoise(true);
+
 				semanticSegmentation.SetLearningAugmentationSpec(augSpec);
 
 				// SemanticSegmentation learn function을 진행하는 스레드 생성 // Create the SemanticSegmentation Learn function thread
