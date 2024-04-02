@@ -141,10 +141,10 @@ namespace RadialGradation
 				CFLLine<double> fllArrow = new CFLLine<double>();
 				CFLPoint<double> flpCenter = new CFLPoint<double>();
 
-				flpCenter = flcRadialRegion.GetCenter();
+				flpCenter.Set(flcRadialRegion.GetCenter());
 				flpCenter.y += flcRadialRegion.radius - 10;
-				fllArrow.flpPoints[0] = flcRadialRegion.GetCenter();
-				fllArrow.flpPoints[1] = flcRadialRegion.GetCenter();
+				fllArrow.flpPoints[0].Set(flcRadialRegion.GetCenter());
+				fllArrow.flpPoints[1].Set(flcRadialRegion.GetCenter());
 				fllArrow.flpPoints[1].y += flcRadialRegion.radius;
 				flfaDrawArrow = fllArrow.MakeArrowWithLength(5);
 
