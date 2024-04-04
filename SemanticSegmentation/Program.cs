@@ -220,7 +220,7 @@ namespace SemanticSegmentation
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				semanticSegmentation.SetLearningEpoch(120);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				semanticSegmentation.SetInterpoloationMethod(EInterpolationMethod.Bilinear);
+				semanticSegmentation.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.001f);
