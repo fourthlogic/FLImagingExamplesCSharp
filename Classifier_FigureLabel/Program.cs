@@ -177,7 +177,7 @@ namespace Classifier
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				classifier.SetLearningEpoch(150);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				classifier.SetInterpoloationMethod(EInterpolationMethod.Bilinear);
+				classifier.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(1e-3f);

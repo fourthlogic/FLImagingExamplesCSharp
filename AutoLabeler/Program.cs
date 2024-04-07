@@ -190,11 +190,11 @@ namespace SemanticSegmentation
 				// 학습할 SemanticSegmentation 모델 설정 // Set up the SemanticSegmentation model to learn
 				semanticSegmentation.SetModel(CSemanticSegmentationDL.EModel.FLSegNet);
 				// 학습할 SemanticSegmentation 모델 Version 설정 // Set up the SemanticSegmentation model version to learn
-				semanticSegmentation.SetModelVersion(CSemanticSegmentationDL.EModelVersion.FL_SS_MV_V1_512_B1);
+				semanticSegmentation.SetModelVersion(CSemanticSegmentationDL.EModelVersion.FLSegNet_V1_512_B3);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				semanticSegmentation.SetLearningEpoch(120);
-				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				semanticSegmentation.SetInterpoloationMethod(EInterpolationMethod.Bilinear);
+				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn imagSe
+				semanticSegmentation.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.0001f);
