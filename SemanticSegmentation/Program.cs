@@ -36,13 +36,11 @@ namespace SemanticSegmentation
 			CFLImage fliLearnImage = new CFLImage();
 			CFLImage fliValidationImage = new CFLImage();
 			CFLImage fliResultLabelImage = new CFLImage();
-			CFLImage fliResultLabelFigureImage = new CFLImage();
 
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageValidation = new CGUIViewImage();
 			CGUIViewImage viewImagresLabel = new CGUIViewImage();
-			CGUIViewImage viewImagresLabelFigure = new CGUIViewImage();
 
 			// 그래프 뷰 선언 // Declare the graph view
 			CGUIViewGraph viewGraph = new CGUIViewGraph();
@@ -84,12 +82,6 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				if((res = viewImagresLabelFigure.Create(600, 500, 1100, 1000)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
 				// Graph 뷰 생성 // Create graph view
 				if((res = viewGraph.Create(1100, 0, 1600, 500)).IsFail())
 				{
@@ -120,15 +112,6 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				fliResultLabelFigureImage.Assign(fliValidationImage);
-				fliResultLabelFigureImage.ClearFigures();
-
-				if((res = viewImagresLabelFigure.SetImagePtr(ref fliResultLabelFigureImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view. \n");
-					break;
-				}
-
 				// 다섯 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the four image view windows
 				if((res = viewImageLearn.SynchronizeWindow(ref viewImageValidation)).IsFail())
 				{
@@ -142,24 +125,16 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImagresLabelFigure)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window. \n");
-					break;
-				}
-
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
 				CGUIViewImageLayer layerValidation = viewImageValidation.GetLayer(0);
 				CGUIViewImageLayer layerResultLabel = viewImagresLabel.GetLayer(0);
-				CGUIViewImageLayer layerResultLabelFigure = viewImagresLabelFigure.GetLayer(0);
-
+	
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
 				layerValidation.Clear();
 				layerResultLabel.Clear();
-				layerResultLabelFigure.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -187,17 +162,10 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				if((res = layerResultLabelFigure.DrawTextCanvas(flpPoint, "RESULT LABEL FIGURE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text\n");
-					break;
-				}
-
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
 				viewImagresLabel.RedrawWindow();
-				viewImagresLabelFigure.RedrawWindow();
 
 				// SemanticSegmentation 객체 생성 // Create SemanticSegmentation object
 				CSemanticSegmentationDL semanticSegmentation = new CSemanticSegmentationDL();
@@ -341,56 +309,6 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				// SegmentationRegionExtractor를 이용하여 라벨 이미지를 피겨로 추출 // Extract label image into figure using SegmentationRegionExtractor
-				// SegmentationRegionExtractor 객체 생성 // Create the SegmentationRegionExtractor object
-				CSegmentationRegionExtractor semanticRE = new CSegmentationRegionExtractor();
-
-				// Blob 파라미터 셋팅 // Set the blob's parameters
-				Tuple<int, int> falRange = new Tuple<int, int>((int)1, (int)semanticSegmentation.GetLearningResultClassCount());
-
-				semanticRE.SetResultType(CBlob.EBlobResultType.Contour);
-				semanticRE.AddRangesToInclude(falRange);
-				semanticRE.SetContourResultType(CBlob.EContourResultType.Perforated);
-				semanticRE.SetSourceImage(ref fliResultLabelImage);
-
-				// 결과를 추출하여 이미지에 붙여넣기 // Extract results and paste them into image
-				if((res = semanticRE.Execute()).IsFail())
-				{
-					ErrorPrint(res, "Failed to process\n");
-					break;
-				}
-
-				CFLFigureArray flfaResultContours = new CFLFigureArray();
-
-				if((semanticRE.GetResultContours(out flfaResultContours)).IsFail())
-				{
-					ErrorPrint(res, "Failed to process\n");
-					break;
-				}
-
-				List<Int64> flaLabelList;
-				// ResultContours 인덱스와 매칭 되는 라벨 번호배열을 가져오기 // ResultContours Get an array of label numbers matching the index.
-				semanticRE.GetResultSegmentationLabels(out flaLabelList);
-
-				Int64 i64ResultCount = flfaResultContours.GetCount();
-
-				for(Int64 i = 0; i < i64ResultCount; ++i)
-				{
-					CFLRegion flfaResultContoursCur = (CFLRegion)flfaResultContours.GetAt(i);
-					List<string> flaNames = new List<string>();
-					Int64 i64RealClassNum = Convert.ToInt32(flfaResultContoursCur.GetName());
-					//flaLabelList[(int)i];
-					
-					semanticSegmentation.GetLearningResultClassNames(i64RealClassNum, out flaNames);
-
-					string flsLabel = string.Format("{0}({1})", i64RealClassNum, flaNames[0]);
-
-					flfaResultContoursCur.SetName(flsLabel);
-					fliResultLabelFigureImage.PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flfaResultContoursCur));
-					//ResultLabel 이미지의 세그먼테이션 라벨 텍스트 설정 // Set segmentation label text for tthe result label image
-					viewImagresLabel.SetSegmentationLabelText(0, (double)i64RealClassNum, flsLabel);
-				}
-
 				// ResultLabl 뷰에 Floating Value Range를 설정
 				viewImagresLabel.SetFloatingImageValueRange(0, (float)semanticSegmentation.GetLearningResultClassCount());
 
@@ -398,7 +316,6 @@ namespace SemanticSegmentation
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
 				viewImagresLabel.RedrawWindow();
-				viewImagresLabelFigure.RedrawWindow();
 				
 				// 그래프 뷰를 갱신 // Update the Graph view.
 				viewGraph.RedrawWindow();
