@@ -36,11 +36,15 @@ namespace SemanticSegmentation
 			CFLImage fliLearnImage = new CFLImage();
 			CFLImage fliValidationImage = new CFLImage();
 			CFLImage fliResultLabelImage = new CFLImage();
+			CFLImage fliResultLabelFigureImage = new CFLImage();
+			CFLImage fliResultConfidenceMapImage = new CFLImage();
 
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageValidation = new CGUIViewImage();
-			CGUIViewImage viewImagresLabel = new CGUIViewImage();
+			CGUIViewImage viewImagesLabel = new CGUIViewImage();
+			CGUIViewImage viewImagesLabelFigure = new CGUIViewImage();
+			CGUIViewImage viewImagesConfidenceMap = new CGUIViewImage();
 
 			// 그래프 뷰 선언 // Declare the graph view
 			CGUIViewGraph viewGraph = new CGUIViewGraph();
@@ -76,7 +80,19 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				if((res = viewImagresLabel.Create(100, 500, 600, 1000)).IsFail())
+				if((res = viewImagesLabel.Create(100, 500, 600, 1000)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				if((res = viewImagesLabelFigure.Create(600, 500, 1100, 1000)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				if((res = viewImagesConfidenceMap.Create(1100, 500, 1600, 1000)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
@@ -104,11 +120,23 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				viewImagresLabel.EnablePixelSegmentationMode(true);
+				viewImagesLabel.EnablePixelSegmentationMode(true);
 
-				if((res = viewImagresLabel.SetImagePtr(ref fliResultLabelImage)).IsFail())
+				if((res = viewImagesLabel.SetImagePtr(ref fliResultLabelImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
+					break;
+				}
+
+				if((res = viewImagesLabelFigure.SetImagePtr(ref fliResultLabelFigureImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+				if((res = viewImagesConfidenceMap.SetImagePtr(ref fliResultConfidenceMapImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -119,9 +147,21 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImagresLabel)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesLabel)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesLabelFigure)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window.\n");
+					break;
+				}
+
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesConfidenceMap)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
@@ -129,12 +169,16 @@ namespace SemanticSegmentation
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
 				CGUIViewImageLayer layerValidation = viewImageValidation.GetLayer(0);
-				CGUIViewImageLayer layerResultLabel = viewImagresLabel.GetLayer(0);
-	
+				CGUIViewImageLayer layerResultLabel = viewImagesLabel.GetLayer(0);
+				CGUIViewImageLayer layerResultLabelFigure = viewImagesLabelFigure.GetLayer(0);
+				CGUIViewImageLayer layerResultConfidenceMap = viewImagesConfidenceMap.GetLayer(0);
+
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
 				layerValidation.Clear();
 				layerResultLabel.Clear();
+				layerResultLabelFigure.Clear();
+				layerResultConfidenceMap.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -162,10 +206,24 @@ namespace SemanticSegmentation
 					break;
 				}
 
+				if((res = layerResultLabelFigure.DrawTextCanvas(flpPoint, "RESULT LABEL FIGURE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = layerResultConfidenceMap.DrawTextCanvas(flpPoint, "RESULT CONFIDENCE MAP", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
-				viewImagresLabel.RedrawWindow();
+				viewImagesLabel.RedrawWindow();
+				viewImagesLabelFigure.RedrawWindow();
+				viewImagesConfidenceMap.RedrawWindow();
 
 				// SemanticSegmentation 객체 생성 // Create SemanticSegmentation object
 				CSemanticSegmentationDL semanticSegmentation = new CSemanticSegmentationDL();
@@ -302,26 +360,69 @@ namespace SemanticSegmentation
 						break;
 				}
 
+				// Result Label Image에 피겨를 포함하지 않는 Execute
+				// 분류할 이미지 설정 // Set the image to classify
+				semanticSegmentation.SetInferenceImage(ref fliValidationImage);
+				// 추론 결과 이미지 설정 // Set the inference result Image
+				semanticSegmentation.SetInferenceResultImage(ref fliResultLabelImage);
+				// 추론 결과 Confidence Map 이미지 설정 // Set the confidence map image
+				semanticSegmentation.SetInferenceResultConfidenceMapImage(ref fliResultConfidenceMapImage);
+				// 추론 결과 옵션 설정 // Set the inference result options;
+				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
+				semanticSegmentation.EnableInferenceResultLabelImage(true);
+				// Result 결과에 Region Figure를 포함 여부 설정 // Set whether to include region figure in result
+				semanticSegmentation.EnableInferenceResultIncludingRegionFigures(false);
+
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = semanticSegmentation.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute");
+					ErrorPrint(res, "Failed to execute.\n");
 					break;
 				}
 
+				// Result Label Image에 피겨를 포함한 Execute
+				// 추론 결과 이미지 설정 // Set the inference result Image
+				semanticSegmentation.SetInferenceResultImage(ref fliResultLabelFigureImage);
+				// 추론 결과 옵션 설정 // Set the inference result options;
+				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
+				semanticSegmentation.EnableInferenceResultLabelImage(false);
+				// Result 결과에 Region Figure를 포함 여부 설정 // Set whether to include region figure in result
+				semanticSegmentation.EnableInferenceResultIncludingRegionFigures(true);
+				// Result item settings enum 설정 // Set the result item settings
+				semanticSegmentation.SetInferenceResultItemSettings(CSemanticSegmentationDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
+
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = semanticSegmentation.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute.\n");
+					break;
+				}
+
+				int i32LearningClassCount = semanticSegmentation.GetLearningResultClassCount();
+				// ResultContours 인덱스와 매칭 되는 라벨 번호배열을 가져오기 // ResultContours Get an array of label numbers matching the index.
+				for(int classNum = 1; classNum < i32LearningClassCount; ++classNum)
+				{
+					List<string> flaNames = new List<string>();
+
+					semanticSegmentation.GetLearningResultClassNames(classNum,out flaNames);
+					viewImagesLabel.SetSegmentationLabelText(0, (double)classNum, flaNames[0]);
+				}
+
 				// ResultLabl 뷰에 Floating Value Range를 설정
-				viewImagresLabel.SetFloatingImageValueRange(0, (float)semanticSegmentation.GetLearningResultClassCount());
+				viewImagesLabel.SetFloatingImageValueRange(0, (float)semanticSegmentation.GetLearningResultClassCount());
 
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
-				viewImagresLabel.RedrawWindow();
-				
+				viewImagesLabel.RedrawWindow();
+				viewImagesLabelFigure.RedrawWindow();
+				viewImagesConfidenceMap.RedrawWindow();
+
 				// 그래프 뷰를 갱신 // Update the Graph view.
 				viewGraph.RedrawWindow();
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageLearn.IsAvailable() && viewGraph.IsAvailable())
+				while(viewImageLearn.IsAvailable() && viewImageValidation.IsAvailable() && viewImagesLabel.IsAvailable() && viewImagesLabelFigure.IsAvailable() && viewGraph.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
