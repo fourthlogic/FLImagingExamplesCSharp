@@ -13,7 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-
 namespace OpticalCharacterRecognition
 {
 	internal class Program
@@ -48,7 +47,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 이미지 로드 // Load image
-				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognition.flif")).IsFail())
+				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognize.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -129,12 +128,12 @@ namespace OpticalCharacterRecognition
 					break;
 				}
 
-				// 이미지에서 학습할 문자의 색상 및 배경 색상을 설정
-				/*if(IsFail(ocr.SetCharacterColor(COCR::ECharacterColorType_BlackOnWhite)))
+				// 이미지에서 학습할 문자의 각도 범위를 조정
+				if((res = ocr.SetLearningAngleTolerance(10.)).IsFail())
 				{
-					printf("Failed to set character color type.");
+					ErrorPrint(res, "Failed to set learning angle tolerance.");
 					break;
-				}*/
+				}
 
 				// 학습할 이미지에 저장되어있는 Figure 학습
 				if((res = ocr.Learn()).IsFail())
@@ -150,24 +149,24 @@ namespace OpticalCharacterRecognition
 					break;
 				}
 
-				// 인식할 각도의 범위를 설정
-				if((res = ocr.SetAngleTolerance(0)).IsFail())
+				// 인식할 문자의 각도 범위를 설정
+				if((res = ocr.SetRecognizingAngleTolerance(10.)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set noise filter size.");
+					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
 					break;
 				}
 
-				// 인식할 이미지에서 문자의 Threshold 값을 입력 받지 않고 자동으로 찾는 모드를 설정
-				if((res = ocr.EnableAutoScale(true)).IsFail())
+				// 인식할 문자의 색상을 설정
+				if((res = ocr.SetRecognizingCharacterColorType(COCR.ECharacterColorType.WhiteOnBlack)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set threshold auto.");
+					ErrorPrint(res, "Failed to set recognizing character color.");
 					break;
 				}
 
 				// 인식할 최소 점수를 설정
-				if((res = ocr.SetMinimumScore(0.7)).IsFail())
+				if((res = ocr.SetRecognizingMinimumScore(0.5)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set noise filter size.");
+					ErrorPrint(res, "Failed to set minimum score.");
 					break;
 				}
 
@@ -211,7 +210,6 @@ namespace OpticalCharacterRecognition
 						break;
 					}
 				}
-
 
 				viewImage.Invalidate();
 				viewImageRecognize.Invalidate();
