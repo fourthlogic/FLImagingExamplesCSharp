@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace Demoire
+namespace LowIntensityCorrection
 {
 	class Program
 	{
@@ -108,13 +108,13 @@ namespace Demoire
 				LowIntensityCorrection.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
 				LowIntensityCorrection.SetDestinationImage(ref arrFliImage[1]);
-				// Smoothing 설정
-				LowIntensityCorrection.EnableSmoothing(true);
+				// Noise Reduction 설정
+				LowIntensityCorrection.EnableNoiseReduction(true);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if ((res = (LowIntensityCorrection.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation add.");
+					ErrorPrint(res, "Failed to execute Low Intensity Correction.");
 					break;
 				}
 
