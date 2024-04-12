@@ -176,14 +176,7 @@ namespace MultiFocus
 				}
 
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if((res = view3DDst.SetHeightMap(fliDstImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				// 3D 이미지 뷰에 Texture 이미지를 디스플레이 // Display the texture image on the 3D image view
-				if((res = view3DDst.SetTexture(fliTxtImage)).IsFail())
+				if(view3DDst.PushObject(fliDstImage, fliTxtImage) < 0)
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -194,8 +187,6 @@ namespace MultiFocus
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
-
-				view3DDst.SetFillType(EFillType3D.WireFrame);
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				viewImageSrc.Invalidate(true);

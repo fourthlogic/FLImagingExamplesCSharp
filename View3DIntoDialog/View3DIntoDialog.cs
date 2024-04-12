@@ -36,7 +36,6 @@ namespace View3DIntoDialog
             InitializeComponent();
 
             this.buttonGetHeightProfile.Click += new System.EventHandler(this.ClickButtonGetHeightProfile);
-            this.buttonSetHeightModel.Click += new System.EventHandler(this.ClickButtonSetHeightModel);
 
             this.Load += new System.EventHandler(this.FormImageViewLoad);
             this.CenterToScreen();
@@ -59,9 +58,6 @@ namespace View3DIntoDialog
 				// 3D 뷰 유효성 체크
 				if(!m_view3D.IsAvailable())
 					break;
-
-				// 3D 뷰의 이미지를 얻어 온다.
-				CFLImage fliModel = m_view3D.GetIntrinsicImage();
 
 				// 높이 프로파일의 좌표를 Edit box 로부터 얻어 와 지정한다.
 				long i64StartX = long.Parse(this.textBoxStartX.Text);
@@ -100,30 +96,7 @@ namespace View3DIntoDialog
 			}
 			while(false);
 		}
-        private void ClickButtonSetHeightModel(object sender, EventArgs e)
-		{
-			do
-			{
-				// 3D 뷰 유효성 체크
-				if(!m_view3D.IsAvailable())
-					break;
-
-				// 3D 뷰의 이미지를 얻어 온다.
-				CFLImage fliModel = m_view3D.GetIntrinsicImage();
-
-				// 모델의 높이를 Edit box 로부터 얻어 와 지정한다.
-				float f32ModelHeight = float.Parse(this.richTextBoxModelHeight.Text);
-				
-				// 모델의 높이를 지정한다.
-				CResult gr = m_view3D.SetHeightModel(f32ModelHeight);
-
-                if (gr.IsFail())
-                    ErrorMessageBox(gr, "");
-
-				m_view3D.Invalidate();
-			}
-			while(false);
-		}
+     
         private void DockView3DToThis()
         {
             m_view3D = new CGUIView3D();
@@ -134,7 +107,7 @@ namespace View3DIntoDialog
             if (res.IsFail())
                 ErrorMessageBox(res, "");
 
-            // 3D 뷰의 윈도우을 얻어온다.
+            // 3D 뷰의 윈도우를 얻어온다.
             ulong hWndImageView = m_view3D.GetWindowHandle();
 
             if(hWndImageView != 0)
@@ -145,13 +118,8 @@ namespace View3DIntoDialog
                 // 3D 뷰 의 Form 내에서의 위치를 이동한다.
                 MoveWindow((IntPtr)hWndImageView, 10, 15, 540, 435, true);
 
-				// 이미지 로드 // Load image
-				m_view3D.Load("../../ExampleImages/View3D/mountain.flif");
-				
-				// 텍스처 로드
-				m_view3D.LoadTexture("../../ExampleImages/View3D/mountain_texture.flif");
-
-				this.richTextBoxModelHeight.Text = m_view3D.GetHeightModel().ToString();
+				// 높이 맵 이미지와 텍스쳐 로드 // Load height map image and texture
+				m_view3D.Load("../../ExampleImages/View3D/mountain.flif", "../../ExampleImages/View3D/mountain_texture.flif");
 			}
 		}
 

@@ -30,10 +30,7 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormView3DIntoDialog));
 			this.buttonGetHeightProfile = new System.Windows.Forms.Button();
-			this.buttonSetHeightModel = new System.Windows.Forms.Button();
 			this.richTextBoxInfo = new System.Windows.Forms.RichTextBox();
-			this.richTextBoxModelHeight = new System.Windows.Forms.RichTextBox();
-			this.labelHeight = new System.Windows.Forms.Label();
 			this.groupBoxRect = new System.Windows.Forms.GroupBox();
 			this.labelHeightProfile = new System.Windows.Forms.Label();
 			this.textBoxEndY = new System.Windows.Forms.TextBox();
@@ -51,56 +48,24 @@
 			// 
 			this.buttonGetHeightProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonGetHeightProfile.Font = new System.Drawing.Font("Arial", 9F);
-			this.buttonGetHeightProfile.Location = new System.Drawing.Point(8, 175);
+			this.buttonGetHeightProfile.Location = new System.Drawing.Point(8, 92);
 			this.buttonGetHeightProfile.Name = "buttonGetHeightProfile";
 			this.buttonGetHeightProfile.Size = new System.Drawing.Size(157, 33);
 			this.buttonGetHeightProfile.TabIndex = 0;
 			this.buttonGetHeightProfile.Text = "Height Profile";
 			this.buttonGetHeightProfile.UseVisualStyleBackColor = true;
 			// 
-			// buttonSetHeightModel
-			// 
-			this.buttonSetHeightModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonSetHeightModel.Font = new System.Drawing.Font("Arial", 9F);
-			this.buttonSetHeightModel.Location = new System.Drawing.Point(6, 45);
-			this.buttonSetHeightModel.Name = "buttonSetHeightModel";
-			this.buttonSetHeightModel.Size = new System.Drawing.Size(156, 31);
-			this.buttonSetHeightModel.TabIndex = 1;
-			this.buttonSetHeightModel.Text = "Set Model Height";
-			this.buttonSetHeightModel.UseVisualStyleBackColor = true;
-			// 
 			// richTextBoxInfo
 			// 
 			this.richTextBoxInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.richTextBoxInfo.Font = new System.Drawing.Font("Arial", 9F);
-			this.richTextBoxInfo.Location = new System.Drawing.Point(6, 214);
+			this.richTextBoxInfo.Location = new System.Drawing.Point(6, 131);
 			this.richTextBoxInfo.Name = "richTextBoxInfo";
 			this.richTextBoxInfo.ReadOnly = true;
 			this.richTextBoxInfo.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-			this.richTextBoxInfo.Size = new System.Drawing.Size(158, 220);
+			this.richTextBoxInfo.Size = new System.Drawing.Size(158, 303);
 			this.richTextBoxInfo.TabIndex = 4;
 			this.richTextBoxInfo.Text = "";
-			// 
-			// richTextBoxModelHeight
-			// 
-			this.richTextBoxModelHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.richTextBoxModelHeight.Font = new System.Drawing.Font("Arial", 9F);
-			this.richTextBoxModelHeight.Location = new System.Drawing.Point(64, 15);
-			this.richTextBoxModelHeight.Name = "richTextBoxModelHeight";
-			this.richTextBoxModelHeight.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-			this.richTextBoxModelHeight.Size = new System.Drawing.Size(98, 24);
-			this.richTextBoxModelHeight.TabIndex = 4;
-			this.richTextBoxModelHeight.Text = "";
-			// 
-			// labelHeight
-			// 
-			this.labelHeight.AutoSize = true;
-			this.labelHeight.Font = new System.Drawing.Font("Arial", 9F);
-			this.labelHeight.Location = new System.Drawing.Point(6, 17);
-			this.labelHeight.Name = "labelHeight";
-			this.labelHeight.Size = new System.Drawing.Size(49, 15);
-			this.labelHeight.TabIndex = 3;
-			this.labelHeight.Text = "Height :";
 			// 
 			// groupBoxRect
 			// 
@@ -108,9 +73,6 @@
 			this.groupBoxRect.Controls.Add(this.textBoxEndY);
 			this.groupBoxRect.Controls.Add(this.labelEndY);
 			this.groupBoxRect.Controls.Add(this.textBoxEndX);
-			this.groupBoxRect.Controls.Add(this.buttonSetHeightModel);
-			this.groupBoxRect.Controls.Add(this.richTextBoxModelHeight);
-			this.groupBoxRect.Controls.Add(this.labelHeight);
 			this.groupBoxRect.Controls.Add(this.labelEndX);
 			this.groupBoxRect.Controls.Add(this.textBoxStartY);
 			this.groupBoxRect.Controls.Add(this.labelStartY);
@@ -130,66 +92,15 @@
 			// 
 			this.labelHeightProfile.AutoSize = true;
 			this.labelHeightProfile.Font = new System.Drawing.Font("Arial", 9F);
-			this.labelHeightProfile.Location = new System.Drawing.Point(6, 96);
+			this.labelHeightProfile.Location = new System.Drawing.Point(6, 13);
 			this.labelHeightProfile.Name = "labelHeightProfile";
 			this.labelHeightProfile.Size = new System.Drawing.Size(81, 15);
 			this.labelHeightProfile.TabIndex = 13;
 			this.labelHeightProfile.Text = "Height Profile";
 			// 
-			// textBoxStartX
-			// 
-			this.textBoxStartX.Location = new System.Drawing.Point(58, 118);
-			this.textBoxStartX.Name = "textBoxStartX";
-			this.textBoxStartX.Size = new System.Drawing.Size(37, 21);
-			this.textBoxStartX.TabIndex = 6;
-			this.textBoxStartX.Text = "0";
-			// 
-			// labelStartX
-			// 
-			this.labelStartX.AutoSize = true;
-			this.labelStartX.Location = new System.Drawing.Point(6, 121);
-			this.labelStartX.Name = "labelStartX";
-			this.labelStartX.Size = new System.Drawing.Size(46, 15);
-			this.labelStartX.TabIndex = 5;
-			this.labelStartX.Text = "Start   x";
-			// 
-			// textBoxStartY
-			// 
-			this.textBoxStartY.Location = new System.Drawing.Point(122, 118);
-			this.textBoxStartY.Name = "textBoxStartY";
-			this.textBoxStartY.Size = new System.Drawing.Size(43, 21);
-			this.textBoxStartY.TabIndex = 8;
-			this.textBoxStartY.Text = "0";
-			// 
-			// labelStartY
-			// 
-			this.labelStartY.AutoSize = true;
-			this.labelStartY.Location = new System.Drawing.Point(101, 121);
-			this.labelStartY.Name = "labelStartY";
-			this.labelStartY.Size = new System.Drawing.Size(15, 15);
-			this.labelStartY.TabIndex = 7;
-			this.labelStartY.Text = " y";
-			// 
-			// textBoxEndX
-			// 
-			this.textBoxEndX.Location = new System.Drawing.Point(58, 148);
-			this.textBoxEndX.Name = "textBoxEndX";
-			this.textBoxEndX.Size = new System.Drawing.Size(37, 21);
-			this.textBoxEndX.TabIndex = 10;
-			this.textBoxEndX.Text = "104";
-			// 
-			// labelEndX
-			// 
-			this.labelEndX.AutoSize = true;
-			this.labelEndX.Location = new System.Drawing.Point(6, 151);
-			this.labelEndX.Name = "labelEndX";
-			this.labelEndX.Size = new System.Drawing.Size(46, 15);
-			this.labelEndX.TabIndex = 9;
-			this.labelEndX.Text = "End    x";
-			// 
 			// textBoxEndY
 			// 
-			this.textBoxEndY.Location = new System.Drawing.Point(120, 148);
+			this.textBoxEndY.Location = new System.Drawing.Point(120, 65);
 			this.textBoxEndY.Name = "textBoxEndY";
 			this.textBoxEndY.Size = new System.Drawing.Size(45, 21);
 			this.textBoxEndY.TabIndex = 12;
@@ -198,11 +109,62 @@
 			// labelEndY
 			// 
 			this.labelEndY.AutoSize = true;
-			this.labelEndY.Location = new System.Drawing.Point(101, 151);
+			this.labelEndY.Location = new System.Drawing.Point(101, 68);
 			this.labelEndY.Name = "labelEndY";
 			this.labelEndY.Size = new System.Drawing.Size(15, 15);
 			this.labelEndY.TabIndex = 11;
 			this.labelEndY.Text = " y";
+			// 
+			// textBoxEndX
+			// 
+			this.textBoxEndX.Location = new System.Drawing.Point(58, 65);
+			this.textBoxEndX.Name = "textBoxEndX";
+			this.textBoxEndX.Size = new System.Drawing.Size(37, 21);
+			this.textBoxEndX.TabIndex = 10;
+			this.textBoxEndX.Text = "104";
+			// 
+			// labelEndX
+			// 
+			this.labelEndX.AutoSize = true;
+			this.labelEndX.Location = new System.Drawing.Point(6, 68);
+			this.labelEndX.Name = "labelEndX";
+			this.labelEndX.Size = new System.Drawing.Size(46, 15);
+			this.labelEndX.TabIndex = 9;
+			this.labelEndX.Text = "End    x";
+			// 
+			// textBoxStartY
+			// 
+			this.textBoxStartY.Location = new System.Drawing.Point(122, 35);
+			this.textBoxStartY.Name = "textBoxStartY";
+			this.textBoxStartY.Size = new System.Drawing.Size(43, 21);
+			this.textBoxStartY.TabIndex = 8;
+			this.textBoxStartY.Text = "0";
+			// 
+			// labelStartY
+			// 
+			this.labelStartY.AutoSize = true;
+			this.labelStartY.Location = new System.Drawing.Point(101, 38);
+			this.labelStartY.Name = "labelStartY";
+			this.labelStartY.Size = new System.Drawing.Size(15, 15);
+			this.labelStartY.TabIndex = 7;
+			this.labelStartY.Text = " y";
+			// 
+			// textBoxStartX
+			// 
+			this.textBoxStartX.Location = new System.Drawing.Point(58, 35);
+			this.textBoxStartX.Name = "textBoxStartX";
+			this.textBoxStartX.Size = new System.Drawing.Size(37, 21);
+			this.textBoxStartX.TabIndex = 6;
+			this.textBoxStartX.Text = "0";
+			// 
+			// labelStartX
+			// 
+			this.labelStartX.AutoSize = true;
+			this.labelStartX.Location = new System.Drawing.Point(6, 38);
+			this.labelStartX.Name = "labelStartX";
+			this.labelStartX.Size = new System.Drawing.Size(46, 15);
+			this.labelStartX.TabIndex = 5;
+			this.labelStartX.Text = "Start   x";
 			// 
 			// FormView3DIntoDialog
 			// 
@@ -223,10 +185,7 @@
 
 		private System.Windows.Forms.GroupBox groupBoxRect;
 		private System.Windows.Forms.Button buttonGetHeightProfile;
-		private System.Windows.Forms.Button buttonSetHeightModel;
-		private System.Windows.Forms.RichTextBox richTextBoxModelHeight;
 		private System.Windows.Forms.RichTextBox richTextBoxInfo;
-		private System.Windows.Forms.Label labelHeight;
 		private System.Windows.Forms.Label labelStartX;
 		private System.Windows.Forms.TextBox textBoxStartX;
 		private System.Windows.Forms.TextBox textBoxEndY;

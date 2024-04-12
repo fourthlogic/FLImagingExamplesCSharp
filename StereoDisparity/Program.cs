@@ -244,14 +244,7 @@ namespace StereoDisparity
 				}
 
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if((res = viewImage3DDst.SetHeightMap(fliDstImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				// 3D 이미지 뷰에 Texture 이미지를 디스플레이 // Display the Texture image on the 3D image view
-				if((res = viewImage3DDst.SetTexture(fliTxtImage)).IsFail())
+				if(viewImage3DDst.PushObject(fliDstImage, fliTxtImage) < 0)
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

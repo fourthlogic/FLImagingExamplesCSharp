@@ -336,13 +336,6 @@ namespace FPP
 					break;
 				}
 
-				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if((res = view3DDst.SetHeightMap(fliImageDst)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
 				// Texture 이미지 로드 // Load the texture image
 				if((res = fliTxtImage.Load("../../ExampleImages/Moire3D/text.flif")).IsFail())
 				{
@@ -350,8 +343,8 @@ namespace FPP
 					break;
 				}
 
-				// 3D 이미지 뷰에 Texture 이미지를 디스플레이 // Display the texture image on the 3D image view
-				if((res = view3DDst.SetTexture(fliTxtImage)).IsFail())
+				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
+				if(view3DDst.PushObject(fliImageDst, fliTxtImage) < 0)
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

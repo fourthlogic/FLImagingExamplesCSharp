@@ -125,15 +125,8 @@ namespace View3D
 					break;
 				}
 
-				// 3D 뷰에 모델을 로드하여 디스플레이
-				if((res = view3D.SetHeightMap(arrFliImage[(int)EType.Model])).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the 3D view.\n");
-					break;
-				}
-
-				// 3D 뷰에 텍스처를 로드하여 디스플레이
-				if((res = view3D.SetTexture(arrFliImage[(int)EType.Texture])).IsFail())
+				// 3D 뷰에 높이 맵과 텍스쳐를 로드하여 디스플레이
+				if(view3D.PushObject(arrFliImage[(int)EType.Model], arrFliImage[(int)EType.Texture]) < 0)
 				{
 					ErrorPrint(res, "Failed to set image object on the 3D view.\n");
 					break;

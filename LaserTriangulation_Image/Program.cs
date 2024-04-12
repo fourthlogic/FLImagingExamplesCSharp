@@ -173,7 +173,7 @@ namespace MultiFocus
 				}
 
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if((res = view3DDst.SetHeightMap(fliDstImage)).IsFail())
+				if(view3DDst.PushObject(fliDstImage) < 0)
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
