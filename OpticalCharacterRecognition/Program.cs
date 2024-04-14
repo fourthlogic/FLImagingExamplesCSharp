@@ -1,4 +1,11 @@
-﻿using FLImagingCLR;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+using FLImagingCLR;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Base;
 using FLImagingCLR.Devices;
@@ -6,12 +13,6 @@ using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.ThreeDim;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 
 namespace OpticalCharacterRecognition
 {
@@ -129,7 +130,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 이미지에서 학습할 문자의 각도 범위를 조정
-				if((res = ocr.SetLearningAngleTolerance(10.)).IsFail())
+				if((res = ocr.SetLearningAngleTolerance(10)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set learning angle tolerance.");
 					break;
@@ -150,7 +151,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 문자의 각도 범위를 설정
-				if((res = ocr.SetRecognizingAngleTolerance(10.)).IsFail())
+				if((res = ocr.SetRecognizingAngleTolerance(10)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
 					break;
