@@ -389,7 +389,7 @@ namespace SemanticSegmentation
 				// Result 결과에 Region Figure를 포함 여부 설정 // Set whether to include region figure in result
 				semanticSegmentation.EnableInferenceResultIncludingRegionFigures(true);
 				// Result item settings enum 설정 // Set the result item settings
-				semanticSegmentation.SetInferenceResultItemSettings(CSemanticSegmentationDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
+				semanticSegmentation.SetInferenceResultItemSettings(CSemanticSegmentationDL.EInferenceResultItemSettings.ClassNum_ClassName_ConfidenceScore_RegionType_Contour);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = semanticSegmentation.Execute()).IsFail())
