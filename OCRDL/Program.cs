@@ -1,9 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Net.NetworkInformation;
 
 using FLImagingCLR;
 using FLImagingCLR.Base;
@@ -13,7 +15,6 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
-using System.Net.NetworkInformation;
 
 namespace SemanticSegmentation
 {
@@ -55,13 +56,13 @@ namespace SemanticSegmentation
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("../../ExampleImages/SemanticSegmentation/Train.flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/OCRDL/OCR_Learn.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
-
-				if((res = fliValidationImage.Load("../../ExampleImages/SemanticSegmentation/Validation.flif")).IsFail())
+				
+				if((res = fliValidationImage.Load("../../ExampleImages/OCRDL/OCR_Inference.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -226,33 +227,33 @@ namespace SemanticSegmentation
 				viewImagesConfidenceMap.RedrawWindow();
 
 				// SemanticSegmentation 객체 생성 // Create SemanticSegmentation object
-				CSemanticSegmentationDL semanticSegmentation = new CSemanticSegmentationDL();
+				COCRDL ocr = new COCRDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				semanticSegmentation.SetLearningImage(ref fliLearnImage);
+				ocr.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
-				semanticSegmentation.SetLearningValidationImage(ref fliValidationImage);
+				ocr.SetLearningValidationImage(ref fliValidationImage);
 				// 분류할 이미지 설정 // Set the image to classify
-				semanticSegmentation.SetInferenceImage(ref fliValidationImage);
-				semanticSegmentation.SetInferenceResultImage(ref fliResultLabelImage);
+				ocr.SetInferenceImage(ref fliValidationImage);
+				ocr.SetInferenceResultImage(ref fliResultLabelImage);
 
 				// 학습할 SemanticSegmentation 모델 설정 // Set up the SemanticSegmentation model to learn
-				semanticSegmentation.SetModel(CSemanticSegmentationDL.EModel.FLSegNet);
+				ocr.SetModel(COCRDL.EModel.FLSegNet);
 				// 학습할 SemanticSegmentation 모델 Version 설정 // Set up the SemanticSegmentation model version to learn
-				semanticSegmentation.SetModelVersion(CSemanticSegmentationDL.EModelVersion.FLSegNet_V1_512_B3);
+				ocr.SetModelVersion(COCRDL.EModelVersion.FLSegNet_V1_512_B3);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				semanticSegmentation.SetLearningEpoch(120);
+				ocr.SetLearningEpoch(10000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				semanticSegmentation.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				ocr.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.001f);
 
 				// 설정한 Optimizer를 SemanticSegmentation에 적용 // Apply Optimizer that we set up to SemanticSegmentation
-				semanticSegmentation.SetLearningOptimizerSpec(optSpec);
+				ocr.SetLearningOptimizerSpec(optSpec);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
@@ -264,21 +265,21 @@ namespace SemanticSegmentation
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
-				semanticSegmentation.SetLearningAugmentationSpec(augSpec);
+				ocr.SetLearningAugmentationSpec(augSpec);
 
 				// SemanticSegmentation learn function을 진행하는 스레드 생성 // Create the SemanticSegmentation Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					if((res = semanticSegmentation.Learn()).IsFail())
+					if((res = ocr.Learn()).IsFail())
 						ErrorPrint(res, "Failed to execute Learn.\n");
 
 					bTerminated = true;
 				}, null);
 
-				while(!semanticSegmentation.IsRunning() && !bTerminated)
+				while(!ocr.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
-				int i32MaxEpoch = semanticSegmentation.GetLearningEpoch();
+				int i32MaxEpoch = ocr.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
 				int i32PrevValidationCount = 0;
@@ -288,21 +289,21 @@ namespace SemanticSegmentation
 					Thread.Sleep(1);
 
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MiniBatchCount = semanticSegmentation.GetActualMiniBatchCount();
+					int i32MiniBatchCount = ocr.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = semanticSegmentation.GetLearningResultCurrentIteration();
+					int i32Iteration = ocr.GetLearningResultCurrentIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = semanticSegmentation.GetLastEpoch();
+					int i32Epoch = ocr.GetLastEpoch();
 
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
 					if(i32Epoch != i32PrevEpoch && i32Iteration == i32MiniBatchCount && i32Epoch > 0)
 					{
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
-						float f32CurrCost = semanticSegmentation.GetLearningResultLastCost();
+						float f32CurrCost = ocr.GetLearningResultLastCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32ValidationPa = semanticSegmentation.GetLearningResultLastAccuracy();
-						float f32ValidationPaMeanIoU = semanticSegmentation.GetLearningResultLastMeanIoU();
+						float f32ValidationPa = ocr.GetLearningResultLastAccuracy();
+						float f32ValidationPaMeanIoU = ocr.GetLearningResultLastMeanIoU();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Epoch {3} / {4}", f32CurrCost, f32ValidationPa, f32ValidationPaMeanIoU, i32Epoch, i32MaxEpoch);
@@ -316,12 +317,12 @@ namespace SemanticSegmentation
 						List<float> vctMeanIoUZE = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU, out vctValidationsZE, out vctMeanIoUZE, out vctValidationEpoch);
+						ocr.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU, out vctValidationsZE, out vctMeanIoUZE, out vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
 						{
-							int i32Step = semanticSegmentation.GetLearningValidationStep();
+							int i32Step = ocr.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
 
 							for(long i = 0; i < vctValidations.Count() - 1; ++i)
@@ -345,36 +346,37 @@ namespace SemanticSegmentation
 							viewGraph.RedrawWindow();
 						}
 
-						// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
-						// If the validation result is 1.0, stop learning and classify images 
-						if(f32ValidationPa == 1.0f)
-							semanticSegmentation.Stop();
+						// 검증 결과가 0.9 이상 일 경우 학습을 중단하고 분류 진행 
+						// If the validation result is greater than 0.9, stop learning and classify images 
+						if(f32ValidationPaMeanIoU >= 0.9f)
+							ocr.Stop();
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = vctCosts.Count();
 						i32PrevValidationCount = vctValidations.Count();
 					}
-
+					
+					//GetKeyStates(System.Windows.Input.Key.Escape);
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
-					if(!semanticSegmentation.IsRunning())
+					if(!ocr.IsRunning())
 						break;
 				}
 
 				// Result Label Image에 피겨를 포함하지 않는 Execute
 				// 분류할 이미지 설정 // Set the image to classify
-				semanticSegmentation.SetInferenceImage(ref fliValidationImage);
+				ocr.SetInferenceImage(ref fliValidationImage);
 				// 추론 결과 이미지 설정 // Set the inference result Image
-				semanticSegmentation.SetInferenceResultImage(ref fliResultLabelImage);
+				ocr.SetInferenceResultImage(ref fliResultLabelImage);
 				// 추론 결과 Confidence Map 이미지 설정 // Set the confidence map image
-				semanticSegmentation.SetInferenceResultConfidenceMapImage(ref fliResultConfidenceMapImage);
+				ocr.SetInferenceResultConfidenceMapImage(ref fliResultConfidenceMapImage);
 				// 추론 결과 옵션 설정 // Set the inference result options;
 				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
-				semanticSegmentation.EnableInferenceResultLabelImage(true);
+				ocr.EnableInferenceResultLabelImage(true);
 				// Result 결과에 Region Figure를 포함 여부 설정 // Set whether to include region figure in result
-				semanticSegmentation.EnableInferenceResultIncludingRegionFigures(false);
+				ocr.EnableInferenceResultIncludingRegionFigures(false);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = semanticSegmentation.Execute()).IsFail())
+				if((res = ocr.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
@@ -382,34 +384,34 @@ namespace SemanticSegmentation
 
 				// Result Label Image에 피겨를 포함한 Execute
 				// 추론 결과 이미지 설정 // Set the inference result Image
-				semanticSegmentation.SetInferenceResultImage(ref fliResultLabelFigureImage);
+				ocr.SetInferenceResultImage(ref fliResultLabelFigureImage);
 				// 추론 결과 옵션 설정 // Set the inference result options;
 				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
-				semanticSegmentation.EnableInferenceResultLabelImage(false);
+				ocr.EnableInferenceResultLabelImage(false);
 				// Result 결과에 Region Figure를 포함 여부 설정 // Set whether to include region figure in result
-				semanticSegmentation.EnableInferenceResultIncludingRegionFigures(true);
+				ocr.EnableInferenceResultIncludingRegionFigures(true);
 				// Result item settings enum 설정 // Set the result item settings
-				semanticSegmentation.SetInferenceResultItemSettings(CSemanticSegmentationDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
+				ocr.SetInferenceResultItemSettings(COCRDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = semanticSegmentation.Execute()).IsFail())
+				if((res = ocr.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
 				}
 
-				int i32LearningClassCount = semanticSegmentation.GetLearningResultClassCount();
+				int i32LearningClassCount = ocr.GetLearningResultClassCount();
 				// ResultContours 인덱스와 매칭 되는 라벨 번호배열을 가져오기 // ResultContours Get an array of label numbers matching the index.
 				for(int classNum = 1; classNum < i32LearningClassCount; ++classNum)
 				{
 					List<string> flaNames = new List<string>();
 
-					semanticSegmentation.GetLearningResultClassNames(classNum, out flaNames);
+					ocr.GetLearningResultClassNames(classNum, out flaNames);
 					viewImagesLabel.SetSegmentationLabelText(0, (double)classNum, flaNames[0]);
 				}
 
 				// ResultLabl 뷰에 Floating Value Range를 설정
-				viewImagesLabel.SetFloatingImageValueRange(0, (float)semanticSegmentation.GetLearningResultClassCount());
+				viewImagesLabel.SetFloatingImageValueRange(0, (float)ocr.GetLearningResultClassCount());
 
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
