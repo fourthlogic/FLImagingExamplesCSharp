@@ -89,7 +89,7 @@ namespace SemanticSegmentation
 				}
 
 				// Graph 뷰 생성 // Create graph view
-				if((res = viewGraph.Create(1100, 0, 1600, 500)).IsFail())
+				if((res = viewGraph.Create(600, 500, 1100, 1000)).IsFail())
 				{
 					ErrorPrint(res, " Failed to create the graph view. \n");
 					break;
