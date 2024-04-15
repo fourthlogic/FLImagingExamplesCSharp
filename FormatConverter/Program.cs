@@ -99,13 +99,13 @@ namespace FormatConverter
 				CFLPoint<double> resultRegion = new CFLPoint<double>(0, 0);
 
 				// View 정보를 디스플레이 합니다. // Display View information.
-				if((res = layerSource.DrawTextCanvas(resultRegion, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerSource.DrawTextCanvas(resultRegion, "Source Image(3Ch U8)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
-				if((res = layerConverted.DrawTextCanvas(resultRegion, "Converted Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerConverted.DrawTextCanvas(resultRegion, "Converted Image(1Ch U8)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
 					break;

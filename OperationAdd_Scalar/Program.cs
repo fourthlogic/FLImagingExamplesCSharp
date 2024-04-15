@@ -188,19 +188,19 @@ namespace OperationAdd
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-				if((res = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Image(Add 30, 0, 0)", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Image(Add 30, 0, 0)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Image(Add 0, 30, 0)", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Image(Add 0, 30, 0)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;

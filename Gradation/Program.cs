@@ -132,7 +132,7 @@ namespace Gradation
 				CGUIViewImageLayer layer2 = viewImage[1].GetLayer(0);
 
 				// Draw Figure 객체 // Gradation Vector Figure object
-				CFLLine<double> fllDrawVector = new CFLLine<double>();
+				CFLFigureArray fllDrawVector = new CFLFigureArray();
 				fllDrawVector.Load("../../ExampleImages/Gradation/DrawVector.fig");
 
 				CFLRect<double> fllRect1 = new CFLRect<double>();
@@ -161,13 +161,13 @@ namespace Gradation
 				}
 
 				// Gradation Vector 출력 // Draw gradation vector
-				if((res = layer1.DrawFigureImage(fllVector, EColor.BLACK, 5)).IsFail())
+				if((res = layer1.DrawFigureImage(fllDrawVector, EColor.BLACK, 5)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = layer1.DrawFigureImage(fllVector, EColor.LIME, 3)).IsFail())
+				if((res = layer1.DrawFigureImage(fllDrawVector, EColor.LIME, 3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
