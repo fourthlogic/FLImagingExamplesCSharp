@@ -343,12 +343,16 @@ namespace FPP
 					break;
 				}
 
+				CFL3DObjectHeightMap fl3DOHM = new CFL3DObjectHeightMap(ref fliImageDst, ref fliTxtImage);
+
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if(view3DDst.PushObject(fliImageDst, fliTxtImage) < 0)
+				if(view3DDst.PushObject(fl3DOHM).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
+
+				view3DDst.ZoomFit();
 
 				if((res = layer3D.DrawTextCanvas(flp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{

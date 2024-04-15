@@ -243,12 +243,16 @@ namespace StereoDisparity
 					break;
 				}
 
+				CFL3DObjectHeightMap fl3DOHM = new CFL3DObjectHeightMap(ref fliDstImage, ref fliTxtImage);
+
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if(viewImage3DDst.PushObject(fliDstImage, fliTxtImage) < 0)
+				if(viewImage3DDst.PushObject(fl3DOHM).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
+
+				viewImage3DDst.ZoomFit();
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				viewImageSrc.Invalidate(true);
