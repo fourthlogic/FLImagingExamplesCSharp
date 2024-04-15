@@ -16,7 +16,7 @@ using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 
-namespace SemanticSegmentation
+namespace OCR
 {
 	class Program
 	{
@@ -226,7 +226,7 @@ namespace SemanticSegmentation
 				viewImagesLabelFigure.RedrawWindow();
 				viewImagesConfidenceMap.RedrawWindow();
 
-				// SemanticSegmentation 객체 생성 // Create SemanticSegmentation object
+				// OCR 객체 생성 // Create OCR object
 				COCRDL ocr = new COCRDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
@@ -240,10 +240,10 @@ namespace SemanticSegmentation
 				ocr.SetInferenceImage(ref fliValidationImage);
 				ocr.SetInferenceResultImage(ref fliResultLabelImage);
 
-				// 학습할 SemanticSegmentation 모델 설정 // Set up the SemanticSegmentation model to learn
+				// 학습할 OCR 모델 설정 // Set up the OCR model to learn
 				ocr.SetModel(COCRDL.EModel.FLSegNet);
-				// 학습할 SemanticSegmentation 모델 Version 설정 // Set up the SemanticSegmentation model version to learn
-				ocr.SetModelVersion(COCRDL.EModelVersion.FLSegNet_V1_512_B3);
+				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
+				ocr.SetModelVersion(COCRDL.EModelVersion.FLSegNet_V1_1024_B1);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				ocr.SetLearningEpoch(10000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
@@ -252,7 +252,7 @@ namespace SemanticSegmentation
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.001f);
 
-				// 설정한 Optimizer를 SemanticSegmentation에 적용 // Apply Optimizer that we set up to SemanticSegmentation
+				// 설정한 Optimizer를 OCR에 적용 // Apply Optimizer that we set up to OCR
 				ocr.SetLearningOptimizerSpec(optSpec);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
@@ -261,13 +261,13 @@ namespace SemanticSegmentation
 				augSpec.SetCommonActivationRatio(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(180.0, false, true);
+				augSpec.SetRotationParam(45.0, false, true);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
 				ocr.SetLearningAugmentationSpec(augSpec);
 
-				// SemanticSegmentation learn function을 진행하는 스레드 생성 // Create the SemanticSegmentation Learn function thread
+				// OCR learn function을 진행하는 스레드 생성 // Create the OCR Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
 					if((res = ocr.Learn()).IsFail())
