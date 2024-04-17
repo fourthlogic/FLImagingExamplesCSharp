@@ -38,14 +38,12 @@ namespace OCR
 			CFLImage fliValidationImage = new CFLImage();
 			CFLImage fliResultLabelImage = new CFLImage();
 			CFLImage fliResultLabelFigureImage = new CFLImage();
-			CFLImage fliResultConfidenceMapImage = new CFLImage();
 
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageValidation = new CGUIViewImage();
 			CGUIViewImage viewImagesLabel = new CGUIViewImage();
 			CGUIViewImage viewImagesLabelFigure = new CGUIViewImage();
-			CGUIViewImage viewImagesConfidenceMap = new CGUIViewImage();
 
 			// 그래프 뷰 선언 // Declare the graph view
 			CGUIViewGraph viewGraph = new CGUIViewGraph();
@@ -93,12 +91,6 @@ namespace OCR
 					break;
 				}
 
-				if((res = viewImagesConfidenceMap.Create(1100, 500, 1600, 1000)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
 				// Graph 뷰 생성 // Create graph view
 				if((res = viewGraph.Create(1100, 0, 1600, 500)).IsFail())
 				{
@@ -135,12 +127,6 @@ namespace OCR
 					break;
 				}
 
-				if((res = viewImagesConfidenceMap.SetImagePtr(ref fliResultConfidenceMapImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
 				// 다섯 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the four image view windows
 				if((res = viewImageLearn.SynchronizeWindow(ref viewImageValidation)).IsFail())
 				{
@@ -160,26 +146,18 @@ namespace OCR
 					break;
 				}
 
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesConfidenceMap)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window.\n");
-					break;
-				}
-
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
 				CGUIViewImageLayer layerValidation = viewImageValidation.GetLayer(0);
 				CGUIViewImageLayer layerResultLabel = viewImagesLabel.GetLayer(0);
 				CGUIViewImageLayer layerResultLabelFigure = viewImagesLabelFigure.GetLayer(0);
-				CGUIViewImageLayer layerResultConfidenceMap = viewImagesConfidenceMap.GetLayer(0);
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
 				layerValidation.Clear();
 				layerResultLabel.Clear();
 				layerResultLabelFigure.Clear();
-				layerResultConfidenceMap.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -213,18 +191,11 @@ namespace OCR
 					break;
 				}
 
-				if((res = layerResultConfidenceMap.DrawTextCanvas(flpPoint, "RESULT CONFIDENCE MAP", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text\n");
-					break;
-				}
-
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
 				viewImagesLabel.RedrawWindow();
 				viewImagesLabelFigure.RedrawWindow();
-				viewImagesConfidenceMap.RedrawWindow();
 
 				// OCR 객체 생성 // Create OCR object
 				COCRDL ocr = new COCRDL();
@@ -367,8 +338,6 @@ namespace OCR
 				ocr.SetInferenceImage(ref fliValidationImage);
 				// 추론 결과 이미지 설정 // Set the inference result Image
 				ocr.SetInferenceResultImage(ref fliResultLabelImage);
-				// 추론 결과 Confidence Map 이미지 설정 // Set the confidence map image
-				ocr.SetInferenceResultConfidenceMapImage(ref fliResultConfidenceMapImage);
 				// 추론 결과 옵션 설정 // Set the inference result options;
 				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
 				ocr.EnableInferenceResultLabelImage(true);
@@ -418,7 +387,6 @@ namespace OCR
 				viewImageValidation.RedrawWindow();
 				viewImagesLabel.RedrawWindow();
 				viewImagesLabelFigure.RedrawWindow();
-				viewImagesConfidenceMap.RedrawWindow();
 
 				// 그래프 뷰를 갱신 // Update the Graph view.
 				viewGraph.RedrawWindow();
