@@ -179,8 +179,10 @@ namespace MultiFocus
 					break;
 				}
 
+				CFL3DObjectHeightMap fl3DOHMResult = new CFL3DObjectHeightMap(ref fliDstImage, ref fliTxtImage);
+
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if(view3DDst.PushObject(multiFocus3d.GetDestinationObject()).IsFail())
+				if(view3DDst.PushObject(fl3DOHMResult).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
