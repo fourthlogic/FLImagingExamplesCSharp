@@ -41,14 +41,14 @@ namespace OpticalCharacterRecognition
 				CResult res;
 
 				// 이미지 로드 // Load image
-				if((res = fliImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Learn.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Learn_Unicode.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 로드 // Load image
-				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognition.flif")).IsFail())
+				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognition_Unicode.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -136,7 +136,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 이미지에서 학습할 문자의 각도 범위를 조정
-				if((res = ocr.SetLearningAngleTolerance(10)).IsFail())
+				if((res = ocr.SetLearningAngleTolerance(50)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set learning angle tolerance.");
 					break;
@@ -190,22 +190,15 @@ namespace OpticalCharacterRecognition
 					break;
 				}
 
-				// 인식할 이미지의 전처리 여부를 설정
-				if((res = ocr.EnableRecognizingPreprocessing(false)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set recognizing Preprocessing.");
-					break;
-				}
-
 				// 인식할 문자의 각도 범위를 설정
-				if((res = ocr.SetRecognizingAngleTolerance(10)).IsFail())
+				if((res = ocr.SetRecognizingAngleTolerance(50)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
 					break;
 				}
 
 				// 인식할 문자의 색상을 설정
-				if((res = ocr.SetRecognizingCharacterColorType(COCR.ECharacterColorType.All)).IsFail())
+				if((res = ocr.SetRecognizingCharacterColorType(COCR.ECharacterColorType.WhiteOnBlack)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing character color.");
 					break;
@@ -215,6 +208,13 @@ namespace OpticalCharacterRecognition
 				if((res = ocr.SetRecognizingMinimumScore(0.6)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set minimum score.");
+					break;
+				}
+
+				// 인식할 문자의 유니코드 여부를 설정
+				if((res = ocr.EnableRecognizingUnicodeByteCharacter(true)).IsFail())
+				{
+					ErrorPrint(res, "Failed to Enable unicode byte character.");
 					break;
 				}
 
@@ -237,13 +237,11 @@ namespace OpticalCharacterRecognition
 
 					string flsResultString = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
-
 					int i32Score = (int)(resultChar.f64Score * 100.0);
+					CFLRect<double> flrBoundary = new CFLRect<double>();
 
 					flsResultString = "[" + flsResultName + "]" + string.Format("Score : {0}%\n", i32Score);
 					Console.WriteLine(flsResultString);
-					CFLRect<double> flrBoundary = new CFLRect<double>();
-
 					resultChar.flfaCharacter.GetBoundaryRect(out flrBoundary);
 
 					if((res = layerRecognize.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
