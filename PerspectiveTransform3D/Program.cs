@@ -1,0 +1,134 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+using FLImagingCLR;
+using FLImagingCLR.Base;
+using FLImagingCLR.Foundation;
+using FLImagingCLR.GUI;
+using FLImagingCLR.ImageProcessing;
+using FLImagingCLR.AdvancedFunctions;
+using FLImagingCLR.ThreeDim;
+using System.Diagnostics;
+using System.Collections;
+
+namespace MultiFocus
+{
+	class Program
+	{
+		public static void ErrorPrint(CResult cResult, string str)
+		{
+			if(str.Length > 1)
+				Console.WriteLine(str);
+
+			Console.WriteLine("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
+			Console.WriteLine("\n");
+			Console.ReadKey();
+		}
+
+		[STAThread]
+		static void Main(string[] args)
+		{
+			// 이미지 뷰 선언 // Declare the image view
+			CGUIViewImage viewImageSrc = new CGUIViewImage();
+			CGUIViewImage viewImageDst = new CGUIViewImage();
+			CGUIView3D view3DSrc = new CGUIView3D();
+			CGUIView3D view3DDst = new CGUIView3D();
+			CFL3DObject fl3DObjectSrc = new CFL3DObject();
+			CFL3DObject fl3DObjectDst = new CFL3DObject();
+
+			// 알고리즘 동작 결과 // Algorithm execution result
+			CResult res = new CResult();
+
+			do
+			{
+				// Source 3D 이미지 뷰 생성 // Create the Source 3D image view
+				if((res = view3DSrc.Create(400, 200, 1300, 800)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
+				if((res = view3DDst.Create(400, 200, 1300, 800)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+
+				CPlyReader plyReader = new CPlyReader();
+				plyReader.Load("../../ExampleImages/PerspectiveTransform3D/binary-vertex.ply");
+				plyReader.GetResult3DObject(out fl3DObjectSrc);
+
+				// Distance Transform 3D 객체 생성 // Create Distance Transform 3D object
+				CPerspectiveTransform3D PerspectiveTransform3D = new CPerspectiveTransform3D();
+
+				TPoint3<float> tpPosition = new TPoint3<float>(0.000000f, 0.000000f, 0.000000f);
+				TPoint3<float> tpDirection = new TPoint3<float>(-0.100000f, 0.000000f, -1.000000f);
+				TPoint3<float> tpUpVector = new TPoint3<float>(0.000000f, 1.000000f, 0.000000f);
+
+				// Source 객체 설정 // Set the source object
+				PerspectiveTransform3D.SetSourceObject(ref fl3DObjectSrc);
+				// Destination 객체 설정 // Set the Destination object
+				PerspectiveTransform3D.SetDestinationObject(ref fl3DObjectDst);
+				// 카메라 위치 설정 // Set the camera position
+				PerspectiveTransform3D.SetPosition(ref tpPosition);
+				// 카메라 방향 설정 // Set the camera direction
+				PerspectiveTransform3D.SetDirection(ref tpDirection);
+				// 카메라 방향 타입 설정 // Set the camera direction type
+				PerspectiveTransform3D.SetDirectionType(CPerspectiveTransform3D.EDirectionType.Decrement);
+				// 카메라 업 벡터 설정 // Set the camera up vector
+				PerspectiveTransform3D.SetUpVector(ref tpUpVector);
+
+				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				if((res = PerspectiveTransform3D.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute MultiFocus.\n");
+					break;
+				}
+
+				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
+				CGUIView3DLayer layer3DSrc = view3DSrc.GetLayer(0);
+				CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
+
+				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
+				layer3DSrc.Clear();
+				layer3DDst.Clear();
+
+				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
+				view3DSrc.PushObject(fl3DObjectSrc);
+				view3DSrc.ZoomFit();
+
+				view3DDst.PushObject(fl3DObjectDst);
+				view3DDst.ZoomFit();
+
+				CFLPoint<double> flp = new CFLPoint<double>();
+
+				if((res = layer3DSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+				if((res = layer3DDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+				// 이미지 뷰를 갱신 합니다. // Update image view
+				view3DSrc.Invalidate(true);
+				view3DDst.Invalidate(true);
+
+				// 이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
+				while(view3DSrc.IsAvailable() && view3DDst.IsAvailable())
+					Thread.Sleep(1);
+			}
+			while(false);
+		}
+	}
+}

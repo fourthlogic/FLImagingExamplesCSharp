@@ -1178,6 +1178,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transform", "Transform", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceTransform3D", "DistanceTransform3D\DistanceTransform3D.csproj", "{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerspectiveTransform3D", "PerspectiveTransform3D\PerspectiveTransform3D.csproj", "{E5648142-7EFF-4B47-90EC-CAA7EA610DBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -2788,6 +2790,10 @@ Global
 		{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17}.Debug|x64.Build.0 = Debug|x64
 		{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17}.Release|x64.ActiveCfg = Release|x64
 		{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17}.Release|x64.Build.0 = Release|x64
+		{E5648142-7EFF-4B47-90EC-CAA7EA610DBA}.Debug|x64.ActiveCfg = Debug|x64
+		{E5648142-7EFF-4B47-90EC-CAA7EA610DBA}.Debug|x64.Build.0 = Debug|x64
+		{E5648142-7EFF-4B47-90EC-CAA7EA610DBA}.Release|x64.ActiveCfg = Release|x64
+		{E5648142-7EFF-4B47-90EC-CAA7EA610DBA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3369,6 +3375,7 @@ Global
 		{22D37D56-7BE3-49C5-9C90-32B6A53CD896} = {3C9E13DF-B188-4918-AE35-A01AC1F529C0}
 		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652} = {22D37D56-7BE3-49C5-9C90-32B6A53CD896}
 		{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17} = {45008592-F09F-46EC-A909-914C86DEF7E0}
+		{E5648142-7EFF-4B47-90EC-CAA7EA610DBA} = {45008592-F09F-46EC-A909-914C86DEF7E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
