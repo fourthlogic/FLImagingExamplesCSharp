@@ -164,7 +164,7 @@ namespace MicroQRCode
 					qrCodeDecoder.GetResultMicroQRCodeSpec(i, out codeSpecResult);
 
 					EMicroQRCodeErrorCorrectionLevel eECLevel = codeSpecResult.GetMicroQRCodeErrorCorrectionLevel();
-					EMicroQRCodeSymbolVersion eSymbol = codeSpecResult.GetMicroQRCodeSymbolVersion();
+					EMicroQRCodeSymbolType eSymbol = codeSpec.GetSymbolType();
 
 					string strAdditionalData = "";
 
@@ -188,16 +188,16 @@ namespace MicroQRCode
 
 					switch(eSymbol)
 					{
-					case EMicroQRCodeSymbolVersion.MicroQRVersion1:
+					case EMicroQRCodeSymbolType.MicroQRVersion1:
 						strAdditionalData += "-1]";
 						break;
-					case EMicroQRCodeSymbolVersion.MicroQRVersion2:
+					case EMicroQRCodeSymbolType.MicroQRVersion2:
 						strAdditionalData += "-2]";
 						break;
-					case EMicroQRCodeSymbolVersion.MicroQRVersion3:
+					case EMicroQRCodeSymbolType.MicroQRVersion3:
 						strAdditionalData += "-3]";
 						break;
-					case EMicroQRCodeSymbolVersion.MicroQRVersion4:
+					case EMicroQRCodeSymbolType.MicroQRVersion4:
 						strAdditionalData += "-4]";
 						break;
 					default:
