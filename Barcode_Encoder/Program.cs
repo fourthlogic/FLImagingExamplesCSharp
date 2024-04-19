@@ -57,7 +57,7 @@ namespace Barcode
 				// 처리할 이미지 설정 // Set the image to process
 				sBarcodeEncoder.SetSourceImage(ref fliImage);
 				// Encoding Barcode 타입 설정
-				codeSpec.SetBarcodeSymbol(EBarcodeSymbol.EAN128);
+				codeSpec.SetSymbolType(EBarcodeSymbolType.EAN128);
 				// Encoding Message 설정
 				sBarcodeEncoder.SetEncodingMessage(strInput);
 

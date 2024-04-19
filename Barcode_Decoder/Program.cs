@@ -76,7 +76,7 @@ namespace Barcode
 
 				// Barcode 타입 설정
 				// 미 설정시 EBarcodeDecodingType.Auto 로 모든 심볼을 탐색한다 동작한다.
-				sBarcode.SetBarcodeSymbolToDetect(EBarcodeSymbol.EAN13);
+				sBarcode.SetSymbolType(EBarcodeSymbolType.EAN13);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = sBarcode.Execute()).IsFail())				
@@ -129,67 +129,67 @@ namespace Barcode
 					CBarcodeSpec bcs;
 					sBarcode.GetResultBarcodeSpec(i, out bcs);
 
-					EBarcodeSymbol eSymbol = bcs.GetBarcodeSymbol();
+					EBarcodeSymbolType eSymbol = bcs.GetSymbolType();
 
 					string strSymbol = "";
 
 					switch(eSymbol)
 					{
-					case EBarcodeSymbol.CODE11:
+					case EBarcodeSymbolType.CODE11:
 						strSymbol = "[CODE-11]";
 						break;
-					case EBarcodeSymbol.CODE39:
+					case EBarcodeSymbolType.CODE39:
 						strSymbol = "[CODE-39]";
 						break;
-					case EBarcodeSymbol.Codabar:
+					case EBarcodeSymbolType.Codabar:
 						strSymbol = "[Codabar]";
 						break;
-					case EBarcodeSymbol.Datalogic2Of5:
+					case EBarcodeSymbolType.Datalogic2Of5:
 						strSymbol = "[Datalogic 2/5]";
 						break;
-					case EBarcodeSymbol.Interleaved2Of5:
+					case EBarcodeSymbolType.Interleaved2Of5:
 						strSymbol = "[Interleaved 2/5]";
 						break;
-					case EBarcodeSymbol.Industrial2Of5:
+					case EBarcodeSymbolType.Industrial2Of5:
 						strSymbol = "[Industrial 2/5]";
 						break;
-					case EBarcodeSymbol.MSI:
+					case EBarcodeSymbolType.MSI:
 						strSymbol = "[MSI]";
 						break;
-					case EBarcodeSymbol.Plessey:
+					case EBarcodeSymbolType.Plessey:
 						strSymbol = "[Plessy UK]";
 						break;
-					case EBarcodeSymbol.UPCA:
+					case EBarcodeSymbolType.UPCA:
 						strSymbol = "[UPC-A]";
 						break;
-					case EBarcodeSymbol.UPCE:
+					case EBarcodeSymbolType.UPCE:
 						strSymbol = "[UPC-E]";
 						break;
-					case EBarcodeSymbol.EAN8:
+					case EBarcodeSymbolType.EAN8:
 						strSymbol = "[EAN-8]";
 						break;
-					case EBarcodeSymbol.EAN13:
+					case EBarcodeSymbolType.EAN13:
 						strSymbol = "[EAN-13]";
 						break;
-					case EBarcodeSymbol.EAN128:
+					case EBarcodeSymbolType.EAN128:
 						strSymbol = "[EAN-128]";
 						break;
-					case EBarcodeSymbol.CODE93:
+					case EBarcodeSymbolType.CODE93:
 						strSymbol = "[CODE-93]";
 						break;
-					case EBarcodeSymbol.GS1DatabarOmniTrunc:
+					case EBarcodeSymbolType.GS1DatabarOmniTrunc:
 						strSymbol = "[GS1 DatabarOmniTrunc]";
 						break;
-					case EBarcodeSymbol.GS1DatabarLimited:
+					case EBarcodeSymbolType.GS1DatabarLimited:
 						strSymbol = "[GS1 DatabarLimited]";
 						break;
-					case EBarcodeSymbol.GS1DatabarExpanded:
+					case EBarcodeSymbolType.GS1DatabarExpanded:
 						strSymbol = "[GS1 DatabarExpanded]";
 						break;
-					case EBarcodeSymbol.USPSIntelligent:
+					case EBarcodeSymbolType.USPSIntelligent:
 						strSymbol = "[USPS Intelligent]";
 						break;
-					case EBarcodeSymbol.JapanesePostalCustomer:
+					case EBarcodeSymbolType.JapanesePostalCustomer:
 						strSymbol = "[Japanese Postal Customer]";
 						break;
 					default:

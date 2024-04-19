@@ -160,9 +160,9 @@ namespace QRCode
 					qrCodeDecoder.GetResultQRCodeSpec(i, out codeSpec);
 
 					EQRCodeErrorCorrectionLevel eECLevel = codeSpec.GetQRCodeErrorCorrectionLevel();
-					EQRCodeSymbolVersion1 eSymbol1 = EQRCodeSymbolVersion1.None;
-					EQRCodeSymbolVersion2 eSymbol2 = EQRCodeSymbolVersion2.None;
-					codeSpec.GetQRCodeSymbolVersion(out eSymbol1, out eSymbol2);
+					EQRCodeSymbolType1 eSymbol1 = EQRCodeSymbolType1.None;
+					EQRCodeSymbolType2 eSymbol2 = EQRCodeSymbolType2.None;
+					codeSpec.GetSymbolType(out eSymbol1, out eSymbol2);
 
 					string strAdditionalData = "";
 
@@ -184,7 +184,7 @@ namespace QRCode
 						break;
 					}
 
-					if(eSymbol1 != EQRCodeSymbolVersion1.None)
+					if(eSymbol1 != EQRCodeSymbolType1.None)
 					{
 						int i32SymbolValue = (int)eSymbol1;
 						int i32Symbol = 0;
@@ -201,7 +201,7 @@ namespace QRCode
 						strAdditionalData += String.Format("-{0}]", i32Symbol);
 					}
 
-					if(eSymbol2 != EQRCodeSymbolVersion2.None)
+					if(eSymbol2 != EQRCodeSymbolType2.None)
 					{
 						int i32SymbolValue = (int)eSymbol1;
 						int i32Symbol = 0;
