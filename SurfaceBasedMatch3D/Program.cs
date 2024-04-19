@@ -56,20 +56,20 @@ namespace SurfaceBasedMatch3D
 
 				if((eResult = plyReader.GetResult3DObject(out fl3DOLearnObject)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to load the object file.\n");
+					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
 				}
 
 				// Source Object 로드 // Load the Source object
 				if((eResult = plyReader.Load("../../ExampleImages/SurfaceBasedMatch3D/MeasuredPoints.ply")).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to load the object file.\n");
+					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
 				}
 
 				if((eResult = plyReader.GetResult3DObject(out fl3DOSourceObject)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to load the object file.\n");
+					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
 				}
 
@@ -90,21 +90,21 @@ namespace SurfaceBasedMatch3D
 				// Dst 3D 뷰 생성
 				if((eResult = view3DDst.Create(1124, 0, 1636, 512)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the Dst 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Dst 3D view.\n");
 					break;
 				}
 
 				// Learn Object 3D 뷰 생성 // Create the learn object 3D view
 				if((eResult = view3DLearn.PushObject(fl3DOLearnObject)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to display the 3D object.\n");
+					ErrorPrint(eResult, "Failed to display the 3D object.\n");
 					break;
 				}
 
 				// Source Object 3D 뷰 생성 // Create the source object 3D view
 				if((eResult = view3DSource.PushObject(fl3DOSourceObject)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to display the 3D object.\n");
+					ErrorPrint(eResult, "Failed to display the 3D object.\n");
 					break;
 				}
 
@@ -129,14 +129,14 @@ namespace SurfaceBasedMatch3D
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = SurfaceBasedMatch3D.Learn()).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to execute Laser Triangulation.");
+					ErrorPrint(eResult, "Failed to execute Laser Triangulation.");
 					break;
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = SurfaceBasedMatch3D.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to execute Laser Triangulation.");
+					ErrorPrint(eResult, "Failed to execute Laser Triangulation.");
 					break;
 				}
 
@@ -162,33 +162,33 @@ namespace SurfaceBasedMatch3D
 
 				if((eResult = layer3DLearn.DrawTextCanvas(flp, "Learn Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
 				if((eResult = layer3DSource.DrawTextCanvas(flp, "Source Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
 				if((eResult = layer3DDst.DrawTextCanvas(flp, "Destination Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
 				// 3D 오브젝트 뷰에 결과 Object와 비교를 위한 Source 오브젝트 디스플레이
 				if((eResult = view3DDst.PushObject((CFL3DObject)SurfaceBasedMatch3D.GetSourceObject())).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to set image object on the image view.\n");
+					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 3D 오브젝트 뷰에 결과 Object 디스플레이
 				if((eResult = view3DDst.PushObject((CFL3DObject)SurfaceBasedMatch3D.GetDestinationObject())).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to set image object on the image view.\n");
+					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -205,14 +205,14 @@ namespace SurfaceBasedMatch3D
 				// 매치 결과 가져오기
 				if((eResult = SurfaceBasedMatch3D.GetResultScore(out flaF64Score)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to estimate pose matrix.\n");
+					ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
 					break;
 				}
 
 				// 추정된 포즈 행렬 가져오기
 				if((eResult = SurfaceBasedMatch3D.GetResultPoseMatrix(out flaF64PoseMatrix)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to estimate pose matrix.\n");
+					ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
 					break;
 				}
 
@@ -244,7 +244,7 @@ namespace SurfaceBasedMatch3D
 				// 추정된 포즈 행렬 및 score 출력
 				if((eResult = layer3DDst.DrawTextCanvas(flp, strChannel, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
 				{
-					ErrorPrint(eResult, L"Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
