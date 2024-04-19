@@ -13,6 +13,13 @@
         - The example of an algorithm that processes multiple images that are different and unaligned, each with a different focus, making them a single aligned image with all the focus.
         - 각각 초점이 다르고 정렬되지 않은 여러 장의 이미지를 처리해 모든 초점을 가지고 정렬된 한장의 이미지로 만드는 알고리즘 예제.
 
+  - [Match]
+    
+    - [Surface]
+      - Surface Based Match
+        - The example of an algorithm that estimate pose matrix for a given point clouds.
+        - 주어진 포인트 클라우드에 대해 포즈 행렬을 추정하는 알고리즘 예제.
+
   - [Reconstruction]
 
     - [Laser Triangulation]
@@ -22,9 +29,9 @@
       - LaserTriangulation_Profile
         - The example of an algorithm that reconstructs 3D objects projected by line laser into 3D image using laser triangulation from the source of 'Profile' type.
         - 레이저로 투사된 3차원 물체를 레이저 삼각측량법을 이용하여 3차원 이미지로 재구성하는 알고리즘 예제. (Source Type : Profile)
-  
-    - [Moire 3D]
 
+    - [Moire 3D]
+    
       - Moire3D
         - The example of an algorithm that creates a height map of an object by analyzing the Fringe Pattern projected onto the object.
         - 물체에 투영된 프린지 패턴(Fringe Pattern)을 분석하여 물체의 Height Map 을 만드는 알고리즘 예제.
@@ -32,24 +39,24 @@
     - [Multi Focus 3D]
 
       - MultiFocus3D
-        - The example of converts multiple images with different focus into a 3D image with integrated focus.
+        - The example of an algorithm that converts multiple images with different focus into a 3D image with integrated focus.
         - 각각 초점이 다른 여러장의 이미지를 처리해 모든 초점을 가지는 한장의 3D 이미지로 만드는 알고리즘 예제.
   
     - [Stereo]
     
-      - Stereo Calibrator
+      - StereoCalibrator
         - The example of an algorithm that perform stereo calibration and image pair Rectification.
         - 스테레오 캘리브레이션과 이미지 쌍 Rectification을 수행하는 알고리즘 예제.
-      - Stereo Disparity
+      - StereoDisparity
         - The example of an algorithm that performs getting disparity map from a pair of stereo calibrator output images.
         - 스테레오 캘리브레이터의 Rectification 결과 이미지 쌍으로부터 스테레오 Disparity Map을 구하는 알고리즘 예제.
 
-    - [Match]
+  - [Transform]
     
-      - Surface Based Match
-        - The example of an algorithm that estimate pose matrix for a given point clouds.
-        - 주어진 포인트 클라우드에 대해 포즈 행렬을 추정하는 알고리즘 예제.
-
+    - [Distance Transform]
+      - DistanceTransform3D
+        - The example of an algorithm that measures the distance to a given vertex based on the camera's position and the direction the camera is looking.
+        - 주어진 정점에 대하여 카메라의 위치와 카메라가 바라보는 방향을 바탕으로 거리를 측정하는 알고리즘 예제.
 
 - [Advanced Functions]
 
