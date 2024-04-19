@@ -58,12 +58,9 @@ namespace MultiFocus
 					break;
 				}
 
+				fl3DObjectSrc.Load("../../ExampleImages/PerspectiveTransform3D/binary-vertex.ply");
 
-				CPlyReader plyReader = new CPlyReader();
-				plyReader.Load("../../ExampleImages/PerspectiveTransform3D/binary-vertex.ply");
-				plyReader.GetResult3DObject(out fl3DObjectSrc);
-
-				// Distance Transform 3D 객체 생성 // Create Distance Transform 3D object
+				// Perspective Transform 3D 객체 생성 // Create Perspective Transform 3D object
 				CPerspectiveTransform3D PerspectiveTransform3D = new CPerspectiveTransform3D();
 
 				TPoint3<float> tpPosition = new TPoint3<float>(0.000000f, 0.000000f, 0.000000f);

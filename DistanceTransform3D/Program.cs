@@ -131,9 +131,7 @@ namespace MultiFocus
 				}
 
 
-				CPlyReader plyReader = new CPlyReader();
-				plyReader.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
-				plyReader.GetResult3DObject(out fl3DObject);
+				fl3DObject.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
 
 				// Distance Transform 3D 객체 생성 // Create Distance Transform 3D object
 				CDistanceTransform3D DistanceTransform3D = new CDistanceTransform3D();
