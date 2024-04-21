@@ -44,30 +44,15 @@ namespace SurfaceBasedMatch3D
 
 			do
 			{
-				// ply 파일 리더 // ply file reader
-				CPlyReader plyReader = new CPlyReader();
-
 				// Learn Object 로드 // Load the learn object
-				if((eResult = plyReader.Load("../../ExampleImages/SurfaceBasedMatch3D/ReferencePoints.ply")).IsFail())
+				if((eResult = fl3DOLearnObject.Load("../../ExampleImages/SurfaceBasedMatch3D/ReferencePoints.ply")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the image file.\n");
 					break;
 				}
 
-				if((eResult = plyReader.GetResult3DObject(out fl3DOLearnObject)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to load the object file.\n");
-					break;
-				}
-
 				// Source Object 로드 // Load the Source object
-				if((eResult = plyReader.Load("../../ExampleImages/SurfaceBasedMatch3D/MeasuredPoints.ply")).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to load the object file.\n");
-					break;
-				}
-
-				if((eResult = plyReader.GetResult3DObject(out fl3DOSourceObject)).IsFail())
+				if((eResult = fl3DOSourceObject.Load("../../ExampleImages/SurfaceBasedMatch3D/MeasuredPoints.ply")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
