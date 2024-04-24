@@ -58,14 +58,14 @@ namespace MultiFocus
 					break;
 				}
 
-				fl3DObjectSrc.Load("../../ExampleImages/PerspectiveTransform3D/binary-vertex.ply");
+				fl3DObjectSrc.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
 
 				// Perspective Transform 3D 객체 생성 // Create Perspective Transform 3D object
 				CPerspectiveTransform3D PerspectiveTransform3D = new CPerspectiveTransform3D();
 
-				TPoint3<float> tpPosition = new TPoint3<float>(0.000000f, 0.000000f, 0.000000f);
-				TPoint3<float> tpDirection = new TPoint3<float>(-0.100000f, 0.000000f, -1.000000f);
-				TPoint3<float> tpUpVector = new TPoint3<float>(0.000000f, 1.000000f, 0.000000f);
+				TPoint3<float> tpPosition = new TPoint3<float>(2.0f, 0.0f, 1.5f);
+				TPoint3<float> tpDirection = new TPoint3<float>(-1.0f, 0.0f, -1.0f);
+				TPoint3<float> tpUpVector = new TPoint3<float>(0.0f, 1.0f, 0.0f);
 
 				// Source 객체 설정 // Set the source object
 				PerspectiveTransform3D.SetSourceObject(ref fl3DObjectSrc);
