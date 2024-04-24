@@ -16,7 +16,7 @@ using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 
-namespace OCR
+namespace OpticalCharacterRecognitionDL
 {
 	class Program
 	{
@@ -54,13 +54,13 @@ namespace OCR
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("../../ExampleImages/OCRDL/OCR_Learn.flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/OpticalCharacterRecognitionDL/OCR_Learn.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 				
-				if((res = fliValidationImage.Load("../../ExampleImages/OCRDL/OCR_Inference.flif")).IsFail())
+				if((res = fliValidationImage.Load("../../ExampleImages/OpticalCharacterRecognitionDL/OCR_Inference.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -198,7 +198,7 @@ namespace OCR
 				viewImagesLabelFigure.RedrawWindow();
 
 				// OCR 객체 생성 // Create OCR object
-				COCRDL ocr = new COCRDL();
+				COpticalCharacterRecognitionDL ocr = new COpticalCharacterRecognitionDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
@@ -212,9 +212,9 @@ namespace OCR
 				ocr.SetInferenceResultImage(ref fliResultLabelImage);
 
 				// 학습할 OCR 모델 설정 // Set up the OCR model to learn
-				ocr.SetModel(COCRDL.EModel.FLSegNet);
+				ocr.SetModel(COpticalCharacterRecognitionDL.EModel.FLSegNet);
 				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
-				ocr.SetModelVersion(COCRDL.EModelVersion.FLSegNet_V1_1024_B1);
+				ocr.SetModelVersion(COpticalCharacterRecognitionDL.EModelVersion.FLSegNet_V1_1024_B3);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				ocr.SetLearningEpoch(10000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
@@ -360,7 +360,7 @@ namespace OCR
 				// Result 결과에 Region Figure를 포함 여부 설정 // Set whether to include region figure in result
 				ocr.EnableInferenceResultIncludingRegionFigures(true);
 				// Result item settings enum 설정 // Set the result item settings
-				ocr.SetInferenceResultItemSettings(COCRDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
+				ocr.SetInferenceResultItemSettings(COpticalCharacterRecognitionDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = ocr.Execute()).IsFail())
