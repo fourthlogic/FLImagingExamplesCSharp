@@ -9,8 +9,8 @@
     <ProjectGuid>{5789CF2C-CBB4-4617-AF9F-FDB6AF3B97CD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FormatConverter</RootNamespace>
-    <AssemblyName>FormatConverter</AssemblyName>
+    <RootNamespace>Decolorization</RootNamespace>
+    <AssemblyName>Decolorization</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
