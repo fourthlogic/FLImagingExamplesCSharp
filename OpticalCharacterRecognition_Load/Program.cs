@@ -41,7 +41,7 @@ namespace OpticalCharacterRecognition
 				CResult res;
 
 				// 이미지 로드 // Load image
-				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognition_15Degree.flif")).IsFail())
+				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognition.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -136,16 +136,9 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 문자의 각도 범위를 설정
-				if((res = ocr.SetRecognizingAngleTolerance(20)).IsFail())
+				if((res = ocr.SetRecognizingAngleTolerance(10)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
-					break;
-				}
-
-				// 인식할 이미지의 전처리 여부를 설정
-				if((res = ocr.EnableRecognizingNoiseReduction(false)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set recognizing noise reduction.");
 					break;
 				}
 
@@ -216,7 +209,7 @@ namespace OpticalCharacterRecognition
 					break;
 				}
 
-				// 인식할 이미지의 전처리 여부를 설정
+				// 인식할 이미지의 잡음 제거 여부를 설정
 				if((res = ocr.EnableRecognizingNoiseReduction(true)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing noise reduction.");

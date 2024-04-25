@@ -128,20 +128,6 @@ namespace OpticalCharacterRecognition
 					break;
 				}
 
-				// 학습할 이미지의 전처리 여부를 설정
-				if((res = ocr.EnableLearningNoiseReduction(false)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set learning noise reduction.");
-					break;
-				}
-
-				// 이미지에서 학습할 문자의 각도 범위를 조정
-				if((res = ocr.SetLearningAngleTolerance(10)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set learning angle tolerance.");
-					break;
-				}
-
 				// 학습할 이미지에 저장되어있는 Figure 학습
 				if((res = ocr.Learn()).IsFail())
 				{
@@ -187,20 +173,6 @@ namespace OpticalCharacterRecognition
 				if((res = ocr.SetSourceImage(ref fliRecognizeImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
-					break;
-				}
-
-				// 인식할 이미지의 전처리 여부를 설정
-				if((res = ocr.EnableRecognizingNoiseReduction(false)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set recognizing noise reduction.");
-					break;
-				}
-
-				// 인식할 문자의 각도 범위를 설정
-				if((res = ocr.SetRecognizingAngleTolerance(10)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
 					break;
 				}
 
