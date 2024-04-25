@@ -107,13 +107,13 @@ namespace OpticalCharacterRecognition
 				layerRecognize.Clear();
 				layerRecognizeUnicode.Clear();
 
-				if((res = layerRecognize.DrawTextCanvas(new CFLPoint<double>(0, 0), "Learn", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerRecognize.DrawTextCanvas(new CFLPoint<double>(0, 0), "Recognition1", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
-				if((res = layerRecognizeUnicode.DrawTextCanvas(new CFLPoint<double>(0, 0), "Recognition", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerRecognizeUnicode.DrawTextCanvas(new CFLPoint<double>(0, 0), "Recognition2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
 					break;
@@ -143,9 +143,9 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 이미지의 전처리 여부를 설정
-				if((res = ocr.EnableRecognizingPreprocessing(false)).IsFail())
+				if((res = ocr.EnableRecognizingNoiseReduction(false)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set recognizing Preprocessing.");
+					ErrorPrint(res, "Failed to set recognizing noise reduction.");
 					break;
 				}
 
@@ -217,9 +217,9 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 이미지의 전처리 여부를 설정
-				if((res = ocr.EnableRecognizingPreprocessing(true)).IsFail())
+				if((res = ocr.EnableRecognizingNoiseReduction(true)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set recognizing Preprocessing.");
+					ErrorPrint(res, "Failed to set recognizing noise reduction.");
 					break;
 				}
 

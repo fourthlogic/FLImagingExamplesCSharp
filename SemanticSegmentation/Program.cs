@@ -246,6 +246,14 @@ namespace SemanticSegmentation
 					bTerminated = true;
 				}, null);
 
+				bool bEscape = false;
+
+				ThreadPool.QueueUserWorkItem((arg) =>
+				{
+					if(Console.ReadKey().Key == ConsoleKey.Escape)
+						bEscape = true;
+				}, null);
+
 				while(!semanticSegmentation.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
@@ -318,7 +326,7 @@ namespace SemanticSegmentation
 
 						// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is 1.0, stop learning and classify images 
-						if(f32ValidationPa == 1.0f)
+						if(f32ValidationPa == 1.0f || bEscape)
 							semanticSegmentation.Stop();
 
 						i32PrevEpoch = i32Epoch;
