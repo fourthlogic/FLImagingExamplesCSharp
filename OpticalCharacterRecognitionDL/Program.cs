@@ -199,7 +199,7 @@ namespace OpticalCharacterRecognitionDL
 
 				// OCR 객체 생성 // Create OCR object
 				COpticalCharacterRecognitionDL ocr = new COpticalCharacterRecognitionDL();
-
+				
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
@@ -341,8 +341,6 @@ namespace OpticalCharacterRecognitionDL
 				// 추론 결과 옵션 설정 // Set the inference result options;
 				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
 				ocr.EnableInferenceResultLabelImage(true);
-				// Result 결과에 Region Figure를 포함 여부 설정 // Set whether to include region figure in result
-				ocr.EnableInferenceResultIncludingRegionFigures(false);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = ocr.Execute()).IsFail())
@@ -357,8 +355,6 @@ namespace OpticalCharacterRecognitionDL
 				// 추론 결과 옵션 설정 // Set the inference result options;
 				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
 				ocr.EnableInferenceResultLabelImage(false);
-				// Result 결과에 Region Figure를 포함 여부 설정 // Set whether to include region figure in result
-				ocr.EnableInferenceResultIncludingRegionFigures(true);
 				// Result item settings enum 설정 // Set the result item settings
 				ocr.SetInferenceResultItemSettings(COpticalCharacterRecognitionDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
 
