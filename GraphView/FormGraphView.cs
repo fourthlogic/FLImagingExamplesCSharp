@@ -143,7 +143,7 @@ namespace GraphView
                     strChartName = "Chart";
 
                 // 선택한 차트타입을 얻어온다.
-                EChartType eChartType = (EChartType)comboBoxChartType.SelectedIndex ;
+                EChartType eChartType = (EChartType)(comboBoxChartType.SelectedIndex + 1);
 
                 // 랜덤으로 10개의 데이터를 생성한다.
                 const int i32DataCount = 10;
