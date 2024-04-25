@@ -247,6 +247,14 @@ namespace OpticalCharacterRecognitionDL
 					bTerminated = true;
 				}, null);
 
+				bool bEscape = false;
+
+				ThreadPool.QueueUserWorkItem((arg) =>
+				{
+					if(Console.ReadKey().Key == ConsoleKey.Escape)
+						bEscape = true;
+				}, null);
+
 				while(!ocr.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
@@ -319,7 +327,7 @@ namespace OpticalCharacterRecognitionDL
 
 						// 검증 결과가 0.9 이상 일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is greater than 0.9, stop learning and classify images 
-						if(f32ValidationPaMeanIoU >= 0.9f)
+						if(f32ValidationPaMeanIoU >= 0.9f || bEscape)
 							ocr.Stop();
 
 						i32PrevEpoch = i32Epoch;
@@ -327,7 +335,6 @@ namespace OpticalCharacterRecognitionDL
 						i32PrevValidationCount = vctValidations.Count();
 					}
 					
-					//GetKeyStates(System.Windows.Input.Key.Escape);
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
 					if(!ocr.IsRunning())
 						break;
