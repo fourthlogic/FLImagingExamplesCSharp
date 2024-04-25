@@ -129,9 +129,9 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 학습할 이미지의 전처리 여부를 설정
-				if((res = ocr.EnableLearningPreprocessing(false)).IsFail())
+				if((res = ocr.EnableLearningNoiseReduction(false)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set learning Preprocessing.");
+					ErrorPrint(res, "Failed to set learning noise reduction.");
 					break;
 				}
 
