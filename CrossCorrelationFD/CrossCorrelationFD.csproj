@@ -9,8 +9,8 @@
     <ProjectGuid>{6E7BAC9A-D6F9-4879-BAEC-FC5DEC866D28}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CrossCorrelation</RootNamespace>
-    <AssemblyName>CrossCorrelation</AssemblyName>
+    <RootNamespace>CrossCorrelationFD</RootNamespace>
+    <AssemblyName>CrossCorrelationFD</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

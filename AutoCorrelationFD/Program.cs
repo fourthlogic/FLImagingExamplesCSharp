@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
 
-namespace CrossCorrelation
+namespace AutoCorrelation
 {
 	class Program
 	{
@@ -31,12 +31,12 @@ namespace CrossCorrelation
 		static void Main(string[] args)
 		{
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage[] arrFliImage = new CFLImage[3];
+			CFLImage[] arrFliImage = new CFLImage[2];
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage[] arrViewImage = new CGUIViewImage[3];
+			CGUIViewImage[] arrViewImage = new CGUIViewImage[2];
 
-			for(int i = 0; i < 3; ++i)
+			for(int i = 0; i < 2; ++i)
 			{
 				arrFliImage[i] = new CFLImage();
 				arrViewImage[i] = new CGUIViewImage();
@@ -46,21 +46,14 @@ namespace CrossCorrelation
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = (arrFliImage[0].Load("../../ExampleImages/CrossCorrelation/Cross Correlation Source.flif"))).IsFail())
-				{
-					ErrorPrint(res, "Failed to load the image file.\n");
-					break;
-				}
-
-				// 이미지 로드 // Load image
-				if((res = (arrFliImage[1].Load("../../ExampleImages/CrossCorrelation/Cross Correlation Operand.flif"))).IsFail())
+				if((res = (arrFliImage[0].Load("../../ExampleImages/CrossCorrelationFD/Cross Correlation Source.flif"))).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-				if((res = (arrFliImage[2].Assign(arrFliImage[0]))).IsFail())
+				if((res = (arrFliImage[1].Assign(arrFliImage[0]))).IsFail())
 				{
 					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
@@ -80,17 +73,10 @@ namespace CrossCorrelation
 					break;
 				}
 
-				// 이미지 뷰 생성 // Create image view
-				if((res = (arrViewImage[2].Create(1124, 0, 1636, 512))).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
 				bool bError = false;
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				for(int i = 0; i < 3; ++i)
+				for(int i = 0; i < 2; ++i)
 				{
 					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{
@@ -110,13 +96,6 @@ namespace CrossCorrelation
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = (arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2]))).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize view\n");
-					break;
-				}
-
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 				if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[1]))).IsFail())
 				{
@@ -124,35 +103,26 @@ namespace CrossCorrelation
 					break;
 				}
 
-				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[2]))).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window.\n");
-					break;
-				}
-
-				// Cross Correlation 객체 생성 // Create CrossCorrelation object
-				CCrossCorrelation CrossCorrelation = new CCrossCorrelation();
+				// Auto Correlation FD 객체 생성 // Create AutoCorrelation FD object
+				CAutoCorrelationFD AutoCorrelationFD = new CAutoCorrelationFD();
 				// Source 이미지 설정 // Set source image
-				CrossCorrelation.SetSourceImage(ref arrFliImage[0]);
-				// Operand 이미지 설정 // Set Operand image
-				CrossCorrelation.SetOperandImage(ref arrFliImage[1]);
+				AutoCorrelationFD.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				CrossCorrelation.SetDestinationImage(ref arrFliImage[2]);
+				AutoCorrelationFD.SetDestinationImage(ref arrFliImage[1]);
 				// 출력 방식 설정 // Set Output Method
-				CrossCorrelation.EnableNormalizedCrossCorrelation(true);
+				AutoCorrelationFD.EnableNormalizedAutoCorrelation(true);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (CrossCorrelation.Execute())).IsFail())
+				if((res = (AutoCorrelationFD.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Cross Correlation.");
+					ErrorPrint(res, "Failed to execute Auto Correlation.");
 					Console.WriteLine(res.GetString());
 					break;
 				}
 
-				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[3];
+				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[2];
 
-				for(int i = 0; i < 3; ++i)
+				for(int i = 0; i < 2; ++i)
 				{
 					// 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
 					// 따로 해제할 필요 없음 // No need to release separately
@@ -176,13 +146,7 @@ namespace CrossCorrelation
 					break;
 				}
 
-				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
-
-				if((res = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
@@ -191,12 +155,10 @@ namespace CrossCorrelation
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				arrViewImage[0].Invalidate(true);
 				arrViewImage[1].Invalidate(true);
-				arrViewImage[2].Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(arrViewImage[0].IsAvailable()
-					  && arrViewImage[1].IsAvailable()
-					  && arrViewImage[2].IsAvailable())
+					  && arrViewImage[1].IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
