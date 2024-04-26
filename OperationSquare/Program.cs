@@ -183,7 +183,7 @@ namespace OperationSquare
                 // Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
                 //                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
                 TPoint<double> tpPosition0 = new TPoint<double>(5, 0);
-                TPoint<double> tpPosition1 = new TPoint<double>(5, 22);
+                TPoint<double> tpPosition1 = new TPoint<double>(5, 27);
 
                 if ((res = arrLayer[0].DrawTextCanvas(tpPosition0, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
@@ -191,7 +191,7 @@ namespace OperationSquare
                     break;
                 }
 
-                if ((res = arrLayer[1].DrawTextCanvas(tpPosition0, "Destination1 Image(Square)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[1].DrawTextCanvas(tpPosition0, "Destination1 Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
@@ -203,7 +203,7 @@ namespace OperationSquare
                     break;
                 }
 
-                if ((res = arrLayer[2].DrawTextCanvas(tpPosition0, "Destination2 Image(Square)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[2].DrawTextCanvas(tpPosition0, "Destination2 Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
