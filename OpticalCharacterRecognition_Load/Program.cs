@@ -150,7 +150,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 최소 점수를 설정
-				if((res = ocr.SetRecognizingMinimumScore(0.7)).IsFail())
+				if((res = ocr.SetRecognizingMinimumScore(0.5)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set minimum score.");
 					break;
