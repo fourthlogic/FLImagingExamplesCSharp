@@ -175,8 +175,8 @@ namespace SurfaceBasedMatch3D
 					break;
 				}
 
-				List<double> flaF64Score = new List<double>();
-				List<double> flaF64PoseMatrix = new List<double>();
+				CSurfaceBasedMatch3D.SPoseMatrixParameters sResult;
+
 				double f64ArrRotX;
 				double f64ArrRotY;
 				double f64ArrRotZ;
@@ -185,27 +185,28 @@ namespace SurfaceBasedMatch3D
 				double f64ArrTransZ;
 				double f64Score;
 
-				// 매치 결과 가져오기
-				if((eResult = SurfaceBasedMatch3D.GetResultScore(out flaF64Score)).IsFail())
+				long i64ResultCount = SurfaceBasedMatch3D.GetResultCount();
+
+				if(i64ResultCount == 0)
 				{
 					ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
 					break;
 				}
 
 				// 추정된 포즈 행렬 가져오기
-				if((eResult = SurfaceBasedMatch3D.GetResultPoseMatrix(out flaF64PoseMatrix)).IsFail())
+				if((eResult = SurfaceBasedMatch3D.GetResultPoseMatrix(0, out sResult)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
 					break;
 				}
 
-				f64Score = flaF64Score[0];
-				f64ArrRotX = flaF64PoseMatrix[0];
-				f64ArrRotY = flaF64PoseMatrix[1];
-				f64ArrRotZ = flaF64PoseMatrix[2];
-				f64ArrTransX = flaF64PoseMatrix[3];
-				f64ArrTransY = flaF64PoseMatrix[4];
-				f64ArrTransZ = flaF64PoseMatrix[5];
+				f64Score = sResult.f64Score;
+				f64ArrRotX = sResult.f64Rx;
+				f64ArrRotY = sResult.f64Ry;
+				f64ArrRotZ = sResult.f64Rz;
+				f64ArrTransX = sResult.f64Tx;
+				f64ArrTransY = sResult.f64Ty;
+				f64ArrTransZ = sResult.f64Tz;
 
 				// 추정한 포즈 결과를 Console창에 출력한다 // Print the estimated pose matrix to the console window
 				Console.WriteLine(" ▷ Pose Matrix");
