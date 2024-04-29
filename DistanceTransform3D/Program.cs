@@ -117,14 +117,14 @@ namespace MultiFocus
 			do
 			{
 				// Source 3D 이미지 뷰 생성 // Create the Source 3D image view
-				if((res = view3DSrc.Create(400, 200, 1300, 800)).IsFail())
+				if((res = view3DSrc.Create(100, 0, 600, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
-				if((res = view3DDst.Create(400, 200, 1300, 800)).IsFail())
+				if((res = view3DDst.Create(600, 0, 1100, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
