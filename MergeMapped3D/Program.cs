@@ -1,0 +1,139 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+using FLImagingCLR;
+using FLImagingCLR.Base;
+using FLImagingCLR.Foundation;
+using FLImagingCLR.GUI;
+using FLImagingCLR.ImageProcessing;
+using FLImagingCLR.AdvancedFunctions;
+using FLImagingCLR.ThreeDim;
+using System.Diagnostics;
+using System.Collections;
+
+namespace MultiFocus
+{
+	class Program
+	{
+		public static void ErrorPrint(CResult cResult, string str)
+		{
+			if(str.Length > 1)
+				Console.WriteLine(str);
+
+			Console.WriteLine("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
+			Console.WriteLine("\n");
+			Console.ReadKey();
+		}
+
+		[STAThread]
+		static void Main(string[] args)
+		{
+			CResult res = new CResult();
+			CGUIView3D view3DSrc = new CGUIView3D();
+			CGUIView3D view3DSrc2 = new CGUIView3D();
+			CGUIView3D view3DDst = new CGUIView3D();
+
+			do
+			{
+				// Source 3D 이미지 뷰 생성 // Create the Source 3D image view
+				if((res = view3DSrc.Create(400, 200, 1300, 800)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Source 3D 이미지 뷰 생성 // Create the Source 3D image view
+				if((res = view3DSrc2.Create(400, 200, 1300, 800)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
+				if((res = view3DDst.Create(400, 200, 1300, 800)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				FLImagingCLR.Foundation.CFL3DObject fl3DOSrc = new FLImagingCLR.Foundation.CFL3DObject();
+				FLImagingCLR.Foundation.CFL3DObject fl3DOSrc2 = new FLImagingCLR.Foundation.CFL3DObject();
+				res = fl3DOSrc.Load("../../ExampleImages/MergeMapped3D/Left Cam.ply");
+				res = fl3DOSrc2.Load("../../ExampleImages/MergeMapped3D/Right Cam.ply");
+
+				FLImagingCLR.ThreeDim.CMergeMapped3D algemObject = new FLImagingCLR.ThreeDim.CMergeMapped3D();
+
+				FLImagingCLR.Foundation.CFL3DObject fl3DODst = new FLImagingCLR.Foundation.CFL3DObject();
+
+				TPoint3<float> tpPosition = new TPoint3<float>(-0.152f, 0.125f, 0f);
+				TPoint3<float> tpRotateByEulerAngles = new TPoint3<float>(-8f, 29f, -90f);
+				TPoint3<float> tpPosition2 = new TPoint3<float>(0.152f, 0.125f, 0f);
+				TPoint3<float> tpRotateByEulerAngles2 = new TPoint3<float>(-8f, -29f, -90f);
+
+				// 카메라 위치 설정 // Set the camera position
+				algemObject.SetPosition(tpPosition, tpPosition2);
+				// 카메라 회전정도 설정 // Set the camera degree
+				algemObject.SetRotateByEulerAngles(tpRotateByEulerAngles, tpRotateByEulerAngles2);
+
+				// 카메라 1, 2의 Source 객체 설정 // Set the source object of camera 1, 2
+				algemObject.SetSourceObject(ref fl3DOSrc);
+				algemObject.SetSourceObject2(ref fl3DOSrc2);
+				// Destination 객체 설정 // Set the destination object
+				algemObject.SetDestinationObject(ref fl3DODst);
+
+				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				if((res = algemObject.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute MultiFocus.\n");
+					break;
+				}
+
+				view3DSrc.PushObject(algemObject.GetSourceObject());
+				view3DSrc2.PushObject(algemObject.GetSourceObject2());
+				view3DDst.PushObject(algemObject.GetDestinationObject());
+
+				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
+				view3DSrc.ZoomFit();
+				view3DSrc2.ZoomFit();
+				view3DDst.ZoomFit();
+
+				CGUIView3DLayer layer3DSrc = view3DSrc.GetLayer(0);
+				CGUIView3DLayer layer3DSrc2 = view3DSrc2.GetLayer(0);
+				CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
+
+				CFLPoint<double> flp = new CFLPoint<double>();
+
+
+				if((res = layer3DSrc.DrawTextCanvas(flp, ("Source Object 1"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+				if((res = layer3DSrc2.DrawTextCanvas(flp, ("Source Object 2"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+				if((res = layer3DDst.DrawTextCanvas(flp, ("Destination Object"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+				// 이미지 뷰를 갱신 합니다. // Update image view
+				view3DSrc.Invalidate(true);
+				view3DSrc2.Invalidate(true);
+				view3DDst.Invalidate(true);
+
+				// 이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
+				while(view3DSrc.IsAvailable() && view3DSrc2.IsAvailable() && view3DDst.IsAvailable())
+					Thread.Sleep(1);
+			}
+			while(false);
+		}
+	}
+}
