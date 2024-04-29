@@ -184,13 +184,13 @@ namespace MultiFocus
 
 				CFLPoint<double> flp = new CFLPoint<double>();
 
-				if((res = layer3DSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer3DSrc.DrawTextCanvas(flp, ("Source Object"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = layer3DDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer3DDst.DrawTextCanvas(flp, ("Destination Object"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
