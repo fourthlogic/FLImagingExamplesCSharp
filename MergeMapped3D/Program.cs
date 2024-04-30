@@ -35,6 +35,7 @@ namespace MultiFocus
 			CGUIView3D view3DSrc = new CGUIView3D();
 			CGUIView3D view3DSrc2 = new CGUIView3D();
 			CGUIView3D view3DDst = new CGUIView3D();
+			CGUIViewImage viewTestDescription = new CGUIViewImage();
 
 			do
 			{
@@ -54,6 +55,12 @@ namespace MultiFocus
 
 				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
 				if((res = view3DDst.Create(1100, 0, 1600, 500)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				if((res = viewTestDescription.Create(100, 500, 600, 1000)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
@@ -124,13 +131,25 @@ namespace MultiFocus
 					break;
 				}
 
+				CFLImage fliTestDescription = new CFLImage();
+				fliTestDescription.Load("../../ExampleImages/MergeMapped3D/Test Environment.flif");
+				viewTestDescription.SetImagePtr(ref fliTestDescription);
+				CGUIViewImageLayer layerTestDescription = viewTestDescription.GetLayer(0);
+
+				if((res = layerTestDescription.DrawTextCanvas(flp, ("Test Environment"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				view3DSrc.Invalidate(true);
 				view3DSrc2.Invalidate(true);
 				view3DDst.Invalidate(true);
+				viewTestDescription.Invalidate(true);
 
 				// 이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
-				while(view3DSrc.IsAvailable() && view3DSrc2.IsAvailable() && view3DDst.IsAvailable())
+				while(view3DSrc.IsAvailable() && view3DSrc2.IsAvailable() && view3DDst.IsAvailable() && viewTestDescription.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
