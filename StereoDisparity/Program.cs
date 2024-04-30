@@ -167,12 +167,16 @@ namespace StereoDisparity
 				// StereoDisparity 객체 생성 // Create StereoDisparity object
 				CStereoDisparity disparity = new CStereoDisparity();
 
+				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
+
 				// Source 이미지 설정 // Set the source image
 				disparity.SetSourceImage(ref fliSrcImage);
 				// Source 이미지 설정 // Set the source image
 				disparity.SetSourceImage2(ref fliSrcImage2);
 				// Destination 이미지 설정 // Set the destination image
 				disparity.SetDestinationImage(ref fliDstImage);
+				// Destination 객체 설정 // Set the destination object
+				disparity.SetDestinationObject(ref fl3DOHM);
 				// 결과 Texture 이미지 설정 // Set the result texture image
 				disparity.SetResultTextureImage(ref fliTxtImage);
 				// 최소 허용 Disparity 값 설정 // Set the minimum allowed disparity value
@@ -243,10 +247,12 @@ namespace StereoDisparity
 					break;
 				}
 
-				CFL3DObjectHeightMap fl3DOHM = new CFL3DObjectHeightMap(ref fliDstImage, ref fliTxtImage);
+				CFL3DObjectHeightMap fl3DObject = disparity.GetDestinationObject() as CFL3DObjectHeightMap;
+				fl3DObject.SetTextureImage(ref fliTxtImage);
+				fl3DObject.ActivateVertexColorTexture(true);
 
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if(viewImage3DDst.PushObject(fl3DOHM).IsFail())
+				if(viewImage3DDst.PushObject(fl3DObject).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

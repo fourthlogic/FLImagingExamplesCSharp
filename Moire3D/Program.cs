@@ -248,12 +248,16 @@ namespace FPP
 				// FPP 객체 생성 // Create FPP object
 				CMoire3D Moire3D = new CMoire3D();
 
+				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
+
 				// Learn 이미지 설정 // Set the learn image
 				Moire3D.SetLearnImage(ref vctLrnImages);
 				// Source 이미지 설정 // Set the source image
 				Moire3D.SetSourceImage(ref vctSrcImages);
 				// Destination 이미지 설정 // Set the destination image
 				Moire3D.SetDestinationImage(ref fliImageDst);
+				// Destination 객체 설정 // Set the destination object
+				Moire3D.SetDestinationObject(ref fl3DOHM);
 				// 카메라의 working distance 설정 // Set working distance of the camera
 				Moire3D.SetWorkingDistance(330);
 				// 카메라의 field of view 설정 // Set field of view of the camera
@@ -343,10 +347,12 @@ namespace FPP
 					break;
 				}
 
-				CFL3DObjectHeightMap fl3DOHM = new CFL3DObjectHeightMap(ref fliImageDst, ref fliTxtImage);
+				CFL3DObjectHeightMap fl3DObject = Moire3D.GetDestinationObject() as CFL3DObjectHeightMap;
+				fl3DObject.SetTextureImage(ref fliTxtImage);
+				fl3DObject.ActivateVertexColorTexture(true);
 
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if(view3DDst.PushObject(fl3DOHM).IsFail())
+				if(view3DDst.PushObject(fl3DObject).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
