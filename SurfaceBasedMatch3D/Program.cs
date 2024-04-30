@@ -32,7 +32,6 @@ namespace SurfaceBasedMatch3D
 			// 3D 객체 선언 // Declare 3D object
 			CFL3DObject fl3DOLearnObject = new CFL3DObject();
 			CFL3DObject fl3DOSourceObject = new CFL3DObject();
-			CFL3DObject fl3DODestinationObject = new CFL3DObject();
 
 			// 3D 뷰 선언 // Declare 3D view	
 			CGUIView3D view3DDst = new CGUIView3D();
@@ -100,8 +99,6 @@ namespace SurfaceBasedMatch3D
 				SurfaceBasedMatch3D.SetLearnObject(ref fl3DOLearnObject);
 				// Source object 설정 // Set the source object
 				SurfaceBasedMatch3D.SetSourceObject(ref fl3DOSourceObject);
-				// Destination object 설정 // Set the destination object
-				SurfaceBasedMatch3D.SetDestinationObject(ref fl3DODestinationObject);
 				// 오브젝트 타입 설정 // Set the type of the object
 				SurfaceBasedMatch3D.SetObjectType(CSurfaceBasedMatch3D.EObjectType.Object3D);
 				// Min score 설정 // Set the min score
@@ -112,14 +109,14 @@ namespace SurfaceBasedMatch3D
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = SurfaceBasedMatch3D.Learn()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Laser Triangulation.");
+					ErrorPrint(eResult, "Failed to execute Surface Based Match 3D.");
 					break;
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = SurfaceBasedMatch3D.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Laser Triangulation.");
+					ErrorPrint(eResult, "Failed to execute Surface Based Match 3D.");
 					break;
 				}
 
@@ -168,21 +165,11 @@ namespace SurfaceBasedMatch3D
 					break;
 				}
 
-				// 3D 오브젝트 뷰에 결과 Object 디스플레이
-				if((eResult = view3DDst.PushObject((CFL3DObject)SurfaceBasedMatch3D.GetDestinationObject())).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				CSurfaceBasedMatch3D.SPoseMatrixParameters sResult;
+				CSurfaceBasedMatch3D.SPoseMatrixParameters sResult = new CSurfaceBasedMatch3D.SPoseMatrixParameters();
 
 				double f64ArrRotX;
 				double f64ArrRotY;
 				double f64ArrRotZ;
-				double f64ArrTransX;
-				double f64ArrTransY;
-				double f64ArrTransZ;
 				double f64Score;
 
 				long i64ResultCount = SurfaceBasedMatch3D.GetResultCount();
@@ -193,44 +180,62 @@ namespace SurfaceBasedMatch3D
 					break;
 				}
 
-				// 추정된 포즈 행렬 가져오기
-				if((eResult = SurfaceBasedMatch3D.GetResultPoseMatrix(0, out sResult)).IsFail())
+				for(long i = 0; i < i64ResultCount; i++)
 				{
-					ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
-					break;
+					CFL3DObject fl3DOLearnTransform = new CFL3DObject();
+					CFLPoint3<double> flpTrans = new CFLPoint3<double>();
+					TPoint3<double> tp3Center = new TPoint3<double>();
+
+					// 추정된 포즈 행렬 가져오기
+					if((eResult = SurfaceBasedMatch3D.GetResultPoseMatrix(i, out sResult)).IsFail())
+					{
+						ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
+						break;
+					}
+
+					f64Score = sResult.f64Score;
+					f64ArrRotX = sResult.f64Rx;
+					f64ArrRotY = sResult.f64Ry;
+					f64ArrRotZ = sResult.f64Rz;
+					flpTrans.x = sResult.f64Tx;
+					flpTrans.y = sResult.f64Ty;
+					flpTrans.z = sResult.f64Tz;
+
+					// 추정한 포즈 결과를 Console창에 출력한다 // Print the estimated pose matrix to the console window
+					Console.WriteLine(" ▷ Pose Matrix {0}", i);
+					Console.WriteLine("  1. R : Rotation, T : Translation\n");
+					Console.WriteLine("    Rx   : {0}", f64ArrRotX);
+					Console.WriteLine("    Ry   : {0}", f64ArrRotY);
+					Console.WriteLine("    Rz   : {0}", f64ArrRotZ);
+					Console.WriteLine("    Tx   : {0}", flpTrans.x);
+					Console.WriteLine("    Ty   : {0}", flpTrans.y);
+					Console.WriteLine("    Tz   : {0}", flpTrans.z);
+					Console.WriteLine("  2. Score : {0}", f64Score);
+					Console.WriteLine("\n");
+
+					if((eResult = SurfaceBasedMatch3D.GetResultObject(i, out fl3DOLearnTransform, out tp3Center)).IsFail())
+					{
+						ErrorPrint(eResult, "Failed to set object on the 3d view.\n");
+						break;
+					}
+
+					if((eResult = view3DDst.PushObject(fl3DOLearnTransform)).IsFail())
+					{
+						ErrorPrint(eResult, "Failed to set object on the 3d view.\n");
+						break;
+					}
+
+					string strChannel = String.Format("Rx : {0}, Ry : {1}, Rz : {2}, \nTx : {3}, Ty : {4}, Tz : {5}\nScore : {6}"
+									   , f64ArrRotX, f64ArrRotY, f64ArrRotZ, flpTrans.x, flpTrans.y, flpTrans.z, f64Score);
+
+					// 추정된 포즈 행렬 및 score 출력
+					if((eResult = layer3DDst.DrawText3D(tp3Center, strChannel, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+					{
+						ErrorPrint(eResult, "Failed to draw text.\n");
+						break;
+					}
 				}
 
-				f64Score = sResult.f64Score;
-				f64ArrRotX = sResult.f64Rx;
-				f64ArrRotY = sResult.f64Ry;
-				f64ArrRotZ = sResult.f64Rz;
-				f64ArrTransX = sResult.f64Tx;
-				f64ArrTransY = sResult.f64Ty;
-				f64ArrTransZ = sResult.f64Tz;
-
-				// 추정한 포즈 결과를 Console창에 출력한다 // Print the estimated pose matrix to the console window
-				Console.WriteLine(" ▷ Pose Matrix");
-				Console.WriteLine("  1. R : Rotation, T : Translation\n");
-				Console.WriteLine("    Rx   : {0}", f64ArrRotX);
-				Console.WriteLine("    Ry   : {0}", f64ArrRotY);
-				Console.WriteLine("    Rz   : {0}", f64ArrRotZ);
-				Console.WriteLine("    Tx   : {0}", f64ArrTransX);
-				Console.WriteLine("    Ty   : {0}", f64ArrTransY);
-				Console.WriteLine("    Tz   : {0}", f64ArrTransZ);
-				Console.WriteLine("  2. Score : {0}", f64Score);
-				Console.WriteLine("\n");
-
-				string strChannel = String.Format("Rx : {0}, Ry : {1}, Rz : {2}, \nTx : {3}, Ty : {4}, Tz : {5}\nScore : {6}"
-							   , f64ArrRotX, f64ArrRotY, f64ArrRotZ, f64ArrTransX, f64ArrTransY, f64ArrTransZ, f64Score);
-
-				flp.x = 0;
-				flp.y = 32;
-				// 추정된 포즈 행렬 및 score 출력
-				if((eResult = layer3DDst.DrawTextCanvas(flp, strChannel, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
-					break;
-				}
 
 				view3DDst.ZoomFit();
 				view3DLearn.ZoomFit();
@@ -241,9 +246,10 @@ namespace SurfaceBasedMatch3D
 				view3DSource.Invalidate(true);
 				view3DDst.Invalidate(true);
 
-				// 이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
+				//이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
 				while(view3DSource.IsAvailable() && view3DLearn.IsAvailable() && view3DDst.IsAvailable())
 					Thread.Sleep(1);
+
 			}
 			while(false);
 		}
