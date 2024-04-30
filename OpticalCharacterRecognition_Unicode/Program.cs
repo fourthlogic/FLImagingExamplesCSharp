@@ -102,7 +102,6 @@ namespace OpticalCharacterRecognition
 				layer = viewImage.GetLayer(0);
 				layerRecognize = viewImageRecognize.GetLayer(1);
 
-
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layer.Clear();
 				layerRecognize.Clear();
@@ -136,13 +135,9 @@ namespace OpticalCharacterRecognition
 				}
 
 				CFLFigureArray flfaLearnt = new CFLFigureArray();
-				CFLFigureArray flfaLearntOffset = new CFLFigureArray();
 
 				// 학습한 문자의 모양를 받아오는 함수
 				ocr.GetLearntCharacter(out flfaLearnt);
-
-				// 학습한 문자의 위치를 받아오는 함수
-				ocr.GetLearntCharacterOffset(out flfaLearntOffset);
 
 				Int64 i64LearntCount = flfaLearnt.GetCount();
 
@@ -151,9 +146,7 @@ namespace OpticalCharacterRecognition
 					CFLFigure flfLearnt = new CFLFigureArray(flfaLearnt.GetAt(i));
 					string flsResultString = flfLearnt.GetName();
 					CFLRect<double> flrBoundary = new CFLRect<double>();
-					CFLPoint<double> flpOffset = new CFLPoint<double>(flfaLearntOffset.GetAt(i));
 
-					flfLearnt.Offset(flpOffset);
 					flrBoundary = flfLearnt.GetBoundaryRect();
 
 					if((res = layer.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
@@ -177,7 +170,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 문자의 각도 범위를 설정
-				if((res = ocr.SetRecognizingAngleTolerance(50)).IsFail())
+				if((res = ocr.SetRecognizingAngleTolerance(50.0)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
 					break;

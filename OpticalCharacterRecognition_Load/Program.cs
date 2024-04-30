@@ -136,7 +136,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 문자의 각도 범위를 설정
-				if((res = ocr.SetRecognizingAngleTolerance(10)).IsFail())
+				if((res = ocr.SetRecognizingAngleTolerance(10.0)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
 					break;
@@ -146,13 +146,6 @@ namespace OpticalCharacterRecognition
 				if((res = ocr.SetRecognizingCharacterColorType(COCR.ECharacterColorType.All)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing character color.");
-					break;
-				}
-
-				// 인식할 최소 점수를 설정
-				if((res = ocr.SetRecognizingMinimumScore(0.45)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set minimum score.");
 					break;
 				}
 
@@ -203,16 +196,9 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 문자의 각도 범위를 설정
-				if((res = ocr.SetRecognizingAngleTolerance(10)).IsFail())
+				if((res = ocr.SetRecognizingAngleTolerance(10.0)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
-					break;
-				}
-
-				// 인식할 이미지의 잡음 제거 여부를 설정
-				if((res = ocr.EnableRecognizingNoiseReduction(true)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set recognizing noise reduction.");
 					break;
 				}
 
@@ -224,7 +210,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 최소 점수를 설정
-				if((res = ocr.SetRecognizingMinimumScore(0.45)).IsFail())
+				if((res = ocr.SetRecognizingMinimumScore(0.5)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set minimum score.");
 					break;
