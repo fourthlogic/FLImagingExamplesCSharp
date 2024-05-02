@@ -99,8 +99,6 @@ namespace SurfaceBasedMatch3D
 				SurfaceBasedMatch3D.SetLearnObject(ref fl3DOLearnObject);
 				// Source object 설정 // Set the source object
 				SurfaceBasedMatch3D.SetSourceObject(ref fl3DOSourceObject);
-				// 오브젝트 타입 설정 // Set the type of the object
-				SurfaceBasedMatch3D.SetObjectType(CSurfaceBasedMatch3D.EObjectType.Object3D);
 				// Min score 설정 // Set the min score
 				SurfaceBasedMatch3D.SetMinScore(0.1);
 				// 최대 결과 개수 설정 // Set the max count of match result
