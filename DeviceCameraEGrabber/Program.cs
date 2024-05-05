@@ -79,7 +79,6 @@ namespace DeviceCameraEGrabber
 	        {
                 String strInput = "";
 
-                String strCamfilePath = "";
 		        int i32BoardIndex = 0;
                 int i32ModuleIndex = 0;
 

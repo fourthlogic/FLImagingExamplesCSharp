@@ -136,7 +136,7 @@ namespace Morphology_Close
 				morphologyClose.SetDestinationROI(flrROI);
 
 				// 처리할 Morphology Kernel 의 HalfSize 설정 (HalfSize = 3 일 경우, Kernel Size : 7x7) // Setting HalfSize 3(Kerenl Radius : 7x7)
-				morphologyClose.SetKernelShape(CMorphologyClose.EKernelShape.Circle);
+				morphologyClose.SetKernelShape(EKernelShape.Circle);
 				morphologyClose.SetKernel(3);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
