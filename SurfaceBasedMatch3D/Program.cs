@@ -100,15 +100,27 @@ namespace SurfaceBasedMatch3D
 				// Source object 설정 // Set the source object
 				SurfaceBasedMatch3D.SetSourceObject(ref fl3DOSourceObject);
 				// Min score 설정 // Set the min score
-				SurfaceBasedMatch3D.SetMinScore(0.1);
+				SurfaceBasedMatch3D.SetMinScore(0.5);
 				// 최대 결과 개수 설정 // Set the max count of match result
-				SurfaceBasedMatch3D.SetMaxObject(1);				
+				SurfaceBasedMatch3D.SetMaxObject(1);
 				// 학습 샘플링 거리 설정 // Set the learn sampling distance
 				SurfaceBasedMatch3D.SetLearnSamplingDistance(0.03);
 				// 장면 샘플링 거리 설정 // Set the scene sampling distance
 				SurfaceBasedMatch3D.SetSceneSamplingDistance(0.03);
 				// 키포인트 비율 설정 // Set the keypoint ratio.
-				SurfaceBasedMatch3D.SetKeypointRatio(0.5);
+				SurfaceBasedMatch3D.SetKeypointRatio(0.3);
+				// 엣지 학습 여부 설정 // Set the edge train
+				SurfaceBasedMatch3D.EnableTrainEdge(true);
+				// 엣지 장면 여부 설정 // Set the edge scene
+				SurfaceBasedMatch3D.EnableSceneEdge(true);
+				// 엣지 학습 임계값 설정 // Set the threshold of train edge
+				SurfaceBasedMatch3D.SetTrainEdgeThreshold(0.25);
+				// 엣지 장면 임계값 설정 // Set the threshold of scene edge
+				SurfaceBasedMatch3D.SetSceneEdgeThreshold(0.25);
+				// 클러스터링 범위 설정 // Set the clustering range
+				SurfaceBasedMatch3D.SetClusterRange(2);
+				// 포즈 조정 반복 횟수 설정 // Set the iteration value of pose refinement
+				SurfaceBasedMatch3D.SetIteration(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = SurfaceBasedMatch3D.Learn()).IsFail())
@@ -175,6 +187,7 @@ namespace SurfaceBasedMatch3D
 				double f64ArrRotY;
 				double f64ArrRotZ;
 				double f64Score;
+				double f64Residual;
 
 				long i64ResultCount = SurfaceBasedMatch3D.GetResultCount();
 
@@ -197,6 +210,7 @@ namespace SurfaceBasedMatch3D
 						break;
 					}
 
+					f64Residual = sResult.f64Residual;
 					f64Score = sResult.f64Score;
 					f64ArrRotX = sResult.f64Rx;
 					f64ArrRotY = sResult.f64Ry;
@@ -214,7 +228,8 @@ namespace SurfaceBasedMatch3D
 					Console.WriteLine("    Tx   : {0}", flpTrans.x);
 					Console.WriteLine("    Ty   : {0}", flpTrans.y);
 					Console.WriteLine("    Tz   : {0}", flpTrans.z);
-					Console.WriteLine("  2. Score : {0}", f64Score);
+					Console.WriteLine("    Score : {0}", f64Score);
+					Console.WriteLine("    Residual : {0}", f64Residual);
 					Console.WriteLine("\n");
 
 					if((eResult = SurfaceBasedMatch3D.GetResultObject(i, out fl3DOLearnTransform, out tp3Center)).IsFail())
