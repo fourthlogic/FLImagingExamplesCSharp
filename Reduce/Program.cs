@@ -110,28 +110,24 @@ namespace Reduce
 
 
 				// Reduce 함수 실행 (Epsilon : 10.0) // Reduce function execution (Epsilon : 10.0)
-				CFLPointArray flpaResult1;
+				CFLRegion flrgResult1;
 				double f64Epsilon1 = 10.0;
 
-				if((res = flrgSourceFig.Reduce(f64Epsilon1, true, out flpaResult1)).IsFail())
+				if((res = flrgSourceFig.Reduce(f64Epsilon1, true, out flrgResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
 				}
-
-				CFLRegion flrgResult1 = new CFLRegion(flpaResult1);
 
 				// Reduce 함수 실행 (Epsilon : 15.0) // Reduce function execution (Epsilon : 15.0)
-				CFLPointArray flpaResult2;
+				CFLRegion flrgResult2;
 				double f64Epsilon2 = 15.0;
 
-				if((res = flrgSourceFig.Reduce(f64Epsilon2, true, out flpaResult2)).IsFail())
+				if((res = flrgSourceFig.Reduce(f64Epsilon2, true, out flrgResult2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
 				}
-
-				CFLRegion flrgResult2 = new CFLRegion(flpaResult2);
 
 				// View 에 결과 Region 과 정점 그리기 // Draw the resulting Region and vertices in the View
 				layer[1].DrawFigureImage(flrgResult1, EColor.CYAN, 3);
