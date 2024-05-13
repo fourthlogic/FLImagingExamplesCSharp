@@ -41,7 +41,7 @@ namespace OpticalCharacterRecognition
 				CResult res;
 
 				// 이미지 로드 // Load image
-				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognition_15Degree.flif")).IsFail())
+				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognition.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
