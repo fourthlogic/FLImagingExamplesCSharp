@@ -184,10 +184,10 @@ namespace OpticalCharacterRecognition
 					break;
 				}
 
-				// 인식할 최소 점수를 설정
-				if((res = ocr.SetRecognizingMinimumScore(0.6)).IsFail())
+				// 인식할 최대 개수를 설정
+				if((res = ocr.SetRecognizingMaximumCharacterCount(12)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set minimum score.");
+					ErrorPrint(res, "Failed to set maximum character count.");
 					break;
 				}
 
