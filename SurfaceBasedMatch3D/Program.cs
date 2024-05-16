@@ -44,14 +44,14 @@ namespace SurfaceBasedMatch3D
 			do
 			{
 				// Learn Object 로드 // Load the learn object
-				if((eResult = fl3DOLearnObject.Load("../../ExampleImages/SurfaceBasedMatch3D/ReferencePoints.ply")).IsFail())
+				if((eResult = fl3DOLearnObject.Load("../../ExampleImages/SurfaceBasedMatch3D/Car wheel example.ply")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Source Object 로드 // Load the Source object
-				if((eResult = fl3DOSourceObject.Load("../../ExampleImages/SurfaceBasedMatch3D/MeasuredPoints.ply")).IsFail())
+				if((eResult = fl3DOSourceObject.Load("../../ExampleImages/SurfaceBasedMatch3D/Car example.ply")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
@@ -102,21 +102,17 @@ namespace SurfaceBasedMatch3D
 				// Min score 설정 // Set the min score
 				SurfaceBasedMatch3D.SetMinScore(0.5);
 				// 최대 결과 개수 설정 // Set the max count of match result
-				SurfaceBasedMatch3D.SetMaxObject(1);
+				SurfaceBasedMatch3D.SetMaxObject(4);
 				// 학습 샘플링 거리 설정 // Set the learn sampling distance
 				SurfaceBasedMatch3D.SetLearnSamplingDistance(0.03);
 				// 장면 샘플링 거리 설정 // Set the scene sampling distance
 				SurfaceBasedMatch3D.SetSceneSamplingDistance(0.03);
 				// 키포인트 비율 설정 // Set the keypoint ratio.
-				SurfaceBasedMatch3D.SetKeypointRatio(0.3);
+				SurfaceBasedMatch3D.SetKeypointRatio(0.5);
 				// 엣지 학습 여부 설정 // Set the edge train
-				SurfaceBasedMatch3D.EnableTrainEdge(true);
+				SurfaceBasedMatch3D.EnableTrainEdge(false);
 				// 엣지 장면 여부 설정 // Set the edge scene
-				SurfaceBasedMatch3D.EnableEdgeBasedMatch(true);
-				// 엣지 학습 임계값 설정 // Set the threshold of train edge
-				SurfaceBasedMatch3D.SetTrainEdgeThreshold(0.25);
-				// 엣지 장면 임계값 설정 // Set the threshold of scene edge
-				SurfaceBasedMatch3D.SetSceneEdgeThreshold(0.25);
+				SurfaceBasedMatch3D.EnableEdgeBasedMatch(false);
 				// 클러스터링 범위 설정 // Set the clustering range
 				SurfaceBasedMatch3D.SetClusterRange(2);
 				// 포즈 조정 반복 횟수 설정 // Set the iteration value of pose refinement
@@ -244,8 +240,8 @@ namespace SurfaceBasedMatch3D
 						break;
 					}
 
-					string strChannel = String.Format("Rx : {0}, Ry : {1}, Rz : {2}, \nTx : {3}, Ty : {4}, Tz : {5}\nScore : {6}"
-									   , f64ArrRotX, f64ArrRotY, f64ArrRotZ, flpTrans.x, flpTrans.y, flpTrans.z, f64Score);
+					string strChannel = String.Format("R({0}, {1}, {2}) , \nT({3}, {4}, {5})\nScore : {6}\nResidual {7}:"
+									   , f64ArrRotX, f64ArrRotY, f64ArrRotZ, flpTrans.x, flpTrans.y, flpTrans.z, f64Score, f64Residual);
 
 					// 추정된 포즈 행렬 및 score 출력
 					if((eResult = layer3DDst.DrawText3D(tp3Center, strChannel, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
