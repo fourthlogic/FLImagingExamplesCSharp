@@ -62,7 +62,7 @@ namespace MultiFocus
 			else // dZ
 				i32SelectedAxis = 2;
 
-			List<TPoint3<float>> flaColors = new List<TPoint3<float>>();
+			List<TPoint3<byte>> flaColors = new List<TPoint3<byte>>();
 
 			for(int i = 0; i < arrResult.Count; ++i)
 			{
@@ -76,20 +76,22 @@ namespace MultiFocus
 				float f32Temp;
 				float f32Segment = (1.0f / 6.0f);
 
-				float[] arrF32Color = new float[3];
+				byte[] arrF32Color = new byte[3];
 
 				for(int j = 0; j < 3; ++j)
 				{
-					arrF32Color[j] = (f32Intensity - (j * 2 - 1) * f32Segment) / f32Segment;
-					arrF32Color[j] = arrF32Color[j] > 1 ? 1 : arrF32Color[j];
-					arrF32Color[j] = arrF32Color[j] < 0 ? 0 : arrF32Color[j];
+					float f32Value;
+					f32Value = (f32Intensity - (j * 2 - 1) * f32Segment) / f32Segment;
+					f32Value = f32Value > 1 ? 1 : f32Value;
+					f32Value = f32Value < 0 ? 0 : f32Value;
 					f32Temp = (f32Intensity - (j * 2 + 1) * f32Segment) / f32Segment;
 					f32Temp = f32Temp > 1 ? 1 : f32Temp;
 					f32Temp = f32Temp < 0 ? 0 : f32Temp;
-					arrF32Color[j] -= f32Temp;
+					f32Value -= f32Temp;
+					arrF32Color[j] = (byte)(f32Value * 255);
 				}
 
-				TPoint3<float> tpColor = new TPoint3<float>(arrF32Color[0], arrF32Color[1], arrF32Color[2]);
+				TPoint3<byte> tpColor = new TPoint3<byte>(arrF32Color[0], arrF32Color[1], arrF32Color[2]);
 
 				flaColors.Add(tpColor);
 			}
