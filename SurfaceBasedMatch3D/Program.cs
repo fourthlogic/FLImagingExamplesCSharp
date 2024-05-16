@@ -132,13 +132,19 @@ namespace SurfaceBasedMatch3D
 					break;
 				}
 
-				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
-				CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
+
+				view3DLearn.SetShadingType(EView3DObjectShadingType.Flat);
+                view3DSource.SetShadingType(EView3DObjectShadingType.Flat);
+                view3DDst.SetShadingType(EView3DObjectShadingType.Flat);
+
+
+                // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+                // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
+                CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
 				CGUIView3DLayer layer3DLearn = view3DLearn.GetLayer(0);
 				CGUIView3DLayer layer3DSource = view3DSource.GetLayer(0);
 
-
+				
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layer3DDst.Clear();
 				layer3DLearn.Clear();
@@ -177,7 +183,11 @@ namespace SurfaceBasedMatch3D
 					break;
 				}
 
-				CSurfaceBasedMatch3D.SPoseMatrixParameters sResult = new CSurfaceBasedMatch3D.SPoseMatrixParameters();
+                view3DDst.ZoomFit();
+                view3DLearn.ZoomFit();
+                view3DSource.ZoomFit();
+
+                CSurfaceBasedMatch3D.SPoseMatrixParameters sResult = new CSurfaceBasedMatch3D.SPoseMatrixParameters();
 
 				double f64ArrRotX;
 				double f64ArrRotY;
@@ -252,12 +262,13 @@ namespace SurfaceBasedMatch3D
 				}
 
 
-				view3DDst.ZoomFit();
-				view3DLearn.ZoomFit();
-				view3DSource.ZoomFit();
-
+                view3DDst.ZoomFit();
+                view3DLearn.ZoomFit();
+                view3DSource.ZoomFit();
+                
+				
 				// 이미지 뷰를 갱신 합니다. // Update image view
-				view3DLearn.Invalidate(true);
+                view3DLearn.Invalidate(true);
 				view3DSource.Invalidate(true);
 				view3DDst.Invalidate(true);
 
