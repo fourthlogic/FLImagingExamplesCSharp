@@ -395,9 +395,9 @@ namespace OrthogonalCalibrator
                 COrthogonalCalibrator.SIntrinsicParameters sIntrinsicParam = sCC.GetResultIntrinsicParameters();
                 COrthogonalCalibrator.SDistortionCoefficients sDistortCoeef = sCC.GetResultDistortionCoefficients();
 
-                string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, sIntrinsicParam.f64Padding1, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, sIntrinsicParam.f64Padding2, sIntrinsicParam.f64Padding3, sIntrinsicParam.f64Padding4);
+                string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, 0, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, 0, 0, 1);
 
-                string strDistVal = String.Format("{0}, {1}, {2}, {3}, {4}", sDistortCoeef.f64F1, sDistortCoeef.f64F2, sDistortCoeef.f64P1, sDistortCoeef.f64P2, sDistortCoeef.f64F3);
+                string strDistVal = String.Format("{0}, {1}, {2}, {3}, {4}", sDistortCoeef.f64K1, sDistortCoeef.f64K2, sDistortCoeef.f64P1, sDistortCoeef.f64P2, sDistortCoeef.f64K3);
 
                 Console.WriteLine("Intrinsic parameters");
                 Console.WriteLine("{0}", strMatrix);

@@ -602,11 +602,11 @@ namespace StereoCalibrator
 
 				double f64ReprojError = sSC.GetResultReProjectionError();
 
-				string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, sIntrinsicParam.f64Padding1, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, sIntrinsicParam.f64Padding2, sIntrinsicParam.f64Padding3, sIntrinsicParam.f64Padding4);
+				string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, 0, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, 0, 0, 1);
 
 				string strDistVal = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}", sDistortCoeef.f64K1, sDistortCoeef.f64K2, sDistortCoeef.f64P1, sDistortCoeef.f64P2, sDistortCoeef.f64K3, sDistortCoeef.f64K4, sDistortCoeef.f64K5, sDistortCoeef.f64K6, sDistortCoeef.f64S1, sDistortCoeef.f64S2, sDistortCoeef.f64S3, sDistortCoeef.f64S4, sDistortCoeef.f64Gx, sDistortCoeef.f64Gy);
 
-				string strMatrix2 = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, sIntrinsicParam.f64Padding1, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, sIntrinsicParam.f64Padding2, sIntrinsicParam.f64Padding3, sIntrinsicParam.f64Padding4);
+				string strMatrix2 = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, 0, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, 0, 0, 1);
 
 				string strDistVal2 = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}", sDistortCoeef2.f64K1, sDistortCoeef2.f64K2, sDistortCoeef2.f64P1, sDistortCoeef2.f64P2, sDistortCoeef2.f64K3, sDistortCoeef2.f64K4, sDistortCoeef2.f64K5, sDistortCoeef2.f64K6, sDistortCoeef2.f64S1, sDistortCoeef2.f64S2, sDistortCoeef2.f64S3, sDistortCoeef2.f64S4, sDistortCoeef2.f64Gx, sDistortCoeef2.f64Gy);
 

@@ -181,18 +181,14 @@ namespace CircleGauge
                 uIntrinc.f64FocalLengthX = arrF64Intrinc[0];
                 uIntrinc.f64Skew = arrF64Intrinc[1];
                 uIntrinc.f64PrincipalPointX = arrF64Intrinc[2];
-                uIntrinc.f64Padding1 = arrF64Intrinc[3];
                 uIntrinc.f64FocalLengthY = arrF64Intrinc[4];
                 uIntrinc.f64PrincipalPointY = arrF64Intrinc[5];
-                uIntrinc.f64Padding2 = arrF64Intrinc[6];
-                uIntrinc.f64Padding3 = arrF64Intrinc[7];
-                uIntrinc.f64Padding4 = arrF64Intrinc[8];
 
-                uDist.f64F1 = arrF64Dist[0];
-                uDist.f64F2 = arrF64Dist[1];
+                uDist.f64K1 = arrF64Dist[0];
+                uDist.f64K2 = arrF64Dist[1];
                 uDist.f64P1 = arrF64Dist[2];
                 uDist.f64P2 = arrF64Dist[3];
-                uDist.f64F3 = arrF64Dist[4];
+                uDist.f64K3 = arrF64Dist[4];
 
                 if ((res = sCC.SetIntrinsicParameters(uIntrinc)).IsFail())
                 {
@@ -210,8 +206,8 @@ namespace CircleGauge
                     break;
 
                 CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
-                string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", uIntrinc.f64FocalLengthX, uIntrinc.f64Skew, uIntrinc.f64PrincipalPointX, uIntrinc.f64Padding1, uIntrinc.f64FocalLengthY, uIntrinc.f64PrincipalPointY, uIntrinc.f64Padding2, uIntrinc.f64Padding3, uIntrinc.f64Padding4);
-                string strDistVal = String.Format("{0}, {1}, {2}, {3}, {4}", uDist.f64F1, uDist.f64F2, uDist.f64P1, uDist.f64P2, uDist.f64F3);
+                string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", uIntrinc.f64FocalLengthX, uIntrinc.f64Skew, uIntrinc.f64PrincipalPointX, 0, uIntrinc.f64FocalLengthY, uIntrinc.f64PrincipalPointY, 0, 0, 1);
+                string strDistVal = String.Format("{0}, {1}, {2}, {3}, {4}", uDist.f64K1, uDist.f64K2, uDist.f64P1, uDist.f64P2, uDist.f64K3);
 
                 TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
