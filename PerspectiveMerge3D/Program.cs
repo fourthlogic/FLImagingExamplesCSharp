@@ -76,14 +76,14 @@ namespace MultiFocus
 				FLImagingCLR.Foundation.CFL3DObject fl3DODst = new FLImagingCLR.Foundation.CFL3DObject();
 
 				TPoint3<float> tpPosition = new TPoint3<float>(-0.152f, 0.0f, 0f);
-				TPoint3<float> tpRotateByEulerAngles = new TPoint3<float>(-8f, 29f, 90f);
+				TPoint3<float> tpRotation = new TPoint3<float>(-8f, 29f, 90f);
 				TPoint3<float> tpPosition2 = new TPoint3<float>(0.152f, 0.0f, 0f);
-				TPoint3<float> tpRotateByEulerAngles2 = new TPoint3<float>(-8f, -29f, 90f);
+				TPoint3<float> tpRotation2 = new TPoint3<float>(-8f, -29f, 90f);
 
 				// 카메라 위치 설정 // Set the camera position
 				algemObject.SetPosition(tpPosition, tpPosition2);
 				// 카메라 회전정도 설정 // Set the camera degree
-				algemObject.SetRotateByEulerAngles(tpRotateByEulerAngles, tpRotateByEulerAngles2);
+				algemObject.SetRotation(tpRotation, tpRotation2);
 
 				// 카메라 1, 2의 Source 객체 설정 // Set the source object of camera 1, 2
 				algemObject.SetSourceObject(ref fl3DOSrc);
