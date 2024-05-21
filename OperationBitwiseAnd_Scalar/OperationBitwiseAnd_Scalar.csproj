@@ -142,23 +142,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameBase)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameFoundation)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameGUI)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcBase)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcOperation)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcConvolution)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcMorphology)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcTransform)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImgProcTransform)_Cuda_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImageProcessing)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameImageProcessing)_Cuda_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAdvancedFunctions)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAdvancedFunctions)_Cuda_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAdvancedImageProcessing)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameDevices)_X64.dll" .\
-copy "C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameThreeDim)_X64.dll" .\
-Set ERRORLEVEL=0</PostBuildEvent>
+    <PostBuildEvent></PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
