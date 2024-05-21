@@ -9,8 +9,8 @@
     <ProjectGuid>{4A070916-E5E1-45D5-BFDC-6ACA26600643}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MergeMapped3D</RootNamespace>
-    <AssemblyName>MergeMapped3D</AssemblyName>
+    <RootNamespace>PerspectiveMerge3D</RootNamespace>
+    <AssemblyName>PerspectiveMerge3D</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

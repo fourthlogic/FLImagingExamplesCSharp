@@ -68,10 +68,10 @@ namespace MultiFocus
 
 				FLImagingCLR.Foundation.CFL3DObject fl3DOSrc = new FLImagingCLR.Foundation.CFL3DObject();
 				FLImagingCLR.Foundation.CFL3DObject fl3DOSrc2 = new FLImagingCLR.Foundation.CFL3DObject();
-				res = fl3DOSrc.Load("../../ExampleImages/MergeMapped3D/Left Cam.ply");
-				res = fl3DOSrc2.Load("../../ExampleImages/MergeMapped3D/Right Cam.ply");
+				res = fl3DOSrc.Load("../../ExampleImages/PerspectiveMerge3D/Left Cam.ply");
+				res = fl3DOSrc2.Load("../../ExampleImages/PerspectiveMerge3D/Right Cam.ply");
 
-				FLImagingCLR.ThreeDim.CMergeMapped3D algemObject = new FLImagingCLR.ThreeDim.CMergeMapped3D();
+				FLImagingCLR.ThreeDim.CPerspectiveMerge3D algemObject = new FLImagingCLR.ThreeDim.CPerspectiveMerge3D();
 
 				FLImagingCLR.Foundation.CFL3DObject fl3DODst = new FLImagingCLR.Foundation.CFL3DObject();
 
@@ -125,14 +125,14 @@ namespace MultiFocus
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
-				if((res = layer3DDst.DrawTextCanvas(flp, ("Merge Mapped Result"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer3DDst.DrawTextCanvas(flp, ("Result"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
 				CFLImage fliTestDescription = new CFLImage();
-				fliTestDescription.Load("../../ExampleImages/MergeMapped3D/Test Environment.flif");
+				fliTestDescription.Load("../../ExampleImages/PerspectiveMerge3D/Test Environment.flif");
 				viewTestDescription.SetImagePtr(ref fliTestDescription);
 				CGUIViewImageLayer layerTestDescription = viewTestDescription.GetLayer(0);
 
