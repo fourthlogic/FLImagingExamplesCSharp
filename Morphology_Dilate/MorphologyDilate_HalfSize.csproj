@@ -9,8 +9,8 @@
     <ProjectGuid>{C3D97E30-33A3-48CF-99EA-12620477B638}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Morphology_Dilate</RootNamespace>
-    <AssemblyName>Morphology_Dilate</AssemblyName>
+    <RootNamespace>Morphology_Dilate_HalfSize</RootNamespace>
+    <AssemblyName>Morphology_Dilate_HalfSize</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

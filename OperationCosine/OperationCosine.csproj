@@ -9,8 +9,8 @@
     <ProjectGuid>{E17D86A7-62C2-43A1-B1C0-076867FF0333}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OperationAtan2_Scalar</RootNamespace>
-    <AssemblyName>OperationAtan2_Scalar</AssemblyName>
+    <RootNamespace>OperationCosine</RootNamespace>
+    <AssemblyName>OperationCosine</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

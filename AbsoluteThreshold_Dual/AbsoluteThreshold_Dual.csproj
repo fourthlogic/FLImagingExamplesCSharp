@@ -9,8 +9,8 @@
     <ProjectGuid>{7F7F15F9-C4C4-4275-AA6E-A0A268B5CAF3}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Threshold_Dual</RootNamespace>
-    <AssemblyName>Threshold_Dual</AssemblyName>
+    <RootNamespace>AbsoluteThreshold_Dual</RootNamespace>
+    <AssemblyName>AbsoluteThreshold_Dual</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

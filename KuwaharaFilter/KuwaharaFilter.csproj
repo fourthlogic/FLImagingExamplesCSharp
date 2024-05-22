@@ -9,8 +9,8 @@
     <ProjectGuid>{8B6EE8FC-2914-4C25-B4BB-C6A7546C0F18}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KuwaharaFilter_Image</RootNamespace>
-    <AssemblyName>KuwaharaFilter_Image</AssemblyName>
+    <RootNamespace>KuwaharaFilter</RootNamespace>
+    <AssemblyName>KuwaharaFilter</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

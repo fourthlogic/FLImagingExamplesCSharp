@@ -9,8 +9,8 @@
     <ProjectGuid>{BDEFFBE9-4DDC-4468-8F18-23C14605DD24}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ThinPlateSplineTransform</RootNamespace>
-    <AssemblyName>ThinPlateSplineTransform</AssemblyName>
+    <RootNamespace>ThinPlateSplineWarping</RootNamespace>
+    <AssemblyName>ThinPlateSplineWarping</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

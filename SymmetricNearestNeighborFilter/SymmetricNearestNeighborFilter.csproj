@@ -9,8 +9,8 @@
     <ProjectGuid>{E7A23A01-24FA-4AF9-B2ED-9AF2427A2236}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SymmetricNearestNeighborFilter_Image</RootNamespace>
-    <AssemblyName>SymmetricNearestNeighborFilter_Image</AssemblyName>
+    <RootNamespace>SymmetricNearestNeighborFilter</RootNamespace>
+    <AssemblyName>SymmetricNearestNeighborFilter</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

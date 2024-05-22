@@ -9,8 +9,8 @@
     <ProjectGuid>{10C55BE6-0176-4986-9031-BFF7530AD79A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Morphology_Close</RootNamespace>
-    <AssemblyName>Morphology_Close</AssemblyName>
+    <RootNamespace>Morphology_Close_Region</RootNamespace>
+    <AssemblyName>Morphology_Close_Region</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

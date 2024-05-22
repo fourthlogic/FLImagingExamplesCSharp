@@ -9,8 +9,8 @@
     <ProjectGuid>{42A48C67-F699-46CC-ABE7-2F8B50D876B9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Normalization_Max</RootNamespace>
-    <AssemblyName>Normalization_Max</AssemblyName>
+    <RootNamespace>Normalization_MaxElement</RootNamespace>
+    <AssemblyName>Normalization_MaxElement</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

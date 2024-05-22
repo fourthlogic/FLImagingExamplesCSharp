@@ -9,8 +9,8 @@
     <ProjectGuid>{9FEF571E-F7A7-4400-AE03-A51CC4366823}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GridOfDotsDetector</RootNamespace>
-    <AssemblyName>GridOfDotsDetector</AssemblyName>
+    <RootNamespace>CheesboardDetector</RootNamespace>
+    <AssemblyName>CheesboardDetector</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

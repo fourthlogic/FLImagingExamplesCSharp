@@ -9,8 +9,8 @@
     <ProjectGuid>{C40C51AA-79D9-4E5C-B8E7-F6CE6EA5E616}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gauge_CrossGauge</RootNamespace>
-    <AssemblyName>Gauge_CrossGauge</AssemblyName>
+    <RootNamespace>CrossGauge</RootNamespace>
+    <AssemblyName>CrossGauge</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

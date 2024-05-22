@@ -9,8 +9,8 @@
     <ProjectGuid>{2E8DCD98-5D6C-43D7-9848-F5800D52AA93}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gauge_CircleGauge</RootNamespace>
-    <AssemblyName>Gauge_CircleGauge</AssemblyName>
+    <RootNamespace>CircleGauge</RootNamespace>
+    <AssemblyName>CircleGauge</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

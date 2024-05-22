@@ -9,8 +9,8 @@
     <ProjectGuid>{8A2776C8-6242-4221-8A97-614E80E94B72}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gauge_RectangleGauge</RootNamespace>
-    <AssemblyName>Gauge_RectangleGauge</AssemblyName>
+    <RootNamespace>RectangleGauge</RootNamespace>
+    <AssemblyName>RectangleGauge</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

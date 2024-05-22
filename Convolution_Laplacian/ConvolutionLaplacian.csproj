@@ -9,8 +9,8 @@
     <ProjectGuid>{40D2EA8B-8323-4935-995E-638585CE822C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Convolution_Laplacian</RootNamespace>
-    <AssemblyName>Convolution_Laplacian</AssemblyName>
+    <RootNamespace>ConvolutionLaplacian</RootNamespace>
+    <AssemblyName>ConvolutionLaplacian</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

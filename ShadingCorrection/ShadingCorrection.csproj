@@ -9,8 +9,8 @@
     <ProjectGuid>{912D0CED-083F-4889-AE67-68EDCA3336A1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OperationAdd_Scalar</RootNamespace>
-    <AssemblyName>OperationAdd_Scalar</AssemblyName>
+    <RootNamespace>ShadingCorrection</RootNamespace>
+    <AssemblyName>ShadingCorrection</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

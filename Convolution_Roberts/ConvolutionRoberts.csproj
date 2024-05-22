@@ -9,8 +9,8 @@
     <ProjectGuid>{3C25E43B-B016-4C39-B718-6E674E060D5A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Convolution_Roberts</RootNamespace>
-    <AssemblyName>Convolution_Roberts</AssemblyName>
+    <RootNamespace>ConvolutionRoberts</RootNamespace>
+    <AssemblyName>ConvolutionRoberts</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

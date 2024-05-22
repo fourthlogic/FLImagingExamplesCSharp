@@ -9,8 +9,8 @@
     <ProjectGuid>{2AB9124A-66A9-4CA5-A8A8-877AF0C02C49}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CannyEdgeDetector</RootNamespace>
-    <AssemblyName>CannyEdgeDetector</AssemblyName>
+    <RootNamespace>Stitching</RootNamespace>
+    <AssemblyName>Stitching</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

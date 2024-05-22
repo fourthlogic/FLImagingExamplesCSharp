@@ -9,8 +9,8 @@
     <ProjectGuid>{5C162054-2B92-4F1D-8FB9-1CEC9E82EB08}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FourierTransform</RootNamespace>
-    <AssemblyName>FourierTransform</AssemblyName>
+    <RootNamespace>FourierTransformReal</RootNamespace>
+    <AssemblyName>FourierTransformReal</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

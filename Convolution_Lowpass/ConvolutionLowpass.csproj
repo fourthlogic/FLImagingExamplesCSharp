@@ -9,8 +9,8 @@
     <ProjectGuid>{1B7E9BD3-A26E-4C82-BF66-BD9E6DE002D6}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Convolution_Lowpass</RootNamespace>
-    <AssemblyName>Convolution_Lowpass</AssemblyName>
+    <RootNamespace>ConvolutionLowpass</RootNamespace>
+    <AssemblyName>ConvolutionLowpass</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

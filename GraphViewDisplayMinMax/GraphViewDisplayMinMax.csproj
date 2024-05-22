@@ -9,8 +9,8 @@
     <ProjectGuid>{9072AEEB-2A43-40CA-82F0-939955CC46A5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Histogram</RootNamespace>
-    <AssemblyName>Histogram</AssemblyName>
+    <RootNamespace>GraphViewDisplayMinMax</RootNamespace>
+    <AssemblyName>GraphViewDisplayMinMax</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

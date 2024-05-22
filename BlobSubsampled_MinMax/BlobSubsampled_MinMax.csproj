@@ -9,8 +9,8 @@
     <ProjectGuid>{82C9F4AF-6BA6-458B-9290-0BEF1303E185}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Blob_Sort</RootNamespace>
-    <AssemblyName>Blob_Sort</AssemblyName>
+    <RootNamespace>BlobSubsampled_MinMax</RootNamespace>
+    <AssemblyName>BlobSubsampled_MinMax</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

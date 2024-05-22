@@ -9,8 +9,8 @@
     <ProjectGuid>{4028BC3F-83FF-41C4-A2CE-A6EDBD2F84E4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Convolution_Gradient</RootNamespace>
-    <AssemblyName>Convolution_Gradient</AssemblyName>
+    <RootNamespace>ConvolutionGradient</RootNamespace>
+    <AssemblyName>ConvolutionGradient</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
