@@ -1162,8 +1162,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Match", "Match", "{3C9E13DF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Surface", "Surface", "{22D37D56-7BE3-49C5-9C90-32B6A53CD896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurfaceMatch3D", "SurfaceBasedMatch3D\SurfaceMatch3D.csproj", "{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transform", "Transform", "{45008592-F09F-46EC-A909-914C86DEF7E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceTransform3D", "DistanceTransform3D\DistanceTransform3D.csproj", "{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17}"
@@ -1217,6 +1215,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerspectiveMerge3D", "PerspectiveMerge3D\PerspectiveMerge3D.csproj", "{4A070916-E5E1-45D5-BFDC-6ACA26600643}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceCameraCrevis", "DeviceCameraCrevis\DeviceCameraCrevis.csproj", "{262053DA-2315-4A66-A151-322326A8CB2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurfaceMatch3D", "SurfaceMatch3D\SurfaceMatch3D.csproj", "{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2800,10 +2800,6 @@ Global
 		{B80E0B5E-CB20-4D7F-AB47-83535C4B4500}.Debug|x64.Build.0 = Debug|x64
 		{B80E0B5E-CB20-4D7F-AB47-83535C4B4500}.Release|x64.ActiveCfg = Release|x64
 		{B80E0B5E-CB20-4D7F-AB47-83535C4B4500}.Release|x64.Build.0 = Release|x64
-		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}.Debug|x64.ActiveCfg = Debug|x64
-		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}.Debug|x64.Build.0 = Debug|x64
-		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}.Release|x64.ActiveCfg = Release|x64
-		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}.Release|x64.Build.0 = Release|x64
 		{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17}.Debug|x64.ActiveCfg = Debug|x64
 		{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17}.Debug|x64.Build.0 = Debug|x64
 		{2C9A4BDE-90B4-4818-B971-FCCBFD0F9E17}.Release|x64.ActiveCfg = Release|x64
@@ -2884,6 +2880,10 @@ Global
 		{262053DA-2315-4A66-A151-322326A8CB2E}.Debug|x64.Build.0 = Debug|x64
 		{262053DA-2315-4A66-A151-322326A8CB2E}.Release|x64.ActiveCfg = Release|x64
 		{262053DA-2315-4A66-A151-322326A8CB2E}.Release|x64.Build.0 = Release|x64
+		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}.Debug|x64.ActiveCfg = Debug|x64
+		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}.Debug|x64.Build.0 = Debug|x64
+		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}.Release|x64.ActiveCfg = Release|x64
+		{53F277F3-AA67-4C3A-BAD4-6BE60D5C4652}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
