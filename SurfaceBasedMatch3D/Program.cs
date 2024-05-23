@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace SurfaceBasedMatch3D
+namespace SurfaceMatch3D
 {
 	class Program
 	{
@@ -44,14 +44,14 @@ namespace SurfaceBasedMatch3D
 			do
 			{
 				// Learn Object 로드 // Load the learn object
-				if((eResult = fl3DOLearnObject.Load("../../ExampleImages/SurfaceBasedMatch3D/Car wheel example.ply")).IsFail())
+				if((eResult = fl3DOLearnObject.Load("../../ExampleImages/SurfaceMatch3D/Car wheel example.ply")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Source Object 로드 // Load the Source object
-				if((eResult = fl3DOSourceObject.Load("../../ExampleImages/SurfaceBasedMatch3D/Car example.ply")).IsFail())
+				if((eResult = fl3DOSourceObject.Load("../../ExampleImages/SurfaceMatch3D/Car example.ply")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
@@ -92,43 +92,43 @@ namespace SurfaceBasedMatch3D
 					break;
 				}
 
-				// SurfaceBasedMatch3D 객체 생성 // Create SurfaceBasedMatch3D object
-				CSurfaceBasedMatch3D SurfaceBasedMatch3D = new CSurfaceBasedMatch3D();
+				// SurfaceMatch3D 객체 생성 // Create SurfaceMatch3D object
+				CSurfaceMatch3D SurfaceMatch3D = new CSurfaceMatch3D();
 
 				// Learn object 설정 // Set the learn object
-				SurfaceBasedMatch3D.SetLearnObject(ref fl3DOLearnObject);
+				SurfaceMatch3D.SetLearnObject(ref fl3DOLearnObject);
 				// Source object 설정 // Set the source object
-				SurfaceBasedMatch3D.SetSourceObject(ref fl3DOSourceObject);
+				SurfaceMatch3D.SetSourceObject(ref fl3DOSourceObject);
 				// Min score 설정 // Set the min score
-				SurfaceBasedMatch3D.SetMinScore(0.5);
+				SurfaceMatch3D.SetMinScore(0.5);
 				// 최대 결과 개수 설정 // Set the max count of match result
-				SurfaceBasedMatch3D.SetMaxObject(4);
+				SurfaceMatch3D.SetMaxObject(4);
 				// 학습 샘플링 거리 설정 // Set the learn sampling distance
-				SurfaceBasedMatch3D.SetLearnSamplingDistance(0.03);
+				SurfaceMatch3D.SetLearnSamplingDistance(0.03);
 				// 장면 샘플링 거리 설정 // Set the scene sampling distance
-				SurfaceBasedMatch3D.SetSceneSamplingDistance(0.03);
+				SurfaceMatch3D.SetSceneSamplingDistance(0.03);
 				// 키포인트 비율 설정 // Set the keypoint ratio.
-				SurfaceBasedMatch3D.SetKeypointRatio(0.5);
+				SurfaceMatch3D.SetKeypointRatio(0.5);
 				// 엣지 학습 여부 설정 // Set the edge train
-				SurfaceBasedMatch3D.EnableTrainEdge(false);
+				SurfaceMatch3D.EnableTrainEdge(false);
 				// 엣지 장면 여부 설정 // Set the edge scene
-				SurfaceBasedMatch3D.EnableEdgeBasedMatch(false);
+				SurfaceMatch3D.EnableEdgeBasedMatch(false);
 				// 클러스터링 범위 설정 // Set the clustering range
-				SurfaceBasedMatch3D.SetClusterRange(2);
+				SurfaceMatch3D.SetClusterRange(2);
 				// 포즈 조정 반복 횟수 설정 // Set the iteration value of pose refinement
-				SurfaceBasedMatch3D.SetIteration(5);
+				SurfaceMatch3D.SetIteration(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = SurfaceBasedMatch3D.Learn()).IsFail())
+				if((eResult = SurfaceMatch3D.Learn()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Surface Based Match 3D.");
+					ErrorPrint(eResult, "Failed to execute Surface Match 3D.");
 					break;
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = SurfaceBasedMatch3D.Execute()).IsFail())
+				if((eResult = SurfaceMatch3D.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Surface Based Match 3D.");
+					ErrorPrint(eResult, "Failed to execute Surface Match 3D.");
 					break;
 				}
 
@@ -177,7 +177,7 @@ namespace SurfaceBasedMatch3D
 				}
 
 				// 3D 오브젝트 뷰에 결과 Object와 비교를 위한 Source 오브젝트 디스플레이
-				if((eResult = view3DDst.PushObject((CFL3DObject)SurfaceBasedMatch3D.GetSourceObject())).IsFail())
+				if((eResult = view3DDst.PushObject((CFL3DObject)SurfaceMatch3D.GetSourceObject())).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
 					break;
@@ -187,7 +187,7 @@ namespace SurfaceBasedMatch3D
                 view3DLearn.ZoomFit();
                 view3DSource.ZoomFit();
 
-                CSurfaceBasedMatch3D.SPoseMatrixParameters sResult = new CSurfaceBasedMatch3D.SPoseMatrixParameters();
+                CSurfaceMatch3D.SPoseMatrixParameters sResult = new CSurfaceMatch3D.SPoseMatrixParameters();
 
 				double f64ArrRotX;
 				double f64ArrRotY;
@@ -195,7 +195,7 @@ namespace SurfaceBasedMatch3D
 				double f64Score;
 				double f64Residual;
 
-				long i64ResultCount = SurfaceBasedMatch3D.GetResultCount();
+				long i64ResultCount = SurfaceMatch3D.GetResultCount();
 
 				if(i64ResultCount == 0)
 				{
@@ -210,7 +210,7 @@ namespace SurfaceBasedMatch3D
 					TPoint3<double> tp3Center = new TPoint3<double>();
 
 					// 추정된 포즈 행렬 가져오기
-					if((eResult = SurfaceBasedMatch3D.GetResultPoseMatrix(i, out sResult)).IsFail())
+					if((eResult = SurfaceMatch3D.GetResultPoseMatrix(i, out sResult)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
 						break;
@@ -238,7 +238,7 @@ namespace SurfaceBasedMatch3D
 					Console.WriteLine("    Residual : {0}", f64Residual);
 					Console.WriteLine("\n");
 
-					if((eResult = SurfaceBasedMatch3D.GetResultObject(i, out fl3DOLearnTransform, out tp3Center)).IsFail())
+					if((eResult = SurfaceMatch3D.GetResultObject(i, out fl3DOLearnTransform, out tp3Center)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to set object on the 3d view.\n");
 						break;
