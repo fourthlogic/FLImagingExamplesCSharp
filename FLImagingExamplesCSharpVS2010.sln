@@ -1224,6 +1224,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Total Variation Denoising",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalVariationDenoising", "TotalVariationDenoising\TotalVariationDenoising.csproj", "{D99BA649-A374-4B60-89D4-AEA6AD5475DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticSegmentation_SingleAxisTiling", "SemanticSegmentation_SingleAxisTiling\SemanticSegmentation_SingleAxisTiling.csproj", "{2958127D-FE2A-46EA-9A7A-BEACE9F76853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticSegmentation_BothAxesTiling", "SemanticSegmentation_BothAxesTiling\SemanticSegmentation_BothAxesTiling.csproj", "{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -4568,6 +4572,22 @@ Global
 		{D99BA649-A374-4B60-89D4-AEA6AD5475DD}.Release|x64.Build.0 = Release|x64
 		{D99BA649-A374-4B60-89D4-AEA6AD5475DD}.Release|x86.ActiveCfg = Release|x64
 		{D99BA649-A374-4B60-89D4-AEA6AD5475DD}.Release|x86.Build.0 = Release|x64
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853}.Debug|x64.ActiveCfg = Debug|x64
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853}.Debug|x64.Build.0 = Debug|x64
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853}.Debug|x86.ActiveCfg = Debug|x64
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853}.Debug|x86.Build.0 = Debug|x64
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853}.Release|x64.ActiveCfg = Release|x64
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853}.Release|x64.Build.0 = Release|x64
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853}.Release|x86.ActiveCfg = Release|x64
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853}.Release|x86.Build.0 = Release|x64
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}.Debug|x64.ActiveCfg = Debug|x64
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}.Debug|x64.Build.0 = Debug|x64
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}.Debug|x86.ActiveCfg = Debug|x64
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}.Debug|x86.Build.0 = Debug|x64
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}.Release|x64.ActiveCfg = Release|x64
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}.Release|x64.Build.0 = Release|x64
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}.Release|x86.ActiveCfg = Release|x64
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -5172,6 +5192,8 @@ Global
 		{8B5E1859-07A5-4964-ABC4-923EE79B0195} = {D86E4217-09FB-43B7-A67B-88DE24762E92}
 		{00B07D14-6FBF-4F05-9E7C-1B606381EF40} = {B9798B69-323C-42B6-A578-EA55EC49F500}
 		{D99BA649-A374-4B60-89D4-AEA6AD5475DD} = {00B07D14-6FBF-4F05-9E7C-1B606381EF40}
+		{2958127D-FE2A-46EA-9A7A-BEACE9F76853} = {4F234A7E-3910-4B04-AB20-0F26B9539C1B}
+		{8FFF5218-EFC9-4A8A-81F7-27C3C6342185} = {4F234A7E-3910-4B04-AB20-0F26B9539C1B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
