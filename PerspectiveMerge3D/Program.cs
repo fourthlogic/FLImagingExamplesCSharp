@@ -80,14 +80,10 @@ namespace MultiFocus
 				TPoint3<float> tpPosition2 = new TPoint3<float>(0.152f, 0.0f, 0f);
 				TPoint3<float> tpRotation2 = new TPoint3<float>(-8f, -29f, 90f);
 
-				// 카메라 위치 설정 // Set the camera position
-				algemObject.SetPosition(tpPosition, tpPosition2);
-				// 카메라 회전정도 설정 // Set the camera degree
-				algemObject.SetRotation(tpRotation, tpRotation2);
 
 				// 카메라 1, 2의 Source 객체 설정 // Set the source object of camera 1, 2
-				algemObject.SetSourceObject(ref fl3DOSrc);
-				algemObject.SetSourceObject2(ref fl3DOSrc2);
+				algemObject.AddSourceObject(ref fl3DOSrc, tpPosition, tpRotation);
+				algemObject.AddSourceObject(ref fl3DOSrc2, tpPosition2, tpRotation2);
 				// Destination 객체 설정 // Set the destination object
 				algemObject.SetDestinationObject(ref fl3DODst);
 
@@ -98,8 +94,8 @@ namespace MultiFocus
 					break;
 				}
 
-				view3DSrc.PushObject(algemObject.GetSourceObject());
-				view3DSrc2.PushObject(algemObject.GetSourceObject2());
+				view3DSrc.PushObject(fl3DOSrc);
+				view3DSrc2.PushObject(fl3DOSrc2);
 				view3DDst.PushObject(algemObject.GetDestinationObject());
 
 				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
