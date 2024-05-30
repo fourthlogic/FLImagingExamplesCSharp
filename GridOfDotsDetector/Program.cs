@@ -82,171 +82,178 @@ namespace CameraCalibrator
                 double f64AverageCellPitch;
                 List<List<TPoint<double>>> flaPoints;
 
-                gridofDots.GetResultCenterPoints(out flaPoints);
-                gridofDots.GetResultForRegion(out flqRegion);
-                i64ResultRow = gridofDots.GetResultRows();
-                i64ResultCol = gridofDots.GetResultColumns();
-                f64AverageCellPitch = gridofDots.GetResultAverageCellPitch();
+				// 페이지 0번 보드 갯수를 가져옴. // Page 0 Gets the number of boards.
+				Int64 i64PageIndex = 0;
+				Int64 i64BoardCount = gridofDots.GetResultBoardCount(i64PageIndex);
 
-                CFLPoint<double> flpPoint0 = new CFLPoint<double>(flqRegion.flpPoints[0]);
-                CFLPoint<double> flpPoint1 = new CFLPoint<double>(flqRegion.flpPoints[1]);
-
-                double f64Width = flpPoint0.GetDistance(flpPoint1);
-                double f64Angle = flpPoint0.GetAngle(flpPoint1);
-
-                if ((res = layer.DrawFigureImage(flqRegion, EColor.BLACK, 3)).IsFail())
+                for(Int64 i32BoardIndex = 0; i32BoardIndex < i64BoardCount; i32BoardIndex++)
                 {
-                    ErrorPrint(res, "Failed to draw figure.\n");
-                    break;
-                }
+					gridofDots.GetResultCenterPoints(i64PageIndex, i64BoardCount, out flaPoints);
+					gridofDots.GetResultBoardRegion(i64PageIndex, i64BoardCount, out flqRegion);
+					i64ResultRow = gridofDots.GetResultBoardRows(i64PageIndex, i64BoardCount);
+					i64ResultCol = gridofDots.GetResultBoardColumns(i64PageIndex, i64BoardCount);
+					f64AverageCellPitch = gridofDots.GetResultBoardAverageCellPitch(i64PageIndex, i64BoardCount);
 
-                if ((res = layer.DrawFigureImage(flqRegion, EColor.YELLOW, 1)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw figure.\n");
-                    break;
-                }
+					CFLPoint<double> flpPoint0 = new CFLPoint<double>(flqRegion.flpPoints[0]);
+					CFLPoint<double> flpPoint1 = new CFLPoint<double>(flqRegion.flpPoints[1]);
 
-                if ((res = layer.DrawTextImage(flpPoint0, String.Format("({0} X {1}) Pitch [{2}]", i64ResultCol, i64ResultRow, f64AverageCellPitch), EColor.YELLOW, EColor.BLACK, (int)(f64Width / 16), true, f64Angle, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw text.\n");
-                    break;
-                }
+					double f64Width = flpPoint0.GetDistance(flpPoint1);
+					double f64Angle = flpPoint0.GetAngle(flpPoint1);
 
-                int i32LineTransition;
-                int i32VertexNumber;
-                EColor[] crTable = new EColor[3];
-                crTable[0] = EColor.RED;
-                crTable[1] = EColor.LIME;
-                crTable[2] = EColor.CYAN;
+					if((res = layer.DrawFigureImage(flqRegion, EColor.BLACK, 3)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw figure.\n");
+						break;
+					}
 
-                i32LineTransition = 0;
-                i32VertexNumber = 0;
+					if((res = layer.DrawFigureImage(flqRegion, EColor.YELLOW, 1)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw figure.\n");
+						break;
+					}
 
-                double f64Pitch = 0;
-                CFLPoint<double> flpLastPoint = new CFLPoint<double>();
+					if((res = layer.DrawTextImage(flpPoint0, String.Format("({0} X {1}) Pitch [{2}]", i64ResultCol, i64ResultRow, f64AverageCellPitch), EColor.YELLOW, EColor.BLACK, (int)(f64Width / 16), true, f64Angle, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw text.\n");
+						break;
+					}
 
-                for (long j = 0; j < flaPoints.Count(); ++j)
-                {
-                    List<TPoint<double>> fla2 = flaPoints[(int)j];
+					int i32LineTransition;
+					int i32VertexNumber;
+					EColor[] crTable = new EColor[3];
+					crTable[0] = EColor.RED;
+					crTable[1] = EColor.LIME;
+					crTable[2] = EColor.CYAN;
 
-                    if (j > 0)
-                    {
-                        CFLPoint<double> fla20 = new CFLPoint<double>();
-                        fla20.x = fla2[0].x;
-                        fla20.y = fla2[0].y;
+					i32LineTransition = 0;
+					i32VertexNumber = 0;
 
-                        CFLLine<double> fll = new CFLLine<double>(flpLastPoint, fla20);
+					double f64Pitch = 0;
+					CFLPoint<double> flpLastPoint = new CFLPoint<double>();
 
-                        if ((res = layer.DrawFigureImage(fll, EColor.BLACK, 5)).IsFail())
-                        {
-                            ErrorPrint(res, "Failed to draw figure.\n");
-                            break;
-                        }
+					for(long j = 0; j < flaPoints.Count(); ++j)
+					{
+						List<TPoint<double>> fla2 = flaPoints[(int)j];
 
-                        if ((res = layer.DrawFigureImage(fll, EColor.YELLOW, 3)).IsFail())
-                        {
-                            ErrorPrint(res, "Failed to draw figure.\n");
-                            break;
-                        }
-                    }
+						if(j > 0)
+						{
+							CFLPoint<double> fla20 = new CFLPoint<double>();
+							fla20.x = fla2[0].x;
+							fla20.y = fla2[0].y;
 
-                    for (long k = 0; k < fla2.Count(); ++k)
-                    {
-                        if (k > 0)
-                        {
-                            CFLPoint<double> fla2k = new CFLPoint<double>();
-                            fla2k.x = fla2[(int)k].x;
-                            fla2k.y = fla2[(int)k].y;
+							CFLLine<double> fll = new CFLLine<double>(flpLastPoint, fla20);
 
-                            CFLLine<double> fll = new CFLLine<double>(flpLastPoint, fla2k);
+							if((res = layer.DrawFigureImage(fll, EColor.BLACK, 5)).IsFail())
+							{
+								ErrorPrint(res, "Failed to draw figure.\n");
+								break;
+							}
 
-                            if ((res = layer.DrawFigureImage(fll, EColor.BLACK, 5)).IsFail())
-                            {
-                                ErrorPrint(res, "Failed to draw figure.\n");
-                                break;
-                            }
+							if((res = layer.DrawFigureImage(fll, EColor.YELLOW, 3)).IsFail())
+							{
+								ErrorPrint(res, "Failed to draw figure.\n");
+								break;
+							}
+						}
 
-                            if ((res = layer.DrawFigureImage(fll, crTable[i32LineTransition++ % 3], 3)).IsFail())
-                            {
-                                ErrorPrint(res, "Failed to draw figure.\n");
-                                break;
-                            }
-                        }
+						for(long k = 0; k < fla2.Count(); ++k)
+						{
+							if(k > 0)
+							{
+								CFLPoint<double> fla2k = new CFLPoint<double>();
+								fla2k.x = fla2[(int)k].x;
+								fla2k.y = fla2[(int)k].y;
 
-                        CFLPoint<double> fla2kk = new CFLPoint<double>();
-                        fla2kk.x = fla2[(int)k].x;
-                        fla2kk.y = fla2[(int)k].y;
+								CFLLine<double> fll = new CFLLine<double>(flpLastPoint, fla2k);
 
-                        flpLastPoint = fla2kk;
-                    }
-                }
+								if((res = layer.DrawFigureImage(fll, EColor.BLACK, 5)).IsFail())
+								{
+									ErrorPrint(res, "Failed to draw figure.\n");
+									break;
+								}
 
-                i32LineTransition = 0;
+								if((res = layer.DrawFigureImage(fll, crTable[i32LineTransition++ % 3], 3)).IsFail())
+								{
+									ErrorPrint(res, "Failed to draw figure.\n");
+									break;
+								}
+							}
 
-                for (long j = 0; j < flaPoints.Count(); ++j)
-                {
-                    List<TPoint<double>> fla2 = flaPoints[(int)j];
-                    CFLPoint<double> fla2Point0 = new CFLPoint<double>();
-                    CFLPoint<double> fla2Point1 = new CFLPoint<double>();
-                    fla2Point0.x = fla2[0].x;
-                    fla2Point0.y = fla2[0].y;
-                    fla2Point1.x = fla2[1].x;
-                    fla2Point1.y = fla2[1].y;
+							CFLPoint<double> fla2kk = new CFLPoint<double>();
+							fla2kk.x = fla2[(int)k].x;
+							fla2kk.y = fla2[(int)k].y;
 
-                    double f64AngleText = fla2Point0.GetAngle(fla2Point1);
+							flpLastPoint = fla2kk;
+						}
+					}
 
-                    for (long k = 0; k < fla2.Count(); ++k)
-                    {
-                        EColor crTextColor = crTable[(i32LineTransition++) % 3];
+					i32LineTransition = 0;
 
-                        int i32CheckValue = (i32VertexNumber + 1) % fla2.Count();
+					for(long j = 0; j < flaPoints.Count(); ++j)
+					{
+						List<TPoint<double>> fla2 = flaPoints[(int)j];
+						CFLPoint<double> fla2Point0 = new CFLPoint<double>();
+						CFLPoint<double> fla2Point1 = new CFLPoint<double>();
+						fla2Point0.x = fla2[0].x;
+						fla2Point0.y = fla2[0].y;
+						fla2Point1.x = fla2[1].x;
+						fla2Point1.y = fla2[1].y;
 
-                        if (i32CheckValue == 0)
-                            crTextColor = EColor.YELLOW;
-                        else
-                        {
-                            double f64Dx = fla2[(int)k + 1].x - fla2[(int)k].x;
-                            double f64Dy = fla2[(int)k + 1].y - fla2[(int)k].y;
+						double f64AngleText = fla2Point0.GetAngle(fla2Point1);
 
-                            f64Pitch = Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy);
-                        }
+						for(long k = 0; k < fla2.Count(); ++k)
+						{
+							EColor crTextColor = crTable[(i32LineTransition++) % 3];
 
-                        if (j == 0)
-                        {
-                            double f64Dx = flaPoints[1][(int)k].x - flaPoints[0][(int)k].x;
-                            double f64Dy = flaPoints[1][(int)k].y - flaPoints[0][(int)k].y;
+							int i32CheckValue = (i32VertexNumber + 1) % fla2.Count();
 
-                            f64Pitch = Math.Min(f64Pitch, Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy));
-                        }
-                        else
-                        {
-                            double f64Dx = flaPoints[(int)j][(int)k].x - flaPoints[(int)j - 1][(int)k].x;
-                            double f64Dy = flaPoints[(int)j][(int)k].y - flaPoints[(int)j - 1][(int)k].y;
+							if(i32CheckValue == 0)
+								crTextColor = EColor.YELLOW;
+							else
+							{
+								double f64Dx = fla2[(int)k + 1].x - fla2[(int)k].x;
+								double f64Dy = fla2[(int)k + 1].y - fla2[(int)k].y;
 
-                            f64Pitch = Math.Min(f64Pitch, Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy));
-                        }
+								f64Pitch = Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy);
+							}
 
-                        CFLPoint<double> flpDisPlay = new CFLPoint<double>();
-                        flpDisPlay.x = fla2[(int)k].x;
-                        flpDisPlay.y = fla2[(int)k].y;
+							if(j == 0)
+							{
+								double f64Dx = flaPoints[1][(int)k].x - flaPoints[0][(int)k].x;
+								double f64Dy = flaPoints[1][(int)k].y - flaPoints[0][(int)k].y;
 
-                        if ((res = layer.DrawTextImage(flpDisPlay, String.Format("{0}", i32VertexNumber++), crTextColor, EColor.BLACK, (int)(f64Pitch / 3), true, f64Angle)).IsFail())
-                        {
-                            ErrorPrint(res, "Failed to draw text.\n");
-                            break;
-                        }
+								f64Pitch = Math.Min(f64Pitch, Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy));
+							}
+							else
+							{
+								double f64Dx = flaPoints[(int)j][(int)k].x - flaPoints[(int)j - 1][(int)k].x;
+								double f64Dy = flaPoints[(int)j][(int)k].y - flaPoints[(int)j - 1][(int)k].y;
 
-                        if (k > 0)
-                        {
-                            CFLPoint<double> flpAngle0 = new CFLPoint<double>(fla2[(int)k].x, fla2[(int)k].y);
-                            CFLPoint<double> flpAngle1 = new CFLPoint<double>(fla2[(int)k - 1].x, fla2[(int)k - 1].y);
+								f64Pitch = Math.Min(f64Pitch, Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy));
+							}
 
-                            f64Angle = flpAngle1.GetAngle(flpAngle0);
-                        }
-                    }
+							CFLPoint<double> flpDisPlay = new CFLPoint<double>();
+							flpDisPlay.x = fla2[(int)k].x;
+							flpDisPlay.y = fla2[(int)k].y;
 
-                    --i32LineTransition;
-                }
+							if((res = layer.DrawTextImage(flpDisPlay, String.Format("{0}", i32VertexNumber++), crTextColor, EColor.BLACK, (int)(f64Pitch / 3), true, f64Angle)).IsFail())
+							{
+								ErrorPrint(res, "Failed to draw text.\n");
+								break;
+							}
+
+							if(k > 0)
+							{
+								CFLPoint<double> flpAngle0 = new CFLPoint<double>(fla2[(int)k].x, fla2[(int)k].y);
+								CFLPoint<double> flpAngle1 = new CFLPoint<double>(fla2[(int)k - 1].x, fla2[(int)k - 1].y);
+
+								f64Angle = flpAngle1.GetAngle(flpAngle0);
+							}
+						}
+
+						--i32LineTransition;
+					}
+				}		
 
                 // 이미지 뷰를 갱신 합니다. // Update the image view.
                 viewImage.Invalidate(true);
