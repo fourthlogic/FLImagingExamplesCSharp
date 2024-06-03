@@ -129,7 +129,7 @@ namespace TotalVariationDenoising
 				}
 
 				// 모델 설정 // Set the Model Type
-				if((res = (TotalVariationDenoising.SetModelType(CTotalVariationDenoising.ModelType.Anisotropic))).IsFail())
+				if((res = (TotalVariationDenoising.SetModelType(CTotalVariationDenoising.EModelType.Anisotropic))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Model Type.");
 					break;
