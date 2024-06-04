@@ -100,7 +100,7 @@ namespace SurfaceMatch3D
 				// Source object 설정 // Set the source object
 				SurfaceMatch3D.SetSourceObject(ref fl3DOSourceObject);
 				// Min score 설정 // Set the min score
-				SurfaceMatch3D.SetMinScore(0.5);
+				SurfaceMatch3D.SetMinScore(0.3);
 				// 최대 결과 개수 설정 // Set the max count of match result
 				SurfaceMatch3D.SetMaxObject(4);
 				// 학습 샘플링 거리 설정 // Set the learn sampling distance
