@@ -9,6 +9,8 @@ using FLImagingCLR.Base;
 using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
+using FLImagingCLR.AdvancedFunctions;
+
 using CResult = FLImagingCLR.CResult;
 
 namespace ModulationTransferFunction
