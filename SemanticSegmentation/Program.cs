@@ -32,6 +32,9 @@ namespace SemanticSegmentation
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// 라이브러리가 완전히 로드 될 때까지 기다림 // Wait for the library to fully load
+			Thread.Sleep(1000);
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliLearnImage = new CFLImage();
 			CFLImage fliValidationImage = new CFLImage();
