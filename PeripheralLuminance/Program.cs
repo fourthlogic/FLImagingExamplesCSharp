@@ -121,7 +121,7 @@ namespace PeripheralLuminance
 					}
 
 					// 이미지 뷰 정보 표시 // Display image view information
-					if((res = layer.DrawTextImage(pflfSrc, strText, EColor.YELLOW, EColor.BLACK, 13, false, 0., EGUIViewImageTextAlignment.LEFT_TOP)).IsFail())
+					if((res = layer.DrawTextImage(pflfSrc, strText, EColor.YELLOW, EColor.BLACK, 13, false, 0.0, EGUIViewImageTextAlignment.LEFT_TOP)).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw text\n");
 						break;
