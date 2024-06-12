@@ -54,7 +54,7 @@ namespace HoleFilling
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[(int)EType.Source].Load("C:\\Users\\JSLee\\source\\repos\\FLImaging\\ExampleImages/HoleFilling/TodoList.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/HoleFilling/TodoList.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
