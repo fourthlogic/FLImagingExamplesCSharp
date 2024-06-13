@@ -175,6 +175,13 @@ namespace ConditionalReplacer
 				// 논리조건 설정 // Set the logical condition
 				conditionalReplacer.SetLogicalCondition((long)ELogicalCondition.LessEqual, EThresholdIndex.Second);
 
+				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				if((res = conditionalReplacer.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute conditional replacer.");
+					break;
+				}
+
 				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[3];
 
                 for (int i = 0; i < 3; ++i)
