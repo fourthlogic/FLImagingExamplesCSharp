@@ -100,14 +100,14 @@ namespace VertexMatch3D
 				}
 
 				// 학습 데이터 저장 // Save the learnt data
-				if((eResult = VertexMatch3D.Save("../../ExampleImages/VertexMatch3D/Example FLSM Data.flsm")).IsFail())
+				if((eResult = VertexMatch3D.Save("../../ExampleImages/VertexMatch3D/Example FLVM Data.flvm")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to save the learnt data file.\n");
 					break;
 				}
 
 				// 학습 데이터 불러오기 // Load the learnt data
-				if((eResult = VertexMatch3D.Load("../../ExampleImages/VertexMatch3D/Example FLSM Data.flsm")).IsFail())
+				if((eResult = VertexMatch3D.Load("../../ExampleImages/VertexMatch3D/Example FLVM Data.flvm")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the learnt data file.\n");
 					break;
