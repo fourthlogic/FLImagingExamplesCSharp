@@ -9,8 +9,8 @@
     <ProjectGuid>{74CC24CE-7CE4-49B8-B2DB-787FD22F9B74}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SurfaceMatch3D</RootNamespace>
-    <AssemblyName>SurfaceMatch3D</AssemblyName>
+    <RootNamespace>SurfaceMatch3DLoad</RootNamespace>
+    <AssemblyName>SurfaceMatch3DLoad</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
