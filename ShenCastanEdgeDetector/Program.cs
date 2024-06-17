@@ -43,7 +43,7 @@ namespace ShenCastanEdgeDetector
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliISrcImage.Load("../../ExampleImages/ShenCastanEdgeDetector_Img/Gear.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/ShenCastanEdgeDetector/Gear.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
