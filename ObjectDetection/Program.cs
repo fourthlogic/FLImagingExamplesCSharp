@@ -193,7 +193,8 @@ namespace ObjectDetection
 				// 검증을 진행 할 최소 평균 Cost값 설정 // Set the minimum average cost value at which verification will be triggered
 				objectDetection.SetLearningRequiredCostForValidation(5);
 				// 학습 중단 Metrics 값 설정 // Set Learning Stop Metrics Values
-				objectDetection.SetLearningStopConditionMetrics(0.9f);
+				String strStopConditon = "mAP >= 0.9";
+				objectDetection.SetLearningStopCondition(strStopConditon);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(5e-4f);
