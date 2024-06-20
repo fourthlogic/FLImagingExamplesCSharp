@@ -110,37 +110,37 @@ namespace HoleFilling
 				if(bError)
 					break;
 
-				// 알고리즘 객체 생성 // Create Algorithm object
-				CHoleFilling alg = new CHoleFilling();
-				// Source 이미지 설정 // Set the source image
-				alg.SetSourceImage(ref arrFliImage[(int)EType.Source]);
-				// Destination 이미지 설정 // Set the destination image
-				alg.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				//// 알고리즘 객체 생성 // Create Algorithm object
+				//CHoleFilling alg = new CHoleFilling();
+				//// Source 이미지 설정 // Set the source image
+				//alg.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				//// Destination 이미지 설정 // Set the destination image
+				//alg.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 
-				alg.SetIgnoreBoundaryHoles(true);
-				alg.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And);
-				alg.SetMaximumHoleArea(99999999999);
-				alg.SetShowHoleFigure(true);
-				alg.SetThresholdMode(EThresholdMode.Dual_And);
+				//alg.SetIgnoreBoundaryHoles(true);
+				//alg.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And);
+				//alg.SetMaximumHoleArea(99999999999);
+				//alg.SetShowHoleFigure(true);
+				//alg.SetThresholdMode(EThresholdMode.Dual_And);
 
-				CMultiVar<UInt64> mvThresholdCondition1 = new CMultiVar<UInt64>(1, 1, 1);
-				alg.SetThresholdCondition(1, mvThresholdCondition1);
-				CMultiVar<UInt64> mvThresholdValue1U64 = new CMultiVar<UInt64>(175, 230, 240);
-				CMultiVar<double> mvThresholdValue1F64 = new CMultiVar<double>(175, 230, 240);
-				alg.SetThresholdValue(1, mvThresholdValue1U64, mvThresholdValue1F64);
+				//CMultiVar<UInt64> mvThresholdCondition1 = new CMultiVar<UInt64>(1, 1, 1);
+				//alg.SetThresholdCondition(1, mvThresholdCondition1);
+				//CMultiVar<UInt64> mvThresholdValue1U64 = new CMultiVar<UInt64>(175, 230, 240);
+				//CMultiVar<double> mvThresholdValue1F64 = new CMultiVar<double>(175, 230, 240);
+				//alg.SetThresholdValue(1, mvThresholdValue1U64, mvThresholdValue1F64);
 
-				CMultiVar<UInt64> mvThresholdCondition2 = new CMultiVar<UInt64>(5, 5, 5);
-				alg.SetThresholdCondition(2, mvThresholdCondition2);
-				CMultiVar<UInt64> mvThresholdValue2U64 = new CMultiVar<UInt64>(200, 240, 255);
-				CMultiVar<double> mvThresholdValue2F64 = new CMultiVar<double>(200, 240, 255);
-				alg.SetThresholdValue(2, mvThresholdValue2U64, mvThresholdValue2F64);
+				//CMultiVar<UInt64> mvThresholdCondition2 = new CMultiVar<UInt64>(5, 5, 5);
+				//alg.SetThresholdCondition(2, mvThresholdCondition2);
+				//CMultiVar<UInt64> mvThresholdValue2U64 = new CMultiVar<UInt64>(200, 240, 255);
+				//CMultiVar<double> mvThresholdValue2F64 = new CMultiVar<double>(200, 240, 255);
+				//alg.SetThresholdValue(2, mvThresholdValue2U64, mvThresholdValue2F64);
 
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (alg.Execute())).IsFail())
-				{
-					ErrorPrint(res, "Failed to execute HoleFilling.");
-					break;
-				}
+				//// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				//if((res = (alg.Execute())).IsFail())
+				//{
+				//	ErrorPrint(res, "Failed to execute HoleFilling.");
+				//	break;
+				//}
 
 				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[(int)EType.ETypeCount];
 
