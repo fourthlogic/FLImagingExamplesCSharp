@@ -143,7 +143,7 @@ namespace FLDenoisingType1
 				}
 
 				// Amplitude 설정 // Set the Amplitude
-				if((res = (FLDenoisingType1.SetAmplitude(0.1))).IsFail())
+				if((res = (FLDenoisingType1.SetAmplitude(30))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Amplitude.");
 					break;
