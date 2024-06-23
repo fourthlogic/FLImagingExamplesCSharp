@@ -65,7 +65,7 @@ namespace StepReaderConvertTo3DObject
                 // Method 1. Load the STEP file in CFL3DObject
                 CFL3DObject fl3DObj0 = new CFL3DObject();
 
-                if ((res = fl3DObj0.LoadStepFormat("C:\\source\\repos\\GitHub\\ExampleImages\\StepReaderConvertTo3DObject\\Cylinder.step", f64ChordalDeviation)).IsFail())
+                if ((res = fl3DObj0.LoadSTEP("../../ExampleImages/StepReaderConvertTo3DObject/Cylinder.step", f64ChordalDeviation)).IsFail())
                 {
                     ErrorPrint(res, "Failed to load step file.\n");
                     break;
@@ -84,7 +84,7 @@ namespace StepReaderConvertTo3DObject
                 CStepReader sr = new CStepReader();
                 f64ChordalDeviation = 0.00001;
 
-                if ((res = sr.Load("C:\\source\\repos\\GitHub\\ExampleImages\\StepReaderConvertTo3DObject\\Cylinder.step")).IsFail())
+                if ((res = sr.Load("../../ExampleImages/StepReaderConvertTo3DObject/Cylinder.step")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load step file.\n");
                     break;
