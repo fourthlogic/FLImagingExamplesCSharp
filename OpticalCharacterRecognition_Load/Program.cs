@@ -155,13 +155,14 @@ namespace OpticalCharacterRecognition
 					string flsResultString = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
 					int i32Score = (int)(resultChar.f64Score * 100.0);
+					double f64Scale = resultChar.f64ScaleWidth * resultChar.f64ScaleHeight;
 					CFLRect<double> flrBoundary = new CFLRect<double>();
 
-					flsResultString = "[" + flsResultName + "]" + string.Format("Score : {0}%\n", i32Score);
+					flsResultString = "[" + flsResultName + "]" + string.Format("Score: {0}%\nScale: {1}\nRotation: {2}", i32Score, f64Scale.ToString("n2"), resultChar.f64Rotation);
 					Console.WriteLine(flsResultString);
 					resultChar.flfaCharacter.GetBoundaryRect(out flrBoundary);
 
-					if((res = layerRecognize.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+					if((res = layerRecognize.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
 					{
 						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}\n", i));
 						break;
@@ -198,13 +199,14 @@ namespace OpticalCharacterRecognition
 					string flsResultString = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
 					int i32Score = (int)(resultChar.f64Score * 100.0);
+					double f64Scale = resultChar.f64ScaleWidth * resultChar.f64ScaleHeight;
 					CFLRect<double> flrBoundary = new CFLRect<double>();
 
-					flsResultString = "[" + flsResultName + "]" + string.Format("Score : {0}%\n", i32Score);
+					flsResultString = "[" + flsResultName + "]" + string.Format("Score: {0}%\nScale: {1}\nRotation: {2}", i32Score, f64Scale.ToString("n2"), resultChar.f64Rotation);
 					Console.WriteLine(flsResultString);
 					resultChar.flfaCharacter.GetBoundaryRect(out flrBoundary);
 
-					if((res = layerRecognizeUnicode.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+					if((res = layerRecognizeUnicode.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
 					{
 						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}\n", i));
 						break;
