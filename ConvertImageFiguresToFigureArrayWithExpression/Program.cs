@@ -63,29 +63,54 @@ namespace GetFigure
 					break;
 				}
 
-				// SourceView, DstView 의 0번 레이어 가져오기 // Get Layer 0 of SourceView, DstView
-				CGUIViewImageLayer Src1Layer0 = viewImage[0].GetLayer(0);
-				CGUIViewImageLayer Dst1Layer0 = viewImage[1].GetLayer(0);
-				CGUIViewImageLayer Src2Layer0 = viewImage[2].GetLayer(0);
-				CGUIViewImageLayer Dst2Layer0 = viewImage[3].GetLayer(0);
+				CFLImage fliSource = new CFLImage();
 
-				Src1Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 1", EColor.YELLOW, EColor.BLACK, 15);
-				Src2Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 2", EColor.YELLOW, EColor.BLACK, 15);
-				Dst1Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 1", EColor.YELLOW, EColor.BLACK, 15);
-				Dst2Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 2", EColor.YELLOW, EColor.BLACK, 15);
-
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				// Source 이미지 로드 // Load the source image
+				if((res = fliSource.Load("../../ExampleImages/Figure/ImageWithFigure.flif")).IsFail())
 				{
-					ErrorPrint(res, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImage[2].SynchronizePointOfView(ref viewImage[3])).IsFail())
+				CFLImage fliCopy = new CFLImage(fliSource, false);
+				fliCopy.ClearFigures();
+
+				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
+				if((res = viewImage[0].SetImagePtr(ref fliSource)).IsFail())
 				{
-					ErrorPrint(res, "Failed to synchronize view\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
+				}
+
+				for(int i = 1; i < 4; ++i)
+				{
+					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
+					if((res = viewImage[i].SetImagePtr(ref fliCopy)).IsFail())
+					{
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
+						break;
+					}
+				}
+
+				// SourceView, ResultView 의 0번 레이어 가져오기 // Get Layer 0 of SourceView, ResultView
+				CGUIViewImageLayer layerSource = viewImage[0].GetLayer(0);
+				CGUIViewImageLayer layerResult1 = viewImage[1].GetLayer(0);
+				CGUIViewImageLayer layerResult2 = viewImage[2].GetLayer(0);
+				CGUIViewImageLayer layerResult3 = viewImage[3].GetLayer(0);
+
+				layerSource.DrawTextCanvas(new TPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 15);
+				layerResult1.DrawTextCanvas(new TPoint<double>(0, 0), "Result 1", EColor.YELLOW, EColor.BLACK, 15);
+				layerResult2.DrawTextCanvas(new TPoint<double>(0, 0), "Result 2", EColor.YELLOW, EColor.BLACK, 15);
+				layerResult3.DrawTextCanvas(new TPoint<double>(0, 0), "Result 3", EColor.YELLOW, EColor.BLACK, 15);
+
+				for(int i = 1; i < 4; ++i)
+				{
+					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
+					if((res = viewImage[0].SynchronizePointOfView(ref viewImage[i])).IsFail())
+					{
+						ErrorPrint(res, "Failed to synchronize view\n");
+						break;
+					}
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
@@ -96,23 +121,6 @@ namespace GetFigure
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
-				}
-
-				CFLFigureArray flfaSource1 = new CFLFigureArray();
-				CFLFigureArray flfaSource2 = new CFLFigureArray();
-
-				// Source Figure 불러오기 // Load source figure
-				if((res = flfaSource1.Load("../../ExampleImages/Figure/various shapes.fig")).IsFail())
-				{
-					ErrorPrint(res, "Failed to load the figure file.\n");
-					break;
-				}
-
-				// Source Figure 불러오기 // Load source figure
-				if((res = flfaSource2.Load("../../ExampleImages/Figure/Circles.fig")).IsFail())
-				{
-					ErrorPrint(res, "Failed to load the figure file.\n");
-					break;
 				}
 
 				// 지원되는 연산자 : [, ] , { , }, (, ), +, -, *, / , ^, <, >, <= , =<, >= , =>, != , =!, =, == , &, &&, and, | , || , or
@@ -237,18 +245,17 @@ namespace GetFigure
 				//	variance                                              : Variance or Var
 				//	standard deviation                                    : Stdev or Stddev
 
-
 				// 조건식 문자열 // Condition string
 				String strExpression1;
-				strExpression1 = string.Format("area > 400 and center.y < 160 or vertexcount = 3");
+				strExpression1 = string.Format("Name == '1 Flux'");
 
 				// 조건식을 View에 표기 // Draw the conditional expression in the View
-				Dst1Layer0.DrawTextCanvas(new TPoint<double>(0, 20), strExpression1, EColor.YELLOW, EColor.BLACK, 13);
+				layerResult1.DrawTextCanvas(new TPoint<double>(0, 20), strExpression1, EColor.YELLOW, EColor.BLACK, 13);
 
 				// 조건식을 만족하는 Figure를 flfaResult1에 추출 // Extract the figure that satisfies the conditional expression to flfaResult1
-				CFLFigureArray flfaResult1 = new CFLFigureArray();
+				CFLFigureArray flfaResult1;
 
-				if((res = flfaSource1.GetFigure(strExpression1, out flfaResult1)).IsFail())
+				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression1, fliSource, out flfaResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
@@ -256,49 +263,60 @@ namespace GetFigure
 
 				// 조건식 문자열 // Condition string
 				String strExpression2;
-				strExpression2 = string.Format("area >= mean('area')");
+				strExpression2 = string.Format("Name == '2 Rubber' && Width > 90");
 
 				// 조건식을 View에 표기 // Draw the conditional expression in the View
-				Dst2Layer0.DrawTextCanvas(new TPoint<double>(0, 20), strExpression2, EColor.YELLOW, EColor.BLACK, 13);
+				layerResult2.DrawTextCanvas(new TPoint<double>(0, 20), strExpression2, EColor.YELLOW, EColor.BLACK, 13);
 
 				// 조건식을 만족하는 Figure를 flfaResult2에 추출 // Get the figure that satisfies the conditional expression to flfaResult2
-				CFLFigureArray flfaResult2 = new CFLFigureArray();
+				CFLFigureArray flfaResult2;
 
-				if((res = flfaSource2.GetFigure(strExpression2, out flfaResult2)).IsFail())
+				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression2, fliSource, out flfaResult2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
-				// SourceView의 0번 레이어에 Source Figure 그리기 // Draw the Source Figure on Layer 0 of the SourceView
-				Src1Layer0.DrawFigureImage(flfaSource1, EColor.CYAN);
-				Src2Layer0.DrawFigureImage(flfaSource2, EColor.CYAN);
+				// 조건식 문자열 // Condition string
+				String strExpression3;
+				strExpression3 = string.Format("Center.x > mean('Center.x')");
 
-				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1
-				Dst1Layer0.DrawFigureImage(flfaSource1, EColor.CYAN);
-				Dst1Layer0.DrawFigureImage(flfaResult1, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				// 조건식을 View에 표기 // Draw the conditional expression in the View
+				layerResult3.DrawTextCanvas(new TPoint<double>(0, 20), strExpression3, EColor.YELLOW, EColor.BLACK, 13);
 
-				// DstView2의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView2
-				Dst2Layer0.DrawFigureImage(flfaSource2, EColor.CYAN);
-				Dst2Layer0.DrawFigureImage(flfaResult2, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				// 조건식을 만족하는 Figure를 flfaResult3에 추출 // Get the figure that satisfies the conditional expression to flfaResult3
+				CFLFigureArray flfaResult3;
+
+				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression3, fliSource, out flfaResult3)).IsFail())
+				{
+					ErrorPrint(res, "Failed to process.\n");
+					break;
+				}
+
+				// ResultView의 0번 레이어에 Result Figure 그리기 // Draw the Result Figure on Layer 0 of the ResultView
+				layerResult1.DrawFigureImage(flfaResult1, EColor.BLACK, 3);
+				layerResult1.DrawFigureImage(flfaResult1, EColor.LIME);
+				layerResult2.DrawFigureImage(flfaResult2, EColor.BLACK, 3);
+				layerResult2.DrawFigureImage(flfaResult2, EColor.LIME);
+				layerResult3.DrawFigureImage(flfaResult3, EColor.BLACK, 3);
+				layerResult3.DrawFigureImage(flfaResult3, EColor.LIME);
 
 				// Console 출력 // Console output
-				Console.WriteLine("Source1 Figure Array\n");
-				Console.WriteLine("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaSource1));
-
-				Console.WriteLine("Result1 Figure that area > 400 and center.y < 160 or vertexcount = 3\n");
+				Console.WriteLine("Result1 Figure that Name == '1 Flux'\n");
 				Console.WriteLine("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaResult1));
 
-				Console.WriteLine("Source2 Figure Array\n");
-				Console.WriteLine("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaSource2));
-
-				Console.WriteLine("Result2 Figure that area >= mean('area')\n");
+				Console.WriteLine("Result2 Figure that Name == '2 Rubber' && Width > 90\n");
 				Console.WriteLine("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaResult2));
 
+				Console.WriteLine("Result3 Figure that Center.x > mean('Center.x')\n");
+				Console.WriteLine("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaResult3));
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				for(int i = 0; i < 4; ++i)
+				{
 					viewImage[i].Invalidate(true);
+					viewImage[i].RedrawWindow();
+				}
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage[0].IsAvailable() && viewImage[1].IsAvailable() && viewImage[2].IsAvailable() && viewImage[3].IsAvailable())
