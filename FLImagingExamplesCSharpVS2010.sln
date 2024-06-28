@@ -1310,6 +1310,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trailing Ones", "Trailing O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationTrailingOnes", "OperationTrailingOnes\OperationTrailingOnes.csproj", "{ED6002F5-7682-4201-8E47-E6D3818DFEFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpticalCharacterVerification_Quality", "OpticalCharacterVerification_Quality\OpticalCharacterVerification_Quality.csproj", "{DDD68583-C460-4A67-B917-623B5BFC906D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -4792,6 +4794,12 @@ Global
 		{ED6002F5-7682-4201-8E47-E6D3818DFEFB}.Release|x64.ActiveCfg = Release|x64
 		{ED6002F5-7682-4201-8E47-E6D3818DFEFB}.Release|x64.Build.0 = Release|x64
 		{ED6002F5-7682-4201-8E47-E6D3818DFEFB}.Release|x86.ActiveCfg = Release|x64
+		{DDD68583-C460-4A67-B917-623B5BFC906D}.Debug|x64.ActiveCfg = Debug|x64
+		{DDD68583-C460-4A67-B917-623B5BFC906D}.Debug|x64.Build.0 = Debug|x64
+		{DDD68583-C460-4A67-B917-623B5BFC906D}.Debug|x86.ActiveCfg = Debug|x64
+		{DDD68583-C460-4A67-B917-623B5BFC906D}.Release|x64.ActiveCfg = Release|x64
+		{DDD68583-C460-4A67-B917-623B5BFC906D}.Release|x64.Build.0 = Release|x64
+		{DDD68583-C460-4A67-B917-623B5BFC906D}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -5438,6 +5446,7 @@ Global
 		{D25D0877-C80E-4AAD-B0F3-E4D0EE115BE5} = {C20F2CD3-4C6B-4E2F-820A-C50325DA5825}
 		{F5BBE99D-6803-491C-A738-5451D1F0012A} = {1A616418-DF11-41F3-9B0D-0BA564C9C8F1}
 		{26C2C22D-1BF3-4937-8491-0A7065713146} = {1A616418-DF11-41F3-9B0D-0BA564C9C8F1}
+		{DDD68583-C460-4A67-B917-623B5BFC906D} = {1A616418-DF11-41F3-9B0D-0BA564C9C8F1}
 		{ED6002F5-7682-4201-8E47-E6D3818DFEFB} = {024A6542-0C9C-4C3D-8541-2863A781C0DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
