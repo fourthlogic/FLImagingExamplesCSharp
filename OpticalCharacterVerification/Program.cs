@@ -147,14 +147,14 @@ namespace OpticalCharacterVerification
 					break;
 				}
 
-				// 인식할 최소 점수를 설정
-				if((res = ocv.SetMinimumScore(0.7)).IsFail())
+				// 인식할 최소 퀄리티를 설정
+				if((res = ocv.SetMinimumQuality(0.6)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set minimum score.");
+					ErrorPrint(res, "Failed to set minimum quality.");
 					break;
 				}
 
-				// 검증 기준 범위 가중치 설정// 인식할 최소 점수를 설정
+				// 검증 기준 범위 가중치 설정
 				if((res = ocv.SetSigma(5)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set sigma.");
@@ -196,11 +196,11 @@ namespace OpticalCharacterVerification
 					string flsResultString = "";
 					string flsResultString2 = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
-					int i32Score = (int)(resultChar.f64Score * 100.0);
+					int i32Quality = (int)(resultChar.f64Quality * 100.0);
 					CFLRect<double> flrBoundary = resultChar.flrBoundary;
 					CFLLine<double> fllBlankSpaceWidth = resultChar.fllBlankSpaceWidthLine;
 
-					flsResultString = "[" + flsResultName + "]" + string.Format("Score: {0}%\nScale: {1}\nAngle: {2}\nLighting: {3}\nContrast: {4}", i32Score, (resultChar.f64ScaleWidth * resultChar.f64ScaleHeight).ToString("n2"), resultChar.f64Rotation.ToString("n2"), resultChar.f64Lighting.ToString("n2"), resultChar.f64Contrast.ToString("n2"));
+					flsResultString = "[" + flsResultName + "]" + string.Format("Quality: {0}%\nScale: {1}\nAngle: {2}\nLighting: {3}\nContrast: {4}", i32Quality, (resultChar.f64ScaleWidth * resultChar.f64ScaleHeight).ToString("n2"), resultChar.f64Rotation.ToString("n2"), resultChar.f64Lighting.ToString("n2"), resultChar.f64Contrast.ToString("n2"));
 					Console.WriteLine(flsResultString);
 					Console.WriteLine();
 
@@ -216,17 +216,20 @@ namespace OpticalCharacterVerification
 						break;
 					}
 
-					if((res = layer1.DrawFigureImage(flrBoundary, resultChar.bVerified ? EColor.GREEN : EColor.RED, 1, resultChar.bVerified ? EColor.GREEN : EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
+					if((res = layer1.DrawFigureImage(flrBoundary, resultChar.bVerified ? EColor.GREEN : EColor.RED, 3, resultChar.bVerified ? EColor.GREEN : EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, 0.0f)).IsFail())
 					{
 						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
 						break;
 					}
 
+					layer1.DrawFigureImage(resultChar.flfaIntrusion, EColor.YELLOW, 1, EColor.YELLOW, EGUIViewImagePenStyle.Solid, 1.0f, 0.3f);
+					layer1.DrawFigureImage(resultChar.flfaExtrusion, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1.0f, 0.3f);
+
 					if(resultChar.f64BlankSpaceWidth != 0)
 					{
 						flsResultString2 = string.Format("Space Width: {0}", resultChar.f64BlankSpaceWidth.ToString("n2"));
 
-						if((res = layer1.DrawFigureImage(fllBlankSpaceWidth, EColor.BLACK, 1, EColor.BLACK, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
+						if((res = layer1.DrawFigureImage(fllBlankSpaceWidth, EColor.BLACK, 3, EColor.BLACK, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
 						{
 							ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
 							break;
@@ -271,11 +274,11 @@ namespace OpticalCharacterVerification
 					string flsResultString = "";
 					string flsResultString2 = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
-					int i32Score = (int)(resultChar.f64Score * 100.0);
+					int i32Quality = (int)(resultChar.f64Quality * 100.0);
 					CFLRect<double> flrBoundary = resultChar.flrBoundary;
 					CFLLine<double> fllBlankSpaceWidth = resultChar.fllBlankSpaceWidthLine;
 
-					flsResultString = "[" + flsResultName + "]" + string.Format("Score: {0}%\nScale: {1}\nAngle: {2}\nLighting: {3}\nContrast: {4}", i32Score, (resultChar.f64ScaleWidth * resultChar.f64ScaleHeight).ToString("n2"), resultChar.f64Rotation.ToString("n2"), resultChar.f64Lighting.ToString("n2"), resultChar.f64Contrast.ToString("n2"));
+					flsResultString = "[" + flsResultName + "]" + string.Format("Quality: {0}%\nScale: {1}\nAngle: {2}\nLighting: {3}\nContrast: {4}", i32Quality, (resultChar.f64ScaleWidth * resultChar.f64ScaleHeight).ToString("n2"), resultChar.f64Rotation.ToString("n2"), resultChar.f64Lighting.ToString("n2"), resultChar.f64Contrast.ToString("n2"));
 					Console.WriteLine(flsResultString);
 					Console.WriteLine();
 
@@ -291,17 +294,20 @@ namespace OpticalCharacterVerification
 						break;
 					}
 
-					if((res = layer2.DrawFigureImage(flrBoundary, resultChar.bVerified ? EColor.GREEN : EColor.RED, 1, resultChar.bVerified ? EColor.GREEN : EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
+					if((res = layer2.DrawFigureImage(flrBoundary, resultChar.bVerified ? EColor.GREEN : EColor.RED, 3, resultChar.bVerified ? EColor.GREEN : EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, 0.0f)).IsFail())
 					{
 						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
 						break;
 					}
 
+					layer2.DrawFigureImage(resultChar.flfaIntrusion, EColor.YELLOW, 1, EColor.YELLOW, EGUIViewImagePenStyle.Solid, 1.0f, 0.3f);
+					layer2.DrawFigureImage(resultChar.flfaExtrusion, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1.0f, 0.3f);
+
 					if(resultChar.f64BlankSpaceWidth != 0)
 					{
 						flsResultString2 = string.Format("Space Width: {0}", resultChar.f64BlankSpaceWidth.ToString("n2"));
 
-						if((res = layer2.DrawFigureImage(fllBlankSpaceWidth, EColor.BLACK, 1, EColor.BLACK, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
+						if((res = layer2.DrawFigureImage(fllBlankSpaceWidth, EColor.BLACK, 3, EColor.BLACK, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
 						{
 							ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
 							break;
@@ -346,11 +352,11 @@ namespace OpticalCharacterVerification
 					string flsResultString = "";
 					string flsResultString2 = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
-					int i32Score = (int)(resultChar.f64Score * 100.0);
+					int i32Quality = (int)(resultChar.f64Quality * 100.0);
 					CFLRect<double> flrBoundary = resultChar.flrBoundary;
 					CFLLine<double> fllBlankSpaceWidth = resultChar.fllBlankSpaceWidthLine;
 
-					flsResultString = "[" + flsResultName + "]" + string.Format("Score: {0}%\nScale: {1}\nAngle: {2}\nLighting: {3}\nContrast: {4}", i32Score, (resultChar.f64ScaleWidth * resultChar.f64ScaleHeight).ToString("n2"), resultChar.f64Rotation.ToString("n2"), resultChar.f64Lighting.ToString("n2"), resultChar.f64Contrast.ToString("n2"));
+					flsResultString = "[" + flsResultName + "]" + string.Format("Quality: {0}%\nScale: {1}\nAngle: {2}\nLighting: {3}\nContrast: {4}", i32Quality, (resultChar.f64ScaleWidth * resultChar.f64ScaleHeight).ToString("n2"), resultChar.f64Rotation.ToString("n2"), resultChar.f64Lighting.ToString("n2"), resultChar.f64Contrast.ToString("n2"));
 					Console.WriteLine(flsResultString);
 					Console.WriteLine();
 
@@ -366,17 +372,20 @@ namespace OpticalCharacterVerification
 						break;
 					}
 
-					if((res = layer3.DrawFigureImage(flrBoundary, resultChar.bVerified ? EColor.GREEN : EColor.RED, 1, resultChar.bVerified ? EColor.GREEN : EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
+					if((res = layer3.DrawFigureImage(flrBoundary, resultChar.bVerified ? EColor.GREEN : EColor.RED, 3, resultChar.bVerified ? EColor.GREEN : EColor.RED, EGUIViewImagePenStyle.Solid, 1.0f, 0.0f)).IsFail())
 					{
 						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
 						break;
 					}
 
+					layer3.DrawFigureImage(resultChar.flfaIntrusion, EColor.YELLOW, 1, EColor.YELLOW, EGUIViewImagePenStyle.Solid, 1.0f, 0.3f);
+					layer3.DrawFigureImage(resultChar.flfaExtrusion, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1.0f, 0.3f);
+
 					if(resultChar.f64BlankSpaceWidth != 0)
 					{
 						flsResultString2 = string.Format("Space Width: {0}", resultChar.f64BlankSpaceWidth.ToString("n2"));
 
-						if((res = layer3.DrawFigureImage(fllBlankSpaceWidth, EColor.BLACK, 1, EColor.BLACK, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
+						if((res = layer3.DrawFigureImage(fllBlankSpaceWidth, EColor.BLACK, 3, EColor.BLACK, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
 						{
 							ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
 							break;
