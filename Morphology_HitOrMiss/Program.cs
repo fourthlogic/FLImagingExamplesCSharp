@@ -54,7 +54,7 @@ namespace Morphology_HitOrMiss
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/Morphology/Moss.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/Morphology/Monkey.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -121,7 +121,7 @@ namespace Morphology_HitOrMiss
 					break;
 
 				// ROI 설정을 위한 CFLRect 객체 생성 // Create a CFLRect object for setting ROI
-				CFLRect<int> flrROI = new CFLRect<int>(100, 190, 360, 420);
+				CFLRect<int> flrROI = new CFLRect<int>(90, 20, 430, 320);
 
 				// Morphology HitOrMiss 객체 생성 // Create Morphology HitOrMiss object
 				CMorphologyHitOrMiss morphologyHitOrMiss = new CMorphologyHitOrMiss();
@@ -228,7 +228,7 @@ namespace Morphology_HitOrMiss
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = (morphologyHitOrMiss.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute morphology gradient.");
+					ErrorPrint(res, "Failed to execute morphology Hit or Miss.");
 					break;
 				}
 
