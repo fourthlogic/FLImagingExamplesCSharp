@@ -139,6 +139,8 @@ namespace OperationTrailingOnes
 					break;
 				}
 
+				viewImageSrc.SetPixelNumberMode(EPixelNumberMode.Binary);
+
 				// 이미지 뷰를 갱신 // Update image view
 				viewImageSrc.Invalidate(true);
 				viewImageDst.Invalidate(true);
