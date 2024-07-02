@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace LowIntensityCorrection
+namespace LowLuminanceCorrectionType1
 {
 	class Program
 	{
@@ -45,7 +45,7 @@ namespace LowIntensityCorrection
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = (arrFliImage[0].Load("../../ExampleImages/LowIntensityCorrection/LowIntensityCorrection.flif"))).IsFail())
+				if((res = (arrFliImage[0].Load("../../ExampleImages/LowLuminanceCorrectionType1/LowLuminanceCorrectionType1.flif"))).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -102,17 +102,17 @@ namespace LowIntensityCorrection
 					break;
 				}
 
-				// LowIntensityCorrection 객체 생성 // Create LowIntensityCorrection object
-				CLowIntensityCorrection LowIntensityCorrection = new CLowIntensityCorrection();
+				// LowLuminanceCorrectionType1 객체 생성 // Create LowLuminanceCorrectionType1 object
+				CLowLuminanceCorrectionType1 LowLuminanceCorrectionType1 = new CLowLuminanceCorrectionType1();
 				// Source 이미지 설정 // Set source image
-				LowIntensityCorrection.SetSourceImage(ref arrFliImage[0]);
+				LowLuminanceCorrectionType1.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				LowIntensityCorrection.SetDestinationImage(ref arrFliImage[1]);
+				LowLuminanceCorrectionType1.SetDestinationImage(ref arrFliImage[1]);
 				// Noise Reduction 설정
-				LowIntensityCorrection.EnableNoiseReduction(true);
+				LowLuminanceCorrectionType1.EnableNoiseReduction(true);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if ((res = (LowIntensityCorrection.Execute())).IsFail())
+				if ((res = (LowLuminanceCorrectionType1.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Low Intensity Correction.");
 					break;

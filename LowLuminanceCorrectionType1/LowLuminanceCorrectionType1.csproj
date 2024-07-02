@@ -9,8 +9,8 @@
     <ProjectGuid>{1AD53E46-F30E-467C-8240-82A4EE40837D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LowIntensityCorrection</RootNamespace>
-    <AssemblyName>LowIntensityCorrection</AssemblyName>
+    <RootNamespace>LowLuminanceCorrectionType1</RootNamespace>
+    <AssemblyName>LowLuminanceCorrectionType1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
