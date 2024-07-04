@@ -139,6 +139,7 @@ namespace OperationTrailingZeros
 					break;
 				}
 
+				// Source 이미지 뷰의 Pixel 값을 Binary로 설정 // Show Pixel Values on Source Image View to Binary
 				viewImageSrc.SetPixelNumberMode(EPixelNumberMode.Binary);
 
 				// 이미지 뷰를 갱신 // Update image view

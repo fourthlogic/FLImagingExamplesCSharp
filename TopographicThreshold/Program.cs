@@ -247,6 +247,7 @@ namespace TopographicThreshold
 					break;
 				}
 
+				// Destination 이미지 뷰의 Pixel 값을 컬러링하여 볼 수 있도록 설정 // Show Colored Pixel Values on Destination Image Views
 				for(int i = 1; i < 4; ++i)
 					arrViewImage[i].EnablePixelSegmentationMode(true);
 
