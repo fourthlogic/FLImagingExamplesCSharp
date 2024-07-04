@@ -50,7 +50,8 @@ namespace OperationLeadingOnes
 					arrU8[2 * i + 1] = (byte)(value >> 8);
 				}
 
-				if ((res = fliSourceImage.Create(4, 4, arrU8, EPixelFormat.C1_U16)).IsFail())
+				// 버퍼로부터 Source 이미지 생성 // Create the source image from the buffer
+				if((res = fliSourceImage.Create(4, 4, arrU8, EPixelFormat.C1_U16)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
