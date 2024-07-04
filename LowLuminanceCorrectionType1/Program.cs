@@ -114,7 +114,7 @@ namespace LowLuminanceCorrectionType1
 				// 알고리즘 수행 // Execute the algorithm
 				if ((res = (LowLuminanceCorrectionType1.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Low Intensity Correction.");
+					ErrorPrint(res, "Failed to execute Low Luminance Correction Type 1.");
 					break;
 				}
 
