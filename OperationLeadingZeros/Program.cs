@@ -98,7 +98,7 @@ namespace OperationLeadingZeros
 					break;
 				}
 
-				// Operation Trailing Ones 객체 생성 // Create Operation Trailing Ones object
+				// Operation Leading Zeros 객체 생성 // Create Operation Leading Zeros object
 				COperationLeadingZeros to = new COperationLeadingZeros();
 
 				// Source 이미지 설정 // Set the source image
