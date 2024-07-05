@@ -112,20 +112,27 @@ namespace OpticalCharacterVerification
 					break;
 				}
 
-				// 인식할 최소 퀄리티를 설정
-				if((res = ocv.SetMinimumQuality(0.4)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set minimum quality.");
-					break;
-				}
-
 				// 정규표현식 사용 여부 설정
 				if((res = ocv.EnableRegularExpression(true)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set regular expression.");
 					break;
 				}
-				
+
+				// 인트루전 검증 여부를 설정 (해당 예제에서는 퀄리티 검증을 배제함)
+				if((res = ocv.EnableIntrusionInspection(false)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set intrusion inspection.");
+					break;
+				}
+
+				// 익스트루전 검증 여부를 설정 (해당 예제에서는 퀄리티 검증을 배제함)
+				if((res = ocv.EnableExtrusionInspection(false)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set extrusion inspection.");
+					break;
+				}
+
 				// 문자를 검증할 이미지 설정
 				if((res = ocv.SetSourceImage(ref fliImage1)).IsFail())
 				{

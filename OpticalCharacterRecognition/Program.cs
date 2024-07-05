@@ -178,7 +178,7 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 인식할 문자의 색상을 설정
-				if((res = ocr.SetRecognizingCharacterColorType(COCR.ECharacterColorType.All)).IsFail())
+				if((res = ocr.SetRecognizingCharacterColorType(ECharacterColorType.All)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set recognizing character color.");
 					break;
