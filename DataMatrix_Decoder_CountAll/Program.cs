@@ -82,7 +82,7 @@ namespace DataMatrix
 				dataMatrixDecoder.SetColorMode(EDataCodeColor.Auto);
 				// 전처리 Blur 설정
 				// EDataMatrixImageProcessingMethod_Normal 입력 시 전처리를 하지 않는다.
-				dataMatrixDecoder.SetImageProcessingMethod(EDataCodeDecoderImageProcessingMethod.Normal);
+				dataMatrixDecoder.SetDenoisingMethod(EDataCodeDecoderDenoisingMethod.Gaussian);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = dataMatrixDecoder.Execute()).IsFail())
