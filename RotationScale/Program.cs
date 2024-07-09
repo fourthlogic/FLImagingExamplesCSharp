@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace ScaleRotation
+namespace RotationScale
 {
 	class Program
 	{
@@ -114,53 +114,53 @@ namespace ScaleRotation
 				if(bError)
 					break;
 
-				// ScaleRotation 객체 생성 // Create ScaleRotation object
-				CScaleRotation scaleRotation = new CScaleRotation();
+				// RotationScale 객체 생성 // Create RotationScale object
+				CRotationScale rotationScale = new CRotationScale();
 				// Source 이미지 설정 // Set the source image
-				scaleRotation.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				rotationScale.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				scaleRotation.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				rotationScale.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Scale 비율 설정 // set scale ratio
-				scaleRotation.SetScale(1.5, 1.5);
+				rotationScale.SetScale(1.5, 1.5);
 				// 회전 각도 설정 // set rotation angle
-				scaleRotation.SetAngle(30.0);
+				rotationScale.SetAngle(30.0);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaleRotation.Execute())).IsFail())
+				if((res = (rotationScale.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute scaleRotation.");
+					ErrorPrint(res, "Failed to execute rotationScale.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set the destination image
-				scaleRotation.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				rotationScale.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Scale 비율 설정 // set scale ratio
-				scaleRotation.SetScale(0.7, 1.5);
+				rotationScale.SetScale(0.7, 1.5);
 				// 회전 각도 설정 // set rotation angle
-				scaleRotation.SetAngle(30.0);
+				rotationScale.SetAngle(30.0);
 				// Image Resize 설정 // Set Image Resize
-				scaleRotation.SetResizeMethod(EResizeMethod.Resize);
+				rotationScale.SetResizeMethod(EResizeMethod.Resize);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaleRotation.Execute())).IsFail())
+				if((res = (rotationScale.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute scaleRotation.");
+					ErrorPrint(res, "Failed to execute rotationScale.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set the destination image
-				scaleRotation.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
+				rotationScale.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
 				// Scale 비율 설정 // set scale ratio
-				scaleRotation.SetScale(1.5, 0.7);
+				rotationScale.SetScale(1.5, 0.7);
 				// 회전 각도 설정 // set rotation angle
-				scaleRotation.SetAngle(240.0);
+				rotationScale.SetAngle(240.0);
 				// Image Resize 설정 // Set Image Resize
-				scaleRotation.SetResizeMethod(EResizeMethod.Resize);
+				rotationScale.SetResizeMethod(EResizeMethod.Resize);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaleRotation.Execute())).IsFail())
+				if((res = (rotationScale.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute scaleRotation.");
+					ErrorPrint(res, "Failed to execute rotationScale.");
 					break;
 				}
 
