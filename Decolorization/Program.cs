@@ -105,7 +105,7 @@ namespace Decolorization
 					break;
 				}
 
-				if((res = layerConverted.DrawTextCanvas(resultRegion, "Converted Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerConverted.DrawTextCanvas(resultRegion, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
 					break;
