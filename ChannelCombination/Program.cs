@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelIntegrator
+namespace ChannelCombination
 {
 	class Program
 	{
@@ -49,19 +49,19 @@ namespace ChannelIntegrator
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliImage[0].Load("../../ExampleImages/ChannelIntegrator/Valley1.flif")).IsFail())
+				if((res = fliImage[0].Load("../../ExampleImages/ChannelCombination/Valley1.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				if((res = fliImage[1].Load("../../ExampleImages/ChannelIntegrator/Valley2.flif")).IsFail())
+				if((res = fliImage[1].Load("../../ExampleImages/ChannelCombination/Valley2.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				if((res = fliImage[2].Load("../../ExampleImages/ChannelIntegrator/Valley3.flif")).IsFail())
+				if((res = fliImage[2].Load("../../ExampleImages/ChannelCombination/Valley3.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -155,8 +155,8 @@ namespace ChannelIntegrator
 					break;
 				}
 
-				// Channel Integrator 객체 생성 // Create Channel Integrator object
-				CChannelIntegrator ChannelIntegrator = new CChannelIntegrator();
+				// Channel Combination 객체 생성 // Create Channel Combination object
+				CChannelCombination ChannelCombination = new CChannelCombination();
 
 				// Source 이미지를 저장할 Array 선언 // Declare an Array to store the source image
 				List<CFLImage> vctSrcImages = new List<CFLImage>();
@@ -175,15 +175,15 @@ namespace ChannelIntegrator
 				vctSrcChannels.Add((Int64)EChannelSelection.Channel_0);
 
 				// 결합할 이미지 및 채널입력 // Set images, channels
-				ChannelIntegrator.SetSourceImage(ref vctSrcImages, vctSrcChannels);
+				ChannelCombination.SetSourceImage(ref vctSrcImages, vctSrcChannels);
 
 				// 결합 결과를 저장할 이미지 설정 // Set destination image
-				ChannelIntegrator.SetDestinationImage(ref fliDstImage);
+				ChannelCombination.SetDestinationImage(ref fliDstImage);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ChannelIntegrator.Execute())).IsFail())
+				if((res = (ChannelCombination.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ChannelIntegrator.");
+					ErrorPrint(res, "Failed to execute ChannelCombination.");
 					break;
 				}
 
