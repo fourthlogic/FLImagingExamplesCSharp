@@ -1334,7 +1334,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotationScale", "RotationSc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LowLuminanceCorrectionType2", "LowLuminanceCorrectionType2\LowLuminanceCorrectionType2.csproj", "{EBAEEB84-3C2F-4039-A392-8B8B6BDD9D06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelSwapper", "ChannelSwapper\ChannelSwapper.csproj", "{FE4B0904-C5F3-4D63-A120-EF5B0E13270E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChannelSwap", "ChannelSwap\ChannelSwap.csproj", "{FE4B0904-C5F3-4D63-A120-EF5B0E13270E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

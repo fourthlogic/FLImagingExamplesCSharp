@@ -9,8 +9,8 @@
     <ProjectGuid>{FE4B0904-C5F3-4D63-A120-EF5B0E13270E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChannelSwapper</RootNamespace>
-    <AssemblyName>ChannelSwapper</AssemblyName>
+    <RootNamespace>ChannelSwap</RootNamespace>
+    <AssemblyName>ChannelSwap</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

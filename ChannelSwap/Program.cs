@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelSwapper
+namespace ChannelSwap
 {
 	class Program
 	{
@@ -41,7 +41,7 @@ namespace ChannelSwapper
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ChannelSwapper/deer.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelSwap/deer.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -89,23 +89,23 @@ namespace ChannelSwapper
 					break;
 				}
 
-				// Channel Swapper 객체 생성 // Create Channel Swapper object
-				CChannelSwapper ChannelSwapper = new CChannelSwapper();
+				// Channel Swap 객체 생성 // Create Channel Swap object
+				CChannelSwap ChannelSwap = new CChannelSwap();
 
 				// Source 이미지 설정 // Set source image 
-				ChannelSwapper.SetSourceImage(ref fliSourceImage);
+				ChannelSwap.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set destination image
-				ChannelSwapper.SetDestinationImage(ref fliDestinationImage);
+				ChannelSwap.SetDestinationImage(ref fliDestinationImage);
 
 				// 교환할 채널 인덱스 설정 // Set channel indexes to swap
-				ChannelSwapper.SetSwapChannelFrom(EChannelSelection.Channel_0);
-				ChannelSwapper.SetSwapChannelTo(EChannelSelection.Channel_1);
+				ChannelSwap.SetSwapChannelFrom(EChannelSelection.Channel_0);
+				ChannelSwap.SetSwapChannelTo(EChannelSelection.Channel_1);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ChannelSwapper.Execute())).IsFail())
+				if((res = (ChannelSwap.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Channel Swapper. \n");
+					ErrorPrint(res, "Failed to execute Channel Swap. \n");
 					break;
 				}
 
