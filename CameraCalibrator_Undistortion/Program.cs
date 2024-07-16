@@ -202,7 +202,19 @@ namespace CircleGauge
                     break;
                 }
 
-                if (!Undistortion(sCC, fliSourceImage, fliDestinationImage, viewImageSource, viewImageDestination))
+				if((res = sCC.EnableAutoCalibration(false)).IsFail())
+				{
+					ErrorPrint(res, "Failed to auto calibration\n");
+					break;
+				}
+
+				if((res = sCC.Calibrate()).IsFail())
+				{
+					ErrorPrint(res, "Failed to calibration\n");
+					break;
+				}
+				
+                if(!Undistortion(sCC, fliSourceImage, fliDestinationImage, viewImageSource, viewImageDestination))
                     break;
 
                 CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
