@@ -150,7 +150,7 @@ namespace ConditionalReplacer
                 // 논리조건 설정 // Set the logical condition
                 conditionalReplacer.SetLogicalCondition((long)ELogicalCondition.Greater);
 
-                // 조건이 거짓일 경우 Replacement 값 설정하기 위한 MultiVar 객체 생성 // Create the MultiVar object that sets the Replacement value if the condition is false
+                // 조건이 참일 경우 Replacement 값 설정하기 위한 MultiVar 객체 생성 // Create the MultiVar object that sets the Replacement value if the condition is true
                 CMultiVar<double> mvReplacement = new CMultiVar<double>(0.0);
 
                 // Replacement 값 설정 // Set Replacement value
