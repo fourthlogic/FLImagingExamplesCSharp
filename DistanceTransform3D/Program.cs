@@ -96,10 +96,15 @@ namespace MultiFocus
 				flaColors.Add(tpColor);
 			}
 
-			CFL3DObject fl3DO = new CFL3DObject();
-			fl3DO.Assign(pFlaPlyData, flaColors);
+			int i32ReturnIndex = -1;
 
-			pView3D.PushObject(fl3DO);
+			if((pView3D.PushObject(new CGUIView3DObject(), out i32ReturnIndex)).IsOK())
+			{
+				CGUIView3DObject objView3D = pView3D.GetView3DObject(i32ReturnIndex);
+				CFL3DObject fl3DO = objView3D.GetData();
+				fl3DO.Assign(pFlaPlyData, flaColors);
+				pView3D.UpdateObject(i32ReturnIndex);
+			}
 		}
 
 
@@ -111,7 +116,7 @@ namespace MultiFocus
 			CGUIViewImage viewImageDst = new CGUIViewImage();
 			CGUIView3D view3DSrc = new CGUIView3D();
 			CGUIView3D view3DDst = new CGUIView3D();
-			CFL3DObject fl3DObject = new CFL3DObject();
+			CFL3DObject fl3DObject = null;
 
 			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult res = new CResult();
@@ -132,8 +137,41 @@ namespace MultiFocus
 					break;
 				}
 
+				// 우선 빈 CGUIView3DObject 객체를 뷰에 추가한 후 해당 객체의 인덱스를 i32ReturnIndex 에 얻어 오기
+				// First, add an empty CGUIView3DObject object to the view, then retrieve the index of that object into i32ReturnIndex.
+				int i32ReturnIndex = -1;
+				if((res = view3DSrc.PushObject(new CGUIView3DObject(), out i32ReturnIndex)).IsFail())
+				{
+					ErrorPrint(res, "Failed to display 3D object.\n");
+					break;
+				}
 
+				// 뷰에 추가된 CGUIView3DObject 객체를 i32ReturnIndex 를 이용해서 얻어 오기
+				// Retrieve the CGUIView3DObject object added to the view using i32ReturnIndex.
+				CGUIView3DObject objView3DSrc = view3DSrc.GetView3DObject(i32ReturnIndex);
+				if(objView3DSrc == null)
+				{
+					ErrorPrint(res, "Failed to display 3D object.\n");
+					break;
+				}
+
+				// 뷰에 추가된 CGUIView3DObject 객체의 내부 CFL3DObject 포인터를 얻어 오기
+				// Retrieve the internal CFL3DObject pointer of the CGUIView3DObject object added to the view.
+				fl3DObject = objView3DSrc.GetData();
+				if(fl3DObject == null)
+				{
+					ErrorPrint(res, "Failed to display 3D object.\n");
+					break;
+				}
+
+				// 뷰에 추가된 CGUIView3DObject 객체의 내부 CFL3DObject 에 ply 파일 로드
+				// Load the PLY file into the internal CFL3DObject of the CGUIView3DObject object added to the view.
 				fl3DObject.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
+
+				// CFL3DObject 에 ply 파일을 로드하였으므로 뷰의 CGUIView3DObject 객체를 업데이트
+				// Since the PLY file has been loaded into the CFL3DObject, update the CGUIView3DObject object in the view.
+				view3DSrc.UpdateObject(i32ReturnIndex);
+				view3DSrc.ZoomFit();
 
 				// Distance Transform 3D 객체 생성 // Create Distance Transform 3D object
 				CDistanceTransform3D DistanceTransform3D = new CDistanceTransform3D();
@@ -180,9 +218,6 @@ namespace MultiFocus
 					ErrorPrint(res, "Failed to zoom fit of the image view.\n");
 					break;
 				}
-
-				view3DSrc.PushObject(fl3DObject);
-				view3DSrc.ZoomFit();
 
 				CFLPoint<double> flp = new CFLPoint<double>();
 
