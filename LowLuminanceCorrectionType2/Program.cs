@@ -110,8 +110,6 @@ namespace LowLuminanceCorrectionType2
 				LowLuminanceCorrectionType2.SetDestinationImage(ref arrFliImage[1]);
 				// Noise Reduction 설정
 				LowLuminanceCorrectionType2.EnableNoiseReduction(true);
-				// Sharpening 설정
-				LowLuminanceCorrectionType2.EnableSharpening(false);
 				// Kernel Size 설정
 				LowLuminanceCorrectionType2.SetKernelSize(5);
 
