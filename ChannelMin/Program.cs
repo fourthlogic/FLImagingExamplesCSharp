@@ -41,7 +41,7 @@ namespace ChannelMin
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ChannelMin/deer.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelMin/Color.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;

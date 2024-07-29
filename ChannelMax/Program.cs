@@ -41,7 +41,7 @@ namespace ChannelMax
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ChannelMax/deer.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelMax/Color.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
