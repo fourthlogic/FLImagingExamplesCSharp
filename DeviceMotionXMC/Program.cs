@@ -49,7 +49,7 @@ namespace DeviceCameraiRAYPLE
 				int i32PortNumber = 0;
 				int i32AxisNumber = 0;
 				double f64Resolution = 0;
-				double f64Jeck = 0;
+				double f64Jerk = 0;
 				double f64MoveSpeed = 0;
 				double f64AccDecSpeed = 0;
 				double f64Position = 0;
@@ -124,11 +124,11 @@ namespace DeviceCameraiRAYPLE
 				double.TryParse(strInput, out f64Resolution);
 				pDMAxis.SetResolution(f64Resolution);
 
-				// Axis Jeck을 입력합니다. // Set axis jeck value.
-				Console.Write("Enter axis Jeck(mm/s3) : ");
+				// Axis Jerk을 입력합니다. // Set axis jerk value.
+				Console.Write("Enter axis Jerk(mm/s3) : ");
 				strInput = Console.ReadLine();
-				double.TryParse(strInput, out f64Jeck);
-				pDMAxis.SetJeck(f64Jeck);
+				double.TryParse(strInput, out f64Jerk);
+				pDMAxis.SetJerk(f64Jerk);
 
 				while(true)
 				{
