@@ -133,8 +133,11 @@ namespace ProjectionUtilities3D
                 viewImage[0].SetFixThumbnailView(true);
 
 
-                // 2. 카메라 1과 카메라 2 사이의 시점에 대한 프로젝션 // 2. Projection for viewpoints between Camera 1 and Camera 2		
-                for (int i = 0; i <= 10; ++i)
+				// 2. 카메라 1과 카메라 2 사이의 시점에 대한 프로젝션 // 2. Projection for viewpoints between Camera 1 and Camera 2		
+			
+                pu.SetTopologyType(ETopologyType3D.Wireframe);
+
+				for(int i = 0; i <= 10; ++i)
                 {
                     // 카메라 시점 설정 // Set camera viewpoint
                     CFL3DCamera camInterpolation = new CFL3DCamera();
@@ -167,8 +170,12 @@ namespace ProjectionUtilities3D
                 viewImage[1].SetFixThumbnailView(true);
 
 
-                // 3. Zoom Fit 시점의 이미지 얻기 // 3. Get image at Zoom Fit viewpoint
-                pu.ZoomFitCamera();
+				// 3. Zoom Fit 시점의 이미지 얻기 // 3. Get image at Zoom Fit viewpoint
+
+				pu.SetTopologyType(ETopologyType3D.PointCloud);
+				pu.SetPointSize((float)5);
+
+				pu.ZoomFitCamera();
 
                 // 프로젝션 수행 // Perform projection
                 res = pu.Execute();

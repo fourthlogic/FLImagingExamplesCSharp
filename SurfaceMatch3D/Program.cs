@@ -133,9 +133,9 @@ namespace SurfaceMatch3D
 				}
 
 
-				view3DLearn.SetShadingType(EView3DObjectShadingType.Flat);
-                view3DSource.SetShadingType(EView3DObjectShadingType.Flat);
-                view3DDst.SetShadingType(EView3DObjectShadingType.Flat);
+				view3DLearn.SetShadingType(EShadingType3D.Flat);
+                view3DSource.SetShadingType(EShadingType3D.Flat);
+                view3DDst.SetShadingType(EShadingType3D.Flat);
 
 
                 // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
