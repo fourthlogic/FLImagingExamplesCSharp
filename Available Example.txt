@@ -45,7 +45,7 @@
       - LaserTriangulation_Image
         - The example of an algorithm that reconstructs 3D objects projected by line laser into 3D image using laser triangulation from the source of 'Image' type.
         - 레이저로 투사된 3차원 물체를 레이저 삼각측량법을 이용하여 3차원 이미지로 재구성하는 알고리즘 예제. (Source Type : Image)
-      - LaserTriangulation_Profile
+      - LaserTriangulation_Profil
         - The example of an algorithm that reconstructs 3D objects projected by line laser into 3D image using laser triangulation from the source of 'Profile' type.
         - 레이저로 투사된 3차원 물체를 레이저 삼각측량법을 이용하여 3차원 이미지로 재구성하는 알고리즘 예제. (Source Type : Profile)
 
@@ -663,6 +663,9 @@
     - ChannelMax
       - The example of an algorithm that extracts maximum value of each pixel from a multichannel image.
       - 다채널 이미지에서 각 픽셀의 최대값을 추출하여 이미지화 하는 알고리즘 예제.
+    - ChannelMean
+      - The example of an algorithm that extracts mean value of each pixel from a multichannel image.
+      - 다채널 이미지에서 각 픽셀의 평균값을 추출하여 이미지화 하는 알고리즘 예제.
     - ChannelMedian
       - The example of an algorithm that extracts median value of each pixel from a multichannel image.
       - 다채널 이미지에서 각 픽셀의 중앙값을 추출하여 이미지화 하는 알고리즘 예제.
