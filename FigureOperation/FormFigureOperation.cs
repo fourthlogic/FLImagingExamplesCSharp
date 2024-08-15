@@ -21,15 +21,15 @@ namespace FigureOperation
 {
 	public partial class FormFigureOperation : Form
 	{
-        public void ErrorMessageBox(CResult cResult, string str)
-        {
-            string strMessage = String.Format("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
+		public void ErrorMessageBox(CResult cResult, string str)
+		{
+			string strMessage = String.Format("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
 
-            if (str.Length > 1)
-                strMessage += str;
+			if(str.Length > 1)
+				strMessage += str;
 
-            MessageBox.Show(strMessage, "Error");
-        }
+			MessageBox.Show(strMessage, "Error");
+		}
 
 		public FormFigureOperation()
 		{
@@ -45,12 +45,6 @@ namespace FigureOperation
 			this.Load += new System.EventHandler(this.FormImageViewLoad);
 			this.CenterToScreen();
 		}
-
-		[DllImport("user32.dll")]
-		public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-
-		[DllImport("user32.dll", SetLastError = true)]
-		public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
 
 		private void FormImageViewLoad(object sender, EventArgs e)
 		{
@@ -69,7 +63,7 @@ namespace FigureOperation
 			do
 			{
 				// 이미지 뷰 유효성 체크
-				if (!m_viewImage.IsAvailable())
+				if(!m_viewImage.IsAvailable())
 					break;
 
 				EFigureTemplateType eTemplateType = EFigureTemplateType.Double;
@@ -89,7 +83,7 @@ namespace FigureOperation
 					eTemplateType = EFigureTemplateType.Double;
 					break;
 				}
-				
+
 				// 이미지 뷰의 캔버스 영역을 얻어온다.
 				CFLRect<int> flrlCanvas = m_viewImage.GetClientRectCanvasRegion();
 
@@ -107,214 +101,214 @@ namespace FigureOperation
 				CFLRect<double> flrdFigureShape = new CFLRect<double>(flpdCenter.x - f64Size, flpdCenter.y - f64Size, flpdCenter.x + f64Size, flpdCenter.y + f64Size);
 
 				// 선택한 Decl Type, Template Type 으로 Figure 를 생성한다.
-                // CubicSpline, ComplexRegion 같은 경우에는 Template Type 이 double 형으로 고정이다.
-				switch (SelectedDeclType())
+				// CubicSpline, ComplexRegion 같은 경우에는 Template Type 이 double 형으로 고정이다.
+				switch(SelectedDeclType())
 				{
-					case EFigureDeclType.Point:
+				case EFigureDeclType.Point:
+					{
+						switch(eTemplateType)
 						{
-							switch (eTemplateType)
-							{
-								case EFigureTemplateType.Int32:
-									flFigure = new CFLPoint<int>();
-									break;
+						case EFigureTemplateType.Int32:
+							flFigure = new CFLPoint<int>();
+							break;
 
-								case EFigureTemplateType.Int64:
-									flFigure = new CFLPoint<long>();
-									break;
+						case EFigureTemplateType.Int64:
+							flFigure = new CFLPoint<long>();
+							break;
 
-								case EFigureTemplateType.Float:
-									flFigure = new CFLPoint<float>();
-									break;
+						case EFigureTemplateType.Float:
+							flFigure = new CFLPoint<float>();
+							break;
 
-								case EFigureTemplateType.Double:
-									flFigure = new CFLPoint<double>();
-									break;
+						case EFigureTemplateType.Double:
+							flFigure = new CFLPoint<double>();
+							break;
 
-								default:
-									break;
-							}
+						default:
+							break;
 						}
-						break;
+					}
+					break;
 
-					case EFigureDeclType.Line:
+				case EFigureDeclType.Line:
+					{
+						switch(eTemplateType)
 						{
-							switch (eTemplateType)
-							{
-								case EFigureTemplateType.Int32:
-									flFigure = new CFLLine<int>();
-									break;
+						case EFigureTemplateType.Int32:
+							flFigure = new CFLLine<int>();
+							break;
 
-								case EFigureTemplateType.Int64:
-									flFigure = new CFLLine<long>();
-									break;
+						case EFigureTemplateType.Int64:
+							flFigure = new CFLLine<long>();
+							break;
 
-								case EFigureTemplateType.Float:
-									flFigure = new CFLLine<float>();
-									break;
+						case EFigureTemplateType.Float:
+							flFigure = new CFLLine<float>();
+							break;
 
-								case EFigureTemplateType.Double:
-									flFigure = new CFLLine<double>();
-									break;
+						case EFigureTemplateType.Double:
+							flFigure = new CFLLine<double>();
+							break;
 
-								default:
-									break;
-							}
+						default:
+							break;
 						}
-						break;
+					}
+					break;
 
-					case EFigureDeclType.Rect:
+				case EFigureDeclType.Rect:
+					{
+						switch(eTemplateType)
 						{
-							switch (eTemplateType)
-							{
-								case EFigureTemplateType.Int32:
-									flFigure = new CFLRect<int>();
-									break;
+						case EFigureTemplateType.Int32:
+							flFigure = new CFLRect<int>();
+							break;
 
-								case EFigureTemplateType.Int64:
-									flFigure = new CFLRect<long>();
-									break;
+						case EFigureTemplateType.Int64:
+							flFigure = new CFLRect<long>();
+							break;
 
-								case EFigureTemplateType.Float:
-									flFigure = new CFLRect<float>();
-									break;
+						case EFigureTemplateType.Float:
+							flFigure = new CFLRect<float>();
+							break;
 
-								case EFigureTemplateType.Double:
-									flFigure = new CFLRect<double>();
-									break;
+						case EFigureTemplateType.Double:
+							flFigure = new CFLRect<double>();
+							break;
 
-								default:
-									break;
-							}
+						default:
+							break;
 						}
-						break;
+					}
+					break;
 
-					case EFigureDeclType.Quad:
+				case EFigureDeclType.Quad:
+					{
+						switch(eTemplateType)
 						{
-							switch (eTemplateType)
-							{
-								case EFigureTemplateType.Int32:
-									flFigure = new CFLQuad<int>();
-									break;
+						case EFigureTemplateType.Int32:
+							flFigure = new CFLQuad<int>();
+							break;
 
-								case EFigureTemplateType.Int64:
-									flFigure = new CFLQuad<long>();
-									break;
+						case EFigureTemplateType.Int64:
+							flFigure = new CFLQuad<long>();
+							break;
 
-								case EFigureTemplateType.Float:
-									flFigure = new CFLQuad<float>();
-									break;
+						case EFigureTemplateType.Float:
+							flFigure = new CFLQuad<float>();
+							break;
 
-								case EFigureTemplateType.Double:
-									flFigure = new CFLQuad<double>();
-									break;
+						case EFigureTemplateType.Double:
+							flFigure = new CFLQuad<double>();
+							break;
 
-								default:
-									break;
-							}
+						default:
+							break;
 						}
-						break;
+					}
+					break;
 
-					case EFigureDeclType.Circle:
+				case EFigureDeclType.Circle:
+					{
+						switch(eTemplateType)
 						{
-							switch (eTemplateType)
-							{
-								case EFigureTemplateType.Int32:
-									flFigure = new CFLCircle<int>();
-									break;
+						case EFigureTemplateType.Int32:
+							flFigure = new CFLCircle<int>();
+							break;
 
-								case EFigureTemplateType.Int64:
-									flFigure = new CFLCircle<long>();
-									break;
+						case EFigureTemplateType.Int64:
+							flFigure = new CFLCircle<long>();
+							break;
 
-								case EFigureTemplateType.Float:
-									flFigure = new CFLCircle<float>();
-									break;
+						case EFigureTemplateType.Float:
+							flFigure = new CFLCircle<float>();
+							break;
 
-								case EFigureTemplateType.Double:
-									flFigure = new CFLCircle<double>();
-									break;
+						case EFigureTemplateType.Double:
+							flFigure = new CFLCircle<double>();
+							break;
 
-								default:
-									break;
-							}
+						default:
+							break;
 						}
-						break;
+					}
+					break;
 
-					case EFigureDeclType.Ellipse:
+				case EFigureDeclType.Ellipse:
+					{
+						switch(eTemplateType)
 						{
-							switch (eTemplateType)
-							{
-								case EFigureTemplateType.Int32:
-									flFigure = new CFLEllipse<int>();
-									break;
+						case EFigureTemplateType.Int32:
+							flFigure = new CFLEllipse<int>();
+							break;
 
-								case EFigureTemplateType.Int64:
-									flFigure = new CFLEllipse<long>();
-									break;
+						case EFigureTemplateType.Int64:
+							flFigure = new CFLEllipse<long>();
+							break;
 
-								case EFigureTemplateType.Float:
-									flFigure = new CFLEllipse<float>();
-									break;
+						case EFigureTemplateType.Float:
+							flFigure = new CFLEllipse<float>();
+							break;
 
-								case EFigureTemplateType.Double:
-									flFigure = new CFLEllipse<double>();
-									break;
+						case EFigureTemplateType.Double:
+							flFigure = new CFLEllipse<double>();
+							break;
 
-								default:
-									break;
-							}
+						default:
+							break;
 						}
-						break;
+					}
+					break;
 
-					case EFigureDeclType.CubicSpline:
+				case EFigureDeclType.CubicSpline:
+					{
+						flFigure = new CFLCubicSpline();
+					}
+					break;
+
+				case EFigureDeclType.Region:
+					{
+						flFigure = new CFLRegion();
+					}
+					break;
+
+				case EFigureDeclType.ComplexRegion:
+					{
+						flFigure = new CFLComplexRegion();
+					}
+					break;
+
+				case EFigureDeclType.Doughnut:
+					{
+						switch(eTemplateType)
 						{
-							flFigure = new CFLCubicSpline();
+						case EFigureTemplateType.Int32:
+							flFigure = new CFLDoughnut<int>();
+							break;
+
+						case EFigureTemplateType.Int64:
+							flFigure = new CFLDoughnut<long>();
+							break;
+
+						case EFigureTemplateType.Float:
+							flFigure = new CFLDoughnut<float>();
+							break;
+
+						case EFigureTemplateType.Double:
+							flFigure = new CFLDoughnut<double>();
+							break;
+
+						default:
+							break;
 						}
-						break;
+					}
+					break;
 
-                     case EFigureDeclType.Region:
-                         {
-                             flFigure = new CFLRegion();
-                         }
-                         break;
-
-					case EFigureDeclType.ComplexRegion:
-						{
-							flFigure = new CFLComplexRegion();
-						}
-						break;
-
-					case EFigureDeclType.Doughnut:
-						{
-							switch (eTemplateType)
-							{
-								case EFigureTemplateType.Int32:
-									flFigure = new CFLDoughnut<int>();
-									break;
-
-								case EFigureTemplateType.Int64:
-									flFigure = new CFLDoughnut<long>();
-									break;
-
-								case EFigureTemplateType.Float:
-									flFigure = new CFLDoughnut<float>();
-									break;
-
-								case EFigureTemplateType.Double:
-									flFigure = new CFLDoughnut<double>();
-									break;
-
-								default:
-									break;
-							}
-						}
-						break;
-
-					default:
-						break;
+				default:
+					break;
 				}
 
-				if (flFigure == null)
+				if(flFigure == null)
 					break;
 
 				// 생성된 Figure 에 사각형을 설정함으로써 각 형상에 맞게 구성한다.
@@ -334,13 +328,13 @@ namespace FigureOperation
 				// 콤보 박스에 Figure Object 항목을 설정한다.
 				UpdateFigureObjectList();
 			}
-			while (false);
+			while(false);
 		}
 		private void ClickButtonClear(object sender, EventArgs e)
 		{
 			do
 			{
-				if (!m_viewImage.IsAvailable())
+				if(!m_viewImage.IsAvailable())
 					break;
 
 				// 현재 이미지 뷰에 있는 Figure Objects 를 제거한다.
@@ -352,7 +346,7 @@ namespace FigureOperation
 				// 콤보 박스에 Figure Object 항목을 설정한다.
 				UpdateFigureObjectList();
 			}
-			while (false);
+			while(false);
 		}
 		private void SelectedIndexChangedComboBoxSrcFigure(object sender, EventArgs e)
 		{
@@ -374,7 +368,7 @@ namespace FigureOperation
 				flFigure1 = GetSelectedFigure1();
 				flFigure2 = GetSelectedFigure2();
 
-				if (flFigure1 == null || flFigure2 == null)
+				if(flFigure1 == null || flFigure2 == null)
 				{
 					cResult.Assign(EResult.InvalidObject);
 					break;
@@ -383,40 +377,40 @@ namespace FigureOperation
 				// Operation 결과를 얻기 위해 FLFigureArray 를 생성한다.
 				CFLFigureArray flfaRes = new CFLFigureArray();
 
-				switch (comboBoxOperation.SelectedIndex)
+				switch(comboBoxOperation.SelectedIndex)
 				{
-					case 0:
-						// Intersection Operation 수행
-						cResult = flFigure1.GetRegionOfIntersection(flFigure2, out flfaRes);
-						break;
+				case 0:
+					// Intersection Operation 수행
+					cResult = flFigure1.GetRegionOfIntersection(flFigure2, out flfaRes);
+					break;
 
-					case 1:
-						// Union Operation 수행
-						cResult = flFigure1.GetRegionOfUnion(flFigure2, out flfaRes);
-						break;
+				case 1:
+					// Union Operation 수행
+					cResult = flFigure1.GetRegionOfUnion(flFigure2, out flfaRes);
+					break;
 
-					case 2:
-						// Subtraction Operation 수행
-						cResult = flFigure1.GetRegionOfSubtraction(flFigure2, out flfaRes);
-						break;
+				case 2:
+					// Subtraction Operation 수행
+					cResult = flFigure1.GetRegionOfSubtraction(flFigure2, out flfaRes);
+					break;
 
-					case 3:
-						// Exclusive Or Operation 수행
-						cResult = flFigure1.GetRegionOfExclusiveOr(flFigure2, out flfaRes);
-						break;
+				case 3:
+					// Exclusive Or Operation 수행
+					cResult = flFigure1.GetRegionOfExclusiveOr(flFigure2, out flfaRes);
+					break;
 				}
 
 				// 수행 결과를 확인한다.
-				if (cResult.IsFail())
+				if(cResult.IsFail())
 					break;
 
 				CFLFigureArray flfa = new CFLFigureArray(flfaRes);
 
-				if (flfa.GetCount() == 0)
+				if(flfa.GetCount() == 0)
 					break;
 
 				// 이미지 뷰에 Figure object 를 생성한다.
-				if (flfa.GetCount() == 1)
+				if(flfa.GetCount() == 1)
 					m_viewImage.PushBackFigureObject(flfa.GetAt(0), EAvailableFigureContextMenu.All);
 				else
 					m_viewImage.PushBackFigureObject(flfa, EAvailableFigureContextMenu.All);
@@ -427,7 +421,7 @@ namespace FigureOperation
 				// 콤보 박스에 Figure Object 항목을 설정한다.
 				UpdateFigureObjectList();
 			}
-			while (false);
+			while(false);
 
 			// 수행 결과 메세지를 표시한다.
 			DisplayMessage(cResult.GetString());
@@ -438,27 +432,21 @@ namespace FigureOperation
 			m_viewImage = new CGUIViewImage();
 
 			// 이미지 뷰 생성 // Create image view
-            CResult res = m_viewImage.Create(0, 0, 540, 490);
+			CResult res = m_viewImage.Create(0, 0, 540, 490);
 
-            if (res.IsFail())
-                ErrorMessageBox(res, "");
+			if(res.IsFail())
+				ErrorMessageBox(res, "");
 
-			// 이미지 뷰의 윈도우를 얻어온다.
-			ulong hWndImageView = m_viewImage.GetWindowHandle();
+			// 현재 Form 을 image view 의 parent 로 설정한다.
+			m_viewImage.SetParentWindow((ulong)this.Handle);
 
-			if (hWndImageView != 0)
-			{
-				// 현재 Form 을 image view 의 parent 로 설정한다.
-				SetParent((IntPtr)hWndImageView, this.Handle);
-
-				// image view 의 Form 내에서의 위치를 이동한다.
-				MoveWindow((IntPtr)hWndImageView, 10, 15, 540, 490, true);
-			}
+			// image view 의 Form 내에서의 위치를 이동한다.
+			m_viewImage.MoveWindow(10, 15, 540, 490, true);
 		}
 		private void UpdateControls()
 		{
 			// 이미지 뷰 유효성 체크
-			if (!m_viewImage.IsAvailable())
+			if(!m_viewImage.IsAvailable())
 			{
 				comboBoxDeclType.Enabled = false;
 				comboBoxTemplateType.Enabled = false;
@@ -473,15 +461,15 @@ namespace FigureOperation
 			{
 				comboBoxDeclType.Enabled = true;
 
-                if (comboBoxDeclType.DroppedDown == false && (SelectedDeclType() == EFigureDeclType.CubicSpline || SelectedDeclType() == EFigureDeclType.Region || SelectedDeclType() == EFigureDeclType.ComplexRegion))
+				if(comboBoxDeclType.DroppedDown == false && (SelectedDeclType() == EFigureDeclType.CubicSpline || SelectedDeclType() == EFigureDeclType.Region || SelectedDeclType() == EFigureDeclType.ComplexRegion))
 				{
-					if (comboBoxTemplateType.SelectedIndex != 0)
+					if(comboBoxTemplateType.SelectedIndex != 0)
 						comboBoxTemplateType.SelectedIndex = 3; // Double
 
-					if (comboBoxTemplateType.Enabled == true)
+					if(comboBoxTemplateType.Enabled == true)
 						comboBoxTemplateType.Enabled = false;
 				}
-				else if (comboBoxTemplateType.Enabled == false)
+				else if(comboBoxTemplateType.Enabled == false)
 					comboBoxTemplateType.Enabled = true;
 
 				buttonCreate.Enabled = true;
@@ -500,13 +488,13 @@ namespace FigureOperation
 				// 이미지 뷰의 Figure object 개수를 얻어온다.
 				int i32Count = m_viewImage.GetFigureObjectCount();
 
-				if (comboBoxSrc.Items.Count == i32Count && comboBoxDst.Items.Count == i32Count)
+				if(comboBoxSrc.Items.Count == i32Count && comboBoxDst.Items.Count == i32Count)
 					break;
 
 				// 콤보 박스에 Figure Object 항목을 설정한다.
 				UpdateFigureObjectList();
 			}
-			while (false);
+			while(false);
 		}
 		private void DrawSelectedFigure()
 		{   // 선택된 Figure Object 를 얻어온다.
@@ -516,7 +504,7 @@ namespace FigureOperation
 			do
 			{
 				// 이미지 뷰 유효성 체크
-				if (!m_viewImage.IsAvailable())
+				if(!m_viewImage.IsAvailable())
 					break;
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
@@ -526,10 +514,10 @@ namespace FigureOperation
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layer.Clear();
 
-				if (flFigure1 == null && flFigure2 == null)
+				if(flFigure1 == null && flFigure2 == null)
 					break;
 
-				if (flFigure1 != null)
+				if(flFigure1 != null)
 				{
 					// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
 					// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
@@ -538,7 +526,7 @@ namespace FigureOperation
 					layer.DrawFigureImage(flFigure1, EColor.RED, 5, EColor.RED, EGUIViewImagePenStyle.Solid, 0.5f, 0.3f);
 				}
 
-				if (flFigure2 != null)
+				if(flFigure2 != null)
 				{
 					// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
 					// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
@@ -547,7 +535,7 @@ namespace FigureOperation
 					layer.DrawFigureImage(flFigure2, EColor.BLUE, 5, EColor.BLUE, EGUIViewImagePenStyle.Solid, 0.5f, 0.3f);
 				}
 			}
-			while (false);
+			while(false);
 
 			// 이미지 뷰를 갱신한다. // Update the image view.
 			m_viewImage.Invalidate(true);
@@ -561,53 +549,53 @@ namespace FigureOperation
 			{
 				int i32CurSel = comboBoxDeclType.SelectedIndex;
 
-				switch (i32CurSel)
+				switch(i32CurSel)
 				{
-					case 0:
-						eReturn = EFigureDeclType.Point;
-						break;
+				case 0:
+					eReturn = EFigureDeclType.Point;
+					break;
 
-					case 1:
-						eReturn = EFigureDeclType.Line;
-						break;
+				case 1:
+					eReturn = EFigureDeclType.Line;
+					break;
 
-					case 2:
-						eReturn = EFigureDeclType.Rect;
-						break;
+				case 2:
+					eReturn = EFigureDeclType.Rect;
+					break;
 
-					case 3:
-						eReturn = EFigureDeclType.Quad;
-						break;
+				case 3:
+					eReturn = EFigureDeclType.Quad;
+					break;
 
-					case 4:
-						eReturn = EFigureDeclType.Circle;
-						break;
+				case 4:
+					eReturn = EFigureDeclType.Circle;
+					break;
 
-					case 5:
-						eReturn = EFigureDeclType.Ellipse;
-						break;
+				case 5:
+					eReturn = EFigureDeclType.Ellipse;
+					break;
 
-					case 6:
-						eReturn = EFigureDeclType.CubicSpline;
-						break;
+				case 6:
+					eReturn = EFigureDeclType.CubicSpline;
+					break;
 
-                    case 7:
-                        eReturn = EFigureDeclType.Region;
-                        break;
+				case 7:
+					eReturn = EFigureDeclType.Region;
+					break;
 
-					case 8:
-                        eReturn = EFigureDeclType.ComplexRegion;
-						break;
+				case 8:
+					eReturn = EFigureDeclType.ComplexRegion;
+					break;
 
-					case 9:
-						eReturn = EFigureDeclType.Doughnut;
-						break;
+				case 9:
+					eReturn = EFigureDeclType.Doughnut;
+					break;
 
-					default:
-						break;
+				default:
+					break;
 				}
 			}
-			while (false);
+			while(false);
 
 			return eReturn;
 		}
@@ -625,19 +613,19 @@ namespace FigureOperation
 				// 이미지 뷰의 Figure object 개수를 얻어온다.
 				int i32Count = m_viewImage.GetFigureObjectCount();
 
-				if (i32Count == 0)
+				if(i32Count == 0)
 					break;
 
-				for (int i = 0; i < i32Count; ++i)
+				for(int i = 0; i < i32Count; ++i)
 				{
 					// 해당 인덱스의 Figure Object 를 얻어온다.
 					CFLFigure flFigure = m_viewImage.GetFigureObject((int)i);
-					if (flFigure == null)
+					if(flFigure == null)
 						continue;
 
 					// Figure Object 의 이름을 설정한다.
 					string strFigureName = MakeFigureObjectName((int)i, flFigure);
-					if (strFigureName == "")
+					if(strFigureName == "")
 						break;
 
 					// 콤보 박스에 항목을 추가한다.                    
@@ -645,12 +633,12 @@ namespace FigureOperation
 					comboBoxDst.Items.Add(strFigureName);
 				}
 
-				if (comboBoxSrc.Items.Count > i32Selected1)
+				if(comboBoxSrc.Items.Count > i32Selected1)
 					comboBoxSrc.SelectedIndex = i32Selected1;
-				if (comboBoxDst.Items.Count > i32Selected2)
+				if(comboBoxDst.Items.Count > i32Selected2)
 					comboBoxDst.SelectedIndex = i32Selected2;
 			}
-			while (false);
+			while(false);
 		}
 
 		private string MakeFigureObjectName(int i32Index, CFLFigure flFigure)
@@ -660,94 +648,94 @@ namespace FigureOperation
 
 			do
 			{
-				if (flFigure == null)
+				if(flFigure == null)
 					break;
 
 
 				strReturn = "[" + i32Index.ToString() + "] ";
 
 				// Figure 의 DeclType 에 따른 이름 설정
-				switch (flFigure.GetDeclType())
+				switch(flFigure.GetDeclType())
 				{
-					case EFigureDeclType.Point:
-						strReturn += "Point";
-						break;
+				case EFigureDeclType.Point:
+					strReturn += "Point";
+					break;
 
-					case EFigureDeclType.Line:
-						strReturn += "Line";
-						break;
+				case EFigureDeclType.Line:
+					strReturn += "Line";
+					break;
 
-					case EFigureDeclType.Rect:
-						strReturn += "Rect";
-						break;
+				case EFigureDeclType.Rect:
+					strReturn += "Rect";
+					break;
 
-					case EFigureDeclType.Quad:
-						strReturn += "Quad";
-						break;
+				case EFigureDeclType.Quad:
+					strReturn += "Quad";
+					break;
 
-					case EFigureDeclType.Circle:
-						strReturn += "Circle";
-						break;
+				case EFigureDeclType.Circle:
+					strReturn += "Circle";
+					break;
 
-					case EFigureDeclType.Ellipse:
-						strReturn += "Ellipse";
-						break;
+				case EFigureDeclType.Ellipse:
+					strReturn += "Ellipse";
+					break;
 
-					case EFigureDeclType.CubicSpline:
-						strReturn += "CubicSpline";
-						break;
+				case EFigureDeclType.CubicSpline:
+					strReturn += "CubicSpline";
+					break;
 
-                    case EFigureDeclType.Region:
-                        strReturn += "Region";
-                        break;
+				case EFigureDeclType.Region:
+					strReturn += "Region";
+					break;
 
-                    case EFigureDeclType.ComplexRegion:
-                        strReturn += "ComplexRegion";
-						break;
+				case EFigureDeclType.ComplexRegion:
+					strReturn += "ComplexRegion";
+					break;
 
-					case EFigureDeclType.Array:
-						strReturn += "Array";
-						break;
+				case EFigureDeclType.Array:
+					strReturn += "Array";
+					break;
 
-					case EFigureDeclType.Doughnut:
-						strReturn += "Doughnut";
-						break;
+				case EFigureDeclType.Doughnut:
+					strReturn += "Doughnut";
+					break;
 
-					default:
-						bError = true;
-						break;
+				default:
+					bError = true;
+					break;
 				}
 
-				if (bError)
+				if(bError)
 					break;
 
 				// Figure 의 Template Type 에 따른 이름 설정
-				switch (flFigure.GetTemplateType())
+				switch(flFigure.GetTemplateType())
 				{
-					case EFigureTemplateType.Int32:
-						strReturn += "(Int32)";
-						break;
+				case EFigureTemplateType.Int32:
+					strReturn += "(Int32)";
+					break;
 
-					case EFigureTemplateType.Int64:
-						strReturn += "(Int64)";
-						break;
+				case EFigureTemplateType.Int64:
+					strReturn += "(Int64)";
+					break;
 
-					case EFigureTemplateType.Float:
-						strReturn += "(Float)";
-						break;
+				case EFigureTemplateType.Float:
+					strReturn += "(Float)";
+					break;
 
-					case EFigureTemplateType.Double:
-						strReturn += "(Double)";
-						break;
+				case EFigureTemplateType.Double:
+					strReturn += "(Double)";
+					break;
 
-					default:
-						bError = true;
-						break;
+				default:
+					bError = true;
+					break;
 				}
 			}
-			while (false);
+			while(false);
 
-			if (bError)
+			if(bError)
 				strReturn = "";
 
 			return strReturn;
@@ -759,18 +747,18 @@ namespace FigureOperation
 			do
 			{
 				// 이미지 뷰 유효성 체크
-				if (!m_viewImage.IsAvailable())
+				if(!m_viewImage.IsAvailable())
 					break;
 
 				int i32Selected = comboBoxSrc.SelectedIndex;
 
-				if (i32Selected < 0)
+				if(i32Selected < 0)
 					break;
 
 				// 해당 인덱스의 Figure Object 를 얻어온다.
 				flfReturn = m_viewImage.GetFigureObject(i32Selected);
 			}
-			while (false);
+			while(false);
 
 			return flfReturn;
 		}
@@ -781,18 +769,18 @@ namespace FigureOperation
 			do
 			{
 				// 이미지 뷰 유효성 체크
-				if (!m_viewImage.IsAvailable())
+				if(!m_viewImage.IsAvailable())
 					break;
 
 				int i32Selected = comboBoxDst.SelectedIndex;
 
-				if (i32Selected < 0)
+				if(i32Selected < 0)
 					break;
 
 				// 해당 인덱스의 Figure Object 를 얻어온다.
 				flfReturn = m_viewImage.GetFigureObject(i32Selected);
 			}
-			while (false);
+			while(false);
 
 			return flfReturn;
 		}

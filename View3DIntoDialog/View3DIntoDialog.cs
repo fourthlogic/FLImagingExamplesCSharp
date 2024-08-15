@@ -19,39 +19,33 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace View3DIntoDialog
 {
-    public partial class FormView3DIntoDialog : Form
-    {
-        public void ErrorMessageBox(CResult cResult, string str)
-        {
-            string strMessage = String.Format("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
+	public partial class FormView3DIntoDialog : Form
+	{
+		public void ErrorMessageBox(CResult cResult, string str)
+		{
+			string strMessage = String.Format("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
 
-            if (str.Length > 1)
-                strMessage += str;
+			if(str.Length > 1)
+				strMessage += str;
 
-            MessageBox.Show(strMessage, "Error");
-        }
+			MessageBox.Show(strMessage, "Error");
+		}
 
-        public FormView3DIntoDialog()
-        {
-            InitializeComponent();
+		public FormView3DIntoDialog()
+		{
+			InitializeComponent();
 
-            this.buttonGetHeightProfile.Click += new System.EventHandler(this.ClickButtonGetHeightProfile);
+			this.buttonGetHeightProfile.Click += new System.EventHandler(this.ClickButtonGetHeightProfile);
 
-            this.Load += new System.EventHandler(this.FormImageViewLoad);
-            this.CenterToScreen();
-        }
+			this.Load += new System.EventHandler(this.FormImageViewLoad);
+			this.CenterToScreen();
+		}
 
-        [DllImport("user32.dll")]
-        public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
-
-        private void FormImageViewLoad(object sender, EventArgs e)
-        {
-            DockView3DToThis();
-        }
-        private void ClickButtonGetHeightProfile(object sender, EventArgs e)
+		private void FormImageViewLoad(object sender, EventArgs e)
+		{
+			DockView3DToThis();
+		}
+		private void ClickButtonGetHeightProfile(object sender, EventArgs e)
 		{
 			do
 			{
@@ -69,8 +63,8 @@ namespace View3DIntoDialog
 				CFLPoint<long> flpEnd = new CFLPoint<long>(i64EndX, i64EndY);
 				double[] arrHP = { };
 
-                // 높이 프로파일 정보를 얻어 온다.
-                CResult gr = m_view3D.GetHeightProfile(flpStart, flpEnd, out arrHP);
+				// 높이 프로파일 정보를 얻어 온다.
+				CResult gr = m_view3D.GetHeightProfile(flpStart, flpEnd, out arrHP);
 
 				if(gr.IsOK())
 				{
@@ -96,33 +90,27 @@ namespace View3DIntoDialog
 			}
 			while(false);
 		}
-     
-        private void DockView3DToThis()
-        {
-            m_view3D = new CGUIView3D();
-            
-            // 3D 뷰 생성
-            CResult res = m_view3D.Create(0, 0, 540, 435);
 
-            if (res.IsFail())
-                ErrorMessageBox(res, "");
+		private void DockView3DToThis()
+		{
+			m_view3D = new CGUIView3D();
 
-            // 3D 뷰의 윈도우를 얻어온다.
-            ulong hWndImageView = m_view3D.GetWindowHandle();
+			// 3D 뷰 생성
+			CResult res = m_view3D.Create(0, 0, 540, 435);
 
-            if(hWndImageView != 0)
-            {
-                // 현재 Form 을 3D 뷰 의 parent 로 설정한다.
-                SetParent((IntPtr)hWndImageView, this.Handle);
+			if(res.IsFail())
+				ErrorMessageBox(res, "");
 
-                // 3D 뷰 의 Form 내에서의 위치를 이동한다.
-                MoveWindow((IntPtr)hWndImageView, 10, 15, 540, 435, true);
+			// 현재 Form 을 3D 뷰 의 parent 로 설정한다.
+			m_view3D.SetParentWindow((ulong)this.Handle);
 
-				// 높이 맵 이미지와 텍스쳐 로드 // Load height map image and texture
-				m_view3D.Load("../../ExampleImages/View3D/mountain.flif", "../../ExampleImages/View3D/mountain_texture.flif");
-			}
+			// 3D 뷰 의 Form 내에서의 위치를 이동한다.
+			m_view3D.MoveWindow(10, 15, 540, 435, true);
+
+			// 높이 맵 이미지와 텍스쳐 로드 // Load height map image and texture
+			m_view3D.Load("../../ExampleImages/View3D/mountain.flif", "../../ExampleImages/View3D/mountain_texture.flif");
 		}
 
-        private CGUIView3D m_view3D;
+		private CGUIView3D m_view3D;
 	}
 }
