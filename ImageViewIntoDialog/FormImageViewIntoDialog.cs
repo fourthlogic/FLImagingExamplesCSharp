@@ -17,7 +17,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace ImageViewInToDialog
+namespace ImageViewIntoDialog
 {
 	public partial class FormImageViewIntoDialog : Form
 	{
@@ -115,16 +115,10 @@ namespace ImageViewInToDialog
 			m_viewImage = new CGUIViewImage();
 
 			// 이미지 뷰 생성 // Create image view
-			CResult res = m_viewImage.Create(0, 0, 540, 435);
+			CResult res = m_viewImage.CreateAndFitParent((ulong)pictureBoxView.Handle);
 
 			if(res.IsFail())
 				ErrorMessageBox(res, "");
-
-			// 현재 Form 을 image view 의 parent 로 설정한다.
-			m_viewImage.SetParentWindow((ulong)this.Handle);
-
-			// image view 의 Form 내에서의 위치를 이동한다.
-			m_viewImage.MoveWindow(10, 15, 540, 435, true);
 		}
 		private void UpdateControls()
 		{

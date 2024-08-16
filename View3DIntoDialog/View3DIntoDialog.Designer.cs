@@ -41,7 +41,9 @@
 			this.labelStartY = new System.Windows.Forms.Label();
 			this.textBoxStartX = new System.Windows.Forms.TextBox();
 			this.labelStartX = new System.Windows.Forms.Label();
+			this.pictureBoxView = new System.Windows.Forms.PictureBox();
 			this.groupBoxRect.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxView)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonGetHeightProfile
@@ -166,17 +168,27 @@
 			this.labelStartX.TabIndex = 5;
 			this.labelStartX.Text = "Start   x";
 			// 
+			// pictureBoxView
+			// 
+			this.pictureBoxView.Location = new System.Drawing.Point(12, 12);
+			this.pictureBoxView.Name = "pictureBoxView";
+			this.pictureBoxView.Size = new System.Drawing.Size(542, 438);
+			this.pictureBoxView.TabIndex = 3;
+			this.pictureBoxView.TabStop = false;
+			// 
 			// FormView3DIntoDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(734, 461);
+			this.Controls.Add(this.pictureBoxView);
 			this.Controls.Add(this.groupBoxRect);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "FormView3DIntoDialog";
 			this.Text = "View3DIntoDialog";
 			this.groupBoxRect.ResumeLayout(false);
 			this.groupBoxRect.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxView)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -195,5 +207,6 @@
 		private System.Windows.Forms.TextBox textBoxStartY;
 		private System.Windows.Forms.Label labelStartY;
 		private System.Windows.Forms.Label labelHeightProfile;
+		private System.Windows.Forms.PictureBox pictureBoxView;
 	}
 }

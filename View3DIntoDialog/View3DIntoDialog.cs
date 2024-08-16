@@ -96,16 +96,10 @@ namespace View3DIntoDialog
 			m_view3D = new CGUIView3D();
 
 			// 3D 뷰 생성
-			CResult res = m_view3D.Create(0, 0, 540, 435);
+			CResult res = m_view3D.CreateAndFitParent((ulong)pictureBoxView.Handle);
 
 			if(res.IsFail())
 				ErrorMessageBox(res, "");
-
-			// 현재 Form 을 3D 뷰 의 parent 로 설정한다.
-			m_view3D.SetParentWindow((ulong)this.Handle);
-
-			// 3D 뷰 의 Form 내에서의 위치를 이동한다.
-			m_view3D.MoveWindow(10, 15, 540, 435, true);
 
 			// 높이 맵 이미지와 텍스쳐 로드 // Load height map image and texture
 			m_view3D.Load("../../ExampleImages/View3D/mountain.flif", "../../ExampleImages/View3D/mountain_texture.flif");

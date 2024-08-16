@@ -17,7 +17,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace GraphViewInToDialog
+namespace GraphViewIntoDialog
 {
 	public partial class FormGraphViewIntoDialog : Form
 	{
@@ -170,16 +170,10 @@ namespace GraphViewInToDialog
 			m_viewGraph = new CGUIViewGraph();
 
 			// 그래프 뷰 생성
-			CResult res = m_viewGraph.Create(0, 0, 500, 435);
+			CResult res = m_viewGraph.CreateAndFitParent((ulong)pictureBoxView.Handle);
 
 			if(res.IsFail())
 				ErrorMessageBox(res, "");
-
-			// 현재 Form 을 Graph view 의 parent 로 설정한다.
-			m_viewGraph.SetParentWindow((ulong)this.Handle);
-
-			// Graph view 의 Form 내에서의 위치를 이동한다.
-			m_viewGraph.MoveWindow(10, 15, 500, 435, true);
 		}
 		private void UpdateControls()
 		{

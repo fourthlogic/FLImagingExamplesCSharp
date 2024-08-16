@@ -194,16 +194,10 @@ namespace GraphLeastSquares
 			m_viewGraph = new CGUIViewGraph();
 
 			// 그래프 뷰 생성
-			CResult res = m_viewGraph.Create(0, 0, 540, 435);
+			CResult res = m_viewGraph.CreateAndFitParent((ulong)pictureBoxView.Handle);
 
 			if(res.IsFail())
 				ErrorMessageBox(res, "");
-
-			// 현재 Form 을 Graph view 의 parent 로 설정한다.
-			m_viewGraph.SetParentWindow((ulong)this.Handle);
-
-			// Graph view 의 Form 내에서의 위치를 이동한다.
-			m_viewGraph.MoveWindow(10, 15, 540, 435, true);
 		}
 		private void UpdateControls()
 		{
