@@ -131,8 +131,6 @@ namespace StereoPhotometric
 				photometric.SetDestinationObject(ref fl3DOHM);
 				// 결과 Texture 이미지 설정 // Set the result texture image
 				photometric.SetResultTextureImage(ref fliTxtImage);
-				// 광원의 위치 입력 방식 설정 // Set light source location input method
-				photometric.SetCalibrationMode(CStereoPhotometric.ECalibrationMode.ECalibrationMode_Angle_Degrees);
 
 				// 각 이미지의 광원 Slant 값 입력
 				CMultiVar<double> mvdSlant = new CMultiVar<double>();
@@ -158,8 +156,6 @@ namespace StereoPhotometric
 				mvdSlant.PushBack(26.067657);
 				mvdSlant.PushBack(26.126303);
 
-                photometric.SetAngleSlant(ref mvdSlant);
-
 				// 각 이미지의 광원 Tilt 값 입력
 				CMultiVar<double> mvdTilt = new CMultiVar<double>();
 
@@ -184,7 +180,7 @@ namespace StereoPhotometric
 				mvdTilt.PushBack(13.056294);
 				mvdTilt.PushBack(-5.976723);
 
-                photometric.SetAngleTilt(ref mvdTilt);
+                photometric.SetLightAngleDegrees(ref mvdSlant, ref mvdTilt);
 
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
