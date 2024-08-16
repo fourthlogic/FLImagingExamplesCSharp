@@ -158,7 +158,7 @@ namespace StereoPhotometric
 				mvdSlant.PushBack(26.067657);
 				mvdSlant.PushBack(26.126303);
 
-				StereoPhotometric.SetAngleSlant(mvdSlant);
+                photometric.SetAngleSlant(ref mvdSlant);
 
 				// 각 이미지의 광원 Tilt 값 입력
 				CMultiVar<double> mvdTilt = new CMultiVar<double>();
@@ -184,7 +184,7 @@ namespace StereoPhotometric
 				mvdTilt.PushBack(13.056294);
 				mvdTilt.PushBack(-5.976723);
 
-				StereoPhotometric.SetAngleTilt(mvdTilt);
+                photometric.SetAngleTilt(ref mvdTilt);
 
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
