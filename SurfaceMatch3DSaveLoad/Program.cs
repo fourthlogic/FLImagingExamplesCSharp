@@ -232,6 +232,7 @@ namespace SurfaceMatch3D
 					CFL3DObject fl3DOLearnTransform = new CFL3DObject();
 					CFLPoint3<double> flpTrans = new CFLPoint3<double>();
 					TPoint3<double> tp3Center = new TPoint3<double>();
+					TPoint3<double> tp3RotVec = new TPoint3<double>();
 
 					// 추정된 포즈 행렬 가져오기
 					if((eResult = SurfaceMatch3D.GetResultPoseMatrix(i, out sResult)).IsFail())
@@ -245,6 +246,9 @@ namespace SurfaceMatch3D
 					f64ArrRotX = sResult.f64Rx;
 					f64ArrRotY = sResult.f64Ry;
 					f64ArrRotZ = sResult.f64Rz;
+					tp3RotVec.x = sResult.f64RotationVectorX;
+					tp3RotVec.y = sResult.f64RotationVectorY;
+					tp3RotVec.z = sResult.f64RotationVectorZ;
 					flpTrans.x = sResult.f64Tx;
 					flpTrans.y = sResult.f64Ty;
 					flpTrans.z = sResult.f64Tz;
@@ -255,6 +259,9 @@ namespace SurfaceMatch3D
 					Console.WriteLine("    Rx   : {0}", f64ArrRotX);
 					Console.WriteLine("    Ry   : {0}", f64ArrRotY);
 					Console.WriteLine("    Rz   : {0}", f64ArrRotZ);
+					Console.WriteLine("    Rotation Vector X   : {0}", tp3RotVec.x);
+					Console.WriteLine("    Rotation Vector Y   : {0}", tp3RotVec.y);
+					Console.WriteLine("    Rotation Vector Z   : {0}", tp3RotVec.z);
 					Console.WriteLine("    Tx   : {0}", flpTrans.x);
 					Console.WriteLine("    Ty   : {0}", flpTrans.y);
 					Console.WriteLine("    Tz   : {0}", flpTrans.z);
