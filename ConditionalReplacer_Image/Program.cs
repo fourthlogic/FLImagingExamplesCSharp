@@ -184,7 +184,7 @@ namespace ConditionalReplacer
 				CMultiVar<double> mvReplacement = new CMultiVar<double>(0.0);
 
 				// Replacement 값 설정 // Set Replacement value
-				conditionalReplacer.SetReplacementValue(ref mvReplacement);
+				conditionalReplacer.SetReplacementValue(mvReplacement);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = conditionalReplacer.Execute()).IsFail())
