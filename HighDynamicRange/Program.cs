@@ -79,7 +79,7 @@ namespace HighDynamicRange
 				}
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if (viewImageSrc.SynchronizePointOfView(viewImageDst).IsFail())
+                if (viewImageSrc.SynchronizePointOfView(ref viewImageDst).IsFail())
                 {
                     ErrorPrint(result, "Failed to synchronize view. \n");
                     break;

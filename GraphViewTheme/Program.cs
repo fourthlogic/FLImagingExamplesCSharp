@@ -58,7 +58,7 @@ namespace GraphViewTheme
 				}
 
 				// 윈도우의 위치를 동기화 한다 // / Synchronize the positions of windows
-				if((res = viewGraphLight.SynchronizeWindow(viewGraphDark)).IsFail())
+				if((res = viewGraphLight.SynchronizeWindow(ref viewGraphDark)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

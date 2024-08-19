@@ -98,7 +98,7 @@ namespace SigmaFilter
 						continue;
 
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((result = arrViewImage[(int)EType.Source].SynchronizePointOfView(arrViewImage[i])).IsFail())
+					if((result = arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
 					{
 						ErrorPrint(result, "Failed to synchronize view\n");
 						bError = true;
@@ -106,7 +106,7 @@ namespace SigmaFilter
 					}
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((result = arrViewImage[(int)EType.Source].SynchronizeWindow(arrViewImage[i])).IsFail())
+					if((result = arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i])).IsFail())
 					{
 						ErrorPrint(result, "Failed to synchronize window.\n");
 						bError = true;

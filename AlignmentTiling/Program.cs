@@ -119,14 +119,14 @@ namespace AlignmentTiling
 				// 이미지 뷰 윈도우의 위치를 맞춤 // Align the position of the image view window
 				for(int i = 1; i < i32SrcImageCount; ++i)
 				{
-					if((res = (arrViewImageSrc[0].SynchronizeWindow(arrViewImageSrc[i]))).IsFail())
+					if((res = (arrViewImageSrc[0].SynchronizeWindow(ref arrViewImageSrc[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
 
-				if((res = (arrViewImageSrc[0].SynchronizeWindow(viewImageDst))).IsFail())
+				if((res = (arrViewImageSrc[0].SynchronizeWindow(ref viewImageDst))).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

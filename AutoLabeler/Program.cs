@@ -122,13 +122,13 @@ namespace SemanticSegmentation
 				fliResultAutotLabelImage.ClearFigures();
 
 				// 다섯 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the four image view windows
-				if((res = viewImageLearn.SynchronizeWindow(viewImageValidation)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageValidation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
-				if((res = viewImageLearn.SynchronizeWindow(viewImagresAutoLabel)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImagresAutoLabel)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;

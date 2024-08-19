@@ -105,21 +105,21 @@ namespace View3D
 					break;
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = (arrViewImage[(int)EType.Model].SynchronizePointOfView(arrViewImage[(int)EType.Texture]))).IsFail())
+				if((res = (arrViewImage[(int)EType.Model].SynchronizePointOfView(ref arrViewImage[(int)EType.Texture]))).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two image view windows.
-				if((res = (arrViewImage[(int)EType.Model].SynchronizeWindow(arrViewImage[(int)EType.Texture]))).IsFail())
+				if((res = (arrViewImage[(int)EType.Model].SynchronizeWindow(ref arrViewImage[(int)EType.Texture]))).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 3D 뷰와 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the image view and the 3D view window
-				if((res = (arrViewImage[(int)EType.Model].SynchronizeWindow(view3D))).IsFail())
+				if((res = (arrViewImage[(int)EType.Model].SynchronizeWindow(ref view3D))).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

@@ -70,14 +70,14 @@ namespace CircleGauge
 				for(int i = 1; i < i32ViewCount; ++i)
 				{
 					// 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoint of the image view
-					if((res = viewImage[0].SynchronizePointOfView(viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizePointOfView(ref viewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view\n");
 						break;
 					}
 
 					// 이미지 뷰 윈도우의 위치를 맞춤 // Align the position of the image view window
-					if((res = viewImage[0].SynchronizeWindow(viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;

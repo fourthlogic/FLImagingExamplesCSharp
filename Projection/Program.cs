@@ -69,7 +69,7 @@ namespace Projection
 				}
 
 				// 윈도우의 위치를 동기화 한다 // / Synchronize the positions of windows
-				if((res = viewImage.SynchronizeWindow(viewGraph)).IsFail())
+				if((res = viewImage.SynchronizeWindow(ref viewGraph)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

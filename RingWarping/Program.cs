@@ -113,7 +113,7 @@ namespace RingWarping
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                if (viewImageSource.SynchronizeWindow(viewImageDestination).IsFail())
+                if (viewImageSource.SynchronizeWindow(ref viewImageDestination).IsFail())
                 {
 					ErrorPrint(res,"Failed to synchronize window. \n");
                     break;

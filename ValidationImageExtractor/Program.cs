@@ -102,13 +102,13 @@ namespace SemanticSegmentation
 				}
 
 				// 세 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the three image view windows
-				if((res = viewImageSource.SynchronizeWindow(viewImagresLearn)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(ref viewImagresLearn)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
-				if((res = viewImageSource.SynchronizeWindow(viewImagresValidation)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(ref viewImagresValidation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;

@@ -78,14 +78,14 @@ namespace Mura
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
+				if((viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 					Console.WriteLine("Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((viewImageSrc.SynchronizeWindow(viewImageDst)).IsFail())
+				if((viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
 					Console.WriteLine("Failed to synchronize view\n");
 					break;

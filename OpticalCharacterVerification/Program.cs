@@ -100,26 +100,26 @@ namespace OpticalCharacterVerification
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((res = viewImage1.SynchronizeWindow(viewImage2)).IsFail())
+				if((res = viewImage1.SynchronizeWindow(ref viewImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
-				if((res = viewImage1.SynchronizeWindow(viewImage3)).IsFail())
+				if((res = viewImage1.SynchronizeWindow(ref viewImage3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImage1.SynchronizePointOfView(viewImage2)).IsFail())
+				if((res = viewImage1.SynchronizePointOfView(ref viewImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage1.SynchronizePointOfView(viewImage3)).IsFail())
+				if((res = viewImage1.SynchronizePointOfView(ref viewImage3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;

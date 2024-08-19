@@ -84,7 +84,7 @@ namespace MedianSeparatedFilter
 				}
 
 				// Source이미지 뷰와 Dst 이미지 뷰의 초점을 맞춤
-				if ((res =viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
+				if ((res =viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

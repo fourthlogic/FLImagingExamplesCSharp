@@ -83,14 +83,14 @@ namespace OpticalCharacterRecognition
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((res = viewImageRecognize.SynchronizeWindow(viewImageRecognizeUnicode)).IsFail())
+				if((res = viewImageRecognize.SynchronizeWindow(ref viewImageRecognizeUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageRecognize.SynchronizePointOfView(viewImageRecognizeUnicode)).IsFail())
+				if((res = viewImageRecognize.SynchronizePointOfView(ref viewImageRecognizeUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;

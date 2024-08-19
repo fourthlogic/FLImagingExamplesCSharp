@@ -101,7 +101,7 @@ namespace Rotation
 						continue;
 
 					// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-					if((res = (arrViewImage[(int)EType.Source].SynchronizeWindow(arrViewImage[i]))).IsFail())
+					if((res = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;

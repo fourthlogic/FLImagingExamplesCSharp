@@ -93,38 +93,38 @@ namespace ChannelCombination
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewSrcImage[0].SynchronizePointOfView(viewSrcImage[1])).IsFail())
+				if((res = viewSrcImage[0].SynchronizePointOfView(ref viewSrcImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewSrcImage[1].SynchronizePointOfView(viewSrcImage[2])).IsFail())
+				if((res = viewSrcImage[1].SynchronizePointOfView(ref viewSrcImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewSrcImage[2].SynchronizePointOfView(viewDstImage)).IsFail())
+				if((res = viewSrcImage[2].SynchronizePointOfView(ref viewDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewSrcImage[0].SynchronizeWindow(viewSrcImage[1])).IsFail())
+				if((res = viewSrcImage[0].SynchronizeWindow(ref viewSrcImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewSrcImage[1].SynchronizeWindow(viewSrcImage[2])).IsFail())
+				if((res = viewSrcImage[1].SynchronizeWindow(ref viewSrcImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewSrcImage[2].SynchronizeWindow(viewDstImage)).IsFail())
+				if((res = viewSrcImage[2].SynchronizeWindow(ref viewDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;

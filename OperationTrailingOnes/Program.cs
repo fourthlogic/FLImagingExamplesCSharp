@@ -71,7 +71,7 @@ namespace OperationTrailingOnes
 				}
 
 				// 두 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
@@ -92,7 +92,7 @@ namespace OperationTrailingOnes
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageSrc.SynchronizeWindow(viewImageDst)).IsFail())
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;

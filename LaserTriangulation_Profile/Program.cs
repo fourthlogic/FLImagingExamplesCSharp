@@ -88,7 +88,7 @@ namespace LaserTriangulation
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
@@ -102,7 +102,7 @@ namespace LaserTriangulation
 				}
 
 				// 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two view windows.
-				if((res = viewImageSrc.SynchronizeWindow(viewImageDst)).IsFail())
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;

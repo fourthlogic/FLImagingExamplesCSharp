@@ -363,28 +363,28 @@ namespace OrthogonalCalibrator
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-                if ((res = viewImageLearn.SynchronizePointOfView(viewImageSource)).IsFail())
+                if ((res = viewImageLearn.SynchronizePointOfView(ref viewImageSource)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-                if ((res = viewImageLearn.SynchronizePointOfView(viewImageDestination)).IsFail())
+                if ((res = viewImageLearn.SynchronizePointOfView(ref viewImageDestination)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                if ((res = viewImageLearn.SynchronizeWindow(viewImageSource)).IsFail())
+                if ((res = viewImageLearn.SynchronizeWindow(ref viewImageSource)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window.");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                if ((res = viewImageLearn.SynchronizeWindow(viewImageDestination)).IsFail())
+                if ((res = viewImageLearn.SynchronizeWindow(ref viewImageDestination)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window.");
                     break;

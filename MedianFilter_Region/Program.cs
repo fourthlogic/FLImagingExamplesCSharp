@@ -72,7 +72,7 @@ namespace MedianFilter
 				}
 
 				// Source이미지 뷰와 Dst 이미지 뷰의 초점을 맞춤
-				if(viewImageSrc.SynchronizePointOfView(viewImageDst).IsFail())
+				if(viewImageSrc.SynchronizePointOfView(ref viewImageDst).IsFail())
 				{
 					Console.WriteLine("Failed to set image object on the image view.\n");
 					break;

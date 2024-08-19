@@ -135,7 +135,7 @@ namespace Tiling
 				// 이미지 뷰 윈도우의 위치를 맞춤 // Align the position of the image view window
 				for(int i = 1; i < 5; ++i)
 				{
-					if((res = (arrViewImage[0].SynchronizeWindow(arrViewImage[i]))).IsFail())
+					if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;

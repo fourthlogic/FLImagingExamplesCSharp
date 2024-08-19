@@ -75,7 +75,7 @@ namespace BlobSubsampled
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImage.SynchronizePointOfView(viewImageRecover)).IsFail())
+				if((res = viewImage.SynchronizePointOfView(ref viewImageRecover)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;

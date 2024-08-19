@@ -171,7 +171,7 @@ namespace FPP
 				}
 
 				// 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two view windows
-				if((res = viewImageLrn[1].SynchronizeWindow(viewImageLrn[0])).IsFail())
+				if((res = viewImageLrn[1].SynchronizeWindow(ref viewImageLrn[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
@@ -180,7 +180,7 @@ namespace FPP
 				// 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two view windows
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((res = viewImageSrc[i32I].SynchronizeWindow(viewImageLrn[0])).IsFail())
+					if((res = viewImageSrc[i32I].SynchronizeWindow(ref viewImageLrn[0])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
@@ -188,14 +188,14 @@ namespace FPP
 				}
 
 				// 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two view windows
-				if((res = viewImageDst.SynchronizeWindow(viewImageLrn[0])).IsFail())
+				if((res = viewImageDst.SynchronizeWindow(ref viewImageLrn[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views. 
-				if((res = viewImageLrn[1].SynchronizePointOfView(viewImageLrn[0])).IsFail())
+				if((res = viewImageLrn[1].SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view.\n");
 					break;
@@ -204,7 +204,7 @@ namespace FPP
 				// 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views. 
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((res = viewImageSrc[i32I].SynchronizePointOfView(viewImageLrn[0])).IsFail())
+					if((res = viewImageSrc[i32I].SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view.\n");
 						break;
@@ -212,14 +212,14 @@ namespace FPP
 				}
 
 				// 두 이미지 뷰의 페이지를 동기화 한다. // Synchronize the page of the two image views. 
-				if((res = viewImageDst.SynchronizePointOfView(viewImageLrn[0])).IsFail())
+				if((res = viewImageDst.SynchronizePointOfView(ref viewImageLrn[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 페이지를 동기화 한다. // Synchronize the page of the two image views. 
-				if((res = viewImageLrn[1].SynchronizePageIndex(viewImageLrn[0])).IsFail())
+				if((res = viewImageLrn[1].SynchronizePageIndex(ref viewImageLrn[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view.\n");
 					break;
@@ -228,7 +228,7 @@ namespace FPP
 				// 두 이미지 뷰의 페이지를 동기화 한다. // Synchronize the page of the two image views. 
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((res = viewImageSrc[i32I].SynchronizePageIndex(viewImageLrn[0])).IsFail())
+					if((res = viewImageSrc[i32I].SynchronizePageIndex(ref viewImageLrn[0])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view.\n");
 						break;

@@ -111,86 +111,86 @@ namespace FilterGeneratorFD
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewImage[0].SynchronizePointOfView(viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(viewImage[2])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(viewImage[3])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[3])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(viewImage[4])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[4])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(viewImage[5])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[5])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(viewImage[6])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[6])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(viewImage[7])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[7])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImage[0].SynchronizeWindow(viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(viewImage[2])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(viewImage[3])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[3])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(viewImage[4])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[4])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(viewImage[5])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[5])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(viewImage[6])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[6])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(viewImage[7])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[7])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;

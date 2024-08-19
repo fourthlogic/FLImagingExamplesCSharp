@@ -88,14 +88,14 @@ namespace OperationComplexMultiply
 				}
 
 				// Source 이미지 뷰와 Operand 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the source view and the operand view
-				if((res = viewImageSource.SynchronizePointOfView(viewImageOperand)).IsFail())
+				if((res = viewImageSource.SynchronizePointOfView(ref viewImageOperand)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// Source 이미지 뷰와 Destination 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the source view and the destination view
-				if((res = viewImageSource.SynchronizePointOfView(viewImageDestination)).IsFail())
+				if((res = viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
@@ -123,14 +123,14 @@ namespace OperationComplexMultiply
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageSource.SynchronizeWindow(viewImageOperand)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(ref viewImageOperand)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageSource.SynchronizeWindow(viewImageDestination)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;

@@ -163,70 +163,70 @@ namespace OperationBitwiseAnd
                     break;
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((res =  arrViewImage0[0].SynchronizePointOfView(arrViewImage0[1])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage0[1])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((res =  arrViewImage0[0].SynchronizePointOfView(arrViewImage0[2])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage0[2])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((res =  arrViewImage0[0].SynchronizeWindow(arrViewImage0[1])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage0[1])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((res =  arrViewImage0[0].SynchronizeWindow(arrViewImage0[2])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage0[2])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((res =  arrViewImage0[0].SynchronizePointOfView(arrViewImage1[0])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage1[0])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((res =  arrViewImage0[0].SynchronizePointOfView(arrViewImage1[1])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage1[1])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((res =  arrViewImage0[0].SynchronizePointOfView(arrViewImage1[2])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage1[2])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((res =  arrViewImage0[0].SynchronizeWindow(arrViewImage1[0])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage1[0])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((res =  arrViewImage0[0].SynchronizeWindow(arrViewImage1[1])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage1[1])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((res =  arrViewImage0[0].SynchronizeWindow(arrViewImage1[2])).IsFail())
+                if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage1[2])).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;

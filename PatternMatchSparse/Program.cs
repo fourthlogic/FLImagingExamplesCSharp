@@ -62,7 +62,7 @@ namespace Match
 					break;
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageLearn.SynchronizeWindow(viewImageFind)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageFind)).IsFail())
 					break;
 
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);

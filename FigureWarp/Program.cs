@@ -53,14 +53,14 @@ namespace FigureWarp
 				}
 
 				// 각 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoint of each image view.
-				if((cResult = viewImage[0].SynchronizePointOfView(viewImage[1])).IsFail())
+				if((cResult = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
 					ErrorPrint(cResult, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 각 이미지 뷰 윈도우의 위치를 동기화 한다. // Synchronize the position of each image view window.
-				if((cResult = viewImage[0].SynchronizeWindow(viewImage[1])).IsFail())
+				if((cResult = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
 				{
 					ErrorPrint(cResult, "Failed to synchronize window.\n");
 					break;

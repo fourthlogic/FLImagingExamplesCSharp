@@ -97,7 +97,7 @@ namespace Classifier
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageLearn.SynchronizeWindow(viewImageSource)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageSource)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;

@@ -406,28 +406,28 @@ namespace CameraCalibrator
                 for (int i = 0; i < 3; ++i)
                 {
                     // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-                    if ((res = viewImageLearn[i].SynchronizePointOfView(viewImageSource)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizePointOfView(ref viewImageSource)).IsFail())
                     {
                         ErrorPrint(res, "Failed to synchronize view");
                         break;
                     }
 
                     // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-                    if ((res = viewImageLearn[i].SynchronizePointOfView(viewImageDestination)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizePointOfView(ref viewImageDestination)).IsFail())
                     {
                         ErrorPrint(res, "Failed to synchronize view");
                         break;
                     }
 
                     // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                    if ((res = viewImageLearn[i].SynchronizeWindow(viewImageSource)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizeWindow(ref viewImageSource)).IsFail())
                     {
                         ErrorPrint(res, "Failed to synchronize window.");
                         break;
                     }
 
                     // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                    if ((res = viewImageLearn[i].SynchronizeWindow(viewImageDestination)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizeWindow(ref viewImageDestination)).IsFail())
                     {
                         ErrorPrint(res, "Failed to synchronize window.");
                         break;

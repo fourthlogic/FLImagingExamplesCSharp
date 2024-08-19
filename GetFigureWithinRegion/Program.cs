@@ -79,7 +79,7 @@ namespace GetFigureWithinRegion
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
 				for(int i = 1; i < 4; ++i)
 				{
-					if((res = viewImage[0].SynchronizePointOfView(viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizePointOfView(ref viewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view\n");
 						break;
@@ -89,7 +89,7 @@ namespace GetFigureWithinRegion
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 				for(int i = 1; i < 4; ++i)
 				{
-					if((res = viewImage[0].SynchronizeWindow(viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
@@ -99,7 +99,7 @@ namespace GetFigureWithinRegion
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 				for(int i = 1; i < 4; ++i)
 				{
-					if((res = viewImage[0].SynchronizeWindow(viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;

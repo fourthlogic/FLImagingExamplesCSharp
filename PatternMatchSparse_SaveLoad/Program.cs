@@ -62,7 +62,7 @@ namespace Match
 					break;
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageLearn.SynchronizeWindow(viewImageFind)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageFind)).IsFail())
 					break;
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display

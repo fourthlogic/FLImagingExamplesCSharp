@@ -108,7 +108,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 					}
 
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((res = viewImageSrc.SynchronizePointOfView(arrViewImageDst[i])).IsFail())
+					if((res = viewImageSrc.SynchronizePointOfView(ref arrViewImageDst[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;
@@ -116,7 +116,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 					}
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((res = viewImageSrc.SynchronizeWindow(arrViewImageDst[i])).IsFail())
+					if((res = viewImageSrc.SynchronizeWindow(ref arrViewImageDst[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;

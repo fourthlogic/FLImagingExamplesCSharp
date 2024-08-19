@@ -178,7 +178,7 @@ namespace Match
 				for(long i64DataIdx = 0; i64DataIdx < 3; ++i64DataIdx)
 				{
 					// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-					if((res = viewImageFind.SynchronizeWindow(viewImageLearn[i64DataIdx])).IsFail())
+					if((res = viewImageFind.SynchronizeWindow(ref viewImageLearn[i64DataIdx])).IsFail())
 						break;
 				}
 
