@@ -57,7 +57,7 @@ namespace Mura
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageSrc.SetImagePtr(ref fliImageSrc)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(fliImageSrc)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -78,14 +78,14 @@ namespace Mura
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+				if((viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
 				{
 					Console.WriteLine("Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+				if((viewImageSrc.SynchronizeWindow(viewImageDst)).IsFail())
 				{
 					Console.WriteLine("Failed to synchronize view\n");
 					break;
@@ -118,7 +118,7 @@ namespace Mura
 				sMura.GetResultMuraImage(out fliImageDst);
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageDst.SetImagePtr(ref fliImageDst)).IsFail())
+				if((res = viewImageDst.SetImagePtr(fliImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

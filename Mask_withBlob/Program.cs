@@ -64,7 +64,7 @@ namespace Mask
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = (viewImageSrc.SetImagePtr(ref fliSrcImage))).IsFail())
+				if((res = (viewImageSrc.SetImagePtr(fliSrcImage))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
@@ -78,21 +78,21 @@ namespace Mask
 				}
 
 				// Mask 이미지 뷰에 이미지를 디스플레이 // Display the image in the Mask image view
-				if((res = viewImageMask.SetImagePtr(ref fliMaskImage)).IsFail())
+				if((res = viewImageMask.SetImagePtr(fliMaskImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = (viewImageSrc.SynchronizePointOfView(ref viewImageMask))).IsFail())
+				if((res = (viewImageSrc.SynchronizePointOfView(viewImageMask))).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((res = (viewImageSrc.SynchronizeWindow(ref viewImageMask))).IsFail())
+				if((res = (viewImageSrc.SynchronizeWindow(viewImageMask))).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

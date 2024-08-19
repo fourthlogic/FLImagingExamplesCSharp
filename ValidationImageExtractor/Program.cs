@@ -83,32 +83,32 @@ namespace SemanticSegmentation
 
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+				if((res = viewImageSource.SetImagePtr(fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImagresLearn.SetImagePtr(ref fliResultLearnImage)).IsFail())
+				if((res = viewImagresLearn.SetImagePtr(fliResultLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImagresValidation.SetImagePtr(ref fliResultValidationImage)).IsFail())
+				if((res = viewImagresValidation.SetImagePtr(fliResultValidationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// 세 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the three image view windows
-				if((res = viewImageSource.SynchronizeWindow(ref viewImagresLearn)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(viewImagresLearn)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
-				if((res = viewImageSource.SynchronizeWindow(ref viewImagresValidation)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(viewImagresValidation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;

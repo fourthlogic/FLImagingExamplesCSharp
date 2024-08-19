@@ -62,28 +62,28 @@ namespace ChannelExtraction
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. .
-				if((res = viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
+				if((res = viewImageSource.SynchronizePointOfView(viewImageDestination)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
+				if((res = viewImageSource.SynchronizeWindow(viewImageDestination)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+				if((res = viewImageSource.SetImagePtr(fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
+				if((res = viewImageDestination.SetImagePtr(fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;

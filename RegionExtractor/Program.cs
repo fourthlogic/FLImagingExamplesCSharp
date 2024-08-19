@@ -57,7 +57,7 @@ namespace RegionExtractor
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -71,7 +71,7 @@ namespace RegionExtractor
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
+				if((res = viewImageDst.SetImagePtr(fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

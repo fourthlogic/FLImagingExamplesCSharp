@@ -58,7 +58,7 @@ namespace HighDynamicRange
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if(viewImageSrc.SetImagePtr(ref fliSrcImage).IsFail())
+				if(viewImageSrc.SetImagePtr(fliSrcImage).IsFail())
 				{
 					ErrorPrint(result, "Failed to set image object on the image view.\n");
 					break;
@@ -72,14 +72,14 @@ namespace HighDynamicRange
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if(viewImageDst.SetImagePtr(ref fliDstImage).IsFail())
+				if(viewImageDst.SetImagePtr(fliDstImage).IsFail())
 				{
 					ErrorPrint(result, "Failed to set image object on the image view.\n");
 					break;
 				}
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if (viewImageSrc.SynchronizePointOfView(ref viewImageDst).IsFail())
+                if (viewImageSrc.SynchronizePointOfView(viewImageDst).IsFail())
                 {
                     ErrorPrint(result, "Failed to synchronize view. \n");
                     break;

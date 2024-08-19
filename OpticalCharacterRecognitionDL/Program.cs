@@ -104,13 +104,13 @@ namespace OpticalCharacterRecognitionDL
 				viewGraph.SetDarkMode();
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
+				if((res = viewImageLearn.SetImagePtr(fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImageValidation.SetImagePtr(ref fliValidationImage)).IsFail())
+				if((res = viewImageValidation.SetImagePtr(fliValidationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
@@ -118,32 +118,32 @@ namespace OpticalCharacterRecognitionDL
 
 				viewImagesLabel.EnablePixelSegmentationMode(true);
 
-				if((res = viewImagesLabel.SetImagePtr(ref fliResultLabelImage)).IsFail())
+				if((res = viewImagesLabel.SetImagePtr(fliResultLabelImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImagesLabelFigure.SetImagePtr(ref fliResultLabelFigureImage)).IsFail())
+				if((res = viewImagesLabelFigure.SetImagePtr(fliResultLabelFigureImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 다섯 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the four image view windows
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImageValidation)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(viewImageValidation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesLabel)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(viewImagesLabel)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesLabelFigure)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(viewImagesLabelFigure)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

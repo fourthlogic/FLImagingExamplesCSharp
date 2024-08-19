@@ -69,28 +69,28 @@ namespace OpticalCharacterRecognition
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageRecognize.SetImagePtr(ref fliRecognizeImage)).IsFail())
+				if((res = viewImageRecognize.SetImagePtr(fliRecognizeImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Converted 이미지 뷰에 이미지를 디스플레이
-				if((res = viewImageRecognizeUnicode.SetImagePtr(ref fliRecognizeImageUnicode)).IsFail())
+				if((res = viewImageRecognizeUnicode.SetImagePtr(fliRecognizeImageUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((res = viewImageRecognize.SynchronizeWindow(ref viewImageRecognizeUnicode)).IsFail())
+				if((res = viewImageRecognize.SynchronizeWindow(viewImageRecognizeUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageRecognize.SynchronizePointOfView(ref viewImageRecognizeUnicode)).IsFail())
+				if((res = viewImageRecognize.SynchronizePointOfView(viewImageRecognizeUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;

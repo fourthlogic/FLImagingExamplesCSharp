@@ -66,14 +66,14 @@ namespace CircleGauge
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the Source ImageView
-                if ((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+                if ((res = viewImageSource.SetImagePtr(fliSourceImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the Destination image view
-                if ((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
+                if ((res = viewImageDestination.SetImagePtr(fliDestinationImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
@@ -94,7 +94,7 @@ namespace CircleGauge
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                if ((res = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
+                if ((res = viewImageSource.SynchronizeWindow(viewImageDestination)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window.");
                     break;

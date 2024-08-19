@@ -76,7 +76,7 @@ namespace GetFigure
 				fliCopy.ClearFigures();
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImage[0].SetImagePtr(ref fliSource)).IsFail())
+				if((res = viewImage[0].SetImagePtr(fliSource)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -85,7 +85,7 @@ namespace GetFigure
 				for(int i = 1; i < 4; ++i)
 				{
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((res = viewImage[i].SetImagePtr(ref fliCopy)).IsFail())
+					if((res = viewImage[i].SetImagePtr(fliCopy)).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
@@ -106,7 +106,7 @@ namespace GetFigure
 				for(int i = 1; i < 4; ++i)
 				{
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((res = viewImage[0].SynchronizePointOfView(ref viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizePointOfView(viewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view\n");
 						break;
@@ -116,7 +116,7 @@ namespace GetFigure
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 				for(int i = 1; i < 4; ++i)
 				{
-					if((res = viewImage[0].SynchronizeWindow(ref viewImage[i])).IsFail())
+					if((res = viewImage[0].SynchronizeWindow(viewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;

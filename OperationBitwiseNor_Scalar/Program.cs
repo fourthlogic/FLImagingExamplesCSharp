@@ -69,28 +69,28 @@ namespace OperationBitwiseNor
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+                if ((res = viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-                if ((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
+                if ((res = viewImageSrc.SetImagePtr(fliSourceImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-                if ((res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
+                if ((res = viewImageDst.SetImagePtr(fliDestinationImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+                if ((res = viewImageSrc.SynchronizeWindow(viewImageDst)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize window. \n");
                     break;

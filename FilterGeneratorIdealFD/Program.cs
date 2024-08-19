@@ -87,81 +87,81 @@ namespace FilterGeneratorFD
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(viewImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[2])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(viewImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[3])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(viewImage[3])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[4])).IsFail())
+				if((res = viewImage[0].SynchronizePointOfView(viewImage[4])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(viewImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(ref viewImage[2])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(viewImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(ref viewImage[3])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(viewImage[3])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				if((res = viewImage[0].SynchronizeWindow(ref viewImage[4])).IsFail())
+				if((res = viewImage[0].SynchronizeWindow(viewImage[4])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(fliISrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[1].SetImagePtr(ref fliIFFTImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(fliIFFTImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[2].SetImagePtr(ref fliIFilterImage)).IsFail())
+				if((res = viewImage[2].SetImagePtr(fliIFilterImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[3].SetImagePtr(ref fliIMultiplyImage)).IsFail())
+				if((res = viewImage[3].SetImagePtr(fliIMultiplyImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[4].SetImagePtr(ref fliIDstImage)).IsFail())
+				if((res = viewImage[4].SetImagePtr(fliIDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

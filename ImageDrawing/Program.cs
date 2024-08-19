@@ -74,21 +74,21 @@ namespace ImageDrawing
 		        }
 
 		        // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-		        if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+		        if((res = viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to synchronize view\n");
 			        break;
 		        }
 
 		        // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-		        if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+		        if((res = viewImageSrc.SynchronizeWindow(viewImageDst)).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to synchronize window.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-		        if((res = viewImageSrc.SetImagePtr(ref fliImage)).IsFail())
+		        if((res = viewImageSrc.SetImagePtr(fliImage)).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;
@@ -224,7 +224,7 @@ namespace ImageDrawing
 
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 CFLImage fliTemp = (CFLImage)fliImageDrawing;
-                if ((res = viewImageDst.SetImagePtr(ref fliTemp)).IsFail())
+                if ((res = viewImageDst.SetImagePtr(fliTemp)).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;

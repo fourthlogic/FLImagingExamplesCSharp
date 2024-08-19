@@ -66,21 +66,21 @@ namespace OperationPopcount
 				}
 
 				// 두 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the two image views
-				if ((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+				if ((res = viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the images in the image views
-				if ((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail() ||
-					(res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
+				if ((res = viewImageSrc.SetImagePtr(fliSourceImage)).IsFail() ||
+					(res = viewImageDst.SetImagePtr(fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+				if((res = viewImageSrc.SynchronizeWindow(viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;

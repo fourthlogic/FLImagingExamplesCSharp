@@ -85,7 +85,7 @@ namespace OperationBitRollingLeft_Image
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
+					if((res = arrViewImage[i].SetImagePtr(arrFliImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
@@ -96,7 +96,7 @@ namespace OperationBitRollingLeft_Image
 						continue;
 
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((res = arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
+					if((res = arrViewImage[(int)EType.Source].SynchronizePointOfView(arrViewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;
@@ -104,7 +104,7 @@ namespace OperationBitRollingLeft_Image
 					}
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((res = arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i])).IsFail())
+					if((res = arrViewImage[(int)EType.Source].SynchronizeWindow(arrViewImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;

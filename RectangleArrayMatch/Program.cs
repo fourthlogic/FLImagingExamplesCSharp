@@ -67,20 +67,20 @@ namespace Match
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
+				if((res = viewImageLearn.SetImagePtr(fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
+				if((res = viewImageFind.SetImagePtr(fliFindImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImageFind)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(viewImageFind)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

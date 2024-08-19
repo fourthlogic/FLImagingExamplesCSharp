@@ -94,7 +94,7 @@ namespace AlignmentTiling
 
 					// 얕은 복사된 해당 페이지를 선택한 이미지를 뷰에 디스플레이
 					// Display the selected image of the shallow-copied page in the view
-					if((res = (arrViewImageSrc[i].SetImagePtr(ref fliSrcImages[i]))).IsFail())
+					if((res = (arrViewImageSrc[i].SetImagePtr(fliSrcImages[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
@@ -110,7 +110,7 @@ namespace AlignmentTiling
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = (viewImageDst.SetImagePtr(ref fliDstImage))).IsFail())
+				if((res = (viewImageDst.SetImagePtr(fliDstImage))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -119,14 +119,14 @@ namespace AlignmentTiling
 				// 이미지 뷰 윈도우의 위치를 맞춤 // Align the position of the image view window
 				for(int i = 1; i < i32SrcImageCount; ++i)
 				{
-					if((res = (arrViewImageSrc[0].SynchronizeWindow(ref arrViewImageSrc[i]))).IsFail())
+					if((res = (arrViewImageSrc[0].SynchronizeWindow(arrViewImageSrc[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						break;
 					}
 				}
 
-				if((res = (arrViewImageSrc[0].SynchronizeWindow(ref viewImageDst))).IsFail())
+				if((res = (arrViewImageSrc[0].SynchronizeWindow(viewImageDst))).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

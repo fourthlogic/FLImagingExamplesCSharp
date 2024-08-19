@@ -57,28 +57,28 @@ namespace OperationLogicalNot
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if (viewImageSource.SynchronizePointOfView(ref viewImageDestination).IsFail())
+                if (viewImageSource.SynchronizePointOfView(viewImageDestination).IsFail())
                 {
                     Console.WriteLine("Failed to synchronize view. \n");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-                if (viewImageSource.SetImagePtr(ref fliSourceImage).IsFail())
+                if (viewImageSource.SetImagePtr(fliSourceImage).IsFail())
                 {
                     Console.WriteLine("Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destiantion 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-                if (viewImageDestination.SetImagePtr(ref fliDestinationImage).IsFail())
+                if (viewImageDestination.SetImagePtr(fliDestinationImage).IsFail())
                 {
                     Console.WriteLine("Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                if (viewImageSource.SynchronizeWindow(ref viewImageDestination).IsFail())
+                if (viewImageSource.SynchronizeWindow(viewImageDestination).IsFail())
                 {
                     Console.WriteLine("Failed to synchronize window. \n");
                     break;

@@ -129,7 +129,7 @@ namespace ProjectionUtilities3D
                 // 최종 이미지에 투영 결과 이미지 추가 // Add projection result image to final image
                 fliFinal[0].PushBackPage(fliRes);
                 // 결과 이미지를 이미지 뷰에 로드 // Load result image into image view
-                viewImage[0].SetImagePtr(ref fliFinal[0]);
+                viewImage[0].SetImagePtr(fliFinal[0]);
                 viewImage[0].SetFixThumbnailView(true);
 
 
@@ -166,7 +166,7 @@ namespace ProjectionUtilities3D
                 }
 
                 // 결과 이미지를 이미지 뷰에 로드 // Load result image into image view
-                viewImage[1].SetImagePtr(ref fliFinal[1]);
+                viewImage[1].SetImagePtr(fliFinal[1]);
                 viewImage[1].SetFixThumbnailView(true);
 
 
@@ -188,7 +188,7 @@ namespace ProjectionUtilities3D
                 fliFinal[2].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(figureText));
 
                 // 결과 이미지를 이미지 뷰에 로드 // Load result image into image view
-                viewImage[2].SetImagePtr(ref fliFinal[2]);
+                viewImage[2].SetImagePtr(fliFinal[2]);
                 viewImage[2].SetFixThumbnailView(true);
 
                 while (viewImage[0].IsAvailable() && viewImage[1].IsAvailable() && viewImage[2].IsAvailable())

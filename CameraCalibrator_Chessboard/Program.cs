@@ -161,7 +161,7 @@ namespace CameraCalibrator
                     }
 
                     // Learn 이미지 뷰에 이미지를 디스플레이 // Display the image in the Learn image view
-                    if ((res = viewImageLearn[i].SetImagePtr(ref arrFliDisplay[i])).IsFail())
+                    if ((res = viewImageLearn[i].SetImagePtr(arrFliDisplay[i])).IsFail())
                     {
                         ErrorPrint(res, "Failed to set image object on the image view.");
                         break;
@@ -367,14 +367,14 @@ namespace CameraCalibrator
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the Source ImageView
-                if ((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
+                if ((res = viewImageSource.SetImagePtr(fliSourceImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the Destination image view
-                if ((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
+                if ((res = viewImageDestination.SetImagePtr(fliDestinationImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
@@ -383,28 +383,28 @@ namespace CameraCalibrator
                 for (int i = 0; i < 3; ++i)
                 {
                     // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-                    if ((res = viewImageLearn[i].SynchronizePointOfView(ref viewImageSource)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizePointOfView(viewImageSource)).IsFail())
                     {
                         ErrorPrint(res, "Failed to synchronize view");
                         break;
                     }
 
                     // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
-                    if ((res = viewImageLearn[i].SynchronizePointOfView(ref viewImageDestination)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizePointOfView(viewImageDestination)).IsFail())
                     {
                         ErrorPrint(res, "Failed to synchronize view");
                         break;
                     }
 
                     // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                    if ((res = viewImageLearn[i].SynchronizeWindow(ref viewImageSource)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizeWindow(viewImageSource)).IsFail())
                     {
                         ErrorPrint(res, "Failed to synchronize window.");
                         break;
                     }
 
                     // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-                    if ((res = viewImageLearn[i].SynchronizeWindow(ref viewImageDestination)).IsFail())
+                    if ((res = viewImageLearn[i].SynchronizeWindow(viewImageDestination)).IsFail())
                     {
                         ErrorPrint(res, "Failed to synchronize window.");
                         break;

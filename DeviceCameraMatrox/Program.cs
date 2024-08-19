@@ -43,7 +43,7 @@ namespace DeviceCameraMatrox
                 if (m_viewImage.GetImage() != m_fliImage)
                 {
                     // 이미지 뷰에 이미지 포인터 설정
-                    m_viewImage.SetImagePtr(ref m_fliImage);
+                    m_viewImage.SetImagePtr(m_fliImage);
                 }
 
                 // 이미지 뷰를 재갱신 한다.

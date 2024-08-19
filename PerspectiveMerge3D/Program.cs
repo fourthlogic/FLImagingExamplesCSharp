@@ -129,7 +129,7 @@ namespace MultiFocus
 
 				CFLImage fliTestDescription = new CFLImage();
 				fliTestDescription.Load("../../ExampleImages/PerspectiveMerge3D/Test Environment.flif");
-				viewTestDescription.SetImagePtr(ref fliTestDescription);
+				viewTestDescription.SetImagePtr(fliTestDescription);
 				CGUIViewImageLayer layerTestDescription = viewTestDescription.GetLayer(0);
 
 				if((res = layerTestDescription.DrawTextCanvas(flp, ("Test Environment"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())

@@ -71,7 +71,7 @@ namespace StereoDisparity
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -85,7 +85,7 @@ namespace StereoDisparity
 				}
 
 				// 이미지 뷰 2에 이미지를 디스플레이 // Display the image to the image view 2
-				if((res = viewImageSrc2.SetImagePtr(ref fliSrcImage2)).IsFail())
+				if((res = viewImageSrc2.SetImagePtr(fliSrcImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -99,7 +99,7 @@ namespace StereoDisparity
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
+				if((res = viewImageDst.SetImagePtr(fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -113,14 +113,14 @@ namespace StereoDisparity
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageSrc2)).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(viewImageSrc2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
@@ -141,21 +141,21 @@ namespace StereoDisparity
 				}
 
                 // 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two view windows.
-                if ((res = viewImageSrc.SynchronizeWindow(ref viewImageSrc2)).IsFail())
+                if ((res = viewImageSrc.SynchronizeWindow(viewImageSrc2)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two view windows.
-                if ((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+                if ((res = viewImageSrc.SynchronizeWindow(viewImageDst)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two view windows.
-                if ((res = viewImageSrc.SynchronizeWindow(ref viewImage3DDst)).IsFail())
+                if ((res = viewImageSrc.SynchronizeWindow(viewImage3DDst)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;

@@ -62,14 +62,14 @@ namespace Projection
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage.SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage.SetImagePtr(fliISrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 윈도우의 위치를 동기화 한다 // / Synchronize the positions of windows
-				if((res = viewImage.SynchronizeWindow(ref viewGraph)).IsFail())
+				if((res = viewImage.SynchronizeWindow(viewGraph)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

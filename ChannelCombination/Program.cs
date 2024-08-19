@@ -93,63 +93,63 @@ namespace ChannelCombination
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewSrcImage[0].SynchronizePointOfView(ref viewSrcImage[1])).IsFail())
+				if((res = viewSrcImage[0].SynchronizePointOfView(viewSrcImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewSrcImage[1].SynchronizePointOfView(ref viewSrcImage[2])).IsFail())
+				if((res = viewSrcImage[1].SynchronizePointOfView(viewSrcImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewSrcImage[2].SynchronizePointOfView(ref viewDstImage)).IsFail())
+				if((res = viewSrcImage[2].SynchronizePointOfView(viewDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewSrcImage[0].SynchronizeWindow(ref viewSrcImage[1])).IsFail())
+				if((res = viewSrcImage[0].SynchronizeWindow(viewSrcImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewSrcImage[1].SynchronizeWindow(ref viewSrcImage[2])).IsFail())
+				if((res = viewSrcImage[1].SynchronizeWindow(viewSrcImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewSrcImage[2].SynchronizeWindow(ref viewDstImage)).IsFail())
+				if((res = viewSrcImage[2].SynchronizeWindow(viewDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewSrcImage[0].SetImagePtr(ref fliImage[0])).IsFail())
+				if((res = viewSrcImage[0].SetImagePtr(fliImage[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewSrcImage[1].SetImagePtr(ref fliImage[1])).IsFail())
+				if((res = viewSrcImage[1].SetImagePtr(fliImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewSrcImage[2].SetImagePtr(ref fliImage[2])).IsFail())
+				if((res = viewSrcImage[2].SetImagePtr(fliImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewDstImage.SetImagePtr(ref fliDstImage)).IsFail())
+				if((res = viewDstImage.SetImagePtr(fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

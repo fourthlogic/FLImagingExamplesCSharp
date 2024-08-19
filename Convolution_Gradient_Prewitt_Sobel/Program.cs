@@ -72,7 +72,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -100,7 +100,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 					}
 
 					// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-					if((res = arrViewImageDst[i].SetImagePtr(ref arrFliDstImage[i])).IsFail())
+					if((res = arrViewImageDst[i].SetImagePtr(arrFliDstImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
@@ -108,7 +108,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 					}
 
 					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((res = viewImageSrc.SynchronizePointOfView(ref arrViewImageDst[i])).IsFail())
+					if((res = viewImageSrc.SynchronizePointOfView(arrViewImageDst[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;
@@ -116,7 +116,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 					}
 
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((res = viewImageSrc.SynchronizeWindow(ref arrViewImageDst[i])).IsFail())
+					if((res = viewImageSrc.SynchronizeWindow(arrViewImageDst[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;

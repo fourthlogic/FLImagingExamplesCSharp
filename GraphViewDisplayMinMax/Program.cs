@@ -69,14 +69,14 @@ namespace GraphViewDisplayMinMax
 				}
 
 				// 윈도우의 위치를 동기화 // / Synchronize the positions of windows
-				if((res = arrViewGraph[0].SynchronizeWindow(ref arrViewGraph[1])).IsFail())
+				if((res = arrViewGraph[0].SynchronizeWindow(arrViewGraph[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 윈도우의 위치를 동기화 // / Synchronize the positions of windows
-				if((res = arrViewGraph[1].SynchronizeWindow(ref arrViewGraph[2])).IsFail())
+				if((res = arrViewGraph[1].SynchronizeWindow(arrViewGraph[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
