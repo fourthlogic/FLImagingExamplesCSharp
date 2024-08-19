@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace VertexMatch3D
+namespace HandEyeCalibrator3D
 {
 	class Program
 	{
@@ -187,11 +187,11 @@ namespace VertexMatch3D
 						String strIdx;
 
 						// 결과 3D 객체 얻어오기 // Get the result 3D object
-						HandEyeCalibrator3D.GetEndEffector3DObject(i, ref fl3DORobot, out tp3RobotCenter);
-						HandEyeCalibrator3D.GetResultCamera3DObject(i, ref fl3DCam, out tp3CamCenter);
+						HandEyeCalibrator3D.GetEndEffector3DObject(i, out fl3DORobot, out tp3RobotCenter);
+						HandEyeCalibrator3D.GetResultCamera3DObject(i, out fl3DCam, out tp3CamCenter);
 
 						// 카메라 포즈 추정에 실패할 경우 NOK 출력 // NOK output if camera pose estimation fails
-						if((HandEyeCalibrator3D.GetResultCalibration3DObject(i, ref fl3DBoard, out tp3BoardCenter)).IsFail())
+						if((HandEyeCalibrator3D.GetResultCalibration3DObject(i, out fl3DBoard, out tp3BoardCenter)).IsFail())
 						{
 							strIdx = String.Format("Calib Board(NOK) {0}", i);
 							view3DLayer.DrawText3D(tp3BoardCenter, strIdx, EColor.CYAN, 0, 9);
