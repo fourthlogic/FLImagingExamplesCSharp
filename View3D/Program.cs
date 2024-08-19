@@ -125,7 +125,7 @@ namespace View3D
 					break;
 				}
 
-				CFL3DObjectHeightMap fl3DOHM = new CFL3DObjectHeightMap(ref arrFliImage[(int)EType.Model], ref arrFliImage[(int)EType.Texture]);
+				CFL3DObjectHeightMap fl3DOHM = new CFL3DObjectHeightMap(arrFliImage[(int)EType.Model], arrFliImage[(int)EType.Texture]);
 
 				// 3D 뷰에 높이 맵과 텍스쳐를 로드하여 디스플레이
 				if(view3D.PushObject(fl3DOHM).IsFail())
