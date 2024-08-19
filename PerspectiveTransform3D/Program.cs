@@ -72,13 +72,13 @@ namespace MultiFocus
 				// Destination 객체 설정 // Set the Destination object
 				PerspectiveTransform3D.SetDestinationObject(ref fl3DObjectDst);
 				// 카메라 위치 설정 // Set the camera position
-				PerspectiveTransform3D.SetPosition(ref tpPosition);
+				PerspectiveTransform3D.SetPosition(tpPosition);
 				// 카메라 방향 설정 // Set the camera direction
-				PerspectiveTransform3D.SetDirection(ref tpDirection);
+				PerspectiveTransform3D.SetDirection(tpDirection);
 				// 카메라 방향 타입 설정 // Set the camera direction type
 				PerspectiveTransform3D.SetDirectionType(CPerspectiveTransform3D.EDirectionType.Decrement);
 				// 카메라 업 벡터 설정 // Set the camera up vector
-				PerspectiveTransform3D.SetUpVector(ref tpUpVector);
+				PerspectiveTransform3D.SetUpVector(tpUpVector);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = PerspectiveTransform3D.Execute()).IsFail())

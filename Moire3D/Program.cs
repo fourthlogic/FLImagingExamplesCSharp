@@ -263,9 +263,9 @@ namespace FPP
 				// 카메라의 field of view 설정 // Set field of view of the camera
 				Moire3D.SetFieldOfView(400);
 				// 프로젝터 각도 설정 // Set angle of projector
-				Moire3D.SetAngleOfProjector(ref mvF64AngleOfProjector);
+				Moire3D.SetAngleOfProjector(mvF64AngleOfProjector);
 				// Phase Unwrap 히스토그램 bin 범위 설정 // Set histogram bin range for phase unwrapping
-				Moire3D.SetBinInterval(ref mvF64SmallBinRange);
+				Moire3D.SetBinInterval(mvF64SmallBinRange);
 				// 패턴 타입 설정 // Set Pattern Type
 				Moire3D.SetPatternType(CMoire3D.EPatternType.SquareWave);
 				// Noise 감쇠 모드 활성화 // Enable noise reduction mode

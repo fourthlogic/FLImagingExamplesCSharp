@@ -183,11 +183,11 @@ namespace MultiFocus
 				// Source 객체 설정 // Set the source object
 				DistanceTransform3D.SetSourceObject(ref fl3DObject);
 				// 카메라 위치 설정 // Set the camera position
-				DistanceTransform3D.SetPosition(ref tpPosition);
+				DistanceTransform3D.SetPosition(tpPosition);
 				// 카메라 방향 설정 // Set the camera direction
-				DistanceTransform3D.SetDirection(ref tpDirection);
+				DistanceTransform3D.SetDirection(tpDirection);
 				// 카메라 업 벡터 설정 // Set the camera up vector
-				DistanceTransform3D.SetUpVector(ref tpUpVector);
+				DistanceTransform3D.SetUpVector(tpUpVector);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = DistanceTransform3D.Execute()).IsFail())
