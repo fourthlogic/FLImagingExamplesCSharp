@@ -75,8 +75,8 @@ namespace Statistics
 				CMultiVar<double> mvParameterC = new CMultiVar<double>(255);
 
 				// Parameter 설정(A: 0, C: 255) // Set the parameter(A: 0, C: 255)
-				fuzzyentropy.SetParameterA(out mvParameterA);
-				fuzzyentropy.SetParameterC(out mvParameterC);
+				fuzzyentropy.SetParameterA(mvParameterA);
+				fuzzyentropy.SetParameterC(mvParameterC);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (fuzzyentropy.Execute())).IsFail())
