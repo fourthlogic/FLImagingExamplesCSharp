@@ -125,7 +125,7 @@ namespace GaborFilter
 				gaborfilter.SetDestinationImage(ref arrFliImage[2]);
 
 				// 커널 이미지 // Get Kernel Image 
-				if((res = (gaborfilter.GetKernelImage(ref arrFliImage[1]))).IsFail())
+				if((res = (gaborfilter.GetKernelImage(out arrFliImage[1]))).IsFail())
 				{
 					ErrorPrint(res, "Failed to Get Kernel Image.");
 					Console.WriteLine(res.GetString());
