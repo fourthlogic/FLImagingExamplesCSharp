@@ -131,25 +131,25 @@ namespace ChannelCombination
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewSrcImage[0].SetImagePtr(fliImage[0])).IsFail())
+				if((res = viewSrcImage[0].SetImagePtr(ref fliImage[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewSrcImage[1].SetImagePtr(fliImage[1])).IsFail())
+				if((res = viewSrcImage[1].SetImagePtr(ref fliImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewSrcImage[2].SetImagePtr(fliImage[2])).IsFail())
+				if((res = viewSrcImage[2].SetImagePtr(ref fliImage[2])).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewDstImage.SetImagePtr(fliDstImage)).IsFail())
+				if((res = viewDstImage.SetImagePtr(ref fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

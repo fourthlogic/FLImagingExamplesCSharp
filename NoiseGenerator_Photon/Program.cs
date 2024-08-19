@@ -74,13 +74,13 @@ namespace NoiseGenerator
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the imageview
-				if((res = viewImage[0].SetImagePtr(fliImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
 				}
 
-				if((res = viewImage[1].SetImagePtr(fliDestinationImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;

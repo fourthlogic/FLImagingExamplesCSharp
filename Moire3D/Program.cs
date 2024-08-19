@@ -146,7 +146,7 @@ namespace FPP
 				// Learn 이미지 뷰에 이미지를 디스플레이 // Display the image in the Learn image view
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((res = viewImageLrn[i32I].SetImagePtr(fliLrnImage[i32I])).IsFail())
+					if((res = viewImageLrn[i32I].SetImagePtr(ref fliLrnImage[i32I])).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
@@ -156,7 +156,7 @@ namespace FPP
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the Source image view
 				for(int i32I = 0; i32I < 2; ++i32I)
 				{
-					if((res = viewImageSrc[i32I].SetImagePtr(fliSrcImage[i32I])).IsFail())
+					if((res = viewImageSrc[i32I].SetImagePtr(ref fliSrcImage[i32I])).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
@@ -164,7 +164,7 @@ namespace FPP
 				}
 
 				// Dst 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = viewImageDst.SetImagePtr(fliImageDst)).IsFail())
+				if((res = viewImageDst.SetImagePtr(ref fliImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

@@ -96,7 +96,7 @@ namespace VertexMatch3D
 					CameraPose3D.SetSourceImage(ref fliSource);
 
 					// 이미지 포인터 설정 // Set image pointer
-					viewImage.SetImagePtr(fliSource);
+					viewImage.SetImagePtr(ref fliSource);
 
 					// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 					if((eResult = CameraPose3D.Execute()).IsFail())

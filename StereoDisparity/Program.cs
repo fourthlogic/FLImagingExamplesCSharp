@@ -71,7 +71,7 @@ namespace StereoDisparity
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageSrc.SetImagePtr(fliSrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -85,7 +85,7 @@ namespace StereoDisparity
 				}
 
 				// 이미지 뷰 2에 이미지를 디스플레이 // Display the image to the image view 2
-				if((res = viewImageSrc2.SetImagePtr(fliSrcImage2)).IsFail())
+				if((res = viewImageSrc2.SetImagePtr(ref fliSrcImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -99,7 +99,7 @@ namespace StereoDisparity
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = viewImageDst.SetImagePtr(fliDstImage)).IsFail())
+				if((res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

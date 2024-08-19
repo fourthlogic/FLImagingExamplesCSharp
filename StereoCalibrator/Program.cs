@@ -493,14 +493,14 @@ namespace StereoCalibrator
 				}
 
 				// Learn 이미지 뷰에 이미지를 디스플레이 // Display learn image on the image view
-				if((res = viewImageLearn.SetImagePtr(fliLearnImage)).IsFail())
+				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Learn 이미지 2 뷰에 이미지를 디스플레이 // Display the image on the learn image 2 view
-				if((res = viewImageLearn2.SetImagePtr(fliLearnImage2)).IsFail())
+				if((res = viewImageLearn2.SetImagePtr(ref fliLearnImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -532,14 +532,14 @@ namespace StereoCalibrator
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageDestination.SetImagePtr(fliDestinationImage)).IsFail())
+				if((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = viewImageDestination2.SetImagePtr(fliDestinationImage2)).IsFail())
+				if((res = viewImageDestination2.SetImagePtr(ref fliDestinationImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

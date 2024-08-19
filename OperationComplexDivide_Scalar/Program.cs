@@ -78,14 +78,14 @@ namespace OperationComplexDivide
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageSrc.SetImagePtr(fliSourceImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이
-				if((res = viewImageDst.SetImagePtr(fliDestinationImage)).IsFail())
+				if((res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;

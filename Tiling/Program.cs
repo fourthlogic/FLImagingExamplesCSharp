@@ -111,7 +111,7 @@ namespace Tiling
 				{					
 					// 이미지를 뷰에 디스플레이
 					// Display the image
-					if((res = (arrViewImage[i].SetImagePtr(arrViewImages[i]))).IsFail())
+					if((res = (arrViewImage[i].SetImagePtr(ref arrViewImages[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
@@ -126,7 +126,7 @@ namespace Tiling
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = (arrViewImage[i32SrcImageCount].SetImagePtr(arrFliImage[1]))).IsFail())
+				if((res = (arrViewImage[i32SrcImageCount].SetImagePtr(ref arrFliImage[1]))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

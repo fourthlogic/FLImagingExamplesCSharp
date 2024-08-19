@@ -72,7 +72,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageSrc.SetImagePtr(fliSrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -100,7 +100,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 					}
 
 					// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-					if((res = arrViewImageDst[i].SetImagePtr(arrFliDstImage[i])).IsFail())
+					if((res = arrViewImageDst[i].SetImagePtr(ref arrFliDstImage[i])).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;

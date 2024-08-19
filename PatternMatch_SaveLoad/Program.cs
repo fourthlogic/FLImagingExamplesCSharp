@@ -55,10 +55,10 @@ namespace Match
 					break;
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageLearn.SetImagePtr(fliLearnImage)).IsFail())
+				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
 					break;
 
-				if((res = viewImageFind.SetImagePtr(fliFindImage)).IsFail())
+				if((res = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
 					break;
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows

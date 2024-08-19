@@ -31,7 +31,7 @@ namespace DeviceCameraiRAYPLE
             m_viewImage = viewImage;
 
             // 이미지 뷰에 이미지 포인터 설정
-            m_viewImage.SetImagePtr(m_fliImage);
+            m_viewImage.SetImagePtr(ref m_fliImage);
         }
 
         // 카메라에서 이미지 취득 시 호출 되는 함수

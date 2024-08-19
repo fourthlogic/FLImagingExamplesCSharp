@@ -88,7 +88,7 @@ namespace ImageDrawing
 		        }
 
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-		        if((res = viewImageSrc.SetImagePtr(fliImage)).IsFail())
+		        if((res = viewImageSrc.SetImagePtr(ref fliImage)).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;
@@ -224,7 +224,7 @@ namespace ImageDrawing
 
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 CFLImage fliTemp = (CFLImage)fliImageDrawing;
-                if ((res = viewImageDst.SetImagePtr(fliTemp)).IsFail())
+                if ((res = viewImageDst.SetImagePtr(ref fliTemp)).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;

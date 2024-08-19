@@ -137,31 +137,31 @@ namespace FilterGeneratorFD
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[0].SetImagePtr(fliISrcImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[1].SetImagePtr(fliIFFTImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(ref fliIFFTImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[2].SetImagePtr(fliIFilterImage)).IsFail())
+				if((res = viewImage[2].SetImagePtr(ref fliIFilterImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[3].SetImagePtr(fliIMultiplyImage)).IsFail())
+				if((res = viewImage[3].SetImagePtr(ref fliIMultiplyImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[4].SetImagePtr(fliIDstImage)).IsFail())
+				if((res = viewImage[4].SetImagePtr(ref fliIDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

@@ -78,7 +78,7 @@ namespace Match
 						break;
 
 					// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-					if((viewImageLearn[i64DataIdx].SetImagePtr(fliLearnImage[i64DataIdx]).IsFail()))
+					if((viewImageLearn[i64DataIdx].SetImagePtr(ref fliLearnImage[i64DataIdx]).IsFail()))
 						break;
 
 					CGUIViewImageLayer layerLearn = viewImageLearn[i64DataIdx].GetLayer(0);
@@ -180,7 +180,7 @@ namespace Match
 					break;
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageFind.SetImagePtr(fliFindImage)).IsFail())
+				if((res = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
 					break;
 
 				for(long i64DataIdx = 0; i64DataIdx < 3; ++i64DataIdx)

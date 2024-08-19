@@ -57,7 +57,7 @@ namespace Mura
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageSrc.SetImagePtr(fliImageSrc)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliImageSrc)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -118,7 +118,7 @@ namespace Mura
 				sMura.GetResultMuraImage(out fliImageDst);
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageDst.SetImagePtr(fliImageDst)).IsFail())
+				if((res = viewImageDst.SetImagePtr(ref fliImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

@@ -95,19 +95,19 @@ namespace ObjectDetection
 				viewGraph.SetDarkMode();
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageLearn.SetImagePtr(fliLearnImage)).IsFail())
+				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImageValidation.SetImagePtr(fliValidationImage)).IsFail())
+				if((res = viewImageValidation.SetImagePtr(ref fliValidationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImagesLabel.SetImagePtr(fliResultImage)).IsFail())
+				if((res = viewImagesLabel.SetImagePtr(ref fliResultImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;

@@ -76,7 +76,7 @@ namespace OperationTangentH
 				// Display the image in the image view
 				for(int i = 0; i < 2; ++i)
 				{
-					if((res = (arrViewImage[i].SetImagePtr(arrFliImage[i]))).IsFail())
+					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;

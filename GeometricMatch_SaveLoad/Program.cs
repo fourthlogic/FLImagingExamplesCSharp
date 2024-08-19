@@ -67,13 +67,13 @@ namespace Match
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageLearn.SetImagePtr(fliLearnImage)).IsFail())
+				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
 				}
 
-				if((res = viewImageFind.SetImagePtr(fliFindImage)).IsFail())
+				if((res = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;

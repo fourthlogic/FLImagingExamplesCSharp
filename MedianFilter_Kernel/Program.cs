@@ -51,7 +51,7 @@ namespace MedianFilter
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if(viewImageSrc.SetImagePtr(fliSrcImage).IsFail())
+				if(viewImageSrc.SetImagePtr(ref fliSrcImage).IsFail())
 				{
 					Console.WriteLine("Failed to set image object on the image view.\n");
 					break;
@@ -65,7 +65,7 @@ namespace MedianFilter
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if(viewImageDst.SetImagePtr(fliDstImage).IsFail())
+				if(viewImageDst.SetImagePtr(ref fliDstImage).IsFail())
 				{
 					Console.WriteLine("Failed to set image object on the image view.\n");
 					break;

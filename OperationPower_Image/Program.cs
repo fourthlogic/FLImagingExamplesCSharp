@@ -141,7 +141,7 @@ namespace OperationBitwiseAnd
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 3; ++i)
                 {
-                    if ((res =  arrViewImage0[i].SetImagePtr(arrFliImage0[i])).IsFail())
+                    if ((res =  arrViewImage0[i].SetImagePtr(ref arrFliImage0[i])).IsFail())
                     {
                         ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
@@ -151,7 +151,7 @@ namespace OperationBitwiseAnd
 
                 for (int i = 0; i < 3; ++i)
                 {
-                    if ((res =  arrViewImage1[i].SetImagePtr(arrFliImage1[i])).IsFail())
+                    if ((res =  arrViewImage1[i].SetImagePtr(ref arrFliImage1[i])).IsFail())
                     {
                         ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;

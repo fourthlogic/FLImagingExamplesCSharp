@@ -97,19 +97,19 @@ namespace Classifier
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageLearn.SetImagePtr(fliLearnImage)).IsFail())
+				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImageSource.SetImagePtr(fliSourceImage)).IsFail())
+				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImageValidate.SetImagePtr(fliValidateIamge)).IsFail())
+				if((res = viewImageValidate.SetImagePtr(ref fliValidateIamge)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;

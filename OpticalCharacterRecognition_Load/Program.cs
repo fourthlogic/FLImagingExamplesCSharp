@@ -69,14 +69,14 @@ namespace OpticalCharacterRecognition
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageRecognize.SetImagePtr(fliRecognizeImage)).IsFail())
+				if((res = viewImageRecognize.SetImagePtr(ref fliRecognizeImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// Converted 이미지 뷰에 이미지를 디스플레이
-				if((res = viewImageRecognizeUnicode.SetImagePtr(fliRecognizeImageUnicode)).IsFail())
+				if((res = viewImageRecognizeUnicode.SetImagePtr(ref fliRecognizeImageUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

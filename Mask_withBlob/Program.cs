@@ -64,7 +64,7 @@ namespace Mask
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = (viewImageSrc.SetImagePtr(fliSrcImage))).IsFail())
+				if((res = (viewImageSrc.SetImagePtr(ref fliSrcImage))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
@@ -78,7 +78,7 @@ namespace Mask
 				}
 
 				// Mask 이미지 뷰에 이미지를 디스플레이 // Display the image in the Mask image view
-				if((res = viewImageMask.SetImagePtr(fliMaskImage)).IsFail())
+				if((res = viewImageMask.SetImagePtr(ref fliMaskImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

@@ -61,13 +61,13 @@ namespace FormatConverter
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImageSource.SetImagePtr(fliSourceImage)).IsFail())
+				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImageConverted.SetImagePtr(fliConvertedImage)).IsFail())
+				if((res = viewImageConverted.SetImagePtr(ref fliConvertedImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

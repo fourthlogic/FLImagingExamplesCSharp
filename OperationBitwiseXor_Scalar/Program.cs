@@ -85,21 +85,21 @@ namespace OperationBitwiseXor
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-                if ((res = viewImageSrc.SetImagePtr(fliSourceImage)).IsFail())
+                if ((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destination1 이미지 뷰에 이미지를 디스플레이  // Display the image in the destination1 image view
-                if ((res = viewImageDst1.SetImagePtr(fliDestinationImage1)).IsFail())
+                if ((res = viewImageDst1.SetImagePtr(ref fliDestinationImage1)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destination2 이미지 뷰에 이미지를 디스플레이  // Display the image in the destination2 image view
-                if ((res = viewImageDst2.SetImagePtr(fliDestinationImage2)).IsFail())
+                if ((res = viewImageDst2.SetImagePtr(ref fliDestinationImage2)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;

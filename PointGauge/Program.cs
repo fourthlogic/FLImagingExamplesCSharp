@@ -51,7 +51,7 @@ namespace Gauge
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((res = viewImage.SetImagePtr(fliImage)).IsFail())
+                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;

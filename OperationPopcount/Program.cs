@@ -73,8 +73,8 @@ namespace OperationPopcount
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the images in the image views
-				if ((res = viewImageSrc.SetImagePtr(fliSourceImage)).IsFail() ||
-					(res = viewImageDst.SetImagePtr(fliDestinationImage)).IsFail())
+				if ((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail() ||
+					(res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;

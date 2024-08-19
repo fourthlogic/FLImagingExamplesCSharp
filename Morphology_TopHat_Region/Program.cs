@@ -91,7 +91,7 @@ namespace Morphology_TopHat
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((res = (arrViewImage[i].SetImagePtr(arrFliImage[i]))).IsFail())
+					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
@@ -131,7 +131,7 @@ namespace Morphology_TopHat
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = (arrViewImage[(int)EType.Region].SetImagePtr(arrFliImage[(int)EType.Region]))).IsFail())
+				if((res = (arrViewImage[(int)EType.Region].SetImagePtr(ref arrFliImage[(int)EType.Region]))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					bError = true;

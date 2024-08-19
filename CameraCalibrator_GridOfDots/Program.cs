@@ -161,7 +161,7 @@ namespace CameraCalibrator
                     }
 
                     // Learn 이미지 뷰에 이미지를 디스플레이 // Display the image in the Learn image view
-                    if ((res = viewImageLearn[i].SetImagePtr(arrFliDisplay[i])).IsFail())
+                    if ((res = viewImageLearn[i].SetImagePtr(ref arrFliDisplay[i])).IsFail())
                     {
                         ErrorPrint(res, "Failed to set image object on the image view.");
                         break;
@@ -390,14 +390,14 @@ namespace CameraCalibrator
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the Source ImageView
-                if ((res = viewImageSource.SetImagePtr(fliSourceImage)).IsFail())
+                if ((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the Destination image view
-                if ((res = viewImageDestination.SetImagePtr(fliDestinationImage)).IsFail())
+                if ((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;

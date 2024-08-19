@@ -81,19 +81,19 @@ namespace OpticalCharacterVerification
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImage1.SetImagePtr(fliImage1)).IsFail())
+				if((res = viewImage1.SetImagePtr(ref fliImage1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage2.SetImagePtr(fliImage2)).IsFail())
+				if((res = viewImage2.SetImagePtr(ref fliImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				if((res = viewImage3.SetImagePtr(fliImage3)).IsFail())
+				if((res = viewImage3.SetImagePtr(ref fliImage3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

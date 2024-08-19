@@ -94,7 +94,7 @@ namespace AlignmentTiling
 
 					// 얕은 복사된 해당 페이지를 선택한 이미지를 뷰에 디스플레이
 					// Display the selected image of the shallow-copied page in the view
-					if((res = (arrViewImageSrc[i].SetImagePtr(fliSrcImages[i]))).IsFail())
+					if((res = (arrViewImageSrc[i].SetImagePtr(ref fliSrcImages[i]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
@@ -110,7 +110,7 @@ namespace AlignmentTiling
 				}
 
 				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = (viewImageDst.SetImagePtr(fliDstImage))).IsFail())
+				if((res = (viewImageDst.SetImagePtr(ref fliDstImage))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

@@ -64,14 +64,14 @@ namespace OperationLogicalNot
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-                if (viewImageSource.SetImagePtr(fliSourceImage).IsFail())
+                if (viewImageSource.SetImagePtr(ref fliSourceImage).IsFail())
                 {
                     Console.WriteLine("Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destiantion 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-                if (viewImageDestination.SetImagePtr(fliDestinationImage).IsFail())
+                if (viewImageDestination.SetImagePtr(ref fliDestinationImage).IsFail())
                 {
                     Console.WriteLine("Failed to set image object on the image view. \n");
                     break;

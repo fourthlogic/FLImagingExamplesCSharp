@@ -93,7 +93,7 @@ namespace OperationGreater
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 3; ++i)
                 {
-                    if ((result = arrViewImage[i].SetImagePtr(arrFliImage[i])).IsFail())
+                    if ((result = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
                     {
                         ErrorPrint(result, "Failed to set image object on the image view.\n");
                         bError = true;

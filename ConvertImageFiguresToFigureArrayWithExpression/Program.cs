@@ -76,7 +76,7 @@ namespace GetFigure
 				fliCopy.ClearFigures();
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImage[0].SetImagePtr(fliSource)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliSource)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -85,7 +85,7 @@ namespace GetFigure
 				for(int i = 1; i < 4; ++i)
 				{
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((res = viewImage[i].SetImagePtr(fliCopy)).IsFail())
+					if((res = viewImage[i].SetImagePtr(ref fliCopy)).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;

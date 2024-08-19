@@ -53,7 +53,7 @@ namespace Statistics
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-                if ((res = viewImage.SetImagePtr(fliImage)).IsFail())
+                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;

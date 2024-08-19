@@ -83,19 +83,19 @@ namespace SemanticSegmentation
 
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-				if((res = viewImageSource.SetImagePtr(fliSourceImage)).IsFail())
+				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImagresLearn.SetImagePtr(fliResultLearnImage)).IsFail())
+				if((res = viewImagresLearn.SetImagePtr(ref fliResultLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				if((res = viewImagresValidation.SetImagePtr(fliResultValidationImage)).IsFail())
+				if((res = viewImagresValidation.SetImagePtr(ref fliResultValidationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
