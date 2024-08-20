@@ -113,7 +113,7 @@ namespace OperationCompare
                 compare.SetDestinationImage(ref arrFliImage[1]);
                 // Scalar Operation 모드로 설정 // Set operation mode to scalar
                 compare.SetOperationSource(EOperationSource.Scalar);
-                // Compare Scalar 값 설정 // Set comparsion value of compare operation
+                // Compare Scalar 값 설정 // Set comparison value of compare operation
                 compare.SetScalarValue(mvScalar);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
