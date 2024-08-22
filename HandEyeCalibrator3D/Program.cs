@@ -86,7 +86,7 @@ namespace HandEyeCalibrator3D
 				HandEyeCalibrator3D.SetCalibrationObjectType(ECalibrationObjectType.ChessBoard);
 
 				// 캘리브레이션 방법 설정 // Set the calibration method
-				HandEyeCalibrator3D.SetCalibrationMethod(CHandEyeCalibrator3D.ECalibrationMethod.Nonlinear);
+				HandEyeCalibrator3D.SetCalibrationMethod(CHandEyeCalibrator3D.ERefinementMethod.Nonlinear);
 
 				// 회전 타입 설정 // Set the rotation type
 				HandEyeCalibrator3D.SetRotationType(CHandEyeCalibrator3D.ERotationType.Rodrigues);
