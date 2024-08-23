@@ -180,29 +180,34 @@ namespace HandEyeCalibrator3D
 					view3DLayer.DrawTextCanvas(new CFLPoint<double>(0, flpImageSize.y), strEuler, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM);
 					view3DLayer.DrawTextCanvas(new CFLPoint<double>(flpImageSize.x, flpImageSize.y), strTranslate, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.RIGHT_BOTTOM);
 
+					CFL3DObject fl3DOCalibrationBoard = new CFL3DObject();
+					TPoint3<double> tp3BoardCenter = new TPoint3<double>();
+
+					HandEyeCalibrator3D.GetResultCalibration3DObject(out fl3DOCalibrationBoard, out tp3BoardCenter);
+					String strIdx = "";
+
+					strIdx = String.Format("Calibration Board");
+					view3DLayer.DrawText3D(tp3BoardCenter, strIdx, EColor.RED, 0, 9);
+					view3D.PushObject(fl3DOCalibrationBoard);
+
 					for(int i = 0; i < i32PageCount; i++)
 					{
-						TPoint3<double> tp3RobotCenter = new TPoint3<double>(), tp3CamCenter = new TPoint3<double>(), tp3BoardCenter = new TPoint3<double>();
-						CFL3DObject fl3DORobot = new CFL3DObject(), fl3DCam = new CFL3DObject(), fl3DBoard = new CFL3DObject();
-						String strIdx;
+						TPoint3<double> tp3RobotCenter = new TPoint3<double>(), tp3CamCenter = new TPoint3<double>();
+						CFL3DObject fl3DORobot = new CFL3DObject(), fl3DCam = new CFL3DObject();
+						TPoint3<float> tp3Cam = new TPoint3<float>(), tp3Board = new TPoint3<float>();
 
 						// 결과 3D 객체 얻어오기 // Get the result 3D object
 						HandEyeCalibrator3D.GetEndEffector3DObject(i, out fl3DORobot, out tp3RobotCenter);
 						HandEyeCalibrator3D.GetResultCamera3DObject(i, out fl3DCam, out tp3CamCenter);
 
 						// 카메라 포즈 추정에 실패할 경우 NOK 출력 // NOK output if camera pose estimation fails
-						if((HandEyeCalibrator3D.GetResultCalibration3DObject(i, out fl3DBoard, out tp3BoardCenter)).IsFail())
+						if((HandEyeCalibrator3D.GetResultReprojectionPoint(i, out tp3Cam, out tp3Board)).IsFail())
 						{
-							strIdx = String.Format("Calib Board(NOK) {0}", i);
-							view3DLayer.DrawText3D(tp3BoardCenter, strIdx, EColor.CYAN, 0, 9);
+							strIdx = String.Format("Reprojection(NOK) %d", i);
+							view3DLayer.DrawText3D(tp3CamCenter, strIdx, EColor.CYAN, 0, 9);
 						}
 						else
-						{
-							strIdx = String.Format("Calib Board {0}", i);
-							view3DLayer.DrawText3D(tp3BoardCenter, strIdx, EColor.RED, 0, 9);
-						}
-
-						view3D.PushObject(fl3DBoard);
+							view3D.PushObject(new CGUIView3DObjectLine(tp3Cam, tp3Board, EColor.CYAN));
 
 						strIdx = String.Format("End Effector {0}", i);
 						view3DLayer.DrawText3D(tp3RobotCenter, strIdx, EColor.BLUE, 0, 9);
