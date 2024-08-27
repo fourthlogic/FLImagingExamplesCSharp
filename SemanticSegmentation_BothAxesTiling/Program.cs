@@ -239,7 +239,7 @@ namespace SemanticSegmentation
 				// 정사각형 비율을 유지하여 모델 크기로 이미지를 나누어 처리한다.
 				// Set the training image segmentation mode.
 				// The original image is divided and processed by the model size by maintaining the square ratio.
-				semanticSegmentation.SetImageTilingMode(CSemanticSegmentationDL.ETilingMode.BothAxesTiling);
+				semanticSegmentation.SetImageTilingMode(ETilingMode.BothAxesTiling);
 
 				// SemanticSegmentation learn function을 진행하는 스레드 생성 // Create the SemanticSegmentation Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>

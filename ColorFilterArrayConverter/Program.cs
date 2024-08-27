@@ -110,13 +110,13 @@ namespace ColorFilterArrayConverter
 				ColorFilterArrayConverter.SetDestinationImage(ref arrFliImage[1]);
 
 				// Bayer Pattern 설정 // Set Bayer Pattern
-				ColorFilterArrayConverter.SetBayerPattern(EBayerPattern.RGGB);
+				ColorFilterArrayConverter.SetBayerPattern(CColorFilterArrayConverter.EBayerPattern.RGGB);
 
 				// Bayer Interpolation 설정 // Set Bayer Interpolation
-				ColorFilterArrayConverter.SetBayerPattern(EBayerInterpolation.Adaptive2);
+				ColorFilterArrayConverter.SetBayerInterpolation(CColorFilterArrayConverter.EBayerInterpolation.Adaptive2);
 
 				// 채널 타입 설정 // Set Channel Type
-				ColorFilterArrayConverter.SetBayerPattern(EChannelType.Separation);
+				ColorFilterArrayConverter.SetChannelType(CColorFilterArrayConverter.EChannelType.Separation);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = ColorFilterArrayConverter.Execute()).IsFail())
