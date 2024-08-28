@@ -131,6 +131,9 @@ namespace PhotometricStereo
 				photometric.SetDestinationObject(ref fl3DOHM);
 				// 결과 Texture 이미지 설정 // Set the result texture image
 				photometric.SetResultTextureImage(ref fliTxtImage);
+				// 동작 방식 설정 // Set Operation Mode
+				photometric.SetReconstructionMode(CPhotometricStereo.EReconstructionMode.EReconstructionMode_RFT_FP32);
+
 
 				// 각 이미지의 광원 Slant 값 입력
 				CMultiVar<double> mvdSlant = new CMultiVar<double>();
