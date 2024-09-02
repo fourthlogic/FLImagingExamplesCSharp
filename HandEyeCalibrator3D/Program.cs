@@ -166,6 +166,8 @@ namespace HandEyeCalibrator3D
 					HandEyeCalibrator3D.GetResultRotationVector(out matResultRotationVector, false);
 					HandEyeCalibrator3D.GetResultTranslationVector(out tp3ResultTranslationVector, false);
 					HandEyeCalibrator3D.GetResultEulerAngle(out listResultEulerAngle, false);
+					HandEyeCalibrator3D.GetResultRotationError(out double f64RotationError);
+					HandEyeCalibrator3D.GetResultTranslationError(out double f64TranslationError);
 
 					// 3D View의 canvas rect 영역 얻어오기 // Get the canvas rect region
 					CFLRect<int> flrCanvasRegion = view3D.GetClientRectCanvasRegion();
@@ -175,10 +177,12 @@ namespace HandEyeCalibrator3D
 					String strTranslate = String.Format("Translation Vector\n{0,11:0.000000}\n{1,11:0.000000}\n{2,11:0.000000}", tp3ResultTranslationVector.x, tp3ResultTranslationVector.y, tp3ResultTranslationVector.z);
 					String strEuler = String.Format("Euler Angle\n{0,11:0.000000}\n{1,11:0.000000}\n{2,11:0.000000}", listResultEulerAngle[0], listResultEulerAngle[1], listResultEulerAngle[2]);
 					String strRotationVector = String.Format("Rotation Vector(End effector to camera)\n{0,11:0.000000}\n{1,11:0.000000}\n{2,11:0.000000}", matResultRotationVector.GetValue(0, 0), matResultRotationVector.GetValue(1, 0), matResultRotationVector.GetValue(2, 0));
+					String strError = String.Format("Rotation Error\n{0,11:0.000000}\nTranslation Error\n{1,11:0.000000}", f64RotationError, f64TranslationError);
 
 					view3DLayer.DrawTextCanvas(new CFLPoint<double>(0, 0), strRotationVector, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_TOP);
 					view3DLayer.DrawTextCanvas(new CFLPoint<double>(0, flpImageSize.y), strEuler, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM);
 					view3DLayer.DrawTextCanvas(new CFLPoint<double>(flpImageSize.x, flpImageSize.y), strTranslate, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.RIGHT_BOTTOM);
+					view3DLayer.DrawTextCanvas(new CFLPoint<double>(flpImageSize.x, 0), strError, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.RIGHT_TOP);
 
 					CFL3DObject fl3DOCalibrationBoard = new CFL3DObject();
 					TPoint3<double> tp3BoardCenter = new TPoint3<double>();
