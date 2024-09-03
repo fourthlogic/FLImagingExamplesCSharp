@@ -52,7 +52,7 @@ namespace Convolution_Sobel
 			{
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSrcImage.Load("../../ExampleImages/Convolution/Building.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/filter/Building.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
