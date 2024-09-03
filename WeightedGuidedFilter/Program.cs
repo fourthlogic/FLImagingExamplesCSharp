@@ -151,8 +151,8 @@ namespace WeightedGuidedFilter
 				// filter mask radius = 3 설정 // Set the filter mask radius = 3
 				weightedGuidedFilter.SetRadius(3);
 
-				// amplitude = 30 설정 // Set the amplitude = 30
-				weightedGuidedFilter.SetAmplitude(30);
+				// amplitude = 300 설정 // Set the amplitude = 300
+				weightedGuidedFilter.SetAmplitude(300);
 
 
 		        // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
