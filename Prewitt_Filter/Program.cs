@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Convolution_Sobel
+namespace Convolution_Prewitt
 {
 	class Program
 	{
@@ -52,7 +52,7 @@ namespace Convolution_Sobel
 			{
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSrcImage.Load("../../ExampleImages/Convolution/Building.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/Filter/Building.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -107,30 +107,30 @@ namespace Convolution_Sobel
 					break;
 				}
 
-				// Convolution Sobel 객체 생성 // Create Convolution Sobel object
-				CConvolutionSobel convolutionSobel = new CConvolutionSobel();
+				// Convolution Prewitt 객체 생성 // Create Convolution Prewitt object
+				CPrewittFilter convolutionPrewitt = new CPrewittFilter();
 
-				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
+				CFLRect<double> flrROI = new CFLRect<double>(200, 200, 500, 500);
 
 				// Source 이미지 설정 // Set the source image
-				convolutionSobel.SetSourceImage(ref fliSrcImage);
+				convolutionPrewitt.SetSourceImage(ref fliSrcImage);
 
 				// Source ROI 설정 // Set the Source ROI
-				convolutionSobel.SetSourceROI(flrROI);
+				convolutionPrewitt.SetSourceROI(flrROI);
 
 				// Destination 이미지 설정 // Set the destination image
-				convolutionSobel.SetDestinationImage(ref fliDstImage);
+				convolutionPrewitt.SetDestinationImage(ref fliDstImage);
 
 				// Destination ROI 설정 // Set Destination ROI
-				convolutionSobel.SetDestinationROI(flrROI);
+				convolutionPrewitt.SetDestinationROI(flrROI);
 
-				// Convolution Sobel 커널 연산 방법 설정
-				convolutionSobel.SetKernelMethod(CConvolutionSobel.EKernel.Sobel);
+				// Convolution Prewitt 커널 연산 방법 설정
+				convolutionPrewitt.SetKernelMethod(CPrewittFilter.EKernel.Prewitt);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = convolutionSobel.Execute()).IsFail())
+				if((res = convolutionPrewitt.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute convolution sobel.");
+					ErrorPrint(res, "Failed to execute convolution prewitt.");
 					break;
 				}
 

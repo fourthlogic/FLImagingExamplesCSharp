@@ -58,7 +58,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 			{
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSrcImage.Load("../../ExampleImages/Convolution/Building.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/Filter/Building.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -131,7 +131,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				CFLRect<double> flrROI = new CFLRect<double>(200, 200, 500, 500);
 
 				// Convolution Gradient 객체 생성 // Create Convolution Gradient object
-				CConvolutionGradient convolutionGradient = new CConvolutionGradient();
+				CGradientFilter convolutionGradient = new CGradientFilter();
 
 				// Source 이미지 설정 // Set the source image
 				convolutionGradient.SetSourceImage(ref fliSrcImage);
@@ -142,7 +142,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				// Destination ROI 설정 // Set Destination ROI
 				convolutionGradient.SetDestinationROI(flrROI);
 				// Convolution Gradient 커널 연산 방법 설정
-				convolutionGradient.SetKernelMethod(CConvolutionGradient.EKernel.Gradient);
+				convolutionGradient.SetKernelMethod(CGradientFilter.EKernel.Gradient);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = convolutionGradient.Execute()).IsFail())
@@ -153,7 +153,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 
 
 				// Convolution Prewitt 객체 생성 // Create Convolution Prewitt object
-				CConvolutionPrewitt convolutionPrewitt = new CConvolutionPrewitt();
+				CPrewittFilter convolutionPrewitt = new CPrewittFilter();
 
 				// Source 이미지 설정 // Set the source image
 				convolutionPrewitt.SetSourceImage(ref fliSrcImage);
@@ -164,7 +164,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				// Destination ROI 설정 // Set Destination ROI
 				convolutionPrewitt.SetDestinationROI(flrROI);
 				// Convolution Prewitt 커널 연산 방법 설정
-				convolutionPrewitt.SetKernelMethod(CConvolutionPrewitt.EKernel.Prewitt);
+				convolutionPrewitt.SetKernelMethod(CPrewittFilter.EKernel.Prewitt);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = convolutionPrewitt.Execute()).IsFail())
@@ -175,7 +175,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 
 
 				// Convolution Sobel 객체 생성 // Create Convolution Sobel object
-				CConvolutionSobel convolutionSobel = new CConvolutionSobel();
+				CSobelFilter convolutionSobel = new CSobelFilter();
 
 				// Source 이미지 설정 // Set the source image
 				convolutionSobel.SetSourceImage(ref fliSrcImage);
@@ -186,7 +186,7 @@ namespace Convolution_Gradient_Prewitt_Sobel
 				// Destination ROI 설정 // Set Destination ROI
 				convolutionSobel.SetDestinationROI(flrROI);
 				// Convolution Sobel 커널 연산 방법 설정
-				convolutionSobel.SetKernelMethod(CConvolutionSobel.EKernel.Sobel);
+				convolutionSobel.SetKernelMethod(CSobelFilter.EKernel.Sobel);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = convolutionSobel.Execute()).IsFail())

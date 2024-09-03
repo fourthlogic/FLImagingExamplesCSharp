@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1D62B2F1-964F-4E9F-94CE-46B482EEA865}</ProjectGuid>
+    <ProjectGuid>{4028BC3F-83FF-41C4-A2CE-A6EDBD2F84E4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConvolutionPrewitt</RootNamespace>
-    <AssemblyName>ConvolutionPrewitt</AssemblyName>
+    <RootNamespace>Gradient_Filter</RootNamespace>
+    <AssemblyName>Gradient_Filter</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

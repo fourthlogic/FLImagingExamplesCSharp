@@ -59,7 +59,7 @@ namespace Convolution_UserDefinedKernel
 				CResult res;
 
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[(int)EType.Src].Load("../../ExampleImages/Convolution/Sun.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Src].Load("../../ExampleImages/Filter/Sun.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -121,7 +121,7 @@ namespace Convolution_UserDefinedKernel
 					break;
 
 				// Convolution UserDefinedKernel 객체 생성 // Create Convolution UserDefinedKernel object
-				CConvolutionUserDefinedKernel convolution = new CConvolutionUserDefinedKernel();
+				CConvolutionFilter convolution = new CConvolutionFilter();
 
 				// Source 이미지 설정 // Set the source image
 				convolution.SetSourceImage(ref arrFliImage[(int)EType.Src]);

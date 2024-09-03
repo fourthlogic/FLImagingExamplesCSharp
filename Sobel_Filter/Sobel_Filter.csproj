@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DE0F4F2D-3FE6-453F-BDAB-DEF8C90B795E}</ProjectGuid>
+    <ProjectGuid>{733121C8-2197-47FC-A478-E1C26D547E84}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConvolutionGradient_Prewitt_Sobel</RootNamespace>
-    <AssemblyName>ConvolutionGradient_Prewitt_Sobel</AssemblyName>
+    <RootNamespace>Sobel_Filter</RootNamespace>
+    <AssemblyName>Sobel_Filter</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

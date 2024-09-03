@@ -13,10 +13,20 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Convolution_Gradient
+namespace Convolution_Sobel
 {
 	class Program
 	{
+		enum EType
+		{
+			Source = 0,
+			Destination1,
+			Destination2,
+			Destination3,
+			Destination4,
+			ETypeCount,
+		}
+
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -41,7 +51,6 @@ namespace Convolution_Gradient
 			do
 			{
 				CResult res;
-
 				// Source 이미지 로드 // Load the source image
 				if((res = fliSrcImage.Load("../../ExampleImages/Convolution/Building.flif")).IsFail())
 				{
@@ -98,30 +107,30 @@ namespace Convolution_Gradient
 					break;
 				}
 
-				// Convolution Gradient 객체 생성 // Create Convolution Gradient object
-				CConvolutionGradient convolutionGradient = new CConvolutionGradient();
+				// Convolution Sobel 객체 생성 // Create Convolution Sobel object
+				CSobelFilter convolutionSobel = new CSobelFilter();
 
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Source 이미지 설정 // Set the source image
-				convolutionGradient.SetSourceImage(ref fliSrcImage);
+				convolutionSobel.SetSourceImage(ref fliSrcImage);
 
 				// Source ROI 설정 // Set the Source ROI
-				convolutionGradient.SetSourceROI(flrROI);
+				convolutionSobel.SetSourceROI(flrROI);
 
 				// Destination 이미지 설정 // Set the destination image
-				convolutionGradient.SetDestinationImage(ref fliDstImage);
+				convolutionSobel.SetDestinationImage(ref fliDstImage);
 
 				// Destination ROI 설정 // Set Destination ROI
-				convolutionGradient.SetDestinationROI(flrROI);
+				convolutionSobel.SetDestinationROI(flrROI);
 
-				// Convolution Gradient 커널 연산 방법 설정
-				convolutionGradient.SetKernelMethod(CConvolutionGradient.EKernel.Gradient);
+				// Convolution Sobel 커널 연산 방법 설정
+				convolutionSobel.SetKernelMethod(CSobelFilter.EKernel.Sobel);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = convolutionGradient.Execute()).IsFail())
+				if((res = convolutionSobel.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute convolution gradient.");
+					ErrorPrint(res, "Failed to execute convolution sobel.");
 					break;
 				}
 
@@ -172,7 +181,6 @@ namespace Convolution_Gradient
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImageSrc.IsAvailable() && viewImageDst.IsAvailable())
 					Thread.Sleep(1);
-
 			}
 			while(false);
 		}

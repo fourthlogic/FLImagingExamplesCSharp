@@ -13,20 +13,10 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Convolution_Prewitt
+namespace Convolution_Gradient
 {
 	class Program
 	{
-		enum EType
-		{
-			Source = 0,
-			Destination1,
-			Destination2,
-			Destination3,
-			Destination4,
-			ETypeCount,
-		}
-
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -51,8 +41,9 @@ namespace Convolution_Prewitt
 			do
 			{
 				CResult res;
+
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSrcImage.Load("../../ExampleImages/Convolution/Building.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/Filter/Building.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -107,30 +98,30 @@ namespace Convolution_Prewitt
 					break;
 				}
 
-				// Convolution Prewitt 객체 생성 // Create Convolution Prewitt object
-				CConvolutionPrewitt convolutionPrewitt = new CConvolutionPrewitt();
+				// Convolution Gradient 객체 생성 // Create Convolution Gradient object
+				CGradientFilter convolutionGradient = new CGradientFilter();
 
-				CFLRect<double> flrROI = new CFLRect<double>(200, 200, 500, 500);
+				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Source 이미지 설정 // Set the source image
-				convolutionPrewitt.SetSourceImage(ref fliSrcImage);
+				convolutionGradient.SetSourceImage(ref fliSrcImage);
 
 				// Source ROI 설정 // Set the Source ROI
-				convolutionPrewitt.SetSourceROI(flrROI);
+				convolutionGradient.SetSourceROI(flrROI);
 
 				// Destination 이미지 설정 // Set the destination image
-				convolutionPrewitt.SetDestinationImage(ref fliDstImage);
+				convolutionGradient.SetDestinationImage(ref fliDstImage);
 
 				// Destination ROI 설정 // Set Destination ROI
-				convolutionPrewitt.SetDestinationROI(flrROI);
+				convolutionGradient.SetDestinationROI(flrROI);
 
-				// Convolution Prewitt 커널 연산 방법 설정
-				convolutionPrewitt.SetKernelMethod(CConvolutionPrewitt.EKernel.Prewitt);
+				// Convolution Gradient 커널 연산 방법 설정
+				convolutionGradient.SetKernelMethod(CGradientFilter.EKernel.Gradient);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = convolutionPrewitt.Execute()).IsFail())
+				if((res = convolutionGradient.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute convolution prewitt.");
+					ErrorPrint(res, "Failed to execute convolution gradient.");
 					break;
 				}
 
@@ -181,6 +172,7 @@ namespace Convolution_Prewitt
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImageSrc.IsAvailable() && viewImageDst.IsAvailable())
 					Thread.Sleep(1);
+
 			}
 			while(false);
 		}
