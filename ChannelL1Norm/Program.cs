@@ -133,7 +133,7 @@ namespace ChannelL1Norm
 				viewImageSource.Invalidate(true);
 				viewImageDestination.Invalidate(true);
 
-				// 이미지와 이미지 뷰의 Sync 를 동일하게 맞춥니다.
+				// image 가 view 크기에 맞도록 확대 또는 축소합니다. // Zoom image to fit the view.
 				if((res = (viewImageDestination.ZoomFit())).IsFail())
 				{
 					ErrorPrint(res, "Failed to zoom fit. \n");
