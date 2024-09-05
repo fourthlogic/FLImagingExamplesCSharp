@@ -70,7 +70,7 @@ namespace StereoPhotometric
 				}
 
 				// Calibration 이미지 로드 // Load calibration image
-				if((res = fliCalImage.Load("../../ExampleImages/StereoPhotometric/Source.flif")).IsFail())
+				if((res = fliCalImage.Load("../../ExampleImages/StereoPhotometric/Calibrate.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;

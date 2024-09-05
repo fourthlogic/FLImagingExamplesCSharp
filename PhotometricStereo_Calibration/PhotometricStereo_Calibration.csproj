@@ -9,8 +9,8 @@
     <ProjectGuid>{8070E65C-91CA-4AB1-A04D-50ECB093AA6D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PhotometricStereoCalibration</RootNamespace>
-    <AssemblyName>PhotometricStereoCalibration</AssemblyName>
+    <RootNamespace>PhotometricStereo_Calibration</RootNamespace>
+    <AssemblyName>PhotometricStereo_Calibration</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
