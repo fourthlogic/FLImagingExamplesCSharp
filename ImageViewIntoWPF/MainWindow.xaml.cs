@@ -50,12 +50,8 @@ namespace ImageViewIntoWPF
             {
                 m_viewImage = new CGUIViewImage();
 
-                // 이미지 뷰를 생성합니다.
-                if ((res = m_viewImage.Create(5, 0, 505, 305)).IsFail())
-                    break;
-
-                // 메인 윈도우의 핸들을 얻어옵니다.
-                IntPtr hWindow = new WindowInteropHelper(this).Handle;
+				// 메인 윈도우의 핸들을 얻어옵니다.
+				IntPtr hWindow = new WindowInteropHelper(this).Handle;
 
                 if (hWindow == null)
                 {
@@ -63,12 +59,12 @@ namespace ImageViewIntoWPF
                     break;
                 }
 
-                // 메인 윈도우를 이미지 뷰의 부모로 설정합니다.
-                if ((res = m_viewImage.SetParentWindow((ulong)hWindow)).IsFail())
-                    break;
+				// 이미지 뷰를 생성합니다.
+				if((res = m_viewImage.Create(5, 0, 505, 305, (ulong)hWindow)).IsFail())
+					break;
 
-                // 키 이벤트를 부모에게 통지하도록 설정합니다.
-                m_viewImage.EnableKeyEventParentNotification(true);
+				// 키 이벤트를 부모에게 통지하도록 설정합니다.
+				m_viewImage.EnableKeyEventParentNotification(true);
 
                 // 이미지 뷰에 Ctrl + S 단축키가 동작하지 않도록 설정합니다.
                 List<int> listIgnoreShortcut = new List<int>();
