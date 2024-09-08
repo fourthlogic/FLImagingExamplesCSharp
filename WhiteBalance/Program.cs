@@ -111,7 +111,7 @@ namespace WhiteBalance
 				WhiteBalance.SetDestinationImage(ref arrFliImage[1]);
 
 				// 보정 방법 설정 // Set correction method
-				WhiteBalance.SetCorrectionMethod(ECorrectionMethod.ColorTemperature);
+				WhiteBalance.SetCorrectionMethod(CWhiteBalance.ECorrectionMethod.ColorTemperature);
 
 				// 색온도 설정 // Set color temperature
 				WhiteBalance.SetColorTemperature(5700);
