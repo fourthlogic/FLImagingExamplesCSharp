@@ -146,14 +146,14 @@ namespace HandEyeCalibrator3D
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
-
+				
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = HandEyeCalibrator3D.Execute()).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to execute Camera Pose 3D.");
 					break;
 				}
-
+				
 				if(view3D.IsAvailable())
 				{
 					CGUIView3DLayer view3DLayer = view3D.GetLayer(0);
@@ -201,25 +201,31 @@ namespace HandEyeCalibrator3D
 						TPoint3<float> tp3Cam = new TPoint3<float>(), tp3Board = new TPoint3<float>();
 
 						// 결과 3D 객체 얻어오기 // Get the result 3D object
-						HandEyeCalibrator3D.GetEndEffector3DObject(i, out fl3DORobot, out tp3RobotCenter);
-						HandEyeCalibrator3D.GetResultCamera3DObject(i, out fl3DCam, out tp3CamCenter);
-
-						// 카메라 포즈 추정에 실패할 경우 NOK 출력 // NOK output if camera pose estimation fails
-						if((HandEyeCalibrator3D.GetResultReprojectionPoint(i, out tp3Cam, out tp3Board)).IsFail())
+						
+						if(HandEyeCalibrator3D.GetResultCamera3DObject(i, out fl3DCam, out tp3CamCenter).IsOK())
 						{
-							strIdx = String.Format("Reprojection(NOK) %d", i);
-							view3DLayer.DrawText3D(tp3CamCenter, strIdx, EColor.CYAN, 0, 9);
-						}
-						else
+							// 카메라 포즈 추정에 실패할 경우 NOK 출력 // NOK output if camera pose estimation fails
+							if((HandEyeCalibrator3D.GetResultReprojectionPoint(i, out tp3Cam, out tp3Board)).IsFail())
+							{
+								strIdx = String.Format("Cam {0} (NOK)", i);
+								view3DLayer.DrawText3D(tp3CamCenter, strIdx, EColor.CYAN, 0, 9);
+							}
+							else
+							{
+								strIdx = String.Format("Cam {0}", i);
+								view3DLayer.DrawText3D(tp3CamCenter, strIdx, EColor.YELLOW, 0, 9);
+								view3D.PushObject(fl3DCam);								
+							}
+
 							view3D.PushObject(new CGUIView3DObjectLine(tp3Cam, tp3Board, EColor.CYAN));
+						}
 
-						strIdx = String.Format("End Effector {0}", i);
-						view3DLayer.DrawText3D(tp3RobotCenter, strIdx, EColor.BLUE, 0, 9);
-						view3D.PushObject(fl3DORobot);
-
-						strIdx = String.Format("Cam {0}", i);
-						view3DLayer.DrawText3D(tp3CamCenter, strIdx, EColor.YELLOW, 0, 9);
-						view3D.PushObject(fl3DCam);
+						if(HandEyeCalibrator3D.GetEndEffector3DObject(i, out fl3DORobot, out tp3RobotCenter).IsOK())
+						{
+							strIdx = String.Format("End Effector {0}", i);
+							view3DLayer.DrawText3D(tp3RobotCenter, strIdx, EColor.BLUE, 0, 9);
+							view3D.PushObject(fl3DORobot);
+						}
 					}
 
 					view3D.Invalidate();
