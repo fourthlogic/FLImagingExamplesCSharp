@@ -200,14 +200,6 @@ namespace InstanceSegmentation
 				// InstanceSegmentation 객체 생성 // Create InstanceSegmentation object
 				CInstanceSegmentationDL InstanceSegmentation = new CInstanceSegmentationDL();
 
-				CImagePreprocessingSpec imagePreprocessingSpec = new CImagePreprocessingSpec();
-				// Image Preprocessing 활성화 // Enable Image Preprocessing
-				imagePreprocessingSpec.EnableImagePreprocessing(true);
-				// Image Preprocessing LowLuminanceCorrectionType2 활성화 // Enable Image Preprocessing LowLuminanceCorrectionType2
-				imagePreprocessingSpec.EnableLowLuminanceCorrectionType2(true);
-				// 설정한 ImagePreprocessingSpec을 InstanceSegmentation에 적용 // Apply the ImagePreprocessingSpec that we set up to InstanceSegmentation
-				InstanceSegmentation.SetImagePreprocessingSpec(imagePreprocessingSpec);
-
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
@@ -224,7 +216,7 @@ namespace InstanceSegmentation
 				// 학습할 InstanceSegmentation 모델 Version 설정 // Set up the InstanceSegmentation model version to learn
 				InstanceSegmentation.SetModelVersion(CInstanceSegmentationDL.EModelVersion.MaskRCNN_V1_256);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				InstanceSegmentation.SetLearningEpoch(50);
+				InstanceSegmentation.SetLearningEpoch(500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				InstanceSegmentation.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 				// 학습 중단 조건 설정 // Set the condtiion of stopping learning
@@ -296,7 +288,7 @@ namespace InstanceSegmentation
 						float f32MeanAP = InstanceSegmentation.GetLearningResultLastMeanAP();
 		
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Epoch {3} / {4}", f32CurrCost, f32MeanAP, i32Epoch, i32MaxEpoch);
+						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Epoch {2} / {3}", f32CurrCost, f32MeanAP, i32Epoch, i32MaxEpoch);
 
 						// 학습 결과 비용과 검증 결과 기록을 받아 그래프 뷰에 출력  
 						// Get the history of cost and validation and print it at graph view
