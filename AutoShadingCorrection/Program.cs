@@ -45,7 +45,7 @@ namespace OperationAdd
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = (arrFliImage[0].Load("../../ExampleImages/ShadingCorrection/wall.flif"))).IsFail())
+				if((res = (arrFliImage[0].Load("../../ExampleImages/AutoShadingCorrection/wall.flif"))).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -102,17 +102,17 @@ namespace OperationAdd
 					break;
 				}
 
-				// Shading Correction 객체 생성 // Create Shading Correction object
-				CShadingCorrection shadingcorrection = new CShadingCorrection();
+				// Auto Shading Correction 객체 생성 // Create Auto Shading Correction object
+				CAutoShadingCorrection autoshadingcorrection = new CAutoShadingCorrection();
 				// Source 이미지 설정 // Set source image
-                shadingcorrection.SetSourceImage(ref arrFliImage[0]);
+                autoshadingcorrection.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-                shadingcorrection.SetDestinationImage(ref arrFliImage[1]);
+                autoshadingcorrection.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (shadingcorrection.Execute())).IsFail())
+                if ((res = (autoshadingcorrection.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation add.");
+					ErrorPrint(res, "Failed to execute Auto Shading Correction.");
 					break;
 				}
 

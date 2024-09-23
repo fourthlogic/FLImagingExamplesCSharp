@@ -9,8 +9,8 @@
     <ProjectGuid>{912D0CED-083F-4889-AE67-68EDCA3336A1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ShadingCorrection</RootNamespace>
-    <AssemblyName>ShadingCorrection</AssemblyName>
+    <RootNamespace>AutoShadingCorrection</RootNamespace>
+    <AssemblyName>AutoShadingCorrection</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
