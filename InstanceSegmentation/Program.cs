@@ -212,9 +212,9 @@ namespace InstanceSegmentation
 				InstanceSegmentation.SetInferenceResultImage(ref fliResultBoxContourImage);
 
 				// 학습할 InstanceSegmentation 모델 설정 // Set up the InstanceSegmentation model to learn
-				InstanceSegmentation.SetModel(CInstanceSegmentationDL.EModel.MaskRCNN);
+				InstanceSegmentation.SetModel(CInstanceSegmentationDL.EModel.R_FLSegNet);
 				// 학습할 InstanceSegmentation 모델 Version 설정 // Set up the InstanceSegmentation model version to learn
-				InstanceSegmentation.SetModelVersion(CInstanceSegmentationDL.EModelVersion.MaskRCNN_V1_256);
+				InstanceSegmentation.SetModelVersion(CInstanceSegmentationDL.EModelVersion.R_FLSegNet_V1_256);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				InstanceSegmentation.SetLearningEpoch(500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
