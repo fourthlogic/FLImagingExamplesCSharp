@@ -168,7 +168,7 @@ namespace StereoPhotometric
 				// 동작 방식 설정 // Set Operation Mode
 				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.EReconstructionMode_RFT_FP32);
 				// Calibration 데이터 설정 // Set Calibration Settings
-				photometric.SetCalibrationData(386.439657, 346.491239, 259.998140);
+				photometric.SetCalibrationCircleROI(new CFLCircle<double>(386.439657, 346.491239, 259.998140, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther));
 
 				CMatrix<double> cmatdTemp = new CMatrix<double>(3, 3);
 
