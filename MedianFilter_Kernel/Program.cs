@@ -30,7 +30,7 @@ namespace MedianFilter
 			do
 			{
 				// 이미지 로드 // Load image
-                if (fliSrcImage.Load("../../ExampleImages/MedianFilter/Chip_Noise.flif").IsFail())
+				if(fliSrcImage.Load("../../ExampleImages/MedianFilter/Chip_Noise.flif").IsFail())
 				{
 					Console.WriteLine("Failed to load the image file.\n");
 					break;
@@ -94,8 +94,8 @@ namespace MedianFilter
 
 				CResult ipResult;
 
-				// Blob 객체 생m성
-                CMedianFilter filterMedian = new CMedianFilter();
+				// Median Filter 객체 생성 // Create Median Filter object
+				CMedianFilter filterMedian = new CMedianFilter();
 
 				// 처리할 이미지 설정 // Set the image to process
 				filterMedian.SetSourceImage(ref fliSrcImage);
