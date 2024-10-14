@@ -140,6 +140,12 @@ namespace HoleFilling
 				// Hole 영역을 채우는 방식을 설정 // Set the method of filling the hole area
 				if((res = alg.SetFillingMethod(CHoleFilling.EFillingMethod.Harmonic_Interpolation)).IsFail())
 					break;
+				// Harmonic Interpolation 의 Precision 값 설정 // Set precision value for Harmonic Interpolation
+				if((res = alg.SetPrecision(0.1)).IsFail())
+					break;
+				// Harmonic Interpolation 의 Max Iteration 값 설정 // Set max iteration value for Harmonic Interpolation
+				if((res = alg.SetMaxIteration(100)).IsFail())
+					break;
 				// 첫 번째 Threshold 의 채널 별 논리 연산자와 값 설정 // Set the logical operator and value for each channel of the first Threshold
 				CMultiVar<UInt64> mvThresholdCondition1 = new CMultiVar<UInt64>((UInt64)ELogicalCondition.GreaterEqual, (UInt64)ELogicalCondition.GreaterEqual, (UInt64)ELogicalCondition.GreaterEqual);
 				if((res = alg.SetThresholdCondition(EThresholdIndex.First, mvThresholdCondition1)).IsFail())
