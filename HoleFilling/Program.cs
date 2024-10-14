@@ -112,26 +112,48 @@ namespace HoleFilling
 
 				// 알고리즘 객체 생성 // Create Algorithm object
 				CHoleFilling alg = new CHoleFilling();
+
 				// Source 이미지 설정 // Set the source image
-				alg.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				if((res = alg.SetSourceImage(ref arrFliImage[(int)EType.Source])).IsFail())
+					break;
 				// Destination 이미지 설정 // Set the destination image
-				alg.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
-
-				alg.EnableIgnoreBoundaryHole(true);
-				alg.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And);
-				alg.SetMinimumHoleArea(10);
-				alg.SetMaximumHoleArea(99999999999);
-				alg.SetThresholdMode(EThresholdMode.Dual_And);
-
+				if((res = alg.SetDestinationImage(ref arrFliImage[(int)EType.Destination])).IsFail())
+					break;
+				// 처리할 Hole Area 넓이 범위 설정 // Set hole area range to process
+				if((res = alg.SetMinimumHoleArea(10)).IsFail())
+					break;
+				// 처리할 Hole Area 넓이 범위 설정 // Set hole area range to process
+				if((res = alg.SetMaximumHoleArea(99999999999)).IsFail())
+					break;
+				// 이미지 경계와 맞닿은 hole 의 처리 여부 설정 // Set whether to process holes that touch the image boundary
+				if((res = alg.EnableIgnoreBoundaryHole(true)).IsFail())
+					break;
+				// Threshold 를 통과한 픽셀이 hole 인지 object 인지 설정 // Set whether the pixel that passed the threshold is a hole or an object
+				if((res = alg.SetThresholdPassTarget(CHoleFilling.EThresholdPassTarget.Object)).IsFail())
+					break;
+				// Threshold 수와 결합 방식을 의미하는 Threshold 모드 설정 // Threshold mode setting, which refers to the number of threshold and combination method
+				if((res = alg.SetThresholdMode(EThresholdMode.Dual_And)).IsFail())
+					break;
+				// 각 Threshold 내에서 채널 별 논리 결과 간의 결합 방식을 의미하는 Logical Condition Of Channels 설정 // Set the Logical Condition Of Channels, which refers to the combination method between logical results for each channel within each Threshold
+				if((res = alg.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And)).IsFail())
+					break;
+				// Hole 영역을 채우는 방식을 설정 // Set the method of filling the hole area
+				if((res = alg.SetFillingMethod(CHoleFilling.EFillingMethod.Harmonic_Interpolation)).IsFail())
+					break;
+				// 첫 번째 Threshold 의 채널 별 논리 연산자와 값 설정 // Set the logical operator and value for each channel of the first Threshold
 				CMultiVar<UInt64> mvThresholdCondition1 = new CMultiVar<UInt64>((UInt64)ELogicalCondition.GreaterEqual, (UInt64)ELogicalCondition.GreaterEqual, (UInt64)ELogicalCondition.GreaterEqual);
-				alg.SetThresholdCondition(EThresholdIndex.First, mvThresholdCondition1);
+				if((res = alg.SetThresholdCondition(EThresholdIndex.First, mvThresholdCondition1)).IsFail())
+					break;
 				CMultiVar<UInt64> mvThresholdValue1U64 = new CMultiVar<UInt64>(175, 230, 240);
-				alg.SetThresholdValue(EThresholdIndex.First, mvThresholdValue1U64);
-
-				CMultiVar<UInt64> mvThresholdCondition2 = new CMultiVar<UInt64>(5, 5, 5);
-				alg.SetThresholdCondition(EThresholdIndex.Second, mvThresholdCondition2);
+				if((res = alg.SetThresholdValue(EThresholdIndex.First, mvThresholdValue1U64)).IsFail())
+					break;
+				// 두 번째 Threshold 의 채널 별 논리 연산자와 값 설정 // Set the logical operator and value for each channel of the second Threshold
+				CMultiVar<UInt64> mvThresholdCondition2 = new CMultiVar<UInt64>((UInt64)ELogicalCondition.Less, (UInt64)ELogicalCondition.Less, (UInt64)ELogicalCondition.Less);
+				if((res = alg.SetThresholdCondition(EThresholdIndex.Second, mvThresholdCondition2)).IsFail())
+					break;
 				CMultiVar<UInt64> mvThresholdValue2U64 = new CMultiVar<UInt64>(200, 240, 255);
-				alg.SetThresholdValue(EThresholdIndex.Second, mvThresholdValue2U64);
+				if((res = alg.SetThresholdValue(EThresholdIndex.Second, mvThresholdValue2U64)).IsFail())
+					break;
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = (alg.Execute())).IsFail())
