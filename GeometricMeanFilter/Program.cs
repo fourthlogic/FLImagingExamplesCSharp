@@ -48,7 +48,7 @@ namespace GeometricMeanFilter
 					break;
 				}
 
-				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성
+				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
 				if((res = fliDstImage.Assign(fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to assign the image file.\n");
