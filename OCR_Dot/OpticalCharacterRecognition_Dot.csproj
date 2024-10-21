@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E618347D-98E3-4321-A5A6-A614A5F84C9A}</ProjectGuid>
+    <ProjectGuid>{FE89E0ED-6486-4FB2-88C6-E5C14236C43C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpticalCharacterRecognition</RootNamespace>
-    <AssemblyName>OpticalCharacterRecognition</AssemblyName>
+    <RootNamespace>OCR_Dot</RootNamespace>
+    <AssemblyName>OCR_Dot</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

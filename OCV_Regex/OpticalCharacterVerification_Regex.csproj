@@ -9,8 +9,8 @@
     <ProjectGuid>{26C2C22D-1BF3-4937-8491-0A7065713146}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpticalCharacterVerification_Regex</RootNamespace>
-    <AssemblyName>OpticalCharacterVerification</AssemblyName>
+    <RootNamespace>OCV_Regex</RootNamespace>
+    <AssemblyName>OCV_Regex</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

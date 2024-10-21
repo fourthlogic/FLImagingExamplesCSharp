@@ -9,8 +9,8 @@
     <ProjectGuid>{97D42FD4-5B20-4D48-BD43-9241335ECED3}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpticalCharacterRecognition_Load</RootNamespace>
-    <AssemblyName>OpticalCharacterRecognition_Load</AssemblyName>
+    <RootNamespace>OCR_Load</RootNamespace>
+    <AssemblyName>OCR_Load</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

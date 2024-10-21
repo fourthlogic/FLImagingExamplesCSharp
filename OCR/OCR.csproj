@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DDD68583-C460-4A67-B917-623B5BFC906D}</ProjectGuid>
+    <ProjectGuid>{E618347D-98E3-4321-A5A6-A614A5F84C9A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpticalCharacterVerification_Quality</RootNamespace>
-    <AssemblyName>OpticalCharacterVerification_Quality</AssemblyName>
+    <RootNamespace>OCR</RootNamespace>
+    <AssemblyName>OCR</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

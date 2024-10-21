@@ -9,8 +9,8 @@
     <ProjectGuid>{B80E0B5E-CB20-4D7F-AB47-83535C4B4500}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpticalCharacterRecognition_Unicode</RootNamespace>
-    <AssemblyName>OpticalCharacterRecognition_Unicode</AssemblyName>
+    <RootNamespace>OCR_Unicode</RootNamespace>
+    <AssemblyName>OCR_Unicode</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

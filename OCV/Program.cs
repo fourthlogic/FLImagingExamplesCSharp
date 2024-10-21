@@ -14,7 +14,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.ThreeDim;
 
-namespace OpticalCharacterVerification
+namespace OCV
 {
 	internal class Program
 	{
@@ -43,19 +43,19 @@ namespace OpticalCharacterVerification
 				CResult res;
 
 				// 이미지 로드 // Load image
-				if((res = fliImage1.Load("../../ExampleImages/OpticalCharacterVerification/Print_Example1.flif")).IsFail())
+				if((res = fliImage1.Load("../../ExampleImages/OCV/Print_Example1.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				if((res = fliImage2.Load("../../ExampleImages/OpticalCharacterVerification/Print_Example2.flif")).IsFail())
+				if((res = fliImage2.Load("../../ExampleImages/OCV/Print_Example2.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				if((res = fliImage3.Load("../../ExampleImages/OpticalCharacterVerification/Print_Example3.flif")).IsFail())
+				if((res = fliImage3.Load("../../ExampleImages/OCV/Print_Example3.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -141,7 +141,7 @@ namespace OpticalCharacterVerification
 				COCV ocv = new COCV();
 
 				// OCR Font 파일을 로드
-				if((res = ocv.LoadFontData("../../ExampleImages/OpticalCharacterVerification/Font_A-Z_0-9.flocr")).IsFail())
+				if((res = ocv.LoadFontData("../../ExampleImages/OCV/Font_A-Z_0-9.flocr")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load Font file.");
 					break;

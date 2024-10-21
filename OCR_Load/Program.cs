@@ -14,7 +14,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.ThreeDim;
 
-namespace OpticalCharacterRecognition
+namespace OCR
 {
 	internal class Program
 	{
@@ -32,88 +32,88 @@ namespace OpticalCharacterRecognition
 		{
 			do
 			{
-				CFLImage fliImage = new CFLImage();
 				CFLImage fliRecognizeImage = new CFLImage();
+				CFLImage fliRecognizeImageUnicode = new CFLImage();
 				// Declaration of the image view.
-				CGUIViewImage viewImage = new CGUIViewImage();
 				CGUIViewImage viewImageRecognize = new CGUIViewImage();
+				CGUIViewImage viewImageRecognizeUnicode = new CGUIViewImage();
 
 				CResult res;
 
 				// 이미지 로드 // Load image
-				if((res = fliImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Learn.flif")).IsFail())
+				if((res = fliRecognizeImage.Load("../../ExampleImages/OCR/OCR_Recognition.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 로드 // Load image
-				if((res = fliRecognizeImage.Load("../../ExampleImages/OpticalCharacterRecognition/OCR_Recognition.flif")).IsFail())
+				if((res = fliRecognizeImageUnicode.Load("../../ExampleImages/OCR/OCR_Recognition_Unicode2.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImage.Create(200, 0, 712, 512)).IsFail())
+				if((res = viewImageRecognize.Create(200, 0, 712, 512)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImageRecognize.Create(712, 0, 1224, 512)).IsFail())
+				if((res = viewImageRecognizeUnicode.Create(712, 0, 1224, 512)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				// Converted 이미지 뷰에 이미지를 디스플레이
 				if((res = viewImageRecognize.SetImagePtr(ref fliRecognizeImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
+				// Converted 이미지 뷰에 이미지를 디스플레이
+				if((res = viewImageRecognizeUnicode.SetImagePtr(ref fliRecognizeImageUnicode)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
 				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-				if((res = viewImage.SynchronizeWindow(ref viewImageRecognize)).IsFail())
+				if((res = viewImageRecognize.SynchronizeWindow(ref viewImageRecognizeUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImage.SynchronizePointOfView(ref viewImageRecognize)).IsFail())
+				if((res = viewImageRecognize.SynchronizePointOfView(ref viewImageRecognizeUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
-				CGUIViewImageLayer layer = new CGUIViewImageLayer();
 				CGUIViewImageLayer layerRecognize = new CGUIViewImageLayer();
+				CGUIViewImageLayer layerRecognizeUnicode = new CGUIViewImageLayer();
 
-				layer = viewImage.GetLayer(0);
-				layerRecognize = viewImageRecognize.GetLayer(1);
+				layerRecognize = viewImageRecognize.GetLayer(0);
+				layerRecognizeUnicode = viewImageRecognizeUnicode.GetLayer(1);
 
 
-				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
-				layer.Clear();
+				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layerRecognize
 				layerRecognize.Clear();
+				layerRecognizeUnicode.Clear();
 
-				if((res = layer.DrawTextCanvas(new CFLPoint<double>(0, 0), "Learn", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerRecognize.DrawTextCanvas(new CFLPoint<double>(0, 0), "Recognition1", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
-				if((res = layerRecognize.DrawTextCanvas(new CFLPoint<double>(0, 0), "Recognition", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerRecognizeUnicode.DrawTextCanvas(new CFLPoint<double>(0, 0), "Recognition2", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
 					break;
@@ -121,80 +121,17 @@ namespace OpticalCharacterRecognition
 
 				COCR ocr = new COCR();
 
-				// 문자를 학습할 이미지 설정
-				if((res = ocr.SetLearnImage(ref fliImage)).IsFail())
+				// 학습 정보 파일을 로드
+				if((res = ocr.Load("../../ExampleImages/OCR/OCR_FourthLogic.flocr")).IsFail())
 				{
-					ErrorPrint(res, "Failed to set Source Image.");
+					ErrorPrint(res, "Failed to load learnt file.");
 					break;
-				}
-
-				// 학습할 이미지에 저장되어있는 Figure 학습
-				if((res = ocr.Learn()).IsFail())
-				{
-					ErrorPrint(res, "Failed to train.");
-					break;
-				}
-
-				CFLFigureArray flfaLearnt = new CFLFigureArray();
-
-				// 학습한 문자의 모양를 받아오는 함수
-				ocr.GetLearntCharacter(out flfaLearnt);
-
-				Int64 i64LearntCount = flfaLearnt.GetCount();
-
-				for(Int64 i = 0; i < i64LearntCount; ++i)
-				{
-					CFLFigure flfLearnt = new CFLFigureArray(flfaLearnt.GetAt(i));
-					string flsResultString = flfLearnt.GetName();
-					CFLRect<double> flrBoundary = new CFLRect<double>();
-
-					flrBoundary = flfLearnt.GetBoundaryRect();
-
-					if((res = layer.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
-					{
-						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}\n", i));
-						break;
-					}
-
-					if((res = layer.DrawFigureImage(flfLearnt, EColor.LIME, 1, EColor.LIME, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
-					{
-						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
-						break;
-					}
 				}
 
 				// 문자를 인식할 이미지 설정
 				if((res = ocr.SetSourceImage(ref fliRecognizeImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
-					break;
-				}
-
-				// 인식할 문자의 각도 범위를 설정
-				if((res = ocr.SetRecognizingAngleTolerance(10.0)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set angle tolerance.");
-					break;
-				}
-
-				// 인식할 문자의 색상을 설정
-				if((res = ocr.SetRecognizingCharacterColorType(ECharacterColorType.All)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set recognizing character color.");
-					break;
-				}
-
-				// 인식할 최소 점수를 설정
-				if((res = ocr.SetRecognizingMinimumScore(0.7)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set minimum score.");
-					break;
-				}
-
-				// 인식할 최대 개수를 설정
-				if((res = ocr.SetRecognizingMaximumCharacterCount(12)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set maximum character count.");
 					break;
 				}
 
@@ -217,14 +154,12 @@ namespace OpticalCharacterRecognition
 
 					string flsResultString = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
-
 					int i32Score = (int)(resultChar.f64Score * 100.0);
 					double f64Scale = resultChar.f64ScaleWidth * resultChar.f64ScaleHeight;
+					CFLRect<double> flrBoundary = new CFLRect<double>();
 
 					flsResultString = "[" + flsResultName + "]" + string.Format("Score: {0}%\nScale: {1}\nRotation: {2}", i32Score, f64Scale.ToString("n2"), resultChar.f64Rotation);
 					Console.WriteLine(flsResultString);
-					CFLRect<double> flrBoundary = new CFLRect<double>();
-
 					resultChar.flfaCharacter.GetBoundaryRect(out flrBoundary);
 
 					if((res = layerRecognize.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
@@ -240,11 +175,55 @@ namespace OpticalCharacterRecognition
 					}
 				}
 
-				viewImage.Invalidate();
+				// 문자를 인식할 이미지 설정
+				if((res = ocr.SetSourceImage(ref fliRecognizeImageUnicode)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Source Image.");
+					break;
+				}
+
+				// 인식할 이미지에서 문자를 찾는 기능을 수행
+				if((res = ocr.Execute()).IsFail())
+				{
+					ErrorPrint(res, res.GetString());
+					break;
+				}
+
+				// 찾은 문자의 개수를 받아오는 함수
+				i64ResultCount = ocr.GetResultCount();
+
+				for(Int64 i = 0; i < i64ResultCount; ++i)
+				{
+					ocr.GetResultRecognizedCharactersInfo(i, out resultChar);
+
+					string flsResultString = "";
+					string flsResultName = resultChar.flfaCharacter.GetName();
+					int i32Score = (int)(resultChar.f64Score * 100.0);
+					double f64Scale = resultChar.f64ScaleWidth * resultChar.f64ScaleHeight;
+					CFLRect<double> flrBoundary = new CFLRect<double>();
+
+					flsResultString = "[" + flsResultName + "]" + string.Format("Score: {0}%\nScale: {1}\nRotation: {2}", i32Score, f64Scale.ToString("n2"), resultChar.f64Rotation);
+					Console.WriteLine(flsResultString);
+					resultChar.flfaCharacter.GetBoundaryRect(out flrBoundary);
+
+					if((res = layerRecognizeUnicode.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+					{
+						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}\n", i));
+						break;
+					}
+
+					if((res = layerRecognizeUnicode.DrawFigureImage(resultChar.flfaCharacter, EColor.LIME, 1, EColor.LIME, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
+					{
+						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
+						break;
+					}
+				}
+
 				viewImageRecognize.Invalidate();
+				viewImageRecognizeUnicode.Invalidate();
 
 				// The image view is waiting until close.
-				while(viewImage.IsAvailable() && viewImageRecognize.IsAvailable())
+				while(viewImageRecognize.IsAvailable() && viewImageRecognizeUnicode.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
