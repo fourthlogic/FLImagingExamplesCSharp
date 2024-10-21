@@ -16,7 +16,7 @@ using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 
-namespace OpticalCharacterRecognitionDL
+namespace CharacterBasedOCRDL
 {
 	class Program
 	{
@@ -57,13 +57,13 @@ namespace OpticalCharacterRecognitionDL
 				Thread.Sleep(1000);
 
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("../../ExampleImages/OpticalCharacterRecognitionDL/OCR_Learn.flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/CharacterBasedOCRDL/OCR_Learn.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 				
-				if((res = fliValidationImage.Load("../../ExampleImages/OpticalCharacterRecognitionDL/OCR_Inference.flif")).IsFail())
+				if((res = fliValidationImage.Load("../../ExampleImages/CharacterBasedOCRDL/OCR_Inference.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -201,7 +201,7 @@ namespace OpticalCharacterRecognitionDL
 				viewImagesLabelFigure.RedrawWindow();
 
 				// OCR 객체 생성 // Create OCR object
-				COpticalCharacterRecognitionDL ocr = new COpticalCharacterRecognitionDL();
+				CCharacterBasedOCRDL ocr = new CCharacterBasedOCRDL();
 				
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
@@ -215,9 +215,9 @@ namespace OpticalCharacterRecognitionDL
 				ocr.SetInferenceResultImage(ref fliResultLabelImage);
 
 				// 학습할 OCR 모델 설정 // Set up the OCR model to learn
-				ocr.SetModel(COpticalCharacterRecognitionDL.EModel.FLSegNet);
+				ocr.SetModel(CCharacterBasedOCRDL.EModel.FLSegNet);
 				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
-				ocr.SetModelVersion(COpticalCharacterRecognitionDL.EModelVersion.FLSegNet_V1_1024_B3);
+				ocr.SetModelVersion(CCharacterBasedOCRDL.EModelVersion.FLSegNet_V1_1024_B3);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				ocr.SetLearningEpoch(10000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
@@ -366,7 +366,7 @@ namespace OpticalCharacterRecognitionDL
 				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
 				ocr.EnableInferenceResultLabelImage(false);
 				// Result item settings enum 설정 // Set the result item settings
-				ocr.SetInferenceResultItemSettings(COpticalCharacterRecognitionDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
+				ocr.SetInferenceResultItemSettings(CCharacterBasedOCRDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = ocr.Execute()).IsFail())

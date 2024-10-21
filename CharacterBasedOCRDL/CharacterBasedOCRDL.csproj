@@ -9,8 +9,8 @@
     <ProjectGuid>{C150FDC7-94E9-4187-A6FF-ECF82972330E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpticalCharacterRecognitionDL</RootNamespace>
-    <AssemblyName>OpticalCharacterRecognitionDL</AssemblyName>
+    <RootNamespace>CharacterBasedOCRDL</RootNamespace>
+    <AssemblyName>CharacterBasedOCRDL</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
