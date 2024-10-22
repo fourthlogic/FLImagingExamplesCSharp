@@ -227,6 +227,7 @@ namespace InstanceSegmentation
 
 				// 설정한 Optimizer를 InstanceSegmentation에 적용 // Apply Optimizer that we set up to InstanceSegmentation
 				InstanceSegmentation.SetLearningOptimizerSpec(optSpec);
+				InstanceSegmentation.EnableOptimalLearningStatePreservation(false);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();

@@ -186,6 +186,7 @@ namespace Classifier
 				optSpec.SetLearningRate(1e-3f);
 				// 설정한 Optimizer를 Classifier에 적용 // Apply Optimizer that we set up to Classifier
 				classifier.SetLearningOptimizerSpec(optSpec);
+				classifier.EnableOptimalLearningStatePreservation(false);
 
 				// Classifier learn function을 진행하는 스레드 생성 // Create the Classifier Learn function thread
 				CResult eLearnResult = new CResult();
