@@ -139,13 +139,13 @@ namespace SemanticSegmentation
 					break;
 				}
 				
-				if((res = layerValidation.DrawTextCanvas(flpPoint, "TRAIN(EXTRACTED (4/6))", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerValidation.DrawTextCanvas(flpPoint, "TRAIN(EXTRACTED (3/4))", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layerResultLabel.DrawTextCanvas(flpPoint, "VALIDATION(EXTRACTED (2/6))", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerResultLabel.DrawTextCanvas(flpPoint, "VALIDATION(EXTRACTED (1/4))", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
