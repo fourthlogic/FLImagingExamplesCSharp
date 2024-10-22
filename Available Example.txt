@@ -705,6 +705,12 @@
       - The algorithm example to get the fuzzy entropy of an image.
       - 이미지의 Fuzzy Entropy 를 구하는 알고리즘 예제.
 
+  - [Calibration]
+
+    - ShadingCalibrator
+      - The example of an algorithm that perform light state calibration and correction of an image.
+      - 조명 상태 캘리브레이션 및 보정을 수행하는 알고리즘 예제.
+
   - [Channel]
 
     - ChannelExtraction
