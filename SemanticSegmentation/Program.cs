@@ -240,6 +240,24 @@ namespace SemanticSegmentation
 
 				semanticSegmentation.SetLearningAugmentationSpec(augSpec);
 
+				// 학습을 종료할 조건식 설정. miou.ze값이 0.9 이상인 경우 학습 종료한다. metric.ze와 동일한 값입니다.
+				// Set Conditional Expression to End Learning. If the miou.ze value is 0.9 or higher, end the learning. Same value as metric.ze.
+				semanticSegmentation.SetLearningStopCondition("miou.ze >= 0.9");
+
+				// 자동 저장 옵션 설정 // Set Auto-Save Options
+				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
+
+				// 자동 저장 활성화 // Enable Auto-Save
+				autoSaveSpec.EnableAutoSave(true);
+				// 저장할 모델 경로 설정 // Set Model path to save
+				autoSaveSpec.SetAutoSavePath("model.flss");
+				// 자동 저장 조건식 설정. 현재 miou.ze값이 최대 값인 경우 저장 활성화
+				// Set auto-save conditional expressions. Enable save if the current miou.ze value is the maximum value
+				autoSaveSpec.SetAutoSaveCondition("miou.ze > max('miou.ze')");
+
+				// 자동 저장 옵션 설정 // Set Auto-Save Options
+				semanticSegmentation.SetLearningAutoSaveSpec(autoSaveSpec);
+
 				// SemanticSegmentation learn function을 진행하는 스레드 생성 // Create the SemanticSegmentation Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{

@@ -161,6 +161,24 @@ namespace Classifier
 				classifier.SetLearningOptimizerSpec(optSpec);
 				classifier.EnableOptimalLearningStatePreservation(false);
 
+				// 학습을 종료할 조건식 설정. f1score값이 0.95 이상인 경우 학습 종료한다. metric와 동일한 값입니다.
+				// Set Conditional Expression to End Learning. If the f1score value is 0.95 or higher, end the learning. Same value as metric.
+				classifier.SetLearningStopCondition("f1score >= 0.95");
+
+				// 자동 저장 옵션 설정 // Set Auto-Save Options
+				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
+
+				// 자동 저장 활성화 // Enable Auto-Save
+				autoSaveSpec.EnableAutoSave(true);
+				// 저장할 모델 경로 설정 // Set Model path to save
+				autoSaveSpec.SetAutoSavePath("model.flcf");
+				// 자동 저장 조건식 설정. 현재 f1score값이 최대 값인 경우 저장 활성화
+				// Set auto-save conditional expressions. Enable save if the current f1score value is the maximum value
+				autoSaveSpec.SetAutoSaveCondition("f1score > max('f1score')");
+
+				// 자동 저장 옵션 설정 // Set Auto-Save Options
+				classifier.SetLearningAutoSaveSpec(autoSaveSpec);
+
 				// Classifier learn function을 진행하는 스레드 생성 // Create the Classifier Learn function thread
 				CResult eLearnResult = new CResult();
 
