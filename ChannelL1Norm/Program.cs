@@ -41,7 +41,7 @@ namespace ChannelL1Norm
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ChannelL1Norm/Color.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelL1Norm/Coord.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
