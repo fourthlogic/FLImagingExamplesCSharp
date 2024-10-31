@@ -211,7 +211,7 @@ namespace ObjectDetection
 				augSpec.EnableRotation(true);
 				augSpec.SetRotationParam(30.0, true, false);
 				augSpec.EnableScale(true);
-				augSpec.SetScaleParam(.8, 1.0, true, 1.0, 1.0, 1.0, 1.0, true);
+				augSpec.SetScaleParam(1.0, 1.0, 1.0, 1.0, true);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
