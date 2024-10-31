@@ -238,8 +238,8 @@ namespace InstanceSegmentation
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
-				augSpec.EnableScaleCrop(true);
-				augSpec.SetScaleCropParam(0.900000, 1.000000, true, 1.000000, 1.000000, 1.000000, 1.000000, true);
+				augSpec.EnableScale(true);
+				augSpec.SetScaleParam(0.900000, 1.000000, true, 1.000000, 1.000000, 1.000000, 1.000000, true);
 
 				instanceSegmentation.SetLearningAugmentationSpec(augSpec);
 
