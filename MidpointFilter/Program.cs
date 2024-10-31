@@ -127,20 +127,6 @@ namespace MidpointFilter
 				layerSrc.Clear();
 				layerDst.Clear();
 
-				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
-				// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
-				if(layerSrc.DrawFigureImage(flrROI, EColor.BLUE).IsFail())
-				{
-					Console.WriteLine("Failed to draw figures objects on the image view.\n");
-					break;
-				}
-
-				if(layerDst.DrawFigureImage(flrROI, EColor.BLUE).IsFail())
-				{
-					Console.WriteLine("Failed to draw figures objects on the image view.\n");
-					break;
-				}
-
 				CFLPoint<double> flp = new CFLPoint<double>();
 
 				if(layerSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20).IsFail())
