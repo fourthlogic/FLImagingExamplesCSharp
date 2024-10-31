@@ -37,13 +37,11 @@ namespace CharacterBasedOCRDL
 			CFLImage fliLearnImage = new CFLImage();
 			CFLImage fliValidationImage = new CFLImage();
 			CFLImage fliResultLabelImage = new CFLImage();
-			CFLImage fliResultLabelFigureImage = new CFLImage();
 
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageValidation = new CGUIViewImage();
 			CGUIViewImage viewImagesLabel = new CGUIViewImage();
-			CGUIViewImage viewImagesLabelFigure = new CGUIViewImage();
 
 			// 그래프 뷰 선언 // Declare the graph view
 			CGUIViewGraph viewGraph = new CGUIViewGraph();
@@ -62,7 +60,7 @@ namespace CharacterBasedOCRDL
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
-				
+
 				if((res = fliValidationImage.Load("../../ExampleImages/CharacterBasedOCRDL/OCR_Inference.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
@@ -88,14 +86,8 @@ namespace CharacterBasedOCRDL
 					break;
 				}
 
-				if((res = viewImagesLabelFigure.Create(600, 500, 1100, 1000)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
 				// Graph 뷰 생성 // Create graph view
-				if((res = viewGraph.Create(1100, 0, 1600, 500)).IsFail())
+				if((res = viewGraph.Create(600, 500, 1100, 1000)).IsFail())
 				{
 					ErrorPrint(res, " Failed to create the graph view. \n");
 					break;
@@ -124,12 +116,6 @@ namespace CharacterBasedOCRDL
 					break;
 				}
 
-				if((res = viewImagesLabelFigure.SetImagePtr(ref fliResultLabelFigureImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
 				// 다섯 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the four image view windows
 				if((res = viewImageLearn.SynchronizeWindow(ref viewImageValidation)).IsFail())
 				{
@@ -143,24 +129,16 @@ namespace CharacterBasedOCRDL
 					break;
 				}
 
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesLabelFigure)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window.\n");
-					break;
-				}
-
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
 				CGUIViewImageLayer layerValidation = viewImageValidation.GetLayer(0);
 				CGUIViewImageLayer layerResultLabel = viewImagesLabel.GetLayer(0);
-				CGUIViewImageLayer layerResultLabelFigure = viewImagesLabelFigure.GetLayer(0);
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
 				layerValidation.Clear();
 				layerResultLabel.Clear();
-				layerResultLabelFigure.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -188,21 +166,14 @@ namespace CharacterBasedOCRDL
 					break;
 				}
 
-				if((res = layerResultLabelFigure.DrawTextCanvas(flpPoint, "RESULT LABEL FIGURE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text\n");
-					break;
-				}
-
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
 				viewImagesLabel.RedrawWindow();
-				viewImagesLabelFigure.RedrawWindow();
 
 				// OCR 객체 생성 // Create OCR object
 				CCharacterBasedOCRDL ocr = new CCharacterBasedOCRDL();
-				
+
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
@@ -215,9 +186,9 @@ namespace CharacterBasedOCRDL
 				ocr.SetInferenceResultImage(ref fliResultLabelImage);
 
 				// 학습할 OCR 모델 설정 // Set up the OCR model to learn
-				ocr.SetModel(CCharacterBasedOCRDL.EModel.FLSegNet);
+				ocr.SetModel(CCharacterBasedOCRDL.EModel.R_FLSegNet);
 				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
-				ocr.SetModelVersion(CCharacterBasedOCRDL.EModelVersion.FLSegNet_V1_1024_B3);
+				ocr.SetModelVersion(CCharacterBasedOCRDL.EModelVersion.R_FLSegNet_V1_512);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				ocr.SetLearningEpoch(10000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
@@ -302,30 +273,26 @@ namespace CharacterBasedOCRDL
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
 						float f32CurrCost = ocr.GetLearningResultLastCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32ValidationPa = ocr.GetLearningResultLastAccuracy();
-						float f32ValidationPaMeanIoU = ocr.GetLearningResultLastMeanIoU();
+						float f32ValidationMeanAP = ocr.GetLearningResultLastMeanAP();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Epoch {3} / {4}", f32CurrCost, f32ValidationPa, f32ValidationPaMeanIoU, i32Epoch, i32MaxEpoch);
+						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Epoch {2} / {3}", f32CurrCost, f32ValidationMeanAP, i32Epoch, i32MaxEpoch);
 
 						// 학습 결과 비용과 검증 결과 기록을 받아 그래프 뷰에 출력  
 						// Get the history of cost and validation and print it at graph view
 						List<float> vctCosts = new List<float>();
-						List<float> vctValidations = new List<float>();
-						List<float> vctMeanIoU = new List<float>();
-						List<float> vctValidationsZE = new List<float>();
-						List<float> vctMeanIoUZE = new List<float>();
+						List<float> vctMeanAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						ocr.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU, out vctValidationsZE, out vctMeanIoUZE, out vctValidationEpoch);
+						ocr.GetLearningResultAllHistory(out vctCosts, out vctMeanAP, out vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
-						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
+						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanAP.Count() != 0 && i32PrevValidationCount != vctMeanAP.Count()))
 						{
 							int i32Step = ocr.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
 
-							for(long i = 0; i < vctValidations.Count() - 1; ++i)
+							for(long i = 0; i < vctMeanAP.Count() - 1; ++i)
 								flaX.Add((float)(i * i32Step));
 
 							flaX.Add((float)(vctCosts.Count() - 1));
@@ -337,8 +304,7 @@ namespace CharacterBasedOCRDL
 							// Graph View 데이터 입력 // Input Graph View Data
 							viewGraph.Plot(vctCosts, EChartType.Line, EColor.RED, "Cost");
 							// Graph View 데이터 입력 // Input Graph View Data
-							viewGraph.Plot(flaX, vctValidations, EChartType.Line, EColor.CYAN, "Validation");
-							viewGraph.Plot(flaX, vctMeanIoU, EChartType.Line, EColor.PINK, "mIoU");
+							viewGraph.Plot(flaX, vctMeanAP, EChartType.Line, EColor.PINK, "mAP");
 							viewGraph.UnlockUpdate();
 
 							viewGraph.UpdateWindow();
@@ -348,14 +314,14 @@ namespace CharacterBasedOCRDL
 
 						// 검증 결과가 0.9 이상 일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is greater than 0.9, stop learning and classify images 
-						if(f32ValidationPaMeanIoU >= 0.9f || bEscape)
+						if(f32ValidationMeanAP >= 0.9f || bEscape)
 							ocr.Stop();
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = vctCosts.Count();
-						i32PrevValidationCount = vctValidations.Count();
+						i32PrevValidationCount = vctMeanAP.Count();
 					}
-					
+
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
 					if(!ocr.IsRunning())
 						break;
@@ -367,24 +333,8 @@ namespace CharacterBasedOCRDL
 				// 추론 결과 이미지 설정 // Set the inference result Image
 				ocr.SetInferenceResultImage(ref fliResultLabelImage);
 				// 추론 결과 옵션 설정 // Set the inference result options;
-				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
-				ocr.EnableInferenceResultLabelImage(true);
-
-				// 알고리즘 수행 // Execute the algorithm
-				if((res = ocr.Execute()).IsFail())
-				{
-					ErrorPrint(res, "Failed to execute.\n");
-					break;
-				}
-
-				// Result Label Image에 피겨를 포함한 Execute
-				// 추론 결과 이미지 설정 // Set the inference result Image
-				ocr.SetInferenceResultImage(ref fliResultLabelFigureImage);
-				// 추론 결과 옵션 설정 // Set the inference result options;
-				// Result 결과를 Label Image로 받을지 여부 설정 // Set whether to receive the result as a Label Image
-				ocr.EnableInferenceResultLabelImage(false);
 				// Result item settings enum 설정 // Set the result item settings
-				ocr.SetInferenceResultItemSettings(CCharacterBasedOCRDL.EInferenceResultItemSettings.ClassName_ConfidenceScore_RegionType_Contour);
+				ocr.SetInferenceResultItemSettings(CCharacterBasedOCRDL.EInferenceResultItemSettings.ClassName_Contour);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = ocr.Execute()).IsFail())
@@ -405,18 +355,18 @@ namespace CharacterBasedOCRDL
 
 				// ResultLabl 뷰에 Floating Value Range를 설정
 				viewImagesLabel.SetFloatingImageValueRange(0, (float)ocr.GetLearningResultClassCount());
+				viewImagesLabel.ZoomFit();
 
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
 				viewImagesLabel.RedrawWindow();
-				viewImagesLabelFigure.RedrawWindow();
 
 				// 그래프 뷰를 갱신 // Update the Graph view.
 				viewGraph.RedrawWindow();
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageLearn.IsAvailable() && viewImageValidation.IsAvailable() && viewImagesLabel.IsAvailable() && viewImagesLabelFigure.IsAvailable() && viewGraph.IsAvailable())
+				while(viewImageLearn.IsAvailable() && viewImageValidation.IsAvailable() && viewImagesLabel.IsAvailable() && viewGraph.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
