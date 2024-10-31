@@ -104,7 +104,7 @@ namespace Normalization
 
 				// Trimming 비율 설정 // Setting the Trimming Ratio
 				// 하한 10%, 상한 30% 설정 // Set trimming Lower 10%, Upper30%
-				normalize.SetTrimming(CNormalization.ETrimmingMethod.Ratio, 0.1, 0.3);
+				Normalization.SetTrimming(CNormalization.ETrimmingMethod.Ratio, 0.1, 0.3);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (Normalization.Execute())).IsFail())
