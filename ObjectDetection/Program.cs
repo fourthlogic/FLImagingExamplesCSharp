@@ -183,21 +183,23 @@ namespace ObjectDetection
 				objectDetection.SetInferenceResultImage(ref fliResultImage);
 
 				// 학습할 ObjectDetection 모델 설정 // Set up the ObjectDetection model to learn
-				objectDetection.SetModel(CObjectDetectionDL.EModel.YOLO);
+				objectDetection.SetModel(CObjectDetectionDL.EModel.R_FLNET);
 				// 학습할 ObjectDetection 모델 Version 설정 // Set up the ObjectDetection model version to learn
-				objectDetection.SetModelVersion(CObjectDetectionDL.EModelVersion.YOLO_V4_256);
+				objectDetection.SetModelVersion(CObjectDetectionDL.EModelVersion.R_FLNet_V1_256);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				objectDetection.SetLearningEpoch(1024);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				objectDetection.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 				// 검증을 진행 할 최소 평균 Cost값 설정 // Set the minimum average cost value at which verification will be triggered
 				objectDetection.SetLearningRequiredAvgCostForValidation(5);
+				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
+				objectDetection.EnableOptimalLearningStatePreservation(false);
 				// 학습 중단 Metrics 값 설정 // Set Learning Stop Metrics Values
 				String strStopConditon = "mAP >= 0.9";
 				objectDetection.SetLearningStopCondition(strStopConditon);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
-				optSpec.SetLearningRate(5e-4f);
+				optSpec.SetLearningRate(1e-4f);
 				optSpec.SetWeightDecay(0);
 
 				// 설정한 Optimizer를 ObjectDetection에 적용 // Apply Optimizer that we set up to ObjectDetection
@@ -211,7 +213,7 @@ namespace ObjectDetection
 				augSpec.EnableRotation(true);
 				augSpec.SetRotationParam(30.0, true, false);
 				augSpec.EnableScale(true);
-				augSpec.SetScaleParam(1.0, 1.0, 1.0, 1.0, true);
+				augSpec.SetScaleParam(1.0, 1.2, 1.0, 1.2, true);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
