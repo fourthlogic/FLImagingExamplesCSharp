@@ -41,7 +41,7 @@ namespace TotalVariationDenoising
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/TotalVariationDenoising/CircuitNoise.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;

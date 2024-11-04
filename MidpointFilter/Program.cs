@@ -30,7 +30,7 @@ namespace MidpointFilter
 			do
 			{
 				// 이미지 로드 // Load image
-				if(fliSrcImage.Load("../../ExampleImages/MidpointFilter/Train.flif").IsFail())
+				if(fliSrcImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif").IsFail())
 				{
 					Console.WriteLine("Failed to load the image file.\n");
 					break;

@@ -47,7 +47,7 @@ namespace MeanCurvatureFlow
             do
             {
                 // Source 이미지 로드 // Load the source image
-                if ((res = arrFliImage[0].Load("../../ExampleImages/MeanCurvatureFlow/Sea3Ch.flif")).IsFail())
+                if ((res = arrFliImage[0].Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;

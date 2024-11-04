@@ -42,7 +42,7 @@ namespace StackBlurFilter
 				CResult res = new CResult();
 
 				// 이미지 로드 // Load image
-				if((res = fliSrcImage.Load("../../ExampleImages/StackBlurFilter/Gear.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;

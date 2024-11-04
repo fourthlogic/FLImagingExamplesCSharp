@@ -56,7 +56,7 @@ namespace InfiniteSymmetricExponentialFilter
 			do
 			{
 				// 이미지 로드 // Load image
-                if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/InfiniteSymmetricExponentialFilter/mountain.flif")).IsFail())
+                if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;

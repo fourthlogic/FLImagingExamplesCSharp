@@ -41,14 +41,14 @@ namespace BilateralFilterGrid
 			do
 	        {
                 // Source 이미지 로드 // Load the source image
-                if ((res = fliSourceImage.Load("../../ExampleImages/BilateralFilterGrid/Gear.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
-                // Destination 이미지 로드 // Load the destination image
-                if ((res = fliDestinationImage.Load("../../ExampleImages/BilateralFilterGrid/Gear.flif")).IsFail())
+				// Destination 이미지 로드 // Load the destination image
+				if((res = fliDestinationImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;

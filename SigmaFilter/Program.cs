@@ -54,7 +54,7 @@ namespace SigmaFilter
 			do
 			{
 				// Source 이미지 로드 // Load source image
-                if ((result = arrFliImage[(int)EType.Source].Load("../../ExampleImages/Gradation/pika.flif")).IsFail())
+                if ((result = arrFliImage[(int)EType.Source].Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
 				{
 					ErrorPrint(result, "Failed to load the image file.\n");
 					break;
