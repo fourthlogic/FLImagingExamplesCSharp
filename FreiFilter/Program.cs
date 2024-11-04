@@ -45,7 +45,7 @@ namespace FreiFilter
             {
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if ((res = arrFliImage[0].Load("../../ExampleImages/FreiFilter/Gear.flif")).IsFail())
+				if ((res = arrFliImage[0].Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;

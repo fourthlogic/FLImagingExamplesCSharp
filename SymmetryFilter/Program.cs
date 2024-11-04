@@ -41,14 +41,14 @@ namespace SymmetryFilter
 			do
 	        {
                 // Source 이미지 로드 // Load the source image
-                if ((res = fliSourceImage.Load("../../ExampleImages/SymmetryFilter/Monkey.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Destination 이미지 로드 // Load the destination image
-                if ((res = fliDestinationImage.Load("../../ExampleImages/SymmetryFilter/Monkey.flif")).IsFail())
+                if ((res = fliDestinationImage.Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
@@ -106,7 +106,7 @@ namespace SymmetryFilter
 				symmetryFilter.SetDestinationImage(ref fliDestinationImage);
 
 				// Mask Size = 50 설정 // Set the Mask Size = 50
-				symmetryFilter.SetMaskSize(50);
+				symmetryFilter.SetMaskSize(3);
 
 				// Exponent = 0.3 설정 // Set the Exponent = 0.3
 				symmetryFilter.SetExponent(0.3);

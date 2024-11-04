@@ -43,7 +43,7 @@ namespace Convolution_Gradient
 				CResult res;
 
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSrcImage.Load("../../ExampleImages/Filter/Building.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;

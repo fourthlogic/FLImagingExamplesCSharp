@@ -54,7 +54,7 @@ namespace DeviationFilter
 			do
 			{
 				// Source 이미지 로드 // Load source image
-                if ((result = arrFliImage[(int)EType.Source].Load("../../ExampleImages/DeviationFilter/market.flif")).IsFail())
+                if ((result = arrFliImage[(int)EType.Source].Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
 				{
 					ErrorPrint(result, "Failed to load the image file.\n");
 					break;

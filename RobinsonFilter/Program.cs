@@ -48,7 +48,7 @@ namespace RobinsonFilter
             do
             {
                 // Source 이미지 로드 // Load source image
-                if ((result = arrFliImage[0].Load("../../ExampleImages/RobinsonFilter/Gear.flif")).IsFail())
+                if ((result = arrFliImage[0].Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
                 {
                     ErrorPrint(result, "Failed to load the image file.\n");
                     break;
