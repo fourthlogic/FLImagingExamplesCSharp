@@ -138,7 +138,7 @@ namespace HoleFilling
 				if((res = alg.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And)).IsFail())
 					break;
 				// Hole 영역을 채우는 방식을 설정 // Set the method of filling the hole area
-				if((res = alg.SetFillingMethod(CHoleFilling.EFillingMethod.Harmonic_Interpolation)).IsFail())
+				if((res = alg.SetFillingMethod(CHoleFilling.EFillingMethod.HarmonicInterpolation)).IsFail())
 					break;
 				// Harmonic Interpolation 의 Precision 값 설정 // Set precision value for Harmonic Interpolation
 				if((res = alg.SetPrecision(0.1)).IsFail())
@@ -201,7 +201,7 @@ namespace HoleFilling
 					break;
 				}
 
-				CFLFigure flfHoleContour = alg.GetFigureObject();
+				CFLFigure flfHoleContour = alg.GetSelectedPageFigureObject();
 
 				if((res = (arrLayer[(int)EType.Source].DrawFigureImage(flfHoleContour, EColor.CYAN))).IsFail())
 				{
