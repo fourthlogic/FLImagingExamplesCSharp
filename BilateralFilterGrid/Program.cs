@@ -62,7 +62,7 @@ namespace BilateralFilterGrid
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
-                if ((res = viewImageDestination.Create(1000, 0, 1450, 480)).IsFail())
+                if ((res = viewImageDestination.Create(550, 0, 1000, 480)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
@@ -106,10 +106,10 @@ namespace BilateralFilterGrid
 				bilateralFilterGrid.SetDestinationImage(ref fliDestinationImage);
 
 				// Sampling Rate Spatial 설정 // Set the Sampling Rate Spatial
-				bilateralFilterGrid.SetSamplingRateSpatial(8);
+				bilateralFilterGrid.SetSamplingRateSpatial(2);
 
 				// Sampling Rate Range 설정 // Set the Sampling Rate Range
-				bilateralFilterGrid.SetSamplingRateRange(0.1);
+				bilateralFilterGrid.SetSamplingRateRange(0.5);
 
                 bilateralFilterGrid.SetPaddingMethod(EPaddingMethod.DecreasingKernel);
 
