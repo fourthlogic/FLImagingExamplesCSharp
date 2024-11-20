@@ -37,7 +37,7 @@ namespace Gauge
 			do
 			{
                 // 이미지 로드 // Load image
-                if ((res = fliImage.Load("../../ExampleImages/Gauge/Plate.flif")).IsFail())
+                if ((res = fliImage.Load("../../ExampleImages/Gauge/stripe.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
