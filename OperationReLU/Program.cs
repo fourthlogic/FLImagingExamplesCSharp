@@ -44,7 +44,7 @@ namespace OperationReLU
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationReLU/Coord.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationReLU/Coord1D.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -129,8 +129,15 @@ namespace OperationReLU
 					break;
 				}
 
-				// Source 이미지 뷰의 Pixel 값을 10진법으로 설정 // Show Pixel Values on Source Image View to Decimal
+				// 이미지 뷰의 값 표현 방식 설정 // Set how values ​​are expressed in image view
 				viewImageSource.SetPixelNumberMode(EPixelNumberMode.Decimal);
+				viewImageDestination0.SetPixelNumberMode(EPixelNumberMode.Decimal);
+				viewImageDestination1.SetPixelNumberMode(EPixelNumberMode.Decimal);
+
+				// floating 이미지의 색상 표현 범위 설정 // Set the color expression range of floating images
+				viewImageSource.SetFloatingImageValueRange(-1.0, 1.0);
+				viewImageDestination0.SetFloatingImageValueRange(-1.0, 1.0);
+				viewImageDestination1.SetFloatingImageValueRange(-1.0, 1.0);
 
 				// 이미지 뷰를 갱신 // Update image view
 				viewImageSource.Invalidate(true);
