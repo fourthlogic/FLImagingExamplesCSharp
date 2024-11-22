@@ -89,7 +89,7 @@ namespace OperationPReLU
 				algObject.SetSourceImage(ref fliSourceImage);
 				algObject.SetDestinationImage(ref fliDestinationImage0);
 				algObject.SetOperationMode(COperationPReLU.EOperationMode.Forward);
-				algObject.SetLambda(0.2);
+				algObject.SetAlpha(0.2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
