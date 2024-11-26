@@ -1526,6 +1526,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeMatchEllipse", "ShapeM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeMatchRectangle", "ShapeMatchRectangle\ShapeMatchRectangle.csproj", "{549DC9C6-B533-4595-B0E7-4572F1DB6030}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeMatchLine", "ShapeMatchLine\ShapeMatchLine.csproj", "{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -5378,6 +5380,14 @@ Global
 		{549DC9C6-B533-4595-B0E7-4572F1DB6030}.Release|x64.Build.0 = Release|x64
 		{549DC9C6-B533-4595-B0E7-4572F1DB6030}.Release|x86.ActiveCfg = Release|x64
 		{549DC9C6-B533-4595-B0E7-4572F1DB6030}.Release|x86.Build.0 = Release|x64
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}.Debug|x64.ActiveCfg = Debug|x64
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}.Debug|x64.Build.0 = Debug|x64
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}.Debug|x86.ActiveCfg = Debug|x64
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}.Debug|x86.Build.0 = Debug|x64
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}.Release|x64.ActiveCfg = Release|x64
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}.Release|x64.Build.0 = Release|x64
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}.Release|x86.ActiveCfg = Release|x64
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -6133,6 +6143,7 @@ Global
 		{50888808-2E6C-45D6-8DF5-386A96CC2CBF} = {86E4A484-F64B-4FE6-9896-3A76E4A93245}
 		{1F9E39A3-1E52-49C8-896F-2643D436E74B} = {86E4A484-F64B-4FE6-9896-3A76E4A93245}
 		{549DC9C6-B533-4595-B0E7-4572F1DB6030} = {86E4A484-F64B-4FE6-9896-3A76E4A93245}
+		{8EB16CCF-6D8E-4CE3-937C-FEFF6540C702} = {86E4A484-F64B-4FE6-9896-3A76E4A93245}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
