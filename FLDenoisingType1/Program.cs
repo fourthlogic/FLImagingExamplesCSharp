@@ -129,7 +129,7 @@ namespace FLDenoisingType1
 				}
 
 				// Kernel 크기 설정 // Set the Kernel Size
-				if((res = (FLDenoisingType1.SetKernelSize(3))).IsFail())
+				if((res = (FLDenoisingType1.SetKernelSize(5))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Kernel Size.");
 					break;
@@ -143,9 +143,16 @@ namespace FLDenoisingType1
 				}
 
 				// Amplitude 설정 // Set the Amplitude
-				if((res = (FLDenoisingType1.SetAmplitude(30))).IsFail())
+				if((res = (FLDenoisingType1.SetAmplitude(20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Amplitude.");
+					break;
+				}
+
+				// Operation Mode 설정 // Set the Operation Mode
+				if((res = (FLDenoisingType1.SetOperationMode(CFLDenoisingType1.EOperationMode.Normal))).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Operation Mode.");
 					break;
 				}
 
