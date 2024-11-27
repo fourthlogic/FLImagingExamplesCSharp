@@ -132,7 +132,7 @@ namespace PhotometricStereo
 				// 결과 Texture 이미지 설정 // Set the result texture image
 				photometric.SetResultTextureImage(ref fliTxtImage);
 				// 동작 방식 설정 // Set Operation Mode
-				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.EReconstructionMode_RFT_FP32);
+				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.EReconstructionMode_Poisson_FP32);
 
 
 				// 각 이미지의 광원 Slant 값 입력
@@ -230,7 +230,7 @@ namespace PhotometricStereo
 
 				CFL3DObjectHeightMap fl3DObject = photometric.GetDestinationObject() as CFL3DObjectHeightMap;
 				fl3DObject.SetTextureImage(fliTxtImage);
-				fl3DObject.ActivateVertexColorTexture(true);
+				fl3DObject.ActivateVertexColorTexture(false);
 
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
 				if(viewImage3DDst.PushObject(fl3DObject).IsFail())
