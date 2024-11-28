@@ -101,8 +101,8 @@ namespace ShapeMatch
 					// 도형 검출 결과를 Console창에 출력합니다. // Output the shape detection result to the console window.
 					Console.Write(" < Instance : {0} >\n", i);
 					Console.Write("  1. Shape Type : Line\n");
-					Console.Write("    Center X: {0}\n", matchResult.fllResultObject.GetCenter().x);
-					Console.Write("    Center Y: {0}\n", matchResult.fllResultObject.GetCenter().y);
+					Console.Write("    Pivot X: {0}\n", matchResult.flpPivot.x);
+					Console.Write("    Pivot Y: {0}\n", matchResult.flpPivot.y);
 					Console.Write("    Angle    : {0}\n", matchResult.fllResultObject.GetAngle());
 					Console.Write("  2. Score : {0}\n  3. Score : {1}\n  4. Scale : {2}\n\n", matchResult.f32Score, matchResult.f32Angle, matchResult.f32Scale);
 
@@ -112,9 +112,9 @@ namespace ShapeMatch
 						break;
 					}
 
-					string str = String.Format("Score : {0}\nAngle : {1}\nScale : {2}", matchResult.f32Score, matchResult.f32Angle, matchResult.f32Scale);
+					string str = String.Format("Score : {0}\nAngle : {1}\nScale : {2}\nPivot : ({3}, {4})", matchResult.f32Score, matchResult.f32Angle, matchResult.f32Scale, matchResult.flpPivot.x, matchResult.flpPivot.y);
 
-					if((res = layer.DrawTextImage(matchResult.fllResultObject.GetCenter(), str, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+					if((res = layer.DrawTextImage(matchResult.flpPivot, str, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw text\n");
 						break;
