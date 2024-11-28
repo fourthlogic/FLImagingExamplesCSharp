@@ -252,15 +252,12 @@ namespace Match
 					FLGeometricMatchLoad.GetResult(i, out results);
 					FLGeometricMatchLoad.GetResultForDetectedFeature(i, out flfaResultPoints);
 
-					bool bInverse = results.bInverse;
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;
 					float f32Scale = results.f32Scale;
 					CFLFigure pFlfRegion = results.pFlfRegion;
 					CFLPoint<double> flpLocation = results.pFlpLocation;
-					CFLPoint<double> flpPivot = results.pFlpPivot;
-
-					string strInverse = bInverse ? "Inverse Type" : "Normal Type";
+					CFLPoint<double> flpPivot = results.pFlpPivot;;
 
 					CFLRect<double> pFlrResultRegion = new CFLRect<double>(pFlfRegion);
 
@@ -274,11 +271,6 @@ namespace Match
 					Console.WriteLine("    angle  : {0}", f32Angle);
 					Console.WriteLine("  2. Interest Pivot : ({0}, {1})", flpPivot.x, flpPivot.y);
 					Console.WriteLine("  3. Score : {0}\n  4. Angle : {1}\n  5. Scale : x{2}", f32Score, f32Angle, f32Scale);
-
-					if(bInverse)
-						Console.WriteLine("  6. Contrast : Inverse Type");
-					else
-						Console.WriteLine("  6. Contrast : Normal Type");;
 
 					// 검출 결과의 중심점을 디스플레이 한다 // Display the center point of the detection result
 					CFLFigureArray flfaPointPivot = flpPivot.MakeCrossHair(3, false);

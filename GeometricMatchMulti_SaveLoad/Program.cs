@@ -254,7 +254,6 @@ namespace Match
 					FLGeometricMatchMultiLoad.GetResult(i, out results);
 					FLGeometricMatchMultiLoad.GetResultForDetectedFeature(i, out flfaResultPoints);
 
-					bool bInverse = results.bInverse;
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;
 					float f32Scale = results.f32Scale;
@@ -262,7 +261,6 @@ namespace Match
 					CFLPoint<double> flpLocation = new CFLPoint<double>(results.pFlpLocation);
 					CFLPoint<double> flpPivot = new CFLPoint<double>(results.pFlpPivot);
 
-					string strInverse = bInverse ? "Inverse Type" : "Normal Type";
 					string wstrClassName = results.pStrClassName;
 
 					long i64Idx = 0;
@@ -289,11 +287,6 @@ namespace Match
 					Console.WriteLine("    angle  : {0}", pFlrResultRegion.angle);
 					Console.WriteLine("  2. Interest Pivot : ({0}, {1})", flpPivot.x, flpPivot.y);
 					Console.WriteLine("  3. Score : {0}\n  4. Angle : {1}\n  5. Scale : x{2}", f32Score, f32Angle, f32Scale);
-
-					if(bInverse)
-						Console.WriteLine(" Inverse Type");
-					else
-						Console.WriteLine(" Normal Type");
 
 					Console.WriteLine("");
 
