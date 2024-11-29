@@ -97,23 +97,20 @@ namespace Gauge
 
 
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage[] fliImage = new CFLImage[i32ExampleCount];
+			CFLImage fliImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] viewImage = new CGUIViewImage[i32ExampleCount];
 
-			for(int i = 0; i < i32ExampleCount; ++i)
-			{
-				fliImage[i] = new CFLImage();
+			for(int i = 0; i < i32ExampleCount; ++i)			
 				viewImage[i] = new CGUIViewImage();
-			}
-
+			
 			CResult res = new CResult();
 
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliImage[0].Load("../../ExampleImages/Gauge/stripe.flif")).IsFail())
+				if((res = fliImage.Load("../../ExampleImages/Gauge/stripe.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -122,9 +119,6 @@ namespace Gauge
 				// 이미지 뷰 생성 // Create image view
 				for(int i = 0; i < i32ExampleCount; ++i)
 				{
-					if(i > 0)
-						fliImage[i].Assign(fliImage[0]);
-
 					int i32X = 300 * (i % 4);
 					int i32Y = 300 * (i / 4);
 
@@ -135,7 +129,7 @@ namespace Gauge
 					}
 
 					// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-					if((res = viewImage[i].SetImagePtr(ref fliImage[i])).IsFail())
+					if((res = viewImage[i].SetImagePtr(ref fliImage)).IsFail())
 					{
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
@@ -170,7 +164,7 @@ namespace Gauge
 				for(int i = 0; i < i32ExampleCount; ++i)
 				{
 					// 처리할 이미지 설정 // Set the image to process
-					lineGauge.SetSourceImage(ref fliImage[i]);
+					lineGauge.SetSourceImage(ref fliImage);
 
 					// 측정할 영역을 설정합니다. // Set the area to measure.
 					lineGauge.SetMeasurementRegion(measureRegion, arrTolerance[i]);
