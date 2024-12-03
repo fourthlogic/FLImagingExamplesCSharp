@@ -102,9 +102,9 @@ namespace Gauge
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] viewImage = new CGUIViewImage[i32ExampleCount];
 
-			for(int i = 0; i < i32ExampleCount; ++i)			
+			for(int i = 0; i < i32ExampleCount; ++i)
 				viewImage[i] = new CGUIViewImage();
-			
+
 			CResult res = new CResult();
 
 			do
@@ -134,12 +134,25 @@ namespace Gauge
 						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						break;
 					}
+
+					// 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the all image views. 
+					if(i > 0)
+					{
+						if((res = viewImage[i].SynchronizePointOfView(ref viewImage[0])).IsFail())
+						{
+							ErrorPrint(res, "Failed to set image object on the image view.\n");
+							break;
+						}
+					}
 				}
 
 				// Line Gauge 객체 생성 // Create Line Gauge object
 				CLineGauge lineGauge = new CLineGauge();
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.
+
+				// 처리할 이미지 설정 // Set the image to process
+				lineGauge.SetSourceImage(ref fliImage);
 				// 선을 추정하기위해 추출할 경계점 변화 방향에 대해 설정합니다. // Set the boundary point change direction to extract to estimate the line.
 				lineGauge.SetTransitionType(CLineGauge.ETransitionType.DarkToBrightOrBrightToDark);
 				// 선을 추정하기위해 추출한 경계점 중 사용할 경계점 유형을 선택합니다. // Select the boundary point type to use among the boundary points extracted to estimate the line.
@@ -163,9 +176,6 @@ namespace Gauge
 
 				for(int i = 0; i < i32ExampleCount; ++i)
 				{
-					// 처리할 이미지 설정 // Set the image to process
-					lineGauge.SetSourceImage(ref fliImage);
-
 					// 측정할 영역을 설정합니다. // Set the area to measure.
 					lineGauge.SetMeasurementRegion(measureRegion, arrTolerance[i]);
 
