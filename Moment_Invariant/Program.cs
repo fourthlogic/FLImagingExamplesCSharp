@@ -72,22 +72,22 @@ namespace Moment
 				// 이진화이미지로 판단할 경우 0이 아닌 모든 화소값은 1로 처리함 // When judging as a binarized image, all non-zero pixel values ??are treated as 1.
 				moment.EnableBinaryImage(true);
 
-                bool bIsCalcGeometricMoment = true;
-                bool bIsCalcCentroidMoment = true;
-                bool bIsCalcCentralMoment = true;
-                bool bIsCalcNormalizedCentralMoment = true;
-                bool bIsCalcHuMoment = true;
+                bool bCalcGeometricMoment = true;
+                bool bCalcCentroidMoment = true;
+                bool bCalcCentralMoment = true;
+                bool bCalcNormalizedCentralMoment = true;
+                bool bCalcHuMoment = true;
 
 				// 계산 대상에 기하학적 모멘트를 포함합니다. // Include the geometric moment in the computed object.
-				moment.EnableGeometricMoment(bIsCalcGeometricMoment);
+				moment.EnableGeometricMoment(bCalcGeometricMoment);
 				// 계산 대상에 도심 모멘트를 포함합니다. // Include the centroid moment in the calculation target.
-				moment.EnableCentroidMoment(bIsCalcCentroidMoment);
+				moment.EnableCentroidMoment(bCalcCentroidMoment);
 				// 계산 대상에 중심 모멘트를 포함합니다. // Include the central moment in the calculation target.
-				moment.EnableCentralMoment(bIsCalcCentralMoment);
+				moment.EnableCentralMoment(bCalcCentralMoment);
 				// 계산 대상에 정규화된 중심 모멘트를 포함합니다. // Include the normalized central moment in the computed target.
-				moment.EnableNormalizedCentralMoment(bIsCalcNormalizedCentralMoment);
+				moment.EnableNormalizedCentralMoment(bCalcNormalizedCentralMoment);
 				// 계산 대상에 휴(불변) 모멘트를 포함합니다. // Include the idle (invariant) moment in the calculation target.
-				moment.EnableHuMoment(bIsCalcHuMoment);
+				moment.EnableHuMoment(bCalcHuMoment);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = moment.Execute()).IsFail())
@@ -101,7 +101,7 @@ namespace Moment
                 moment.GetMoment(out results);
 
 				// 모멘트 결과를 Console창에 출력 // Output the moment result to the console window
-				if(bIsCalcGeometricMoment)
+				if(bCalcGeometricMoment)
                 {
                     Console.WriteLine("< Geometric Moment > ");
                     Console.WriteLine(" Moment 00 : {0}", results.pSGeometricMoments.f64GeometricM00);
@@ -117,7 +117,7 @@ namespace Moment
                     Console.WriteLine("");
                 }
 
-                if (bIsCalcCentroidMoment)
+                if (bCalcCentroidMoment)
                 {
                     Console.WriteLine("< Centroid Moment > ");
                     Console.WriteLine(" Moment Centroid X : {0}", results.pSCentroidMoment.f64CentroidX);
@@ -125,7 +125,7 @@ namespace Moment
                     Console.WriteLine("");
                 }
 
-                if (bIsCalcCentralMoment)
+                if (bCalcCentralMoment)
                 {
                     Console.WriteLine("< Central Moment > ");
                     Console.WriteLine(" Moment 00 : {0}", results.pSCentralMoments.f64CentralM00);
@@ -141,7 +141,7 @@ namespace Moment
                     Console.WriteLine("");
                 }
 
-                if (bIsCalcNormalizedCentralMoment)
+                if (bCalcNormalizedCentralMoment)
                 {
                     Console.WriteLine("< Normalized Central Moment > ");
                     Console.WriteLine(" Moment 00 : {0}", results.pSNormalizedCentralMoments.f64NormalizedCentralM00);
@@ -157,7 +157,7 @@ namespace Moment
                     Console.WriteLine("");
                 }
 
-                if (bIsCalcHuMoment)
+                if (bCalcHuMoment)
                 {
                     Console.WriteLine("< Hu Moment > ");
                     Console.WriteLine(" Hu 0 : {0}", results.pSHuMoments.f64Hu0);

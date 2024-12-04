@@ -34,7 +34,7 @@ namespace StereoCalibrator3D
 
 		static bool DrawGridPoints(SGridDisplay sGridDisplay, CGUIViewImageLayer pLayer)
 		{
-			bool bIsOK = false;
+			bool bOK = false;
 
 			// 결과 enum 선언
 			CResult res = new CResult();
@@ -183,7 +183,7 @@ namespace StereoCalibrator3D
 			}
 			while(false);
 
-			return bIsOK;
+			return bOK;
 		}
 
 		public class CMessageReceiver : CFLBase
