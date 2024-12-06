@@ -111,7 +111,7 @@ namespace Match
 				// 추출할 특징점 처리과정에서의 노이즈 필터링 정도를 설정합니다. // Set the noise filtering degree in the process of processing the feature points to be extracted.
 				FLDrawingMatch.SetFeatureFiltering(0.0);
 				// 추출할 특징점 처리과정에서의 허용 임계값을 설정합니다. // Set the allowable threshold in the feature point processing process to be extracted.
-				FLDrawingMatch.SetLearnThresholdCoeff(1.0);
+				FLDrawingMatch.SetLearnThresholdCoefficient(1.0);
 
 				// 알고리즘 수행 // Execute the Algoritm
 				if((res = FLDrawingMatch.Learn()).IsFail())
@@ -151,7 +151,7 @@ namespace Match
 				// 검출 시 이미지 영역밖의 탐색 정도를 설정합니다. // Set the degree of search outside the image area when detecting.
 				FLDrawingMatch.SetInvisibleRegionEstimation(1.25);
 				// 검출 시 처리과정에서의 허용 임계값을 설정합니다. // Set the allowable threshold in the process of detection.
-				FLDrawingMatch.SetFindThresholdCoeff(1.2);
+				FLDrawingMatch.SetFindThresholdCoefficient(1.2);
 				// 검출 시 겹쳐짐 허용 정도를 설정합니다. // Set the allowable degree of overlap during detection.
 				FLDrawingMatch.SetObjectOverlap(0.5);
 				// 검출 시 이미지 전처리 유무를 설정합니다. // Set whether or not to pre-process the image during detection.
