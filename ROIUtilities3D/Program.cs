@@ -34,191 +34,455 @@ namespace ROIUtilities3D
 		[STAThread]
 		static void Main(string[] args)
 		{
-			// 3D 뷰 선언 // Declare the 3D view
-			CGUIView3D view3D = new CGUIView3D();
+			// 3D 뷰 선언 // Declaration of the 3D view 
+			CGUIView3D view3DSrc = new CGUIView3D();
+			CGUIView3D view3DInclude = new CGUIView3D();
+			CGUIView3D view3DExclude = new CGUIView3D();
+			CGUIView3D view3DAdd = new CGUIView3D();
+			CGUIView3D view3DRemove = new CGUIView3D();
+			CGUIView3D view3DXOR = new CGUIView3D();
+			CGUIView3D[] arrView3D = new CGUIView3D[6];
+			arrView3D[0] = view3DSrc;
+			arrView3D[1] = view3DInclude;
+			arrView3D[2] = view3DExclude;
+			arrView3D[3] = view3DAdd;
+			arrView3D[4] = view3DRemove;
+			arrView3D[5] = view3DXOR;
+
+			CResult res;
 
 			do
 			{
-				CResult res;
+				// 3D 뷰 생성 // Create the 3D view
+				view3DInclude.Create(0, 0, 300, 300); // L, T, R, B(Left, Top, Right, Bottom) 
+				view3DSrc.Create(300, 0, 600, 300);
+				view3DExclude.Create(600, 0, 900, 300);
+				view3DAdd.Create(0, 300, 300, 600);
+				view3DRemove.Create(300, 300, 600, 600);
+				view3DXOR.Create(600, 300, 900, 600);
 
-				// 3D 뷰 생성 // Create 3D view
-				if((res = (view3D.Create(100, 0, 612, 512))).IsFail())
+				// 3D 객체 선언 // Declare a 3D object
+				CFL3DObject fl3DObjLeft = new CFL3DObject();
+				CFL3DObject fl3DObjRight = new CFL3DObject();
+				// 3D 객체 로드 // Load a 3D object
+				res = fl3DObjLeft.Load("../../ExampleImages/ROIUtilities3D/Left Cam.ply");
+				res = fl3DObjRight.Load("../../ExampleImages/ROIUtilities3D/Right Cam.ply");
+
+				for(int i = 0; i < 6; ++i)
 				{
-					ErrorPrint(res, "Failed to create the 3D view.\n");
-					break;
-				}
+					// 3D 뷰에 3D 객체 추가
+					arrView3D[i].PushObject(fl3DObjLeft);
+					arrView3D[i].PushObject(fl3DObjRight);
 
-				// 3D 뷰에 PLY 파일 디스플레이
-				if((res = view3D.Load("../../ExampleImages/ROIUtilities3D/Right Cam.ply")).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the 3D view.\n");
-					break;
-				}
+					// 추가한 3D 객체가 화면 안에 들어오도록 Zoom Fit
+					arrView3D[i].ZoomFit();
 
-				view3D.ZoomFit();
+					// 3D 뷰어의 시점(카메라) 변경
+					CGUIView3DCamera cam = arrView3D[i].GetCamera();
+					cam.SetPosition(new CFLPoint3<float>(0.71, 0.02, 10.94));
+					cam.SetDirectionUp(new CFLPoint3<float>(1, 0, 0));
+					arrView3D[i].SetCamera(cam);
 
-				int i32ObjectCount = view3D.GetObjectCount();
-
-				if(i32ObjectCount == 0)
-				{
-					ErrorPrint(res, "The 3D view doesn't have any 3D objects.\n");
-					break;
-				}
-
-				// 3D 뷰에 ROI 추가
-				TRect<float> trROI = new TRect<float>(137, 96, 239, 369);
-				view3D.PushBackROI(trROI);
-
-				// Figure 객체를 로드하여 3D 뷰에 ROI 추가
-				CFLFigure pFlf = CFigureUtilities.LoadFigure("../../ExampleImages/ROIUtilities3D/frustumROI.fig");
-
-				if(pFlf != null)
-					view3D.PushBackROI(pFlf);
-
-				int i32ROICount = view3D.GetROICount();
-
-				if(i32ROICount == 0)
-				{
-					ErrorPrint(res, "There is no ROI in the 3D view.\n");
-					break;
-				}
-
-				CROIUtilities3D roiUtil3D = new CROIUtilities3D();
-
-				for(int i = 0; i < i32ROICount; ++i)
-				{
-					CFLFrustum<float> flfr = new CFLFrustum<float>();
-					view3D.GetROI(i, out flfr);
-
-					roiUtil3D.PushBackROI(flfr);
-				}
-
-				for(int i = 0; i < i32ObjectCount; ++i)
-				{
-					CGUIView3DObject pObj = view3D.GetView3DObject(i);
-
-					if(pObj == null || !pObj.IsSelectionEnabled())
-						continue;
-
-					CFL3DObject pObjData = pObj.GetData();
-
-					if(pObjData == null)
-						continue;
-
-					roiUtil3D.PushBack3DObject(pObjData);
-				}
-
-				List<List<int>> flfaResultROIIndexInclude, flfaResultROIIndexExclude;
-
-				roiUtil3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Include);
-
-				if((res = roiUtil3D.Execute()).IsFail())
-					break;
-
-				if((res = roiUtil3D.GetResult(out flfaResultROIIndexInclude)).IsFail())
-					break;
-
-				CFL3DObject resultObject3D = new CFL3DObject();
-
-				if((res = roiUtil3D.GetResult(out resultObject3D)).IsFail())
-					break;
-
-				roiUtil3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Exclude);
-
-				if((res = roiUtil3D.Execute()).IsFail())
-					break;
-
-				if((res = roiUtil3D.GetResult(out flfaResultROIIndexExclude)).IsFail())
-					break;
-
-				if(flfaResultROIIndexInclude.Count() > 0)
-				{
-					int i32IndexRes = 0;
-
-					for(int i = 0; i < i32ObjectCount; ++i)
+					if(i > 0)
 					{
-						CGUIView3DObject pObj = view3D.GetView3DObject(i);
-
-						if(pObj == null || !pObj.IsSelectionEnabled())
-							continue;
-
-						CFL3DObject pObjData = pObj.GetData();
-
-						if(pObjData == null)
-							continue;
-
-						List<int> flaCollisionIndex = flfaResultROIIndexInclude[i32IndexRes];
-						i32IndexRes++;
-
-						if(flaCollisionIndex.Count() == 0)
-							continue;
-
-						int i32CollisionIndexCount = (int)flaCollisionIndex.Count();
-
-						for(int j = 0; j < i32CollisionIndexCount; ++j)
-							pObjData.SetVertexColorAt(flaCollisionIndex[j], 255, 0, 0);
-
-						pObj.UpdateAll();
-						view3D.UpdateObject(i);
+						// 3D 뷰 시점 동기화
+						arrView3D[i].SynchronizePointOfView(ref arrView3D[i - 1]);
+						// 윈도우 동기화
+						arrView3D[i].SynchronizeWindow(ref arrView3D[i - 1]);
 					}
 				}
 
-				if(flfaResultROIIndexExclude.Count() > 0)
+				// 절두체 ROI 선언
+				CFLFrustum<float> flfr = new CFLFrustum<float>();
+				// 파일에서 절두체 ROI 로드
+				flfr.Load("../../ExampleImages/ROIUtilities3D/frustumROI.fig");
+
+				// 3D 뷰에 ROI 추가
+				for(int i = 0; i < 6; ++i)
+					arrView3D[i].PushBackROI(flfr);
+
+				// CROIUtilities3D 객체 선언
+				CROIUtilities3D roiUtil3D = new CROIUtilities3D();
+
+				// CROIUtilities3D 객체에 3D Object 추가
+				roiUtil3D.PushBack3DObject(fl3DObjLeft);
+				roiUtil3D.PushBack3DObject(fl3DObjRight);
+
+				// CROIUtilities3D 객체에 절두체 ROI 추가
+				roiUtil3D.PushBackROI(flfr);
+
+				// 선택 타입 설정 : ROI 안에 포함되는 정점만 선택
+				roiUtil3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Include);
+
+				// CROIUtilities3D 실행
+				if((res = roiUtil3D.Execute()).IsFail())
+					break;
+
+				// CROIUtilities3D 에서 결과 얻어 오기
+				List<List<int>> arr2ResultROIIndexInclude;
+				if((res = roiUtil3D.GetResult(out arr2ResultROIIndexInclude)).IsFail())
+					break;
+
+				// EResultSelectionType.Add 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Include 연산으로 얻은 결과값까지 복사됨
+				CROIUtilities3D roiUtil3DAdd = new CROIUtilities3D(roiUtil3D);
+				// 복사한 객체에서 ROI를 모두 클리어
+				roiUtil3DAdd.ClearROI();
+
+				if(arr2ResultROIIndexInclude.Count() > 0)
 				{
-					int i32IndexRes = 0;
+					int i32ObjectIdx = 0;
+
+					// 3D 뷰어에 추가된 3D 객체의 개수
+					int i32ObjectCount = view3DInclude.GetObjectCount();
 
 					for(int i = 0; i < i32ObjectCount; ++i)
 					{
-						CGUIView3DObject pObj = view3D.GetView3DObject(i);
+						// 3D 뷰어에 추가된 i번째 3D 객체
+						CGUIView3DObject pObj = view3DInclude.GetView3DObject(i);
 
+						// 해당 객체가 없거나, 해당 객체에 대해 선택이 비활성화 되어 있다면 continue
 						if(pObj == null || !pObj.IsSelectionEnabled())
 							continue;
 
-						CFL3DObject pObjData = pObj.GetData();
+						// i번째 3D 객체의 데이터(CFL3DObject)
+						CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
 
+						// 해당 객체가 없다면 continue
 						if(pObjData == null)
 							continue;
 
-						List<int> flaCollisionIndex = flfaResultROIIndexExclude[i32IndexRes];
-						i32IndexRes++;
+						// i번째 3D 객체에 대한 결과값 배열. 이 배열은 i번째 3D 객체에 대해, ROI 내부에 위치한 정점의 인덱스로 이루어짐
+						List<int> flaCollisionIndex = arr2ResultROIIndexInclude[i32ObjectIdx];
+						i32ObjectIdx++;
 
 						if(flaCollisionIndex.Count() == 0)
 							continue;
 
 						int i32CollisionIndexCount = (int)flaCollisionIndex.Count();
 
+						// i번째 3D 객체에 대해, ROI 내부에 위치한 정점을 빨간색으로 표시
+						for(int j = 0; j < i32CollisionIndexCount; ++j)
+							pObjData.SetVertexColorAt(flaCollisionIndex[j], 255, 0, 0); // RED
+
+						// 3D 뷰어에 추가된 i번째 3D 객체에 대해 렌더링 업데이트
+						pObj.UpdateAll();
+						view3DInclude.UpdateObject(i);
+					}
+
+					// 3D 뷰어 업데이트
+					view3DInclude.UpdateScreen();
+				}
+
+				// 선택 타입 설정 : ROI 바깥의 정점만 선택
+				roiUtil3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Exclude);
+
+				// CROIUtilities3D 실행
+				if((res = roiUtil3D.Execute()).IsFail())
+					break;
+
+				// CROIUtilities3D 에서 결과 얻어 오기
+				List<List<int>> arr2ResultROIIndexExclude;
+				if((res = roiUtil3D.GetResult(out arr2ResultROIIndexExclude)).IsFail())
+					break;
+
+				// EResultSelectionType.Remove 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨
+				CROIUtilities3D roiUtil3DRemove = new CROIUtilities3D(roiUtil3D);
+				// EResultSelectionType.XOR 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨
+				CROIUtilities3D roiUtil3DXOR = new CROIUtilities3D(roiUtil3D);
+				// 복사한 객체에서 ROI를 모두 클리어
+				roiUtil3DRemove.ClearROI();
+				roiUtil3DXOR.ClearROI();
+
+				if(arr2ResultROIIndexExclude.Count() > 0)
+				{
+					int i32ObjectIdx = 0;
+
+					// 3D 뷰어에 추가된 3D 객체의 개수
+					int i32ObjectCount = view3DExclude.GetObjectCount();
+
+					for(int i = 0; i < i32ObjectCount; ++i)
+					{
+						// 3D 뷰어에 추가된 i번째 3D 객체
+						CGUIView3DObject pObj = view3DExclude.GetView3DObject(i);
+
+						// 해당 객체가 없거나, 해당 객체에 대해 선택이 비활성화 되어 있다면 continue
+						if(pObj == null || !pObj.IsSelectionEnabled())
+							continue;
+
+						// i번째 3D 객체의 데이터(CFL3DObject)
+						CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+
+						// 해당 객체가 없다면 continue
+						if(pObjData == null)
+							continue;
+
+						// i번째 3D 객체에 대한 결과값 배열. 이 배열은 i번째 3D 객체에 대해, ROI 외부에 위치한 정점의 인덱스로 이루어짐
+						List<int> flaCollisionIndex = arr2ResultROIIndexExclude[i32ObjectIdx];
+						i32ObjectIdx++;
+
+						if(flaCollisionIndex.Count() == 0)
+							continue;
+
+						int i32CollisionIndexCount = (int)flaCollisionIndex.Count();
+
+						// i번째 3D 객체에 대해, ROI 바깥에 위치한 정점을 파란색으로 표시
 						for(int j = 0; j < i32CollisionIndexCount; ++j)
 							pObjData.SetVertexColorAt(flaCollisionIndex[j], 0, 0, 255); // BLUE
 
+						// 3D 뷰어에 추가된 i번째 3D 객체에 대해 렌더링 업데이트
 						pObj.UpdateAll();
-						view3D.UpdateObject(i);
+						view3DExclude.UpdateObject(i);
 					}
+					// 3D 뷰어 업데이트
+					view3DExclude.UpdateScreen();
 				}
 
-				view3D.UpdateScreen();
+				// 기존 선택 영역(위에서 Include로 선택한 영역)에 추가로 선택할 영역을 ROI로 설정
+				CFLFrustum<float> flfrAdd = new CFLFrustum<float>();
+				flfrAdd.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Add.fig");
 
-				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the shapes drawn on the layer
-				view3D.GetLayer(0).Clear();
+				// CROIUtilities3D 객체에 절두체 ROI 추가
+				roiUtil3DAdd.PushBackROI(flfrAdd);
+				// 3D 뷰어에 절두체 ROI 추가
+				view3DAdd.PushBackROI(flfrAdd);
 
-				// View 정보를 디스플레이 합니다. // Display the view information.
-				// 아래 함수 DrawTextCanvas() 는 Screen 좌표를 기준으로 하는 문자열을 Drawing 한다. // The function DrawTextCanvas() draws a String based on the screen coordinates.
+				// 선택 타입 설정 : 기존 결과에 ROI 안에 포함되는 정점을 추가
+				roiUtil3DAdd.SetSelectionType(CROIUtilities3D.EResultSelectionType.Add);
+
+				// CROIUtilities3D 실행
+				if((res = roiUtil3DAdd.Execute()).IsFail())
+					break;
+
+				// CROIUtilities3D 에서 결과 얻어 오기
+				List<List<int>> arr2ResultROIIndexAdd;
+				if((res = roiUtil3DAdd.GetResult(out arr2ResultROIIndexAdd)).IsFail())
+					break;
+
+				if(arr2ResultROIIndexAdd.Count() > 0)
+				{
+					int i32ObjectIdx = 0;
+					// 3D 뷰어에 추가된 3D 객체의 개수
+					int i32ObjectCount = view3DAdd.GetObjectCount();
+
+					for(int i = 0; i < i32ObjectCount; ++i)
+					{
+						// 3D 뷰어에 추가된 i번째 3D 객체
+						CGUIView3DObject pObj = view3DAdd.GetView3DObject(i);
+
+						// 해당 객체가 없거나, 해당 객체에 대해 선택이 비활성화 되어 있다면 continue
+						if(pObj == null || !pObj.IsSelectionEnabled())
+							continue;
+
+						// i번째 3D 객체의 데이터(CFL3DObject)
+						CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+
+						// 해당 객체가 없다면 continue
+						if(pObjData == null)
+							continue;
+
+						// i번째 3D 객체에 대한 결과값 배열.
+						List<int> flaCollisionIndex = arr2ResultROIIndexAdd[i32ObjectIdx];
+						i32ObjectIdx++;
+
+						if(flaCollisionIndex.Count() == 0)
+							continue;
+
+						int i32CollisionIndexCount = (int)flaCollisionIndex.Count();
+
+						// i번째 3D 객체에 대해, ROI 내부에 위치한 정점을 빨간색으로 표시
+						for(int j = 0; j < i32CollisionIndexCount; ++j)
+							pObjData.SetVertexColorAt(flaCollisionIndex[j], 255, 0, 0); // RED
+
+						// 3D 뷰어에 추가된 i번째 3D 객체에 대해 렌더링 업데이트
+						pObj.UpdateAll();
+						view3DAdd.UpdateObject(i);
+					}
+
+					view3DAdd.UpdateScreen();
+				}
+
+				// 기존 선택 영역(위에서 Exclude로 선택한 영역)에서 제거할 영역을 ROI로 설정
+				CFLFrustum<float> flfrRemove1 = new CFLFrustum<float>();
+				CFLFrustum<float> flfrRemove2 = new CFLFrustum<float>();
+				flfrRemove1.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Remove1.fig");
+				flfrRemove2.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Remove2.fig");
+				// CROIUtilities3D 객체에 절두체 ROI 추가
+				roiUtil3DRemove.PushBackROI(flfrRemove1);
+				roiUtil3DRemove.PushBackROI(flfrRemove2);
+				// 3D 뷰에 ROI 추가
+				view3DRemove.PushBackROI(flfrRemove1);
+				view3DRemove.PushBackROI(flfrRemove2);
+
+				// 선택 타입 설정 : 기존 결과에서 ROI 안의 정점을 제거
+				roiUtil3DRemove.SetSelectionType(CROIUtilities3D.EResultSelectionType.Remove);
+
+				// CROIUtilities3D 실행
+				if((res = roiUtil3DRemove.Execute()).IsFail())
+					break;
+
+				// CROIUtilities3D 에서 결과 얻어 오기
+				List<List<int>> arr2ResultROIIndexRemove;
+				if((res = roiUtil3DRemove.GetResult(out arr2ResultROIIndexRemove)).IsFail())
+					break;
+
+				if(arr2ResultROIIndexRemove.Count() > 0)
+				{
+					int i32ObjectIdx = 0;
+
+					// 3D 뷰어에 추가된 3D 객체의 개수
+					int i32ObjectCount = view3DRemove.GetObjectCount();
+
+					for(int i = 0; i < i32ObjectCount; ++i)
+					{
+						// 3D 뷰어에 추가된 i번째 3D 객체
+						CGUIView3DObject pObj = view3DRemove.GetView3DObject(i);
+
+						// 해당 객체가 없거나, 해당 객체에 대해 선택이 비활성화 되어 있다면 continue
+						if(pObj == null || !pObj.IsSelectionEnabled())
+							continue;
+
+						// i번째 3D 객체의 데이터(CFL3DObject)
+						CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+
+						// 해당 객체가 없다면 continue
+						if(pObjData == null)
+							continue;
+
+						// i번째 3D 객체에 대한 결과값 배열.
+						List<int> flaCollisionIndex = arr2ResultROIIndexRemove[i32ObjectIdx];
+						i32ObjectIdx++;
+
+						if(flaCollisionIndex.Count() == 0)
+							continue;
+
+						int i32CollisionIndexCount = (int)flaCollisionIndex.Count();
+
+						// i번째 3D 객체에 대해, 기존 결과에서 ROI 안의 정점을 제거 후 선택된 정점을 파란색으로 표시
+						for(int j = 0; j < i32CollisionIndexCount; ++j)
+							pObjData.SetVertexColorAt(flaCollisionIndex[j], 0, 0, 255); // BLUE
+
+						// 3D 뷰어에 추가된 i번째 3D 객체에 대해 렌더링 업데이트
+						pObj.UpdateAll();
+						view3DRemove.UpdateObject(i);
+					}
+
+					// 3D 뷰어 업데이트
+					view3DRemove.UpdateScreen();
+				}
+
+				// 기존 선택 영역(위에서 Exclude로 선택한 영역)에서 XOR 선택할 영역을 ROI로 설정
+				CFLFrustum<float> flfrXOR = new CFLFrustum<float>();
+				flfrXOR.Load("../../ExampleImages/ROIUtilities3D/frustumROI_XOR.fig");
+				// CROIUtilities3D 객체에 절두체 ROI 추가
+				roiUtil3DXOR.PushBackROI(flfrXOR);
+				// 3D 뷰에 ROI 추가
+				view3DXOR.PushBackROI(flfrXOR);
+
+				// 선택 타입 설정 : 기존 결과에서 ROI 안의 정점을 XOR 연산하여 선택
+				roiUtil3DXOR.SetSelectionType(CROIUtilities3D.EResultSelectionType.XOR);
+
+				// CROIUtilities3D 실행
+				if((res = roiUtil3DXOR.Execute()).IsFail())
+					break;
+
+				// CROIUtilities3D 에서 결과 얻어 오기
+				List<List<int>> arr2ResultROIIndexXOR;
+				if((res = roiUtil3DXOR.GetResult(out arr2ResultROIIndexXOR)).IsFail())
+					break;
+
+				if(arr2ResultROIIndexXOR.Count() > 0)
+				{
+					int i32ObjectIdx = 0;
+
+					// 3D 뷰어에 추가된 3D 객체의 개수
+					int i32ObjectCount = view3DXOR.GetObjectCount();
+
+					for(int i = 0; i < i32ObjectCount; ++i)
+					{
+						// 3D 뷰어에 추가된 i번째 3D 객체
+						CGUIView3DObject pObj = view3DXOR.GetView3DObject(i);
+
+						// 해당 객체가 없거나, 해당 객체에 대해 선택이 비활성화 되어 있다면 continue
+						if(pObj == null || !pObj.IsSelectionEnabled())
+							continue;
+
+						// i번째 3D 객체의 데이터(CFL3DObject)
+						CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+
+						// 해당 객체가 없다면 continue
+						if(pObjData == null)
+							continue;
+
+						// i번째 3D 객체에 대한 결과값 배열.
+						List<int> flaCollisionIndex = arr2ResultROIIndexXOR[i32ObjectIdx];
+						i32ObjectIdx++;
+
+						if(flaCollisionIndex.Count() == 0)
+							continue;
+
+						int i32CollisionIndexCount = (int)flaCollisionIndex.Count();
+
+						// i번째 3D 객체에 대해, 기존 결과에서 ROI 안의 정점을 XOR 연산한 결과 정점들을 파란색으로 표시
+						for(int j = 0; j < i32CollisionIndexCount; ++j)
+							pObjData.SetVertexColorAt(flaCollisionIndex[j], 0, 0, 255); // BLUE
+
+						// 3D 뷰어에 추가된 i번째 3D 객체에 대해 렌더링 업데이트
+						pObj.UpdateAll();
+						view3DXOR.UpdateObject(i);
+					}
+
+					view3DXOR.UpdateScreen();
+				}
+
+				// 아래 함수 DrawTextCanvas()는 screen좌표를 기준으로 하는 string을 drawing 한다. // The function DrawTextCanvas below draws a String based on the screen coordinates.
+				// 색상 파라미터를 EGUIViewImageLayerTransparencyColor 으로 넣어주게되면 배경색으로 처리함으로 불투명도를 0으로 한것과 같은 효과가 있다. // If the color parameter is added as EGUIViewImageLayerTransparencyColor, it has the same effect as setting the opacity to 0 by processing it as a background color.
 				// 파라미터 순서 : 레이어 . 기준 좌표 Figure 객체 . 문자열 . 폰트 색 . 면 색 . 폰트 크기 . 실제 크기 유무 . 각도 .
 				//                 얼라인 . 폰트 이름 . 폰트 알파값(불투명도) . 면 알파값 (불투명도) . 폰트 두께 . 폰트 이텔릭
 				// Parameter order: layer . reference coordinate Figure object . string . font color . Area color . font size . actual size . angle .
 				//                  Align . Font Name . Font Alpha Value (Opaqueness) . Cotton Alpha Value (Opaqueness) . Font Thickness . Font Italic
-				CFLPoint<double> flpPosition = new CFLPoint<double>(0, 0);
-
-				if((res = (view3D.GetLayer(0).DrawTextCanvas(flpPosition, "3D View", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				CFLPoint<double> flp = new CFLPoint<double>(0, 0);
+				if((res = view3DSrc.GetLayer(0).DrawTextCanvas(flp, "Source", EColor.YELLOW, EColor.BLACK, 22)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				// 이미지 뷰를 갱신 합니다. // Update the image view.
-				view3D.Invalidate(true);
+				if((res = view3DInclude.GetLayer(0).DrawTextCanvas(flp, "Include", EColor.YELLOW, EColor.BLACK, 22)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
 
-				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(view3D.IsAvailable())
+				if((res = view3DExclude.GetLayer(0).DrawTextCanvas(flp, "Exclude", EColor.YELLOW, EColor.BLACK, 22)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = view3DAdd.GetLayer(0).DrawTextCanvas(flp, "Add(Include Result+Add)", EColor.YELLOW, EColor.BLACK, 22)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = view3DRemove.GetLayer(0).DrawTextCanvas(flp, "Remove(Exclude Result-Remove)", EColor.YELLOW, EColor.BLACK, 22)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = view3DXOR.GetLayer(0).DrawTextCanvas(flp, "XOR(Exclude Result^XOR)", EColor.YELLOW, EColor.BLACK, 22)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				// 3D 뷰를 갱신 // Update 3D view
+				for(int i = 0; i < 6; ++i)
+					arrView3D[i].Invalidate(true);
+
+				// 3D 뷰가 종료될 때 까지 기다림 // Wait for the 3D view 
+				while(arrView3D[0].IsAvailable() && arrView3D[1].IsAvailable() && arrView3D[2].IsAvailable() && arrView3D[3].IsAvailable() && arrView3D[4].IsAvailable() && arrView3D[5].IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
