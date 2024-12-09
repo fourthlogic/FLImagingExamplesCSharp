@@ -95,7 +95,7 @@ namespace ConvexHull3D
 					view3DSrc.ZoomFit();
 
 					// 입력, 출력 뷰의 시점을 맞춤
-					view3DSrc.SynchronizePointOfView(view3DDst);
+					view3DSrc.SynchronizePointOfView(ref view3DDst);
 
 					// 입력, 출력 뷰를 하나의 창으로 취급
 					view3DSrc.SynchronizeWindow(ref view3DDst);
