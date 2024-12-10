@@ -51,8 +51,8 @@ namespace Match
 			do
 			{
 				string[] arrPath = new string[2];
-				arrPath[0] = "../../ExampleImages/Matching/Pattern Multi Learn.flif";
-				arrPath[1] = "../../ExampleImages/Matching/Pattern Multi Learn.flif";
+				arrPath[0] = "../../ExampleImages/Matching/Pattern2 Single Learn.flif";
+				arrPath[1] = "../../ExampleImages/Matching/Pattern2 Single Learn.flif";
 
 				string[] arrClassName = new string[2];
 				arrClassName[0] = "A";
@@ -61,8 +61,8 @@ namespace Match
 				arrColor[0] = EColor.LIME;
 				arrColor[1] = EColor.RED;
 				CFLRect<double>[] arrLearnRegion = new CFLRect<double>[2];
-				arrLearnRegion[0] = new CFLRect<double>(390.76, 174.77, 678.95, 457.39);
-				arrLearnRegion[1] = new CFLRect<double>(23.55, 742.79, 176.94, 888.74);
+				arrLearnRegion[0] = new CFLRect<double>(326.6913, 372.2960, 477.5354, 521.5354);
+				arrLearnRegion[1] = new CFLRect<double>(586.7185, 566.3427, 763.2982, 672.1134);
 
 				for(long i64DataIdx = 0; i64DataIdx < 2; ++i64DataIdx)
 				{
@@ -142,7 +142,7 @@ namespace Match
 				}
 
 				// 이미지 로드 // Load image
-				if((res = fliFindImage.Load("../../ExampleImages/Matching/Pattern Multi Find.flif")).IsFail())
+				if((res = fliFindImage.Load("../../ExampleImages/Matching/Pattern2 Single Find2.flif")).IsFail())
 					break;
 
 				// 이미지 뷰 생성 // Create image view
@@ -182,7 +182,7 @@ namespace Match
 				FLPatternMatchMultiSparseLoad.SetAngleBias(0.0);
 				// 검출 시 사용될 각도의 탐색범위를 설정합니다. // Set the search range of the angle to be used for detection.
 				// 각도는 기본 각도를 기준으로 (기본 각도 - AngleTolerance, 기본 각도 + AngleTolerance)가 최종 탐색범위 // The angle is based on the basic angle (default angle - AngleTolerance, basic angle + AngleTolerance) is the final search range
-				FLPatternMatchMultiSparseLoad.SetAngleTolerance(10.0);
+				FLPatternMatchMultiSparseLoad.SetAngleTolerance(15.0);
 				// 검출 시 최적화 정도를 설정합니다. // Set the degree of optimization for detection.
 				// 검출 시 사용될 최소 탐색점수를 설정합니다. // Set the minimum search score to be used for detection.
 				FLPatternMatchMultiSparseLoad.SetMinimumDetectionScore(0.7);

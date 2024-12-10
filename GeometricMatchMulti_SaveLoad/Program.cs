@@ -51,9 +51,9 @@ namespace Match
 			do
 			{
 				string[] arrPath = new string[3];
-				arrPath[0] = "../../ExampleImages/Matching/Geometric Mult Learn_01.flif";
-				arrPath[1] = "../../ExampleImages/Matching/Geometric Mult Learn_02.flif";
-				arrPath[2] = "../../ExampleImages/Matching/Geometric Mult Learn_03.flif";
+				arrPath[0] = "../../ExampleImages/Matching/Geometric Mult Learn.flif";
+				arrPath[1] = "../../ExampleImages/Matching/Geometric Mult Learn.flif";
+				arrPath[2] = "../../ExampleImages/Matching/Geometric Mult Learn.flif";
 
 				string[] arrClassName = new string[3];
 				arrClassName[0] = "A";
@@ -92,11 +92,11 @@ namespace Match
 					CFLRect<double> learnRegion = new CFLRect<double>();
 
 					if(i64DataIdx == 0)
-						learnRegion.Set(33.700864, 230.805616, 213.474082, 407.099352);
+						learnRegion.Set(402.23622, 165.22834, 541.73228, 610.803149);
 					else if(i64DataIdx == 1)
-						learnRegion.Set(370.366091, 482.671707, 470.402807, 575.431965);
+						learnRegion.Set(257.32283, 476.72440, 396.81889, 688.00);
 					else if(i64DataIdx == 2)
-						learnRegion.Set(363.564795, 344.259179, 486.333693, 430.323974);
+						learnRegion.Set(549.85826, 476.72440, 689.35433, 688.00);
 
 					CFLPoint<double> flpLearnPivot = new CFLPoint<double>(learnRegion.GetCenter());
 					FLGeometricMatchMultiSave.SetLearnROI(learnRegion);
@@ -108,7 +108,7 @@ namespace Match
 					// 추출할 특징점 처리과정에서의 노이즈 필터링 정도를 설정합니다. // Set the noise filtering degree in the process of processing the feature points to be extracted.
 					FLGeometricMatchMultiSave.SetFeatureFiltering(0.5);
 					// 추출할 특징점 처리과정에서의 허용 임계값을 설정합니다. // Set the allowable threshold in the feature point processing process to be extracted.
-					FLGeometricMatchMultiSave.SetLearnThresholdCoefficient(1.0);
+					FLGeometricMatchMultiSave.SetLearnThresholdCoefficient(1.3);
 
 					// 알고리즘 수행 // Execute the Algoritm
 					if((FLGeometricMatchMultiSave.Learn(arrClassName[i64DataIdx])).IsFail())

@@ -86,7 +86,7 @@ namespace Match
 				FLPatternMatch.SetLearnImage(ref fliLearnImage);
 
 				// 학습할 영역을 설정합니다. // Set the area to learn.
-				CFLRect<double> learnRegion = new CFLRect<double>(90.457883, 97.838013, 420.282937, 402.447084);
+				CFLRect<double> learnRegion = new CFLRect<double>(174.7086, 272.2204, 799.0551, 601.3228);
 				CFLPoint<double> flpLearnPivot = new CFLPoint<double>(learnRegion.GetCenter());
 				FLPatternMatch.SetLearnROI(learnRegion);
 				FLPatternMatch.SetLearnPivot(flpLearnPivot);

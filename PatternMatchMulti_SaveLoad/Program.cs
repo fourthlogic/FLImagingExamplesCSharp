@@ -61,8 +61,8 @@ namespace Match
 				arrColor[0] = EColor.LIME;
 				arrColor[1] = EColor.RED;
 				CFLRect<double>[] arrLearnRegion = new CFLRect<double>[2];
-				arrLearnRegion[0] = new CFLRect<double>(390.76, 174.77, 678.95, 457.39);
-				arrLearnRegion[1] = new CFLRect<double>(23.55, 742.79, 176.94, 888.74);
+				arrLearnRegion[0] = new CFLRect<double>(178.9984, 178.9984, 253.9842, 257.2094);
+				arrLearnRegion[1] = new CFLRect<double>(110.4629, 109.6566, 182.2236, 178.9984);
 
 				for(long i64DataIdx = 0; i64DataIdx < 2; ++i64DataIdx)
 				{
@@ -183,7 +183,7 @@ namespace Match
 				FLPatternMatchMultiLoad.SetAngleBias(0.0);
 				// 검출 시 사용될 각도의 탐색범위를 설정합니다. // Set the search range of the angle to be used for detection.
 				// 각도는 기본 각도를 기준으로 (기본 각도 - AngleTolerance, 기본 각도 + AngleTolerance)가 최종 탐색범위 // The angle is based on the basic angle (default angle - AngleTolerance, basic angle + AngleTolerance) is the final search range
-				FLPatternMatchMultiLoad.SetAngleTolerance(10.0);
+				FLPatternMatchMultiLoad.SetAngleTolerance(15.0);
 				// 검출 시 최적화 정도를 설정합니다. // Set the degree of optimization for detection.
 				// 0 ~ 1범위에서 0에 가까울수록 정확성은 낮아질 수 있으나, 속도가 상향됩니다. // From 0 to 1, the closer to 0, the lower the accuracy, but the higher the speed.
 				FLPatternMatchMultiLoad.SetAccuracy(0.5);
