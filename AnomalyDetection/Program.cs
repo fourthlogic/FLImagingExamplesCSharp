@@ -176,6 +176,8 @@ namespace AnomalyDetection
 
 				// 학습할 이미지 설정 // Set the image to learn
 				AnomalyDetection.SetLearningImage(ref fliLearnImage);
+				// 검증할 이미지 설정 // Set the image to validation
+				AnomalyDetection.SetLearningValidationImage(ref fliValidationImage);
 				// 분류할 이미지 설정 // Set the image to classify
 				AnomalyDetection.SetInferenceImage(ref fliValidationImage);
 				AnomalyDetection.SetInferenceResultImage(ref fliResultLabelFigureImage);
@@ -183,7 +185,7 @@ namespace AnomalyDetection
 				// 학습할 AnomalyDetection 모델 설정 // Set up the AnomalyDetection model to learn
 				AnomalyDetection.SetModel(CAnomalyDetectionDL.EModel.FLDefNet);
 				// 학습할 AnomalyDetection 모델 Version 설정 // Set up the AnomalyDetection model version to learn
-				AnomalyDetection.SetModelVersion(CAnomalyDetectionDL.EModelVersion.FLDefNet_V1_512);
+				AnomalyDetection.SetModelVersion(CAnomalyDetectionDL.EModelVersion.FLDefNet_V1_256);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				AnomalyDetection.SetLearningEpoch(1000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
@@ -200,8 +202,8 @@ namespace AnomalyDetection
 
 				augSpec.SetCommonActivationRatio(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
-				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(180.0, false, true);
+				augSpec.EnablePerspective(true);
+				augSpec.SetPerspectiveParam(0.1);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 

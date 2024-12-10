@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3DE36014-862B-43F6-8F14-03E6B5764215}</ProjectGuid>
+    <ProjectGuid>{9B26EB4A-B92C-469A-A135-A5BCF399B759}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AnomalyDetection</RootNamespace>
-    <AssemblyName>AnomalyDetection</AssemblyName>
+    <RootNamespace>SuperResolution</RootNamespace>
+    <AssemblyName>SuperResolution</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
