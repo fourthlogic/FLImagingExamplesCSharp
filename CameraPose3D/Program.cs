@@ -45,7 +45,6 @@ namespace CameraPose3D
 			dictEulerString[EEulerSequence.Extrinsic_ZXZ] = "ZXZ";
 
 			CFLImage fliSource = new CFLImage();
-			CGUIViewImage viewImage = new CGUIViewImage();
 
 			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult eResult = new CResult();
@@ -80,23 +79,38 @@ namespace CameraPose3D
 
 				CFLPoint<double> flpOrigin = new CFLPoint<double>(0, 0);
 
+				CGUIViewImage[] arrViewWrap = new CGUIViewImage[i32PageCount];
+				int i32WindowWidth = 300;
+				int i32WindowHeight = 300;
+
+				for(int i = 0; i < i32PageCount / 3; ++i)
+				{
+					int i32Height = i32WindowHeight * i;
+
+					for(int j = 0; j < i32PageCount / 3; ++j)
+					{
+						int i32Width = i32WindowWidth * j;
+						int i32Index = i * 3 + j;
+
+						arrViewWrap[i32Index] = new CGUIViewImage();
+						arrViewWrap[i32Index].Create(10 + i32Height, i32Width, 10 + i32Height + i32WindowHeight, i32Width + i32WindowWidth);
+					}
+				}
+
+				for(int i = 1; i < i32PageCount; ++i)
+					arrViewWrap[0].SynchronizeWindow(ref arrViewWrap[i]);
+
 				for(int i = 0; i < i32PageCount; i++)
 				{
-					// 이미지 뷰 생성 // Create image view
-					if((eResult = viewImage.Create(100, 0, 612, 512)).IsFail())
-					{
-						ErrorPrint(eResult, "Failed to create the Source 3D view.\n");
-						break;
-					}
-
 					// 페이지 선택
-					fliSource.SelectPage(i);
+					
+					CFLImage fliPage = new CFLImage(fliSource.GetPage(i)); 
 
 					// 처리할 이미지 설정
-					CameraPose3D.SetSourceImage(ref fliSource);
+					CameraPose3D.SetSourceImage(ref fliPage);
 
 					// 이미지 포인터 설정 // Set image pointer
-					viewImage.SetImagePtr(ref fliSource);
+					arrViewWrap[i].SetImagePtr(ref fliPage);
 
 					// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 					if((eResult = CameraPose3D.Execute()).IsFail())
@@ -107,7 +121,7 @@ namespace CameraPose3D
 
 					// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 					// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
-					CGUIViewImageLayer layerViewSource = viewImage.GetLayer(0);
+					CGUIViewImageLayer layerViewSource = arrViewWrap[i].GetLayer(0);
 
 					// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 					layerViewSource.Clear();
@@ -119,7 +133,7 @@ namespace CameraPose3D
 					//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 					// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 					//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-					if((eResult = layerViewSource.DrawTextCanvas(flpOrigin, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					if((eResult = layerViewSource.DrawTextCanvas(flpOrigin, "Source Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to draw text.\n");
 						break;
@@ -163,18 +177,18 @@ namespace CameraPose3D
 					String strRotationMatrix = String.Format("Rotation Matrix\n[{0,9:0.000000}, {1,9:0.000000}, {2,9:0.000000}]\n[{3,9:0.000000}, {4,9:0.000000}, {5,9:0.000000}]\n[{6,9:0.000000}, {7,9:0.000000}, {8,9:0.000000}]", matResultRotationMatrix.GetValue(0, 0), matResultRotationMatrix.GetValue(0, 1), matResultRotationMatrix.GetValue(0, 2), matResultRotationMatrix.GetValue(1, 0), matResultRotationMatrix.GetValue(1, 1), matResultRotationMatrix.GetValue(1, 2), matResultRotationMatrix.GetValue(2, 0), matResultRotationMatrix.GetValue(2, 1), matResultRotationMatrix.GetValue(2, 2));
 					String strRotationVector = String.Format("Rotation Vector\n[{0,11:0.000000}]\n[{1,11:0.000000}]\n[{2,11:0.000000}]", listResultRotationVector[0], listResultRotationVector[1], listResultRotationVector[2]);
 
-					layerViewSource.DrawTextImage(new TPoint<double>(flpImageSize.x, 0), strTranslate, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.RIGHT_TOP, "Courier New");
-					layerViewSource.DrawTextImage(new TPoint<double>(0, flpImageSize.y), strEuler, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM, "Courier New");
-					layerViewSource.DrawTextImage(new TPoint<double>(0, 0), strRotationVector, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_TOP, "Courier New");
-					layerViewSource.DrawTextImage(new TPoint<double>(flpImageSize.x, flpImageSize.y), strRotationMatrix, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.RIGHT_BOTTOM, "Courier New");
-
-					if(viewImage.IsAvailable())
-						viewImage.Invalidate();
-
-					// 이미지 뷰가 종료될 때 까지 기다림
-					while(viewImage.IsAvailable())
-						Thread.Sleep(1);
+					layerViewSource.DrawTextImage(new TPoint<double>(flpImageSize.x, 0), strTranslate, EColor.YELLOW, EColor.BLACK, 11, false, 0, EGUIViewImageTextAlignment.RIGHT_TOP, "Courier New");
+					layerViewSource.DrawTextImage(new TPoint<double>(0, flpImageSize.y), strEuler, EColor.YELLOW, EColor.BLACK, 11, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM, "Courier New");
+					layerViewSource.DrawTextImage(new TPoint<double>(0, 0), strRotationVector, EColor.YELLOW, EColor.BLACK, 11, false, 0, EGUIViewImageTextAlignment.LEFT_TOP, "Courier New");
+					layerViewSource.DrawTextImage(new TPoint<double>(flpImageSize.x, flpImageSize.y), strRotationMatrix, EColor.YELLOW, EColor.BLACK, 11, false, 0, EGUIViewImageTextAlignment.RIGHT_BOTTOM, "Courier New");
 				}
+
+				if(arrViewWrap[0].IsAvailable())
+					arrViewWrap[0].Invalidate();
+
+				// 이미지 뷰가 종료될 때 까지 기다림
+				while(arrViewWrap[0].IsAvailable())
+					Thread.Sleep(1);
 			}
 			while(false);
 		}
