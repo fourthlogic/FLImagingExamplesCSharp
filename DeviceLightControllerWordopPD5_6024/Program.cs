@@ -52,20 +52,18 @@ namespace DeviceCameraiRAYPLE
 					Console.WriteLine("0. Exit");
 					Console.Write("Connection Type: ");
 
-					if(!int.TryParse(Console.ReadLine(), out i32connectionType) ||
-						i32connectionType < 0 || i32connectionType > 4)
+					if(!int.TryParse(Console.ReadLine(), out i32connectionType) || i32connectionType < 0 || i32connectionType > 4)
 					{
 						Console.WriteLine("Incorrect input. Please select again.\n");
 						continue;
 					}
 
 					if(i32connectionType == 0)
-					{
 						bExit = true;
-					}
 
 					break;
-				} while(true);
+				}
+				while(true);
 
 				if(bExit)
 					break;
@@ -85,6 +83,7 @@ namespace DeviceCameraiRAYPLE
 				if(i32connectionType == 1) // RS232C
 				{
 					Console.Write("Port Number: ");
+
 					if(int.TryParse(Console.ReadLine(), out var portNumber))
 					{
 						// 컴포트 번호 설정 // Set the COM port number.
@@ -94,9 +93,11 @@ namespace DeviceCameraiRAYPLE
 				else
 				{
 					Console.Write("Input IP Address: ");
+
 					var ipAddress = Console.ReadLine();
 
 					Console.Write("Port Number: ");
+
 					if(int.TryParse(Console.ReadLine(), out var port))
 					{
 						// IP 주소, Port 설정 // Set the IP address and port.
@@ -121,20 +122,18 @@ namespace DeviceCameraiRAYPLE
 					Console.WriteLine("0. Exit");
 					Console.Write("Input Channel Count: ");
 
-					if(!int.TryParse(Console.ReadLine(), out i32channelCount) ||
-						(i32channelCount != 0 && i32channelCount != 1 && i32channelCount != 2))
+					if(!int.TryParse(Console.ReadLine(), out i32channelCount) || (i32channelCount != 0 && i32channelCount != 1 && i32channelCount != 2))
 					{
 						Console.WriteLine("Incorrect input. Please select again.\n");
 						continue;
 					}
 
 					if(i32channelCount == 0)
-					{
 						bExit = true;
-					}
 
 					break;
-				} while(true);
+				} 
+				while(true);
 
 				if(bExit)
 					break;
@@ -154,8 +153,7 @@ namespace DeviceCameraiRAYPLE
 					Console.WriteLine("0. Exit");
 					Console.Write("Input Communication Type: ");
 
-					if(!int.TryParse(Console.ReadLine(), out i32communicationType) ||
-						(i32communicationType != 0 && i32communicationType != 1 && i32communicationType != 2))
+					if(!int.TryParse(Console.ReadLine(), out i32communicationType) || (i32communicationType != 0 && i32communicationType != 1 && i32communicationType != 2))
 					{
 						Console.WriteLine("Incorrect input. Please select again.\n");
 						continue;
@@ -167,7 +165,8 @@ namespace DeviceCameraiRAYPLE
 					}
 
 					break;
-				} while(true);
+				} 
+				while(true);
 
 				if(bExit)
 					break;
@@ -213,9 +212,7 @@ namespace DeviceCameraiRAYPLE
 							Console.WriteLine("0. Exit");
 							Console.Write("Input Trigger Method: ");
 
-							if(!int.TryParse(Console.ReadLine(), out triggerMethod) ||
-								(triggerMethod != 0 && triggerMethod != 1 && triggerMethod != 2 &&
-								 triggerMethod != 3 && triggerMethod != 4))
+							if(!int.TryParse(Console.ReadLine(), out triggerMethod) || (triggerMethod != 0 && triggerMethod != 1 && triggerMethod != 2 && triggerMethod != 3 && triggerMethod != 4))
 							{
 								Console.WriteLine("Incorrect input. Please select again.\n");
 								continue;
@@ -227,18 +224,20 @@ namespace DeviceCameraiRAYPLE
 							}
 
 							break;
-						} while(true);
+
+						} 
+						while(true);
 
 						if(bExit)
 							break;
 
 						CDeviceLightControllerWordopPD5_6024.ETriggerMethod eTriggerMethod = CDeviceLightControllerWordopPD5_6024.ETriggerMethod.LowLevel;
 
-						if(i32connectionType == 2)
+						if(triggerMethod == 2)
 							eTriggerMethod = CDeviceLightControllerWordopPD5_6024.ETriggerMethod.HighLevel;
-						else if(i32connectionType == 3)
+						else if(triggerMethod == 3)
 							eTriggerMethod = CDeviceLightControllerWordopPD5_6024.ETriggerMethod.FallingEdge;
-						else if(i32connectionType == 4)
+						else if(triggerMethod == 4)
 							eTriggerMethod = CDeviceLightControllerWordopPD5_6024.ETriggerMethod.RisingEdge;
 
 						// 트리거 방식을 설정합니다. // Set the trigger method.
