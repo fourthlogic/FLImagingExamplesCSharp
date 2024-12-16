@@ -49,14 +49,17 @@ namespace DeviceCameraiRAYPLE
 					Console.WriteLine("2. TCP Server");
 					Console.WriteLine("3. TCP Client");
 					Console.WriteLine("4. UDP");
-					Console.WriteLine("0. Exit");
+					Console.WriteLine("0. Exit\n");
 					Console.Write("Connection Type: ");
 
 					if(!int.TryParse(Console.ReadLine(), out i32connectionType) || i32connectionType < 0 || i32connectionType > 4)
 					{
+						Console.Clear();
 						Console.WriteLine("Incorrect input. Please select again.\n");
 						continue;
 					}
+
+					Console.Clear();
 
 					if(i32connectionType == 0)
 						bExit = true;
@@ -82,6 +85,7 @@ namespace DeviceCameraiRAYPLE
 
 				if(i32connectionType == 1) // RS232C
 				{
+					Console.Clear();
 					Console.Write("Port Number: ");
 
 					if(int.TryParse(Console.ReadLine(), out var portNumber))
@@ -92,6 +96,7 @@ namespace DeviceCameraiRAYPLE
 				}
 				else
 				{
+					Console.Clear();
 					Console.Write("Input IP Address: ");
 
 					var ipAddress = Console.ReadLine();
@@ -119,14 +124,17 @@ namespace DeviceCameraiRAYPLE
 					// 채널 갯수를 선택합니다. // Select the number of channels.
 					Console.WriteLine("\n1. Channel 4");
 					Console.WriteLine("2. Channel 8");
-					Console.WriteLine("0. Exit");
+					Console.WriteLine("0. Exit\n");
 					Console.Write("Input Channel Count: ");
 
 					if(!int.TryParse(Console.ReadLine(), out i32channelCount) || (i32channelCount != 0 && i32channelCount != 1 && i32channelCount != 2))
 					{
+						Console.Clear();
 						Console.WriteLine("Incorrect input. Please select again.\n");
 						continue;
 					}
+
+					Console.Clear();
 
 					if(i32channelCount == 0)
 						bExit = true;
@@ -148,16 +156,19 @@ namespace DeviceCameraiRAYPLE
 				do
 				{
 					// 통신 방식을 선택합니다. // Select the communication method.
-					Console.WriteLine("\n1. ASCII Code");
+					Console.WriteLine("1. ASCII Code");
 					Console.WriteLine("2. Hexadecimal");
-					Console.WriteLine("0. Exit");
+					Console.WriteLine("0. Exit\n");
 					Console.Write("Input Communication Type: ");
 
 					if(!int.TryParse(Console.ReadLine(), out i32communicationType) || (i32communicationType != 0 && i32communicationType != 1 && i32communicationType != 2))
 					{
+						Console.Clear();
 						Console.WriteLine("Incorrect input. Please select again.\n");
 						continue;
 					}
+
+					Console.Clear();
 
 					if(i32communicationType == 0)
 					{
@@ -179,18 +190,21 @@ namespace DeviceCameraiRAYPLE
 				while(true)
 				{
 					// 작업 모드를 선택합니다. // Select the operation mode.
-					Console.WriteLine("\n1. Light On/Off");
+					Console.WriteLine("1. Light On/Off");
 					Console.WriteLine("2. Light Value");
 					Console.WriteLine("3. Strobe Time");
 					Console.WriteLine("4. Trigger Method");
-					Console.WriteLine("0. Exit");
+					Console.WriteLine("0. Exit\n");
 					Console.Write("Select Number: ");
 
 					if(!int.TryParse(Console.ReadLine(), out var operationMode))
 					{
+						Console.Clear();
 						Console.WriteLine("Invalid input. Try again.\n");
 						continue;
 					}
+
+					Console.Clear();
 
 					if(operationMode == 0)
 					{
@@ -209,14 +223,17 @@ namespace DeviceCameraiRAYPLE
 							Console.WriteLine("2. High Level");
 							Console.WriteLine("3. Falling Edge");
 							Console.WriteLine("4. Rising Edge");
-							Console.WriteLine("0. Exit");
+							Console.WriteLine("0. Exit\n");
 							Console.Write("Input Trigger Method: ");
 
 							if(!int.TryParse(Console.ReadLine(), out triggerMethod) || (triggerMethod != 0 && triggerMethod != 1 && triggerMethod != 2 && triggerMethod != 3 && triggerMethod != 4))
 							{
+								Console.Clear();
 								Console.WriteLine("Incorrect input. Please select again.\n");
 								continue;
 							}
+
+							Console.Clear();
 
 							if(triggerMethod == 0)
 							{
@@ -281,6 +298,8 @@ namespace DeviceCameraiRAYPLE
 								}
 							}
 						}
+
+						Console.Clear();
 					}
 
 					// 입력된 파라미터를 적용합니다. // Apply the configured parameters.
