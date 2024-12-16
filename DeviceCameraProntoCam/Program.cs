@@ -65,7 +65,13 @@ namespace DeviceCameraProntoCam
 	        // ProntoCam 카메라 선언
 	        CDeviceCameraProntoCam camProntoCam = new CDeviceCameraProntoCam();
 
-	        do
+			// 이벤트를 받을 객체 선언
+			CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
+
+			// 카메라에 이벤트 객체 설정
+			camProntoCam.RegisterDeviceEvent(eventImage);
+
+			do
 	        {
 		        String strInput = "";
 
@@ -165,12 +171,6 @@ namespace DeviceCameraProntoCam
                     strConnection = Console.ReadLine();
 		        }
 
-		        // 이벤트를 받을 객체 선언
-		        CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
-
-		        // 카메라에 이벤트 객체 설정
-		        camProntoCam.RegisterDeviceEvent(eventImage);
-
 		        if(bAutoDetect)
 		        {
                     // 인덱스에 해당하는 카메라로 연결을 설정한다.
@@ -203,6 +203,7 @@ namespace DeviceCameraProntoCam
 
 		        // 카메라를 Live 합니다.
                 drResult = camProntoCam.Live();
+
                 if (drResult.IsFail())
 		        {
 			        Console.Write("Failed to live the camera.\n");
@@ -217,8 +218,9 @@ namespace DeviceCameraProntoCam
 
 	        // 카메라의 초기화를 해제합니다.
 	        camProntoCam.Terminate();
+			camProntoCam.ClearDeviceEvents();
 
-            if (drResult.IsFail())
+			if (drResult.IsFail())
                 Console.ReadLine();
         }
     }
