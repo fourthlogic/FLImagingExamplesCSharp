@@ -50,7 +50,7 @@ namespace GraphViewContextMenu
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowLegend, "ShowLegend"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.MagnetCrosshair, "MagnetCrosshair"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ChangeGraphOrder, "ChangeGraphOrder"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.GetTrendLine, "GetTrendline"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.GetTrendline, "GetTrendline"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.EditAxisLabel, "EditAxisLabel"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SwitchAxis, "SwitchAxis"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.EditExpression, "EditExpression"),
