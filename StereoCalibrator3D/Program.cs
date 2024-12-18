@@ -297,7 +297,7 @@ namespace StereoCalibrator3D
 				}
 
 				// Grid Type 설정 // Set the grid type
-				if((res = sSC.SetGridType(CStereoCalibrator3D.EGridType.EGridType_ChessBoard)).IsFail())
+				if((res = sSC.SetGridType(CStereoCalibrator3D.EGridType.ChessBoard)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Grid Type.\n");
 					break;

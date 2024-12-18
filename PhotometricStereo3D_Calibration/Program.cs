@@ -166,7 +166,7 @@ namespace StereoPhotometric
 				// 결과 Texture 이미지 설정 // Set the result texture image
 				photometric.SetResultTextureImage(ref fliTxtImage);
 				// 동작 방식 설정 // Set Operation Mode
-				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.EReconstructionMode_Poisson_FP32);
+				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
 				// Calibration 데이터 설정 // Set Calibration Settings
 				photometric.SetCalibrationCircleROI(new CFLCircle<double>(386.439657, 346.491239, 259.998140, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther));
 

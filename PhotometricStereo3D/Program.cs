@@ -132,7 +132,7 @@ namespace PhotometricStereo
 				// 결과 Texture 이미지 설정 // Set the result texture image
 				photometric.SetResultTextureImage(ref fliTxtImage);
 				// 동작 방식 설정 // Set Operation Mode
-				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.EReconstructionMode_Poisson_FP32);
+				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
 
 
 				// 각 이미지의 광원 Slant 값 입력
