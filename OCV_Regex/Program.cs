@@ -35,6 +35,9 @@ namespace OCV
 				CFLImage fliImage1 = new CFLImage();
 				CFLImage fliImage2 = new CFLImage();
 
+				CFLFigure flfROI1 = CFigureUtilities.ConvertFigureStringToObject("A[D(97.41509400000000,395.88679200000001,666.96226400000000,528.33962299999996,INFO[NAME((.+)포스로직)]),D(132.79377509433962,260.75241056603778,425.95603924528297,317.26561811320755,INFO[NAME(FOURTH.{5})]),INFO[NAME(_SELECTION_)]]");
+				CFLFigure flfROI2 = CFigureUtilities.ConvertFigureStringToObject("A[D(97.41509400000000,395.88679200000001,666.96226400000000,528.33962299999996,INFO[NAME((\\w+)포스로직)]),D(121.37418892075473,258.90058578113212,414.53645307169802,315.41379332830189,INFO[NAME(FOURTH.{5})]),INFO[NAME(_SELECTION_)]]");
+				
 				CGUIViewImage viewImage1 = new CGUIViewImage();
 				CGUIViewImage viewImage2 = new CGUIViewImage();
 
@@ -140,6 +143,13 @@ namespace OCV
 					break;
 				}
 
+				// ROI 설정
+				if((res = ocv.SetSourceROI(flfROI1)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Source ROI.");
+					break;
+				}
+
 				// 이미지에서 문자를 검증하는 기능을 수행
 				if((res = ocv.Execute()).IsFail())
 				{
@@ -216,6 +226,13 @@ namespace OCV
 				if((res = ocv.SetSourceImage(ref fliImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
+					break;
+				}
+
+				// ROI 설정
+				if((res = ocv.SetSourceROI(flfROI2)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
 				}
 

@@ -35,7 +35,11 @@ namespace OCV
 				CFLImage fliImage1 = new CFLImage();
 				CFLImage fliImage2 = new CFLImage();
 				CFLImage fliImage3 = new CFLImage();
-				
+
+				CFLFigure flfROI1 = CFigureUtilities.ConvertFigureStringToObject("D{(132.03883080595011,-3.45695669993938),(1174.12971955658054,396.56425672952025),(1045.11138292280202,732.66851463916055),(3.02049417217151,332.64730120970091),INFO[NAME(1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)]}");
+				CFLFigure flfROI2 = CFigureUtilities.ConvertFigureStringToObject("D{(132.03883080595011,-3.45695669993938),(1174.12971955658054,396.56425672952025),(1045.11138292280202,732.66851463916055),(3.02049417217151,332.64730120970091),INFO[NAME(1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)]}");
+				CFLFigure flfROI3 = CFigureUtilities.ConvertFigureStringToObject("D(2.57650300000000,-4.01366100000000,932.76853500000004,296.00000000000000,INFO[NAME(1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)])");
+
 				CGUIViewImage viewImage1 = new CGUIViewImage();
 				CGUIViewImage viewImage2 = new CGUIViewImage();
 				CGUIViewImage viewImage3 = new CGUIViewImage();
@@ -168,6 +172,13 @@ namespace OCV
 					break;
 				}
 
+				// ROI 설정
+				if((res = ocv.SetSourceROI(flfROI1)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Source ROI.");
+					break;
+				}
+
 				// 이미지에서 문자를 검증하는 기능을 수행
 				if((res = ocv.Execute()).IsFail())
 				{
@@ -247,6 +258,13 @@ namespace OCV
 					break;
 				}
 
+				// ROI 설정
+				if((res = ocv.SetSourceROI(flfROI2)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Source ROI.");
+					break;
+				}
+
 				// 이미지에서 문자를 검증하는 기능을 수행
 				if((res = ocv.Execute()).IsFail())
 				{
@@ -319,6 +337,13 @@ namespace OCV
 				if((res = ocv.SetSourceImage(ref fliImage3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
+					break;
+				}
+
+				// ROI 설정
+				if((res = ocv.SetSourceROI(flfROI3)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
 				}
 
