@@ -109,10 +109,10 @@ namespace ColorAdjustment
 				ColorAdjustment.SetDestinationImage(ref arrFliImage[1]);
 
 				// Color Space 설정 // Set Color Space
-				ColorAdjustment.SetColorSpace(EColorSpace.CIELCh);
+				ColorAdjustment.SetColorSpace(CColorAdjustment.EColorSpace.CIELCh);
 
 				// Offset 설정 // Set Offset
-				ColorAdjustment.SetOffset(CMultiVar<double>(-10, 20, -50));
+				ColorAdjustment.SetOffset(new CMultiVar<double>(-10, 20, -50));
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = ColorAdjustment.Execute()).IsFail())
