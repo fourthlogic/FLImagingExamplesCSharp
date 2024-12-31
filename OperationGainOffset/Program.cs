@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationImageGainOffset
+namespace OperationGainOffset
 {
 	class Program
 	{
@@ -41,7 +41,7 @@ namespace OperationImageGainOffset
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationImageGainOffset/Color.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationGainOffset/Color.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
@@ -96,27 +96,27 @@ namespace OperationImageGainOffset
 					break;
 				}
 
-				// Image Gain Offset 객체 생성 // Create Image Gain Offset object
-				COperationImageGainOffset ImageGainOffset = new COperationImageGainOffset();
+				// Gain Offset 객체 생성 // Create Gain Offset object
+				COperationGainOffset GainOffset = new COperationGainOffset();
 
 				// Source 이미지 설정 // Set the source image
-                ImageGainOffset.SetSourceImage(ref fliDestinationImage);
+                GainOffset.SetSourceImage(ref fliDestinationImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				ImageGainOffset.SetDestinationImage(ref fliDestinationImage);
+				GainOffset.SetDestinationImage(ref fliDestinationImage);
 
 				// Gain 값 지정 // Set the Gain value
 				CMultiVar<double> mvGain = new CMultiVar<double>(2, 2, 2);
-				ImageGainOffset.SetGain(mvGain);
+				GainOffset.SetGain(mvGain);
 
 				// Offset 값 지정 // Set the Offset value
 				CMultiVar<double> mvOffset = new CMultiVar<double>(50, 50, 50);
-				ImageGainOffset.SetOffset(mvOffset);
+				GainOffset.SetOffset(mvOffset);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = ImageGainOffset.Execute()).IsFail())
+				if((res = GainOffset.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Operation Image Gain Offset. \n");
+					ErrorPrint(res, "Failed to execute Operation Gain Offset. \n");
 					break;
 				}
 

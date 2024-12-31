@@ -9,8 +9,8 @@
     <ProjectGuid>{C8BAAAA5-93ED-4DE3-809E-6C9E3122CFDB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OperationImageGainOffset</RootNamespace>
-    <AssemblyName>OperationImageGainOffset</AssemblyName>
+    <RootNamespace>OperationGainOffset</RootNamespace>
+    <AssemblyName>OperationGainOffset</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
