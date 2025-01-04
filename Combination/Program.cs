@@ -80,7 +80,7 @@ namespace LeastSquares
 
 					// 조합 결과값 얻기 // Get combination result
 					List<List<int>> listCombination = new List<List<int>>();
-                    CResult cResult = C.GetResult(listCombination);
+                    CResult cResult = C.GetResult(out listCombination);
 
                     string flstrCombination = "";
                     int i64CombinationCnt = 0;
