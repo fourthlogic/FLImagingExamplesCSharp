@@ -88,20 +88,20 @@ namespace OCR
 					break;
 				}
 
-				CFLFigureArray flfaLearnt = new CFLFigureArray();
+				CFLFigureArray flfaLearned = new CFLFigureArray();
 
 				// 학습한 문자의 모양를 받아오는 함수
-				ocr.GetLearntCharacter(out flfaLearnt);
+				ocr.GetLearnedCharacter(out flfaLearned);
 
-				Int64 i64LearntCount = flfaLearnt.GetCount();
+				Int64 i64LearnedCount = flfaLearned.GetCount();
 
-				for(Int64 i = 0; i < i64LearntCount; ++i)
+				for(Int64 i = 0; i < i64LearnedCount; ++i)
 				{
-					CFLFigure flfLearnt = new CFLFigureArray(flfaLearnt.GetAt(i));
-					string flsResultString = flfLearnt.GetName();
+					CFLFigure flfLearned = new CFLFigureArray(flfaLearned.GetAt(i));
+					string flsResultString = flfLearned.GetName();
 					CFLRect<double> flrBoundary = new CFLRect<double>();
 
-					flrBoundary = flfLearnt.GetBoundaryRect();
+					flrBoundary = flfLearned.GetBoundaryRect();
 
 					if((res = layer.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
 					{
@@ -109,7 +109,7 @@ namespace OCR
 						break;
 					}
 
-					if((res = layer.DrawFigureImage(flfLearnt, EColor.LIME, 1, EColor.LIME, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
+					if((res = layer.DrawFigureImage(flfLearned, EColor.LIME, 1, EColor.LIME, EGUIViewImagePenStyle.Solid, 1.0f, 0.35f)).IsFail())
 					{
 						ErrorPrint(res, string.Format("Failed to draw recognized character : {0}", i));
 						break;
