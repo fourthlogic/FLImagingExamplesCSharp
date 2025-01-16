@@ -199,6 +199,7 @@ namespace StringBasedOCRDL
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
+				augSpec.EnableAugmentation(true);
 				augSpec.SetCommonActivationRatio(0.8);
 				augSpec.SetCommonIoUThreshold(0.8);
 				augSpec.EnableRotation(true);

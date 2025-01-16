@@ -195,7 +195,7 @@ namespace CharacterBasedOCRDL
 				ocr.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
-				optSpec.SetLearningRate(.001f);
+				optSpec.SetLearningRate(.0001f);
 
 				// 설정한 Optimizer를 OCR에 적용 // Apply Optimizer that we set up to OCR
 				ocr.SetLearningOptimizerSpec(optSpec);
@@ -203,6 +203,7 @@ namespace CharacterBasedOCRDL
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
+				augSpec.EnableAugmentation(true);
 				augSpec.SetCommonActivationRatio(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
