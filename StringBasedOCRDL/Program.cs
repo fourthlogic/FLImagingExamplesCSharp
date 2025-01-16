@@ -36,10 +36,12 @@ namespace StringBasedOCRDL
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliLearnImage = new CFLImage();
 			CFLImage fliValidationImage = new CFLImage();
+			CFLImage fliResultImage = new CFLImage();
 
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageValidation = new CGUIViewImage();
+			CGUIViewImage viewImageResult = new CGUIViewImage();
 
 			// 그래프 뷰 선언 // Declare the graph view
 			CGUIViewGraph viewGraph = new CGUIViewGraph();
@@ -53,13 +55,13 @@ namespace StringBasedOCRDL
 				Thread.Sleep(1000);
 
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("../../ExampleImages/StringBasedOCRDL/Learn.flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/StringBasedOCR/Learn.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				if((res = fliValidationImage.Load("../../ExampleImages/StringBasedOCRDL/Source.flif")).IsFail())
+				if((res = fliValidationImage.Load("../../ExampleImages/StringBasedOCR/Source.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -73,6 +75,12 @@ namespace StringBasedOCRDL
 				}
 
 				if((res = viewImageValidation.Create(600, 0, 1100, 500)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				if((res = viewImageResult.Create(100, 500, 600, 1000)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
@@ -100,8 +108,21 @@ namespace StringBasedOCRDL
 					break;
 				}
 
-				// 다섯 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the four image view windows
+				if((res = viewImageResult.SetImagePtr(ref fliResultImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
+					break;
+				}
+
+				// 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the image view windows
 				if((res = viewImageLearn.SynchronizeWindow(ref viewImageValidation)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				// 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the image view windows
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageResult)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
@@ -111,10 +132,12 @@ namespace StringBasedOCRDL
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
 				CGUIViewImageLayer layerValidation = viewImageValidation.GetLayer(0);
+				CGUIViewImageLayer layerResult = viewImageResult.GetLayer(0);
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
 				layerValidation.Clear();
+				layerResult.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -136,9 +159,16 @@ namespace StringBasedOCRDL
 					break;
 				}
 
+				if((res = layerResult.DrawTextCanvas(flpPoint, "RESULT", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
+				viewImageResult.RedrawWindow();
 
 				// OCR 객체 생성 // Create OCR object
 				CStringBasedOCRDL ocr = new CStringBasedOCRDL();
@@ -147,9 +177,6 @@ namespace StringBasedOCRDL
 				ocr.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
 				ocr.SetLearningValidationImage(ref fliValidationImage);
-				// 분류할 이미지 설정 // Set the image to classify
-				ocr.SetInferenceImage(ref fliValidationImage);
-				ocr.SetInferenceResultImage(ref fliValidationImage);
 
 				// 학습할 OCR 모델 설정 // Set up the OCR model to learn
 				ocr.SetModel(CStringBasedOCRDL.EModel.FLNet);
@@ -172,7 +199,7 @@ namespace StringBasedOCRDL
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
-				augSpec.SetCommonActivationRatio(0.5);
+				augSpec.SetCommonActivationRatio(0.8);
 				augSpec.SetCommonIoUThreshold(0.8);
 				augSpec.EnableRotation(true);
 				augSpec.SetRotationParam(10.0, false, false);
@@ -305,6 +332,10 @@ namespace StringBasedOCRDL
 						break;
 				}
 
+				// 인식할 이미지 설정 // Set the image to Recognize
+				ocr.SetInferenceImage(ref fliValidationImage);
+				ocr.SetInferenceResultImage(ref fliResultImage);
+
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = ocr.Execute()).IsFail())
 				{
@@ -314,12 +345,13 @@ namespace StringBasedOCRDL
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
+				viewImageResult.RedrawWindow();
 
 				// 그래프 뷰를 갱신 // Update the Graph view.
 				viewGraph.RedrawWindow();
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageLearn.IsAvailable() && viewImageValidation.IsAvailable() && viewGraph.IsAvailable())
+				while(viewImageLearn.IsAvailable() && viewImageValidation.IsAvailable() && viewImageResult.IsAvailable() && viewGraph.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
