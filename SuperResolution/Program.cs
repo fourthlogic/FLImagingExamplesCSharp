@@ -247,31 +247,31 @@ namespace SuperResolution
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if((res = layerLearnLowResolution.DrawTextCanvas(flpPoint, "LEARN Low Resolution", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerLearnLowResolution.DrawTextCanvas(flpPoint, "LEARN LOW RESOLUTION", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layerLearnHighResolution.DrawTextCanvas(flpPoint, "LEARN High Resolution", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerLearnHighResolution.DrawTextCanvas(flpPoint, "LEARN HIGH RESOLUTION", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layerValidationLowResolution.DrawTextCanvas(flpPoint, "VALIDATION Low Resolution", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerValidationLowResolution.DrawTextCanvas(flpPoint, "VALIDATION LOW RESOLUTION", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layerValidationHighResolution.DrawTextCanvas(flpPoint, "VALIDATION High Resolution", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerValidationHighResolution.DrawTextCanvas(flpPoint, "VALIDATION HIGH RESOLUTION", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layerResultLabelFigure.DrawTextCanvas(flpPoint, "RESULT LABEL FIGURE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerResultLabelFigure.DrawTextCanvas(flpPoint, "INFERENCE RESULT", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
