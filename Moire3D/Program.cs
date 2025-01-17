@@ -254,8 +254,8 @@ namespace FPP
 				Moire3D.SetLearnImage(ref vctLrnImages);
 				// Source 이미지 설정 // Set the source image
 				Moire3D.SetSourceImage(ref vctSrcImages);
-				// Destination 이미지 설정 // Set the destination image
-				Moire3D.SetDestinationImage(ref fliImageDst);
+				// Destination Height Map 이미지 설정 // Set the destination height map image
+				Moire3D.SetDestinationHeightMapImage(ref fliImageDst);
 				// Destination 객체 설정 // Set the destination object
 				Moire3D.SetDestinationObject(ref fl3DOHM);
 				// 카메라의 working distance 설정 // Set working distance of the camera

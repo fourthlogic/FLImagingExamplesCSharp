@@ -173,12 +173,12 @@ namespace StereoDisparity3D
 				disparity.SetSourceImage(ref fliSrcImage);
 				// Source 이미지 설정 // Set the source image
 				disparity.SetSourceImage2(ref fliSrcImage2);
-				// Destination 이미지 설정 // Set the destination image
-				disparity.SetDestinationImage(ref fliDstImage);
+				// Destination Height Map 이미지 설정 // Set the destination height map image
+				disparity.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destination 객체 설정 // Set the destination object
 				disparity.SetDestinationObject(ref fl3DOHM);
-				// 결과 Texture 이미지 설정 // Set the result texture image
-				disparity.SetResultTextureImage(ref fliTxtImage);
+				// Destination Texture 이미지 설정 // Set the destination texture image
+				disparity.SetDestinationTextureImage(ref fliTxtImage);
 				// 최소 허용 Disparity 값 설정 // Set the minimum allowed disparity value
 				disparity.SetMinimumDisparity(-20);
 				// Disparity 범위 설정 // Set the range of disparity

@@ -159,12 +159,12 @@ namespace StereoPhotometric
 				photometric.SetSourceImage(ref fliSrcImage);
 				// Calibration 이미지 설정 // Set the calibration image
 				photometric.SetCalibrationImage(ref fliCalImage);
-				// Destination 이미지 설정 // Set the destination image
-				photometric.SetDestinationImage(ref fliDstImage);
+				// Destination Height Map 이미지 설정 // Set the destination height map image
+				photometric.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destination 객체 설정 // Set the destination object
 				photometric.SetDestinationObject(ref fl3DOHM);
-				// 결과 Texture 이미지 설정 // Set the result texture image
-				photometric.SetResultTextureImage(ref fliTxtImage);
+				// Destination Texture 이미지 설정 // Set the destination texture image
+				photometric.SetDestinationTextureImage(ref fliTxtImage);
 				// 동작 방식 설정 // Set Operation Mode
 				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
 				// Calibration 데이터 설정 // Set Calibration Settings
