@@ -154,7 +154,7 @@ namespace GraphViewDisplayMinMax
 
 
 				// 그래프 뷰가 종료될 때 까지 기다림 // Wait until the graph view closed
-				while(arrViewGraph[0].IsAvailable() && arrViewGraph[1].IsAvailable())
+				while(arrViewGraph[0].IsAvailable() && arrViewGraph[1].IsAvailable() && arrViewGraph[2].IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
