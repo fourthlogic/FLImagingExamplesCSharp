@@ -222,7 +222,7 @@ namespace PhotometricStereo
 					break;
 				}
 
-				if((res = layerDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerDst.DrawTextCanvas(flp, ("Destination Height Map Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;

@@ -273,7 +273,7 @@ namespace StereoPhotometric
 					break;
 				}
 
-				if((res = layerTxt.DrawTextCanvas(flp, ("Texture Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerTxt.DrawTextCanvas(flp, ("Destination Texture Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
