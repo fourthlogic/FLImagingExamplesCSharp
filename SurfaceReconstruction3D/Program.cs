@@ -45,27 +45,27 @@ namespace SurfaceReconstruction3D
 				// Source Object 로드 // Load the Source object
 				if((eResult = floSource.Load("../../ExampleImages/SurfaceReconstruction3D/Source.ply")).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to load the object file.\n");
+					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
 				}
 
 				// Source 3D 뷰 생성
 				if((eResult = view3DSource.Create(612, 0, 1124, 512)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to create the Learn 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Learn 3D view.\n");
 					break;
 				}
 
 				// Dst 3D 뷰 생성
 				if((eResult = view3DDst.Create(1124, 0, 1636, 512)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to create the Dst 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Dst 3D view.\n");
 					break;
 				}
 
 				if((eResult = view3DSource.PushObject(floSource)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to display the 3D object.\n");
+					ErrorPrint(eResult, "Failed to display the 3D object.\n");
 					break;
 				}
 
@@ -105,7 +105,7 @@ namespace SurfaceReconstruction3D
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = SurfaceReconstruction3D.Execute()).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to execute Surface Match 3D.");
+					ErrorPrint(eResult, "Failed to execute Surface Match 3D.");
 					break;
 				}
 
@@ -134,13 +134,19 @@ namespace SurfaceReconstruction3D
 
 				if((eResult = layer3DSource.DrawTextCanvas(flp, "Source Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
 				if((eResult = layer3DDst.DrawTextCanvas(flp, "Destination Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
+					break;
+				}
+
+				if((eResult = view3DDst.PushObject(floDestination)).IsFail())
+				{
+					ErrorPrint(eResult, "Failed to display the 3D object.\n");
 					break;
 				}
 
