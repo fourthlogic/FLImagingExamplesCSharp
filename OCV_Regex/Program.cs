@@ -35,24 +35,37 @@ namespace OCV
 				CFLImage fliImage1 = new CFLImage();
 				CFLImage fliImage2 = new CFLImage();
 
-				CFLFigure flfROI1 = CFigureUtilities.ConvertFigureStringToObject("A[D(97.41509400000000,395.88679200000001,666.96226400000000,528.33962299999996,INFO[NAME((.+)포스로직)]),D(132.79377509433962,260.75241056603778,425.95603924528297,317.26561811320755,INFO[NAME(FOURTH.{5})]),INFO[NAME(_SELECTION_)]]");
-				CFLFigure flfROI2 = CFigureUtilities.ConvertFigureStringToObject("A[D(97.41509400000000,395.88679200000001,666.96226400000000,528.33962299999996,INFO[NAME((\\w+)포스로직)]),D(121.37418892075473,258.90058578113212,414.53645307169802,315.41379332830189,INFO[NAME(FOURTH.{5})]),INFO[NAME(_SELECTION_)]]");
-				
+				CFLFigure flfaROI1 = new CFLFigureArray();
+				CFLFigure flfaROI2 = new CFLFigureArray();
+
 				CGUIViewImage viewImage1 = new CGUIViewImage();
 				CGUIViewImage viewImage2 = new CGUIViewImage();
 
 				CResult res;
 
 				// 이미지 로드 // Load image
-				if((res = fliImage1.Load("../../ExampleImages/OCV/(주)포스로직.flif")).IsFail())
+				if((res = fliImage1.Load("../../ExampleImages/OCV/FourthLogic Inc.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				if((res = fliImage2.Load("../../ExampleImages/OCV/(주)포스로직2.flif")).IsFail())
+				if((res = fliImage2.Load("../../ExampleImages/OCV/FourthLogic Inc 2.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
+
+				// ROI 로드 // Load ROI
+				if((res = flfaROI1.Load("../../ExampleImages/OCV/FourthLogic Inc_ROI 1.fig")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the ROI file.\n");
+					break;
+				}
+
+				if((res = flfaROI2.Load("../../ExampleImages/OCV/FourthLogic Inc_ROI 2.fig")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the ROI file.\n");
 					break;
 				}
 
@@ -144,7 +157,7 @@ namespace OCV
 				}
 
 				// ROI 설정
-				if((res = ocv.SetSourceROI(flfROI1)).IsFail())
+				if((res = ocv.SetSourceROI(flfaROI1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
@@ -230,7 +243,7 @@ namespace OCV
 				}
 
 				// ROI 설정
-				if((res = ocv.SetSourceROI(flfROI2)).IsFail())
+				if((res = ocv.SetSourceROI(flfaROI2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source ROI.");
 					break;

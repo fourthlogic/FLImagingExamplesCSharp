@@ -36,9 +36,9 @@ namespace OCV
 				CFLImage fliImage2 = new CFLImage();
 				CFLImage fliImage3 = new CFLImage();
 
-				CFLFigure flfROI1 = CFigureUtilities.ConvertFigureStringToObject("D{(132.03883080595011,-3.45695669993938),(1174.12971955658054,396.56425672952025),(1045.11138292280202,732.66851463916055),(3.02049417217151,332.64730120970091),INFO[NAME(1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)]}");
-				CFLFigure flfROI2 = CFigureUtilities.ConvertFigureStringToObject("D{(132.03883080595011,-3.45695669993938),(1174.12971955658054,396.56425672952025),(1045.11138292280202,732.66851463916055),(3.02049417217151,332.64730120970091),INFO[NAME(1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)]}");
-				CFLFigure flfROI3 = CFigureUtilities.ConvertFigureStringToObject("D(2.57650300000000,-4.01366100000000,932.76853500000004,296.00000000000000,INFO[NAME(1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)])");
+				CFLFigure flqROI1 = new CFLQuad<double>();
+				CFLFigure flqROI2 = new CFLQuad<double>();
+				CFLFigure flrROI3 = new CFLRect<double>();
 
 				CGUIViewImage viewImage1 = new CGUIViewImage();
 				CGUIViewImage viewImage2 = new CGUIViewImage();
@@ -62,6 +62,25 @@ namespace OCV
 				if((res = fliImage3.Load("../../ExampleImages/OCV/Print_Example3.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
+
+				// ROI 로드 // Load ROI
+				if((res = flqROI1.Load("../../ExampleImages/OCV/Print_Example_ROI 1.fig")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the ROI file.\n");
+					break;
+				}
+
+				if((res = flqROI2.Load("../../ExampleImages/OCV/Print_Example_ROI 2.fig")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the ROI file.\n");
+					break;
+				}
+
+				if((res = flrROI3.Load("../../ExampleImages/OCV/Print_Example_ROI 3.fig")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the ROI file.\n");
 					break;
 				}
 
@@ -173,7 +192,7 @@ namespace OCV
 				}
 
 				// ROI 설정
-				if((res = ocv.SetSourceROI(flfROI1)).IsFail())
+				if((res = ocv.SetSourceROI(flqROI1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
@@ -259,7 +278,7 @@ namespace OCV
 				}
 
 				// ROI 설정
-				if((res = ocv.SetSourceROI(flfROI2)).IsFail())
+				if((res = ocv.SetSourceROI(flqROI2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
@@ -341,7 +360,7 @@ namespace OCV
 				}
 
 				// ROI 설정
-				if((res = ocv.SetSourceROI(flfROI3)).IsFail())
+				if((res = ocv.SetSourceROI(flrROI3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
