@@ -100,7 +100,7 @@ namespace ImageView
                 // ex) EViewImageLoadOption.Load -> 이미지 파일/폴더 로드
                 //     EViewImageLoadOption.OpenDialog | EViewImageLoadOption.DialogTypeFile 이미지 파일 로드 다이얼로그 활성화
                 //     EViewImageLoadOption.OpenDialog | EViewImageLoadOption.DialogTypeFolder 폴더 로드 다이얼로그 활성화(폴더 내부의 이미지 파일들을 로드)
-                m_viewImage.Load("", EViewImageLoadOption.OpenDialog | EViewImageLoadOption.DialogTypeFile);
+                m_viewImage.Load("", EViewImageLoadOption.Load);
 
                 LockControls(false);
             }
@@ -137,7 +137,23 @@ namespace ImageView
                 if (!m_viewImage.IsAvailable())
                     break;
 
-                EFigureTemplateType eTemplateType = (EFigureTemplateType)comboBoxTemplateType.SelectedIndex + 1;
+                EFigureTemplateType eTemplateType = EFigureTemplateType.Unknown;
+
+				switch(comboBoxTemplateType.SelectedIndex)
+				{
+				case 0:
+                    eTemplateType = EFigureTemplateType.Int32;
+					break;
+				case 1:
+					eTemplateType = EFigureTemplateType.Int64;
+					break;
+				case 2:
+					eTemplateType = EFigureTemplateType.Float;
+					break;
+                case 3:
+					eTemplateType = EFigureTemplateType.Double;
+					break;
+				}
 
                 // 이미지 뷰의 캔버스 영역을 얻어온다.
                 CFLRect<int> flrlCanvas = m_viewImage.GetClientRectCanvasRegion();
@@ -505,33 +521,46 @@ namespace ImageView
 
                 buttonTerminateView.Enabled = true;
                 buttonLoadImage.Enabled = true;
-                buttonSaveImage.Enabled = true;
                 comboBoxDeclType.Enabled = true;
-                comboBoxTemplateType.Enabled = true;
                 buttonCreate.Enabled = true;
-                buttonPopFront.Enabled = true;
 
                 // 이미지 뷰의 이미지 버퍼가 존재하는지 체크
                 if (!m_viewImage.DoesFLImageBufferExist())
-                {
-                    buttonSaveImage.Enabled = false;
-                }
+				{
+					buttonSaveImage.Enabled = false;
+				}
+				else
+				{
+					buttonSaveImage.Enabled = true;
+				}
 
-                if(comboBoxDeclType.DroppedDown == false)
+				if(comboBoxDeclType.DroppedDown == false)
                 {
                     if (SelectedDeclType() == EFigureDeclType.CubicSpline || SelectedDeclType() == EFigureDeclType.Region || SelectedDeclType() == EFigureDeclType.ComplexRegion)
                     {
-                        comboBoxTemplateType.SelectedIndex = (int)EFigureTemplateType.Double - 1;
-                        comboBoxTemplateType.Enabled = false;
-                    }
-                }
+                        comboBoxTemplateType.SelectedIndex = comboBoxTemplateType.Items.Count - 1;
+						comboBoxTemplateType.Enabled = false;
+					}
+					else
+					{
+						comboBoxTemplateType.Enabled = true;
+					}
+				}
+				else
+				{
+					comboBoxTemplateType.Enabled = true;
+				}
 
-                // 이미지 뷰의 Figure object 개수를 얻어온다.
-                if (m_viewImage.GetFigureObjectCount() == 0)
+				// 이미지 뷰의 Figure object 개수를 얻어온다.
+				if (m_viewImage.GetFigureObjectCount() == 0)
                 {
                     buttonPopFront.Enabled = false;
-                }
-            }
+				}
+				else
+				{
+					buttonPopFront.Enabled = true;
+				}
+			}
         }
 
         private CGUIViewImage m_viewImage;
