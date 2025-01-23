@@ -50,6 +50,11 @@ namespace SNAPViewIntoDialog
             // 스냅 뷰 생성 // Create SNAP view
             CResult res = m_viewSNAP.CreateAndFitParent((ulong)this.Handle);
 
+			// 스냅 파일 로드 // Load SNAP file
+			res = m_viewSNAP.Load("C:\\Users\\Public\\Documents\\FLImaging\\ExamplesSNAP\\Advanced Functions\\Object\\Blob.flsf");
+
+			m_viewSNAP.ZoomFit();
+
 			if(res.IsFail())
 				ErrorMessageBox(res, "");
 		}
