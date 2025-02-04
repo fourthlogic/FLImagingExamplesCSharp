@@ -122,7 +122,7 @@ namespace Projection3D
 				}
 				//Source View와 동일한 시점을 유지하기 위해, 이미지의 정중앙을 뷰의 중앙에 맞추고 배율을 1로 설정
 				//Set view's center to the center of image and scale to 1, to match the viewpoint of the source view
-				viewImgDst.MoveCenterImageCoord(new CFLPoint<double>(256, 256), 1.0);
+				viewImgDst.SetViewCenterAndScale(new CFLPoint<double>(256, 256), 1.0);
 
 				// 화면에 출력하기 위해 View에서 레이어 0번을 얻어옴 // Obtain layer number 0 from view for display
 
