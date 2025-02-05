@@ -85,11 +85,11 @@ namespace ThinPlateSplineMapping
 					break;
 				}
 
-				// 화면상에 잘 보이도록 좌표 95배율을 적용 // Apply 95 magnification to the coordinates so that they can be seen clearly on the screen
-				double f64Scale = 95;
+				// 화면상에 잘 보이도록 좌표 90배율을 적용 // Apply 90 magnification to the coordinates so that they can be seen clearly on the screen
+				double f64Scale = 90;
 				// 화면상에 잘 보이도록 시점 Offset 조정 // Adjust the viewpoint offset so that it can be seen clearly on the screen
-				double f64CenterCoordX = 1.59;
-				double f64CenterCoordY = 1.37;
+				double f64CenterCoordX = 2.007;
+				double f64CenterCoordY = 1.865;
 				viewImage[0].SetViewCenterAndScale(new CFLPoint<double>(f64CenterCoordX, f64CenterCoordY), f64Scale);
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
