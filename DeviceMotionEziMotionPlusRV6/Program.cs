@@ -157,7 +157,7 @@ namespace DeviceCameraiRAYPLE
 						{
 							Thread.Sleep(100);
 						}
-						while(!pDMAxis.IsSearchOrigin());
+						while(pDMAxis.IsSearchOrigin());
 
 						if(!pDMAxis.IsSearchOriginEnd())
 							Console.Write("Failed to search origin position.\n");
@@ -197,7 +197,7 @@ namespace DeviceCameraiRAYPLE
 							}
 							while(pDMAxis.IsInMotion());
 
-							if(!pDMAxis.GetInposition())
+							if(!pDMAxis.IsMotionDone())
 								Console.Write("Failed to move absolute position.\n");
 							else
 								Console.Write("Successed to move absolute position.\n");
@@ -217,7 +217,7 @@ namespace DeviceCameraiRAYPLE
 							}
 							while(pDMAxis.IsInMotion());
 
-							if(!pDMAxis.GetInposition())
+							if(!pDMAxis.IsMotionDone())
 								Console.Write("Failed to move incremental position.\n");
 							else
 								Console.Write("Successed to move incremental position.\n");
