@@ -93,13 +93,13 @@ namespace ShapeMatch
 
 				for(long i = 0; i < i64ResultCount; ++i)
 				{
-					CShapeMatchCrossResult matchResult;
+					CShapeMatchFigureResult matchResult;
 
 					shapeMatch.GetResult(i, out matchResult);
 
 					// 도형 검출 결과를 Console창에 출력합니다. // Output the shape detection result to the console window.
 					Console.Write(" < Instance : {0} >\n", i);
-					Console.Write("  1. Shape Type : Cross\n");
+					Console.Write("  1. Shape Type : Region\n");
 					Console.Write("    Pivot X: {0}\n", matchResult.flpPivot.x);
 					Console.Write("    Pivot Y: {0}\n", matchResult.flpPivot.y);
 					Console.Write("  2. Score : {0}\n  3. Scale : {1}\n\n", matchResult.f32Score, matchResult.f32Scale);
