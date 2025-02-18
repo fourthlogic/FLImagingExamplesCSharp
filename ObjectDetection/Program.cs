@@ -212,7 +212,7 @@ namespace ObjectDetection
 				augSpec.SetCommonActivationRatio(0.8);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(30.0, true, false);
+				augSpec.SetRotationParam(-30.0, 30.0, true, false);
 				augSpec.EnableScale(true);
 				augSpec.SetScaleParam(1.0, 1.2, 1.0, 1.2, true);
 				augSpec.EnableHorizontalFlip(true);

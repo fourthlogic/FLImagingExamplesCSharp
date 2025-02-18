@@ -235,7 +235,7 @@ namespace SemanticSegmentation
 				augSpec.SetCommonActivationRatio(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(180.0, false, true);
+				augSpec.SetRotationParam(-180.0, 180.0, false, true);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 

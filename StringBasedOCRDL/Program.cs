@@ -203,13 +203,13 @@ namespace StringBasedOCRDL
 				augSpec.SetCommonActivationRatio(0.8);
 				augSpec.SetCommonIoUThreshold(0.8);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(10.0, false, false);
+				augSpec.SetRotationParam(-10.0, 10.0, false, false);
 
 				augSpec.EnableScale(true);
 				augSpec.SetScaleParam(.8, 1.2, .8, 1.2, false);
 
 				augSpec.EnableTranslation(true);
-				augSpec.SetTranslationParam(.1, .1);
+				augSpec.SetTranslationParam(0.0, 0.1, 0.0, 0.1);
 
 				ocr.SetLearningAugmentationSpec(augSpec);
 

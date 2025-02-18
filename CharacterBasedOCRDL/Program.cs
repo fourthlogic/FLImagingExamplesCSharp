@@ -207,7 +207,7 @@ namespace CharacterBasedOCRDL
 				augSpec.SetCommonActivationRatio(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(45.0, false, true);
+				augSpec.SetRotationParam(-45.0, 45.0, false, true);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 

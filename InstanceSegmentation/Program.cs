@@ -239,7 +239,7 @@ namespace InstanceSegmentation
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 				augSpec.EnableScale(true);
-				augSpec.SetScaleParam( 1.000000, 1.000000, 1.000000, 1.000000, true);
+				augSpec.SetScaleParam(1.000000, 1.000000, 1.000000, 1.000000, true);
 
 				instanceSegmentation.SetLearningAugmentationSpec(augSpec);
 

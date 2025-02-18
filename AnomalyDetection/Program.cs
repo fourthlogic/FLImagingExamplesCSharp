@@ -204,7 +204,7 @@ namespace AnomalyDetection
 				augSpec.SetCommonActivationRatio(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnablePerspective(true);
-				augSpec.SetPerspectiveParam(0.1);
+				augSpec.SetPerspectiveParam(0.0, 0.1);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
