@@ -325,7 +325,7 @@ namespace SuperResolution
 				augSpec.SetCommonActivationRatio(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableTranslation(true);
-				augSpec.SetTranslationParam(0.1, 0.1);
+				augSpec.SetTranslationParam(0.0, 0.1, 0.0, 0.1);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
