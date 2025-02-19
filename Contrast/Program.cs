@@ -133,7 +133,7 @@ namespace Contrast
 					break;
 				}
 
-				if((res = layerDestination.DrawTextCanvas(flpPoint, "Source & Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text. \n");
 					break;
