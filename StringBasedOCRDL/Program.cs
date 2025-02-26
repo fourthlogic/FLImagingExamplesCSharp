@@ -181,7 +181,7 @@ namespace StringBasedOCRDL
 				// 학습할 OCR 모델 설정 // Set up the OCR model to learn
 				ocr.SetModel(CStringBasedOCRDL.EModel.FLNet);
 				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
-				ocr.SetModelVersion(CStringBasedOCRDL.EModelVersion.FLNet_V1_32_256);
+				ocr.SetModelVersion(CStringBasedOCRDL.EModelVersion.FLNet_V1_32_256_B2);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				ocr.SetLearningEpoch(500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
