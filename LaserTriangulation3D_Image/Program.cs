@@ -115,12 +115,17 @@ namespace MultiFocus
 
 				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 
+				// Baseline ROI 생성 // Set the base line of the laser
+				CFLLine<double> fliBaseLine = new CFLLine<double>(0, 61, 1216, 61);
+
 				// Source 이미지 설정 // Set the source image
 				LaserTriangulation.SetSourceImage(ref fliSrcImage);
 				// Destination Height Map 이미지 설정 // Set the destination height map image
 				LaserTriangulation.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destionation 3D Object 설정 // Set the Destionation 3D Object 
 				LaserTriangulation.SetDestinationObject(ref fl3DOHM);
+				// Baseline ROI 설정 // Set the base line of the laser
+				LaserTriangulation.SetBaseLine(fliBaseLine);
 				// Source 이미지 타입 설정 // Set the type of the source image
 				LaserTriangulation.SetSourceType(CLaserTriangulation3D.ESourceType.Image);
 				// Pixel Accuracy 설정 // Set the pixel accuracy
