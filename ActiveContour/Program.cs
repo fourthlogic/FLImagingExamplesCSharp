@@ -149,11 +149,8 @@ namespace ActiveContour
 
                     /* PushBack Figure */
                     {
-						CFLRegion flfContourFigure = new CFLRegion();
-						ac.GetContourFigure(out flfContourFigure);
-
 						viewImage[0].ClearFigureObject();
-                        viewImage[0].PushBackFigureObject(flfContourFigure);
+                        viewImage[0].PushBackFigureObject(ac.GetContourFigure());
                         viewImage[0].Invalidate(true);
 
 						Thread.Sleep(50);
