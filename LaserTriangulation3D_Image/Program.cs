@@ -137,7 +137,7 @@ namespace MultiFocus
 				// 레이저 각도 설정 // Set the angle of laser
 				LaserTriangulation.SetAngleOfLaser(60);
 				// 레이저 밝기 설정 // Set laser brightness threshold
-				LaserTriangulation.SetLaserThreshold(32);
+				LaserTriangulation.SetLaserThreshold(64);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = LaserTriangulation.Execute()).IsFail())
