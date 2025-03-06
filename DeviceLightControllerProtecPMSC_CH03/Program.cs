@@ -91,7 +91,6 @@ namespace DeviceLightController
 
 						if(int.TryParse(Console.ReadLine(), out var onOff))
 						{
-
 							if(onOff == 0)
 							{
 								lightController.EnableLiveTurnOn(true);
@@ -112,6 +111,8 @@ namespace DeviceLightController
 							else if(onOff == 1)
 								lightController.EnableLiveTurnOn(false);
 						}
+
+						Console.Clear();
 					}
 					else if(operationMode == 2)
 					{
@@ -136,6 +137,8 @@ namespace DeviceLightController
 								}
 							}
 						}
+
+						Console.Clear();
 					}
 					else if(operationMode == 3)
 					{
@@ -165,6 +168,8 @@ namespace DeviceLightController
 								}
 							}
 						}
+
+						Console.Clear();
 					}
 
 					// 입력된 파라미터를 적용합니다. // Apply the configured parameters.
