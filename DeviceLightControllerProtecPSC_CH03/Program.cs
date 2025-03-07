@@ -87,7 +87,6 @@ namespace DeviceLightController
 						// On/Off 상태를 설정합니다. // Set the On/Off state.
 						Console.WriteLine("\n1. Live On\n2. Live Off");
 						Console.Write("Select Number: ");
-						Console.Clear();
 
 						if(int.TryParse(Console.ReadLine(), out var onOff))
 						{
