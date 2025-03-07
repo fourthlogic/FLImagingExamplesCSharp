@@ -268,13 +268,13 @@ namespace DeviceLightController
 						{
 							if(operationMode == 1)
 							{
-								Console.WriteLine("\n0. On\n1. Off");
+								Console.WriteLine("\n1. On\n2. Off");
 								Console.Write("Enter On/Off: ");
 
 								if(int.TryParse(Console.ReadLine(), out var onOff))
 								{
 									// 채널별 On/Off 상태를 설정합니다. // Set the On/Off state for the channel.
-									lightController.SetChannelState(channel, onOff == 0);
+									lightController.SetChannelState(channel, onOff == 1);
 								}
 							}
 							else if(operationMode == 2)

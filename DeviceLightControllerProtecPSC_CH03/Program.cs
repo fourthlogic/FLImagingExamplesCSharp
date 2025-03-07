@@ -85,12 +85,13 @@ namespace DeviceLightController
 						lightController.SetOperationMode(CDeviceLightControllerProtecPSC_CH03.EOperationMode.Live);
 
 						// On/Off 상태를 설정합니다. // Set the On/Off state.
-						Console.WriteLine("\n0. On\n1. Off");
+						Console.WriteLine("\n1. Live On\n2. Live Off");
 						Console.Write("Select Number: ");
+						Console.Clear();
 
 						if(int.TryParse(Console.ReadLine(), out var onOff))
 						{
-							if(onOff == 0)
+							if(onOff == 1)
 							{
 								lightController.EnableLiveTurnOn(true);
 
@@ -107,7 +108,7 @@ namespace DeviceLightController
 									}
 								}
 							}
-							else if(onOff == 1)
+							else if(onOff == 2)
 								lightController.EnableLiveTurnOn(false);
 						}
 
