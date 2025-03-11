@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace MultiFocus
+namespace DistanceTransform3D
 {
 	class Program
 	{

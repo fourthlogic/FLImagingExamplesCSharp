@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace MultiFocus
+namespace PerspectiveTransform3D
 {
 	class Program
 	{
