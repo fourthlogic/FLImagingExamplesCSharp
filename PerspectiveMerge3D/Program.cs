@@ -71,24 +71,25 @@ namespace PerspectiveMerge3D
 				res = fl3DOSrc.Load("../../ExampleImages/PerspectiveMerge3D/Left Cam.ply");
 				res = fl3DOSrc2.Load("../../ExampleImages/PerspectiveMerge3D/Right Cam.ply");
 
-				FLImagingCLR.ThreeDim.CPerspectiveMerge3D algemObject = new FLImagingCLR.ThreeDim.CPerspectiveMerge3D();
+				FLImagingCLR.ThreeDim.CPerspectiveMerge3D algObject = new FLImagingCLR.ThreeDim.CPerspectiveMerge3D();
 
 				FLImagingCLR.Foundation.CFL3DObject fl3DODst = new FLImagingCLR.Foundation.CFL3DObject();
 
-				TPoint3<float> tpPosition = new TPoint3<float>(-0.152f, 0.0f, 0f);
-				TPoint3<float> tpRotation = new TPoint3<float>(-8f, 29f, 90f);
-				TPoint3<float> tpPosition2 = new TPoint3<float>(0.152f, 0.0f, 0f);
-				TPoint3<float> tpRotation2 = new TPoint3<float>(-8f, -29f, 90f);
+				algObject.SetEulerSequence(EEulerSequence.Intrinsic_ZXY);
 
+				TPoint3<float> tpPosition = new TPoint3<float>(-0.152f, 0.0f, 0f);
+				TPoint3<float> tpRotation = new TPoint3<float>(90f, -8f, 29f);
+				TPoint3<float> tpPosition2 = new TPoint3<float>(0.152f, 0.0f, 0f);
+				TPoint3<float> tpRotation2 = new TPoint3<float>(90f, -8f, -29f);
 
 				// 카메라 1, 2의 Source 객체 설정 // Set the source object of camera 1, 2
-				algemObject.AddSourceObject(ref fl3DOSrc, tpPosition, tpRotation);
-				algemObject.AddSourceObject(ref fl3DOSrc2, tpPosition2, tpRotation2);
+				algObject.AddSourceObject(ref fl3DOSrc, tpPosition, tpRotation);
+				algObject.AddSourceObject(ref fl3DOSrc2, tpPosition2, tpRotation2);
 				// Destination 객체 설정 // Set the destination object
-				algemObject.SetDestinationObject(ref fl3DODst);
+				algObject.SetDestinationObject(ref fl3DODst);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = algemObject.Execute()).IsFail())
+				if((res = algObject.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute MultiFocus.\n");
 					break;
@@ -96,7 +97,7 @@ namespace PerspectiveMerge3D
 
 				view3DSrc.PushObject(fl3DOSrc);
 				view3DSrc2.PushObject(fl3DOSrc2);
-				view3DDst.PushObject(algemObject.GetDestinationObject());
+				view3DDst.PushObject(algObject.GetDestinationObject());
 
 				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
 				view3DSrc.ZoomFit();
