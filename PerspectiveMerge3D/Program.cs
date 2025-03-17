@@ -66,14 +66,14 @@ namespace PerspectiveMerge3D
 					break;
 				}
 
-				FLImagingCLR.Foundation.CFL3DObject fl3DOSrc = new FLImagingCLR.Foundation.CFL3DObject();
-				FLImagingCLR.Foundation.CFL3DObject fl3DOSrc2 = new FLImagingCLR.Foundation.CFL3DObject();
+				CFL3DObject fl3DOSrc = new CFL3DObject();
+				CFL3DObject fl3DOSrc2 = new CFL3DObject();
 				res = fl3DOSrc.Load("../../ExampleImages/PerspectiveMerge3D/Left Cam.ply");
 				res = fl3DOSrc2.Load("../../ExampleImages/PerspectiveMerge3D/Right Cam.ply");
 
-				FLImagingCLR.ThreeDim.CPerspectiveMerge3D algObject = new FLImagingCLR.ThreeDim.CPerspectiveMerge3D();
+				CPerspectiveMerge3D algObject = new CPerspectiveMerge3D();
 
-				FLImagingCLR.Foundation.CFL3DObject fl3DODst = new FLImagingCLR.Foundation.CFL3DObject();
+				CFL3DObject fl3DODst = new CFL3DObject();
 
 				algObject.SetEulerSequence(EEulerSequence.Intrinsic_ZXY);
 
