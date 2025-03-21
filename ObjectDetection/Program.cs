@@ -209,12 +209,12 @@ namespace ObjectDetection
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
 				augSpec.EnableAugmentation(true);
-				augSpec.SetCommonActivationRatio(0.8);
+				augSpec.SetCommonActivationRate(0.8);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(-30.0, 30.0, true, false);
+				augSpec.SetRotationParam(-30.0, 30.0, true, false, 1.0);
 				augSpec.EnableScale(true);
-				augSpec.SetScaleParam(1.0, 1.2, 1.0, 1.2, true);
+				augSpec.SetScaleParam(1.0, 1.2, 1.0, 1.2, true, 1.0);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 

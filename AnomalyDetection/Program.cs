@@ -201,10 +201,10 @@ namespace AnomalyDetection
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
 				augSpec.EnableAugmentation(true);
-				augSpec.SetCommonActivationRatio(0.5);
+				augSpec.SetCommonActivationRate(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnablePerspective(true);
-				augSpec.SetPerspectiveParam(0.0, 0.1);
+				augSpec.SetPerspectiveParam(0.0, 0.1, 1.0);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 

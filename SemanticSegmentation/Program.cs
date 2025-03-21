@@ -232,10 +232,10 @@ namespace SemanticSegmentation
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
 				augSpec.EnableAugmentation(true);
-				augSpec.SetCommonActivationRatio(0.5);
+				augSpec.SetCommonActivationRate(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(-180.0, 180.0, false, true);
+				augSpec.SetRotationParam(-180.0, 180.0, false, true, 1.0);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 

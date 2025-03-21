@@ -233,13 +233,13 @@ namespace InstanceSegmentation
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
 				augSpec.EnableAugmentation(true);
-				augSpec.SetCommonActivationRatio(0.700000);
+				augSpec.SetCommonActivationRate(0.700000);	
 				augSpec.SetCommonIoUThreshold(0.800000);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 				augSpec.EnableScale(true);
-				augSpec.SetScaleParam(1.000000, 1.000000, 1.000000, 1.000000, true);
+				augSpec.SetScaleParam(1.000000, 1.000000, 1.000000, 1.000000, true, 1.0);
 
 				instanceSegmentation.SetLearningAugmentationSpec(augSpec);
 
