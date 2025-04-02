@@ -56,7 +56,7 @@ namespace LaplacianOfGaussianFilter
 			do
 			{
 				// 이미지 로드 // Load image
-                if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
+                if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/EdgeDetection/AlphabatColor.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -123,7 +123,7 @@ namespace LaplacianOfGaussianFilter
 					break;
 
 				// ROI 설정을 위한 CFLRect 객체 생성 // Create a CFLRect object for setting ROI
-				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
+				CFLRect<int> flrROI = new CFLRect<int>(150, 150, 300, 300);
 
 				// Laplacian Of Gaussian Filter 객체 생성 // Create Laplacian Of Gaussian Filter object
 				CLaplacianOfGaussianFilter LaplacianOfGaussianFilter = new CLaplacianOfGaussianFilter();
