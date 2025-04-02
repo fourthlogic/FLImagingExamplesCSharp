@@ -116,7 +116,23 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				if((res = CLabelRenamerDL.Execute(fliSourceImage, out fliResultImage, "1(OK)", "1(PASS)")).IsFail())
+				// CLabelRenamerDL 객체 생성 // Create CLabelRenamerDL object
+				CLabelRenamerDL labelRenamer = new CLabelRenamerDL();
+				
+				// Source 이미지 설정 // Set source image
+				labelRenamer.SetSourceImage(ref fliSourceImage);
+				// Destination 이미지 설정 // Set destination image
+				labelRenamer.SetDestinationImage(ref fliResultImage);
+
+				// 파라미터 값 설정 // Set parameter value
+				labelRenamer.EnablePathMode(false);
+				labelRenamer.EnableRegularExpression(false);
+				labelRenamer.EnableMatchCase(true);
+				labelRenamer.SetCompareMode(CLabelRenamerDL.ECompareMode.TextMode);
+				labelRenamer.SetOriginalName("1(OK)");
+				labelRenamer.SetSubstituteName("1(PASS)");
+
+				if((res = labelRenamer.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to process\n");
 					break;
