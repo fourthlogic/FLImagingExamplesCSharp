@@ -150,6 +150,9 @@
       - DataMatrixEncoder
         - The example of an algorithm that encodes the input string into a datamatrix.
         - 입력한 문자열을 데이터 매트릭스로 인코딩하는 알고리즘 예제.
+      - DataMatrixVerifier
+        - The example of an algorithm to evaluate print quality after detecting and decoding Data Matrix within an image.
+        - 이미지 내의 데이터 매트릭스를 검출 및 디코딩 후 인쇄 품질을 평가하는 알고리즘 예제.
 
     - [QR Code]
     
@@ -159,6 +162,9 @@
       - QRCodeEncoder
         - The example of an algorithm that encodes the input string into a QR code.
         - 입력한 문자열을 QR 코드로 인코딩하는 알고리즘 예제.
+      - QRCodeVerifier
+        - The example of an algorithm to evaluate print quality after detecting and decoding QR Code within an image.
+        - 이미지 내의 QR 코드를 검출 및 디코딩 후 인쇄 품질을 평가하는 알고리즘 예제.
         
     - [Micro QR Code]
     
