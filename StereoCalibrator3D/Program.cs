@@ -29,7 +29,7 @@ namespace StereoCalibrator3D
 		public struct SGridDisplay
 		{
 			public long i64ImageIdx;
-			public CStereoCalibrator3D.SGridResult sGridData;
+			public CStereoCalibrator3D.CCalibratorGridResult sGridData;
 		};
 
 		static bool DrawGridPoints(SGridDisplay sGridDisplay, CGUIViewImageLayer pLayer)
@@ -588,11 +588,11 @@ namespace StereoCalibrator3D
 				}
 
 				// calibration data 출력 // Display the calibration data
-				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam = sSC.GetResultIntrinsicParameters();
-				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef = sSC.GetResultDistortionCoefficients();
+				CStereoCalibrator3D.CCalibratorIntrinsicParameters sIntrinsicParam = sSC.GetResultIntrinsicParameters();
+				CStereoCalibrator3D.CCalibratorDistortionCoefficients sDistortCoeef = sSC.GetResultDistortionCoefficients();
 
-				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam2 = sSC.GetResultIntrinsicParameters2();
-				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef2 = sSC.GetResultDistortionCoefficients2();
+				CStereoCalibrator3D.CCalibratorIntrinsicParameters sIntrinsicParam2 = sSC.GetResultIntrinsicParameters2();
+				CStereoCalibrator3D.CCalibratorDistortionCoefficients sDistortCoeef2 = sSC.GetResultDistortionCoefficients2();
 
 				CStereoCalibrator3D.SRotationParameters sRotationParam = sSC.GetResultRotationParameters();
 				CStereoCalibrator3D.SRotationParameters sRotationParam2 = sSC.GetResultRotationParameters2();

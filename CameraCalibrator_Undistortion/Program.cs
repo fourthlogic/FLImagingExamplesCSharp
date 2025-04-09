@@ -175,8 +175,8 @@ namespace CircleGauge
                 // Setter로 입력 // Input as setter
                 double[] arrF64Intrinc = new double[9]{ 605.9413643192689, 0, 325.9133439121233, 0, 605.3834974915350, 234.0647625697701, 0, 0, 1 };
                 double[] arrF64Dist = new double[5]{ 0.1748895907714, -1.4909467274276, -0.0070404809103, 0.0017880490098, 5.9363069879613 };
-                CCameraCalibrator.SIntrinsicParameters uIntrinc = new CCameraCalibrator.SIntrinsicParameters();
-                CCameraCalibrator.SDistortionCoefficients uDist = new CCameraCalibrator.SDistortionCoefficients();
+                CCameraCalibrator.CCalibratorIntrinsicParameters uIntrinc = new CCameraCalibrator.CCalibratorIntrinsicParameters();
+                CCameraCalibrator.CCalibratorDistortionCoefficients uDist = new CCameraCalibrator.CCalibratorDistortionCoefficients();
 
                 uIntrinc.f64FocalLengthX = arrF64Intrinc[0];
                 uIntrinc.f64Skew = arrF64Intrinc[1];
