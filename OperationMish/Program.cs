@@ -129,7 +129,7 @@ namespace OperationMish
 					break;
 				}
 
-				// 이미지 뷰의 값 표현 방식 설정 // Set how values ​​are expressed in image view
+				// 이미지 뷰의 값 표현 방식 설정 // Set how values are expressed in image view
 				viewImageSource.SetPixelNumberMode(EPixelNumberMode.Decimal);
 				viewImageDestination0.SetPixelNumberMode(EPixelNumberMode.Decimal);
 				viewImageDestination1.SetPixelNumberMode(EPixelNumberMode.Decimal);

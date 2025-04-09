@@ -97,7 +97,7 @@ namespace Homography
 				// Source 이미지 설정 // Set the source image
 				homography.SetSourceImage(ref fliSourceImage);
 
-				// Source 이미지의 투영 영역 범위 설정 // Set the range of the projection area of ​​the Source image
+				// Source 이미지의 투영 영역 범위 설정 // Set the range of the projection area of the Source image
 				CFLPointArray flpaSourceProjection = new CFLPointArray();
 
 				flpaSourceProjection.PushBack(new CFLPoint<double>(564.137931, 316.551724));
@@ -114,13 +114,13 @@ namespace Homography
 				flpaSourceProjection.PushBack(new CFLPoint<double>(373.793103, 64.137931));
 				flpaSourceProjection.PushBack(new CFLPoint<double>(160.689655, 28.965517));
 
-				// Source 이미지의 투영 영역 지정 // Set the projection area of ​​the Source image
+				// Source 이미지의 투영 영역 지정 // Set the projection area of the Source image
 				homography.SetSourceProjection(flpaSourceProjection);
 
 				// Destination 이미지 설정 // Set the destination image
 				homography.SetDestinationImage(ref fliDestinationImage);
 
-				// Destination 이미지의 투영 영역 범위 설정 // Set the range of the projection area of ​​the destination image
+				// Destination 이미지의 투영 영역 범위 설정 // Set the range of the projection area of the destination image
 				CFLPointArray flpaDestinationProjection = new CFLPointArray();
 
 				flpaDestinationProjection.PushBack(new CFLPoint<double>(529.223526, 181.280286));
@@ -137,7 +137,7 @@ namespace Homography
 				flpaDestinationProjection.PushBack(new CFLPoint<double>(263.629186, 75.928433));
 				flpaDestinationProjection.PushBack(new CFLPoint<double>(1.266525, 182.189349));
 
-				// Destination 이미지의 투영 영역 지정 // Set the projection area of ​​the destination image
+				// Destination 이미지의 투영 영역 지정 // Set the projection area of the destination image
 				res = homography.SetDestinationProjection(flpaDestinationProjection);
 
 				// 보간법 설정 (Bicubic / Bilinear / NearestNeighbor) // Set interpolation method (Bicubic / Bilinear / NearestNeighbor)
