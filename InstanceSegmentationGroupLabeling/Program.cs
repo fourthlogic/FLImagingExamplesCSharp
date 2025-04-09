@@ -56,13 +56,13 @@ namespace InstanceSegmentation
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("../../ExampleImages/InstanceSegmentation/Bolt.flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/InstanceSegmentation/Earring.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				if((res = fliValidationImage.Load("../../ExampleImages/InstanceSegmentation/Bolt.flif")).IsFail())
+				if((res = fliValidationImage.Load("../../ExampleImages/InstanceSegmentation/Earring.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
