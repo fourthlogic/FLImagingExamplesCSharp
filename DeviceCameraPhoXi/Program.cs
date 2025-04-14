@@ -13,7 +13,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
 
-namespace DeviceCameraPhotoneo
+namespace DeviceCameraPhoXi
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase
@@ -41,7 +41,7 @@ namespace DeviceCameraPhotoneo
 	            if(!m_view3D.IsAvailable())
 		            break;
 
-                CDeviceCameraPhotoneo camera = pDeviceImage as CDeviceCameraPhotoneo;
+                CDeviceCameraPhoXi camera = pDeviceImage as CDeviceCameraPhoXi;
 
 	            if(camera == null)
 		            break;
@@ -102,8 +102,8 @@ namespace DeviceCameraPhotoneo
             // 이미지 뷰 선언 // Declare the 3D view
 	        CGUIView3D view3D = new CGUIView3D();
 
-	        // Photoneo 카메라 선언
-	        CDeviceCameraPhotoneo camPhotoneo = new CDeviceCameraPhotoneo();
+	        // PhoXi 카메라 선언
+	        CDeviceCameraPhoXi camPhoXi = new CDeviceCameraPhoXi();
 
 	        do
 	        {
@@ -156,7 +156,7 @@ namespace DeviceCameraPhotoneo
                     List<String> listSerialNumbers = null;
 
                     // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
-                    drResult = camPhotoneo.GetAutoDetectCameraSerialNumbers(out listSerialNumbers);
+                    drResult = camPhoXi.GetAutoDetectCameraSerialNumbers(out listSerialNumbers);
 
 			        if(drResult.IsFail() || listSerialNumbers == null || listSerialNumbers.Count == 0)
 			        {
@@ -208,18 +208,18 @@ namespace DeviceCameraPhotoneo
                 CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
 
 		        // 카메라에 이벤트 객체 설정
-                camPhotoneo.RegisterDeviceEvent(eventImage);
+                camPhoXi.RegisterDeviceEvent(eventImage);
 
 		        // 인덱스에 해당하는 카메라로 연결을 설정한다.
 		        if(bAutoDetect)
                     // 인덱스에 해당하는 카메라로 연결을 설정합니다.
-                    drResult = camPhotoneo.AutoDetectCamera(i32SelectDevice);
+                    drResult = camPhoXi.AutoDetectCamera(i32SelectDevice);
 		        else
                     // 시리얼 번호를 설정합니다.
-                    camPhotoneo.SetSerialNumber(strConnection);
+                    camPhoXi.SetSerialNumber(strConnection);
 
 		        // 카메라를 초기화 합니다.
-                drResult = camPhotoneo.Initialize();
+                drResult = camPhoXi.Initialize();
 
                 if (drResult.IsFail())
 		        {
@@ -238,7 +238,7 @@ namespace DeviceCameraPhotoneo
                 eventImage.SetView3D(view3D);
 
 		        // 카메라를 Live 합니다.
-                drResult = camPhotoneo.Live();
+                drResult = camPhoXi.Live();
 
                 if (drResult.IsFail())
 		        {
@@ -253,7 +253,7 @@ namespace DeviceCameraPhotoneo
 	        while(false);
 
 	        // 카메라의 초기화를 해제합니다.
-	        camPhotoneo.Terminate();
+	        camPhoXi.Terminate();
 
             if (drResult.IsFail())
                 Console.ReadLine();
