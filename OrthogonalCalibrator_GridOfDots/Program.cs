@@ -42,7 +42,7 @@ namespace OrthogonalCalibrator
 			do
 			{
 				// Learn 이미지 설정 // Learn image settings
-				if((res = sCC.SetLearnImageForCameraCalibration(ref fliLearnImage)).IsFail())
+				if((res = sCC.SetCalibrationImage(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image");
 					break;
@@ -52,7 +52,7 @@ namespace OrthogonalCalibrator
 				sCC.SetGridTypeForCameraCalibration(COrthogonalCalibrator.EGridType.GridOfDots);
 
 				// 직교 보정 계산을 할 Learn 이미지 설정 // Learn image settings for orthogonal correction
-				if((res = sCC.SetLearnImageForOrthogonalCorrection(ref fliLearnImage)).IsFail())
+				if((res = sCC.SetOrthogonalCorrectionImage(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image");
 					break;

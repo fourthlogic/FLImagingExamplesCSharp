@@ -42,7 +42,7 @@ namespace CameraCalibrator
 			do
 			{
 				// Learn 이미지 설정 // Learn image settings
-				if((res = sCC.SetLearnImageForCameraCalibration(ref fliLearnImage)).IsFail())
+				if((res = sCC.SetCalibrationImage(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image");
 					break;
