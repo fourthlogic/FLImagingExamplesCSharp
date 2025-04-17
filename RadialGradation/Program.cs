@@ -156,7 +156,7 @@ namespace RadialGradation
 				}
 
 				// text를 출력합니다. // Display text.
-				if((res = layer1.DrawTextImage(flcRadialRegion.GetCenter(), "Start Value(255, 0, 0)\nStart Alpha(1.0, 0.3, 0.3)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
+				if((res = layer1.DrawTextImage(flcRadialRegion.GetCenter(), "Start Value(0, 0, 0)\nStart Alpha(1.0, 0.3, 0.3)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
@@ -170,10 +170,10 @@ namespace RadialGradation
 				}
 
 				// Text 출력 // Display Text
-				if((res = layer1.DrawTextImage(new CFLPoint<double>(50, 0), "Source Image", EColor.RED)).IsFail())
+				if((res = layer1.DrawTextImage(new CFLPoint<double>(50, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = layer2.DrawTextImage(new CFLPoint<double>(50, 0), "Destination Image", EColor.RED)).IsFail())
+				if((res = layer2.DrawTextImage(new CFLPoint<double>(50, 0), "Destination Image",  EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.

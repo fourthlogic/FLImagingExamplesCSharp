@@ -129,7 +129,7 @@ namespace Projection
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// Text 출력 // Display Text 
-				if((res = layer.DrawTextImage(flpTemp, "Source Image", EColor.RED)).IsFail())
+				if((res = layer.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close

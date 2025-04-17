@@ -188,10 +188,10 @@ namespace Gradation
 				}
 
 				// Text 출력 // Display Text
-				if((res = layer1.DrawTextImage(new CFLPoint<double>(50, 0), "Source Image", EColor.RED)).IsFail())
+				if((res = layer1.DrawTextImage(new CFLPoint<double>(50, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = layer2.DrawTextImage(new CFLPoint<double>(0, 0), "Gradation Image", EColor.RED)).IsFail())
+				if((res = layer2.DrawTextImage(new CFLPoint<double>(0, 0), "Gradation Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.

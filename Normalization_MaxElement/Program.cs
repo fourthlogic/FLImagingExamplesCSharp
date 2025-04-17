@@ -123,10 +123,10 @@ namespace Normalization
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// Text 출력 // Display text
-				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.RED)).IsFail())
+				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = layer2.DrawTextImage(flpTemp, "Destination Image", EColor.RED)).IsFail())
+				if((res = layer2.DrawTextImage(flpTemp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 

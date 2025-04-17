@@ -111,7 +111,7 @@ namespace PixelCounter
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// Text 출력 // Display Text 
-				if((res = layer1.DrawTextImage(flpTemp, flsDrawText, EColor.RED)).IsFail())
+				if((res = layer1.DrawTextImage(flpTemp, flsDrawText, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// Source ROI 출력 // Display Source ROI 
