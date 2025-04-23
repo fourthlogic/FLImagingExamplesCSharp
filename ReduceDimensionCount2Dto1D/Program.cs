@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ReduceDimensionMin2Dto1D
+namespace ReduceDimensionCount2Dto1D
 {
 	class Program
 	{
@@ -43,7 +43,7 @@ namespace ReduceDimensionMin2Dto1D
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ReduceDimensionMin2Dto1D/Source.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ReduceDimensionCount2Dto1D/Source.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -104,35 +104,35 @@ namespace ReduceDimensionMin2Dto1D
 					break;
 				}
 
-				// Reduce Dimension Min 2D to 1D 객체 생성 // Create Reduce Dimension Min 2D to 1D object
-				CReduceDimensionMin2Dto1D reduceDimensionMin2Dto1D = new CReduceDimensionMin2Dto1D();
+				// Reduce Dimension Count 2D to 1D 객체 생성 // Create Reduce Dimension Count 2D to 1D object
+				CReduceDimensionCount2Dto1D reduceDimensionCount2Dto1D = new CReduceDimensionCount2Dto1D();
 
 				// Source 이미지 설정 // Set source image 
-				reduceDimensionMin2Dto1D.SetSourceImage(ref fliSourceImage);
+				reduceDimensionCount2Dto1D.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set destination image
-				reduceDimensionMin2Dto1D.SetDestinationImage(ref fliDestinationImageX);
+				reduceDimensionCount2Dto1D.SetDestinationImage(ref fliDestinationImageX);
 
 				// 축소 차원 설정 // Set reduction dimension
-				reduceDimensionMin2Dto1D.SetReductionDimension(CReduceDimensionMin2Dto1D.EReductionDimension.X);
+				reduceDimensionCount2Dto1D.SetReductionDimension(CReduceDimensionCount2Dto1D.EReductionDimension.X);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (reduceDimensionMin2Dto1D.Execute())).IsFail())
+				if((res = (reduceDimensionCount2Dto1D.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Reduce Dimension Min 2D to 1D. \n");
+					ErrorPrint(res, "Failed to execute Reduce Dimension Count 2D to 1D. \n");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				reduceDimensionMin2Dto1D.SetDestinationImage(ref fliDestinationImageY);
+				reduceDimensionCount2Dto1D.SetDestinationImage(ref fliDestinationImageY);
 
 				// 축소 차원 설정 // Set reduction dimension
-				reduceDimensionMin2Dto1D.SetReductionDimension(CReduceDimensionMin2Dto1D.EReductionDimension.Y);
+				reduceDimensionCount2Dto1D.SetReductionDimension(CReduceDimensionCount2Dto1D.EReductionDimension.Y);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (reduceDimensionMin2Dto1D.Execute())).IsFail())
+				if((res = (reduceDimensionCount2Dto1D.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Reduce Dimension Min 2D to 1D. \n");
+					ErrorPrint(res, "Failed to execute Reduce Dimension Count 2D to 1D. \n");
 					break;
 				}
 

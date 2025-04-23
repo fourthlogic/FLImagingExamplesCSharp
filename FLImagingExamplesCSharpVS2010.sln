@@ -1646,6 +1646,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMin2Dto1D", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMax2Dto1D", "ReduceDimensionMax2Dto1D\ReduceDimensionMax2Dto1D.csproj", "{6412ACC3-8648-4860-AB83-DA10F8859EE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionCount2Dto1D", "ReduceDimensionCount2Dto1D\ReduceDimensionCount2Dto1D.csproj", "{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -4942,6 +4944,12 @@ Global
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6}.Release|Win32.ActiveCfg = Release|x64
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6}.Release|x64.ActiveCfg = Release|x64
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6}.Release|x64.Build.0 = Release|x64
+		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Debug|Win32.ActiveCfg = Debug|x64
+		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Debug|x64.ActiveCfg = Debug|x64
+		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Debug|x64.Build.0 = Debug|x64
+		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Release|Win32.ActiveCfg = Release|x64
+		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Release|x64.ActiveCfg = Release|x64
+		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -5757,6 +5765,7 @@ Global
 		{392E8656-01EB-42D4-B92B-6B4062C5833F} = {3D2702E2-8A72-48BF-B040-92B2A15010BF}
 		{282CB74F-57B2-45E6-9E56-1D43DC5710AA} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
+		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
