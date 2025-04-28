@@ -1650,6 +1650,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionCount2Dto1D"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WignerVilleDistribution", "WignerVilleDistribution\WignerVilleDistribution.csproj", "{9DF7AED9-491F-4514-BD46-899558C643BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMean2Dto1D", "ReduceDimensionMean2Dto1D\ReduceDimensionMean2Dto1D.csproj", "{867DB70B-39E9-433B-A163-331CD9B7AA53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -4958,6 +4960,12 @@ Global
 		{9DF7AED9-491F-4514-BD46-899558C643BA}.Release|Win32.ActiveCfg = Release|x64
 		{9DF7AED9-491F-4514-BD46-899558C643BA}.Release|x64.ActiveCfg = Release|x64
 		{9DF7AED9-491F-4514-BD46-899558C643BA}.Release|x64.Build.0 = Release|x64
+		{867DB70B-39E9-433B-A163-331CD9B7AA53}.Debug|Win32.ActiveCfg = Debug|x64
+		{867DB70B-39E9-433B-A163-331CD9B7AA53}.Debug|x64.ActiveCfg = Debug|x64
+		{867DB70B-39E9-433B-A163-331CD9B7AA53}.Debug|x64.Build.0 = Debug|x64
+		{867DB70B-39E9-433B-A163-331CD9B7AA53}.Release|Win32.ActiveCfg = Release|x64
+		{867DB70B-39E9-433B-A163-331CD9B7AA53}.Release|x64.ActiveCfg = Release|x64
+		{867DB70B-39E9-433B-A163-331CD9B7AA53}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -5775,6 +5783,7 @@ Global
 		{282CB74F-57B2-45E6-9E56-1D43DC5710AA} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
 		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
+		{867DB70B-39E9-433B-A163-331CD9B7AA53} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
