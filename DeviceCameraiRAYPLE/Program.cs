@@ -363,8 +363,9 @@ namespace DeviceCameraiRAYPLE
 
 	        // 카메라의 초기화를 해제합니다.
 	        camiRAYPLE.Terminate();
+			camiRAYPLE.ClearDeviceEvents();
 
-            if (drResult.IsFail())
+			if (drResult.IsFail())
                 Console.ReadLine();
         }
     }

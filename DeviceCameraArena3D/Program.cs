@@ -254,7 +254,7 @@ namespace DeviceCameraArena3D
 
 	        // 카메라의 초기화를 해제합니다.
 	        camArena3D.Terminate();
-		camArena3D.ClearDeviceEvents();
+			camArena3D.ClearDeviceEvents();
 
             if (drResult.IsFail())
                 Console.ReadLine();

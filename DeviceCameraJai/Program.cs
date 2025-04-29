@@ -337,8 +337,9 @@ namespace DeviceCameraJai
 
 	        // 카메라의 초기화를 해제합니다.
 	        camJai.Terminate();
+			camJai.ClearDeviceEvents();
 
-            if (drResult.IsFail())
+			if (drResult.IsFail())
                 Console.ReadLine();
         }
     }

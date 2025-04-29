@@ -165,6 +165,7 @@ namespace DeviceCameraMatrox
 
 	        // 카메라의 초기화를 해제합니다.
 	        camMatrox.Terminate();
-        }
+			camMatrox.ClearDeviceEvents();
+		}
     }
 }

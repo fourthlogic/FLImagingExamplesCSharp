@@ -254,8 +254,9 @@ namespace DeviceCameraPhoXi
 
 	        // 카메라의 초기화를 해제합니다.
 	        camPhoXi.Terminate();
+			camPhoXi.ClearDeviceEvents();
 
-            if (drResult.IsFail())
+			if (drResult.IsFail())
                 Console.ReadLine();
         }
     }
