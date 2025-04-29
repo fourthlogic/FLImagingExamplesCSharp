@@ -128,7 +128,7 @@ namespace WignerVilleDistribution
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (wvd.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Hysteresis Threshold.");
+					ErrorPrint(res, "Failed to execute Wigner Ville Distribution.");
 					break;
 				}
 
@@ -144,6 +144,8 @@ namespace WignerVilleDistribution
 				if((res = layer2.DrawTextImage(flpTemp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
+				viewImage[0].ZoomFit();
+				viewImage[1].ZoomFit();
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				viewImage[0].Invalidate(true);
