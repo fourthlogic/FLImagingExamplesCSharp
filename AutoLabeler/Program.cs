@@ -319,7 +319,7 @@ namespace SemanticSegmentation
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = CAutoLabelerDL.Execute(ref fliResultAutotLabelImage, semanticSegmentation, true, true, CAutoLabelerDL.ELabelOptions.ClassName_RegionType_BoundaryRect, 50.0f, 50000.0f, 0.5f)).IsFail())
+				if((res = CAutoLabelerDL.Execute(ref fliResultAutotLabelImage, semanticSegmentation, true, true, true, CAutoLabelerDL.ELabelOptions.ClassName_RegionType_BoundaryRect, 50.0f, 50000.0f, 0.5f)).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute");
 					break;
