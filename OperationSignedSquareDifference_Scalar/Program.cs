@@ -99,8 +99,11 @@ namespace OperationSignedSquareDifference
 	        	// Destination 이미지 설정 // Set the destination image
 	        	signedSquareDifference.SetDestinationImage(ref fliDestinationImage);
 
-	        	// Scalar Operation 모드로 설정 // Set operation mode to scalar
-	        	signedSquareDifference.SetOperationSource(EOperationSource.Scalar);
+				// Operand Overflow Method 설정 // Set the overflow method
+				signedSquareDifference.SetOverflowMethod(EOverflowMethod.Wrapping);
+
+				// Scalar Operation 모드로 설정 // Set operation mode to scalar
+				signedSquareDifference.SetOperationSource(EOperationSource.Scalar);
 
 	        	// 스칼라 색상 지정
                 CMultiVar<double> mvScalar = new CMultiVar<double> (0);
@@ -128,51 +131,6 @@ namespace OperationSignedSquareDifference
 	        	// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 	        	layerSource.Clear();
 	        	layerDestination.Clear();
-
-	        	// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
-	        	// Source ROI 영역이 어디인지 알기 위해 디스플레이 한다
-	        	if((res = layerSource.DrawFigureImage(flcSourceROI, EColor.LIME)).IsFail())
-                {
-                    ErrorPrint(res,"Failed to draw figure. \n");
-                    break;
-                }
-
-	        	// Source Pivot 영역이 어디인지 알기 위해 디스플레이 한다
-	        	CFLFigureArray flfaSourcePivotCrossHair = flpSourcePivot.MakeCrossHair(20, true);
-	        	
-	        	if((res = layerSource.DrawFigureImage(flfaSourcePivotCrossHair, EColor.BLACK, 3)).IsFail())
-                {
-                    ErrorPrint(res,"Failed to draw figure. \n");
-                    break;
-                }
-
-	        	if((res = layerSource.DrawFigureImage(flfaSourcePivotCrossHair, EColor.LIME)).IsFail())
-                {
-                    ErrorPrint(res,"Failed to draw figure. \n");
-                    break;
-                }
-	        	
-	        	// Destination ROI 영역이 어디인지 알기 위해 디스플레이 한다
-	        	if((res = layerDestination.DrawFigureImage(flrDestinationROI, EColor.LIME)).IsFail())
-                {
-                    ErrorPrint(res,"Failed to draw figure. \n");
-                    break;
-                }
-
-	        	// Destination Pivot 영역이 어디인지 알기 위해 디스플레이 한다
-	        	CFLFigureArray flfaDestinationPivotCrossHair = flpDestinationPivot.MakeCrossHair(20, true);
-
-	        	if((res = layerDestination.DrawFigureImage(flfaDestinationPivotCrossHair, EColor.BLACK, 3)).IsFail())
-                {
-                    ErrorPrint(res,"Failed to draw figure. \n");
-                    break;
-                }
-
-	        	if((res = layerDestination.DrawFigureImage(flfaDestinationPivotCrossHair, EColor.LIME)).IsFail())
-                {
-                    ErrorPrint(res,"Failed to draw figure. \n");
-                    break;
-                }
 	        	
 	        	// 이미지 뷰 정보 표시 // Display image view information
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
