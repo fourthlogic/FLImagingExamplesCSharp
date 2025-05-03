@@ -30,9 +30,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Optical Character", "Optica
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QR Code", "QR Code", "{58B47025-C6CB-4488-B238-1AE93DB7DEED}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GraphView", "GraphView", "{2B456346-160B-44E4-B37F-C0C16D3743B1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graph View", "Graph View", "{2B456346-160B-44E4-B37F-C0C16D3743B1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImageView", "ImageView", "{AE46E59B-71BC-4129-9CB2-FFC8DBC7EF27}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image View", "Image View", "{AE46E59B-71BC-4129-9CB2-FFC8DBC7EF27}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImageProcessing", "ImageProcessing", "{749CE3E8-D34D-4D8B-9155-658142707D07}"
 EndProject
@@ -456,7 +456,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flip", "Flip\Flip.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThinPlateSplineMapping", "ThinPlateSplineMapping\ThinPlateSplineMapping.csproj", "{09B8CF5A-1471-4894-A1A1-DBD68A89BE63}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3DView", "3DView", "{C194D213-17AD-4029-80B3-566C04C3E6FC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3D View", "3D View", "{C194D213-17AD-4029-80B3-566C04C3E6FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View3DIntoDialog", "View3DIntoDialog\View3DIntoDialog.csproj", "{256CF217-D70F-4D2E-B87F-7D5857CDA8F1}"
 EndProject
@@ -636,7 +636,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanczosWarping", "LanczosWa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RingWarping", "RingWarping\RingWarping.csproj", "{514B980B-FD41-4FFD-8928-3081D9F1C320}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnisotropicDiffusion", "AnisotropicDiffusion", "{1F74A478-AAB5-4C1F-9A95-542C82AF9D1A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Anisotropic Diffusion", "Anisotropic Diffusion", "{1F74A478-AAB5-4C1F-9A95-542C82AF9D1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnisotropicDiffusion", "AnisotropicDiffusion\AnisotropicDiffusion.csproj", "{98E28090-79B6-4007-9F1D-221D584ABB98}"
 EndProject
@@ -650,13 +650,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorphologyErode_Region", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorphologyOpen_Region", "Morphology_Open_Region\MorphologyOpen_Region.csproj", "{F6066715-0134-423B-B812-50D4503BE5D1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MorphologyClose", "MorphologyClose", "{F34AE7BE-1947-4C55-9A91-6881D40411F5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Morphology Close", "Morphology Close", "{F34AE7BE-1947-4C55-9A91-6881D40411F5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MorphologyOpen", "MorphologyOpen", "{3E99E25F-8C78-40B1-89E3-D641664F4459}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Morphology Open", "Morphology Open", "{3E99E25F-8C78-40B1-89E3-D641664F4459}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MorphologyDilate", "MorphologyDilate", "{02200086-FA26-4174-A14E-0C4E5AA91E4C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Morphology Dilate", "Morphology Dilate", "{02200086-FA26-4174-A14E-0C4E5AA91E4C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MorphologyErode", "MorphologyErode", "{8B14FCC2-7F23-48F4-94BC-5D5752B1C736}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Morphology Erode", "Morphology Erode", "{8B14FCC2-7F23-48F4-94BC-5D5752B1C736}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View3D", "View3D\View3D.csproj", "{B1902F4C-F288-408A-8486-BD49C85914C3}"
 EndProject
@@ -678,13 +678,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationMean_Image", "Oper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationMean_Scalar", "OperationMean_Scalar\OperationMean_Scalar.csproj", "{49A74232-9EAA-4196-870A-7412321779AE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MorphologyGradient", "MorphologyGradient", "{9DD67BD9-2803-4965-A080-4CA36C112B7E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Morphology Gradient", "Morphology Gradient", "{9DD67BD9-2803-4965-A080-4CA36C112B7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorphologyGradient_HalfSize", "Morphology_Gradient\MorphologyGradient_HalfSize.csproj", "{69517221-A5C1-4C03-9236-FC32FB23B2DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorphologyGradient_Region", "Morphology_Gradient_Region\MorphologyGradient_Region.csproj", "{D0FC8691-6B7D-4476-B7E4-CC775AF0F619}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MorphologyTopHat", "MorphologyTopHat", "{F9A046AE-E0F2-48E3-BEAA-84DB66301907}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Morphology TopHat", "Morphology TopHat", "{F9A046AE-E0F2-48E3-BEAA-84DB66301907}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorphologyTopHat_HalfSize", "Morphology_TopHat\MorphologyTopHat_HalfSize.csproj", "{6B3FA424-33DD-4D66-915F-199A25169270}"
 EndProject
@@ -882,25 +882,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bilateral Filter SubSampled
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilateralFilterSubSampled_Image", "BilateralFilterSubSampled_Image\BilateralFilterSubSampled_Image.csproj", "{127AE3F2-B3EA-474C-A8BD-A99AE879D894}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InpaintingCoherenceTransport", "InpaintingCoherenceTransport", "{BA8605FF-11D3-4368-B4D7-26D493417375}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inpainting Coherence Transport", "Inpainting Coherence Transport", "{BA8605FF-11D3-4368-B4D7-26D493417375}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InpaintingTexture", "InpaintingTexture", "{8053B510-0195-49BF-B122-D285522A67E1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inpainting Texture", "Inpainting Texture", "{8053B510-0195-49BF-B122-D285522A67E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Correlation", "Correlation", "{03020EE2-041A-425D-B1AD-D4BEED42D2E1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InpaintingFastMarchingMethod", "InpaintingFastMarchingMethod", "{4CCC561B-1E60-4BDB-B0CE-884496B93C23}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inpainting Fast Marching Method", "Inpainting Fast Marching Method", "{4CCC561B-1E60-4BDB-B0CE-884496B93C23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InpaintingFastMarchingMethod", "InpaintingFastMarchingMethod\InpaintingFastMarchingMethod.csproj", "{C5BD5092-B040-4F03-955B-C0CD7A182562}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GaborFilter", "GaborFilter", "{6DE32901-81AF-40B1-88C5-2C5803154876}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gabor Filter", "Gabor Filter", "{6DE32901-81AF-40B1-88C5-2C5803154876}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaborFilter", "GaborFilter\GaborFilter.csproj", "{812898E8-89D1-4EAC-81AD-397B928865E1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InpaintingNavierStokes", "InpaintingNavierStokes", "{9F75A50E-77DD-465B-83BA-8A3CA3B4A49D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inpainting Navier Stokes", "Inpainting Navier Stokes", "{9F75A50E-77DD-465B-83BA-8A3CA3B4A49D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InpaintingNavierStokes", "InpaintingNavierStokes\InpaintingNavierStokes.csproj", "{C8452749-ED9D-45AE-A67C-197D4D1C6315}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntropyFilter", "EntropyFilter", "{338C4D74-48DB-449A-8362-677E6A53AB64}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entropy Filter", "Entropy Filter", "{338C4D74-48DB-449A-8362-677E6A53AB64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntropyFilter", "EntropyFilter\EntropyFilter.csproj", "{13B05CF1-F76E-433B-8D94-4FBC68298BCD}"
 EndProject
@@ -908,7 +908,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wiener Deconvolution Filter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WienerDeconvolutionFilter", "WienerDeconvolutionFilter\WienerDeconvolutionFilter.csproj", "{152EEAE2-6114-4722-9F51-9388297B1D99}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SaliencyMap", "SaliencyMap", "{D65D2B4C-F8A1-4519-A707-B69BA8FFC438}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Saliency Map", "Saliency Map", "{D65D2B4C-F8A1-4519-A707-B69BA8FFC438}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaliencyMap", "SaliencyMap\SaliencyMap.csproj", "{0AFA5EDA-4D2B-4BD4-9024-A840DEFC11B1}"
 EndProject
@@ -942,7 +942,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedianWeightedFilter_Region
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Restoration", "Restoration", "{C8951BB9-37B7-4E74-AF59-CB5A7CD11C46}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScaledMultiply", "ScaledMultiply", "{6DAEAE12-3DCA-4771-BDCC-C81A2778726B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scaled Multiply", "Scaled Multiply", "{6DAEAE12-3DCA-4771-BDCC-C81A2778726B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationScaledMultiply_Image", "OperationScaledMultiply_Image\OperationScaledMultiply_Image.csproj", "{031A0F3D-AF4D-46D0-8A00-0A6EE79CC308}"
 EndProject
@@ -1036,7 +1036,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationComplexDivide_Imag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationComplexDivide_Scalar", "OperationComplexDivide_Scalar\OperationComplexDivide_Scalar.csproj", "{607ED173-BBC6-49C2-BCE1-AEE55BE65ED9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScaledDivide", "ScaledDivide", "{8F0A4DB5-34AB-40D6-B5DD-BB5D1D7AED41}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scaled Divide", "Scaled Divide", "{8F0A4DB5-34AB-40D6-B5DD-BB5D1D7AED41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationScaledDivide_Image", "OperationScaledDivide_Image\OperationScaledDivide_Image.csproj", "{C7E6FB32-D764-4827-9B5F-25D029AD0205}"
 EndProject
@@ -1050,7 +1050,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingMatch_UsingFigure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingMatch_UsingGerber", "DrawingMatch_UsingGerber\DrawingMatch_UsingGerber.csproj", "{1AC8A15B-6C92-40EC-A3FB-FACFF0607746}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScaledSubtract", "ScaledSubtract", "{4A9DC1ED-2436-4903-9344-98A49EDE444F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scaled Subtract", "Scaled Subtract", "{4A9DC1ED-2436-4903-9344-98A49EDE444F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationScaledSubtract_Image", "OperationScaledSubtract_Image\OperationScaledSubtract_Image.csproj", "{3BFBE307-523E-4327-8112-E2E7F9AFA06E}"
 EndProject
@@ -1062,7 +1062,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomImageGenerator", "Ran
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fast Guided Filter", "Fast Guided Filter", "{78AF3206-B091-4B19-8F63-F9445C93B63B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GreatestCommonDivisor", "GreatestCommonDivisor", "{385979C0-E150-4461-9E6A-99EC50D8CD61}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Greatest Common Divisor", "Greatest Common Divisor", "{385979C0-E150-4461-9E6A-99EC50D8CD61}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationGreatestCommonDivisor_Image", "OperationGreatestCommonDivisor_Image\OperationGreatestCommonDivisor_Image.csproj", "{F6CF18A3-ECC7-4F24-8DDD-D3EA5DA9303C}"
 EndProject
@@ -1070,7 +1070,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationGreatestCommonDivi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceCameraiRAYPLE", "DeviceCameraiRAYPLE\DeviceCameraiRAYPLE.csproj", "{A2BC971E-5FC7-4AFB-B53C-D993B6755C9C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LeastCommonMultiple", "LeastCommonMultiple", "{C4226E14-FDF1-4881-B09B-4D2E7DD2B2A0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Least Common Multiple", "Least Common Multiple", "{C4226E14-FDF1-4881-B09B-4D2E7DD2B2A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationLeastCommonMultiple_Image", "OperationLeastCommonMultiple_Image\OperationLeastCommonMultiple_Image.csproj", "{96DCB9AD-DDAE-4DFC-B883-5B3235528B6B}"
 EndProject
@@ -1218,7 +1218,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bilateral Filter Grid", "Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilateralFilterGrid", "BilateralFilterGrid\BilateralFilterGrid.csproj", "{26539F9B-D92E-4C8B-BFAC-5677EFF86931}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MorphologyHitOrMiss", "MorphologyHitOrMiss", "{C20F2CD3-4C6B-4E2F-820A-C50325DA5825}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Morphology Hit or Miss", "Morphology Hit or Miss", "{C20F2CD3-4C6B-4E2F-820A-C50325DA5825}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorphologyHitOrMiss", "Morphology_HitOrMiss\MorphologyHitOrMiss.csproj", "{D25D0877-C80E-4AAD-B0F3-E4D0EE115BE5}"
 EndProject
@@ -1374,11 +1374,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Uniform Filter", "Uniform F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lowpass Filter", "Lowpass Filter", "{86851FC8-2FFB-4FE1-9723-0B1C1B758833}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Laplacian Of Gaussian Filter", "Laplacian Of Gaussian Filter", "{2E2FCF5B-3E3C-4644-AE52-EE5AA046731D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Laplacian of Gaussian Filter", "Laplacian of Gaussian Filter", "{2E2FCF5B-3E3C-4644-AE52-EE5AA046731D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaplacianOfGaussianFilter", "LaplacianOfGaussianFilter\LaplacianOfGaussianFilter.csproj", "{F9F98C53-EB6C-41DD-B129-CC14ACA1682C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Difference Of Gaussian Filter", "Difference Of Gaussian Filter", "{513B43CB-BE35-431F-BDB7-DCAFDF3A320F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Difference of Gaussian Filter", "Difference of Gaussian Filter", "{513B43CB-BE35-431F-BDB7-DCAFDF3A320F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DifferenceOfGaussianFilter", "DifferenceOfGaussianFilter\DifferenceOfGaussianFilter.csproj", "{B391468A-E49A-41D8-8F3B-E39A918587C8}"
 EndProject
@@ -1434,7 +1434,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceLaserDisplacementSens
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistogramsOfOrientedGradients_PeakVector", "HistogramsOfOrientedGradients_PeakVector\HistogramsOfOrientedGradients_PeakVector.csproj", "{07E68309-257D-41B0-B000-1F233137A75C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HistogramsOfOrientedGradients", "HistogramsOfOrientedGradients", "{49D3B4D6-187B-4034-90FE-77E413C69C63}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Histograms of Oriented Gradients", "Histograms of Oriented Gradients", "{49D3B4D6-187B-4034-90FE-77E413C69C63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistogramsOfOrientedGradients_PredictionImage", "HistogramsOfOrientedGradients_PredictionImage\HistogramsOfOrientedGradients_PredictionImage.csproj", "{57919D66-64E6-4E91-B8A1-462DF6FC0D20}"
 EndProject
@@ -1596,7 +1596,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeMatchCross", "ShapeMat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeMatchFigure", "ShapeMatchFigure\ShapeMatchFigure.csproj", "{9A1D7F37-FE89-410C-9C0F-43A429562027}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SNAPView", "SNAPView", "{51824386-21D2-4B37-B5C8-14322236D4E5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SNAP View", "SNAP View", "{51824386-21D2-4B37-B5C8-14322236D4E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HysteresisThreshold", "HysteresisThreshold\HysteresisThreshold.csproj", "{E4025A5C-411F-4B05-A124-60AC07972557}"
 EndProject
@@ -1646,7 +1646,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMin2Dto1D", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMax2Dto1D", "ReduceDimensionMax2Dto1D\ReduceDimensionMax2Dto1D.csproj", "{6412ACC3-8648-4860-AB83-DA10F8859EE6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SignedSquareDifference", "SignedSquareDifference", "{D6F8F6AF-F709-43B2-A2BE-4C7CB17C8850}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Signed Square Difference", "Signed Square Difference", "{D6F8F6AF-F709-43B2-A2BE-4C7CB17C8850}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationSignedSquareDifference_Scalar", "OperationSignedSquareDifference_Scalar\OperationSignedSquareDifference_Scalar.csproj", "{47F9E4B7-1912-408A-8F20-123213C22CF4}"
 EndProject
@@ -4958,6 +4958,18 @@ Global
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6}.Release|Win32.ActiveCfg = Release|x64
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6}.Release|x64.ActiveCfg = Release|x64
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6}.Release|x64.Build.0 = Release|x64
+		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Debug|Win32.ActiveCfg = Debug|x64
+		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Debug|x64.ActiveCfg = Debug|x64
+		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Debug|x64.Build.0 = Debug|x64
+		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Release|Win32.ActiveCfg = Release|x64
+		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Release|x64.ActiveCfg = Release|x64
+		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Release|x64.Build.0 = Release|x64
+		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Debug|Win32.ActiveCfg = Debug|x64
+		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Debug|x64.ActiveCfg = Debug|x64
+		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Debug|x64.Build.0 = Debug|x64
+		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Release|Win32.ActiveCfg = Release|x64
+		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Release|x64.ActiveCfg = Release|x64
+		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Release|x64.Build.0 = Release|x64
 		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Debug|Win32.ActiveCfg = Debug|x64
 		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Debug|x64.ActiveCfg = Debug|x64
 		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83}.Debug|x64.Build.0 = Debug|x64
@@ -4988,18 +5000,6 @@ Global
 		{E5556DEA-B2E3-4B02-B783-A4C9AA672DEF}.Release|Win32.ActiveCfg = Release|x64
 		{E5556DEA-B2E3-4B02-B783-A4C9AA672DEF}.Release|x64.ActiveCfg = Release|x64
 		{E5556DEA-B2E3-4B02-B783-A4C9AA672DEF}.Release|x64.Build.0 = Release|x64
-		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Debug|Win32.ActiveCfg = Debug|x64
-		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Debug|x64.ActiveCfg = Debug|x64
-		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Debug|x64.Build.0 = Debug|x64
-		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Release|Win32.ActiveCfg = Release|x64
-		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Release|x64.ActiveCfg = Release|x64
-		{47F9E4B7-1912-408A-8F20-123213C22CF4}.Release|x64.Build.0 = Release|x64
-		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Debug|Win32.ActiveCfg = Debug|x64
-		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Debug|x64.ActiveCfg = Debug|x64
-		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Debug|x64.Build.0 = Debug|x64
-		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Release|Win32.ActiveCfg = Release|x64
-		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Release|x64.ActiveCfg = Release|x64
-		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -5819,10 +5819,10 @@ Global
 		{392E8656-01EB-42D4-B92B-6B4062C5833F} = {3D2702E2-8A72-48BF-B040-92B2A15010BF}
 		{282CB74F-57B2-45E6-9E56-1D43DC5710AA} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
 		{6412ACC3-8648-4860-AB83-DA10F8859EE6} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
-		{47F9E4B7-1912-408A-8F20-123213C22CF4} = {D6F8F6AF-F709-43B2-A2BE-4C7CB17C8850}
-		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D} = {D6F8F6AF-F709-43B2-A2BE-4C7CB17C8850}
 		{39621E34-F3A1-4CBE-BFAD-819D5C1C4A83} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
 		{867DB70B-39E9-433B-A163-331CD9B7AA53} = {392E8656-01EB-42D4-B92B-6B4062C5833F}
+		{47F9E4B7-1912-408A-8F20-123213C22CF4} = {D6F8F6AF-F709-43B2-A2BE-4C7CB17C8850}
+		{EFDB7B3C-2C4E-4CAE-A410-928D57E8435D} = {D6F8F6AF-F709-43B2-A2BE-4C7CB17C8850}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
