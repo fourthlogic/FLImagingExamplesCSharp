@@ -318,8 +318,23 @@ namespace SemanticSegmentation
 						break;
 				}
 
+				CAutoLabelerDL autoLabelerDL = new CAutoLabelerDL();
+
+				// 오토라벨러에 모델을 로드 // Load model into autolabeler
+				if((res = autoLabelerDL.Load(ref semanticSegmentation)).IsFail())
+					break;
+
+				// 파라미터 설정 // Parameter settings
+				autoLabelerDL.SetSourceImage(ref fliResultAutotLabelImage);
+				autoLabelerDL.EnableOverwriting(true);
+				autoLabelerDL.EnableBatchProcessing(true);
+				autoLabelerDL.SetLabelOptions(CAutoLabelerDL.ELabelOptions.ClassName_RegionType_BoundaryRect);
+				autoLabelerDL.SetMinimumScore(0.5f);
+				autoLabelerDL.SetMinimumArea(50.0f);
+				autoLabelerDL.SetMaximumArea(50000.0f);
+
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = CAutoLabelerDL.Execute(ref fliResultAutotLabelImage, semanticSegmentation, true, true, true, CAutoLabelerDL.ELabelOptions.ClassName_RegionType_BoundaryRect, 50.0f, 50000.0f, 0.5f)).IsFail())
+				if((res = autoLabelerDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute");
 					break;
