@@ -123,7 +123,7 @@ namespace DeviceCameraArena
                     List<String> listSerialNumbers = null;
 
                     // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
-                    drResult = camArena.GetAutoDetectCamera(out listSerialNumbers);
+                    drResult = camArena.GetAutoDetectCameraSerialNumbers(out listSerialNumbers);
 
 			        if(drResult.IsFail() || listSerialNumbers == null || listSerialNumbers.Count == 0)
 			        {
