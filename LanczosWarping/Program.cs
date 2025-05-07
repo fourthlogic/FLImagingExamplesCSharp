@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace LanczosWarping
+namespace LanczosSplineWarping
 {
 	class Program
 	{
@@ -47,7 +47,7 @@ namespace LanczosWarping
 			do
 			{
                 // Source 이미지 로드 // Load the source image
-                if ((arrFliImage[0].Load("../../ExampleImages/LanczosWarping/chess.flif")).IsFail())
+                if ((arrFliImage[0].Load("../../ExampleImages/LanczosSplineWarping/chess.flif")).IsFail())
                 {
 					ErrorPrint(res, "Failed to load the image file.\n");
                     break;
@@ -125,14 +125,14 @@ namespace LanczosWarping
                     break;
                 }
 
-                // LanczosWarping 객체 생성 // Create LanczosWarping object
-                CLanczosWarping LanczosWarping = new CLanczosWarping();
+                // LanczosSplineWarping 객체 생성 // Create LanczosSplineWarping object
+                CLanczosSplineWarping LanczosSplineWarping = new CLanczosSplineWarping();
                 // Source 이미지 설정 // Set the source image
-                LanczosWarping.SetSourceImage(ref arrFliImage[0]);
+                LanczosSplineWarping.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                LanczosWarping.SetDestinationImage(ref arrFliImage[1]);
+                LanczosSplineWarping.SetDestinationImage(ref arrFliImage[1]);
                 // Interpolation Method 설정 // Set the interpolation method
-                LanczosWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+                LanczosSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
                 // 그리드를 (5,5)로 초기화 // Initialize the grid to (5,5)
                 CFLPoint<int> flpGridSize = new CFLPoint<int>(5, 5);
@@ -180,12 +180,12 @@ namespace LanczosWarping
                     }
                 }
 
-                // 위에서 설정한 좌표들을 바탕으로 LanczosWarping 클래스에 Point 배열 설정 // Set the Point array in the LanczosWarping class based on the coordinates set above
-                LanczosWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
+                // 위에서 설정한 좌표들을 바탕으로 LanczosSplineWarping 클래스에 Point 배열 설정 // Set the Point array in the LanczosSplineWarping class based on the coordinates set above
+                LanczosSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
 
                 CGUIViewImageLayer layer = arrViewImage[0].GetLayer(0);
 
-                // LanczosWarping 클래스에 설정된 Vertex 정보를 화면에 Display // Display the vertex information set in the LanczosWarping class on the screen.
+                // LanczosSplineWarping 클래스에 설정된 Vertex 정보를 화면에 Display // Display the vertex information set in the LanczosSplineWarping class on the screen.
                 for(int k = 0; k < flpaSource.GetCount(); ++k)
                 {
                     CFLPoint<double> flpSource = new CFLPoint<double>();
@@ -222,17 +222,17 @@ namespace LanczosWarping
                 }
 
                 // 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
-                if((LanczosWarping.Calibrate()).IsFail())
+                if((LanczosSplineWarping.Calibrate()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to calibrate LanczosWarping.");
+                    ErrorPrint(res, "Failed to calibrate LanczosSplineWarping.");
                     ErrorPrint(res,res.GetString());
                     break;
                 }
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-               if ((res= LanczosWarping.Execute()).IsFail())
+               if ((res= LanczosSplineWarping.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute LanczosWarping.");
+                    ErrorPrint(res, "Failed to execute LanczosSplineWarping.");
                     ErrorPrint(res,res.GetString());
                     break;
                 }
@@ -241,33 +241,33 @@ namespace LanczosWarping
                 arrFliImage[2].Assign(arrFliImage[1]);
 
                 // Source 이미지 설정 // Set the source image
-                LanczosWarping.SetSourceImage(ref arrFliImage[2]);
+                LanczosSplineWarping.SetSourceImage(ref arrFliImage[2]);
                 // Destination 이미지 설정 // Set the destination image
-                LanczosWarping.SetDestinationImage(ref arrFliImage[3]);
+                LanczosSplineWarping.SetDestinationImage(ref arrFliImage[3]);
                 // Interpolation Method 설정 // Set the interpolation method
-                LanczosWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+                LanczosSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
                 // Calibration Src, Destination Points 바꿔서 셋팅 // Set Calibration Src, Destination Points by changing
-                LanczosWarping.SetCalibrationPointArray(flpaDestination, flpaSource);
+                LanczosSplineWarping.SetCalibrationPointArray(flpaDestination, flpaSource);
 
                 // 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
-                if((LanczosWarping.Calibrate()).IsFail())
+                if((LanczosSplineWarping.Calibrate()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to calibrate LanczosWarping.");
+                    ErrorPrint(res, "Failed to calibrate LanczosSplineWarping.");
                     ErrorPrint(res,res.GetString());
                     break;
                 }
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-               if ((res= LanczosWarping.Execute()).IsFail())
+               if ((res= LanczosSplineWarping.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute LanczosWarping.");
+                    ErrorPrint(res, "Failed to execute LanczosSplineWarping.");
                     ErrorPrint(res,res.GetString());
                     break;
                 }
 
                 layer = arrViewImage[2].GetLayer(0);
 
-                // LanczosWarping 클래스에 설정된 Vertex 정보를 화면에 Display // Display the vertex information set in the LanczosWarping class on the screen
+                // LanczosSplineWarping 클래스에 설정된 Vertex 정보를 화면에 Display // Display the vertex information set in the LanczosSplineWarping class on the screen
                 for(int k = 0; k < flpaSource.GetCount(); ++k)
                 {
                     CFLPoint<double> flpSource = new CFLPoint<double>();
