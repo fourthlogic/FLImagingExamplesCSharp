@@ -98,10 +98,10 @@ namespace LanczosMapping
 
 				// 화면상 좌표(고정 좌표)에 Source 좌표 View 임을 표시
 				layer[0].DrawTextCanvas(new CFLPoint<int>(0, 0), "Source Coordinate", EColor.YELLOW, EColor.BLACK, 30);
-				// 화면상 좌표(고정 좌표)에 Target 좌표 View 임을 표시
-				layer[1].DrawTextCanvas(new CFLPoint<int>(0, 0), "Target Coordinate", EColor.YELLOW, EColor.BLACK, 30);
+				// 화면상 좌표(고정 좌표)에 Destination 좌표 View 임을 표시
+				layer[1].DrawTextCanvas(new CFLPoint<int>(0, 0), "Destination Coordinate", EColor.YELLOW, EColor.BLACK, 30);
 				// 화면상 좌표(고정 좌표)에 Restore 좌표 View 임을 표시
-				layer[2].DrawTextCanvas(new CFLPoint<int>(0, 0), "Restore Coordinate (from Target)", EColor.YELLOW, EColor.BLACK, 30);
+				layer[2].DrawTextCanvas(new CFLPoint<int>(0, 0), "Restore Coordinate (from Destination)", EColor.YELLOW, EColor.BLACK, 30);
 
 
 
@@ -176,12 +176,12 @@ namespace LanczosMapping
 						CLanczosMapping.CLanczosMappingVertexInfo vertex = lczm.GetControlPoint(new CFLPoint<int>(x, y));
 
 						CFLPoint<double> flpSource = new CFLPoint<double>(vertex.tpSource.x, vertex.tpSource.y);
-						CFLPoint<double> flpTarget = new CFLPoint<double>(vertex.tpTarget.x, vertex.tpTarget.y);
+						CFLPoint<double> flpDestination = new CFLPoint<double>(vertex.tpDestination.x, vertex.tpDestination.y);
 
 						for(int i = 0; i < 3; ++i)
 						{
-							// Target Vertex를 각 View Layer에 Drawing // Drawing the target vertex to each view layer
-							if(layer[i].DrawFigureImage(flpTarget, EColor.BLUE, 3).IsFail())
+							// Destination Vertex를 각 View Layer에 Drawing // Drawing the destination vertex to each view layer
+							if(layer[i].DrawFigureImage(flpDestination, EColor.BLUE, 3).IsFail())
 							{
 								ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 								break;
@@ -196,7 +196,7 @@ namespace LanczosMapping
 						}
 
 						Console.WriteLine("Source Vertex ({0},{1}) : ({2:.000},{3:.000})", x, y, vertex.tpSource.x, vertex.tpSource.y);
-						Console.WriteLine("Target Vertex ({0},{1}) : ({2:.000},{3:.000})", x, y, vertex.tpTarget.x, vertex.tpTarget.y);
+						Console.WriteLine("Destination Vertex ({0},{1}) : ({2:.000},{3:.000})", x, y, vertex.tpDestination.x, vertex.tpDestination.y);
 					}
 				}
 
@@ -206,8 +206,8 @@ namespace LanczosMapping
 				double f64Slice = 10;
 
 				CFLPoint<double> flpdSource = new CFLPoint<double>(); // Source 좌표 // Source coordinates
-				CFLPoint<double> flpdTarget = new CFLPoint<double>(); // Target 좌표 // Target coordinates
-				CFLPoint<double> flpdConvertedSource = new CFLPoint<double>(); // Target 좌표를 다시 Source로 변환, 검증 용도의 좌표 // Convert target coordinates back to source, coordinates for verification purposes
+				CFLPoint<double> flpdDestination = new CFLPoint<double>(); // Destination 좌표 // Destination coordinates
+				CFLPoint<double> flpdConvertedSource = new CFLPoint<double>(); // Destination 좌표를 다시 Source로 변환, 검증 용도의 좌표 // Convert destination coordinates back to source, coordinates for verification purposes
 
 				for(int y = 0; y <= (lczm.GetRow() - 1) * f64Slice; ++y)
 				{
@@ -224,21 +224,21 @@ namespace LanczosMapping
 							break;
 						}
 
-						// Source 좌표의 공간을 Target 좌표 공간으로 변환 // Convert the space of source coordinates to target coordinate space
-						if(lczm.ConvertSourceToTarget(flpdSource, out flpdTarget).IsOK())
+						// Source 좌표의 공간을 Destination 좌표 공간으로 변환 // Convert the space of source coordinates to destination coordinate space
+						if(lczm.ConvertSourceToDestination(flpdSource, out flpdDestination).IsOK())
 						{
-							// Source 좌표에서 Target 좌표로 변환된 좌표를 View에 Display // Display coordinates converted from source coordinates to target coordinates on the View
-							if((res = (layer[1].DrawFigureImage(flpdTarget, EColor.LIME))).IsFail())
+							// Source 좌표에서 Destination 좌표로 변환된 좌표를 View에 Display // Display coordinates converted from source coordinates to destination coordinates on the View
+							if((res = (layer[1].DrawFigureImage(flpdDestination, EColor.LIME))).IsFail())
 							{
 								ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 								break;
 							}
 
-							// 변환된 Target 좌표를 그대로 Source 좌표로 변환해서 자신의 위치로 제대로 돌아오는지 검증
-							// Verify that the converted target coordinates are converted to source coordinates as they are and return to their own position properly
-							if(lczm.ConvertTargetToSource(flpdTarget, out flpdConvertedSource).IsOK())
+							// 변환된 Destination 좌표를 그대로 Source 좌표로 변환해서 자신의 위치로 제대로 돌아오는지 검증
+							// Verify that the converted destination coordinates are converted to source coordinates as they are and return to their own position properly
+							if(lczm.ConvertDestinationToSource(flpdDestination, out flpdConvertedSource).IsOK())
 							{
-								Console.WriteLine("Source ({0:.000},{1:.000}) -> Target ({2:.000},{3:.000}) -> Source ({4:.000},{5:.000})", flpdSource.x, flpdSource.y, flpdTarget.x, flpdTarget.y, flpdConvertedSource.x, flpdConvertedSource.y);
+								Console.WriteLine("Source ({0:.000},{1:.000}) -> Destination ({2:.000},{3:.000}) -> Source ({4:.000},{5:.000})", flpdSource.x, flpdSource.y, flpdDestination.x, flpdDestination.y, flpdConvertedSource.x, flpdConvertedSource.y);
 
 								// 변환된 좌표를 View에 Display // Display the converted coordinates in the View
 								if((res = (layer[2].DrawFigureImage(flpdConvertedSource, EColor.CYAN))).IsFail())
