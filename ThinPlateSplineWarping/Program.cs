@@ -112,7 +112,7 @@ namespace ThinPlateSplineWarping
 				CFLPoint<int> flpGridIndex = new CFLPoint<int>();
 
 				CFLPointArray flpaSource = new CFLPointArray();
-				CFLPointArray flpaTarget = new CFLPointArray();
+				CFLPointArray flpaDestination = new CFLPointArray();
 
 				double f64ScaleX = arrFliImage[0].GetWidth() / 4.0;
 				double f64ScaleY = arrFliImage[0].GetHeight() / 4.0;
@@ -127,16 +127,16 @@ namespace ThinPlateSplineWarping
 
 						// Grid Index와 같은 좌표로 Source 좌표를 설정 // Set source vertex same as the grid index
 						CFLPoint<double> flpSource = new CFLPoint<double>(flpGridIndex.x * f64ScaleX, flpGridIndex.y * f64ScaleY);
-						// Grid Index와 같은 좌표에서 미세한 랜덤 값을 부여해서 왜곡된 Target 좌표 설정 // Set distorted target coordinates by giving fine random values in coordinates such as Grid Index
+						// Grid Index와 같은 좌표에서 미세한 랜덤 값을 부여해서 왜곡된 Destination 좌표 설정 // Set distorted destination coordinates by giving fine random values in coordinates such as Grid Index
 						CFLPoint<double> flpDistortion = new CFLPoint<double>((flpGridIndex.x + CRandomGenerator.Double(-0.2, 0.2)) * f64ScaleX, (flpGridIndex.y + CRandomGenerator.Double(-0.2, 0.2)) * f64ScaleY);
 
 						flpaSource.PushBack(flpSource);
-						flpaTarget.PushBack(flpDistortion);
+						flpaDestination.PushBack(flpDistortion);
 					}
 				}
 
 				// 위에서 설정한 좌표들을 바탕으로 ThinPlateSplineMapping 클래스에 Point 배열 설정
-				ThinPlateSplineWarping.SetCalibrationPointArray(flpaSource, flpaTarget);
+				ThinPlateSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
 
 				CGUIViewImageLayer layer = arrViewImage[0].GetLayer(0);
 
@@ -144,19 +144,19 @@ namespace ThinPlateSplineWarping
 				for(int k = 0; k < flpaSource.GetCount(); ++k)
 				{
 					CFLPoint<double> flpSource = new CFLPoint<double>();
-					CFLPoint<double> flpTarget = new CFLPoint<double>();
+					CFLPoint<double> flpDestination = new CFLPoint<double>();
 
 					flpSource = flpaSource.GetAt(k);
-					flpTarget = flpaTarget.GetAt(k);
+					flpDestination = flpaDestination.GetAt(k);
 
 					// Source Vertex를 Source 이미지 뷰 Layer에 그리기 // Draw the source vertex on the source image view layer
-					CFLLine<double> fllLine = new CFLLine<double>(flpSource, flpTarget);
+					CFLLine<double> fllLine = new CFLLine<double>(flpSource, flpDestination);
 					CFLFigureArray flfaArrow = new CFLFigureArray();
 
 					// 선분을 화살표로 변경 // Change a line to an arrow
 					flfaArrow = fllLine.MakeArrowWithRatio(0.25, true, 20);
 
-					if(layer.DrawFigureImage(flpTarget, EColor.BLUE, 1).IsFail())
+					if(layer.DrawFigureImage(flpDestination, EColor.BLUE, 1).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
 						break;

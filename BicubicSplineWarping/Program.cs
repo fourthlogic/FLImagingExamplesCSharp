@@ -146,7 +146,7 @@ namespace BicubicSplineWarping
                 CFLPoint<int> flpGridIndex = new CFLPoint<int>();
 
                 CFLPointArray flpaSource = new CFLPointArray();
-                CFLPointArray flpaTarget = new CFLPointArray();
+                CFLPointArray flpaDestination = new CFLPointArray();
 
                 double f64ScaleX = arrFliImage[0].GetWidth() / 4.0;
                 double f64ScaleY = arrFliImage[0].GetHeight() / 4.0;
@@ -182,12 +182,12 @@ namespace BicubicSplineWarping
                         CFLPoint<double> flpDistortion = new CFLPoint<double>((flpGridIndex.x + f64RandomX) * f64ScaleX, (flpGridIndex.y + f64RandomY) * f64ScaleY);
 
                         flpaSource.PushBack(flpSource);
-                        flpaTarget.PushBack(flpDistortion);
+                        flpaDestination.PushBack(flpDistortion);
                     }
                 }
 
                 // 위에서 설정한 좌표들을 바탕으로 BicubicSplineWarping 클래스에 Point 배열 설정 // Set the Point array in the BicubicSplineWarping class based on the coordinates set above
-                BicubicSplineWarping.SetCalibrationPointArray(flpaSource, flpaTarget);
+                BicubicSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
 
                 CGUIViewImageLayer layer = arrViewImage[0].GetLayer(0);
 
@@ -195,18 +195,18 @@ namespace BicubicSplineWarping
                 for(int k = 0; k < flpaSource.GetCount(); ++k)
                 {
                     CFLPoint<double> flpSource = new CFLPoint<double>();
-                    CFLPoint<double> flpTarget = new CFLPoint<double>();
+                    CFLPoint<double> flpDestination = new CFLPoint<double>();
 
                     flpSource = flpaSource.GetAt(k);
-                    flpTarget = flpaTarget.GetAt(k);
+                    flpDestination = flpaDestination.GetAt(k);
 
-                    CFLLine<double> fllLine = new CFLLine<double>(flpSource, flpTarget);
+                    CFLLine<double> fllLine = new CFLLine<double>(flpSource, flpDestination);
                     CFLFigureArray flfaArrow = new CFLFigureArray();
 
                     flfaArrow = fllLine.MakeArrowWithRatio(0.25, true, 20);
 
-                    // Target Vertex를 각 View Layer에 Drawing // Drawing the target vertex on each view layer
-                    if((res = layer.DrawFigureImage(flpTarget, EColor.BLUE, 1)).IsFail())
+                    // Destination Vertex를 각 View Layer에 Drawing // Drawing the destination vertex on each view layer
+                    if((res = layer.DrawFigureImage(flpDestination, EColor.BLUE, 1)).IsFail())
                     {
                         ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
                         break;
@@ -252,8 +252,8 @@ namespace BicubicSplineWarping
                 BicubicSplineWarping.SetDestinationImage(ref arrFliImage[3]);
                 // Interpolation Method 설정 // Set the interpolation method
                 BicubicSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
-                // Calibration Src, Target Points 바꿔서 셋팅 // Set Calibration Src, Target Points by changing
-                BicubicSplineWarping.SetCalibrationPointArray(flpaTarget, flpaSource);
+                // Calibration Src, Destination Points 바꿔서 셋팅 // Set Calibration Src, Destination Points by changing
+                BicubicSplineWarping.SetCalibrationPointArray(flpaDestination, flpaSource);
 				// Extension 설정
 				BicubicSplineWarping.SetExtension(2);
 
@@ -279,18 +279,18 @@ namespace BicubicSplineWarping
                 for(int k = 0; k < flpaSource.GetCount(); ++k)
                 {
                     CFLPoint<double> flpSource = new CFLPoint<double>();
-                    CFLPoint<double> flpTarget = new CFLPoint<double>();
+                    CFLPoint<double> flpDestination = new CFLPoint<double>();
 
-                    flpSource = flpaTarget.GetAt(k);
-                    flpTarget = flpaSource.GetAt(k);
+                    flpSource = flpaDestination.GetAt(k);
+                    flpDestination = flpaSource.GetAt(k);
 
-                    CFLLine<double> fllLine = new CFLLine<double>(flpSource, flpTarget);
+                    CFLLine<double> fllLine = new CFLLine<double>(flpSource, flpDestination);
                     CFLFigureArray flfaArrow = new CFLFigureArray();
 
                     flfaArrow = fllLine.MakeArrowWithRatio(0.25, true, 20);
 
-					// Target Vertex를 각 View Layer에 Drawing // Drawing the target vertex on each view layer
-					if((res = layer.DrawFigureImage(flpTarget, EColor.BLUE, 1)).IsFail())
+					// Destination Vertex를 각 View Layer에 Drawing // Drawing the destination vertex on each view layer
+					if((res = layer.DrawFigureImage(flpDestination, EColor.BLUE, 1)).IsFail())
                     {
                         ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
                         break;
