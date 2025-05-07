@@ -117,7 +117,13 @@ namespace SemanticSegmentation
 					break;
 				}
 
-				if((res = CUnnamedLabelRemoverDL.Execute(fliSourceImage, out fliResultImage)).IsFail())
+				CUnnamedLabelRemoverDL unnamedLabelRemoverDL = new CUnnamedLabelRemoverDL();
+
+				//파라미터 설정 // Parameters Setting
+				unnamedLabelRemoverDL.SetSourceImage(ref fliSourceImage);
+				unnamedLabelRemoverDL.SetDestinationImage(ref fliResultImage);
+
+				if((res = unnamedLabelRemoverDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to process\n");
 					break;

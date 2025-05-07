@@ -151,14 +151,22 @@ namespace SemanticSegmentation
 					break;
 				}
 
+				CValidationImageExtractorDL validationImageExtractorDL = new CValidationImageExtractorDL();
+				
+				// 소스이미지 설정 // Set the source image
+				validationImageExtractorDL.SetSourceImage(ref fliSourceImage);
+				// 결과 학습 이미지 설정 // Set the result learning image
+				validationImageExtractorDL.SetResultLearningImage(ref fliResultLearnImage);
+				// 결과 검증 이미지 설정 // Set the result validation image
+				validationImageExtractorDL.SetResultValidationImage(ref fliResultValidationImage);
+				// 데이터 셋 타입 설정 // Set the dataset type
+				validationImageExtractorDL.SetDatasetType(CValidationImageExtractorDL.EDatasetType.SemanticSegmentation);
 				// Validation Image 비율 설정 // Set ratio of validation image
-				float f32Ratio = 0.4f;
-				// Dataset type 설정 // Set the data set type
-				CValidationImageExtractorDL.EDatasetType eDatasetType = CValidationImageExtractorDL.EDatasetType.SemanticSegmentation;
+				validationImageExtractorDL.SetValidationRatio(0.4f);
 				// Validation Set에 최소한 몇 개의 클래스가 1개 이상 씩 포함될 것인지 설정 // Set how many classes each will be included in the Validation Set
-				int i32MinimumClassIncluded = 2;
+				validationImageExtractorDL.SetMinimumClassesIncluded(2);
 
-				if((res = CValidationImageExtractorDL.Extract(fliSourceImage, f32Ratio, eDatasetType, out fliResultLearnImage, out fliResultValidationImage, i32MinimumClassIncluded)).IsFail())
+				if((res = validationImageExtractorDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to process\n");
 					break;
