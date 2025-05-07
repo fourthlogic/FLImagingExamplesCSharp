@@ -9,8 +9,8 @@
     <ProjectGuid>{439368B1-84D7-4865-BF56-6D5ACA767FDB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LanczosMapping</RootNamespace>
-    <AssemblyName>LanczosMapping</AssemblyName>
+    <RootNamespace>LanczosSplineMapping</RootNamespace>
+    <AssemblyName>LanczosSplineMapping</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

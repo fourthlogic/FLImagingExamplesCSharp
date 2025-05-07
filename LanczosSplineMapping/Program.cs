@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace LanczosMapping
+namespace LanczosSplineMapping
 {
 	class Program
 	{
@@ -106,7 +106,7 @@ namespace LanczosMapping
 
 
 				// 좌표 매핑용 클래스 선언 // Class declaration for coordinate mapping
-				CLanczosMapping lczm = new CLanczosMapping();
+				CLanczosSplineMapping lczm = new CLanczosSplineMapping();
 
 				// 만약 기존 저장된 매핑 데이터가 있다면 해당 데이터를 로드합니다. // If there is previously saved mapping data, load the data.
 				// 두번째 실행부터는 파일이 생성될 것이기 때문에 아래 세팅과정을 수행하지 않고 지나가게 됩니다. // Since the file will be created from the second execution, the setting process below will be skipped.
@@ -137,8 +137,8 @@ namespace LanczosMapping
 							// Grid Index와 같은 좌표에서 미세한 랜덤 값을 부여해서 좌표를 왜곡 // Distort the coordinates by giving fine random values at the same coordinates as the Grid Index
 							CFLPoint<double> flpDistortion = new CFLPoint<double>(flpGridIndex.x + CRandomGenerator.Double(-0.1, 0.1), flpGridIndex.y + CRandomGenerator.Double(-0.1, 0.1));
 
-							// 위에서 설정한 좌표들을 바탕으로 LanczosMapping 클래스에 하나의 Vertex를 설정
-							// Set one vertex in the LanczosMapping class based on the coordinates set above
+							// 위에서 설정한 좌표들을 바탕으로 LanczosSplineMapping 클래스에 하나의 Vertex를 설정
+							// Set one vertex in the LanczosSplineMapping class based on the coordinates set above
 							lczm.SetControlPoint(flpGridIndex, flpSource, flpDistortion);
 						}
 					}
@@ -164,16 +164,16 @@ namespace LanczosMapping
 					}
 				}
 
-				// 세팅이 완료된 LanczosMapping 클래스를 이용해 변환을 하는 단계입니다.
-				// This step is to convert using the LanczosMapping class that has been set.
+				// 세팅이 완료된 LanczosSplineMapping 클래스를 이용해 변환을 하는 단계입니다.
+				// This step is to convert using the LanczosSplineMapping class that has been set.
 
-				// LanczosMapping 클래스에 설정된 Vertex 정보를 화면에 Display
-				// Display the vertex information set in the LanczosMapping class on the screen
+				// LanczosSplineMapping 클래스에 설정된 Vertex 정보를 화면에 Display
+				// Display the vertex information set in the LanczosSplineMapping class on the screen
 				for(int y = 0; y < lczm.GetRow(); ++y)
 				{
 					for(int x = 0; x < lczm.GetColumn(); ++x)
 					{
-						CLanczosMapping.CLanczosMappingVertexInfo vertex = lczm.GetControlPoint(new CFLPoint<int>(x, y));
+						CLanczosSplineMapping.CLanczosSplineMappingVertexInfo vertex = lczm.GetControlPoint(new CFLPoint<int>(x, y));
 
 						CFLPoint<double> flpSource = new CFLPoint<double>(vertex.tpSource.x, vertex.tpSource.y);
 						CFLPoint<double> flpDestination = new CFLPoint<double>(vertex.tpDestination.x, vertex.tpDestination.y);
