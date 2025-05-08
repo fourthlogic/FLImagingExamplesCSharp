@@ -9,8 +9,8 @@
     <ProjectGuid>{2AEF178C-29D8-4C37-8582-8A05D61C077D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReduceDimensionMin2Dto1D</RootNamespace>
-    <AssemblyName>ReduceDimensionMin2Dto1D</AssemblyName>
+    <RootNamespace>ReduceDimensionMode2Dto1D</RootNamespace>
+    <AssemblyName>ReduceDimensionMode2Dto1D</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
