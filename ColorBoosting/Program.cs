@@ -128,10 +128,10 @@ namespace ColorBoosting
 					break;
 				}
 
-				// 연산 속도 설정 // Set the Operation Speed
-				if((res = (ColorBoosting.SetOperationSpeed(CColorBoosting.EOperationSpeed.Fast))).IsFail())
+				// 연산 타입 설정 // Set the Operation Type
+				if((res = (ColorBoosting.SetOperationType(CColorBoosting.EOperationType.Constant))).IsFail())
 				{
-					ErrorPrint(res, "Failed to set Operation Speed.");
+					ErrorPrint(res, "Failed to set Operation Type.");
 					break;
 				}
 
