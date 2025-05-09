@@ -290,7 +290,7 @@ namespace StereoCalibrator3D
 				}
 
 				// Optimal Solution Accuracy 설정 // Set the optical solution accuracy
-				if((res = sSC.SetOptimalSoutionAcccuracy(1e-5)).IsFail())
+				if((res = sSC.SetOptimalSolutionAccuracy(1e-5)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Optimal Solution Accuracy.\n");
 					break;
