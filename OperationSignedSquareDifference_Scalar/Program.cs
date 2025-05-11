@@ -105,15 +105,15 @@ namespace OperationSignedSquareDifference
 				// Scalar Operation 모드로 설정 // Set operation mode to scalar
 				signedSquareDifference.SetOperationSource(EOperationSource.Scalar);
 
-	        	// 스칼라 색상 지정
-                CMultiVar<double> mvScalar = new CMultiVar<double> (0);
+				// 스칼라 색상 지정 // Set scalar operand color
+				CMultiVar<double> mvScalar = new CMultiVar<double> (0);
 	        	signedSquareDifference.SetScalarValue(mvScalar);
 
-	        	// 항상 공백 영역을 지정한 색으로 채우도록 설정
-	        	signedSquareDifference.EnableFillBlankColorMode(true);
+				// 항상 공백 영역을 지정한 색으로 채우도록 설정 // Set the blank area to always be filled with a specified color
+				signedSquareDifference.EnableFillBlankColorMode(true);
 
-	        	// 공백 색상 지정
-                CMultiVar<double> mvBlank = new CMultiVar<double> (110, 50, 210);
+	        	// 공백 색상 지정 // Set blank color
+                CMultiVar<double> mvBlank = new CMultiVar<double> (100);
 	        	signedSquareDifference.SetBlankColor(mvBlank);
 
 	        	// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters

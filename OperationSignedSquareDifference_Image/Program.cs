@@ -79,15 +79,15 @@ namespace OperationSignedSquareDifference
                     break;
                 }
 
-                // Source 이미지 뷰와 Operand 이미지 뷰의 시점을 동기화 한다
-                if((res =viewImageSource.SynchronizePointOfView(ref viewImageOperand)).IsFail())
+				// Source 이미지 뷰와 Operand 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the source image view and the Operand image view
+				if((res =viewImageSource.SynchronizePointOfView(ref viewImageOperand)).IsFail())
                 {
                     ErrorPrint(res,"Failed to synchronize view. \n");
                     break;
                 }
 
-                // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if((res =viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
+				// Source 이미지 뷰와 Destination 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the source image view and the Destination image view
+				if((res =viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
                 {
                     ErrorPrint(res,"Failed to synchronize view. \n");
                     break;
@@ -100,8 +100,8 @@ namespace OperationSignedSquareDifference
                     break;
                 }
 
-                // Operand 이미지 뷰에 이미지를 디스플레이
-                if((res =viewImageOperand.SetImagePtr(ref fliOperandImage)).IsFail())
+				// Operand 이미지 뷰에 이미지를 디스플레이 // Display the image in the operand image view
+				if((res =viewImageOperand.SetImagePtr(ref fliOperandImage)).IsFail())
                 {
                     ErrorPrint(res,"Failed to set image object on the image view. \n");
                     break;
@@ -146,8 +146,7 @@ namespace OperationSignedSquareDifference
 				// Image Operation 모드로 설정 // Set operation mode to image
 				signedSquareDifference.SetOperationSource(EOperationSource.Image);
 
-		        // 공백 색상 칠하기 모드 해제
-		        // 결과 이미지가 이미 존재할 경우 연산되지 않은 영역을 공백 색상으로 칠하지 않고 원본 그대로 둔다.
+		        // 공백 색상 칠하기 모드 해제 // Disable fill blanck color mode
 		        signedSquareDifference.EnableFillBlankColorMode(false);
 
 		        // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
