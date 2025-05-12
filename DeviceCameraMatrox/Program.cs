@@ -37,10 +37,12 @@ namespace DeviceCameraMatrox
             // 이미지 뷰의 유효성을 확인한다.
             if (m_viewImage.IsAvailable())
             {
-                // 카메라에서 취득 한 이미지를 얻어온다.
-                pDeviceImage.GetAcquiredImage(ref m_fliImage);
+				// 카메라에서 취득 한 이미지를 얻어온다.
+				m_fliImage.Lock();
+				pDeviceImage.GetAcquiredImage(ref m_fliImage);
+				m_fliImage.Unlock();
 
-                if (m_viewImage.GetImage() != m_fliImage)
+				if (m_viewImage.GetImage() != m_fliImage)
                 {
                     // 이미지 뷰에 이미지 포인터 설정
                     m_viewImage.SetImagePtr(ref m_fliImage);

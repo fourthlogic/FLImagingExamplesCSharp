@@ -40,11 +40,13 @@ namespace DeviceCameraArena
             // 이미지 뷰의 유효성을 확인한다.
             if (m_viewImage.IsAvailable())
             {
-                // 카메라에서 취득 한 이미지를 얻어온다.
-                pDeviceImage.GetAcquiredImage(ref m_fliImage);
+				// 카메라에서 취득 한 이미지를 얻어온다.
+				m_fliImage.Lock();
+				pDeviceImage.GetAcquiredImage(ref m_fliImage);
+				m_fliImage.Unlock();
 
-                // 이미지 뷰를 재갱신 한다.
-                m_viewImage.Invalidate();
+				// 이미지 뷰를 재갱신 한다.
+				m_viewImage.Invalidate();
             }
         }
 
