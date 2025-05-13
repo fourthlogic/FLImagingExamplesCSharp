@@ -111,9 +111,14 @@
   - [Utilities]
     
     - [Residual Evaluator]
-      - Residual Evaluator3D
+      - Residual Evaluator 3D
         - The example of an algorithm that measures the residuals of two given objects.
         - 주어진 두 오브젝트의 잔차를 측정하는 알고리즘 예제.
+
+    - [Voxel Grid]
+      - VoxelGrid3D
+        - The example of an algorithm that sampling a given point cloud.
+        - 주어진 포인트 클라우드를 샘플링하는 알고리즘 예제.
 
 - [Advanced Functions]
 
