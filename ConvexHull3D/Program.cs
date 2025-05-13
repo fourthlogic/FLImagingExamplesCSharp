@@ -49,7 +49,7 @@ namespace ConvexHull3D
 				CConvexHull3D convexhull3D = new CConvexHull3D();
 
 				{
-					// 이미지 뷰 생성 // Create image view
+					// 3D 뷰 생성 // Create 3D view
 					if((res = view3DSrc.Create(100, 0, 612, 512)).IsFail() ||
 					   (res = view3DDst.Create(612, 0, 1124, 512)).IsFail())
 					{
@@ -69,7 +69,7 @@ namespace ConvexHull3D
 					view3DSrc.PushObject(floSrc);
 					view3DSrc.SetPointSize(3);
 
-					// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+					// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 					if((res = convexhull3D.Execute()).IsFail())
 					{
 						ErrorPrint(res, "Failed to execute Convex Hull 3D.");

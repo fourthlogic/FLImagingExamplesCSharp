@@ -106,7 +106,7 @@ namespace StereoPhotometric
 					break;
 				}
 
-				// 3D 이미지 뷰 생성
+				// 3D 뷰 생성
 				if((res = viewImage3DDst.Create(896, 0, 1692, 769)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");

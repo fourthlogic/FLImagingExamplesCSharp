@@ -122,7 +122,7 @@ namespace MultiFocus
 				algMultiFocusDerivativeBased3D.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destination Texture 이미지 설정 // Set the destination texture image
 				algMultiFocusDerivativeBased3D.SetDestinationTextureImage(ref fliTxtImage);
-				// Destionation 3D Object 설정 // Set the Destionation 3D Object 
+				// Destination 3D Object 설정 // Set the Destination 3D Object 
 				algMultiFocusDerivativeBased3D.SetDestinationObject(ref fl3DOHM);
 				// Pixel Accuracy 설정 // Set the pixel accuracy
 				algMultiFocusDerivativeBased3D.SetPixelAccuracy(0.1);

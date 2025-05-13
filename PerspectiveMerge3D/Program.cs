@@ -39,24 +39,18 @@ namespace PerspectiveMerge3D
 
 			do
 			{
-				// Source 3D 이미지 뷰 생성 // Create the Source 3D image view
-				if((res = view3DSrc.Create(100, 0, 600, 500)).IsFail())
+				// Source 3D 뷰 생성 // Create the Source 3D view
+				if((res = view3DSrc.Create(100, 0, 600, 500)).IsFail() ||
+				   (res = view3DSrc2.Create(600, 0, 1100, 500)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the 3D view.\n");
 					break;
 				}
 
-				// Source 3D 이미지 뷰 생성 // Create the Source 3D image view
-				if((res = view3DSrc2.Create(600, 0, 1100, 500)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
-				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
+				// Destination 3D 뷰 생성 // Create the destination 3D view
 				if((res = view3DDst.Create(1100, 0, 1600, 500)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the 3D view.\n");
 					break;
 				}
 
@@ -88,7 +82,7 @@ namespace PerspectiveMerge3D
 				// Destination 객체 설정 // Set the destination object
 				algObject.SetDestinationObject(ref fl3DODst);
 
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute MultiFocus.\n");
@@ -110,19 +104,9 @@ namespace PerspectiveMerge3D
 
 				CFLPoint<double> flp = new CFLPoint<double>();
 
-
-				if((res = layer3DSrc.DrawTextCanvas(flp, ("Left Camera"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
-
-				if((res = layer3DSrc2.DrawTextCanvas(flp, ("Right Camera"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
-				if((res = layer3DDst.DrawTextCanvas(flp, ("Result"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer3DSrc.DrawTextCanvas(flp, ("Left Camera"), EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+				   (res = layer3DSrc2.DrawTextCanvas(flp, ("Right Camera"), EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+				   (res = layer3DDst.DrawTextCanvas(flp, ("Result"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;

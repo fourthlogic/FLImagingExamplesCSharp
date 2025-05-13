@@ -119,7 +119,7 @@ namespace LaserTriangulation
 				LaserTriangulation.SetSourceImage(ref fliSrcImage);
 				// Destination Height Map 이미지 설정 // Set the destination height map image
 				LaserTriangulation.SetDestinationHeightMapImage(ref fliDstImage);
-				// Destionation 3D Object 설정 // Set the Destionation 3D Object 
+				// Destination 3D Object 설정 // Set the Destination 3D Object 
 				LaserTriangulation.SetDestinationObject(ref fl3DOHM);
 				// Source 이미지 타입 설정 // Set the type of the source image
 				LaserTriangulation.SetSourceType(CLaserTriangulation3D.ESourceType.Profile);

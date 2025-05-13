@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace PerspectiveTransform3D
+namespace SwitchAxes3D
 {
 	class Program
 	{
@@ -60,23 +60,16 @@ namespace PerspectiveTransform3D
 
 				fl3DObjectSrc.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
 
-				// Perspective Transform 3D 객체 생성 // Create Perspective Transform 3D object
-				CPerspectiveTransform3D PerspectiveTransform3D = new CPerspectiveTransform3D();
-
-				TPoint3<float> tpPosition = new TPoint3<float>(2.0f, 0.0f, 1.5f);
-				TPoint3<float> tpDirection = new TPoint3<float>(-1.0f, 0.0f, -1.0f);
-				TPoint3<float> tpUpVector = new TPoint3<float>(0.0f, 1.0f, 0.0f);
+				// 알고리즘 객체 생성 // Create algorithm object
+				CSwitchAxes3D SwitchAxes3D = new CSwitchAxes3D();
 
 				// 파라미터 설정 // Set parameter
-				PerspectiveTransform3D.SetSourceObject(ref fl3DObjectSrc);
-				PerspectiveTransform3D.SetDestinationObject(ref fl3DObjectDst);
-				PerspectiveTransform3D.SetPosition(tpPosition);
-				PerspectiveTransform3D.SetDirection(tpDirection);
-				PerspectiveTransform3D.SetDirectionType(EDirectionType.Decrement);
-				PerspectiveTransform3D.SetUpVector(tpUpVector);
+				SwitchAxes3D.SetSourceObject(ref fl3DObjectSrc);
+				SwitchAxes3D.SetDestinationObject(ref fl3DObjectDst);
+				SwitchAxes3D.SetAxisOrder(CSwitchAxes3D.EAxisOrder.YZX);
 
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = PerspectiveTransform3D.Execute()).IsFail())
+				if((res = SwitchAxes3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute MultiFocus.\n");
 					break;

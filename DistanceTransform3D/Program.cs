@@ -123,14 +123,14 @@ namespace DistanceTransform3D
 
 			do
 			{
-				// Source 3D 이미지 뷰 생성 // Create the Source 3D image view
+				// Source 3D 뷰 생성 // Create the Source 3D view
 				if((res = view3DSrc.Create(100, 0, 600, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
+				// Destination 3D 뷰 생성 // Create the destination 3D view
 				if((res = view3DDst.Create(600, 0, 1100, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
@@ -189,7 +189,7 @@ namespace DistanceTransform3D
 				// 카메라 업 벡터 설정 // Set the camera up vector
 				DistanceTransform3D.SetUpVector(tpUpVector);
 
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = DistanceTransform3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute MultiFocus.\n");

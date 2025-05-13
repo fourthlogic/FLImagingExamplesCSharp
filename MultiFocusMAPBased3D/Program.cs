@@ -165,10 +165,10 @@ namespace MultiFocus
 				if((res = algMultiFocusMAPBased3D.SetDepthPitch(2.0)).IsFail())
 					break;
 
-				// Destionation 3D object 생성 활성화 // Enable the destionation 3D object generation
+				// Destination 3D object 생성 활성화 // Enable the Destination 3D object generation
 				if((res = algMultiFocusMAPBased3D.Enable3DObjectGeneration(true)).IsFail())
 					break;
-				// Destionation 3D object 설정 // Set the destionation 3D object 
+				// Destination 3D object 설정 // Set the Destination 3D object 
 				if((res = algMultiFocusMAPBased3D.SetDestinationObject(ref fl3DOHM)).IsFail())
 					break;
 

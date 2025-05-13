@@ -81,7 +81,7 @@ namespace PhotometricStereo
 					break;
 				}
 
-				// 3D 이미지 뷰 생성
+				// 3D 뷰 생성
 				if((res = viewImage3DDst.Create(548, 448, 996, 896)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
@@ -232,7 +232,7 @@ namespace PhotometricStereo
 				fl3DObject.SetTextureImage(fliTxtImage);
 				fl3DObject.ActivateVertexColorTexture(false);
 
-				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
+				// 3D 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
 				if(viewImage3DDst.PushObject(fl3DObject).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");

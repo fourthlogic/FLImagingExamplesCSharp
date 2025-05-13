@@ -49,21 +49,21 @@ namespace Projection3D
 		            break;
 	            }
 
-	            // Source 3D 뷰 생성
-	            if((res = view3DSrc.Create(612, 0, 1124, 512)).IsFail())
+				// Source 3D 뷰 생성 // Create the Source 3D view
+				if((res = view3DSrc.Create(612, 0, 1124, 512)).IsFail())
 	            {
 		            ErrorPrint(res, "Failed to create the Source 3D view.\n");
 		            break;
 	            }
 
-	            // Dst 3D 뷰 생성
-	            if((res = viewImgDst.Create(1124, 0, 1636, 512)).IsFail())
+				// Destination 이미지 뷰 생성 // Create the destination image view
+				if((res = viewImgDst.Create(1124, 0, 1636, 512)).IsFail())
 	            {
-		            ErrorPrint(res, "Failed to create the Destination Image view.\n");
+		            ErrorPrint(res, "Failed to create the Destination 3D view.\n");
 		            break;
 	            }
 
-	            // Source Object 3D 뷰 생성 // Create the source object 3D view
+	            // Source 객체를 3D 뷰에 추가 // push source object to 3D view
 	            if((res = view3DSrc.PushObject(floSrc)).IsFail())
 	            {
 		            ErrorPrint(res, "Failed to display the 3D object.\n");
@@ -72,16 +72,12 @@ namespace Projection3D
 
 	            viewImgDst.SynchronizeWindow(ref view3DSrc);
 
-		
-
 	            // Projection3D 객체 생성 // Create Projection3D object
 	            CProjection3D projection3D = new CProjection3D();
 
-	            // Destination object 설정 // Set the destination object
+				// 알고리즘 대상 설정 // set algorithm target
 	            projection3D.SetDestinationImage(ref fliDst);
-	            // Source object 설정 // Set the source object
 	            projection3D.SetSourceObject(ref floSrc);
-	            projection3D.SetImageSize(512, 512);
 
 	            //3D View의 카메라 파라미터 값을 초기화하기 위하여 먼저 호출
 	            view3DSrc.ZoomFit();
@@ -99,16 +95,17 @@ namespace Projection3D
 	            float f32AovX = cam.GetAngleOfViewX();
 	            float f32AovY = cam.GetAngleOfViewY();
 				float f32TargetDistance = cam.GetDistanceFromTarget();
-
+				
+				// 알고리즘 파라미터 설정 // set algorithm parameters
 				projection3D.SetCameraPosition(ptCamPos);
 	            projection3D.SetCameraDirection(ptCamDir);
 	            projection3D.SetDirectionUp(ptCamDirUp);
-
-	            projection3D.SetAngleOfView(f32AovX, f32AovY, EAngleUnit.Degree);
+				projection3D.SetAngleOfView(f32AovX, f32AovY, EAngleUnit.Degree);
 	            projection3D.SetWorkingDistance(100);
+				projection3D.SetImageSize(512, 512);
 
-	            // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-	            if((res = projection3D.Execute()).IsFail())
+				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				if((res = projection3D.Execute()).IsFail())
 	            {
 		            ErrorPrint(res, "Failed to execute Projection 3D.");
 		            break;
