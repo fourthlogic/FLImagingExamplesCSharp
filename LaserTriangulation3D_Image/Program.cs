@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace MultiFocus
+namespace LaserTriangulation
 {
 	class Program
 	{
@@ -110,8 +110,8 @@ namespace MultiFocus
 
 				viewImageSrc.SetFixThumbnailView(true);
 
-				// MultiFocus 객체 생성 // Create MultiFocus object
-				CLaserTriangulation3D LaserTriangulation = new CLaserTriangulation3D();
+                // Laser Triangulation 객체 생성 // Create Laser Triangulation object
+                CLaserTriangulation3D LaserTriangulation = new CLaserTriangulation3D();
 
 				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 

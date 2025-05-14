@@ -71,7 +71,7 @@ namespace SwitchAxes3D
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = SwitchAxes3D.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute MultiFocus.\n");
+					ErrorPrint(res, "Failed to execute.\n");
 					break;
 				}
 
