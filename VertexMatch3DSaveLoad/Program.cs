@@ -281,7 +281,7 @@ namespace VertexMatch3D
 						break;
 					}
 
-					string strChannel = String.Format("R({0}, {1}, {2}) , \nRVec({3}, {4}, {5}) , \nT({6}, {7}, {8})\nScore : {9}\nResidual {10}:"
+					string strChannel = String.Format("R({0,6:0.000000}, {1,6:0.000000}, {2,6:0.000000}) , \nRVec({3,6:0.000000}, {4,6:0.000000}, {5,6:0.000000}) , \nT({6,6:0.000000}, {7,6:0.000000}, {8,6:0.000000})\nScore : {9,6:0.000000}\nResidual {10,6:0.000000}:"
 									   , f64ArrRotX, f64ArrRotY, f64ArrRotZ, tp3RotVec.x, tp3RotVec.y, tp3RotVec.z, flpTrans.x, flpTrans.y, flpTrans.z, f64Score, f64Residual);
 
 					// 추정된 포즈 행렬 및 score 출력
