@@ -113,14 +113,14 @@ namespace HandEyeCalibrator3D
 				// 이미지 뷰 생성 // Create image view
 				if((eResult = viewImage.Create(100, 0, 612, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the Source 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Source image view.\n");
 					break;
 				}
 
 				// 결과 3D 뷰 생성 // Create result 3D view
 				if((eResult = view3D.Create(612, 0, 1124, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the Source 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Result 3D view.\n");
 					break;
 				}
 

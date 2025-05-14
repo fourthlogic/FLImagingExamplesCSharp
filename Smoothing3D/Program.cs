@@ -52,14 +52,14 @@ namespace EdgeDetector3D
 				// Source 3D 뷰 생성
 				if((eResult = view3DSource.Create(612, 0, 1124, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the Destination 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Source 3D view.\n");
 					break;
 				}
 
 				// Dst 3D 뷰 생성
 				if((eResult = view3DDst.Create(1124, 0, 1636, 512)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the Dst 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Destination 3D view.\n");
 					break;
 				}
 
@@ -94,7 +94,7 @@ namespace EdgeDetector3D
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = smoothing3D.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Surface Match 3D.");
+					ErrorPrint(eResult, "Failed to execute Smoothing 3D.");
 					break;
 				}
 
@@ -131,7 +131,7 @@ namespace EdgeDetector3D
 				// 3D 오브젝트 뷰에 결과 오브젝트 디스플레이
 				if((eResult = view3DDst.PushObject((CFL3DObject)smoothing3D.GetDestinationObject())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(eResult, "Failed to set object on the 3D View.\n");
 					break;
 				}
 

@@ -95,7 +95,7 @@ namespace SurfaceMatch3D
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = SurfaceMatch3D.Learn()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Surface Match 3D.");
+					ErrorPrint(eResult, "Failed to learn Surface Match 3D.");
 					break;
 				}
 				
@@ -203,7 +203,7 @@ namespace SurfaceMatch3D
 				// 3D 오브젝트 뷰에 결과 Object와 비교를 위한 Source 오브젝트 디스플레이
 				if((eResult = view3DDst.PushObject((CFL3DObject)SurfaceMatch3D.GetSourceObject())).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
+					ErrorPrint(eResult, "Failed to set object on the 3D View.\n");
 					break;
 				}
 
