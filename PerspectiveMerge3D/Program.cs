@@ -69,12 +69,12 @@ namespace PerspectiveMerge3D
 
 				CFL3DObject fl3DODst = new CFL3DObject();
 
-				algObject.SetEulerSequence(EEulerSequence.Intrinsic_ZXY);
+				algObject.SetEulerSequence(EEulerSequence.Extrinsic_ZXY);
 
 				TPoint3<float> tpPosition = new TPoint3<float>(-0.152f, 0.0f, 0f);
-				TPoint3<float> tpRotation = new TPoint3<float>(90f, -8f, 29f);
+				TPoint3<float> tpRotation = new TPoint3<float>(-90f, 8f, -29f);
 				TPoint3<float> tpPosition2 = new TPoint3<float>(0.152f, 0.0f, 0f);
-				TPoint3<float> tpRotation2 = new TPoint3<float>(90f, -8f, -29f);
+				TPoint3<float> tpRotation2 = new TPoint3<float>(-90f, 8f, 29f);
 
 				// 카메라 1, 2의 Source 객체 설정 // Set the source object of camera 1, 2
 				algObject.AddSourceObject(ref fl3DOSrc, tpPosition, tpRotation);
