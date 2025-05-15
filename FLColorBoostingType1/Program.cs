@@ -129,9 +129,9 @@ namespace FLColorBoostingType1
 				}
 
 				// Factor 설정 // Set Factor
-				if((res = (FLColorBoostingType1.SetFactor(1.5))).IsFail())
+				if((res = (FLColorBoostingType1.SetFactor(3))).IsFail())
 				{
-					ErrorPrint(res, "Failed to set Operation Type.");
+					ErrorPrint(res, "Failed to set Factor.");
 					break;
 				}
 
