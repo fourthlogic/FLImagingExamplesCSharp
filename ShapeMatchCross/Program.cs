@@ -64,6 +64,8 @@ namespace ShapeMatch
 				// 학습할 십자의 크기 설정 // Set the size of the cross to learn
 				shapeMatch.SetHalfLength(130);
 				shapeMatch.SetHalfThickness(50);
+				// 검출할 객체의 색상을 설정합니다. // Sets the color of the object to be detected.
+				shapeMatch.SetObjectColor(EShapeMatchObjectColor.Dark);
 
 				// 도형 학습 // Learn shape
 				if((res = shapeMatch.Learn()).IsFail())
@@ -76,8 +78,6 @@ namespace ShapeMatch
 				shapeMatch.SetSourceImage(ref fliImage);
 				// 검출 시 사용될 유효 변경 크기범위를 설정합니다. // Set the effective change size range to be used for detection.
 				shapeMatch.SetScaleRange(0.9, 1.1);
-				// 검출할 객체의 색상을 설정합니다. // Sets the color of the object to be detected.
-				shapeMatch.SetObjectColor(EShapeMatchObjectColor.Bright);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = shapeMatch.Execute()).IsFail())
