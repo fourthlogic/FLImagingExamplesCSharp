@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationAdd
+namespace FLFLAutoShadingCorrection
 {
 	class Program
 	{
@@ -45,7 +45,7 @@ namespace OperationAdd
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = (arrFliImage[0].Load("../../ExampleImages/AutoShadingCorrection/wall.flif"))).IsFail())
+				if((res = (arrFliImage[0].Load("../../ExampleImages/FLAutoShadingCorrection/wall.flif"))).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -102,17 +102,17 @@ namespace OperationAdd
 					break;
 				}
 
-				// Auto Shading Correction 객체 생성 // Create Auto Shading Correction object
-				CAutoShadingCorrection autoshadingcorrection = new CAutoShadingCorrection();
+				// FL Auto Shading Correction 객체 생성 // Create FL Auto Shading Correction object
+				CFLAutoShadingCorrection flAutoShadingCorrection = new CFLAutoShadingCorrection();
 				// Source 이미지 설정 // Set source image
-                autoshadingcorrection.SetSourceImage(ref arrFliImage[0]);
+                flAutoShadingCorrection.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-                autoshadingcorrection.SetDestinationImage(ref arrFliImage[1]);
+                flAutoShadingCorrection.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (autoshadingcorrection.Execute())).IsFail())
+                if ((res = (flAutoShadingCorrection.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Auto Shading Correction.");
+					ErrorPrint(res, "Failed to execute FL Auto Shading Correction.");
 					break;
 				}
 
