@@ -66,10 +66,10 @@ namespace SwitchAxes3D
 				// 파라미터 설정 // Set parameter
 				SwitchAxes3D.SetSourceObject(ref fl3DObjectSrc);
 				SwitchAxes3D.SetDestinationObject(ref fl3DObjectDst);
-				SwitchAxes3D.SetAxisOrder(CSwitchAxes3D.EAxisOrder.YZX);
+                SwitchAxes3D.SetAxisMappings(CSwitchAxes3D.EAxisMapping.From_PX, CSwitchAxes3D.EAxisMapping.From_NY, CSwitchAxes3D.EAxisMapping.Deduce, false);
 
-				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = SwitchAxes3D.Execute()).IsFail())
+                // 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+                if ((res = SwitchAxes3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
