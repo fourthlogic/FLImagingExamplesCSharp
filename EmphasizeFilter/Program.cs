@@ -122,8 +122,7 @@ namespace EmphasizeFilter
 				// Destination 이미지 설정 // Set the destination image
 				emphasizeFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// 파라미터 값 설정 // Set 파라미터 value
-                emphasizeFilter.SetMaskWidth(7);
-                emphasizeFilter.SetMaskHeight(7);
+				emphasizeFilter.SetKernel(7);
                 emphasizeFilter.SetFactor(1.5);
 				emphasizeFilter.SetPaddingMethod(EPaddingMethod.DecreasingKernel);
 
@@ -136,10 +135,9 @@ namespace EmphasizeFilter
 
 				// Destination 이미지를 Destination2로 설정
 				emphasizeFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
-                // 파라미터 값 설정 // Set 파라미터 value
-                emphasizeFilter.SetMaskWidth(3);
-                emphasizeFilter.SetMaskHeight(3);
-                emphasizeFilter.SetFactor(2.5);
+				// 파라미터 값 설정 // Set 파라미터 value
+				emphasizeFilter.SetKernel(3);
+				emphasizeFilter.SetFactor(2.5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = emphasizeFilter.Execute()).IsFail())
