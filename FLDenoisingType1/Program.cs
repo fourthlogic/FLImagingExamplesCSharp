@@ -129,7 +129,7 @@ namespace FLDenoisingType1
 				}
 
 				// Kernel 크기 설정 // Set the Kernel Size
-				if((res = (FLDenoisingType1.SetKernelSize(5))).IsFail())
+				if((res = (FLDenoisingType1.SetKernel(5))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Kernel Size.");
 					break;
