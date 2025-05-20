@@ -1196,6 +1196,9 @@
     - LowLuminanceCorrectionType1
       - The example of an algorithm that processes a low luminance correction.
       - 저휘도 이미지를 보정하는 알고리즘 예제.
+    - LowLuminanceCorrectionType2
+      - The example of an algorithm that processes a low luminance correction.
+      - 저휘도 이미지를 보정하는 알고리즘 예제.
 
   - [Image Operation]
   

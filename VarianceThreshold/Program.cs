@@ -99,8 +99,8 @@ namespace VarianceThreshold
 				// Destination 이미지 설정 // Set destination image
 				VarianceThreshold.SetDestinationImage(ref fliIDstImage);
 
-				// 하프 사이즈 입력 (Kernel 7x7) // set half size(Kernel 7x7) 
-				VarianceThreshold.SetHalfSize(7, 7);
+				// Kernel 사이즈 입력 // set kernel size
+				VarianceThreshold.SetKernel(15, 15);
 
                 // StdDevScale 설정 // set StdDevScale
                 VarianceThreshold.SetStdDevScale(0.2);

@@ -148,10 +148,10 @@ namespace WeightedGuidedFilter
 				// Destination 이미지 설정 // Set the destination image
 				weightedGuidedFilter.SetDestinationImage(ref fliDestinationImage);
 
-				// filter mask radius = 3 설정 // Set the filter mask radius = 3
-				weightedGuidedFilter.SetRadius(3);
+				//  Kernel 크기 설정 // Set the kernel size
+				weightedGuidedFilter.SetKernel(7);
 
-				// amplitude = 300 설정 // Set the amplitude = 300
+				// amplitude 설정 // Set the amplitude
 				weightedGuidedFilter.SetAmplitude(300);
 
 

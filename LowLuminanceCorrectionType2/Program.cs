@@ -108,10 +108,10 @@ namespace LowLuminanceCorrectionType2
 				LowLuminanceCorrectionType2.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
 				LowLuminanceCorrectionType2.SetDestinationImage(ref arrFliImage[1]);
-				// Noise Reduction 설정
+				// Noise Reduction 설정 // Set usage Noise Reduction
 				LowLuminanceCorrectionType2.EnableNoiseReduction(true);
-				// Kernel Size 설정
-				LowLuminanceCorrectionType2.SetKernelSize(5);
+				// Kernel Size 설정 // Set kernel size
+				LowLuminanceCorrectionType2.SetKernel(5);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (LowLuminanceCorrectionType2.Execute())).IsFail())
