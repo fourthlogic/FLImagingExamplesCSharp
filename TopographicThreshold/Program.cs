@@ -166,8 +166,8 @@ namespace TopographicThreshold
 				// Destination 이미지 설정 // Set the destination image
 				topographicThreshold.SetDestinationImage(ref arrFliImage[1]);
 
-				// Radius 설정 // Set the Radius value
-				topographicThreshold.SetRadius(2);
+				// 커널 크기 설정 // Set the Kernel Size
+				topographicThreshold.SetKernel(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = topographicThreshold.Execute()).IsFail())
@@ -179,8 +179,8 @@ namespace TopographicThreshold
 				// Destination 이미지 설정 // Set the destination image
 				topographicThreshold.SetDestinationImage(ref arrFliImage[2]);
 
-				// Radius 설정 // Set the Radius value
-				topographicThreshold.SetRadius(3);
+				// 커널 크기 설정 // Set the Kernel Size
+				topographicThreshold.SetKernel(7);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = topographicThreshold.Execute()).IsFail())
@@ -192,13 +192,13 @@ namespace TopographicThreshold
 				// Destination 이미지 설정 // Set the destination image
 				topographicThreshold.SetDestinationImage(ref arrFliImage[3]);
 
-				// Radius 설정 // Set the Radius value
-				topographicThreshold.SetRadius(4);
+				// 커널 크기 설정 // Set the Kernel Size
+				topographicThreshold.SetKernel(9);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = topographicThreshold.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute conditional replacer.");
+					ErrorPrint(res, "Failed to execute Topogrpahic Threshold.");
 					break;
 				}
 
@@ -229,19 +229,19 @@ namespace TopographicThreshold
 					break;
 				}
 
-				if((res = arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Image\nRadius: 2", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Image\nKernel Size: 5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Image\nRadius: 3", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Image\nKernel Size: 7", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = arrLayer[3].DrawTextCanvas(tpPosition, "Destination3 Image\nRadius: 4", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[3].DrawTextCanvas(tpPosition, "Destination3 Image\nKernel Size: 9", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
