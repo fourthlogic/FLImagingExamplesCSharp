@@ -152,7 +152,7 @@ namespace GuidedFilter
                 guidedFilter.SetOperationSource(EOperationSource.Image);
 
 				// Kernel Size = 7 설정 // Set the Kernel Size = 7
-				fastGuidedFilter.SetKernel(7);
+				guidedFilter.SetKernel(7);
 
 				// amplitude = 10 설정 // Set the amplitude = 10
 				guidedFilter.SetAmplitude(20);
