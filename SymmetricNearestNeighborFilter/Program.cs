@@ -132,11 +132,9 @@ namespace SymmetricNearestNeighborFilter
 				// Distribution 설정 // Set the Distribution
 				snnFilter.SetDistribution(CSymmetricNearestNeighborFilter.EDistribution.Uniform);
 
-				// Filter Width 설정 // Set the Filter Width
-				snnFilter.SetFilterWidth(9);
-
-				// Filter Height 값 설정 // Set the Filter Height
-				snnFilter.SetFilterHeight(9);
+				// Kernel Width = 5 설정 // Set the Kernel Width = 5
+				// Kernel Height = 5 설정 // Set the Kernel Height = 5
+				snnFilter.SetKernel(9, 9);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = snnFilter.Execute()).IsFail())

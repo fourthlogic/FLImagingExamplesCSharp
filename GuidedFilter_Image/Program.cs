@@ -151,11 +151,11 @@ namespace GuidedFilter
 		        // Image Operation 소스로 설정 // Set Operation Source to image
                 guidedFilter.SetOperationSource(EOperationSource.Image);
 
-                // filter mask radius = 2 설정 // Set the filter mask radius = 2
-                guidedFilter.SetRadius(3);
+				// Kernel Size = 7 설정 // Set the Kernel Size = 7
+				fastGuidedFilter.SetKernel(7);
 
-                // amplitude = 10 설정 // Set the amplitude = 10
-                guidedFilter.SetAmplitude(20);
+				// amplitude = 10 설정 // Set the amplitude = 10
+				guidedFilter.SetAmplitude(20);
 
 
 		        // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters

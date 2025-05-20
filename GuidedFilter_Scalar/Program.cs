@@ -108,11 +108,11 @@ namespace GuidedFilter
 	        	// Scalar Operation 소스로 설정 // Set Operation Source to scalar
                 guidedFilter.SetOperationSource(EOperationSource.Scalar);
 
-                // filter mask radius = 2 설정 // Set the filter mask radius = 2
-                guidedFilter.SetRadius(2);
+				// Kernel Size = 5 설정 // Set the Kernel Size = 5
+				fastGuidedFilter.SetKernel(5);
 
-                // amplitude = 10 설정 // Set the amplitude = 10
-                guidedFilter.SetAmplitude(10);
+				// amplitude = 10 설정 // Set the amplitude = 10
+				guidedFilter.SetAmplitude(10);
 
 	        	// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = guidedFilter.Execute()).IsFail())

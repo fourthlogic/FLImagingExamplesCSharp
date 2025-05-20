@@ -148,8 +148,8 @@ namespace FastGuidedFilter
 				// Destination 이미지 설정 // Set the destination image
 				fastGuidedFilter.SetDestinationImage(ref fliDestinationImage);
 
-				// filter mask radius = 3 설정 // Set the filter mask radius = 3
-				fastGuidedFilter.SetRadius(3);
+				// Kernel Size = 7 설정 // Set the Kernel Size = 7
+				fastGuidedFilter.SetKernel(7);
 
 				// amplitude = 30 설정 // Set the amplitude = 30
 				fastGuidedFilter.SetAmplitude(20);
