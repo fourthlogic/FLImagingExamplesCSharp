@@ -113,8 +113,8 @@ namespace GeometricMeanFilter
 				// Destination 이미지 설정 // Set the destination image
 				geometricMeanFilter.SetDestinationImage(ref fliDstImage);
 
-				// 처리할 Filter의 Half Kernel Size 설정 // Set the half kernel size of the filter
-				geometricMeanFilter.SetHalfKernelSize(1);
+				// 처리할 Filter의 Kernel Size 설정 // Set the kernel size of the filter
+				geometricMeanFilter.SetKernel(3);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = geometricMeanFilter.Execute()).IsFail())
