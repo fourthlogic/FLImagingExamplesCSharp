@@ -99,8 +99,8 @@ namespace AdaptiveThreshold
 				// Destination 이미지 설정 // Set destination image
 				AdaptiveThreshold.SetDestinationImage(ref fliIDstImage);
 
-				// 하프 사이즈 입력 (Kernel 3x3) // set half size(Kernel 3x3) 
-				AdaptiveThreshold.SetHalfSize(3, 3);
+				// 커널 사이즈 입력 (Kernel 7x7) // set kernel size(Kernel 7x7) 
+				AdaptiveThreshold.SetKernel(7, 7);
 
 				// 임계값 옵셋 설정 // set threshold offset 
 				AdaptiveThreshold.SetThresholdOffset(5);
