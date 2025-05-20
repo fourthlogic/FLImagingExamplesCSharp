@@ -99,10 +99,10 @@ namespace AdaptiveThreshold
 				// Destination 이미지 설정 // Set destination image
 				adaptiveThresholdGaussian.SetDestinationImage(ref fliIDstImage);
 
-				// 하프 사이즈 입력 (실제 Kernel 11x11) // set half size(real Kernel 11x11) 
-				adaptiveThresholdGaussian.SetHalfSize(5);
+                // 커널 사이즈 입력 // Set Kernel size 
+                adaptiveThresholdGaussian.SetKernel(11);
 
-				// 임계값 옵셋 설정 // set threshold offset 
+				// 임계값 옵셋 설정 // Set threshold offset 
                 adaptiveThresholdGaussian.SetThresholdOffset(new CMultiVar<double>(5));
 
 				// 알고리즘 수행 // Execute the algorithm
