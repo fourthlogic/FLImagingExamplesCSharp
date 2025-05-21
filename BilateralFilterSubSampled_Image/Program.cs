@@ -148,11 +148,11 @@ namespace BilateralFilterSubSampled
 				// Image Operation 소스로 설정 // Set Operation Source to image
 				bilateralFilterSubSampled.SetOperationSource(EOperationSource.Image);
 
-				// Sigma Spatial = 2.5 설정 // Set the Sigma Spatial = 2.5
-				bilateralFilterSubSampled.SetSigmaSpatial(2.5f);
+				// Sigma Spatial = 3 설정 // Set the Sigma Spatial = 3
+				bilateralFilterSubSampled.SetSigmaSpatial(3);
 
-				// Sigma Range = 40 설정 // Set the Sigma Range = 40
-				bilateralFilterSubSampled.SetSigmaRange(40);
+				// Sigma Range = 50 설정 // Set the Sigma Range = 50
+				bilateralFilterSubSampled.SetSigmaRange(50);
 
 				// Sampling Method Grid 로 설정 // Set the Sampling Method to Grid
 				bilateralFilterSubSampled.SetSamplingMethod(ESamplingMethod.Grid);

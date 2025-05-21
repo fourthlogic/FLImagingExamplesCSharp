@@ -148,12 +148,11 @@ namespace BilateralFilter
 		        // Image Operation 소스로 설정 // Set Operation Source to image
                 bilateralFilter.SetOperationSource(EOperationSource.Image);
 
-                // Sigma Spatial = 2.5 설정 // Set the Sigma Spatial = 2.5
-                bilateralFilter.SetSigmaSpatial(2.5f);
+                // Sigma Spatial = 3 설정 // Set the Sigma Spatial = 3
+                bilateralFilter.SetSigmaSpatial(3);
 
-                // Sigma Range = 40 설정 // Set the Sigma Range = 40
-                bilateralFilter.SetSigmaRange(40);
-
+                // Sigma Range = 50 설정 // Set the Sigma Range = 50
+                bilateralFilter.SetSigmaRange(50);
 
 		        // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = bilateralFilter.Execute()).IsFail())

@@ -152,10 +152,10 @@ namespace FastGuidedFilter
 				fastGuidedFilter.SetKernel(7);
 
 				// amplitude = 30 설정 // Set the amplitude = 30
-				fastGuidedFilter.SetAmplitude(20);
+				fastGuidedFilter.SetAmplitude(30);
 
-				// Sampling Factor = 5 설정 // Set the Sampling Factor = 5
-				fastGuidedFilter.SetSamplingFactor(5);
+				// Sampling Factor = 4 설정 // Set the Sampling Factor = 4
+				fastGuidedFilter.SetSamplingFactor(4);
 
 				// Interpolation = true 설정 // Set the Interpolation = true
 				fastGuidedFilter.EnableInterpolation(true);
