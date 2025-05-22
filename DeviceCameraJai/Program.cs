@@ -71,7 +71,7 @@ namespace DeviceCameraJai
 	        {
 		        String strInput = "";
 
-		        CDeviceGenICamBase.EDeviceType eDeviceType = CDeviceGenICamBase.EDeviceType.GigE;
+		        CDeviceGenICamTypeBase.EDeviceType eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
 		        bool bAutoDetect = false;
 		        int i32SelectDevice = -1;
 		        CDeviceGenICamBase.EConnectionMethod eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
@@ -95,11 +95,11 @@ namespace DeviceCameraJai
 			            switch(i32Select)
 			            {
 			            case 1:
-				            eDeviceType = CDeviceGenICamBase.EDeviceType.GigE;
+				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
 				            break;
 
 			            case 2:
-				            eDeviceType = CDeviceGenICamBase.EDeviceType.USB;
+				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.USB;
 				            break;
 
 			            default:
@@ -162,11 +162,11 @@ namespace DeviceCameraJai
 			        // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
 			        switch(eDeviceType)
 			        {
-			        case CDeviceGenICamBase.EDeviceType.GigE:
+			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
 				        drResult = camJai.GetAutoDetectGigECameraSerialNumbers(out listSerialNumbers);
 				        break;
 
-			        case CDeviceGenICamBase.EDeviceType.USB:
+			        case CDeviceGenICamTypeBase.EDeviceType.USB:
                         drResult = camJai.GetAutoDetectUSBCameraSerialNumbers(out listSerialNumbers);
 				        break;
 
@@ -214,7 +214,7 @@ namespace DeviceCameraJai
 		        }
 		        else
 		        {
-			        if(eDeviceType == CDeviceGenICamBase.EDeviceType.GigE)
+			        if(eDeviceType == CDeviceGenICamTypeBase.EDeviceType.GigE)
 			        {
 				        // 연결 방법을 선택합니다.
 				        while(true)
@@ -280,11 +280,11 @@ namespace DeviceCameraJai
 		        {
 			        switch(eDeviceType)
 			        {
-			        case CDeviceGenICamBase.EDeviceType.GigE:
+			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
 				        drResult = camJai.AutoDetectGigECamera(i32SelectDevice);
 				        break;
 
-			        case CDeviceGenICamBase.EDeviceType.USB:
+			        case CDeviceGenICamTypeBase.EDeviceType.USB:
                         drResult = camJai.AutoDetectUSBCamera(i32SelectDevice);
 				        break;
 

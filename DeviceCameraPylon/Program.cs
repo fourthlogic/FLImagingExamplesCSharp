@@ -71,7 +71,7 @@ namespace DeviceCameraPylon
 	        {
 		        String strInput = "";
 
-		        CDeviceGenICamBase.EDeviceType eDeviceType = CDeviceGenICamBase.EDeviceType.GigE;
+		        CDeviceGenICamTypeBase.EDeviceType eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
 		        bool bAutoDetect = false;
 		        int i32SelectDevice = -1;
 		        CDeviceGenICamBase.EConnectionMethod eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
@@ -97,19 +97,19 @@ namespace DeviceCameraPylon
 			            switch(i32Select)
 			            {
 			            case 1:
-				            eDeviceType = CDeviceGenICamBase.EDeviceType.GigE;
+				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
 				            break;
 
 			            case 2:
-				            eDeviceType = CDeviceGenICamBase.EDeviceType.IEEE1394;
+				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.IEEE1394;
 				            break;
 
 			            case 3:
-				            eDeviceType = CDeviceGenICamBase.EDeviceType.USB;
+				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.USB;
 				            break;
 
 			            case 4:
-				            eDeviceType = CDeviceGenICamBase.EDeviceType.CameraLink;
+				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.CameraLink;
 				            break;
 
 			            default:
@@ -172,19 +172,19 @@ namespace DeviceCameraPylon
 			        // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
 			        switch(eDeviceType)
 			        {
-			        case CDeviceGenICamBase.EDeviceType.GigE:
+			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
 				        drResult = camPylon.GetAutoDetectGigECameraSerialNumbers(out listSerialNumbers);
 				        break;
 
-			        case CDeviceGenICamBase.EDeviceType.IEEE1394:
+			        case CDeviceGenICamTypeBase.EDeviceType.IEEE1394:
                         drResult = camPylon.GetAutoDetectIEEE1394CameraSerialNumbers(out listSerialNumbers);
 				        break;
 
-			        case CDeviceGenICamBase.EDeviceType.USB:
+			        case CDeviceGenICamTypeBase.EDeviceType.USB:
                         drResult = camPylon.GetAutoDetectUSBCameraSerialNumbers(out listSerialNumbers);
 				        break;
 
-			        case CDeviceGenICamBase.EDeviceType.CameraLink:
+			        case CDeviceGenICamTypeBase.EDeviceType.CameraLink:
                         drResult = camPylon.GetAutoDetectCameraLinkCameraSerialNumbers(out listSerialNumbers);
 				        break;
 
@@ -232,7 +232,7 @@ namespace DeviceCameraPylon
 		        }
 		        else
 		        {
-			        if(eDeviceType == CDeviceGenICamBase.EDeviceType.GigE)
+			        if(eDeviceType == CDeviceGenICamTypeBase.EDeviceType.GigE)
 			        {
 				        // 연결 방법을 선택합니다.
 				        while(true)
@@ -298,19 +298,19 @@ namespace DeviceCameraPylon
 		        {
 			        switch(eDeviceType)
 			        {
-			        case CDeviceGenICamBase.EDeviceType.GigE:
+			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
 				        drResult = camPylon.AutoDetectGigECamera(i32SelectDevice);
 				        break;
 
-			        case CDeviceGenICamBase.EDeviceType.IEEE1394:
+			        case CDeviceGenICamTypeBase.EDeviceType.IEEE1394:
                         drResult = camPylon.AutoDetectIEEE1394Camera(i32SelectDevice);
 				        break;
 
-			        case CDeviceGenICamBase.EDeviceType.USB:
+			        case CDeviceGenICamTypeBase.EDeviceType.USB:
                         drResult = camPylon.AutoDetectUSBCamera(i32SelectDevice);
 				        break;
 
-			        case CDeviceGenICamBase.EDeviceType.CameraLink:
+			        case CDeviceGenICamTypeBase.EDeviceType.CameraLink:
                         drResult = camPylon.AutoDetectCameraLinkCamera(i32SelectDevice);
 				        break;
 
