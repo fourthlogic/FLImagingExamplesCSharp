@@ -107,11 +107,11 @@ namespace RadialGradation
 				RadialGradation.SetSourceROI(flcRadialRegion);
 
 				// 시작 Alpha 값 설정 // Set start alpha value
-				CMultiVar<double> mvStartAlpha = new CMultiVar<double>(1.0, 0.3, 0.3);
+				CMultiVar<double> mvStartAlpha = new CMultiVar<double>(0.0, 0.0, 0.0);
 				RadialGradation.SetStartAlpha(mvStartAlpha);
 
 				// 끝 Alpha 값 설정 // Set start alpha value
-				CMultiVar<double> mvEndAlpha = new CMultiVar<double>(0.1, 0.5, 0.5);
+				CMultiVar<double> mvEndAlpha = new CMultiVar<double>(0.7, 0.5, 0.5);
 				RadialGradation.SetEndAlpha(mvEndAlpha);
 
 				// RadialGradation Start Value 설정(3Ch) // Set RadialGradation Start Value(3Ch)
@@ -156,14 +156,14 @@ namespace RadialGradation
 				}
 
 				// text를 출력합니다. // Display text.
-				if((res = layer1.DrawTextImage(flcRadialRegion.GetCenter(), "Start Value(0, 0, 0)\nStart Alpha(1.0, 0.3, 0.3)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
+				if((res = layer1.DrawTextImage(flcRadialRegion.GetCenter(), "Start Value(0, 0, 0)\nStart Alpha(0.0, 0.0, 0.0)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
 				// View 정보를 디스플레이 합니다. // Display View information.
-				if((res = layer1.DrawTextImage(flpCenter, "End Value(100, 255, 255)\nEnd Alpha(0.1, 0.5, 0.5)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
+				if((res = layer1.DrawTextImage(flpCenter, "End Value(100, 255, 255)\nEnd Alpha(0.7, 0.5, 0.5)", EColor.YELLOW, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
