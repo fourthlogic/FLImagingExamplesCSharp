@@ -188,6 +188,8 @@ namespace DataMatrix
 					{
 						string strGrade = string.Format("[ISO/IEC 15415]\r\nDecoding Grade : {0:F1}\r\nAxialNonuniformity Grade : {1:F1}\r\nGridNonuniformity Grade : {2:F1}\r\nSymbolContrast Grade : {3:F1}\r\nUnusedErrorCorrection Grade : {4:F1}\r\nModulation Grade : {5:F1}\r\nFixedPatternDamage Grade : {6:F1}\r\nHorizontalPrintGrowth Grade : {7:F1}\r\nVerticalPrintGrowth Grade : {8:F1}\r\nOverallSymbol Grade : {9:F1}", printQuality.f64DecodingGrade, printQuality.f64AxialNonuniformityGrade, printQuality.f64GridNonuniformityGrade, printQuality.f64SymbolContrastGrade, printQuality.f64UnusedErrorCorrectionGrade, printQuality.f64ModulationGrade, printQuality.f64FixedPatternDamageGrade, printQuality.f64HorizontalPrintGrowthGrade, printQuality.f64VerticalPrintGrowthGrade, printQuality.f64OverallSymbolGrade);
 
+						Console.Write("{0}", strGrade);
+
 						CFLRect<double> flrBoundary = flqRegion.GetBoundaryRect();
                         CFLPoint<double> flpPoint = new CFLPoint<double>(flrBoundary.left, flrBoundary.top);
 
