@@ -135,9 +135,9 @@ namespace Morphology_Gradient
 				// Destination ROI 설정 // Set Destination ROI
 				morphologyGradient.SetDestinationROI(flrROI);
 
-				// 처리할 Morphology Kernel 의 HalfSize 설정 (HalfSize = 3 일 경우, Kernel Size : 7x7) // Setting HalfSize 3(Kerenl Radius : 7x7)
+				// 처리할 Morphology Kernel 의 Kernel Size 설정 (KernelSize = 7 일 경우, Kernel Size : 7x7) // Setting Kernel Size 7(Kerenl Radius : 7x7)
                 morphologyGradient.SetKernelShape(EKernelShape.Circle);
-				morphologyGradient.SetKernel(3);
+				morphologyGradient.SetKernel(7);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = (morphologyGradient.Execute())).IsFail())
