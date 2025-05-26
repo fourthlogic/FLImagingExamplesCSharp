@@ -208,7 +208,7 @@ namespace MultiFocus
 				// Destination 이미지 설정 // Set the destination image
 				multiFocus.SetDestinationImage(ref fliDstImage);
 				// Kernel Size 설정 // Set the kernel size
-				multiFocus.SetKernelHalfSize(11);
+				multiFocus.SetKernel(11);
 				// 첫번째 페이지 Alignment 설정 // Set first page alignment
 				multiFocus.SetFirstPageAlignment(flqFirstPageAlignment);
 				// 마지막 페이지 Alignment 설정 // Set last page alignment
