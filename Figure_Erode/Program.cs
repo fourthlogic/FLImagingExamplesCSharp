@@ -128,22 +128,22 @@ namespace Figure_Erode
 					layer[i].DrawFigureImage(flrgSourceFig, EColor.LIME, 3);
 				}
 
-				// Erode 함수 실행 (HalfSize : 10, default kernel : Rectangle)
-				// Erode function execution (HalfSize : 10, default kernel : Rectangle)
+				// Erode 함수 실행 (KernelSize : 21, default kernel : Rectangle)
+				// Erode function execution (KernelSize : 21, default kernel : Rectangle)
 				CFLFigureArray flfaResult1;
-				long i64HalfSize = 10;
+				long i64KernelSize = 21;
 
-				if((res = flrgSourceFig.Erode(i64HalfSize, i64HalfSize, out flfaResult1)).IsFail())
+				if((res = flrgSourceFig.Erode(i64KernelSize, i64KernelSize, out flfaResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
 				}
 
-				// Erode 함수 실행 (HalfSize : 10, kernel shape : Circle)
-				// Erode function execution (HalfSize : 10, kernel shape : Circle)
+				// Erode 함수 실행 (KernelSize : 21, kernel shape : Circle)
+				// Erode function execution (KernelSize : 21, kernel shape : Circle)
 				CFLFigureArray flfaResult2;
 
-				if((res = flrgSourceFig.Erode(i64HalfSize, i64HalfSize, out flfaResult2, EKernelShape.Circle)).IsFail())
+				if((res = flrgSourceFig.Erode(i64KernelSize, i64KernelSize, out flfaResult2, EKernelShape.Circle)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
@@ -176,8 +176,8 @@ namespace Figure_Erode
 				layer[2].DrawFigureImage(flfaResult2, EColor.YELLOW, 3);
 				layer[3].DrawFigureImage(flfaResult3, EColor.BLACK, 5);
 				layer[3].DrawFigureImage(flfaResult3, EColor.LIGHTRED, 3);
-				layer[1].DrawTextCanvas(new CFLPoint<int>(0, 40), "Rectangle (HalfSize : 10)", EColor.YELLOW, EColor.BLACK, 20);
-				layer[2].DrawTextCanvas(new CFLPoint<int>(0, 40), "Circle (HalfSize : 10)", EColor.YELLOW, EColor.BLACK, 20);
+				layer[1].DrawTextCanvas(new CFLPoint<int>(0, 40), "Rectangle (KernelSize : 21)", EColor.YELLOW, EColor.BLACK, 20);
+				layer[2].DrawTextCanvas(new CFLPoint<int>(0, 40), "Circle (KernelSize : 21)", EColor.YELLOW, EColor.BLACK, 20);
 				layer[3].DrawTextCanvas(new CFLPoint<int>(0, 40), "User Defined Kernel", EColor.YELLOW, EColor.BLACK, 20);
 				layer[3].DrawFigureCanvas(fleForDrawing, EColor.LIGHTRED, 1, EColor.LIGHTRED, EGUIViewImagePenStyle.Solid, 1.0f, 0.5f);
 
@@ -185,10 +185,10 @@ namespace Figure_Erode
 				Console.Write("\n<Source Figure>\n\n");
 				Console.Write("{0}", CFigureUtilities.ConvertFigureObjectToString(flrgSourceFig));
 
-				Console.Write("\n\n<Erode Result1>\nHalfSize = {0}\nKernel Shape = Default(Rectangle)\n\n", i64HalfSize);
+				Console.Write("\n\n<Erode Result1>\nKernelSize = {0}\nKernel Shape = Default(Rectangle)\n\n", i64KernelSize);
 				Console.Write("Result1 Figure : {0}", CFigureUtilities.ConvertFigureObjectToString(flfaResult1));
 
-				Console.Write("\n\n<Erode Result2>\nHalfSize = {0}\nKernel Shape = Circle\n\n", i64HalfSize);
+				Console.Write("\n\n<Erode Result2>\nKernelSize = {0}\nKernel Shape = Circle\n\n", i64KernelSize);
 				Console.Write("Result2 Figure : {0}", CFigureUtilities.ConvertFigureObjectToString(flfaResult2));
 
 				Console.Write("\n\n<Erode Result3>\nKernel Shape = User Defined Kernel\n");
