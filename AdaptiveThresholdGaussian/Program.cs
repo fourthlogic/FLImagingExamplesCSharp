@@ -30,8 +30,8 @@ namespace AdaptiveThreshold
 		static void Main(string[] args)
 		{
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage fliISrcImage = new CFLImage();
-			CFLImage fliIDstImage = new CFLImage();
+			CFLImage fliSrcImage = new CFLImage();
+			CFLImage fliDstImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] viewImage = new CGUIViewImage[2];
@@ -43,7 +43,7 @@ namespace AdaptiveThreshold
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliISrcImage.Load("../../ExampleImages/Threshold/Sun.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/Threshold/Sun.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -77,14 +77,14 @@ namespace AdaptiveThreshold
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[1].SetImagePtr(ref fliIDstImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(ref fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -94,10 +94,10 @@ namespace AdaptiveThreshold
                 CAdaptiveThresholdGaussian adaptiveThresholdGaussian = new CAdaptiveThresholdGaussian();
 
 				// Source 이미지 설정 // Set source image 
-				adaptiveThresholdGaussian.SetSourceImage(ref fliISrcImage);
+				adaptiveThresholdGaussian.SetSourceImage(ref fliSrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				adaptiveThresholdGaussian.SetDestinationImage(ref fliIDstImage);
+				adaptiveThresholdGaussian.SetDestinationImage(ref fliDstImage);
 
                 // 커널 사이즈 입력 // Set Kernel size 
                 adaptiveThresholdGaussian.SetKernel(11);
