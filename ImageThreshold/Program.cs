@@ -30,9 +30,9 @@ namespace ImageThreshold
 		static void Main(string[] args)
 		{
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage fliISrcImage = new CFLImage();
-			CFLImage fliIOprImage = new CFLImage();
-			CFLImage fliIDstImage = new CFLImage();
+			CFLImage fliSrcImage = new CFLImage();
+			CFLImage fliOprImage = new CFLImage();
+			CFLImage fliDstImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] viewImage = new CGUIViewImage[3];
@@ -45,13 +45,13 @@ namespace ImageThreshold
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliISrcImage.Load("../../ExampleImages/ImageThreshold/SunSrc.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/ImageThreshold/SunSrc.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				if((res = fliIOprImage.Load("../../ExampleImages/ImageThreshold/SunOpr.flif")).IsFail())
+				if((res = fliOprImage.Load("../../ExampleImages/ImageThreshold/SunOpr.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -103,21 +103,21 @@ namespace ImageThreshold
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImage[0].SetImagePtr(ref fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[1].SetImagePtr(ref fliIOprImage)).IsFail())
+				if((res = viewImage[1].SetImagePtr(ref fliOprImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[2].SetImagePtr(ref fliIDstImage)).IsFail())
+				if((res = viewImage[2].SetImagePtr(ref fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -127,13 +127,13 @@ namespace ImageThreshold
 				CImageThreshold ImageThreshold = new CImageThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				ImageThreshold.SetSourceImage(ref fliISrcImage);
+				ImageThreshold.SetSourceImage(ref fliSrcImage);
 
 				// Operand 이미지 설정 // Set operand image 
-				ImageThreshold.SetOperandImage(ref fliIOprImage);
+				ImageThreshold.SetOperandImage(ref fliOprImage);
 
 				// Destination 이미지 설정 // Set destination image
-				ImageThreshold.SetDestinationImage(ref fliIDstImage);
+				ImageThreshold.SetDestinationImage(ref fliDstImage);
 
 				// 임계값 오프셋 설정 // set threshold offset 
 				ImageThreshold.SetThresholdOffset(new CMultiVar<double>(5));
