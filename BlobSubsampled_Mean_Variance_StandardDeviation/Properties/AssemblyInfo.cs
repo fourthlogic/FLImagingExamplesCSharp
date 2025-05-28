@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BlobSubSampled_Mean_Variance_StandardDeviation")]
+[assembly: AssemblyTitle("BlobSubsampled_Mean_Variance_StandardDeviation")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BlobSubSampled_Mean_Variance_StandardDeviation")]
+[assembly: AssemblyProduct("BlobSubsampled_Mean_Variance_StandardDeviation")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
