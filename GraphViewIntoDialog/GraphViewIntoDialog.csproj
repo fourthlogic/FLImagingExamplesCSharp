@@ -12,8 +12,8 @@
     <ProjectGuid>{D784401B-B45E-4BA7-A08F-D2F0326325D3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GraphViewInToDialog</RootNamespace>
-    <AssemblyName>GraphViewInToDialog</AssemblyName>
+    <RootNamespace>GraphViewIntoDialog</RootNamespace>
+    <AssemblyName>GraphViewIntoDialog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

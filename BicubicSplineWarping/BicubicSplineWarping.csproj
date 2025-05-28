@@ -9,8 +9,8 @@
     <ProjectGuid>{6346C907-840E-4BD2-A487-039BD9D53794}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BicubicSplineTransform</RootNamespace>
-    <AssemblyName>BicubicSplineTransform</AssemblyName>
+    <RootNamespace>BicubicSplineWarping</RootNamespace>
+    <AssemblyName>BicubicSplineWarping</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

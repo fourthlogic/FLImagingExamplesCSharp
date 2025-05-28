@@ -9,8 +9,8 @@
     <ProjectGuid>{690E58F9-E670-4A81-9F40-EB560840DCA8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>View3D</RootNamespace>
-    <AssemblyName>View3D</AssemblyName>
+    <RootNamespace>StepReaderConvertTo3DObject</RootNamespace>
+    <AssemblyName>StepReaderConvertTo3DObject</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

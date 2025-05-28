@@ -9,8 +9,8 @@
     <ProjectGuid>{9FEF571E-F7A7-4400-AE03-A51CC4366823}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CheesboardDetector</RootNamespace>
-    <AssemblyName>CheesboardDetector</AssemblyName>
+    <RootNamespace>ChessboardDetector</RootNamespace>
+    <AssemblyName>ChessboardDetector</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

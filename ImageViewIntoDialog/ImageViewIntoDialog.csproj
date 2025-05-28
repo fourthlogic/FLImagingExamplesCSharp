@@ -12,7 +12,7 @@
     <ProjectGuid>{C9BD1099-AA7A-44B4-B80D-8F8B8CA14168}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageViewInToDialog</RootNamespace>
+    <RootNamespace>ImageViewIntoDialog</RootNamespace>
     <AssemblyName>ImageViewIntoDialog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>

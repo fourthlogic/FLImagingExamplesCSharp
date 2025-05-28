@@ -9,8 +9,8 @@
     <ProjectGuid>{99AFB724-225D-43EB-A1F7-8A7FEC791990}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QRCode_Decoder</RootNamespace>
-    <AssemblyName>QRCode_Decoder</AssemblyName>
+    <RootNamespace>QRCode_Encoder</RootNamespace>
+    <AssemblyName>QRCode_Encoder</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

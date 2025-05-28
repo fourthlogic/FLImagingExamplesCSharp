@@ -9,8 +9,8 @@
     <ProjectGuid>{2DD1B5CC-BE08-474F-B23A-49156B80E22A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>View3D</RootNamespace>
-    <AssemblyName>View3D</AssemblyName>
+    <RootNamespace>ROIUtilities3D</RootNamespace>
+    <AssemblyName>ROIUtilities3D</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
