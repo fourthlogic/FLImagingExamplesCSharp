@@ -206,80 +206,77 @@ namespace Classifier
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				classifier.SetLearningAutoSaveSpec(autoSaveSpec);
 
-				CAugmentationSpec augSpec = new CAugmentationSpec();
+				// Augmentation Preset 설정 // Set Augmentation Preset
+				CAugmentationSpec augSpec1 = new CAugmentationSpec();
 
-				augSpec.EnableAugmentation(true);
-				augSpec.SetCommonActivationRate(1.000000);
-				augSpec.SetCommonIoUThreshold(0.000000);
-				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
+				augSpec1.EnableAugmentation(true);
+				augSpec1.SetCommonActivationRate(1.000000);
+				augSpec1.SetCommonIoUThreshold(0.000000);
+				augSpec1.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 
-				classifier.SetLearningAugmentationSpec(augSpec);
-				classifier.EnableLearningIndividualClassesAugmentation(true);
-				CAugmentationSpec augSpecClass0 = new CAugmentationSpec();
+				augSpec1.EnableRotation(true);
+				augSpec1.SetRotationParam(-30.000000, 30.000000, false, false, 1.000000);
 
-				augSpecClass0.EnableAugmentation(true);
-				augSpecClass0.SetCommonActivationRate(1.000000);
-				augSpecClass0.SetCommonIoUThreshold(0.000000);
-				augSpecClass0.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
+				CAugmentationPreset AugmentationPreset1 = new CAugmentationPreset();
+				List<int> flaClassNum1 = new List<int>();
+				flaClassNum1.Add(0);
+				flaClassNum1.Add(1);
+				AugmentationPreset1.SetClassNumbers(flaClassNum1);
+				AugmentationPreset1.SetName("Class 0");
+				AugmentationPreset1.SetAugmentationSpec(augSpec1);
+				classifier.AddLearningAugmentationPreset(AugmentationPreset1);
+				CAugmentationSpec augSpec2 = new CAugmentationSpec();
 
-				augSpecClass0.EnableRotation(true);
-				augSpecClass0.SetRotationParam(-30.000000, 30.000000, false, false, 1.000000);
+				augSpec2.EnableAugmentation(true);
+				augSpec2.SetCommonActivationRate(0.500000);
+				augSpec2.SetCommonIoUThreshold(0.000000);
+				augSpec2.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 
-				classifier.AddLearningIndividualClassesAugmentationSpec(0, augSpecClass0);
-				CAugmentationSpec augSpecClass1 = new CAugmentationSpec();
+				augSpec2.EnableRotation(true);
+				augSpec2.SetRotationParam(-180.000000, 180.000000, false, false, 1.000000);
 
-				augSpecClass1.EnableAugmentation(true);
-				augSpecClass1.SetCommonActivationRate(1.000000);
-				augSpecClass1.SetCommonIoUThreshold(0.000000);
-				augSpecClass1.SetCommonInterpolationMethod(EInterpolationMethod.NearestNeighbor);
+				CAugmentationPreset AugmentationPreset2 = new CAugmentationPreset();
+				List<int> flaClassNum2 = new List<int>();
+				flaClassNum2.Add(2);
+				AugmentationPreset2.SetClassNumbers(flaClassNum2);
+				AugmentationPreset2.SetName("Class 2");
+				AugmentationPreset2.SetAugmentationSpec(augSpec2);
+				classifier.AddLearningAugmentationPreset(AugmentationPreset2);
+				CAugmentationSpec augSpec3 = new CAugmentationSpec();
 
-				augSpecClass1.EnableRotation(true);
-				augSpecClass1.SetRotationParam(-30.000000, 30.000000, false, false, 1.000000);
+				augSpec3.EnableAugmentation(true);
+				augSpec3.SetCommonActivationRate(1.000000);
+				augSpec3.SetCommonIoUThreshold(0.000000);
+				augSpec3.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 
-				classifier.AddLearningIndividualClassesAugmentationSpec(1, augSpecClass1);
-				CAugmentationSpec augSpecClass2 = new CAugmentationSpec();
+				augSpec3.EnableScale(true);
+				augSpec3.SetScaleParam(0.670000, 1.500000, 0.670000, 1.500000, true, 1.000000);
 
-				augSpecClass2.EnableAugmentation(true);
-				augSpecClass2.SetCommonActivationRate(1.000000);
-				augSpecClass2.SetCommonIoUThreshold(0.000000);
-				augSpecClass2.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
+				CAugmentationPreset AugmentationPreset3 = new CAugmentationPreset();
+				List<int> flaClassNum3 = new List<int>();
+				flaClassNum3.Add(3);
+				AugmentationPreset3.SetClassNumbers(flaClassNum3);
+				AugmentationPreset3.SetName("Class 3");
+				AugmentationPreset3.SetAugmentationSpec(augSpec3);
+				classifier.AddLearningAugmentationPreset(AugmentationPreset3);
+				CAugmentationSpec augSpec4 = new CAugmentationSpec();
 
-				augSpecClass2.EnableRotation(true);
-				augSpecClass2.SetRotationParam(-180.000000, 176.200000, false, false, 1.000000);
+				augSpec4.EnableAugmentation(true);
+				augSpec4.SetCommonActivationRate(1.000000);
+				augSpec4.SetCommonIoUThreshold(0.000000);
+				augSpec4.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 
-				classifier.AddLearningIndividualClassesAugmentationSpec(2, augSpecClass2);
-				CAugmentationSpec augSpecClass3 = new CAugmentationSpec();
+				augSpec4.EnableQuarterRotation(true);
+				augSpec4.SetQuarterRotationParam(true, true, true, true, 1.000000);
 
-				augSpecClass3.EnableAugmentation(true);
-				augSpecClass3.SetCommonActivationRate(0.800000);
-				augSpecClass3.SetCommonIoUThreshold(0.000000);
-				augSpecClass3.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
-
-				augSpecClass3.EnableScale(true);
-				augSpecClass3.SetScaleParam(0.670000, 1.500000, 0.670000, 1.500000, true, 1.000000);
-
-				classifier.AddLearningIndividualClassesAugmentationSpec(3, augSpecClass3);
-				CAugmentationSpec augSpecClass4 = new CAugmentationSpec();
-
-				augSpecClass4.EnableAugmentation(true);
-				augSpecClass4.SetCommonActivationRate(1.000000);
-				augSpecClass4.SetCommonIoUThreshold(0.000000);
-				augSpecClass4.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
-
-				augSpecClass4.EnableQuarterRotation(true);
-				augSpecClass4.SetQuarterRotationParam(true, false, true, false, 1.000000);
-
-				classifier.AddLearningIndividualClassesAugmentationSpec(4, augSpecClass4);
-				CAugmentationSpec augSpecClass5 = new CAugmentationSpec();
-
-				augSpecClass5.EnableAugmentation(true);
-				augSpecClass5.SetCommonActivationRate(1.000000);
-				augSpecClass5.SetCommonIoUThreshold(0.000000);
-				augSpecClass5.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
-
-				augSpecClass5.EnableQuarterRotation(true);
-				augSpecClass5.SetQuarterRotationParam(true, false, true, false, 1.000000);
-				classifier.AddLearningIndividualClassesAugmentationSpec(5, augSpecClass5);
+				CAugmentationPreset AugmentationPreset4 = new CAugmentationPreset();
+				List<int> flaClassNum4 = new List<int>();
+				flaClassNum4.Add(4);
+				flaClassNum4.Add(5);
+				AugmentationPreset4.SetClassNumbers(flaClassNum4);
+				AugmentationPreset4.SetName("Class 4,5");
+				AugmentationPreset4.SetAugmentationSpec(augSpec4);
+				classifier.AddLearningAugmentationPreset(AugmentationPreset4);
 
 				// Classifier learn function을 진행하는 스레드 생성 // Create the Classifier Learn function thread
 				CResult eLearnResult = new CResult();
