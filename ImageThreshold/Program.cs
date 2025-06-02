@@ -44,6 +44,7 @@ namespace ImageThreshold
 			do
 			{
 				CResult res;
+
 				// 이미지 로드 // Load image
 				if((res = fliSrcImage.Load("../../ExampleImages/ImageThreshold/SunSrc.flif")).IsFail())
 				{
@@ -124,24 +125,24 @@ namespace ImageThreshold
 				}
 
 				// ImageThreshold  객체 생성 // Create Image Threshold object
-				CImageThreshold ImageThreshold = new CImageThreshold();
+				CImageThreshold imageThreshold = new CImageThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				ImageThreshold.SetSourceImage(ref fliSrcImage);
+				imageThreshold.SetSourceImage(ref fliSrcImage);
 
 				// Operand 이미지 설정 // Set operand image 
-				ImageThreshold.SetOperandImage(ref fliOprImage);
+				imageThreshold.SetOperandImage(ref fliOprImage);
 
 				// Destination 이미지 설정 // Set destination image
-				ImageThreshold.SetDestinationImage(ref fliDstImage);
+				imageThreshold.SetDestinationImage(ref fliDstImage);
 
 				// 임계값 오프셋 설정 // set threshold offset 
-				ImageThreshold.SetThresholdOffset(new CMultiVar<double>(5));
+				imageThreshold.SetThresholdOffset(new CMultiVar<double>(5));
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ImageThreshold.Execute())).IsFail())
+				if((res = (imageThreshold.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ImageThreshold.");
+					ErrorPrint(res, "Failed to execute Image Threshold.");
 					break;
 				}
 
