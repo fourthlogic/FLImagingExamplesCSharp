@@ -164,8 +164,8 @@ namespace ChannelInsertion
 				// 추출할 채널을 저장할 Array 선언 // Declare an Array to extract the channels
 				List<Int64> vctInsertionChannels = new List<Int64>();
 
-				// 삽입할 위치를 저장할 Array 선언 // Declare an Array to insert the positions
-				List<Int64> vctInsertionPositions = new List<Int64>();
+				// 삽입할 색인을 저장할 Array 선언 // Declare an Array to insert the indices
+				List<Int64> vctInsertionIndices = new List<Int64>();
 
 				// 삽입 이미지 입력 // insertion images add
 				vctInsertionImages.Add(fliInsertionImage[0]);
@@ -175,15 +175,15 @@ namespace ChannelInsertion
 				vctInsertionChannels.Add((Int64)EChannelSelection.Channel_0);
 				vctInsertionChannels.Add((Int64)EChannelSelection.Channel_0);
 
-				// 이미지별 삽입할 위치를 입력 // positions add
-				vctInsertionPositions.Add(0);
-				vctInsertionPositions.Add(1);
+				// 이미지별 삽입할 색인을 입력 // indices add
+				vctInsertionIndices.Add(0);
+				vctInsertionIndices.Add(1);
 
 				// 소스 이미지 설정 // Set source image
 				channelInsertion.SetSourceImage(ref fliSourceImage);
 
 				// 결합할 이미지 및 채널입력 // Set images, channels
-				channelInsertion.SetInsertionImage(ref vctInsertionImages, vctInsertionChannels, vctInsertionPositions);
+				channelInsertion.SetInsertionImage(ref vctInsertionImages, vctInsertionChannels, vctInsertionIndices);
 
 				// 결합 결과를 저장할 이미지 설정 // Set destination image
 				channelInsertion.SetDestinationImage(ref fliDstImage);
