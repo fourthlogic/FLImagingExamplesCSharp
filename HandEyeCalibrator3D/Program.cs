@@ -163,9 +163,9 @@ namespace HandEyeCalibrator3D
 					List<double> listResultEulerAngle = new List<double>();
 
 					// 캘리브레이션 결과 얻어오기 // Get the calibration result
-					HandEyeCalibrator3D.GetResultRotationVector(out matResultRotationVector, false);
-					HandEyeCalibrator3D.GetResultTranslationVector(out tp3ResultTranslationVector, false);
-					HandEyeCalibrator3D.GetResultEulerAngle(out listResultEulerAngle, false);
+					HandEyeCalibrator3D.GetResultHandToEyeRotationVector(out matResultRotationVector);
+					HandEyeCalibrator3D.GetResultHandToEyeTranslationVector(out tp3ResultTranslationVector);
+					HandEyeCalibrator3D.GetResultHandToEyeEulerAngle(out listResultEulerAngle);
 					HandEyeCalibrator3D.GetResultRotationError(out double f64RotationError);
 					HandEyeCalibrator3D.GetResultTranslationError(out double f64TranslationError);
 
