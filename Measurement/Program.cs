@@ -194,7 +194,7 @@ namespace OperationAdd
 				COrthogonalCalibrator orthogonalCalibrator = new COrthogonalCalibrator ();
 
 				// Learn 이미지 로드 // Load the Learn image
-				if((res = fliDistortionChessBoard.Load("C:\\source\\repos\\FLImaging\\ExampleImages\\Measurement\\ChessBoard.flif")).IsFail())
+				if((res = fliDistortionChessBoard.Load("C:\\Users\\Public\\Documents\\FLImaging\\ExampleImages\\Measurement\\ChessBoard.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -214,7 +214,7 @@ namespace OperationAdd
 					break;
 
 				// 측정 이미지 로드 // Load the measurement image
-				if((res = fliDistortedMeasurementImage.Load("C:\\source\\repos\\FLImaging\\ExampleImages\\Measurement\\Measurement.flif")).IsFail())
+				if((res = fliDistortedMeasurementImage.Load("C:\\Users\\Public\\Documents\\FLImaging\\ExampleImages\\Measurement\\Measurement.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
