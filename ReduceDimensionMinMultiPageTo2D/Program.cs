@@ -123,7 +123,7 @@ namespace ReduceDimensionMinMultiPageTo2D
 					break;
 				}
 
-				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image(X Dimension)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text. \n");
 					break;
