@@ -1716,6 +1716,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMinMultiPage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMaxMultiPageTo2D", "ReduceDimensionMaxMultiPageTo2D\ReduceDimensionMaxMultiPageTo2D.csproj", "{BE027B0C-7F79-42D4-A458-23FF2F6F808D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMeanMultiPageTo2D", "ReduceDimensionMeanMultiPageTo2D\ReduceDimensionMeanMultiPageTo2D.csproj", "{2167D401-E138-47A5-B6F7-4961C1935395}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -5196,6 +5198,12 @@ Global
 		{BE027B0C-7F79-42D4-A458-23FF2F6F808D}.Release|Win32.ActiveCfg = Release|x64
 		{BE027B0C-7F79-42D4-A458-23FF2F6F808D}.Release|x64.ActiveCfg = Release|x64
 		{BE027B0C-7F79-42D4-A458-23FF2F6F808D}.Release|x64.Build.0 = Release|x64
+		{2167D401-E138-47A5-B6F7-4961C1935395}.Debug|Win32.ActiveCfg = Debug|x64
+		{2167D401-E138-47A5-B6F7-4961C1935395}.Debug|x64.ActiveCfg = Debug|x64
+		{2167D401-E138-47A5-B6F7-4961C1935395}.Debug|x64.Build.0 = Debug|x64
+		{2167D401-E138-47A5-B6F7-4961C1935395}.Release|Win32.ActiveCfg = Release|x64
+		{2167D401-E138-47A5-B6F7-4961C1935395}.Release|x64.ActiveCfg = Release|x64
+		{2167D401-E138-47A5-B6F7-4961C1935395}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -6046,6 +6054,7 @@ Global
 		{E3FC92C8-6CA8-41D6-996B-C40F355F6490} = {6107ECF9-0EB0-4009-A999-EBB2AB89E93F}
 		{3E80E2F4-C929-4245-804F-87C41BF774FD} = {EBB27505-1FA2-48A8-AFE7-CE4972A1D92F}
 		{BE027B0C-7F79-42D4-A458-23FF2F6F808D} = {EBB27505-1FA2-48A8-AFE7-CE4972A1D92F}
+		{2167D401-E138-47A5-B6F7-4961C1935395} = {EBB27505-1FA2-48A8-AFE7-CE4972A1D92F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
