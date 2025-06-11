@@ -169,6 +169,8 @@ namespace StereoPhotometric
 				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
 				// Calibration 데이터 설정 // Set Calibration Settings
 				photometric.SetCalibrationCircleROI(new CFLCircle<double>(386.439657, 346.491239, 259.998140, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther));
+				// Valid 픽셀의 기준 설정 // Set valid pixel ratio
+				photometric.SetValidPixelThreshold(0.125);
 
 				CMatrix<double> cmatdTemp = new CMatrix<double>(3, 3);
 

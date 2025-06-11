@@ -133,6 +133,8 @@ namespace PhotometricStereo
 				photometric.SetDestinationTextureImage(ref fliTxtImage);
 				// 동작 방식 설정 // Set Operation Mode
 				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
+				// Valid 픽셀의 기준 설정 // Set valid pixel ratio
+				photometric.SetValidPixelThreshold(0.125);
 
 
 				// 각 이미지의 광원 Slant 값 입력
