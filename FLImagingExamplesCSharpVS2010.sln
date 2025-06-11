@@ -1722,6 +1722,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionMedianMultiP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScannedPointCloudGenerator3D", "ScannedPointCloudGenerator3D\ScannedPointCloudGenerator3D.csproj", "{B292D258-D91D-45CC-8984-617AA9234443}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduceDimensionVarMultiPageTo2D", "ReduceDimensionVarMultiPageTo2D\ReduceDimensionVarMultiPageTo2D.csproj", "{82F64B43-4228-43B2-9810-AA8F9D1CBCC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -5220,6 +5222,12 @@ Global
 		{B292D258-D91D-45CC-8984-617AA9234443}.Release|Win32.ActiveCfg = Release|x64
 		{B292D258-D91D-45CC-8984-617AA9234443}.Release|x64.ActiveCfg = Release|x64
 		{B292D258-D91D-45CC-8984-617AA9234443}.Release|x64.Build.0 = Release|x64
+		{82F64B43-4228-43B2-9810-AA8F9D1CBCC1}.Debug|Win32.ActiveCfg = Debug|x64
+		{82F64B43-4228-43B2-9810-AA8F9D1CBCC1}.Debug|x64.ActiveCfg = Debug|x64
+		{82F64B43-4228-43B2-9810-AA8F9D1CBCC1}.Debug|x64.Build.0 = Debug|x64
+		{82F64B43-4228-43B2-9810-AA8F9D1CBCC1}.Release|Win32.ActiveCfg = Release|x64
+		{82F64B43-4228-43B2-9810-AA8F9D1CBCC1}.Release|x64.ActiveCfg = Release|x64
+		{82F64B43-4228-43B2-9810-AA8F9D1CBCC1}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -6073,6 +6081,7 @@ Global
 		{BE027B0C-7F79-42D4-A458-23FF2F6F808D} = {EBB27505-1FA2-48A8-AFE7-CE4972A1D92F}
 		{2167D401-E138-47A5-B6F7-4961C1935395} = {EBB27505-1FA2-48A8-AFE7-CE4972A1D92F}
 		{01D96B9D-FF26-4442-B6AC-2146DF9CC5D5} = {EBB27505-1FA2-48A8-AFE7-CE4972A1D92F}
+		{82F64B43-4228-43B2-9810-AA8F9D1CBCC1} = {EBB27505-1FA2-48A8-AFE7-CE4972A1D92F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
