@@ -9,8 +9,8 @@
     <ProjectGuid>{1A245997-BF46-464C-A641-75923D4C80C7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GetPointsOfMinimumDistance</RootNamespace>
-    <AssemblyName>GetPointsOfMinimumDistance</AssemblyName>
+    <RootNamespace>GetMinMaxFigureThickness</RootNamespace>
+    <AssemblyName>GetMinMaxFigureThickness</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
