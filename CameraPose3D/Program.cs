@@ -77,7 +77,7 @@ namespace CameraPose3D
 				// Camera Matrix 설정 // Set the camera matrix
 				CFLPoint<double> flpFocalLength = new CFLPoint<double>(617.8218, 618.2815);
 				CFLPoint<double> flpPrincipalPoint = new CFLPoint<double>(319.05237, 243.0472);
-				CameraPose3D.SetCameraMatrix(flpPrincipalPoint, flpFocalLength);
+				CameraPose3D.SetCameraMatrix(flpFocalLength, flpPrincipalPoint);
 
 				// 셀 간격 설정 // Set the board cell pitch
 				CameraPose3D.SetBoardCellPitch(5, 5);
