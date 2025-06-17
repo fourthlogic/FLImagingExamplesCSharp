@@ -208,6 +208,7 @@ namespace StereoPhotometric
 				// Calibrate를 실행한 결과를 Console창에 출력합니다. // Output the calibration result to the console window.
 				int i32CalibPageNum = fliCalImage.GetPageCount();
 
+				// Angle Degrees 데이터 출력
 				Console.WriteLine(" < Calibration Angle - Degrees >");
 
 				for(int i = 0; i < i32CalibPageNum; i++)
@@ -215,8 +216,8 @@ namespace StereoPhotometric
 
 				Console.WriteLine("\n");
 
-				// 기하학적 패턴 검출 결과를 Console창에 출력합니다. // Output the geometric pattern detection result to the console window.
-				Console.WriteLine(" < Calibration Angle - Degrees >");
+				// Positions 데이터 출력
+				Console.WriteLine(" < Calibration Positions >");
 
 				for(int i = 0; i < i32CalibPageNum; i++)
 					Console.WriteLine("Image {0} ->\tX: {1:#,0.0000000}\tY: {2:#,0.0000000} \tZ: {3:#,0.0000000}", i, cmatdPosition.GetValue(i, 0), cmatdPosition.GetValue(i, 1), cmatdPosition.GetValue(i, 2));
