@@ -207,6 +207,8 @@ namespace InstanceSegmentation
 				instanceSegmentation.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
 				instanceSegmentation.SetLearningValidationImage(ref fliValidationImage);
+				// 검증 IoU Threshold를 0.3으로 설정 // Set the validation IoU Threshold to 0.3
+				instanceSegmentation.SetValidationIoUThreshold(.3f);
 				// 분류할 이미지 설정 // Set the image to classify
 				instanceSegmentation.SetInferenceImage(ref fliValidationImage);
 				instanceSegmentation.SetInferenceResultImage(ref fliResultBoxContourImage);
@@ -214,14 +216,14 @@ namespace InstanceSegmentation
 				// 학습할 InstanceSegmentation 모델 설정 // Set up the InstanceSegmentation model to learn
 				instanceSegmentation.SetModel(CInstanceSegmentationDL.EModel.R_FLSegNet);
 				// 학습할 InstanceSegmentation 모델 Version 설정 // Set up the InstanceSegmentation model version to learn
-				instanceSegmentation.SetModelVersion(CInstanceSegmentationDL.EModelVersion.R_FLSegNet_V1_256);
+				instanceSegmentation.SetModelVersion(CInstanceSegmentationDL.EModelVersion.R_FLSegNet_V1_512);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				instanceSegmentation.SetLearningEpoch(500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				instanceSegmentation.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 				// 학습 중단 조건 설정 // Set the condtiion of stopping learning
-				instanceSegmentation.SetLearningStopCondition("cost <= 0 | validation >= 0.8");
-	
+				instanceSegmentation.SetLearningStopCondition("mAP >= 0.9");
+
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.0001f);
 
