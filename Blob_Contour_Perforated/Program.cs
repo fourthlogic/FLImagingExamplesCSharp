@@ -163,7 +163,7 @@ namespace Blob
 								if(k != 0)
 									Console.Write(",");
 
-								CFLPoint<double> pFlpVertex = (CFLPoint<double>)pFlrg.GetAt(j);
+								CFLPoint<double> pFlpVertex = (CFLPoint<double>)pFlrgExclusive.GetAt(k);
 
 								Console.Write("({0}, {1})", pFlpVertex.x, pFlpVertex.y);
 							}
