@@ -160,7 +160,7 @@ namespace CharacterBasedOCRDL
 					break;
 				}
 
-				if((res = layerResultLabel.DrawTextCanvas(flpPoint, "RESULT LABEL", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerResultLabel.DrawTextCanvas(flpPoint, "RESULT", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
