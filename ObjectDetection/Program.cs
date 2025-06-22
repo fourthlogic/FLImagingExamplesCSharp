@@ -193,7 +193,7 @@ namespace ObjectDetection
 				// 검증을 진행 할 최소 평균 Cost값 설정 // Set the minimum average cost value at which verification will be triggered
 				objectDetection.SetLearningRequiredAvgCostForValidation(5);
 				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
-				objectDetection.EnableOptimalLearningStatePreservation(false);
+				objectDetection.EnableOptimalLearningStatePreservation(true);
 				// 학습 중단 Metrics 값 설정 // Set Learning Stop Metrics Values
 				String strStopConditon = "mAP >= 0.9";
 				objectDetection.SetLearningStopCondition(strStopConditon);
