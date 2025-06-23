@@ -199,6 +199,13 @@ namespace ColorizedPointCloudGenerator3D
 					break;
 				}
 
+				// Coordinate Adjustment 자동 설정 // Coordinate Adjustment Auto Set Flag
+				if((res = cColorizedPointCloudGenerator.EnableAutoCoordinateAdjustment(true)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Coordinate Adjustment Flag.\n");
+					break;
+				}
+
 				// 알고리즘 Calibration 실행 // Execute calibration of the algorithm
 				if((res = cColorizedPointCloudGenerator.Calibrate()).IsFail())
 				{
