@@ -145,7 +145,7 @@ namespace DataMatrix
 						continue;
 					}
 
-					// Data Matrix Decoder 결과를 얻어오기 위해 FLStringW 선언
+					// Data Matrix Decoder 결과를 얻어오기 위해 string 선언
 					string strDecoded = "";
 
 					// Data Matrix Decoder 결과들 중 Decoded String 을 얻어옴
