@@ -93,7 +93,7 @@ static void Main(string[] args)
 		}
 
 		// 절두체 ROI 선언 // Declare the frustum ROI
-		CFLFrustum<float> flfr = new CFLFrustum<float>();
+		CFLFrustum3<float> flfr = new CFLFrustum3<float>();
 		// 파일에서 절두체 ROI 로드 // Load the frustum ROI from a file
 		flfr.Load("../../ExampleImages/ROIUtilities3D/frustumROI.fig");
 
@@ -240,7 +240,7 @@ static void Main(string[] args)
 		}
 
 		// 기존 선택 영역(위에서 Include로 선택한 영역)에 추가로 선택할 영역을 ROI로 설정 // Set an additional ROI to be selected in the existing selection area (previously selected with Include)
-		CFLFrustum<float> flfrAdd = new CFLFrustum<float>();
+		CFLFrustum3<float> flfrAdd = new CFLFrustum3<float>();
 		flfrAdd.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Add.fig");
 
 		// CROIUtilities3D 객체에 절두체 ROI 추가 // Add the frustum ROI to the CROIUtilities3D object
@@ -305,8 +305,8 @@ static void Main(string[] args)
 		}
 
 		// 기존 선택 영역(위에서 Exclude로 선택한 영역)에서 제거할 영역을 ROI로 설정 // Set ROIs to remove areas from the existing selection (previously selected with Exclude)
-		CFLFrustum<float> flfrRemove1 = new CFLFrustum<float>();
-		CFLFrustum<float> flfrRemove2 = new CFLFrustum<float>();
+		CFLFrustum3<float> flfrRemove1 = new CFLFrustum3<float>();
+		CFLFrustum3<float> flfrRemove2 = new CFLFrustum3<float>();
 		flfrRemove1.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Remove1.fig");
 		flfrRemove2.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Remove2.fig");
 
@@ -375,7 +375,7 @@ static void Main(string[] args)
 		}
 
 		// 기존 선택 영역(위에서 Exclude로 선택한 영역)에서 XOR 선택할 영역을 ROI로 설정 // Set an ROI to perform XOR operation on the existing selection (previously selected with Exclude)
-		CFLFrustum<float> flfrXOR = new CFLFrustum<float>();
+		CFLFrustum3<float> flfrXOR = new CFLFrustum3<float>();
 		flfrXOR.Load("../../ExampleImages/ROIUtilities3D/frustumROI_XOR.fig");
 
 		// CROIUtilities3D 객체에 절두체 ROI 추가 // Add the frustum ROI to the CROIUtilities3D object
