@@ -146,7 +146,24 @@ namespace QRCode
 						continue;
 					}
 
-					// QR Code Decoder 결과를 얻어오기 위해 FLStringW 선언
+					// QR Code Decoder 결과를 얻어오기 위해 FigureArray 선언
+					CFLFigureArray flfaFinderPattern;
+
+					// QR Code Decoder 결과들 중 Grid Region 을 얻어옴
+					if((res = qrCodeDecoder.GetResultFinderPattern(i, out flfaFinderPattern)).IsFail())
+					{
+						ErrorPrint(res, "Failed to get grid region from the QR Code decoder object.");
+						continue;
+					}
+
+					// QR Code 의 Grid Region 을 디스플레이 한다.
+					if((res = layer.DrawFigureImage(flfaFinderPattern, EColor.CYAN, 5)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
+						continue;
+					}
+
+					// QR Code Decoder 결과를 얻어오기 위해 string 선언
 					string strDecoded = "";
 
 					// QR Code Decoder 결과들 중 Decoded String 을 얻어옴
