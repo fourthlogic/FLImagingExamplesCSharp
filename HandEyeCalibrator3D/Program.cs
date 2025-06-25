@@ -86,10 +86,10 @@ namespace HandEyeCalibrator3D
 				HandEyeCalibrator3D.SetCalibrationObjectType(ECalibrationObjectType.ChessBoard);
 
 				// 최적화 방법 설정 // Set the optimization method
-				HandEyeCalibrator3D.SetOptimizationMethod(CHandEyeCalibrator3D.EOptimizationMethod.Nonlinear);
+				HandEyeCalibrator3D.SetOptimizationMethod(EOptimizationMethod.Nonlinear);
 
 				// 회전 타입 설정 // Set the rotation type
-				HandEyeCalibrator3D.SetRotationType(CHandEyeCalibrator3D.ERotationType.Rodrigues);
+				HandEyeCalibrator3D.SetRotationType(ERotationType.Rodrigues);
 
 				// 엔드 이펙터 각 단위 설정 // Set the end effector angle unit
 				HandEyeCalibrator3D.SetEndEffectorAngleUnit(EAngleUnit.Radian);
