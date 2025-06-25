@@ -116,7 +116,9 @@ namespace VertexMatch3D
 				// 클러스터링 범위 설정 // Set the clustering range
 				VertexMatch3D.SetClusterRange(0.02);
 				// 포즈 조정 반복 횟수 설정 // Set the iteration value of pose refinement
-				VertexMatch3D.SetIteration(5);
+				VertexMatch3D.SetIteration(15);
+				// 초기 점수 설정 // Set the initial score
+				VertexMatch3D.SetInitialScore(0.1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = VertexMatch3D.Learn()).IsFail())
@@ -187,7 +189,7 @@ namespace VertexMatch3D
                 view3DLearn.ZoomFit();
                 view3DSource.ZoomFit();
 
-                CVertexMatch3D.SPoseMatrixParameters sResult = new CVertexMatch3D.SPoseMatrixParameters();
+				FLImagingCLR.ThreeDim.SPoseMatrixParameters sResult = new FLImagingCLR.ThreeDim.SPoseMatrixParameters();
 
 				double f64ArrRotX;
 				double f64ArrRotY;
@@ -219,15 +221,15 @@ namespace VertexMatch3D
 
 					f64Residual = sResult.f64Residual;
 					f64Score = sResult.f64Score;
-					f64ArrRotX = sResult.f64Rx;
-					f64ArrRotY = sResult.f64Ry;
-					f64ArrRotZ = sResult.f64Rz;
-					tp3RotVec.x = sResult.f64RotationVectorX;
-					tp3RotVec.y = sResult.f64RotationVectorY;
-					tp3RotVec.z = sResult.f64RotationVectorZ;
-					flpTrans.x = sResult.f64Tx;
-					flpTrans.y = sResult.f64Ty;
-					flpTrans.z = sResult.f64Tz;
+					f64ArrRotX = sResult.tp3Angle.x;
+					f64ArrRotY = sResult.tp3Angle.y;
+					f64ArrRotZ = sResult.tp3Angle.z;
+					tp3RotVec.x = sResult.tp3RotationVector.x;
+					tp3RotVec.y = sResult.tp3RotationVector.y;
+					tp3RotVec.z = sResult.tp3RotationVector.z;
+					flpTrans.x = sResult.tp3TranslationVector.x;
+					flpTrans.y = sResult.tp3TranslationVector.y;
+					flpTrans.z = sResult.tp3TranslationVector.z;
 
 					// 추정한 포즈 결과를 Console창에 출력한다 // Print the estimated pose matrix to the console window
 					Console.WriteLine(" ▷ Pose Matrix {0}", i);

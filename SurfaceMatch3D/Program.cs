@@ -187,7 +187,7 @@ namespace SurfaceMatch3D
                 view3DLearn.ZoomFit();
                 view3DSource.ZoomFit();
 
-                CSurfaceMatch3D.SPoseMatrixParameters sResult = new CSurfaceMatch3D.SPoseMatrixParameters();
+				FLImagingCLR.ThreeDim.SPoseMatrixParameters sResult = new FLImagingCLR.ThreeDim.SPoseMatrixParameters();
 
 				double f64ArrRotX;
 				double f64ArrRotY;
@@ -219,15 +219,15 @@ namespace SurfaceMatch3D
 
 					f64Residual = sResult.f64Residual;
 					f64Score = sResult.f64Score;
-					f64ArrRotX = sResult.f64Rx;
-					f64ArrRotY = sResult.f64Ry;
-					f64ArrRotZ = sResult.f64Rz;
-					tp3RotVec.x = sResult.f64RotationVectorX;
-					tp3RotVec.y = sResult.f64RotationVectorY;
-					tp3RotVec.z = sResult.f64RotationVectorZ;
-					flpTrans.x = sResult.f64Tx;
-					flpTrans.y = sResult.f64Ty;
-					flpTrans.z = sResult.f64Tz;
+					f64ArrRotX = sResult.tp3Angle.x;
+					f64ArrRotY = sResult.tp3Angle.y;
+					f64ArrRotZ = sResult.tp3Angle.z;
+					tp3RotVec.x = sResult.tp3RotationVector.x;
+					tp3RotVec.y = sResult.tp3RotationVector.y;
+					tp3RotVec.z = sResult.tp3RotationVector.z;
+					flpTrans.x = sResult.tp3TranslationVector.x;
+					flpTrans.y = sResult.tp3TranslationVector.y;
+					flpTrans.z = sResult.tp3TranslationVector.z;
 
 					// 추정한 포즈 결과를 Console창에 출력한다 // Print the estimated pose matrix to the console window
 					Console.WriteLine(" ▷ Pose Matrix {0}", i);
