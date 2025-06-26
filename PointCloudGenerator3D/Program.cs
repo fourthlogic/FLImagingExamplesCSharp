@@ -51,16 +51,12 @@ namespace PointCloudGenerator3D
                 // 파라미터 설정 // Set parameter
                 alg.SetDestinationObject(ref fl3DObjectDst);
                 alg.EnableColorGeneration(true);
-                alg.EnableNormalGeneration(false);
+				alg.EnableNormalGeneration(false);
 
-                CPointCloudGenerator3D.SCountInfo sCount = new CPointCloudGenerator3D.SCountInfo();
-                sCount.bCopyOriginalVertices = false;
-                sCount.i64Edges = 0;
-                sCount.i64Faces = 0;
-                sCount.i64Interiors = 0;
+                var sCount = new CPointCloudGenerator3D.SCountInfo { bCopyOriginalVertices = false, i64Edges = 0, i64Faces = 0, i64Interiors = 0};
 
-                sCount.bCopyOriginalVertices = true;
-                alg.AddPredefinedObject(sCount, EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 255, 255));
+			    sCount.bCopyOriginalVertices = true;
+			    alg.AddPredefinedObject(sCount, EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 255, 255));
                 sCount.bCopyOriginalVertices = false;
 
                 sCount.i64Edges = 4000;
