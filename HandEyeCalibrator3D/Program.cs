@@ -89,7 +89,7 @@ namespace HandEyeCalibrator3D
 				HandEyeCalibrator3D.SetOptimizationMethod(EOptimizationMethod.Nonlinear);
 
 				// 회전 타입 설정 // Set the rotation type
-				HandEyeCalibrator3D.SetRotationType(ERotationType.Rodrigues);
+				HandEyeCalibrator3D.SetRotationType(ERotationType.RotationVector);
 
 				// 엔드 이펙터 각 단위 설정 // Set the end effector angle unit
 				HandEyeCalibrator3D.SetEndEffectorAngleUnit(EAngleUnit.Radian);
