@@ -131,7 +131,7 @@ namespace AdaptiveThreshold
 				viewImage[1].Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImage[0].IsAvailable())
+				while(viewImage[0].IsAvailable() && viewImage[0].IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
