@@ -101,10 +101,10 @@ namespace Figure_FLQuadrilateralSolid3
 					layer3D[i] = view3D[i].GetLayer(0);
 
 				// 각 레이어 캔버스에 텍스트 그리기 // Draw text to each Layer Canvas
-				layer3D[0].DrawTextCanvas(new CFLPoint<double>(3, 0), "Figure A", EColor.YELLOW, EColor.BLACK, 20);
-				layer3D[1].DrawTextCanvas(new CFLPoint<double>(3, 0), "Figure A", EColor.YELLOW, EColor.BLACK, 20);
-				layer3D[2].DrawTextCanvas(new CFLPoint<double>(3, 0), "Figure B", EColor.YELLOW, EColor.BLACK, 20);
-				layer3D[3].DrawTextCanvas(new CFLPoint<double>(3, 0), "Figure B", EColor.YELLOW, EColor.BLACK, 20);
+				layer3D[0].DrawTextCanvas(new CFLPoint<double>(3, 0), "Figure A (Regular Quad)", EColor.YELLOW, EColor.BLACK, 20);
+				layer3D[1].DrawTextCanvas(new CFLPoint<double>(3, 0), "Figure A (Regular Quad)", EColor.YELLOW, EColor.BLACK, 20);
+				layer3D[2].DrawTextCanvas(new CFLPoint<double>(3, 0), "Figure B (Distorted Quad)", EColor.YELLOW, EColor.BLACK, 20);
+				layer3D[3].DrawTextCanvas(new CFLPoint<double>(3, 0), "Figure B (Distorted Quad)", EColor.YELLOW, EColor.BLACK, 20);
 
 				layer3D[0].DrawTextCanvas(new CFLPoint<double>(3, 30), "Base Plane", EColor.YELLOW, EColor.BLACK, 15);
 				layer3D[1].DrawTextCanvas(new CFLPoint<double>(3, 30), "Length : +20", EColor.YELLOW, EColor.BLACK, 15);
@@ -112,12 +112,11 @@ namespace Figure_FLQuadrilateralSolid3
 				layer3D[3].DrawTextCanvas(new CFLPoint<double>(3, 30), "Length : -20", EColor.YELLOW, EColor.BLACK, 15);
 
 				// Figure A 의 한쪽 면 생성 // Create one side of Figure A
-				CFLPoint3<double> flpFigA0 = new CFLPoint3<double>(0, 0, 0);
-				CFLPoint3<double> flpFigA1 = new CFLPoint3<double>(0, 10, 0);
+				CFLPoint3<double> flpFigA0 = new CFLPoint3<double>(0, 0, 5);
+				CFLPoint3<double> flpFigA1 = new CFLPoint3<double>(0, 10, 5);
 				CFLPoint3<double> flpFigA2 = new CFLPoint3<double>(10, 10, 0);
 				CFLPoint3<double> flpFigA3 = new CFLPoint3<double>(10, 0, 0);
 				CFLQuad3<double> flqBasePlaneFigA = new CFLQuad3<double>(flpFigA0, flpFigA1, flpFigA2, flpFigA3);
-				CFLQuadrilateralSolid3<double> flqsBasePlaneFigA = new CFLQuadrilateralSolid3<double>(flqBasePlaneFigA, flqBasePlaneFigA);
 
 				// 두 번째 평면의 각 꼭짓점은 첫 번째 평면의 각 꼭짓점에서 면의 법선 방향으로 `Length`만큼 떨어진 위치에 계산됩니다.
 				// 각 꼭짓점마다 독립적으로 법선을 구하며, 이는 주어진 꼭짓점과 그 주변 두 꼭짓점으로 구성된 삼각형의 법선을 기반으로 합니다.
@@ -154,12 +153,11 @@ namespace Figure_FLQuadrilateralSolid3
 				CFLQuadrilateralSolid3<double> flqsSolidFigA = new CFLQuadrilateralSolid3<double>(flqBasePlaneFigA, f64LengthA);
 
 				// Figure B 의 한쪽 면 생성 // Create one side of Figure B
-				CFLPoint3<double> flpFigB0 = new CFLPoint3<double>(0, 0, 0);
-				CFLPoint3<double> flpFigB1 = new CFLPoint3<double>(-1, 9, -2);
-				CFLPoint3<double> flpFigB2 = new CFLPoint3<double>(10, 10, 0);
-				CFLPoint3<double> flpFigB3 = new CFLPoint3<double>(11, 2, 1);
+				CFLPoint3<double> flpFigB0 = new CFLPoint3<double>(0, 0, -3);
+				CFLPoint3<double> flpFigB1 = new CFLPoint3<double>(-1, 9, -4);
+				CFLPoint3<double> flpFigB2 = new CFLPoint3<double>(10, 10, 1);
+				CFLPoint3<double> flpFigB3 = new CFLPoint3<double>(11, 2, 0);
 				CFLQuad3<double> flqBasePlaneFigB = new CFLQuad3<double>(flpFigB0, flpFigB1, flpFigB2, flpFigB3);
-				CFLQuadrilateralSolid3<double> flqsBasePlaneFigB = new CFLQuadrilateralSolid3<double>(flqBasePlaneFigB, flqBasePlaneFigB);
 
 				// 위와 같은 로직으로 Figure B 의 반대쪽 면을 생성하며, length 가 음수인 경우 법선 벡터의 반대방향으로 반대쪽 면 생성
 				// The opposite side of Figure B is created using the same logic as above, and if length is a negative number, the opposite side is created in the opposite direction of the normal vector.
@@ -168,10 +166,20 @@ namespace Figure_FLQuadrilateralSolid3
 
 
 				// 3D 뷰에 3D figure 추가 // Add 3D figures to the 3D view
-				view3D[0].PushBackROI(flqsBasePlaneFigA);
-				view3D[1].PushBackROI(flqsSolidFigA);
-				view3D[2].PushBackROI(flqsBasePlaneFigB);
-				view3D[3].PushBackROI(flqsSolidFigB);
+				CGUIView3DObject view3DObj = new CGUIView3DObject();
+				view3DObj.SetTopologyType(ETopologyType3D.Wireframe);
+
+				CFL3DObject[] arr3DObj = new CFL3DObject[4];
+				arr3DObj[0] = new CFL3DObject(flqBasePlaneFigA);
+				arr3DObj[1] = new CFL3DObject(flqsSolidFigA);
+				arr3DObj[2] = new CFL3DObject(flqBasePlaneFigB);
+				arr3DObj[3] = new CFL3DObject(flqsSolidFigB);
+
+				for(int i = 0; i < 4; ++i)
+				{
+					view3DObj.Set3DObject(arr3DObj[i]);
+					view3D[i].PushObject(view3DObj);
+				}
 
 				// 추가한 3D 객체가 화면 안에 들어오도록 Zoom Fit // Perform Zoom Fit to ensure added 3D objects are within the view
 				view3D[1].ZoomFit();
@@ -179,7 +187,7 @@ namespace Figure_FLQuadrilateralSolid3
 
 				// 3D 뷰어의 시점(카메라) 변경 // Change the viewpoint (camera) of the 3D viewer
 				CGUIView3DCamera cam1 = view3D[1].GetCamera();
-				cam1.SetPosition(new CFLPoint3<float>(18.48, -32.13, 7.31));
+				cam1.SetPosition(new CFLPoint3<float>(21.40, -30.30, 9.04));
 				cam1.SetDirection(new CFLPoint3<float>(-0.38, 0.92, 0.06));
 				cam1.SetDirectionUp(new CFLPoint3<float>(0.03, -0.05, 1.00));
 				view3D[1].SetCamera(cam1);
