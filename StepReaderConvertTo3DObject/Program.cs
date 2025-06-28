@@ -71,7 +71,7 @@ namespace StepReaderConvertTo3DObject
 
 				// 뷰에 추가된 CGUIView3DObject 객체의 내부 CFL3DObject 포인터를 얻어 오기
 				// Retrieve the internal CFL3DObject pointer of the CGUIView3DObject object added to the view.
-				CFL3DObject fl3DObject = objView3D.GetData();
+				CFL3DObject fl3DObject = objView3D.Get3DObject();
 				if(fl3DObject == null)
 				{
 					ErrorPrint(res, "Failed to display 3D object.\n");
@@ -124,7 +124,7 @@ namespace StepReaderConvertTo3DObject
 					break;
 				}
 
-				CFL3DObject fl3DObject2 = objView3D2.GetData();
+				CFL3DObject fl3DObject2 = objView3D2.Get3DObject();
 				if(fl3DObject2 == null)
 				{
 					ErrorPrint(res, "Failed to display 3D object.\n");

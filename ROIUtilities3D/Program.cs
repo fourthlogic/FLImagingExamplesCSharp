@@ -147,7 +147,7 @@ static void Main(string[] args)
 					continue;
 
 				// i번째 3D 객체의 데이터(CFL3DObject) // Data of the i-th 3D object (CFL3DObject)
-				CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+				CFL3DObject pObjData = (CFL3DObject)pObj.Get3DObject();
 
 				// 해당 객체가 없다면 continue // Skip if the object data is null
 				if(pObjData == null)
@@ -212,7 +212,7 @@ static void Main(string[] args)
 					continue;
 
 				// i번째 3D 객체의 데이터(CFL3DObject) // Data of the i-th 3D object (CFL3DObject)
-				CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+				CFL3DObject pObjData = (CFL3DObject)pObj.Get3DObject();
 
 				// 해당 객체가 없다면 continue // Skip if the object data is null
 				if(pObjData == null)
@@ -276,7 +276,7 @@ static void Main(string[] args)
 					continue;
 
 				// i번째 3D 객체의 데이터(CFL3DObject) // Data of the i-th 3D object (CFL3DObject)
-				CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+				CFL3DObject pObjData = (CFL3DObject)pObj.Get3DObject();
 
 				// 해당 객체가 없다면 continue // Skip if the object data is null
 				if(pObjData == null)
@@ -346,7 +346,7 @@ static void Main(string[] args)
 					continue;
 
 				// i번째 3D 객체의 데이터(CFL3DObject) // Data of the i-th 3D object (CFL3DObject)
-				CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+				CFL3DObject pObjData = (CFL3DObject)pObj.Get3DObject();
 
 				// 해당 객체가 없다면 continue // Skip if the object data is null
 				if(pObjData == null)
@@ -412,7 +412,7 @@ static void Main(string[] args)
 					continue;
 
 				// i번째 3D 객체의 데이터(CFL3DObject) // Data of the i-th 3D object (CFL3DObject)
-				CFL3DObject pObjData = (CFL3DObject)pObj.GetData();
+				CFL3DObject pObjData = (CFL3DObject)pObj.Get3DObject();
 
 				// 해당 객체가 없다면 continue // Skip if the object data is null
 				if(pObjData == null)

@@ -101,7 +101,7 @@ namespace DistanceTransform3D
 			if((pView3D.PushObject(new CGUIView3DObject(), out i32ReturnIndex)).IsOK())
 			{
 				CGUIView3DObject objView3D = pView3D.GetView3DObject(i32ReturnIndex);
-				CFL3DObject fl3DO = objView3D.GetData();
+				CFL3DObject fl3DO = objView3D.Get3DObject();
 				fl3DO.Assign(pFlaPlyData, flaColors);
 				pView3D.UpdateObject(i32ReturnIndex);
 			}
@@ -157,7 +157,7 @@ namespace DistanceTransform3D
 
 				// 뷰에 추가된 CGUIView3DObject 객체의 내부 CFL3DObject 포인터를 얻어 오기
 				// Retrieve the internal CFL3DObject pointer of the CGUIView3DObject object added to the view.
-				fl3DObject = objView3DSrc.GetData();
+				fl3DObject = objView3DSrc.Get3DObject();
 				if(fl3DObject == null)
 				{
 					ErrorPrint(res, "Failed to display 3D object.\n");
