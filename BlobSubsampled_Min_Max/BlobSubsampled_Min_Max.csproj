@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B73437F0-9491-439E-80B0-E708FEDE0FBF}</ProjectGuid>
+    <ProjectGuid>{82C9F4AF-6BA6-458B-9290-0BEF1303E185}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnifiedDataCode_Decoder</RootNamespace>
-    <AssemblyName>UnifiedDataCode_Decoder</AssemblyName>
+    <RootNamespace>BlobSubsampled_Min_Max</RootNamespace>
+    <AssemblyName>BlobSubsampled_Min_Max</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -142,7 +142,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8FDD5B92-5786-43F4-BE85-E453E73AE520}</ProjectGuid>
+    <ProjectGuid>{B73437F0-9491-439E-80B0-E708FEDE0FBF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Blob_MinMax</RootNamespace>
-    <AssemblyName>Blob_MinMax</AssemblyName>
+    <RootNamespace>UnifiedDataCode_Decoder</RootNamespace>
+    <AssemblyName>UnifiedDataCode_Decoder</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
