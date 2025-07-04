@@ -70,13 +70,9 @@ namespace Statistics
 				// Source ROI 설정 // Set the Source ROI
 				fuzzyentropy.SetSourceROI(flrROI);
 
-				// Parameter A, C 생성 (A: 0, C: 255) // Create the parameter A and C (A: 0, C: 255)
-				CMultiVar<double> mvParameterA = new CMultiVar<double>(0);
-				CMultiVar<double> mvParameterC = new CMultiVar<double>(255);
-
 				// Parameter 설정(A: 0, C: 255) // Set the parameter(A: 0, C: 255)
-				fuzzyentropy.SetParameterA(mvParameterA);
-				fuzzyentropy.SetParameterC(mvParameterC);
+				fuzzyentropy.SetParameterA(0);
+				fuzzyentropy.SetParameterC(255);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (fuzzyentropy.Execute())).IsFail())
