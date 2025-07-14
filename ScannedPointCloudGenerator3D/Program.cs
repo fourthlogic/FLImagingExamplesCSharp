@@ -82,9 +82,6 @@ namespace ScannedPointCloudGenerator3D
 				// 샘플링 거리 설정 // Set the sampling distance
 				scannedPointCloudGenerator3D.SetSamplingDistance(0.01f);
 
-				// 샘플링 정도 설정 // Set the sampling degree
-				scannedPointCloudGenerator3D.SetSamplingDegree(100);
-
 				// HPR 반지름 설정 // Set the HPR radius
 				scannedPointCloudGenerator3D.SetHPRSphericalRadius(1000);
 
