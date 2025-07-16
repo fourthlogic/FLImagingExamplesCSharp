@@ -95,10 +95,10 @@ namespace HistogramsOfOrientedGradients
                 }
 
                 // 실행 결과를 받아오기 위한 컨테이너 // Container to get Calculated results
-                CFLFigureArray flfaPeakVectors;
+                CFLFigureArray flfaPeakVectors = new CFLFigureArray();
 
                 // 피크 벡터 추출 // Get Peak Vectors
-                if ((res = hog.GetPeakVectorsFigure(0, out flfaPeakVectors)).IsFail())
+                if ((res = hog.GetPeakVectorsFigure(0, ref flfaPeakVectors)).IsFail())
                 {
                     ErrorPrint(res, "Failed to get result.");
                     break;
