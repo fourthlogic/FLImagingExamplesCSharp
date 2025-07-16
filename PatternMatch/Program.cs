@@ -159,7 +159,7 @@ namespace Match
 				{
 					CPatternMatch.SResult results;
 
-					FLPatternMatch.GetResult(i, out results);
+					FLPatternMatch.GetResult(i, ref results);
 
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;

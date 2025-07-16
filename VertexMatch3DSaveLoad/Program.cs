@@ -113,7 +113,7 @@ namespace VertexMatch3D
 					break;
 				}
 
-				VertexMatch3D.GetSampledLearn3DObject(out fl3DOSampleObject);
+				VertexMatch3D.GetSampledLearn3DObject(ref fl3DOSampleObject);
 
 				// Learn Object 출력 // Display the learn object
 				if((eResult = view3DLearn.PushObject(fl3DOLearnObject)).IsFail())

@@ -163,11 +163,11 @@ namespace DeviceCameraCrevis
 			        switch(eDeviceType)
 			        {
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
-				        drResult = camCrevis.GetAutoDetectGigECameraSerialNumbers(out listSerialNumbers);
+				        drResult = camCrevis.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.USB:
-                        drResult = camCrevis.GetAutoDetectUSBCameraSerialNumbers(out listSerialNumbers);
+                        drResult = camCrevis.GetAutoDetectUSBCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        default:

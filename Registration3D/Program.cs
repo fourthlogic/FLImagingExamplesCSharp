@@ -181,7 +181,7 @@ namespace EdgeDetector3D
 				TPoint3<byte> tp3SourceColor = new TPoint3<byte>(255, 255, 0);
 				CFL3DObject floMergedResult = new CFL3DObject();
 
-				registration3D.GetMergedResult3DObject(true, true, tp3LearnColor, tp3SourceColor, out floMergedResult);
+				registration3D.GetMergedResult3DObject(true, true, tp3LearnColor, tp3SourceColor, ref floMergedResult);
 
 				// 3D 오브젝트 뷰에 Destination 오브젝트 디스플레이
 				if(view3DDst.PushObject(floMergedResult).IsFail())

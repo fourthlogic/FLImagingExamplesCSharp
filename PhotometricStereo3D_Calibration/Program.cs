@@ -188,7 +188,7 @@ namespace StereoPhotometric
 				CMultiVar<double> cmvdSlant = new CMultiVar<double>();
 				CMultiVar<double> cmvdTilt = new CMultiVar<double>();
 
-				photometric.GetLightAngleDegrees(out cmvdSlant, out cmvdTilt);
+				photometric.GetLightAngleDegrees(ref cmvdSlant, ref cmvdTilt);
 
 				// 위치 데이터 동작 방식으로 설정 // Set operation method as positions
 				photometric.SetLightPositions(cmatdTemp);
@@ -203,7 +203,7 @@ namespace StereoPhotometric
 				// Calibrate 된 위치 데이터 저장 // Save calibrated position data
 				CMatrix<double> cmatdPosition = new CMatrix<double>();
 
-				photometric.GetLightPositions(out cmatdPosition);
+				photometric.GetLightPositions(ref cmatdPosition);
 
 				// Calibrate를 실행한 결과를 Console창에 출력합니다. // Output the calibration result to the console window.
 				int i32CalibPageNum = fliCalImage.GetPageCount();

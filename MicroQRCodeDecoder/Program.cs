@@ -170,7 +170,7 @@ namespace MicroQRCode
 					}
 
 					CMicroQRCodeSpec codeSpec = new CMicroQRCodeSpec();
-					qrCodeDecoder.GetResultMicroQRCodeSpec(i, out codeSpec);
+					qrCodeDecoder.GetResultMicroQRCodeSpec(i, ref codeSpec);
 
 					EMicroQRCodeErrorCorrectionLevel eECLevel = codeSpec.GetMicroQRCodeErrorCorrectionLevel();
 					EMicroQRCodeSymbolType eSymbol = codeSpec.GetSymbolType();

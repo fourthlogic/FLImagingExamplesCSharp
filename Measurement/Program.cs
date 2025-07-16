@@ -109,15 +109,15 @@ namespace OperationAdd
 			{
 				COrthogonalCalibrator.CCalibratorGridResult gridResult = new COrthogonalCalibrator.CCalibratorGridResult();
 
-				orthogonalCalibrator.GetResultGridPoints(orthogonalCalibrator.GetSourceImage().GetSelectedPageIndex(), 0, out gridResult);
+				orthogonalCalibrator.GetResultGridPoints(orthogonalCalibrator.GetSourceImage().GetSelectedPageIndex(), 0, ref gridResult);
 				
 				if(gridResult.flfaGridData.GetCount() > 0)
 				{
 					CFLFigureArray flfaGrid = (CFLFigureArray)gridResult.flfaGridData.GetAt(0);
 
 					CFLPoint<double> flp1, flp2;
-					orthogonalCalibrator.ConvertCoordinate((CFLPoint<double>)flfaGrid.Front(), out flp1);
-					orthogonalCalibrator.ConvertCoordinate((CFLPoint<double>)flfaGrid.Back(), out flp2);
+					orthogonalCalibrator.ConvertCoordinate((CFLPoint<double>)flfaGrid.Front(), ref flp1);
+					orthogonalCalibrator.ConvertCoordinate((CFLPoint<double>)flfaGrid.Back(), ref flp2);
 
 					CFLLine<double> fliLine2 = new CFLLine<double>(flp1, flp2);
 
@@ -242,7 +242,7 @@ namespace OperationAdd
 
 				// 실행 결과를 가져옵니다. // Get the execution result.
 				CFLRect<double> flrResult = new CFLRect<double>();
-				rectangleGauge.GetMeasuredObject(out flrResult, 0);
+				rectangleGauge.GetMeasuredObject(ref flrResult, 0);
 
 				CFLPoint<double> flpLeftTop = new CFLPoint<double>(flrResult.left, flrResult.top);
 				CFLPoint<double> flpRightTop = new CFLPoint<double>(flrResult.right, flrResult.top);

@@ -163,11 +163,11 @@ namespace DeviceCameraJai
 			        switch(eDeviceType)
 			        {
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
-				        drResult = camJai.GetAutoDetectGigECameraSerialNumbers(out listSerialNumbers);
+				        drResult = camJai.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.USB:
-                        drResult = camJai.GetAutoDetectUSBCameraSerialNumbers(out listSerialNumbers);
+                        drResult = camJai.GetAutoDetectUSBCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        default:

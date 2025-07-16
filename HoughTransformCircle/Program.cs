@@ -129,7 +129,7 @@ namespace HoughTransformCircle
 
 				for(long i = 0; i < i64ResultCount; i++)
 				{
-					HoughTransform.GetResultCircle(i, out flcResult);
+					HoughTransform.GetResultCircle(i, ref flcResult);
 
 					// 이미지 뷰에 검출된 원 객체 출력 // Output the detected original object to the image view
 					if((res = (layer.DrawFigureImage(flcResult, EColor.LIGHTGREEN, 1))).IsFail())

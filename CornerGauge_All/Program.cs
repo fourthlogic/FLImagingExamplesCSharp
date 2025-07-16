@@ -190,7 +190,7 @@ namespace Gauge
 					{
 						CFLFigureArray flfaResultLine;
 						// 추정된 선을 가져옵니다. // Get the estimated line.
-						CornerGauge.GetMeasuredLines(out flfaResultLine, i % 4);
+						CornerGauge.GetMeasuredLines(ref flfaResultLine, i % 4);
 
 						layer.DrawFigureImage(flfaResultLine, EColor.BLACK, 5);
 						layer.DrawFigureImage(flfaResultLine, EColor.CYAN, 3);
@@ -202,7 +202,7 @@ namespace Gauge
 						// 실행 결과를 가져옵니다. // Get the execution result.
 						CFLFigureArray flfaResultCorners;
 						// 추정된 코너를 가져옵니다. // Get the estimated corner.
-						CornerGauge.GetMeasuredObject(out flfaResultCorners, i % 4);
+						CornerGauge.GetMeasuredObject(ref flfaResultCorners, i % 4);
 
 						layer.DrawFigureImage(flfaResultCorners, EColor.BLACK, 3);
 						layer.DrawFigureImage(flfaResultCorners, EColor.CYAN, 1);
@@ -220,9 +220,9 @@ namespace Gauge
 
 					CFLFigureArray flfaResultsValid, flfaResultsInvalid;
 					// 추정된 코너를 추출에 사용된 유효 경계점을 가져옵니다. // Get the effective boundary point used to extract the estimated corner.
-					CornerGauge.GetMeasuredValidPoints(out flfaResultsValid, i % 4);
+					CornerGauge.GetMeasuredValidPoints(ref flfaResultsValid, i % 4);
 					// 추정된 코너를 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid boundary point that is not used to extract the estimated corner.
-					CornerGauge.GetMeasuredInvalidPoints(out flfaResultsInvalid, i % 4);
+					CornerGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, i % 4);
 
 					for(long i64Index = 0; i64Index < flfaResultsValid.GetCount(); ++i64Index)
 					{

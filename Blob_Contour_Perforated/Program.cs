@@ -177,7 +177,7 @@ namespace Blob
 
 					CFLRect<double> flr = new CFLRect<double>();
 
-					pFlrg.GetBoundaryRect(out flr);
+					pFlrg.GetBoundaryRect(ref flr);
 
 					string strNumber = string.Format("{0}", i);
 

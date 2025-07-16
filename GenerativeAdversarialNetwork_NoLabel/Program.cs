@@ -245,7 +245,7 @@ namespace GenerativeAdversarialNetwork
 						List<float> vctPDV = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						gan.GetLearningResultAllHistory(out vctCosts, out vctSSIM, out vctPDV, out vctValidationEpoch);
+						gan.GetLearningResultAllHistory(ref vctCosts, ref vctSSIM, ref vctPDV, ref vctValidationEpoch);
 
 						if(vctCosts.Count != 0)
 						{

@@ -64,7 +64,7 @@ namespace View3DIntoDialog
 				double[] arrHP = { };
 
 				// 높이 프로파일 정보를 얻어 온다.
-				CResult gr = m_view3D.GetHeightProfile(flpStart, flpEnd, out arrHP);
+				CResult gr = m_view3D.GetHeightProfile(flpStart, flpEnd, ref arrHP);
 
 				if(gr.IsOK())
 				{

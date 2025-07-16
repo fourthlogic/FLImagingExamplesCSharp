@@ -92,7 +92,7 @@ namespace ShapeMatch
 				{
 					CShapeMatchCircleResult matchResult;
 
-					shapeMatch.GetResult(i, out matchResult);
+					shapeMatch.GetResult(i, ref matchResult);
 
 					// 도형 검출 결과를 Console창에 출력합니다. // Output the shape detection result to the console window.
 					Console.Write(" < Instance : {0} >\n", i);

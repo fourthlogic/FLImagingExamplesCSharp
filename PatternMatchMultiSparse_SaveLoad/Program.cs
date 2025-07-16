@@ -209,7 +209,7 @@ namespace Match
 				{
 					CPatternMatchMultiSparse.SResult results;
 
-					FLPatternMatchMultiSparseLoad.GetResult(i, out results);
+					FLPatternMatchMultiSparseLoad.GetResult(i, ref results);
 
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;

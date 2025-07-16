@@ -150,7 +150,7 @@ namespace ScannedPointCloudGenerator3D
 					CFLPoint3<float> flp3Center = new CFLPoint3<float>();
 					CFLPoint3<float> flp3ViewPoint = new CFLPoint3<float>();
 
-					floSourceObject.GetBoundingBox(out tp3Min, out tp3Max);
+					floSourceObject.GetBoundingBox(ref tp3Min, ref tp3Max);
 					flp3Center.x = (tp3Min.x + tp3Max.x) / 2;
 					flp3Center.y = (tp3Min.y + tp3Max.y) / 2;
 					flp3Center.z = (tp3Min.z + tp3Max.z) / 2;

@@ -190,7 +190,7 @@ namespace OrthogonalCalibrator
 				for(long i64ObjectIdx = 0; i64ObjectIdx < i64ObjectCount; ++i64ObjectIdx)
 				{
 					sArrGridDisplay.sGridData = new COrthogonalCalibrator.CCalibratorGridResult();
-					sCC.GetResultGridPoints(i64ObjectIdx, 0, out sArrGridDisplay.sGridData);
+					sCC.GetResultGridPoints(i64ObjectIdx, 0, ref sArrGridDisplay.sGridData);
 					sArrGridDisplay.i64ImageIdx = 0;
 					sArrGridDisplay.i64ObjectIdx = sArrGridDisplay.sGridData.i64ID;
 				}

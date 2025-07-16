@@ -68,7 +68,7 @@ namespace GraphViewIntoDialog
 				for(int i = 0; i < 5; ++i)
 				{
 					string strCoef = textBoxCoeff[i].Text;
-					Double.TryParse(strCoef, out arrF64Coef[i]);
+					Double.TryParse(strCoef, ref arrF64Coef[i]);
 					if(arrF64Coef[i] == 0)
 						continue;
 
@@ -99,7 +99,7 @@ namespace GraphViewIntoDialog
 				// 방정식의 해를 얻어올 객체 생성 // Create 방정식의 해를 얻어올 object
 				List<System.Numerics.Complex> listEquationResult = new List<System.Numerics.Complex>();
 
-				CResult cResult = CEquation.Quartic(arrCpxCoef[0], arrCpxCoef[1], arrCpxCoef[2], arrCpxCoef[3], arrCpxCoef[4], out listEquationResult);
+				CResult cResult = CEquation.Quartic(arrCpxCoef[0], arrCpxCoef[1], arrCpxCoef[2], arrCpxCoef[3], arrCpxCoef[4], ref listEquationResult);
 
 				if(cResult.IsOK())
 				{

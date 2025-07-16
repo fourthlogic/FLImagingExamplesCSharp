@@ -96,7 +96,7 @@ namespace FigureOperation
 				double f64Size = Math.Min(f64Width, f64Height);
 
 				CFLPoint<double> flpdCenter = new CFLPoint<double>(0, 0);
-				flrdImage.GetCenter(out flpdCenter);
+				flrdImage.GetCenter(ref flpdCenter);
 
 				CFLRect<double> flrdFigureShape = new CFLRect<double>(flpdCenter.x - f64Size, flpdCenter.y - f64Size, flpdCenter.x + f64Size, flpdCenter.y + f64Size);
 
@@ -381,22 +381,22 @@ namespace FigureOperation
 				{
 				case 0:
 					// Intersection Operation 수행
-					cResult = flFigure1.GetRegionOfIntersection(flFigure2, out flfaRes);
+					cResult = flFigure1.GetRegionOfIntersection(flFigure2, ref flfaRes);
 					break;
 
 				case 1:
 					// Union Operation 수행
-					cResult = flFigure1.GetRegionOfUnion(flFigure2, out flfaRes);
+					cResult = flFigure1.GetRegionOfUnion(flFigure2, ref flfaRes);
 					break;
 
 				case 2:
 					// Subtraction Operation 수행
-					cResult = flFigure1.GetRegionOfSubtraction(flFigure2, out flfaRes);
+					cResult = flFigure1.GetRegionOfSubtraction(flFigure2, ref flfaRes);
 					break;
 
 				case 3:
 					// Exclusive Or Operation 수행
-					cResult = flFigure1.GetRegionOfExclusiveOr(flFigure2, out flfaRes);
+					cResult = flFigure1.GetRegionOfExclusiveOr(flFigure2, ref flfaRes);
 					break;
 				}
 

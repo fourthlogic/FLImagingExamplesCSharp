@@ -92,7 +92,7 @@ namespace ProjectionUtilities3D
                 res = pu.Execute();
 
                 // 결과 이미지 얻기 // Get result image
-                res = pu.GetResult(out fliRes);
+                res = pu.GetResult(ref fliRes);
 
                 // 결과 이미지에 정보 텍스트 추가 // Add information text to result image
                 figureText.Set(new CFLPoint<int>(10, 10), "1. Projection(Camera Set 1)", (uint)EColor.YELLOW, (uint)EColor.BLACK, 20, false, 0.0, EFigureTextAlignment.LEFT_TOP, "", 1, 1, EFigureTextFontWeight.BOLD, false);
@@ -120,7 +120,7 @@ namespace ProjectionUtilities3D
                 res = pu.Execute();
 
                 // 결과 이미지 얻기 // Get result image
-                res = pu.GetResult(out fliRes);
+                res = pu.GetResult(ref fliRes);
 
                 // 결과 이미지에 정보 텍스트 추가 // Add information text to result image
                 figureText.Set(new CFLPoint<int>(10, 10), "1. Projection(Camera Set 2)", (uint)EColor.YELLOW, (uint)EColor.BLACK, 20, false, 0.0, EFigureTextAlignment.LEFT_TOP, "", 1, 1, EFigureTextFontWeight.BOLD, false);
@@ -142,7 +142,7 @@ namespace ProjectionUtilities3D
                     // 카메라 시점 설정 // Set camera viewpoint
                     CFL3DCamera camInterpolation = new CFL3DCamera();
                     float f32T = (float)i * 0.1f;
-                    CFL3DCamera.Interpolate(camSet1, camSet2, f32T, out camInterpolation);
+                    CFL3DCamera.Interpolate(camSet1, camSet2, f32T, ref camInterpolation);
 
                     // 카메라 설정 // Set camera
                     pu.SetCamera(camInterpolation);
@@ -151,7 +151,7 @@ namespace ProjectionUtilities3D
                     res = pu.Execute();
 
                     // 결과 이미지 얻기 // Get result image
-                    res = pu.GetResult(out fliRes);
+                    res = pu.GetResult(ref fliRes);
 
                     // 결과 이미지에 정보 텍스트 추가 // Add information text to result image
                     String str = String.Format("2. Projection(Camera Interpolation T={1})", i, f32T);
@@ -181,7 +181,7 @@ namespace ProjectionUtilities3D
                 res = pu.Execute();
 
                 // 결과 이미지 얻기 // Get result image
-                res = pu.GetResult(out fliFinal[2]);
+                res = pu.GetResult(ref fliFinal[2]);
 
                 // 결과 이미지에 정보 텍스트 추가 // Add information text to result image
                 figureText.Set(new CFLPoint<int>(10, 10), "3. Projection(ZoomFit)", (uint)EColor.YELLOW, (uint)EColor.BLACK, 20, false, 0.0, EFigureTextAlignment.LEFT_TOP, "", 1, 1, EFigureTextFontWeight.BOLD, false);

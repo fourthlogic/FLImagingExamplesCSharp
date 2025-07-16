@@ -129,7 +129,7 @@ namespace Equation
 					List<Complex> listEquationResult = new List<Complex>();
 
 					// 방정식의 해를 얻어온다. // Get the solution of the equation.
-					CEquation.Solve(listCoef, out listEquationResult);
+					CEquation.Solve(listCoef, ref listEquationResult);
 
                     if (listEquationResult.Count == 0)
                         break;

@@ -291,7 +291,7 @@ namespace StringBasedOCRDL
 						List<float> vctMeanAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						ocr.GetLearningResultAllHistory(out vctCosts, out vct1MNED, out vctMeanAP, out vctValidationEpoch);
+						ocr.GetLearningResultAllHistory(ref vctCosts, ref vct1MNED, ref vctMeanAP, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vct1MNED.Count() != 0 && i32PrevValidationCount != vct1MNED.Count()) || (vctMeanAP.Count() != 0 && i32PrevValidationCount != vctMeanAP.Count()))

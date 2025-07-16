@@ -88,8 +88,8 @@ namespace CameraCalibrator
 
 				for(Int64 i32BoardIndex = 0; i32BoardIndex < i64BoardCount; i32BoardIndex++)
 				{
-					gridofRectangle.GetResultCenterPoints(i64PageIndex, i64BoardCount, out flaPoints);
-					gridofRectangle.GetResultBoardRegion(i64PageIndex, i64BoardCount, out flqRegion);
+					gridofRectangle.GetResultCenterPoints(i64PageIndex, i64BoardCount, ref flaPoints);
+					gridofRectangle.GetResultBoardRegion(i64PageIndex, i64BoardCount, ref flqRegion);
 					i64ResultRow = gridofRectangle.GetResultBoardRows(i64PageIndex, i64BoardCount);
 					i64ResultCol = gridofRectangle.GetResultBoardColumns(i64PageIndex, i64BoardCount);
 					f64AverageCellPitch = gridofRectangle.GetResultBoardAverageCellPitch(i64PageIndex, i64BoardCount);

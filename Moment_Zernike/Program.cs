@@ -92,7 +92,7 @@ namespace Moment
 
                 for (int i = 0; i < i64ZernikeCount; ++i)
                 {
-                    moment.GetZernike(out zernike, i);
+                    moment.GetZernike(ref zernike, i);
 					Console.WriteLine("Zernike N = {0}, M = {1}, RealValue : {2}, Imaginary : {3}", zernike.i32N, zernike.i32M, zernike.f64ZernikeReal, zernike.f64ZernikeImag);
                 }
 

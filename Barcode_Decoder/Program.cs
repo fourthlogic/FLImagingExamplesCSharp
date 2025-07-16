@@ -127,7 +127,7 @@ namespace Barcode
 					}
 
 					CBarcodeSpec bcs;
-					sBarcode.GetResultBarcodeSpec(i, out bcs);
+					sBarcode.GetResultBarcodeSpec(i, ref bcs);
 
 					EBarcodeSymbolType eSymbol = bcs.GetSymbolType();
 

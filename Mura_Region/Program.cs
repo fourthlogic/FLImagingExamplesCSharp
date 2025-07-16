@@ -120,7 +120,7 @@ namespace Mura
 					break;
 				}
 
-				sMura.GetResultMuraImage(out fliImageDst);
+				sMura.GetResultMuraImage(ref fliImageDst);
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 				if((res = viewImageDst.SetImagePtr(ref fliImageDst)).IsFail())

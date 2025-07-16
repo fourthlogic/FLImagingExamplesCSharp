@@ -143,10 +143,10 @@ namespace Histogram
 				CMultiVar<double> mvMedian = new CMultiVar<double>();
 
 				// 평균, 분산, 표준편차, 중앙값 받기 // get mean, variance, standard deviation, median
-				Histogram.GetResultMean(out mvMean);
-				Histogram.GetResultVariance(out mvVariance);
-				Histogram.GetResultStdDev(out mvStdDev);
-				Histogram.GetResultMedian(out mvMedian);
+				Histogram.GetResultMean(ref mvMean);
+				Histogram.GetResultVariance(ref mvVariance);
+				Histogram.GetResultStdDev(ref mvStdDev);
+				Histogram.GetResultMedian(ref mvMedian);
 
 				// 출력 갯수 // get count
 				int i32ResultCount = (int)mvMean.GetCount();

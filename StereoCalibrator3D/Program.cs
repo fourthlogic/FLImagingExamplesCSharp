@@ -465,13 +465,13 @@ namespace StereoCalibrator3D
 
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage.GetPageCount(); ++i64ImgIdx)
 				{
-					sSC.GetResultGridPoints(out sArrGridDisplay[i64ImgIdx].sGridData, i64ImgIdx);
+					sSC.GetResultGridPoints(ref sArrGridDisplay[i64ImgIdx].sGridData, i64ImgIdx);
 					sArrGridDisplay[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 				}
 
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage2.GetPageCount(); ++i64ImgIdx)
 				{
-					sSC.GetResultGridPoints2(out sArrGridDisplay2[i64ImgIdx].sGridData, i64ImgIdx);
+					sSC.GetResultGridPoints2(ref sArrGridDisplay2[i64ImgIdx].sGridData, i64ImgIdx);
 					sArrGridDisplay2[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 				}
 

@@ -171,16 +171,16 @@ namespace Match
 				long i64ResultCount = arrayMatch.GetResultCount();
 				double f64Score = new double(), f64Angle = new double();
 				// 검출 결과 배열의 점수를 가져옵니다. // Get the score of the detection result array.
-				arrayMatch.GetResultForArrayScore(out f64Score);
+				arrayMatch.GetResultForArrayScore(ref f64Score);
 				// 검출 결과 배열의 각도를 가져옵니다. // Get the angle of the detection result array.
-				arrayMatch.GetResultForArrayAngle(out f64Angle);
+				arrayMatch.GetResultForArrayAngle(ref f64Angle);
 
 				for(int i = 0; i < i64ResultCount; ++i)
 				{
 					CRectangleArrayMatch.SResult sResult;
 
 					// 검출 결과 중 배열 하나를 가져옵니다. // Get an array of detection results.
-					arrayMatch.GetResult(i, out sResult);
+					arrayMatch.GetResult(i, ref sResult);
 					CFLPoint<double> flpRegionCenter = sResult.pFlrMeasuredRegion.GetCenter();
 					string strDisplayResult;
 					strDisplayResult = String.Format("Array Element ID : {0}\n Score : {1}\n Angle : {2}", (int)sResult.i64Index, sResult.f64Score, sResult.f64Angle);

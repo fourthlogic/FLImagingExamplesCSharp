@@ -174,12 +174,12 @@ namespace QRCode
 					}
 
 					CQRCodeSpec codeSpec = new CQRCodeSpec();
-					qrCodeDecoder.GetResultQRCodeSpec(i, out codeSpec);
+					qrCodeDecoder.GetResultQRCodeSpec(i, ref codeSpec);
 
 					EQRCodeErrorCorrectionLevel eECLevel = codeSpec.GetQRCodeErrorCorrectionLevel();
 					EQRCodeSymbolType1 eSymbol1 = EQRCodeSymbolType1.None;
 					EQRCodeSymbolType2 eSymbol2 = EQRCodeSymbolType2.None;
-					codeSpec.GetSymbolType(out eSymbol1, out eSymbol2);
+					codeSpec.GetSymbolType(ref eSymbol1, ref eSymbol2);
 
 					string strAdditionalData = "";
 

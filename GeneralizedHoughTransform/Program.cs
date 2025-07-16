@@ -103,7 +103,7 @@ namespace GeneralizedHoughTransform
 				if(GeneralizedHoughTransform.GetDetectedObjectCount() > 0)
 				{
 					CFLFigureArray flfaDetectedObjects;
-					GeneralizedHoughTransform.GetDetectedObjects(out flfaDetectedObjects);
+					GeneralizedHoughTransform.GetDetectedObjects(ref flfaDetectedObjects);
 
 					// 이미지 뷰에 검출된 객체 출력 // Output the detected object to the image view
 					if((res = (layer.DrawFigureImage(flfaDetectedObjects, EColor.BRIGHTCYAN, 2))).IsFail())

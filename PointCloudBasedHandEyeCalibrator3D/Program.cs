@@ -157,11 +157,11 @@ namespace PointCloudBasedHandEyeCalibrator3D
 					List<double> listResultEulerAngle = new List<double>();
 
 					// 캘리브레이션 결과 얻어오기 // Get the calibration result
-					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeRotationVector(out matResultRotationVector);
-					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeTranslationVector(out tp3ResultTranslationVector);
-					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeEulerAngle(out listResultEulerAngle);
-					PointCloudBasedHandEyeCalibrator3D.GetResultRotationError(out double f64RotationError);
-					PointCloudBasedHandEyeCalibrator3D.GetResultTranslationError(out double f64TranslationError);
+					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeRotationVector(ref matResultRotationVector);
+					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeTranslationVector(ref tp3ResultTranslationVector);
+					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeEulerAngle(ref listResultEulerAngle);
+					PointCloudBasedHandEyeCalibrator3D.GetResultRotationError(ref double f64RotationError);
+					PointCloudBasedHandEyeCalibrator3D.GetResultTranslationError(ref double f64TranslationError);
 
 					// 3D View의 canvas rect 영역 얻어오기 // Get the canvas rect region
 					CFLRect<int> flrCanvasRegion = view3D.GetClientRectCanvasRegion();
@@ -181,7 +181,7 @@ namespace PointCloudBasedHandEyeCalibrator3D
 					CFL3DObject fl3DOCalibrationBoard = new CFL3DObject();
 					TPoint3<double> tp3BoardCenter = new TPoint3<double>();
 
-					PointCloudBasedHandEyeCalibrator3D.GetResultCalibration3DObject(out fl3DOCalibrationBoard, out tp3BoardCenter);
+					PointCloudBasedHandEyeCalibrator3D.GetResultCalibration3DObject(ref fl3DOCalibrationBoard, ref tp3BoardCenter);
 					String strIdx = "";
 
 					strIdx = String.Format("Calibration Board");

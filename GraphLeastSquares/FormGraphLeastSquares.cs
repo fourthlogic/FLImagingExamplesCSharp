@@ -60,7 +60,7 @@ namespace GraphLeastSquares
 				string strDegree = textBoxDegree.Text;
 
 				int i32Degree = 0;
-				int.TryParse(strDegree, out i32Degree);
+				int.TryParse(strDegree, ref i32Degree);
 
 				// 랜덤으로 100개의 데이터를 생성한다.
 				const int i32DataCount = 100;
@@ -102,7 +102,7 @@ namespace GraphLeastSquares
 				double f64TRSqr = 0;
 
 				// 다항식 계수를 얻는다.
-				ls.GetPoly(i32Degree, out listOutput, out f64TRSqr);
+				ls.GetPoly(i32Degree, ref listOutput, ref f64TRSqr);
 
 				string strEquation = "";
 

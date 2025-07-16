@@ -188,7 +188,7 @@ namespace Fit_Line
 
 
 				// Console 출력 // Console output
-				Console.Write("Source Points (Without noise)\n");
+				Console.Write("Source Points (Withref noise)\n");
 				Console.Write("{0}\n\n", CFigureUtilities.ConvertFigureObjectToString(flfaSrc));
 
 				Console.Write("Source Points (With noise)\n");

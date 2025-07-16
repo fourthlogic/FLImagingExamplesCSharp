@@ -138,7 +138,7 @@ namespace ResidualEvaluator3D
 				TPoint3<float> tp3Min = new TPoint3<float>(), tp3Max = new TPoint3<float>();
 				TPoint3<double> tp3Center = new TPoint3<double>();
 
-				fl3DOTargetObject.GetBoundingBox(out tp3Min, out tp3Max);
+				fl3DOTargetObject.GetBoundingBox(ref tp3Min, ref tp3Max);
 
 				tp3Center.x = (tp3Min.x + tp3Max.x) / 2;
 				tp3Center.y = (tp3Min.y + tp3Max.y) / 2;

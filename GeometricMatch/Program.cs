@@ -234,8 +234,8 @@ namespace Match
 					CGeometricMatch.SResult results;
 					CFLFigureArray flfaResultPoints;
 
-					FLGeometricMatch.GetResult(i, out results);
-					FLGeometricMatch.GetResultForDetectedFeature(i, out flfaResultPoints);
+					FLGeometricMatch.GetResult(i, ref results);
+					FLGeometricMatch.GetResultForDetectedFeature(i, ref flfaResultPoints);
 
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;

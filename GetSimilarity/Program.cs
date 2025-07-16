@@ -99,8 +99,8 @@ namespace GetSimilarity
 				// Source Figure 와 Transformed Figure 로부터 점을 샘플링
 				// Sample points from the Source Figure and Transformed Figure
 				CFLFigureArray flfaSource, flfaTransformed;
-				fleSourceFig.GetSamplingPointsOnSegment(5, out flfaSource);
-				fleTransformedFig.GetSamplingPointsOnSegment(5, out flfaTransformed);
+				fleSourceFig.GetSamplingPointsOnSegment(5, ref flfaSource);
+				fleTransformedFig.GetSamplingPointsOnSegment(5, ref flfaTransformed);
 
 				CFLPointArray flpaSource = new CFLPointArray();
 				for(long i = 0; i < flfaSource.GetCount(); ++i)

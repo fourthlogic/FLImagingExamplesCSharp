@@ -50,7 +50,7 @@ namespace DeviceCameraMechEye
 	            CFL3DObject floData;
 
 	            // 카메라에서 취득 한 데이터를 얻어온다.
-	            camera.GetAcquired3DData(out floData);
+	            camera.GetAcquired3DData(ref floData);
 
                 if(floData == null)
                     break;
@@ -156,7 +156,7 @@ namespace DeviceCameraMechEye
                     List<String> listSerialNumbers = null;
 
                     // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
-                    drResult = camMechEye.GetAutoDetectCameraSerialNumbers(out listSerialNumbers);
+                    drResult = camMechEye.GetAutoDetectCameraSerialNumbers(ref listSerialNumbers);
 
 			        if(drResult.IsFail() || listSerialNumbers == null || listSerialNumbers.Count == 0)
 			        {

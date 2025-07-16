@@ -167,7 +167,7 @@ namespace ImageView
                 double f64Size = Math.Min(f64Width, f64Height);
 
                 CFLPoint<double> flpdCenter = new CFLPoint<double>(0, 0);
-                flrdImage.GetCenter(out flpdCenter);
+                flrdImage.GetCenter(ref flpdCenter);
 
                 CFLRect<double> flrdFigureShape = new CFLRect<double>(flpdCenter.x -f64Size, flpdCenter.y - f64Size, flpdCenter.x + f64Size, flpdCenter.y + f64Size);
 

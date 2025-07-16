@@ -98,7 +98,7 @@ namespace Moment
 
 				// 모멘트 결과들을 가져옵니다. // Get the moment results.
 				CMoment.SMoment results;
-                moment.GetMoment(out results);
+                moment.GetMoment(ref results);
 
 				// 모멘트 결과를 Console창에 출력 // Output the moment result to the console window
 				if(bCalcGeometricMoment)

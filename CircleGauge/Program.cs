@@ -174,11 +174,11 @@ namespace Gauge
 					CFLFigureArray flfaResultsInvalid;
 
 					// 실행 결과를 가져옵니다. // Get the execution result. // Get the execution result.
-					res = circleGauge.GetMeasuredObject(out flcResult, i % 4);
+					res = circleGauge.GetMeasuredObject(ref flcResult, i % 4);
 					// 추정된 원을 추출에 사용된 유효 경계점을 가져옵니다. // Get the effective boundary point used to extract the estimated circle.
-					circleGauge.GetMeasuredValidPoints(out flfaResultsValid, i % 4);
+					circleGauge.GetMeasuredValidPoints(ref flfaResultsValid, i % 4);
 					// 추정된 원을 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid boundary point that is not used to extract the estimated circle.
-					circleGauge.GetMeasuredInvalidPoints(out flfaResultsInvalid, i % 4);
+					circleGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, i % 4);
 
 					CGUIViewImageLayer layer = viewImage[i].GetLayer(0);
 
@@ -235,9 +235,9 @@ namespace Gauge
 
 						// 원의 정보를 Console창에 출력합니다. // Output the original information to the console window.
 						double f64Radius;
-						flcResult.GetRadius(out f64Radius);
+						flcResult.GetRadius(ref f64Radius);
 						CFLPoint<double> flpLineCenter = new CFLPoint<double>();
-						flcResult.GetCenter(out flpLineCenter);
+						flcResult.GetCenter(ref flpLineCenter);
 						Console.WriteLine("Circle Center : ({0}, {1})\nRadius : {2} pixels", flpLineCenter.x, flpLineCenter.y, f64Radius);
 					}
 

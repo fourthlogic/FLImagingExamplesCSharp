@@ -199,7 +199,7 @@ namespace Match
 				{
 					CPatternMatchMulti.SResult results;
 
-					FLPatternMatchMulti.GetResult(i, out results);
+					FLPatternMatchMulti.GetResult(i, ref results);
 
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;

@@ -44,7 +44,7 @@ namespace DeviceTriggerAxl
 				strInput = Console.ReadLine();
 
 				int i32ModuleIndex = 0;
-				Int32.TryParse(strInput, out i32ModuleIndex);
+				Int32.TryParse(strInput, ref i32ModuleIndex);
 
 				// 장치의 모듈 인덱스를 설정합니다. // Sets the module index for the device.
 				if((res = devTrigger.SetModuleIndex(i32ModuleIndex)).IsFail())
@@ -69,7 +69,7 @@ namespace DeviceTriggerAxl
 					Console.Write("Enter trigger channel(0 ~ {0}): ", devTrigger.GetTriggerChannelCount() - 1);
 					strInput = Console.ReadLine();
 
-					Int32.TryParse(strInput, out i32Channel);
+					Int32.TryParse(strInput, ref i32Channel);
 
 					if(i32Channel < 0 || i32Channel >= devTrigger.GetTriggerChannelCount())
 						Console.Write("Incorrect input. Please enter again.\n");
@@ -91,7 +91,7 @@ namespace DeviceTriggerAxl
 					strInput = Console.ReadLine();
 
 					int i32Select = 0;
-					Int32.TryParse(strInput, out i32Select);
+					Int32.TryParse(strInput, ref i32Select);
 
 					bool bSelected = true;
 
@@ -142,7 +142,7 @@ namespace DeviceTriggerAxl
 					strInput = Console.ReadLine();
 
 					int i32Select = 0;
-					Int32.TryParse(strInput, out i32Select);
+					Int32.TryParse(strInput, ref i32Select);
 
 					bool bSelected = true;
 

@@ -224,7 +224,7 @@ namespace Mask
 
 					CFLRect<double> flr = new CFLRect<double>();
 
-					pFlrg.GetBoundaryRect(out flr);
+					pFlrg.GetBoundaryRect(ref flr);
 
 					CFLPoint<double> flpDraw = new CFLPoint<double>(flr.left, (flr.top + flr.bottom) * .5);
 

@@ -415,7 +415,7 @@ namespace SuperResolution
 						List<float> flaValidationHistory = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						superResolution.GetLearningResultAllHistory(out flaCostHistory, out flaValidationHistory, out flaPSNRHistory, out flaSSIMHistory,  out vctValidationEpoch);
+						superResolution.GetLearningResultAllHistory(ref flaCostHistory, ref flaValidationHistory, ref flaPSNRHistory, ref flaSSIMHistory,  ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((flaCostHistory.Count() != 0 && i32PrevCostCount != flaCostHistory.Count()) || (flaPSNRHistory.Count() != 0 && i32PrevPSNRCount != flaPSNRHistory.Count()) || (flaSSIMHistory.Count() != 0 && i32PrevSSIMCount != flaSSIMHistory.Count()) || (flaValidationHistory.Count() != 0 && i32PrevValidationCount != flaValidationHistory.Count()))

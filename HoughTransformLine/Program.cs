@@ -107,7 +107,7 @@ namespace HoughTransformLine
 				for(long i = 0; i < i64ResultCount; i++) // 출력
 				{
 					// line 결과 가져오기 // get result line
-					HoughTransform.GetResultLine(i, out fllLine);
+					HoughTransform.GetResultLine(i, ref fllLine);
 
 					// line 출력 // display line
 					if((res = (layer.DrawFigureImage(fllLine, EColor.LIME, 1))).IsFail())

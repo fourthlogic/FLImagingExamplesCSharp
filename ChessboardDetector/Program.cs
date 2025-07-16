@@ -79,7 +79,7 @@ namespace CameraCalibrator
                 for (long i = 0; i < (long)chessBoard.GetResultBoardCount(); ++i)
                 {
                     CFLQuad<double> flq = new CFLQuad<double>();
-                    chessBoard.GetResultBoardRegion(i, out flq);
+                    chessBoard.GetResultBoardRegion(i, ref flq);
 
                     CFLPoint<double> flpPoint0 = new CFLPoint<double>(flq.flpPoints[0]);
                     CFLPoint<double> flpPoint1 = new CFLPoint<double>(flq.flpPoints[1]);
@@ -122,7 +122,7 @@ namespace CameraCalibrator
                     i32VertexNumber = 0;
 
                     List < List < TPoint<double> >> flaPoints;
-                    chessBoard.GetResultCornerPoints(i, out flaPoints);
+                    chessBoard.GetResultCornerPoints(i, ref flaPoints);
 
                     CFLPoint<double> flpLastPoint = new CFLPoint<double>();
 

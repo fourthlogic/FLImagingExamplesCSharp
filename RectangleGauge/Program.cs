@@ -103,11 +103,11 @@ namespace Gauge
                 CFLRect<double> resultRegion;
                 CFLFigureArray flfaResultsValid, flfaResultsInvalid;
 				// 추정된 사각형을 가져옵니다. // Get the estimated rectangle.
-				rectangleGauge.GetMeasuredObject(out resultRegion, 0);
+				rectangleGauge.GetMeasuredObject(ref resultRegion, 0);
 				// 추정된 사각형을 추출에 사용된 유효 경계점을 가져옵니다. // Get the valid bounding point used to extract the estimated rectangle.
-				rectangleGauge.GetMeasuredValidPoints(out flfaResultsValid, 0);
+				rectangleGauge.GetMeasuredValidPoints(ref flfaResultsValid, 0);
 				// 추정된 사각형을 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid bounding point that was not used to extract the estimated rectangle.
-				rectangleGauge.GetMeasuredInvalidPoints(out flfaResultsInvalid, 0);
+				rectangleGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, 0);
 
                 CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
@@ -117,7 +117,7 @@ namespace Gauge
 
                 CFLRect<double> flrResult;
 
-                rectangleGauge.GetMeasuredObject(out flrResult, 0);
+                rectangleGauge.GetMeasuredObject(ref flrResult, 0);
 
                 CFLRect<double> flrRegion = rectangleGauge.GetMeasurementRegion();
 				List<double> arrTolerance = rectangleGauge.GetTolerance();

@@ -144,7 +144,7 @@ namespace Barcode
 
 					// String 을 디스플레이 하기 위한 기준 좌표 FLPointL 선언
 					CFLPoint<Int32> flplPos = new CFLPoint<int>();
-                    flqRegion.GetCenter(out flplPos);
+                    flqRegion.GetCenter(ref flplPos);
 
 					// Decoded String 을 디스플레이 한다.
 					// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다. // The function DrawTextCanvas below draws a String based on the screen coordinates.

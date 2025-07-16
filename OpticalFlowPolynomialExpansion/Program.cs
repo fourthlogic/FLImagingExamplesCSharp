@@ -209,7 +209,7 @@ namespace OpticalFlowPolynomialExpansion
                     // Destination 이미지 Pixel에 접근을 위한 Buffer 얻기
                     float[] dstImgBuffer;
 
-                    arrFliImage[1].GetBuffer(out dstImgBuffer);
+                    arrFliImage[1].GetBuffer(ref dstImgBuffer);
 
                     for (int i32Width = 0; i32Width < i32FlowWidth; i32Width += i32GridStep)
                     {

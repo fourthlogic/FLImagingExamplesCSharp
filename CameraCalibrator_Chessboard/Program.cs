@@ -202,7 +202,7 @@ namespace CameraCalibrator
 
 					for(long i64ObjectIdx = 0; i64ObjectIdx < i64ObjectCount; ++i64ObjectIdx)
 					{
-						sCC.GetResultGridPoints(i64ObjectIdx, i64ImgIdx, out sArrGridDisplay[i64ImgIdx].sGridData);
+						sCC.GetResultGridPoints(i64ObjectIdx, i64ImgIdx, ref sArrGridDisplay[i64ImgIdx].sGridData);
 						sArrGridDisplay[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 						sArrGridDisplay[i64ImgIdx].i64ObjectIdx = sArrGridDisplay[i64ImgIdx].sGridData.i64ID;
 					}

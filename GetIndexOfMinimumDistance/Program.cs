@@ -180,7 +180,7 @@ namespace GetIndexOfMinimumDistance
 				{
 					CFLFigureArray flfaArrayDepth1 = (CFLFigureArray)flfaSource2.GetAt(i);
 					CFLRect<double> flrBoundary = new CFLRect<double>();
-					flfaArrayDepth1.GetBoundaryRect(out flrBoundary);
+					flfaArrayDepth1.GetBoundaryRect(ref flrBoundary);
 
 					Src2Layer0.DrawFigureImage(flrBoundary, EColor.LIGHTBLUE, 1);
 					Src2Layer0.DrawTextImage(flfaArrayDepth1.GetCenter(), String.Format("{0}", i), EColor.LIGHTBLUE, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
@@ -208,7 +208,7 @@ namespace GetIndexOfMinimumDistance
 
 				CFLFigureArray flfaArraySrcDepth1 = (CFLFigureArray)flfaSource2.GetAt(flvSrcDepth1.v);
 				CFLRect<double> flrBoundary2 = new CFLRect<double>();
-				flfaArraySrcDepth1.GetBoundaryRect(out flrBoundary2);
+				flfaArraySrcDepth1.GetBoundaryRect(ref flrBoundary2);
 
 				Dst2Layer0.DrawFigureImage(flrBoundary2, EColor.LIGHTORANGE, 1);
 				Dst2Layer0.DrawTextImage(flfaArraySrcDepth1.GetCenter(), String.Format("{0}", flvSrcDepth1.v), EColor.LIGHTORANGE, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);

@@ -188,11 +188,11 @@ namespace Gauge
 					CFLEllipse<double> flres;
 					CFLFigureArray flfaResultsValid, flfaResultsInvalid;
 					// 추정된 타원을 가져옵니다. // Get the estimated ellipse.
-					ellipseGauge.GetMeasuredObject(out flres, i % 4);
+					ellipseGauge.GetMeasuredObject(ref flres, i % 4);
 					// 추정된 타원을 추출에 사용된 유효 경계점을 가져옵니다. // Get the valid boundary point used to extract the estimated ellipse.
-					ellipseGauge.GetMeasuredValidPoints(out flfaResultsValid, i % 4);
+					ellipseGauge.GetMeasuredValidPoints(ref flfaResultsValid, i % 4);
 					// 추정된 타원을 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid boundary point that is not used to extract the estimated ellipse.
-					ellipseGauge.GetMeasuredInvalidPoints(out flfaResultsInvalid, i % 4);
+					ellipseGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, i % 4);
 
 					CGUIViewImageLayer layer = viewImage[i].GetLayer(0);
 
@@ -212,8 +212,8 @@ namespace Gauge
 					CFLEllipse<double> fleOuter = new CFLEllipse<double>(fleRegion);
 					float f64Radius1, f64Radius2;
 
-					fleInner.GetRadius1(out f64Radius1);
-					fleInner.GetRadius2(out f64Radius2);
+					fleInner.GetRadius1(ref f64Radius1);
+					fleInner.GetRadius2(ref f64Radius2);
 
 					f64Tolerance = ellipseGauge.GetTolerance();
 
@@ -262,8 +262,8 @@ namespace Gauge
 						// 타원의 정보를 Console창에 출력합니다. // Output the information of the ellipse to the console window.
 						float f64RadiusResult1 = new float(), f64RadiusResult2 = new float();
 						double f64Anglres = new double();
-						flres.GetRadius1(out f64RadiusResult1);
-						flres.GetRadius2(out f64RadiusResult2);
+						flres.GetRadius1(ref f64RadiusResult1);
+						flres.GetRadius2(ref f64RadiusResult2);
 						f64Anglres = flres.GetAngle();
 						CFLPoint<double> flpLineCenter = flres.GetCenter();
 						Console.WriteLine("Ellipse Center : ({0}, {1})\nRadius X : {2} pixels\nRadius Y : {3} pixels\nAngle : {4}˚",

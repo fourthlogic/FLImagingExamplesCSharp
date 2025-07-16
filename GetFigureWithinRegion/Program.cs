@@ -174,7 +174,7 @@ namespace GetFigureWithinRegion
 
 				// Region1과 겹쳐지는 Figure 추출 // Get figure overlapping with Region1
 				CFLFigureArray flfaResult1 = new CFLFigureArray();
-				flfaSource.GetFigureWithinRegion(flcrRegion1, out flfaResult1);
+				flfaSource.GetFigureWithinRegion(flcrRegion1, ref flfaResult1);
 
 				Console.WriteLine("Result Figure Within Region1\n");
 
@@ -188,7 +188,7 @@ namespace GetFigureWithinRegion
 
 				// Region2과 겹쳐지는 Figure 추출 // Get figure overlapping with Region2
 				CFLFigureArray flfaResult2 = new CFLFigureArray();
-				flfaSource.GetFigureWithinRegion(flcrRegion2, out flfaResult2);
+				flfaSource.GetFigureWithinRegion(flcrRegion2, ref flfaResult2);
 
 				Console.WriteLine("Result Figure Within Region2\n");
 

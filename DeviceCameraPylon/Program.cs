@@ -173,19 +173,19 @@ namespace DeviceCameraPylon
 			        switch(eDeviceType)
 			        {
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
-				        drResult = camPylon.GetAutoDetectGigECameraSerialNumbers(out listSerialNumbers);
+				        drResult = camPylon.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.IEEE1394:
-                        drResult = camPylon.GetAutoDetectIEEE1394CameraSerialNumbers(out listSerialNumbers);
+                        drResult = camPylon.GetAutoDetectIEEE1394CameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.USB:
-                        drResult = camPylon.GetAutoDetectUSBCameraSerialNumbers(out listSerialNumbers);
+                        drResult = camPylon.GetAutoDetectUSBCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.CameraLink:
-                        drResult = camPylon.GetAutoDetectCameraLinkCameraSerialNumbers(out listSerialNumbers);
+                        drResult = camPylon.GetAutoDetectCameraLinkCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        default:

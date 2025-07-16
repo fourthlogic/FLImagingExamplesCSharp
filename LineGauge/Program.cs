@@ -197,11 +197,11 @@ namespace Gauge
 					CFLLine<double> fllResult;
 					CFLFigureArray flfaResultsValid, flfaResultsInvalid;
 					// 추정된 선을 가져옵니다. // Get the estimated line.
-					lineGauge.GetMeasuredObject(out fllResult, i % 4);
+					lineGauge.GetMeasuredObject(ref fllResult, i % 4);
 					// 추정된 선을 추출에 사용된 유효 경계점을 가져옵니다. // Get the effective boundary point used to extract the estimated line.
-					lineGauge.GetMeasuredValidPoints(out flfaResultsValid, i % 4);
+					lineGauge.GetMeasuredValidPoints(ref flfaResultsValid, i % 4);
 					// 추정된 선을 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid boundary point that is not used to extract the estimated line.
-					lineGauge.GetMeasuredInvalidPoints(out flfaResultsInvalid, i % 4);
+					lineGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, i % 4);
 
 					CGUIViewImageLayer layer = viewImage[i].GetLayer(0);
 
@@ -288,7 +288,7 @@ namespace Gauge
 					// 설정된 ROI에 대해 측정영역을 디스플레이 합니다. // Display the measurement area for the set ROI.
 					CFLQuad<double> flqDraw = new CFLQuad<double>();
 					double f64ToleranceLeft, f64ToleranceRight;
-					lineGauge.GetTolerance(out f64ToleranceLeft, out f64ToleranceRight);
+					lineGauge.GetTolerance(ref f64ToleranceLeft, ref f64ToleranceRight);
 
 					CFLPoint<double> fllNorm = measureRegion.GetNormalVector();
 					flqDraw.flpPoints[0].x = measureRegion.flpPoints[0].x + fllNorm.x * f64ToleranceLeft;

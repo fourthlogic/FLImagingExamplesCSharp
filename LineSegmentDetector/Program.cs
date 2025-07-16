@@ -97,8 +97,8 @@ namespace LineSegmentDetector
                 List<double> arrScores;
                 double f64ScoreThreshold = lsd.GetScoreThreshold();
 
-                lsd.GetResultLineSegments(out flfaResults);
-                lsd.GetResultScores(out arrScores);
+                lsd.GetResultLineSegments(ref flfaResults);
+                lsd.GetResultScores(ref arrScores);
 
                 // 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
                 // 따로 해제할 필요 없음 // No need to release separately

@@ -318,7 +318,7 @@ namespace InstanceSegmentation
 						List<float> vctMeanAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						instanceSegmentation.GetLearningResultAllHistory(out vctCosts, out vctMeanAP, out vctValidationEpoch);
+						instanceSegmentation.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanAP.Count() != 0 && i32PrevValidationCount != vctMeanAP.Count()))

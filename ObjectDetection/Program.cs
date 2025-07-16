@@ -295,7 +295,7 @@ namespace ObjectDetection
 						List<float> vctmAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						objectDetection.GetLearningResultAllHistory(out vctCosts, out vctAvgCosts, out vctmAP, out vctValidationEpoch);
+						objectDetection.GetLearningResultAllHistory(ref vctCosts, ref vctAvgCosts, ref vctmAP, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctmAP.Count() != 0 && i32PrevValidationCount != vctmAP.Count()))

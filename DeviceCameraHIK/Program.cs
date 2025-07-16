@@ -173,19 +173,19 @@ namespace DeviceCameraHIK
 			        switch(eDeviceType)
 			        {
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
-				        drResult = camHik.GetAutoDetectGigECameraSerialNumbers(out listSerialNumbers);
+				        drResult = camHik.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.IEEE1394:
-                        drResult = camHik.GetAutoDetectIEEE1394CameraSerialNumbers(out listSerialNumbers);
+                        drResult = camHik.GetAutoDetectIEEE1394CameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.USB:
-                        drResult = camHik.GetAutoDetectUSBCameraSerialNumbers(out listSerialNumbers);
+                        drResult = camHik.GetAutoDetectUSBCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.CameraLink:
-                        drResult = camHik.GetAutoDetectCameraLinkCameraSerialNumbers(out listSerialNumbers);
+                        drResult = camHik.GetAutoDetectCameraLinkCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        default:

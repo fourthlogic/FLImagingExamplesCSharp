@@ -108,7 +108,7 @@ namespace LeastSquares
 						double f64TRSqr = 0.0;
 
 						// 다항식 계수를 얻는다. // Get polynomial coefficients
-						ls.GetPoly(i, out arrF64Output, out f64TRSqr);
+						ls.GetPoly(i, ref arrF64Output, ref f64TRSqr);
 
 				        String strEquation = "";
 
@@ -166,7 +166,7 @@ namespace LeastSquares
 						List<Complex> listEquationResult = new List<Complex>();
 
 						// 방정식의 해를 얻어온다. // Get the solution of the equation.
-						CEquation.Solve(listCoef, out listEquationResult);
+						CEquation.Solve(listCoef, ref listEquationResult);
 
 						// 방정식의 해를 표시한다. // Display the solution of the equation.
 						String strResult = "Result \n";

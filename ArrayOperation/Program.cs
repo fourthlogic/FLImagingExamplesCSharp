@@ -123,7 +123,7 @@ namespace CircleGauge
 				CFLFigureArray flfaCenter = new CFLFigureArray();
 
 				// Figure Array 각 요소의 중심점 계산 // Calculate the center point of each element of Figure Array
-				flfa.GetCenterElementwise(out flfaCenter);
+				flfa.GetCenterElementwise(ref flfaCenter);
 
 				// 중심들을 View0의 0번 레이어에 그리기 // Draw the centers on layer 0 of View0
 				ViewLayer[0].DrawFigureImage(flfaCenter, EColor.RED);
@@ -146,7 +146,7 @@ namespace CircleGauge
 				CFLFigureArray flfaPerimeter = new CFLFigureArray();
 
 				// Figure Array 각 요소의 둘레 계산 // Calculate the perimeter of each element of the Figure Array
-				flfa.GetPerimeterElementwise(out flfaPerimeter);
+				flfa.GetPerimeterElementwise(ref flfaPerimeter);
 
 				// Figure Array 각 요소의 둘레 표시 // Display perimeter of each element of Figure Array
 				for(long i = 0; i < flfaPerimeter.GetCount(); ++i)
@@ -174,7 +174,7 @@ namespace CircleGauge
 				CFLFigureArray flfaCenterOfGravity = new CFLFigureArray();
 
 				// Figure Array 각 요소의 무게중심점 계산 // Calculate the center of gravity of each element of the Figure Array
-				flfa.GetCenterOfGravityElementwise(out flfaCenterOfGravity);
+				flfa.GetCenterOfGravityElementwise(ref flfaCenterOfGravity);
 
 				// 무게중심들을 View0의 0번 레이어에 그리기 // Draw the centers of gravity on Layer 0 of View0
 				ViewLayer[2].DrawFigureImage(flfaCenterOfGravity, EColor.CYAN);
@@ -197,7 +197,7 @@ namespace CircleGauge
 				CFLFigureArray flfaMER = new CFLFigureArray();
 
 				// Figure Array 각 요소의 최소둘레 직사각형을 계산 // Calculate the minimum enclosing rectangle of each element of the Figure Array
-				flfa.GetMinimumEnclosingRectangleElementwise(out flfaMER);
+				flfa.GetMinimumEnclosingRectangleElementwise(ref flfaMER);
 
 				// 최소둘레 직사각형들을 View0의 0번 레이어에 그리기 // Draw the minimum enclosing rectangle on Layer 0 of View0
 				ViewLayer[3].DrawFigureImage(flfaMER, EColor.BLUE);

@@ -154,11 +154,11 @@ namespace CameraPose3D
 
 					// 결과 객체 영역 가져오기 // Get the result board region
 					CFLQuad<double> flqBoardRegion = new CFLQuad<double>();
-					CameraPose3D.GetResultBoardRegion(out flqBoardRegion);
+					CameraPose3D.GetResultBoardRegion(ref flqBoardRegion);
 
 					// 결과 코너점 가져오기 // Get the result corner points
 					CFLFigureArray flfaCornerPoints = new CFLFigureArray();
-					CameraPose3D.GetResultCornerPoints(out flfaCornerPoints);
+					CameraPose3D.GetResultCornerPoints(ref flfaCornerPoints);
 
 					// 결과 객체 영역 그리기 // Draw the result board region
 					layerViewSource.DrawFigureImage(flqBoardRegion, EColor.BLUE, 3);
@@ -176,10 +176,10 @@ namespace CameraPose3D
 					List<double> listResultRotationVector = new List<double>(), listResultTranslationVector = new List<double>(), listResultEulerAngle = new List<double>();
 					CMatrix<double> matResultRotationMatrix = new CMatrix<double>();
 
-					CameraPose3D.GetResultRotationVector(out listResultRotationVector);
-					CameraPose3D.GetResultRotationMatrix(out matResultRotationMatrix);
-					CameraPose3D.GetResultTranslationVector(out listResultTranslationVector);
-					CameraPose3D.GetResultEulerAngle(eEulerSequence, out listResultEulerAngle);
+					CameraPose3D.GetResultRotationVector(ref listResultRotationVector);
+					CameraPose3D.GetResultRotationMatrix(ref matResultRotationMatrix);
+					CameraPose3D.GetResultTranslationVector(ref listResultTranslationVector);
+					CameraPose3D.GetResultEulerAngle(eEulerSequence, ref listResultEulerAngle);
 
 					CFLPoint<double> flpImageSize = new CFLPoint<double>(fliSource);
 					flpImageSize.x *= 2;

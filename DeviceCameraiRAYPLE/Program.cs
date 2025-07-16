@@ -173,19 +173,19 @@ namespace DeviceCameraiRAYPLE
 			        switch(eDeviceType)
 			        {
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
-				        drResult = camiRAYPLE.GetAutoDetectGigECameraSerialNumbers(out listSerialNumbers);
+				        drResult = camiRAYPLE.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.IEEE1394:
-                        drResult = camiRAYPLE.GetAutoDetectIEEE1394CameraSerialNumbers(out listSerialNumbers);
+                        drResult = camiRAYPLE.GetAutoDetectIEEE1394CameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.USB:
-                        drResult = camiRAYPLE.GetAutoDetectUSBCameraSerialNumbers(out listSerialNumbers);
+                        drResult = camiRAYPLE.GetAutoDetectUSBCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.CameraLink:
-                        drResult = camiRAYPLE.GetAutoDetectCameraLinkCameraSerialNumbers(out listSerialNumbers);
+                        drResult = camiRAYPLE.GetAutoDetectCameraLinkCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        default:

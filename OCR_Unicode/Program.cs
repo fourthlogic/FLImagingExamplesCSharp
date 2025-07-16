@@ -137,7 +137,7 @@ namespace OCR
 				CFLFigureArray flfaLearned = new CFLFigureArray();
 
 				// 학습한 문자의 모양를 받아오는 함수
-				ocr.GetLearnedCharacter(out flfaLearned);
+				ocr.GetLearnedCharacter(ref flfaLearned);
 
 				Int64 i64LearnedCount = flfaLearned.GetCount();
 
@@ -226,7 +226,7 @@ namespace OCR
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{
-					ocr.GetResultRecognizedCharactersInfo(i, out resultChar);
+					ocr.GetResultRecognizedCharactersInfo(i, ref resultChar);
 
 					string flsResultString = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
@@ -236,7 +236,7 @@ namespace OCR
 
 					flsResultString = "[" + flsResultName + "]" + string.Format("Score: {0}%\nScale: {1}\nRotation: {2}", i32Score, f64Scale.ToString("n2"), resultChar.f64Rotation);
 					Console.WriteLine(flsResultString);
-					resultChar.flfaCharacter.GetBoundaryRect(out flrBoundary);
+					resultChar.flfaCharacter.GetBoundaryRect(ref flrBoundary);
 
 					if((res = layerRecognize.DrawTextImage(new CFLPoint<double>(flrBoundary.left, flrBoundary.top), flsResultString, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
 					{

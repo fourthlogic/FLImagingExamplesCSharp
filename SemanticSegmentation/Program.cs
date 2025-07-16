@@ -324,7 +324,7 @@ namespace SemanticSegmentation
 						List<float> vctMeanIoUZE = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						semanticSegmentation.GetLearningResultAllHistory(out vctCosts, out vctValidations, out vctMeanIoU, out vctValidationsZE, out vctMeanIoUZE, out vctValidationEpoch);
+						semanticSegmentation.GetLearningResultAllHistory(ref vctCosts, ref vctValidations, ref vctMeanIoU, ref vctValidationsZE, ref vctMeanIoUZE, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
@@ -410,7 +410,7 @@ namespace SemanticSegmentation
 				{
 					List<string> flaNames = new List<string>();
 
-					semanticSegmentation.GetLearningResultClassNames(classNum,out flaNames);
+					semanticSegmentation.GetLearningResultClassNames(classNum,ref flaNames);
 					viewImagesLabel.SetSegmentationLabelText(0, (double)classNum, flaNames[0]);
 				}
 

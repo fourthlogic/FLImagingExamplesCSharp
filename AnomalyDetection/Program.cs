@@ -285,7 +285,7 @@ namespace AnomalyDetection
 						List<float> flaValidationHistory = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						anomalyDetection.GetLearningResultAllHistory(out flaCostHistory, out flaValidationHistory, out vctValidationEpoch);
+						anomalyDetection.GetLearningResultAllHistory(ref flaCostHistory, ref flaValidationHistory, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((flaCostHistory.Count() != 0 && i32PrevCostCount != flaCostHistory.Count()) || (flaValidationHistory.Count() != 0 && i32PrevValidationCount != flaValidationHistory.Count()))

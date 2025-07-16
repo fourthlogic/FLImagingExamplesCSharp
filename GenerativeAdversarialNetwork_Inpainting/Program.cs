@@ -271,7 +271,7 @@ namespace GenerativeAdversarialNetwork
 						List<float> vctMRQ = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						gan.GetLearningResultAllHistory(out vctCosts, out vctSSIM, out vctMRQ, out vctValidationEpoch);
+						gan.GetLearningResultAllHistory(ref vctCosts, ref vctSSIM, ref vctMRQ, ref vctValidationEpoch);
 
 						if(vctCosts.Count != 0)
 						{

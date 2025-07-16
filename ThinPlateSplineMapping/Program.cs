@@ -167,7 +167,7 @@ namespace ThinPlateSplineMapping
 					CFLPoint<double> flpSource = new CFLPoint<double>();
 					CFLPoint<double> flpDestination = new CFLPoint<double>();
 
-					tps.GetControlPoint(k, out flpSource, out flpDestination);
+					tps.GetControlPoint(k, ref flpSource, ref flpDestination);
 
 					for(int i = 0; i < 3; ++i)
 					{

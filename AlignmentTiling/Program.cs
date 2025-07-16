@@ -198,7 +198,7 @@ namespace AlignmentTiling
 				{
 					// 결과 이미지 기준으로 각각의 인덱스에 해당하는 병합된 결과 영역을 받아온다.
 					// Receive the merged result area corresponding to each index based on the result image.
-					alignmentTiling.GetPartialResultRegion(i, out flqResult);
+					alignmentTiling.GetPartialResultRegion(i, ref flqResult);
 
 					// 병합된 영역이 어디인지 알기 위해 디스플레이 한다
 					// FLImaging의 Figure 객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능 // FLimaging's Figure objects can be displayed as a function regardless of the shape

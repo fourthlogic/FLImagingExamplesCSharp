@@ -156,13 +156,13 @@ namespace Gauge
 					CFLFigureArray flfaResultsValid, flfaResultsInvalid;
 					CFLFigureArray flfaResultLine;
 					// 추정을 위한 라인을 가져옵니다. // Get the line for inference.
-					CrossGauge.GetMeasuredLines(out flfaResultLine);
+					CrossGauge.GetMeasuredLines(ref flfaResultLine);
 					// 추정된 십자형을 가져옵니다. // Get the estimated crosshairs.
-					CrossGauge.GetMeasuredObject(out resultRegion);
+					CrossGauge.GetMeasuredObject(ref resultRegion);
 					// 추정된 십자형을 추출에 사용된 유효 경계점을 가져옵니다. // Get the valid boundary points used to extract the estimated crosshairs.
-					CrossGauge.GetMeasuredValidPoints(out flfaResultsValid);
+					CrossGauge.GetMeasuredValidPoints(ref flfaResultsValid);
 					// 추정된 십자형을 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get invalid boundary points that were not used to extract the estimated crosshairs.
-					CrossGauge.GetMeasuredInvalidPoints(out flfaResultsInvalid);
+					CrossGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid);
 
 					CGUIViewImageLayer layer = viewImage[i].GetLayer(0);
 
@@ -184,7 +184,7 @@ namespace Gauge
 					if(res.IsOK())
 					{
 						double f64ResultAngle;
-						CrossGauge.GetMeasuredAngle(out f64ResultAngle);
+						CrossGauge.GetMeasuredAngle(ref f64ResultAngle);
 
 						Console.WriteLine("Cross Center : ({0}, {1})\nAngle : {2}˚", resultRegion.x, resultRegion.y, f64ResultAngle);
 					}

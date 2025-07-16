@@ -177,7 +177,7 @@ namespace OCV
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{
-					ocv.GetResultVerificationCharactersInfo(i, out resultChar);
+					ocv.GetResultVerificationCharactersInfo(i, ref resultChar);
 
 					string flsResultString = "";
 					string flsResultString2 = "";
@@ -252,7 +252,7 @@ namespace OCV
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{
-					ocv.GetResultVerificationCharactersInfo(i, out resultChar);
+					ocv.GetResultVerificationCharactersInfo(i, ref resultChar);
 
 					string flsResultString = "";
 					string flsResultString2 = "";
@@ -327,7 +327,7 @@ namespace OCV
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{
-					ocv.GetResultVerificationCharactersInfo(i, out resultChar);
+					ocv.GetResultVerificationCharactersInfo(i, ref resultChar);
 
 					string flsResultString = "";
 					string flsResultString2 = "";

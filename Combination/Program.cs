@@ -29,7 +29,7 @@ namespace LeastSquares
                 do
                 {
                     Console.Write("Please input n and k as n, k.\n");
-                    Console.Write("Combination : k objects are selected from a set of n objects to produce subsets without ordering.\n");
+                    Console.Write("Combination : k objects are selected from a set of n objects to produce subsets withref ordering.\n");
                     Console.Write("ex) 6, 2\n");
                     Console.Write("Input: ");
 
@@ -55,9 +55,9 @@ namespace LeastSquares
                             break;
 
                         if (nCount == 0)
-                            int.TryParse(input, out n);
+                            int.TryParse(input, ref n);
                         else if (nCount == 1)
-                            int.TryParse(input, out k);
+                            int.TryParse(input, ref k);
                         else
                             break;
 
@@ -80,7 +80,7 @@ namespace LeastSquares
 
 					// 조합 결과값 얻기 // Get combination result
 					List<List<int>> listCombination = new List<List<int>>();
-                    CResult cResult = C.GetResult(out listCombination);
+                    CResult cResult = C.GetResult(ref listCombination);
 
                     string flstrCombination = "";
                     int i64CombinationCnt = 0;

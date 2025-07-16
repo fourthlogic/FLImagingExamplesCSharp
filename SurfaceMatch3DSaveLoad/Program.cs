@@ -113,7 +113,7 @@ namespace SurfaceMatch3D
 					break;
 				}
 
-				SurfaceMatch3D.GetSampledLearn3DObject(out fl3DOSampleObject);
+				SurfaceMatch3D.GetSampledLearn3DObject(ref fl3DOSampleObject);
 
 				// Learn Object 출력 // Display the learn object
 				if((eResult = view3DLearn.PushObject(fl3DOLearnObject)).IsFail())
