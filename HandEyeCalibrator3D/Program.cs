@@ -31,18 +31,31 @@ namespace HandEyeCalibrator3D
 		{
 			Dictionary<EEulerSequence, String> dictEulerString = new Dictionary<EEulerSequence, String>();
 
-			dictEulerString[EEulerSequence.Extrinsic_XYZ] = "XYZ";
-			dictEulerString[EEulerSequence.Extrinsic_XZY] = "XZY";
-			dictEulerString[EEulerSequence.Extrinsic_YZX] = "YZX";
-			dictEulerString[EEulerSequence.Extrinsic_YXZ] = "YXZ";
-			dictEulerString[EEulerSequence.Extrinsic_ZXY] = "ZXY";
-			dictEulerString[EEulerSequence.Extrinsic_ZYX] = "ZYX";
-			dictEulerString[EEulerSequence.Extrinsic_XYX] = "XYX";
-			dictEulerString[EEulerSequence.Extrinsic_XZX] = "XZX";
-			dictEulerString[EEulerSequence.Extrinsic_YZY] = "YZY";
-			dictEulerString[EEulerSequence.Extrinsic_YXY] = "YXY";
-			dictEulerString[EEulerSequence.Extrinsic_ZYZ] = "ZYZ";
-			dictEulerString[EEulerSequence.Extrinsic_ZXZ] = "ZXZ";
+			dictEulerString[EEulerSequence.Extrinsic_XYZ] = "Ext_XYZ";
+			dictEulerString[EEulerSequence.Extrinsic_XZY] = "Ext_XZY";
+			dictEulerString[EEulerSequence.Extrinsic_YZX] = "Ext_YZX";
+			dictEulerString[EEulerSequence.Extrinsic_YXZ] = "Ext_YXZ";
+			dictEulerString[EEulerSequence.Extrinsic_ZXY] = "Ext_ZXY";
+			dictEulerString[EEulerSequence.Extrinsic_ZYX] = "Ext_ZYX";
+			dictEulerString[EEulerSequence.Extrinsic_XYX] = "Ext_XYX";
+			dictEulerString[EEulerSequence.Extrinsic_XZX] = "Ext_XZX";
+			dictEulerString[EEulerSequence.Extrinsic_YZY] = "Ext_YZY";
+			dictEulerString[EEulerSequence.Extrinsic_YXY] = "Ext_YXY";
+			dictEulerString[EEulerSequence.Extrinsic_ZYZ] = "Ext_ZYZ";
+			dictEulerString[EEulerSequence.Extrinsic_ZXZ] = "Ext_ZXZ";
+
+			dictEulerString[EEulerSequence.Intrinsic_XYZ] = "Int_XYZ";
+			dictEulerString[EEulerSequence.Intrinsic_XZY] = "Int_XZY";
+			dictEulerString[EEulerSequence.Intrinsic_YZX] = "Int_YZX";
+			dictEulerString[EEulerSequence.Intrinsic_YXZ] = "Int_YXZ";
+			dictEulerString[EEulerSequence.Intrinsic_ZXY] = "Int_ZXY";
+			dictEulerString[EEulerSequence.Intrinsic_ZYX] = "Int_ZYX";
+			dictEulerString[EEulerSequence.Intrinsic_XYX] = "Int_XYX";
+			dictEulerString[EEulerSequence.Intrinsic_XZX] = "Int_XZX";
+			dictEulerString[EEulerSequence.Intrinsic_YZY] = "Int_YZY";
+			dictEulerString[EEulerSequence.Intrinsic_YXY] = "Int_YXY";
+			dictEulerString[EEulerSequence.Intrinsic_ZYZ] = "Int_ZYZ";
+			dictEulerString[EEulerSequence.Intrinsic_ZXZ] = "Int_ZXZ";
 
 			CFLImage fliSource = new CFLImage();
 			CGUIViewImage viewImage = new CGUIViewImage();
