@@ -111,11 +111,11 @@ namespace Gauge
 				// Cross Gauge 객체 생성 // Create Cross Gauge
 				CCrossGauge CrossGauge = new CCrossGauge();
 
-                
-                // 측정할 영역을 설정합니다. // Set the area to measure.
-                CFLRect<double> measureRegion = new CFLRect<double>(126, 126, 400, 400);
-                double tolerance = 70;
-                CrossGauge.SetMeasurementRegion(measureRegion, tolerance);
+
+				// 측정할 영역을 설정합니다. // Set the area to measure.
+				CFLRect<double> measureRegion = new CFLRect<double>(126, 126, 400, 400);
+				double tolerance = 70;
+				CrossGauge.SetMeasurementRegion(measureRegion, tolerance);
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.				
 				// 십자형을 추정하기위해 추출한 경계점 중 사용할 경계점 유형을 선택합니다. // Select the boundary point type to use among the boundary points extracted to estimate the crosshair.
@@ -152,9 +152,10 @@ namespace Gauge
 					}
 
 					// 실행 결과를 가져옵니다. // Get the execution result.
-					CFLPoint<double> resultRegion;
-					CFLFigureArray flfaResultsValid, flfaResultsInvalid;
-					CFLFigureArray flfaResultLine;
+					CFLPoint<double> resultRegion = new CFLPoint<double>();
+					CFLFigureArray flfaResultsValid = new CFLFigureArray();
+					CFLFigureArray flfaResultsInvalid = new CFLFigureArray();
+					CFLFigureArray flfaResultLine = new CFLFigureArray();
 					// 추정을 위한 라인을 가져옵니다. // Get the line for inference.
 					CrossGauge.GetMeasuredLines(ref flfaResultLine);
 					// 추정된 십자형을 가져옵니다. // Get the estimated crosshairs.
@@ -238,10 +239,10 @@ namespace Gauge
 					for(int i = 0; i < i32ExampleCount; ++i)
 						bTerminated |= !viewImage[i].IsAvailable();
 
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 				}
 			}
-            while (false);
-        }
+			while(false);
+		}
     }
 }

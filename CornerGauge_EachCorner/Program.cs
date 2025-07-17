@@ -34,39 +34,39 @@ namespace Gauge
             CGUIViewImage viewImage = new CGUIViewImage();
 			CResult res = new CResult();
 
-            do
-            {
-                // 이미지 로드 // Load image
-                if ((res = fliImage.Load("../../ExampleImages/Gauge/Rect.flif")).IsFail())
-                {
-                    ErrorPrint(res, "Failed to load the image file.\n");
-                    break;
-                }
+			do
+			{
+				// 이미지 로드 // Load image
+				if((res = fliImage.Load("../../ExampleImages/Gauge/Rect.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
 
-                // 이미지 뷰 생성 // Create image view
-                if ((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to create the image view.\n");
-                    break;
-                }
+				// 이미지 뷰 생성 // Create image view
+				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
 
-                // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to set image object on the image view.\n");
-                    break;
-                }
+				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
 
-                // Corner Gauge 객체 생성 // Create Corner Gauge Object
-                CCornerGauge CornerGauge = new CCornerGauge();
+				// Corner Gauge 객체 생성 // Create Corner Gauge Object
+				CCornerGauge CornerGauge = new CCornerGauge();
 
-                // 처리할 이미지 설정 // Set the image to process
-                CornerGauge.SetSourceImage(ref fliImage);
+				// 처리할 이미지 설정 // Set the image to process
+				CornerGauge.SetSourceImage(ref fliImage);
 
-                // 측정할 영역을 설정합니다. // Set the area to measure.
-                CFLRect<double> measureRegion = new CFLRect<double>(213.577428, 262.324155, 295.020437, 348.179290);
-                double tolerance = 50;
-                CornerGauge.SetMeasurementRegion(measureRegion, tolerance);
+				// 측정할 영역을 설정합니다. // Set the area to measure.
+				CFLRect<double> measureRegion = new CFLRect<double>(213.577428, 262.324155, 295.020437, 348.179290);
+				double tolerance = 50;
+				CornerGauge.SetMeasurementRegion(measureRegion, tolerance);
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.
 				// 코너를 추정하기위해 추출할 경계점 변화 방향에 대해 설정합니다. // Set the boundary point change direction to extract to estimate the corner.
@@ -96,19 +96,19 @@ namespace Gauge
 
 				// 알고리즘 수행 // Execute the Algoritm
 				if((res = CornerGauge.Execute()).IsFail())
-                {
-                    ErrorPrint(res, "Failed to execute Corner gauge.");
-                    break;
-                }
+				{
+					ErrorPrint(res, "Failed to execute Corner gauge.");
+					break;
+				}
 
-                CGUIViewImageLayer layer = viewImage.GetLayer(0);
+				CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
-                layer.Clear();
+				layer.Clear();
 
 
-                if (res.IsOK())
-                {
-					CFLFigureArray flfaResultLine;
+				if(res.IsOK())
+				{
+					CFLFigureArray flfaResultLine = new CFLFigureArray();
 					// 추정된 선을 가져옵니다. // Get the estimated line.
 					CornerGauge.GetMeasuredLines(ref flfaResultLine);
 
@@ -122,7 +122,7 @@ namespace Gauge
 					for(int i32CornerIndex = 0; i32CornerIndex < 4; ++i32CornerIndex)
 					{
 						// 실행 결과를 가져옵니다. // Get the execution result.
-						CFLPoint<double> flpResultCorner;
+						CFLPoint<double> flpResultCorner = new CFLPoint<double>();
 						// 추정된 코너를 가져옵니다. // Get the estimated corner.
 						CornerGauge.GetMeasuredObject(ref flpResultCorner, i32CornerIndex);
 
@@ -140,58 +140,59 @@ namespace Gauge
 					}
 				}
 
-				CFLFigureArray flfaResultsValid, flfaResultsInvalid;
+				CFLFigureArray flfaResultsValid = new CFLFigureArray();
+				CFLFigureArray flfaResultsInvalid = new CFLFigureArray();
 				// 추정된 코너를 추출에 사용된 유효 경계점을 가져옵니다. // Get the effective boundary point used to extract the estimated corner.
 				CornerGauge.GetMeasuredValidPoints(ref flfaResultsValid, 0);
 				// 추정된 코너를 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid boundary point that is not used to extract the estimated corner.
 				CornerGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, 0);
 
 				for(long i64Index = 0; i64Index < flfaResultsValid.GetCount(); ++i64Index)
-                {
-                    if (flfaResultsValid.GetAt(i64Index).GetDeclType() != EFigureDeclType.Point)
-                        break;
+				{
+					if(flfaResultsValid.GetAt(i64Index).GetDeclType() != EFigureDeclType.Point)
+						break;
 
-                    CFLPoint<double> pFlp = (CFLPoint<double>)flfaResultsValid.GetAt(i64Index);
+					CFLPoint<double> pFlp = (CFLPoint<double>)flfaResultsValid.GetAt(i64Index);
 
-                    CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
+					CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-                    if ((res = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
+					if((res = layer.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
 
-				for (long i64Index = 0; i64Index < flfaResultsInvalid.GetCount(); ++i64Index)
-                {
-                    if (flfaResultsInvalid.GetAt(i64Index).GetDeclType() != EFigureDeclType.Point)
-                        break;
+				for(long i64Index = 0; i64Index < flfaResultsInvalid.GetCount(); ++i64Index)
+				{
+					if(flfaResultsInvalid.GetAt(i64Index).GetDeclType() != EFigureDeclType.Point)
+						break;
 
-                    CFLPoint<double> pFlp = (CFLPoint<double>)flfaResultsInvalid.GetAt(i64Index);
+					CFLPoint<double> pFlp = (CFLPoint<double>)flfaResultsInvalid.GetAt(i64Index);
 
-                    CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
+					CFLFigureArray flfaPoint = (new CFLPoint<double>(pFlp.x, pFlp.y)).MakeCrossHair(1, true);
 
-                    if ((res = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
+					if((res = layer.DrawFigureImage(flfaPoint, EColor.RED)).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw figure");
 						break;
 					}
 				}
 
-				if ((res = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
+				if((res = layer.DrawFigureImage(measureRegion, EColor.BLUE)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
 					break;
 				}
 
-                // 이미지 뷰를 갱신 합니다. // Update the image view.
-                viewImage.Invalidate(true);
+				// 이미지 뷰를 갱신 합니다. // Update the image view.
+				viewImage.Invalidate(true);
 
-                // 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
-                while (viewImage.IsAvailable())
-                    Thread.Sleep(1);
-            }
-            while (false);
-        }
+				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
+				while(viewImage.IsAvailable())
+					CThreadUtilities.Sleep(1);
+			}
+			while(false);
+		}
     }
 }

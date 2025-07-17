@@ -194,8 +194,9 @@ namespace Gauge
 
 
 					// 실행 결과를 가져옵니다. // Get the execution result.
-					CFLLine<double> fllResult;
-					CFLFigureArray flfaResultsValid, flfaResultsInvalid;
+					CFLLine<double> fllResult = new CFLLine<double>();
+					CFLFigureArray flfaResultsValid = new CFLFigureArray();
+					CFLFigureArray flfaResultsInvalid = new CFLFigureArray();
 					// 추정된 선을 가져옵니다. // Get the estimated line.
 					lineGauge.GetMeasuredObject(ref fllResult, i % 4);
 					// 추정된 선을 추출에 사용된 유효 경계점을 가져옵니다. // Get the effective boundary point used to extract the estimated line.
@@ -287,7 +288,8 @@ namespace Gauge
 
 					// 설정된 ROI에 대해 측정영역을 디스플레이 합니다. // Display the measurement area for the set ROI.
 					CFLQuad<double> flqDraw = new CFLQuad<double>();
-					double f64ToleranceLeft, f64ToleranceRight;
+					double f64ToleranceLeft = 0;
+					double f64ToleranceRight = 0;
 					lineGauge.GetTolerance(ref f64ToleranceLeft, ref f64ToleranceRight);
 
 					CFLPoint<double> fllNorm = measureRegion.GetNormalVector();
@@ -338,7 +340,7 @@ namespace Gauge
 					for(int i = 0; i < i32ExampleCount; ++i)
 						bTerminated |= !viewImage[i].IsAvailable();
 
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 				}
 			}
 			while(false);

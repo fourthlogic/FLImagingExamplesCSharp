@@ -91,12 +91,12 @@ namespace Gauge
 
 			do
 			{
-                // 이미지 로드 // Load image
-                if ((res = fliImage.Load("../../ExampleImages/Gauge/stripe.flif")).IsFail())
-                {
-                    ErrorPrint(res, "Failed to load the image file.");
-                    break;
-                }
+				// 이미지 로드 // Load image
+				if((res = fliImage.Load("../../ExampleImages/Gauge/stripe.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.");
+					break;
+				}
 
 				// 이미지 뷰 생성 // Create image view
 				for(int i = 0; i < i32ExampleCount; ++i)
@@ -131,14 +131,14 @@ namespace Gauge
 				// Point Gauge 객체 생성 // Create Point Gauge Object
 				CPointGauge pointGauge = new CPointGauge();
 
-                // 처리할 이미지 설정 // Set the image to process
-                pointGauge.SetSourceImage(ref fliImage);
+				// 처리할 이미지 설정 // Set the image to process
+				pointGauge.SetSourceImage(ref fliImage);
 
-                // 측정할 영역을 설정합니다. // Set the area to measure.
-                CFLPoint<double> measureCenter = new CFLPoint<double>(267.0, 240.0);
-                double tolerance = 400.0;
-                double angle = 25.0;
-                pointGauge.SetMeasurementRegion(measureCenter, tolerance, angle);
+				// 측정할 영역을 설정합니다. // Set the area to measure.
+				CFLPoint<double> measureCenter = new CFLPoint<double>(267.0, 240.0);
+				double tolerance = 400.0;
+				double angle = 25.0;
+				pointGauge.SetMeasurementRegion(measureCenter, tolerance, angle);
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.				
 				// 점을 추정하기위해 추출할 경계점의 변화 임계값에 대해 설정합니다. // Set the threshold change of the boundary point to be extracted to estimate the point.
@@ -187,9 +187,9 @@ namespace Gauge
 					// 추출된 점이 어디인지 알기 위해 디스플레이 한다 // Display to know where the extracted point is
 					for(int i32Index = 0; i32Index < (int)i64Count; ++i32Index)
 					{
-						CFLPoint<double> flp;
+						CFLPoint<double> flp = new CFLPoint<double>();
 
-						if(pointGauge.GetMeasuredObject(out flp, i32Index).IsFail())
+						if(pointGauge.GetMeasuredObject(ref flp, i32Index).IsFail())
 							break;
 
 						if((res = layer.DrawFigureImage(flp.MakeCrossHair(10, true), EColor.BLACK, 3)).IsFail())
@@ -223,10 +223,10 @@ namespace Gauge
 					for(int i = 0; i < i32ExampleCount; ++i)
 						bTerminated |= !viewImage[i].IsAvailable();
 
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 				}
 			}
-            while (false);
-        }
+			while(false);
+		}
     }
 }

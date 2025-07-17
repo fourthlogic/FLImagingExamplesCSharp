@@ -149,11 +149,11 @@ namespace Gauge
 				// Ellipse Gauge 객체 생성 // Create Ellipse Gauge Object
 				CEllipseGauge ellipseGauge = new CEllipseGauge();
 
-                // 처리할 이미지 설정 // Set the image to process
-                ellipseGauge.SetSourceImage(ref fliImage);
+				// 처리할 이미지 설정 // Set the image to process
+				ellipseGauge.SetSourceImage(ref fliImage);
 
-                // 측정할 영역을 설정합니다. // Set the area to measure.
-                CFLEllipse<double> measureRegion = new CFLEllipse<double>(240, 280, 96, 150, 22);
+				// 측정할 영역을 설정합니다. // Set the area to measure.
+				CFLEllipse<double> measureRegion = new CFLEllipse<double>(240, 280, 96, 150, 22);
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.				
 				// 타원을 추정하기위해 추출할 경계점의 변화 임계값에 대해 설정합니다. // Set the threshold change of the boundary point to be extracted to estimate the ellipse.
@@ -185,8 +185,9 @@ namespace Gauge
 					}
 
 					// 실행 결과를 가져옵니다. // Get the execution result.
-					CFLEllipse<double> flres;
-					CFLFigureArray flfaResultsValid, flfaResultsInvalid;
+					CFLEllipse<double> flres = new CFLEllipse<double>();
+					CFLFigureArray flfaResultsValid = new CFLFigureArray();
+					CFLFigureArray flfaResultsInvalid = new CFLFigureArray();
 					// 추정된 타원을 가져옵니다. // Get the estimated ellipse.
 					ellipseGauge.GetMeasuredObject(ref flres, i % 4);
 					// 추정된 타원을 추출에 사용된 유효 경계점을 가져옵니다. // Get the valid boundary point used to extract the estimated ellipse.
@@ -260,8 +261,8 @@ namespace Gauge
 						}
 
 						// 타원의 정보를 Console창에 출력합니다. // Output the information of the ellipse to the console window.
-						float f64RadiusResult1 = new float(), f64RadiusResult2 = new float();
-						double f64Anglres = new double();
+						float f64RadiusResult1 = 0, f64RadiusResult2 = 0;
+						double f64Anglres = 0;
 						flres.GetRadius1(ref f64RadiusResult1);
 						flres.GetRadius2(ref f64RadiusResult2);
 						f64Anglres = flres.GetAngle();
@@ -319,10 +320,10 @@ namespace Gauge
 					for(int i = 0; i < i32ExampleCount; ++i)
 						bTerminated |= !viewImage[i].IsAvailable();
 
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 				}
 			}
-            while (false);
-        }
+			while(false);
+		}
     }
 }

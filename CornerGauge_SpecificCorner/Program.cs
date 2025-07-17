@@ -97,11 +97,11 @@ namespace Gauge
 				// Corner Gauge 객체 생성 // Create Corner Gauge Object
 				CCornerGauge CornerGauge = new CCornerGauge();
 
-                // 처리할 이미지 설정 // Set the image to process
-                CornerGauge.SetSourceImage(ref fliImage);
+				// 처리할 이미지 설정 // Set the image to process
+				CornerGauge.SetSourceImage(ref fliImage);
 
-                // 측정할 영역을 설정합니다. // Set the area to measure.
-                CFLRect<double> measureRegion = new CFLRect<double>(213.577428, 262.324155, 295.020437, 348.179290);
+				// 측정할 영역을 설정합니다. // Set the area to measure.
+				CFLRect<double> measureRegion = new CFLRect<double>(213.577428, 262.324155, 295.020437, 348.179290);
 				double tolerance = 50;
 				CornerGauge.SetMeasurementRegion(measureRegion, tolerance);
 
@@ -153,7 +153,7 @@ namespace Gauge
 
 					if(res.IsOK())
 					{
-						CFLFigureArray flfaResultLine;
+						CFLFigureArray flfaResultLine = new CFLFigureArray();
 						// 추정된 선을 가져옵니다. // Get the estimated line.
 						CornerGauge.GetMeasuredLines(ref flfaResultLine);
 
@@ -165,7 +165,7 @@ namespace Gauge
 						arrLines[1] = (CFLLine<double>)(flfaResultLine.GetAt(1));
 
 						// 실행 결과를 가져옵니다. // Get the execution result.
-						CFLFigureArray flfaResultCorner;
+						CFLFigureArray flfaResultCorner = new CFLFigureArray();
 						// 추정된 코너를 가져옵니다. // Get the estimated corner.
 						CornerGauge.GetMeasuredObject(ref flfaResultCorner);
 
@@ -186,7 +186,8 @@ namespace Gauge
 						}
 					}
 
-					CFLFigureArray flfaResultsValid, flfaResultsInvalid;
+					CFLFigureArray flfaResultsValid = new CFLFigureArray();
+					CFLFigureArray flfaResultsInvalid = new CFLFigureArray();
 					// 추정된 코너를 추출에 사용된 유효 경계점을 가져옵니다. // Get the effective boundary point used to extract the estimated corner.
 					CornerGauge.GetMeasuredValidPoints(ref flfaResultsValid, 0);
 					// 추정된 코너를 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid boundary point that is not used to extract the estimated corner.
@@ -241,10 +242,10 @@ namespace Gauge
 					for(int i = 0; i < i32ExampleCount; ++i)
 						bTerminated |= !viewImage[i].IsAvailable();
 
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 				}
 			}
-            while (false);
-        }
+			while(false);
+		}
     }
 }

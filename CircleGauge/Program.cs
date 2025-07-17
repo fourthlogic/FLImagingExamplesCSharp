@@ -92,12 +92,12 @@ namespace Gauge
 
 			do
 			{
-		        // 이미지 로드 // Load image
-		        if((res = fliImage.Load("../../ExampleImages/Gauge/Circle.flif")).IsFail())
-		        {
-			        ErrorPrint(res, "Failed to load the image file.");
-			        break;
-		        }
+				// 이미지 로드 // Load image
+				if((res = fliImage.Load("../../ExampleImages/Gauge/Circle.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.");
+					break;
+				}
 
 				// 이미지 뷰 생성 // Create image view
 				for(int i = 0; i < i32ExampleCount; ++i)
@@ -132,13 +132,13 @@ namespace Gauge
 				// Circle Gauge 객체 생성 // Create Circle Gauge Object
 				CCircleGauge circleGauge = new CCircleGauge();
 
-		        // 처리할 이미지 설정 // Set the image to process
-		        circleGauge.SetSourceImage(ref fliImage);
+				// 처리할 이미지 설정 // Set the image to process
+				circleGauge.SetSourceImage(ref fliImage);
 
-		        // 측정할 영역을 설정합니다. // Set the area to measure.
-		        CFLCircle<double> measureRegion = new CFLCircle<double>(260.0, 265.0, 120.0);
-		        double tolerance = 100;
-		        circleGauge.SetMeasurementRegion(measureRegion, tolerance);
+				// 측정할 영역을 설정합니다. // Set the area to measure.
+				CFLCircle<double> measureRegion = new CFLCircle<double>(260.0, 265.0, 120.0);
+				double tolerance = 100;
+				circleGauge.SetMeasurementRegion(measureRegion, tolerance);
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.				
 				// 원을 추정하기위해 추출할 경계점의 변화 임계값에 대해 설정합니다. // Set the threshold change of the boundary point to be extracted to estimate the circle.
@@ -169,9 +169,9 @@ namespace Gauge
 					}
 
 					// 실행 결과를 가져옵니다. // Get the execution result.
-					CFLCircle<double> flcResult;
-					CFLFigureArray flfaResultsValid;
-					CFLFigureArray flfaResultsInvalid;
+					CFLCircle<double> flcResult = new CFLCircle<double>();
+					CFLFigureArray flfaResultsValid = new CFLFigureArray();
+					CFLFigureArray flfaResultsInvalid = new CFLFigureArray();
 
 					// 실행 결과를 가져옵니다. // Get the execution result. // Get the execution result.
 					res = circleGauge.GetMeasuredObject(ref flcResult, i % 4);
@@ -293,10 +293,10 @@ namespace Gauge
 					for(int i = 0; i < i32ExampleCount; ++i)
 						bTerminated |= !viewImage[i].IsAvailable();
 
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 				}
 			}
-	        while(false);
-        }
+			while(false);
+		}
     }
 }
