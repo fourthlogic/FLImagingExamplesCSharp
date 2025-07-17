@@ -98,7 +98,8 @@ namespace GetSimilarity
 
 				// Source Figure 와 Transformed Figure 로부터 점을 샘플링
 				// Sample points from the Source Figure and Transformed Figure
-				CFLFigureArray flfaSource, flfaTransformed;
+				CFLFigureArray flfaSource = new CFLFigureArray();
+				CFLFigureArray flfaTransformed = new CFLFigureArray();
 				fleSourceFig.GetSamplingPointsOnSegment(5, ref flfaSource);
 				fleTransformedFig.GetSamplingPointsOnSegment(5, ref flfaTransformed);
 
@@ -133,8 +134,8 @@ namespace GetSimilarity
 				layer[0].DrawFigureImage(flpaTransformedWithNoise, EColor.CYAN, 1);
 
 				// Similarity 행렬 계산 // Calculate the similarity matrix
-				CMatrix<double> matResult;
-				if((res = CMatrix<double>.GetSimilarity(flpaSource, flpaTransformedWithNoise, out matResult)).IsFail())
+				CMatrix<double> matResult = new CMatrix<double>();
+				if((res = CMatrix<double>.GetSimilarity(flpaSource, flpaTransformedWithNoise, ref matResult)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
@@ -172,7 +173,7 @@ namespace GetSimilarity
 				}
 
 				// View 에 Text 출력 // Output text to View
-				CFLPoint<int> flpDrawTextPosition = new CFLPoint<int>(flpaSourceGrid.GetBoundaryRect().left -3, flpaSourceGrid.GetBoundaryRect().top - 5);
+				CFLPoint<int> flpDrawTextPosition = new CFLPoint<int>(flpaSourceGrid.GetBoundaryRect().left - 3, flpaSourceGrid.GetBoundaryRect().top - 5);
 
 				layer[1].DrawFigureImage(flpaSourceGrid, EColor.LIME, 3);
 				layer[1].DrawTextImage(flpDrawTextPosition, "Source", EColor.LIME, EColor.BLACK, 15, false, 0, EGUIViewImageTextAlignment.LEFT_BOTTOM);
@@ -181,7 +182,7 @@ namespace GetSimilarity
 				CFLPointArray flpaResult = new CFLPointArray();
 				// Affine 변환에 사용할 Matrix 선언 // Declaration of Matrix to be used for Affine transformation
 				CMatrix<double> matA = new CMatrix<double>(3, 1);
-				CMatrix<double> matB;
+				CMatrix<double> matB = new CMatrix<double>();
 
 				Console.WriteLine("Affine Transform using Similarity Matrix\n");
 				Console.WriteLine("[index] Source Grid -> Transformed Grid");
@@ -193,7 +194,7 @@ namespace GetSimilarity
 					matA.SetValue(1, 0, flpaSourceGrid.GetAt(i).y);
 					matA.SetValue(2, 0, 1);
 
-					if((res = matResult.Multiply(matA, out matB)).IsFail())
+					if((res = matResult.Multiply(matA, ref matB)).IsFail())
 					{
 						ErrorPrint(res, "Failed to calculate Matrix Operation\n");
 						break;
