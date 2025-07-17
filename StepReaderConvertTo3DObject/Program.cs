@@ -54,7 +54,7 @@ namespace StepReaderConvertTo3DObject
 				// 우선 빈 CGUIView3DObject 객체를 뷰에 추가한 후 해당 객체의 인덱스를 i32ReturnIndex 에 얻어 오기
 				// First, add an empty CGUIView3DObject object to the view, then retrieve the index of that object into i32ReturnIndex.
 				int i32ReturnIndex = -1;
-				if((res = view3D[0].PushObject(new CGUIView3DObject(), out i32ReturnIndex)).IsFail())
+				if((res = view3D[0].PushObject(new CGUIView3DObject(), ref i32ReturnIndex)).IsFail())
 				{
 					ErrorPrint(res, "Failed to display 3D object.\n");
 					break;
@@ -111,7 +111,7 @@ namespace StepReaderConvertTo3DObject
                 f64ChordalDeviation = 0.00001;
 
 				i32ReturnIndex = -1;
-				if((res = view3D[1].PushObject(new CGUIView3DObject(), out i32ReturnIndex)).IsFail())
+				if((res = view3D[1].PushObject(new CGUIView3DObject(), ref i32ReturnIndex)).IsFail())
 				{
 					ErrorPrint(res, "Failed to display 3D object.\n");
 					break;
@@ -137,7 +137,7 @@ namespace StepReaderConvertTo3DObject
                     break;
                 }
 
-                if ((res = sr.GetResult3DObject(out fl3DObject2, f64ChordalDeviation)).IsFail())
+                if ((res = sr.GetResult3DObject(ref fl3DObject2, f64ChordalDeviation)).IsFail())
                 {
                     ErrorPrint(res, "Failed to get 3D object from the StepReader.\n");
                     break;
