@@ -185,11 +185,13 @@ namespace OrthogonalCalibrator
 
 				// 화면에 격자 탐지 결과 출력 // Output the grid detection result on the screen
 				SGridDisplay sArrGridDisplay = new SGridDisplay();
+				sArrGridDisplay.i64ImageIdx = 0;
+				sArrGridDisplay.i64ObjectIdx = 0;
+				sArrGridDisplay.sGridData = new CCameraCalibrator.CCalibratorGridResult();
 				long i64ObjectCount = sCC.GetResultGridPointsObjectCnt(0);
 
 				for(long i64ObjectIdx = 0; i64ObjectIdx < i64ObjectCount; ++i64ObjectIdx)
 				{
-					sArrGridDisplay.sGridData = new COrthogonalCalibrator.CCalibratorGridResult();
 					sCC.GetResultGridPoints(i64ObjectIdx, 0, ref sArrGridDisplay.sGridData);
 					sArrGridDisplay.i64ImageIdx = 0;
 					sArrGridDisplay.i64ObjectIdx = sArrGridDisplay.sGridData.i64ID;
@@ -455,7 +457,7 @@ namespace OrthogonalCalibrator
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
 				while(viewImageLearn.IsAvailable() && viewImageSource.IsAvailable() && viewImageDestination.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

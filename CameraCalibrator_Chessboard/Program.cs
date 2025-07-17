@@ -192,9 +192,15 @@ namespace CameraCalibrator
 
 				// 화면에 격자 탐지 결과 출력 // Output the grid detection result on the screen
 				SGridDisplay[] sArrGridDisplay = new SGridDisplay[3];
-				sArrGridDisplay[0] = new SGridDisplay();
-				sArrGridDisplay[1] = new SGridDisplay();
-				sArrGridDisplay[2] = new SGridDisplay();
+
+				for(int i = 0; i < 3; ++i)
+				{
+					sArrGridDisplay[i] = new SGridDisplay();
+
+					sArrGridDisplay[i].i64ImageIdx = 0;
+					sArrGridDisplay[i].i64ObjectIdx = 0;
+					sArrGridDisplay[i].sGridData = new CCameraCalibrator.CCalibratorGridResult();
+				}
 
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage.GetPageCount(); ++i64ImgIdx)
 				{
@@ -475,7 +481,7 @@ namespace CameraCalibrator
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
 				while(viewImageLearn[0].IsAvailable() && viewImageLearn[1].IsAvailable() && viewImageLearn[2].IsAvailable() && viewImageSource.IsAvailable() && viewImageDestination.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

@@ -172,35 +172,35 @@ namespace CircleGauge
 
 			do
 			{
-                // Setter로 입력 // Input as setter
-                double[] arrF64Intrinc = new double[9]{ 605.9413643192689, 0, 325.9133439121233, 0, 605.3834974915350, 234.0647625697701, 0, 0, 1 };
-                double[] arrF64Dist = new double[5]{ 0.1748895907714, -1.4909467274276, -0.0070404809103, 0.0017880490098, 5.9363069879613 };
-                CCameraCalibrator.CCalibratorIntrinsicParameters uIntrinc = new CCameraCalibrator.CCalibratorIntrinsicParameters();
-                CCameraCalibrator.CCalibratorDistortionCoefficients uDist = new CCameraCalibrator.CCalibratorDistortionCoefficients();
+				// Setter로 입력 // Input as setter
+				double[] arrF64Intrinc = new double[9] { 605.9413643192689, 0, 325.9133439121233, 0, 605.3834974915350, 234.0647625697701, 0, 0, 1 };
+				double[] arrF64Dist = new double[5] { 0.1748895907714, -1.4909467274276, -0.0070404809103, 0.0017880490098, 5.9363069879613 };
+				CCameraCalibrator.CCalibratorIntrinsicParameters uIntrinc = new CCameraCalibrator.CCalibratorIntrinsicParameters();
+				CCameraCalibrator.CCalibratorDistortionCoefficients uDist = new CCameraCalibrator.CCalibratorDistortionCoefficients();
 
-                uIntrinc.f64FocalLengthX = arrF64Intrinc[0];
-                uIntrinc.f64Skew = arrF64Intrinc[1];
-                uIntrinc.f64PrincipalPointX = arrF64Intrinc[2];
-                uIntrinc.f64FocalLengthY = arrF64Intrinc[4];
-                uIntrinc.f64PrincipalPointY = arrF64Intrinc[5];
+				uIntrinc.f64FocalLengthX = arrF64Intrinc[0];
+				uIntrinc.f64Skew = arrF64Intrinc[1];
+				uIntrinc.f64PrincipalPointX = arrF64Intrinc[2];
+				uIntrinc.f64FocalLengthY = arrF64Intrinc[4];
+				uIntrinc.f64PrincipalPointY = arrF64Intrinc[5];
 
-                uDist.f64K1 = arrF64Dist[0];
-                uDist.f64K2 = arrF64Dist[1];
-                uDist.f64P1 = arrF64Dist[2];
-                uDist.f64P2 = arrF64Dist[3];
-                uDist.f64K3 = arrF64Dist[4];
+				uDist.f64K1 = arrF64Dist[0];
+				uDist.f64K2 = arrF64Dist[1];
+				uDist.f64P1 = arrF64Dist[2];
+				uDist.f64P2 = arrF64Dist[3];
+				uDist.f64K3 = arrF64Dist[4];
 
-                if ((res = sCC.SetIntrinsicParameters(uIntrinc)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to set intrinsic parameters");
-                    break;
-                }
+				if((res = sCC.SetIntrinsicParameters(uIntrinc)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set intrinsic parameters");
+					break;
+				}
 
-                if ((res = sCC.SetDistortionCoefficients(uDist)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to set distortion coefficients");
-                    break;
-                }
+				if((res = sCC.SetDistortionCoefficients(uDist)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set distortion coefficients");
+					break;
+				}
 
 				if((res = sCC.EnableAutoCalibration(false)).IsFail())
 				{
@@ -213,57 +213,57 @@ namespace CircleGauge
 					ErrorPrint(res, "Failed to calibration\n");
 					break;
 				}
-				
-                if(!Undistortion(sCC, fliSourceImage, fliDestinationImage, viewImageSource, viewImageDestination))
-                    break;
 
-                CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
-                string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", uIntrinc.f64FocalLengthX, uIntrinc.f64Skew, uIntrinc.f64PrincipalPointX, 0, uIntrinc.f64FocalLengthY, uIntrinc.f64PrincipalPointY, 0, 0, 1);
-                string strDistVal = String.Format("{0}, {1}, {2}, {3}, {4}", uDist.f64K1, uDist.f64K2, uDist.f64P1, uDist.f64P2, uDist.f64K3);
+				if(!Undistortion(sCC, fliSourceImage, fliDestinationImage, viewImageSource, viewImageDestination))
+					break;
 
-                TPoint<double> tpPosition = new TPoint<double>(0, 0);
+				CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
+				string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", uIntrinc.f64FocalLengthX, uIntrinc.f64Skew, uIntrinc.f64PrincipalPointX, 0, uIntrinc.f64FocalLengthY, uIntrinc.f64PrincipalPointY, 0, 0, 1);
+				string strDistVal = String.Format("{0}, {1}, {2}, {3}, {4}", uDist.f64K1, uDist.f64K2, uDist.f64P1, uDist.f64P2, uDist.f64K3);
 
-               
-                if ((res = layerSource.DrawTextCanvas(tpPosition, "Intrinsic Parameters: ", EColor.YELLOW, EColor.BLACK, 13)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw text");
-                    break;
-                }
+				TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-                tpPosition.y += 20;
 
-                if ((res = layerSource.DrawTextCanvas(tpPosition, strMatrix, EColor.YELLOW, EColor.BLACK, 13)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw text");
-                    break;
-                }
+				if((res = layerSource.DrawTextCanvas(tpPosition, "Intrinsic Parameters: ", EColor.YELLOW, EColor.BLACK, 13)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
+					break;
+				}
 
-                tpPosition.y += 20;
+				tpPosition.y += 20;
 
-                if ((res = layerSource.DrawTextCanvas(tpPosition, "Distortion Coefficients: ", EColor.YELLOW, EColor.BLACK, 13)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw text");
-                    break;
-                }
+				if((res = layerSource.DrawTextCanvas(tpPosition, strMatrix, EColor.YELLOW, EColor.BLACK, 13)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
+					break;
+				}
 
-                tpPosition.y += 20;
+				tpPosition.y += 20;
 
-                if ((res = layerSource.DrawTextCanvas(tpPosition, strDistVal, EColor.YELLOW, EColor.BLACK, 13)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw text");
-                    break;
-                }
+				if((res = layerSource.DrawTextCanvas(tpPosition, "Distortion Coefficients: ", EColor.YELLOW, EColor.BLACK, 13)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
+					break;
+				}
 
-                viewImageSource.Invalidate();
+				tpPosition.y += 20;
 
-                Console.WriteLine("Intrinsic parameters : {0}", strMatrix);
-                Console.WriteLine("Distortion Coefficients : {0}", strDistVal);
+				if((res = layerSource.DrawTextCanvas(tpPosition, strDistVal, EColor.YELLOW, EColor.BLACK, 13)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
+					break;
+				}
 
-                // 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
-                while (viewImageSource.IsAvailable() && viewImageDestination.IsAvailable())
-                    Thread.Sleep(1);
-            }
-            while (false);
-        }
+				viewImageSource.Invalidate();
+
+				Console.WriteLine("Intrinsic parameters : {0}", strMatrix);
+				Console.WriteLine("Distortion Coefficients : {0}", strDistVal);
+
+				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
+				while(viewImageSource.IsAvailable() && viewImageDestination.IsAvailable())
+					CThreadUtilities.Sleep(1);
+			}
+			while(false);
+		}
     }
 }
