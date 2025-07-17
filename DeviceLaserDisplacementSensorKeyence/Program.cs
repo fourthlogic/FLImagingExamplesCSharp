@@ -44,7 +44,7 @@ namespace DeviceLaserDisplacementSensorKeyence
 				strInput = Console.ReadLine();
 
 				int i32ComPortNumber = 0;
-				Int32.TryParse(strInput, ref i32ComPortNumber);
+				Int32.TryParse(strInput, out i32ComPortNumber);
 
 				devLaserDisplacement.SetComPortNumber(i32ComPortNumber);
 
@@ -62,7 +62,7 @@ namespace DeviceLaserDisplacementSensorKeyence
 					strInput = Console.ReadLine();
 
 					int i32Select = 0;
-					Int32.TryParse(strInput, ref i32Select);
+					Int32.TryParse(strInput, out i32Select);
 
 					int i32BaudRate = -1;
 
@@ -106,7 +106,7 @@ namespace DeviceLaserDisplacementSensorKeyence
 					strInput = Console.ReadLine();
 
 					int i32Select = 0;
-					Int32.TryParse(strInput, ref i32Select);
+					Int32.TryParse(strInput, out i32Select);
 
 					int i32Parity = -1;
 
@@ -150,7 +150,7 @@ namespace DeviceLaserDisplacementSensorKeyence
 					strInput = Console.ReadLine();
 
 					int i32Select = 0;
-					Int32.TryParse(strInput, ref i32Select);
+					Int32.TryParse(strInput, out i32Select);
 
 					// 측정값을 얻어옵니다. // Retrieve the measured value
 					List<double> listMeasured = new List<double>();
