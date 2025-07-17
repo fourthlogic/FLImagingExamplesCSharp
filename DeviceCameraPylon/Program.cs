@@ -1,4 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
+
+0using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -167,7 +170,7 @@ namespace DeviceCameraPylon
 
 		        if(bAutoDetect)
 		        {
-                    List<String> listSerialNumbers = null;
+                    List<String> listSerialNumbers = new List<String>();
 
 			        // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
 			        switch(eDeviceType)

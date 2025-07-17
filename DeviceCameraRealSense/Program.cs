@@ -153,7 +153,7 @@ namespace DeviceCameraRealSense
 
 		        if(bAutoDetect)
 		        {
-                    List<String> listSerialNumbers = null;
+                    List<String> listSerialNumbers = new List<String>();
 
                     // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
                     drResult = camRealSense.GetAutoDetectCameraSerialNumbers(ref listSerialNumbers);

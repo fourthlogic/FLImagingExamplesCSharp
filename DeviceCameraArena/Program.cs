@@ -12,6 +12,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
+using System.Linq.Expressions;
 
 namespace DeviceCameraArena
 {
@@ -122,7 +123,7 @@ namespace DeviceCameraArena
 
 		        if(bAutoDetect)
 		        {
-                    List<String> listSerialNumbers = null;
+                    List<String> listSerialNumbers = new List<String>();
 
                     // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
                     drResult = camArena.GetAutoDetectCameraSerialNumbers(ref listSerialNumbers);
