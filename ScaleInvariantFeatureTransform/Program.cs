@@ -114,7 +114,7 @@ namespace ScaleInvariantFeatureTransform
 				}
 
 				// 실행 결과를 받아오기 위한 컨테이너
-				CFLPointArray flfaResultPoints;
+				CFLPointArray flfaResultPoints = new CFLPointArray();
 
 				// 검출된 점을 가져오는 함수
                 if ((res = (SIFT.GetResultPoints(ref flfaResultPoints))).IsFail())
