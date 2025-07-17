@@ -34,7 +34,7 @@ namespace Barcode
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
-            
+
 			do
 			{
 				CResult res;
@@ -109,10 +109,10 @@ namespace Barcode
 				for(Int32 i = 0; i < i64Results; i++)
 				{
 					// Barcode Decoder 결과를 얻어오기 위해 FLQuadD 선언
-					CFLQuad<double> flqRegion;
+					CFLQuad<double> flqRegion = new CFLQuad<double>();
 
 					// Barcode Decoder 결과들 중 Data Region 을 얻어옴
-					if((res = sBarcodeDecoder.GetResultDataRegion(i, out flqRegion)).IsFail())
+					if((res = sBarcodeDecoder.GetResultDataRegion(i, ref flqRegion)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get data region from the barcode decoder object.");
 						continue;
@@ -129,22 +129,20 @@ namespace Barcode
 						continue;
 					}
 
-					string strDecodedMsg = "";
+					StringBuilder strDecodedMsg = new StringBuilder();
 
 					// Barcode Decoder 결과들 중 Decoded String 을 얻어옴
-					if((res = sBarcodeDecoder.GetResultDecodedString(i, out strDecodedMsg)).IsFail())
+					if((res = sBarcodeDecoder.GetResultDecodedString(i, ref strDecodedMsg)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get decoded string from the barcode decoder object.");
 						continue;
 					}
 
-					strDecodedMsg = String.Format("{0}", strDecodedMsg);
-
-					Console.Write("No. {0} Code : {1}\n", i, strDecodedMsg);
+					Console.Write("No. {0} Code : {1}\n", i, strDecodedMsg.ToString());
 
 					// String 을 디스플레이 하기 위한 기준 좌표 FLPointL 선언
 					CFLPoint<Int32> flplPos = new CFLPoint<int>();
-                    flqRegion.GetCenter(ref flplPos);
+					flqRegion.GetCenter(ref flplPos);
 
 					// Decoded String 을 디스플레이 한다.
 					// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다. // The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -153,7 +151,7 @@ namespace Barcode
 					//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 					// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 					//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-                    if (layer.DrawTextImage(flqRegion.flpPoints[3], strDecodedMsg, EColor.CYAN, EColor.BLACK, 20).IsFail())
+					if(layer.DrawTextImage(flqRegion.flpPoints[3], strDecodedMsg.ToString(), EColor.CYAN, EColor.BLACK, 20).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw string object on the image view.\n");
 						continue;
@@ -166,7 +164,7 @@ namespace Barcode
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

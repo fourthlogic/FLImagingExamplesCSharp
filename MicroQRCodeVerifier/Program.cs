@@ -109,10 +109,10 @@ namespace MicroQRCode
 				for(Int64 i = 0; i < i64Results; ++i)
 				{
 					// MicroQR Code Verifier 결과를 얻어오기 위해 FLQuadD 선언
-					CFLQuad<double> flqRegion;
+					CFLQuad<double> flqRegion = new CFLQuad<double>();
 
 					// MicroQR Code Verifier 결과들 중 Data Region 을 얻어옴
-					if((res = qrCodeVerifier.GetResultDataRegion(i, out flqRegion)).IsFail())
+					if((res = qrCodeVerifier.GetResultDataRegion(i, ref flqRegion)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get data region from the MicroQR Code decoder object.");
 						continue;
@@ -126,10 +126,10 @@ namespace MicroQRCode
 					}
 
 					// MicroQR Code Verifier 결과를 얻어오기 위해 FigureArray 선언
-					CFLFigureArray flfaGridRegion;
+					CFLFigureArray flfaGridRegion = new CFLFigureArray();
 
 					// MicroQR Code Verifier 결과들 중 Grid Region 을 얻어옴
-					if((res = qrCodeVerifier.GetResultGridRegion(i, out flfaGridRegion)).IsFail())
+					if((res = qrCodeVerifier.GetResultGridRegion(i, ref flfaGridRegion)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get grid region from the MicroQR Code decoder object.");
 						continue;
@@ -143,10 +143,10 @@ namespace MicroQRCode
 					}
 
 					// QR Code Verifier 결과를 얻어오기 위해 FigureArray 선언
-					CFLFigureArray flfaFinderPattern;
+					CFLFigureArray flfaFinderPattern = new CFLFigureArray();
 
 					// QR Code Verifier 결과들 중 Grid Region 을 얻어옴
-					if((res = qrCodeVerifier.GetResultFinderPattern(i, out flfaFinderPattern)).IsFail())
+					if((res = qrCodeVerifier.GetResultFinderPattern(i, ref flfaFinderPattern)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get grid region from the QR Code decoder object.");
 						continue;
@@ -160,10 +160,10 @@ namespace MicroQRCode
 					}
 
 					// MicroQR Code Verifier 결과를 얻어오기 위해 string 선언
-					string strDecoded = "";
+					StringBuilder strDecoded = new StringBuilder();
 
 					// MicroQR Code Verifier 결과들 중 Decoded String 을 얻어옴
-					if((res = qrCodeVerifier.GetResultDecodedString(i, out strDecoded)).IsFail())
+					if((res = qrCodeVerifier.GetResultDecodedString(i, ref strDecoded)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get decoded string from the MicroQR Code decoder object.");
 						continue;
@@ -231,7 +231,7 @@ namespace MicroQRCode
 						continue;
 					}
 
-					if((res = layer.DrawTextImage(flqRegion.flpPoints[3], strDecoded, EColor.CYAN, EColor.BLACK, 12, false, flqRegion.flpPoints[3].GetAngle(flqRegion.flpPoints[2]))).IsFail())
+					if((res = layer.DrawTextImage(flqRegion.flpPoints[3], strDecoded.ToString(), EColor.CYAN, EColor.BLACK, 12, false, flqRegion.flpPoints[3].GetAngle(flqRegion.flpPoints[2]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw string object on the image view.");
 						continue;
@@ -240,7 +240,7 @@ namespace MicroQRCode
 					// QR Code Verifier 결과들 중 인쇄 품질을 얻어옴 // Get print quality among QR Code Verifier results
 					CMicroQRCodePrintQuality_ISOIEC_15415 printQuality = new CMicroQRCodePrintQuality_ISOIEC_15415();
 
-					if((res = qrCodeVerifier.GetResultPrintQuality_ISOIEC_15415(i, out printQuality)).IsFail())
+					if((res = qrCodeVerifier.GetResultPrintQuality_ISOIEC_15415(i, ref printQuality)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get print quality from the QR Code decoder object.");
 						continue;
@@ -269,7 +269,7 @@ namespace MicroQRCode
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

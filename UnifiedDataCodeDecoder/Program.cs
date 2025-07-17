@@ -69,13 +69,13 @@ namespace UnifiedDataCode
 				}
 
 				// UnifiedData Code 객체 생성 // Create UnifiedData Code object
-				CUnifiedDataCodeDecoder qrCodeDecoder = new CUnifiedDataCodeDecoder();
+				CUnifiedDataCodeDecoder unifiedCodeDecoder = new CUnifiedDataCodeDecoder();
 
 				// 처리할 이미지 설정 // Set the image to process
-				qrCodeDecoder.SetSourceImage(ref fliImage);
+				unifiedCodeDecoder.SetSourceImage(ref fliImage);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = qrCodeDecoder.Execute()).IsFail())
+				if((res = unifiedCodeDecoder.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute UnifiedData Code decoder.");
 					break;
@@ -89,16 +89,16 @@ namespace UnifiedDataCode
 				layer.Clear();
 
 				// UnifiedData Code Decoder 결과 개수를 얻는다.
-				Int64 i64Results = qrCodeDecoder.GetResultCount();
+				Int64 i64Results = unifiedCodeDecoder.GetResultCount();
 
 				// 디코딩 결과값을 각각 확인하는 코드
 				for(Int64 i = 0; i < i64Results; ++i)
 				{
 					// UnifiedData Code Decoder 결과를 얻어오기 위해 FLQuadD 선언
-					CFLQuad<double> flqdRegion;
+					CFLQuad<double> flqdRegion = new CFLQuad<double>();
 
 					// UnifiedData Code Decoder 결과들 중 Data Region 을 얻어옴
-					if((res = qrCodeDecoder.GetResultDataRegion(i, out flqdRegion)).IsFail())
+					if((res = unifiedCodeDecoder.GetResultDataRegion(i, ref flqdRegion)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get data region from the UnifiedData Code decoder object.");
 						continue;
@@ -112,10 +112,10 @@ namespace UnifiedDataCode
 					}
 
 					// UnifiedData Code Decoder 결과를 얻어오기 위해 FLStringW 선언
-					string strDecoded = "";
+					StringBuilder strDecoded = new StringBuilder();
 
 					// UnifiedData Code Decoder 결과들 중 Decoded String 을 얻어옴
-					if((res = qrCodeDecoder.GetResultDecodedString(i, out strDecoded)).IsFail())
+					if((res = unifiedCodeDecoder.GetResultDecodedString(i, ref strDecoded)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get decoded string from the UnifiedData Code decoder object.");
 						continue;
@@ -133,7 +133,7 @@ namespace UnifiedDataCode
 					//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 					// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 					//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-					if((res = layer.DrawTextImage(flplPos, strDecoded, EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_TOP)).IsFail())
+					if((res = layer.DrawTextImage(flplPos, strDecoded.ToString(), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.LEFT_TOP)).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw string object on the image view.\n");
 						continue;
@@ -145,7 +145,7 @@ namespace UnifiedDataCode
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

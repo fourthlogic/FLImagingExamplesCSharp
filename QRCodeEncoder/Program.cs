@@ -120,10 +120,10 @@ namespace QRCode
 				for(Int64 i = 0; i < i64Results; ++i)
 				{
 					// QR Code Decoder 결과를 얻어오기 위해 FLQuadD 선언
-					CFLQuad<double> flqRegion;
+					CFLQuad<double> flqRegion = new CFLQuad<double>();
 
 					// QR Code Decoder 결과들 중 Data Region 을 얻어옴
-					if((res = qrCodeDecoder.GetResultDataRegion(i, out flqRegion)).IsFail())
+					if((res = qrCodeDecoder.GetResultDataRegion(i, ref flqRegion)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get data region from the QR Code decoder object.");
 						continue;
@@ -137,10 +137,10 @@ namespace QRCode
 					}
 
 					// QR Code Decoder 결과를 얻어오기 위해 FigureArray 선언
-					CFLFigureArray flfaGridRegion;
+					CFLFigureArray flfaGridRegion = new CFLFigureArray();
 
 					// QR Code Decoder 결과들 중 Grid Region 을 얻어옴
-					if((res = qrCodeDecoder.GetResultGridRegion(i, out flfaGridRegion)).IsFail())
+					if((res = qrCodeDecoder.GetResultGridRegion(i, ref flfaGridRegion)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get grid region from the QR Code decoder object.");
 						continue;
@@ -154,10 +154,10 @@ namespace QRCode
 					}
 
 					// QR Code Decoder 결과를 얻어오기 위해 FLStringW 선언
-					string strDecoded = "";
+					StringBuilder strDecoded = new StringBuilder();
 
 					// QR Code Decoder 결과들 중 Decoded String 을 얻어옴
-					if((res = qrCodeDecoder.GetResultDecodedString(i, out strDecoded)).IsFail())
+					if((res = qrCodeDecoder.GetResultDecodedString(i, ref strDecoded)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get decoded string from the QR Code decoder object.");
 						continue;
@@ -243,7 +243,7 @@ namespace QRCode
 						continue;
 					}
 
-					if((res = layer.DrawTextImage(flqRegion.flpPoints[3], strDecoded, EColor.CYAN, EColor.BLACK, 20, false, flqRegion.flpPoints[3].GetAngle(flqRegion.flpPoints[2]))).IsFail())
+					if((res = layer.DrawTextImage(flqRegion.flpPoints[3], strDecoded.ToString(), EColor.CYAN, EColor.BLACK, 20, false, flqRegion.flpPoints[3].GetAngle(flqRegion.flpPoints[2]))).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw string object on the image view.");
 						continue;
@@ -255,7 +255,7 @@ namespace QRCode
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

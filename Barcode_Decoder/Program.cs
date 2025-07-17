@@ -79,9 +79,9 @@ namespace Barcode
 				sBarcode.SetSymbolType(EBarcodeSymbolType.EAN13);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sBarcode.Execute()).IsFail())				
+				if((res = sBarcode.Execute()).IsFail())
 					ErrorPrint(res, "Failed to execute Barcode decoder.");
-				
+
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
@@ -97,10 +97,10 @@ namespace Barcode
 				for(Int32 i = 0; i < i64Results; i++)
 				{
 					// Barcode Decoder 결과를 얻어오기 위해 FLQuadD 선언
-					CFLQuad<double> flqRegion;
+					CFLQuad<double> flqRegion = new CFLQuad<double>();
 
 					// Barcode Decoder 결과들 중 Data Region 을 얻어옴
-					if((res = sBarcode.GetResultDataRegion(i, out flqRegion)).IsFail())
+					if((res = sBarcode.GetResultDataRegion(i, ref flqRegion)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get data region from the barcode decoder object.");
 						continue;
@@ -117,16 +117,17 @@ namespace Barcode
 						continue;
 					}
 
-					string strDecodedMsg = "";
+					//string strDecodedMsg = "";
+					StringBuilder strDecodedMsg = new StringBuilder();
 
 					// Barcode Decoder 결과들 중 Decoded String 을 얻어옴
-					if((res = sBarcode.GetResultDecodedString(i, out strDecodedMsg)).IsFail())
+					if((res = sBarcode.GetResultDecodedString(i, ref strDecodedMsg)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get decoded string from the barcode decoder object.");
 						continue;
 					}
 
-					CBarcodeSpec bcs;
+					CBarcodeSpec bcs = new CBarcodeSpec();
 					sBarcode.GetResultBarcodeSpec(i, ref bcs);
 
 					EBarcodeSymbolType eSymbol = bcs.GetSymbolType();
@@ -214,7 +215,7 @@ namespace Barcode
 						continue;
 					}
 
-					if((res = layer.DrawTextImage(flqRegion.flpPoints[3], strDecodedMsg, EColor.CYAN, EColor.BLACK, 20)).IsFail())
+					if((res = layer.DrawTextImage(flqRegion.flpPoints[3], strDecodedMsg.ToString(), EColor.CYAN, EColor.BLACK, 20)).IsFail())
 					{
 						ErrorPrint(res, "Failed to draw string object on the image view.");
 						continue;
@@ -226,7 +227,7 @@ namespace Barcode
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}
