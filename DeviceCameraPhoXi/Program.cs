@@ -47,7 +47,7 @@ namespace DeviceCameraPhoXi
 		            break;
 
 	            // 데이터 객체 선언
-	            CFL3DObject floData;
+	            CFL3DObject floData = new CFL3DObject();
 
 	            // 카메라에서 취득 한 데이터를 얻어온다.
 	            camera.GetAcquired3DData(ref floData);

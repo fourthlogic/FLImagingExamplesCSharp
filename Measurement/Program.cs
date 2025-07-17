@@ -115,7 +115,7 @@ namespace OperationAdd
 				{
 					CFLFigureArray flfaGrid = (CFLFigureArray)gridResult.flfaGridData.GetAt(0);
 
-					CFLPoint<double> flp1, flp2;
+					CFLPoint<double> flp1 =	new CFLPoint<double>(), flp2 = new CFLPoint<double>();
 					orthogonalCalibrator.ConvertCoordinate((CFLPoint<double>)flfaGrid.Front(), ref flp1);
 					orthogonalCalibrator.ConvertCoordinate((CFLPoint<double>)flfaGrid.Back(), ref flp2);
 

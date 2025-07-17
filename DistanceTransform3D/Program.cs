@@ -98,7 +98,7 @@ namespace DistanceTransform3D
 
 			int i32ReturnIndex = -1;
 
-			if((pView3D.PushObject(new CGUIView3DObject(), out i32ReturnIndex)).IsOK())
+			if((pView3D.PushObject(new CGUIView3DObject(), ref i32ReturnIndex)).IsOK())
 			{
 				CGUIView3DObject objView3D = pView3D.GetView3DObject(i32ReturnIndex);
 				CFL3DObject fl3DO = objView3D.Get3DObject();
@@ -140,7 +140,7 @@ namespace DistanceTransform3D
 				// 우선 빈 CGUIView3DObject 객체를 뷰에 추가한 후 해당 객체의 인덱스를 i32ReturnIndex 에 얻어 오기
 				// First, add an empty CGUIView3DObject object to the view, then retrieve the index of that object into i32ReturnIndex.
 				int i32ReturnIndex = -1;
-				if((res = view3DSrc.PushObject(new CGUIView3DObject(), out i32ReturnIndex)).IsFail())
+				if((res = view3DSrc.PushObject(new CGUIView3DObject(), ref i32ReturnIndex)).IsFail())
 				{
 					ErrorPrint(res, "Failed to display 3D object.\n");
 					break;

@@ -58,7 +58,7 @@ namespace ProjectionUtilities3D
                 pObj3D.Load("../../ExampleImages/ProjectionUtilities3D/Cylinder.step");
 
                 CFLImage[] fliFinal = { new CFLImage(), new CFLImage(), new CFLImage() };
-                CFLImage fliRes;
+                CFLImage fliRes = new CFLImage();
                 CFLFigureText<int> figureText = new CFLFigureText<int>();
 
                 // CProjectionUtilities3D 객체 생성 // Create CProjectionUtilities3D object

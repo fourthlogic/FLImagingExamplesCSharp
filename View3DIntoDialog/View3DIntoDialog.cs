@@ -61,18 +61,18 @@ namespace View3DIntoDialog
 
 				CFLPoint<long> flpStart = new CFLPoint<long>(i64StartX, i64StartY);
 				CFLPoint<long> flpEnd = new CFLPoint<long>(i64EndX, i64EndY);
-				double[] arrHP = { };
+				List<double> listF64HP = new List<double>();
 
 				// 높이 프로파일 정보를 얻어 온다.
-				CResult gr = m_view3D.GetHeightProfile(flpStart, flpEnd, ref arrHP);
+				CResult gr = m_view3D.GetHeightProfile(flpStart, flpEnd, ref listF64HP);
 
 				if(gr.IsOK())
 				{
 					string str = "";
 
-					for(int i = 0; i < arrHP.Length; ++i)
+					for(int i = 0; i < listF64HP.Count(); ++i)
 					{
-						str += String.Format("[{0}] {1}\n", i, arrHP[i]);
+						str += String.Format("[{0}] {1}\n", i, listF64HP[i]);
 					}
 
 					this.richTextBoxInfo.Text = str;

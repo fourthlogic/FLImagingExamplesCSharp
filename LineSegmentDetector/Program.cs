@@ -93,8 +93,8 @@ namespace LineSegmentDetector
 					break;
                 }
                 
-                CFLFigureArray flfaResults;
-                List<double> arrScores;
+                CFLFigureArray flfaResults = new CFLFigureArray();
+                List<double> arrScores = new List<double>();
                 double f64ScoreThreshold = lsd.GetScoreThreshold();
 
                 lsd.GetResultLineSegments(ref flfaResults);
