@@ -124,10 +124,10 @@ namespace HarrisCornerDetector
 				}
 
 				// 실행 결과를 받아오기 위한 컨테이너
-				CFLFigureArray flfaResultPoints;
+				CFLFigureArray flfaResultPoints = new CFLFigureArray();
 
 				// 검출된 점을 가져오는 함수
-				if((res = (harris.GetResultPoints(out flfaResultPoints))).IsFail())
+				if((res = (harris.GetResultPoints(ref flfaResultPoints))).IsFail())
 				{
 					ErrorPrint(res, "Failed to get result.");
 					break;
