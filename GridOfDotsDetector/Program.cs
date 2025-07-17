@@ -35,59 +35,59 @@ namespace CameraCalibrator
             CGUIViewImage viewImage = new CGUIViewImage();
             CResult res = new CResult();
 
-            do
-            {
-                // 이미지 로드 // Load image
-                if ((res = fliImage.Load("../../ExampleImages/GridOfDotsDetector/GridOfDots.flif")).IsFail())
-                {
-                    ErrorPrint(res, "Failed to load the image file.\n");
-                    break;
-                }
+			do
+			{
+				// 이미지 로드 // Load image
+				if((res = fliImage.Load("../../ExampleImages/GridOfDotsDetector/GridOfDots.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
 
-                // 이미지 뷰 생성 // Create image view
-                if ((res = viewImage.Create(400, 0, 1040, 480)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to create the image view.\n");
-                    break;
-                }
+				// 이미지 뷰 생성 // Create image view
+				if((res = viewImage.Create(400, 0, 1040, 480)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
 
-                // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to set image object on the image view.\n");
-                    break;
-                }
+				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
 
-                // Grid Of Dots Detector 객체 생성 // Create Grid Of Dots Detector Object
-                CGridOfDotsDetector gridofDots = new CGridOfDotsDetector();
+				// Grid Of Dots Detector 객체 생성 // Create Grid Of Dots Detector Object
+				CGridOfDotsDetector gridofDots = new CGridOfDotsDetector();
 
-                // 처리할 이미지 설정 // Set the image to process
-                gridofDots.SetSourceImage(ref fliImage);
+				// 처리할 이미지 설정 // Set the image to process
+				gridofDots.SetSourceImage(ref fliImage);
 
-                // 알고리즘 수행 // Execute the Algoritm
-                if ((res = gridofDots.Execute()).IsFail())
-                {
-                    ErrorPrint(res, "Failed to execute Grid Of Dots Detector.");
-                    break;
-                }
+				// 알고리즘 수행 // Execute the Algoritm
+				if((res = gridofDots.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute Grid Of Dots Detector.");
+					break;
+				}
 
-                CGUIViewImageLayer layer = viewImage.GetLayer(0);
+				CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
-                layer.Clear();
+				layer.Clear();
 
-                // ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
-                CFLQuad<double> flqRegion = new CFLQuad<double>();
-                long i64ResultRow = 0;
-                long i64ResultCol = 0;
-                double f64AverageCellPitch;
-                List<List<TPoint<double>>> flaPoints;
+				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
+				CFLQuad<double> flqRegion = new CFLQuad<double>();
+				long i64ResultRow = 0;
+				long i64ResultCol = 0;
+				double f64AverageCellPitch;
+				List<List<TPoint<double>>> flaPoints = new List<List<TPoint<double>>>();
 
 				// 페이지 0번 보드 갯수를 가져옴. // Page 0 Gets the number of boards.
 				Int64 i64PageIndex = 0;
 				Int64 i64BoardCount = gridofDots.GetResultBoardCount(i64PageIndex);
 
-                for(Int64 i32BoardIndex = 0; i32BoardIndex < i64BoardCount; i32BoardIndex++)
-                {
+				for(Int64 i32BoardIndex = 0; i32BoardIndex < i64BoardCount; i32BoardIndex++)
+				{
 					gridofDots.GetResultCenterPoints(i64PageIndex, i64BoardCount, ref flaPoints);
 					gridofDots.GetResultBoardRegion(i64PageIndex, i64BoardCount, ref flqRegion);
 					i64ResultRow = gridofDots.GetResultBoardRows(i64PageIndex, i64BoardCount);
@@ -253,16 +253,16 @@ namespace CameraCalibrator
 
 						--i32LineTransition;
 					}
-				}		
+				}
 
-                // 이미지 뷰를 갱신 합니다. // Update the image view.
-                viewImage.Invalidate(true);
+				// 이미지 뷰를 갱신 합니다. // Update the image view.
+				viewImage.Invalidate(true);
 
-                // 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
-                while (viewImage.IsAvailable())
-                    Thread.Sleep(1);
-            }
-            while (false);
-        }
+				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
+				while(viewImage.IsAvailable())
+					CThreadUtilities.Sleep(1);
+			}
+			while(false);
+		}
     }
 }

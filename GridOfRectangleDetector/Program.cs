@@ -35,52 +35,52 @@ namespace CameraCalibrator
             CGUIViewImage viewImage = new CGUIViewImage();
             CResult res = new CResult();
 
-            do
-            {
-                // 이미지 로드 // Load image
-                if ((res = fliImage.Load("../../ExampleImages/GridOfRectangleDetector/GridOfRectangle.flif")).IsFail())
-                {
-                    ErrorPrint(res, "Failed to load the image file.\n");
-                    break;
-                }
+			do
+			{
+				// 이미지 로드 // Load image
+				if((res = fliImage.Load("../../ExampleImages/GridOfRectangleDetector/GridOfRectangle.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
 
-                // 이미지 뷰 생성 // Create image view
-                if ((res = viewImage.Create(400, 0, 1040, 480)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to create the image view.\n");
-                    break;
-                }
+				// 이미지 뷰 생성 // Create image view
+				if((res = viewImage.Create(400, 0, 1040, 480)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
 
-                // 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
-                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to set image object on the image view.\n");
-                    break;
-                }
+				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
+				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
 
-                // Grid Of Rectangle Detector 객체 생성 // Create Grid Of Rectangle Detector Object
-                CGridOfRectangleDetector gridofRectangle = new CGridOfRectangleDetector();
+				// Grid Of Rectangle Detector 객체 생성 // Create Grid Of Rectangle Detector Object
+				CGridOfRectangleDetector gridofRectangle = new CGridOfRectangleDetector();
 
-                // 처리할 이미지 설정 // Set the image to process
-                gridofRectangle.SetSourceImage(ref fliImage);
+				// 처리할 이미지 설정 // Set the image to process
+				gridofRectangle.SetSourceImage(ref fliImage);
 
-                // 알고리즘 수행 // Execute the Algoritm
-                if ((res = gridofRectangle.Execute()).IsFail())
-                {
-                    ErrorPrint(res, "Failed to execute Grid Of Rectangle Detector.");
-                    break;
-                }
+				// 알고리즘 수행 // Execute the Algoritm
+				if((res = gridofRectangle.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute Grid Of Rectangle Detector.");
+					break;
+				}
 
-                CGUIViewImageLayer layer = viewImage.GetLayer(0);
+				CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
-                layer.Clear();
+				layer.Clear();
 
-                // ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
-                CFLQuad<double> flqRegion = new CFLQuad<double>();
-                long i64ResultRow = 0;
-                long i64ResultCol = 0;
-                double f64AverageCellPitch;
-                List<List<TPoint<double>>> flaPoints;
+				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
+				CFLQuad<double> flqRegion = new CFLQuad<double>();
+				long i64ResultRow = 0;
+				long i64ResultCol = 0;
+				double f64AverageCellPitch;
+				List<List<TPoint<double>>> flaPoints = new List<List<TPoint<double>>>();
 
 				// 페이지 0번 보드 갯수를 가져옴. // Page 0 Gets the number of boards.
 				Int64 i64PageIndex = 0;
@@ -258,11 +258,11 @@ namespace CameraCalibrator
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				viewImage.Invalidate(true);
 
-                // 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
-                while (viewImage.IsAvailable())
-                    Thread.Sleep(1);
-            }
-            while (false);
-        }
+				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
+				while(viewImage.IsAvailable())
+					CThreadUtilities.Sleep(1);
+			}
+			while(false);
+		}
     }
 }

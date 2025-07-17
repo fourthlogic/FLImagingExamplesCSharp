@@ -80,7 +80,7 @@ namespace CameraCalibrator
 				long i64ResultRow = 0;
 				long i64ResultCol = 0;
 				double f64AverageCellPitch;
-				List<List<TPoint<double>>> flaPoints;
+				List<List<TPoint<double>>> flaPoints = new List<List<TPoint<double>>>();
 
 				// 페이지 0번 보드 갯수를 가져옴. // Page 0 Gets the number of boards.
 				Int64 i64PageIndex = 0;
@@ -261,7 +261,7 @@ namespace CameraCalibrator
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}
