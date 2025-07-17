@@ -125,7 +125,7 @@ namespace HoughTransformCircle
 
 				Console.WriteLine("Result Circle Count : {0}", i64ResultCount);
 
-				CFLCircle<double> flcResult;
+				CFLCircle<double> flcResult = new CFLCircle<double>();
 
 				for(long i = 0; i < i64ResultCount; i++)
 				{
