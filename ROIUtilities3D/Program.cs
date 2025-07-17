@@ -119,8 +119,9 @@ static void Main(string[] args)
 			break;
 
 		// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve the results from CROIUtilities3D
-		List<List<int>> arr2ResultROIIndexInclude;
-		if((res = roiUtil3D.GetResult(out arr2ResultROIIndexInclude)).IsFail())
+		List<List<int>> arr2ResultROIIndexInclude = new List<List<int>>();
+
+		if((res = roiUtil3D.GetResult(ref arr2ResultROIIndexInclude)).IsFail())
 			break;
 
 		// EResultSelectionType.Add 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Include 연산으로 얻은 결과값까지 복사됨
@@ -183,8 +184,9 @@ static void Main(string[] args)
 			break;
 
 		// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve results from CROIUtilities3D
-		List<List<int>> arr2ResultROIIndexExclude;
-		if((res = roiUtil3D.GetResult(out arr2ResultROIIndexExclude)).IsFail())
+		List<List<int>> arr2ResultROIIndexExclude = new List<List<int>>();
+
+		if((res = roiUtil3D.GetResult(ref arr2ResultROIIndexExclude)).IsFail())
 			break;
 
 		// EResultSelectionType.Remove 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.Remove operation and copy roiUtil3D. Results from the Exclude operation are also copied.
@@ -256,8 +258,9 @@ static void Main(string[] args)
 			break;
 
 		// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve results from CROIUtilities3D
-		List<List<int>> arr2ResultROIIndexAdd;
-		if((res = roiUtil3DAdd.GetResult(out arr2ResultROIIndexAdd)).IsFail())
+		List<List<int>> arr2ResultROIIndexAdd = new List<List<int>>();
+
+		if((res = roiUtil3DAdd.GetResult(ref arr2ResultROIIndexAdd)).IsFail())
 			break;
 
 		if(arr2ResultROIIndexAdd.Count() > 0)
@@ -325,8 +328,9 @@ static void Main(string[] args)
 			break;
 
 		// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve results from CROIUtilities3D
-		List<List<int>> arr2ResultROIIndexRemove;
-		if((res = roiUtil3DRemove.GetResult(out arr2ResultROIIndexRemove)).IsFail())
+		List<List<int>> arr2ResultROIIndexRemove = new List<List<int>>();
+
+		if((res = roiUtil3DRemove.GetResult(ref arr2ResultROIIndexRemove)).IsFail())
 			break;
 
 		if(arr2ResultROIIndexRemove.Count() > 0)
@@ -391,8 +395,9 @@ static void Main(string[] args)
 			break;
 
 		// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve results from CROIUtilities3D
-		List<List<int>> arr2ResultROIIndexXOR;
-		if((res = roiUtil3DXOR.GetResult(out arr2ResultROIIndexXOR)).IsFail())
+		List<List<int>> arr2ResultROIIndexXOR = new List<List<int>>();
+
+		if((res = roiUtil3DXOR.GetResult(ref arr2ResultROIIndexXOR)).IsFail())
 			break;
 
 		if(arr2ResultROIIndexXOR.Count() > 0)
