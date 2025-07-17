@@ -235,7 +235,7 @@ namespace SurfaceMatch3D
 					TPoint3<double> tp3RotVec = new TPoint3<double>();
 
 					// 추정된 포즈 행렬 가져오기
-					if((eResult = SurfaceMatch3D.GetResultPoseMatrix(i, out sResult)).IsFail())
+					if((eResult = SurfaceMatch3D.GetResultPoseMatrix(i, ref sResult)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
 						break;
@@ -269,7 +269,7 @@ namespace SurfaceMatch3D
 					Console.WriteLine("    Residual : {0}", f64Residual);
 					Console.WriteLine("\n");
 
-					if((eResult = SurfaceMatch3D.GetResultObject(i, out fl3DOLearnTransform, out tp3Center)).IsFail())
+					if((eResult = SurfaceMatch3D.GetResultObject(i, ref fl3DOLearnTransform, ref tp3Center)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to set object on the 3d view.\n");
 						break;

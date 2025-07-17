@@ -116,8 +116,8 @@ namespace CameraPose3D
 				for(int i = 0; i < i32PageCount; i++)
 				{
 					// 페이지 선택
-					
-					CFLImage fliPage = new CFLImage(fliSource.GetPage(i)); 
+
+					CFLImage fliPage = new CFLImage(fliSource.GetPage(i));
 
 					// 처리할 이미지 설정
 					CameraPose3D.SetSourceImage(ref fliPage);

@@ -155,13 +155,14 @@ namespace PointCloudBasedHandEyeCalibrator3D
 					CMatrix<double> matResultRotationVector = new CMatrix<double>();
 					TPoint3<double> tp3ResultTranslationVector = new TPoint3<double>();
 					List<double> listResultEulerAngle = new List<double>();
-
+					double f64RotationError = 0;
+					double f64TranslationError = 0;
 					// 캘리브레이션 결과 얻어오기 // Get the calibration result
 					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeRotationVector(ref matResultRotationVector);
 					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeTranslationVector(ref tp3ResultTranslationVector);
 					PointCloudBasedHandEyeCalibrator3D.GetResultHandToEyeEulerAngle(ref listResultEulerAngle);
-					PointCloudBasedHandEyeCalibrator3D.GetResultRotationError(ref double f64RotationError);
-					PointCloudBasedHandEyeCalibrator3D.GetResultTranslationError(ref double f64TranslationError);
+					PointCloudBasedHandEyeCalibrator3D.GetResultRotationError(ref f64RotationError);
+					PointCloudBasedHandEyeCalibrator3D.GetResultTranslationError(ref f64TranslationError);
 
 					// 3D View의 canvas rect 영역 얻어오기 // Get the canvas rect region
 					CFLRect<int> flrCanvasRegion = view3D.GetClientRectCanvasRegion();
@@ -196,10 +197,10 @@ namespace PointCloudBasedHandEyeCalibrator3D
 
 						// 결과 3D 객체 얻어오기 // Get the result 3D object
 
-						if(PointCloudBasedHandEyeCalibrator3D.GetResultCamera3DObject(i, out fl3DCam, out tp3CamCenter).IsOK())
+						if(PointCloudBasedHandEyeCalibrator3D.GetResultCamera3DObject(i, ref fl3DCam, ref tp3CamCenter).IsOK())
 						{
 							// 카메라 포즈 추정에 실패할 경우 NOK 출력 // NOK output if camera pose estimation fails
-							if((PointCloudBasedHandEyeCalibrator3D.GetResultReprojectionPoint(i, out tp3Cam, out tp3Board)).IsFail())
+							if((PointCloudBasedHandEyeCalibrator3D.GetResultReprojectionPoint(i, ref tp3Cam, ref tp3Board)).IsFail())
 							{
 								strIdx = String.Format("Cam {0} (NOK)", i);
 								view3DLayer.DrawText3D(tp3CamCenter, strIdx, EColor.CYAN, 0, 9);
@@ -214,7 +215,7 @@ namespace PointCloudBasedHandEyeCalibrator3D
 							view3D.PushObject(new CGUIView3DObjectLine(tp3Cam, tp3Board, EColor.CYAN));
 						}
 
-						if(PointCloudBasedHandEyeCalibrator3D.GetEndEffector3DObject(i, out fl3DORobot, out tp3RobotCenter).IsOK())
+						if(PointCloudBasedHandEyeCalibrator3D.GetEndEffector3DObject(i, ref fl3DORobot, ref tp3RobotCenter).IsOK())
 						{
 							strIdx = String.Format("End Effector {0}", i);
 							view3DLayer.DrawText3D(tp3RobotCenter, strIdx, EColor.BLUE, 0, 9);

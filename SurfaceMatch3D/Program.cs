@@ -134,17 +134,17 @@ namespace SurfaceMatch3D
 
 
 				view3DLearn.SetShadingType(EShadingType3D.Flat);
-                view3DSource.SetShadingType(EShadingType3D.Flat);
-                view3DDst.SetShadingType(EShadingType3D.Flat);
+				view3DSource.SetShadingType(EShadingType3D.Flat);
+				view3DDst.SetShadingType(EShadingType3D.Flat);
 
 
-                // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-                // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
-                CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
+				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
+				CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
 				CGUIView3DLayer layer3DLearn = view3DLearn.GetLayer(0);
 				CGUIView3DLayer layer3DSource = view3DSource.GetLayer(0);
 
-				
+
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layer3DDst.Clear();
 				layer3DLearn.Clear();
@@ -183,9 +183,9 @@ namespace SurfaceMatch3D
 					break;
 				}
 
-                view3DDst.ZoomFit();
-                view3DLearn.ZoomFit();
-                view3DSource.ZoomFit();
+				view3DDst.ZoomFit();
+				view3DLearn.ZoomFit();
+				view3DSource.ZoomFit();
 
 				FLImagingCLR.ThreeDim.SPoseMatrixParameters sResult = new FLImagingCLR.ThreeDim.SPoseMatrixParameters();
 
@@ -211,7 +211,7 @@ namespace SurfaceMatch3D
 					TPoint3<double> tp3RotVec = new TPoint3<double>();
 
 					// 추정된 포즈 행렬 가져오기
-					if((eResult = SurfaceMatch3D.GetResultPoseMatrix(i, out sResult)).IsFail())
+					if((eResult = SurfaceMatch3D.GetResultPoseMatrix(i, ref sResult)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
 						break;
@@ -245,7 +245,7 @@ namespace SurfaceMatch3D
 					Console.WriteLine("    Residual : {0}", f64Residual);
 					Console.WriteLine("\n");
 
-					if((eResult = SurfaceMatch3D.GetResultObject(i, out fl3DOLearnTransform, out tp3Center)).IsFail())
+					if((eResult = SurfaceMatch3D.GetResultObject(i, ref fl3DOLearnTransform, ref tp3Center)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to set object on the 3d view.\n");
 						break;
@@ -269,13 +269,13 @@ namespace SurfaceMatch3D
 				}
 
 
-                view3DDst.ZoomFit();
-                view3DLearn.ZoomFit();
-                view3DSource.ZoomFit();
-                
-				
+				view3DDst.ZoomFit();
+				view3DLearn.ZoomFit();
+				view3DSource.ZoomFit();
+
+
 				// 이미지 뷰를 갱신 합니다. // Update image view
-                view3DLearn.Invalidate(true);
+				view3DLearn.Invalidate(true);
 				view3DSource.Invalidate(true);
 				view3DDst.Invalidate(true);
 
