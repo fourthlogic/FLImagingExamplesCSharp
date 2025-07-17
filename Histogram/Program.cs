@@ -116,7 +116,7 @@ namespace Histogram
 					listResult.Clear();
 
 					// Histogram 결과 값 가져오기 // get histogram result
-					if((res = (Histogram.GetResult(i, out listResult))).IsFail())
+					if((res = (Histogram.GetResult(i, ref listResult))).IsFail())
 					{
 						Console.WriteLine("No Result.");
 						break;
