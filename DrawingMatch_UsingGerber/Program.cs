@@ -170,7 +170,7 @@ namespace Match
 
 				for(long i = 0; i < i64ResultCount; ++i)
 				{
-					CGeometricMatch.SResult results;
+					CGeometricMatch.SResult results = new CGeometricMatch.SResult();
 					FLDrawingMatch.GetResult(i, ref results);
 
 					float f32Score = results.f32Score;

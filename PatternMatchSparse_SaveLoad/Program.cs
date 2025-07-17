@@ -172,7 +172,7 @@ namespace Match
 
 				for(long i = 0; i < i64ResultCount; ++i)
 				{
-					CPatternMatchSparse.SResult results;
+					CPatternMatchSparse.SResult results = new CPatternMatchMultiSparse.SResult();
 
 					FLPatternMatchSparseLoad.GetResult(i, ref results);
 

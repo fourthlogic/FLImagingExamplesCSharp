@@ -177,7 +177,7 @@ namespace Match
 
 				for(int i = 0; i < i64ResultCount; ++i)
 				{
-					CRectangleArrayMatch.SResult sResult;
+					CRectangleArrayMatch.SResult sResult = new CRectangleArrayMatch.SResult();
 
 					// 검출 결과 중 배열 하나를 가져옵니다. // Get an array of detection results.
 					arrayMatch.GetResult(i, ref sResult);

@@ -194,7 +194,7 @@ namespace Match
 
 				for(long i = 0; i < i64ResultCount; ++i)
 				{
-					CPatternMatchMultiSparse.SResult results;
+					CPatternMatchMultiSparse.SResult results = new CPatternMatchMultiSparse.SResult();
 
 					FLPatternMatchMultiSparse.GetResult(i, ref results);
 

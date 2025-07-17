@@ -197,7 +197,7 @@ namespace Match
 
 				for(long i = 0; i < i64ResultCount; ++i)
 				{
-					CPatternMatchMulti.SResult results;
+					CPatternMatchMulti.SResult results = new CPatternMatchMulti.SResult();
 
 					FLPatternMatchMulti.GetResult(i, ref results);
 
