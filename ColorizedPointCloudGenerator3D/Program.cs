@@ -244,9 +244,9 @@ namespace ColorizedPointCloudGenerator3D
 				Console.WriteLine("K3 ->\t{0}\n", cCalibDistortion.f64K3);
 
 				// 두 카메라 간의 회전 행렬 출력 // Print the relative rotation matrix between both cameras
-				CMatrix<double> cMatRotation;
+				CMatrix<double> cMatRotation = new CMatrix<double>();
 
-				if((res = cColorizedPointCloudGenerator.GetRelativeRotation(out cMatRotation)).IsFail())
+				if((res = cColorizedPointCloudGenerator.GetRelativeRotation(ref cMatRotation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get relative rotation.\n");
 					break;
@@ -265,9 +265,9 @@ namespace ColorizedPointCloudGenerator3D
 				Console.WriteLine("R22 ->\t{0}\n", cMatRotation.GetValue(2, 2));
 
 				// 두 카메라 간의 변환 행렬 출력 // Print the relative translation matrix between both cameras
-				CMatrix<double> cMatTranslation;
+				CMatrix<double> cMatTranslation = new CMatrix<double>();
 
-				if((res = cColorizedPointCloudGenerator.GetRelativeTranslation(out cMatTranslation)).IsFail())
+				if((res = cColorizedPointCloudGenerator.GetRelativeTranslation(ref cMatTranslation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get relative translation.\n");
 					break;
