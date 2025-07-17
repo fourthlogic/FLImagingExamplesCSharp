@@ -82,6 +82,10 @@ namespace ShapeMatch
 				// 검출할 각도 범위를 설정합니다. // Sets the angle range to be detected.
 				shapeMatch.SetAngleTolerance(10);
 
+				// 검출할 객체 개수 설정. 0이하의 값을 입력 시 모든 객체 검출 
+				// Set the number of objects to detect. If a value less than or equal to 0 is entered, all objects will be detected.
+				shapeMatch.SetMaxObject(5);
+
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = shapeMatch.Execute()).IsFail())
 				{
@@ -94,7 +98,7 @@ namespace ShapeMatch
 
 				for(long i = 0; i < i64ResultCount; ++i)
 				{
-					CShapeMatchLineResult matchResult;
+					CShapeMatchLineResult matchResult = new CShapeMatchLineResult();
 
 					shapeMatch.GetResult(i, ref matchResult);
 
@@ -125,7 +129,7 @@ namespace ShapeMatch
 				viewImage.Invalidate(true);
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

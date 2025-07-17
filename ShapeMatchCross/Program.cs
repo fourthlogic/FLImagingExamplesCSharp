@@ -91,7 +91,7 @@ namespace ShapeMatch
 
 				for(long i = 0; i < i64ResultCount; ++i)
 				{
-					CShapeMatchCrossResult matchResult;
+					CShapeMatchCrossResult matchResult = new CShapeMatchCrossResult();
 
 					shapeMatch.GetResult(i, ref matchResult);
 
@@ -123,7 +123,7 @@ namespace ShapeMatch
 				viewImage.Invalidate(true);
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}
