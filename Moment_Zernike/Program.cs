@@ -10,6 +10,7 @@ using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
+using System.Runtime.InteropServices;
 
 namespace Moment
 {
@@ -87,7 +88,7 @@ namespace Moment
                 }
 
 				// 모멘트 결과들을 가져옵니다. // Get the moment results.
-				CMoment.SZernike zernike;
+				CMoment.SZernike zernike = new CMoment.SZernike();
                 long i64ZernikeCount = (long)moment.GetZernikeCount();
 
                 for (int i = 0; i < i64ZernikeCount; ++i)

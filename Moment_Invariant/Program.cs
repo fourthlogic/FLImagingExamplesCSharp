@@ -69,7 +69,7 @@ namespace Moment
 				// 처리할 ROI 설정 // Set the ROI to be processed
 				moment.SetSourceROI(flrROI);
 				// 처리할 이미지의 이진화이미지로 판단 유무 설정 // Set whether to judge the image to be processed as a binarized image
-				// 이진화이미지로 판단할 경우 0이 아닌 모든 화소값은 1로 처리함 // When judging as a binarized image, all non-zero pixel values ??are treated as 1.
+				// 이진화이미지로 판단할 경우 0이 아닌 모든 화소값은 1로 처리함 // When judging as a binarized image, all non-zero pixel values are treated as 1.
 				moment.EnableBinaryImage(true);
 
                 bool bCalcGeometricMoment = true;
@@ -97,7 +97,8 @@ namespace Moment
                 }
 
 				// 모멘트 결과들을 가져옵니다. // Get the moment results.
-				CMoment.SMoment results;
+				CMoment.SMoment results = new CMoment.SMoment();
+
                 moment.GetMoment(ref results);
 
 				// 모멘트 결과를 Console창에 출력 // Output the moment result to the console window
