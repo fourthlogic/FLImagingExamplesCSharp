@@ -190,7 +190,7 @@ namespace OCR
 				Int64 i64ResultCount = ocr.GetResultCount();
 
 				// 찾은 문자의 정보를 받아올 컨테이너
-				COCR.COCRRecognitionCharacterInfo resultCharv = COCR.COCRRecognitionCharacterInfo();
+				COCR.COCRRecognitionCharacterInfo resultChar = new COCR.COCRRecognitionCharacterInfo();
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{

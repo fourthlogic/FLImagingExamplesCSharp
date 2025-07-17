@@ -215,7 +215,7 @@ namespace OCV
 				Int64 i64ResultCount = ocv.GetResultCount();
 
 				// 찾은 문자의 정보를 받아올 컨테이너
-				COCV.COCVVerificationCharacterInfo resultChar = COCV.COCVVerificationCharacterInfo();
+				COCV.COCVVerificationCharacterInfo resultChar = new COCV.COCVVerificationCharacterInfo();
 
 				Console.WriteLine("Image 1\n");
 
