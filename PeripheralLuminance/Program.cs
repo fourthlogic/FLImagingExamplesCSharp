@@ -91,7 +91,7 @@ namespace PeripheralLuminance
 				List<double> listResult = new List<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 MTF를 구하는 함수 // Function that calculate MTF of the image(or the region of ROI)
-				if((res = PeripheralLuminance.GetResult(out listResult)).IsFail())
+				if((res = PeripheralLuminance.GetResult(ref listResult)).IsFail())
 				{
 					ErrorPrint(res, "No Result");
 					break;

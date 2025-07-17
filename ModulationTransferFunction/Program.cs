@@ -83,7 +83,7 @@ namespace ModulationTransferFunction
 				List<double> listMTF = new List<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 MTF를 구하는 함수 // Function that calculate MTF of the image(or the region of ROI)
-				if((res = flaGLCM.GetResults(out listMTF)).IsFail())
+				if((res = flaGLCM.GetResults(ref listMTF)).IsFail())
 				{
 					ErrorPrint(res, "No Result");
 					break;

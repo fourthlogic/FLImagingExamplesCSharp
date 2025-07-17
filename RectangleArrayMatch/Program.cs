@@ -169,7 +169,7 @@ namespace Match
 
 				// 검출 결과 배열의 개수를 가져옵니다. // Get the number of detection result arrays.
 				long i64ResultCount = arrayMatch.GetResultCount();
-				double f64Score = new double(), f64Angle = new double();
+				double f64Score = 0, f64Angle = 0;
 				// 검출 결과 배열의 점수를 가져옵니다. // Get the score of the detection result array.
 				arrayMatch.GetResultForArrayScore(ref f64Score);
 				// 검출 결과 배열의 각도를 가져옵니다. // Get the angle of the detection result array.

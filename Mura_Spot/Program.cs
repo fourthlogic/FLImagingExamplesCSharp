@@ -127,10 +127,10 @@ namespace Mura
 				}
 
 				// Mura 결과를 얻어오기 위해 FigureArray 선언
-				CFLFigureArray flfaContours;
+				CFLFigureArray flfaContours = new CFLFigureArray();
 
 				// Mura 결과들 중 Contour를 얻어옴
-				if((res = sMura.GetResultContours(out flfaContours)).IsFail())
+				if((res = sMura.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Mura object.");
 					break;
@@ -157,11 +157,11 @@ namespace Mura
 				// Rect 정보값을 각각 확인하는 코드
 				for(Int64 i = 0; i < flfaContours.GetCount(); ++i)
 				{
-                    CFLRegion pFlrg = (CFLRegion)flfaContours.GetAt(i);
+					CFLRegion pFlrg = (CFLRegion)flfaContours.GetAt(i);
 
 					string str = string.Format("{0}", i);
 
-                    layer.DrawTextImage(pFlrg.GetCenter(), str, EColor.CYAN);
+					layer.DrawTextImage(pFlrg.GetCenter(), str, EColor.CYAN);
 				}
 
 				// 이미지 뷰를 갱신 합니다. // Update image view

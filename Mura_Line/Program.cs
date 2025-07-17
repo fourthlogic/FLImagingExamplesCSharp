@@ -139,10 +139,10 @@ namespace Mura
 				}
 
 				// Mura 결과를 얻어오기 위해 FigureArray 선언
-				CFLFigureArray flfaContours;
+				CFLFigureArray flfaContours = new CFLFigureArray();
 
 				// Mura 결과들 중 Contour를 얻어옴
-				if((res = sMura.GetResultContours(out flfaContours)).IsFail())
+				if((res = sMura.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Mura object.");
 					break;
