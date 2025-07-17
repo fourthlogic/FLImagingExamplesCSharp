@@ -165,7 +165,7 @@ namespace Statistics
 						listResult1.Clear();
 
 						// AutoThreshold 결과 값 가져오기 // get auto threshold result
-						if((res = (autothreshold.GetResultBatch(i, j, out listResult1))).IsFail())
+						if((res = (autothreshold.GetResultBatch(i, j, ref listResult1))).IsFail())
 						{
 							Console.WriteLine("No Result.");
 							break;
@@ -223,7 +223,7 @@ namespace Statistics
 						listResult1.Clear();
 
 						// AutoThreshold 결과 값 가져오기 // get auto threshold result
-						if((res = (autothreshold.GetResultBatch(i, j, out listResult1))).IsFail())
+						if((res = (autothreshold.GetResultBatch(i, j, ref listResult1))).IsFail())
 						{
 							Console.WriteLine("No Result.");
 							break;
