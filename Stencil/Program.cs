@@ -95,23 +95,23 @@ namespace Stencil
 				}
 
 				// 폰트 이름 문자열 선언 // Declare string to get font name.
-				String strFontName = "";
+				StringBuilder strFontName = new StringBuilder();
 
 				// 선택한 폰트의 이름 얻어 오기 // Get selected font name.
-				if((res = stencil.GetSelectedFontName(out strFontName)).IsFail())
+				if((res = stencil.GetSelectedFontName(ref strFontName)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get selected font name.\n");
 					break;
 				}
 
 				// 도형 선언 // Declare CFLFigureArray instance.
-				CFLFigureArray flfaRes;
+				CFLFigureArray flfaRes = new CFLFigureArray();
 
 				// 문자열 선언 // Declare the string to convert to figure.
 				String strText = "[Arial]\nFourthLogic CStencil class...";
 
 				// 선택한 폰트로 문자열을 도형으로 변환 // Convert the text to figure
-				if((res = stencil.ConvertStringToFigure(strText, out flfaRes)).IsFail())
+				if((res = stencil.ConvertStringToFigure(strText, ref flfaRes)).IsFail())
 				{
 					ErrorPrint(res, "Failed to convert string to figure.\n");
 					break;
@@ -145,7 +145,7 @@ namespace Stencil
 				strText = "[Cambria]\nFourthLogic CStencil class...";
 
 				// 선택한 폰트로 문자열을 도형으로 변환 // Convert the string to figure.
-				if((res = stencil.ConvertStringToFigure(strText, out flfaRes)).IsFail())
+				if((res = stencil.ConvertStringToFigure(strText, ref flfaRes)).IsFail())
 				{
 					ErrorPrint(res, "Failed to convert string to figure.\n");
 					break;
