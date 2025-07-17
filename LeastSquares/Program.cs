@@ -44,7 +44,7 @@ namespace LeastSquares
 
                     int i32DataCount = 0;
 
-                    if (int.TryParse(strInput, ref i32DataCount) == false)
+                    if (int.TryParse(strInput, out i32DataCount) == false)
                     {
                         Console.WriteLine("Please check the input.\n");
                         break;

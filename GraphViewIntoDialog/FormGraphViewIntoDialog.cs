@@ -68,7 +68,7 @@ namespace GraphViewIntoDialog
 				for(int i = 0; i < 5; ++i)
 				{
 					string strCoef = textBoxCoeff[i].Text;
-					Double.TryParse(strCoef, ref arrF64Coef[i]);
+					Double.TryParse(strCoef, out arrF64Coef[i]);
 					if(arrF64Coef[i] == 0)
 						continue;
 

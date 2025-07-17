@@ -60,7 +60,7 @@ namespace GraphLeastSquares
 				string strDegree = textBoxDegree.Text;
 
 				int i32Degree = 0;
-				int.TryParse(strDegree, ref i32Degree);
+				int.TryParse(strDegree, out i32Degree);
 
 				// 랜덤으로 100개의 데이터를 생성한다.
 				const int i32DataCount = 100;

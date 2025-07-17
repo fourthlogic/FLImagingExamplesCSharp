@@ -55,9 +55,9 @@ namespace LeastSquares
                             break;
 
                         if (nCount == 0)
-                            int.TryParse(input, ref n);
+                            int.TryParse(input, out n);
                         else if (nCount == 1)
-                            int.TryParse(input, ref k);
+                            int.TryParse(input, out k);
                         else
                             break;
 

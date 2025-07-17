@@ -57,7 +57,7 @@ namespace DeviceDIOAxl
 		            strInput = Console.ReadLine();
 
                     int i32Select = 0;
-                    Int32.TryParse(strInput, ref i32Select);
+                    Int32.TryParse(strInput, out i32Select);
 
 		            switch(i32Select)
 		            {
@@ -69,7 +69,7 @@ namespace DeviceDIOAxl
 				            strInput = Console.ReadLine();
 
 				            int i32Bit = 0;
-                            Int32.TryParse(strInput, ref i32Bit);
+                            Int32.TryParse(strInput, out i32Bit);
 
 				            bool bReadStatus = false;
 
@@ -91,7 +91,7 @@ namespace DeviceDIOAxl
 				            strInput = Console.ReadLine();
 
 				            int i32Bit = 0;
-                            Int32.TryParse(strInput, ref i32Bit);
+                            Int32.TryParse(strInput, out i32Bit);
 
 				            // 상태를 입력 받습니다. // Enter status.
 				            Console.Write("Status input: ");
@@ -100,7 +100,7 @@ namespace DeviceDIOAxl
 				            bool bWriteStatus = false;
 
                             int i32Status = 0;
-                            Int32.TryParse(strInput, ref i32Status);
+                            Int32.TryParse(strInput, out i32Status);
 
 				            if(i32Status != 0)
 					            bWriteStatus = true;
