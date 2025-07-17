@@ -85,7 +85,7 @@ namespace Statistics
 				CMultiVar<double> mvFuzzyEntropy = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 Fuzzy Entropy를 구하는 함수 // Function that calculate the fuzzy entropy of the image(or the region of ROI)
-				if((res = fuzzyentropy.GetResultFuzzyEntropy(out mvFuzzyEntropy)).IsFail())
+				if((res = fuzzyentropy.GetResultFuzzyEntropy(ref mvFuzzyEntropy)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.");
 					break;
