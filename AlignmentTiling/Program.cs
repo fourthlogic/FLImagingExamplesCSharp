@@ -192,7 +192,7 @@ namespace AlignmentTiling
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerDst.Clear();
 
-				CFLQuad<double> flqResult;
+				CFLQuad<double> flqResult = new CFLQuad<double>();
 
 				for(int i = 0; i < i32SrcImageCount; ++i)
 				{
