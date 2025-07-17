@@ -102,7 +102,7 @@ namespace GeneralizedHoughTransform
 				// Result 갯수 체크 // Check the number of results
 				if(GeneralizedHoughTransform.GetDetectedObjectCount() > 0)
 				{
-					CFLFigureArray flfaDetectedObjects;
+					CFLFigureArray flfaDetectedObjects = new CFLFigureArray();
 					GeneralizedHoughTransform.GetDetectedObjects(ref flfaDetectedObjects);
 
 					// 이미지 뷰에 검출된 객체 출력 // Output the detected object to the image view
