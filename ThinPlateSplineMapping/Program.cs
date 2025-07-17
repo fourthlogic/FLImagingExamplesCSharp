@@ -215,7 +215,7 @@ namespace ThinPlateSplineMapping
 						}
 
 						// Source 좌표의 공간을 Destination 좌표 공간으로 변환 // Convert the space of source coordinates to destination coordinate space
-						if(tps.ConvertSourceToDestination(flpdSource, out flpdDestination).IsOK())
+						if(tps.ConvertSourceToDestination(flpdSource, ref flpdDestination).IsOK())
 						{
 							// Source 좌표에서 Destination 좌표로 변환된 좌표를 View에 Display // Display coordinates converted from source coordinates to destination coordinates on the View
 							if((res = layer[1].DrawFigureImage(flpdDestination, EColor.LIME)).IsFail())
@@ -226,7 +226,7 @@ namespace ThinPlateSplineMapping
 
 							// 변환된 Destination 좌표를 그대로 Source 좌표로 변환해서 자신의 위치로 제대로 돌아오는지 검증
 							// Verify that the converted destination coordinates are converted to source coordinates as they are and return to their own position properly
-							if(tps.ConvertDestinationToSource(flpdDestination, out flpdConvertedSource).IsOK())
+							if(tps.ConvertDestinationToSource(flpdDestination, ref flpdConvertedSource).IsOK())
 							{
 								Console.WriteLine("Source ({0:.000},{1:.000}) -> Destination ({2:.000},{3:.000}) -> Source ({4:.000},{5:.000})", flpdSource.x, flpdSource.y, flpdDestination.x, flpdDestination.y, flpdConvertedSource.x, flpdConvertedSource.y);
 
