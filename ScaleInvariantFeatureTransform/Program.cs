@@ -117,7 +117,7 @@ namespace ScaleInvariantFeatureTransform
 				CFLPointArray flfaResultPoints;
 
 				// 검출된 점을 가져오는 함수
-                if ((res = (SIFT.GetResultPoints(out flfaResultPoints))).IsFail())
+                if ((res = (SIFT.GetResultPoints(ref flfaResultPoints))).IsFail())
 				{
 					ErrorPrint(res, "Failed to get result.");
 					break;
