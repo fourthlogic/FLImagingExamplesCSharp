@@ -115,7 +115,7 @@ namespace DeviceMotionAxl
 						strInput = Console.ReadLine();
 
 						int i32Select = 0;
-						Int32.TryParse(strInput, ref i32Select);
+						Int32.TryParse(strInput, out i32Select);
 
 						bool bSelected = true;
 
@@ -179,19 +179,19 @@ namespace DeviceMotionAxl
 						Console.Write("Enter Axis Velocity(mm/s): ");
 						strInput = Console.ReadLine();
 
-						Double.TryParse(strInput, ref f64MoveVelocity);
+						Double.TryParse(strInput, out f64MoveVelocity);
 
 						// 가감속을 입력합니다. // Enter acceleration and deceleration.
 						Console.Write("Enter Axis Acceleration(mm/s^2): ");
 						strInput = Console.ReadLine();
 
-						Double.TryParse(strInput, ref f64MoveAccelAndDecel);
+						Double.TryParse(strInput, out f64MoveAccelAndDecel);
 
 						// 이동거리나 절대위치를 입력합니다. // Enter the distance or absolute position.
 						Console.Write("Enter Axis Position(mm): ");
 						strInput = Console.ReadLine();
 
-						Double.TryParse(strInput, ref f64MovePosition);
+						Double.TryParse(strInput, out f64MovePosition);
 
 						if(eMotionFeature == EMotionFeature.MoveAbsolutePosition)
 						{
