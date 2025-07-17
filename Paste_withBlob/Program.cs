@@ -164,10 +164,10 @@ namespace Paste
 				}
 
 				// Blob 결과를 얻어오기 위해 FigureArray 선언 // Declare FigureArray to get blob result
-				CFLFigureArray flfaContours;
+				CFLFigureArray flfaContours = new CFLFigureArray();
 
 				// Blob 결과들 중 Contour를 얻어옴 // Get Contour from Blob results
-				if((res = sBlob.GetResultContours(out flfaContours)).IsFail())
+				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
