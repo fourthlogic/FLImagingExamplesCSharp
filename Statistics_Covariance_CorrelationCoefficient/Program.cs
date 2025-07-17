@@ -72,14 +72,14 @@ namespace Statistics
                 double f64CorrelationCoeff = new double();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 공분산을 구하는 함수 // Function that calculate the covariance of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetCovariance(out f64Covariance)).IsFail())
+				if((res = statistics.GetCovariance(ref f64Covariance)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 상관계수를 구하는 함수 // Function that calculate the correlation coefficient of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetCorrelationCoefficient(out f64CorrelationCoeff)).IsFail())
+                if((res = statistics.GetCorrelationCoefficient(ref f64CorrelationCoeff)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -93,14 +93,14 @@ namespace Statistics
 				double f64CorrelationCoeff2 = new double();
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 공분산을 구하는 함수 // Function that calculate the covariance of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetCovariance(out f64Covariance2)).IsFail())
+                if((res = statistics.GetCovariance(ref f64Covariance2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.");
 					break;
 				}
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 상관계수를 구하는 함수 // Function that calculate the correlation coefficient of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetCorrelationCoefficient(out f64CorrelationCoeff2)).IsFail())
+                if((res = statistics.GetCorrelationCoefficient(ref f64CorrelationCoeff2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.");
 					break;

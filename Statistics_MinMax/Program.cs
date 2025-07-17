@@ -75,14 +75,14 @@ namespace Statistics
                 CMultiVar<double> mvMax = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetMin(out mvMin)).IsFail())
+				if((res = statistics.GetMin(ref mvMin)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetMax(out mvMax)).IsFail())
+				if((res = statistics.GetMax(ref mvMax)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -97,14 +97,14 @@ namespace Statistics
                 CMultiVar<double> mvTrimmingMax = new CMultiVar<double>();
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetMin(out mvTrimmingMin)).IsFail())
+                if((res = statistics.GetMin(ref mvTrimmingMin)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetMax(out mvTrimmingMax)).IsFail())
+                if((res = statistics.GetMax(ref mvTrimmingMax)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;

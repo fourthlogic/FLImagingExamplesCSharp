@@ -76,21 +76,21 @@ namespace Statistics
                 CMultiVar<double> mvLowerQuartile = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 중간값을 구하는 함수 // Function that calculate the median of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetMedian(out mvMedian)).IsFail())
+				if((res = statistics.GetMedian(ref mvMedian)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 75사분위수를 구하는 함수 // Function that calculate the upper quartile of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetUpperQuartile(out mvUpperQuartile)).IsFail())
+                if((res = statistics.GetUpperQuartile(ref mvUpperQuartile)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 25사분위수를 구하는 함수 // Function that calculate the lower quartile of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetLowerQuartile(out mvLowerQuartile)).IsFail())
+                if((res = statistics.GetLowerQuartile(ref mvLowerQuartile)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -106,21 +106,21 @@ namespace Statistics
                 CMultiVar<double> mvTrimmingLowerQuartile = new CMultiVar<double>();
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 중간값을 구하는 함수 // Function that calculate the median of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetMedian(out mvTrimmingMedian)).IsFail())
+                if((res = statistics.GetMedian(ref mvTrimmingMedian)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 75사분위수를 구하는 함수 // Function that calculate the upper quartile of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetUpperQuartile(out mvTrimmingUpperQuartile)).IsFail())
+                if((res = statistics.GetUpperQuartile(ref mvTrimmingUpperQuartile)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 25사분위수를 구하는 함수 // Function that calculate the lower quartile of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetLowerQuartile(out mvTrimmingLowerQuartile)).IsFail())
+                if((res = statistics.GetLowerQuartile(ref mvTrimmingLowerQuartile)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;

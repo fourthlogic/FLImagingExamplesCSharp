@@ -77,28 +77,28 @@ namespace Statistics
                 CMultiVar<double> mvCoefficientOfVariance = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 평균을 구하는 함수 // Function that calculate the mean of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetMean(out mvMean)).IsFail())
+				if((res = statistics.GetMean(ref mvMean)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 표준편차를 구하는 함수 // Function that calculate the standard deviation of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetStandardDeviation(out mvVariance)).IsFail())
+                if((res = statistics.GetStandardDeviation(ref mvVariance)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 분산을 구하는 함수 // Function that calculate the variance of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetVariance(out mvStandardDeviation)).IsFail())
+                if((res = statistics.GetVariance(ref mvStandardDeviation)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 변동계수을 구하는 함수 // Function that calculate the coefficient of variance of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetCoefficientOfVariance(out mvCoefficientOfVariance)).IsFail())
+                if((res = statistics.GetCoefficientOfVariance(ref mvCoefficientOfVariance)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -115,28 +115,28 @@ namespace Statistics
                 CMultiVar<double> mvTrimmingCoefficientOfVariance = new CMultiVar<double>();
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 평균을 구하는 함수 // Function that calculate the mean of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetMean(out mvTrimmingMean)).IsFail())
+                if((res = statistics.GetMean(ref mvTrimmingMean)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 표준편차를 구하는 함수 // Function that calculate the standard deviation of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetStandardDeviation(out mvTrimmingVariance)).IsFail())
+                if((res = statistics.GetStandardDeviation(ref mvTrimmingVariance)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 분산을 구하는 함수 // Function that calculate the variance of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetVariance(out mvTrimmingStandardDeviation)).IsFail())
+                if((res = statistics.GetVariance(ref mvTrimmingStandardDeviation)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 변동계수을 구하는 함수 // Function that calculate the coefficient of variance of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetCoefficientOfVariance(out mvTrimmingCoefficientOfVariance)).IsFail())
+                if((res = statistics.GetCoefficientOfVariance(ref mvTrimmingCoefficientOfVariance)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;

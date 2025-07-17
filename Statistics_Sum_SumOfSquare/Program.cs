@@ -75,14 +75,14 @@ namespace Statistics
                 CMultiVar<double> mvSumOfSquares = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 합을 구하는 함수 // Function that calculate the sum of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetSum(out mvSum)).IsFail())
+				if((res = statistics.GetSum(ref mvSum)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 제곱합을 구하는 함수
-                if ((res = statistics.GetSumOfSquares(out mvSumOfSquares)).IsFail()) // Function that calculate the sum of squares of the pixel value of the image(or the region of ROI)
+                if ((res = statistics.GetSumOfSquares(ref mvSumOfSquares)).IsFail()) // Function that calculate the sum of squares of the pixel value of the image(or the region of ROI)
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -97,14 +97,14 @@ namespace Statistics
                 CMultiVar<double> mvTrimmingSumOfSquares = new CMultiVar<double>();
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 합을 구하는 함수 // Function that calculate the sum of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetSum(out mvTrimmingSum)).IsFail())
+                if((res = statistics.GetSum(ref mvTrimmingSum)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 제곱합을 구하는 함수 // Function that calculate the sum of squares of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetSumOfSquares(out mvTrimmingSumOfSquares)).IsFail())
+                if((res = statistics.GetSumOfSquares(ref mvTrimmingSumOfSquares)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
