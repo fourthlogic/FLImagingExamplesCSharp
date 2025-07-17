@@ -119,10 +119,10 @@ namespace ImageDrawing2
 				}
 
 				// Blob 결과를 얻어오기 위해 FigureArray 선언
-				CFLFigureArray flfaBoundaryRects;
+				CFLFigureArray flfaBoundaryRects = new CFLFigureArray();
 
 				// Blob 결과들 중 Boundary Rectangle 을 얻어옴
-				if((res = sBlob.GetResultBoundaryRects(out flfaBoundaryRects)).IsFail())
+				if((res = sBlob.GetResultBoundaryRects(ref flfaBoundaryRects)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
