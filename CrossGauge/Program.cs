@@ -184,7 +184,7 @@ namespace Gauge
 
 					if(res.IsOK())
 					{
-						double f64ResultAngle;
+						double f64ResultAngle = 0;
 						CrossGauge.GetMeasuredAngle(ref f64ResultAngle);
 
 						Console.WriteLine("Cross Center : ({0}, {1})\nAngle : {2}˚", resultRegion.x, resultRegion.y, f64ResultAngle);

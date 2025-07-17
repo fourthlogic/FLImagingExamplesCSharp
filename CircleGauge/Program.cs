@@ -234,7 +234,7 @@ namespace Gauge
 						}
 
 						// 원의 정보를 Console창에 출력합니다. // Output the original information to the console window.
-						double f64Radius;
+						double f64Radius = 0;
 						flcResult.GetRadius(ref f64Radius);
 						CFLPoint<double> flpLineCenter = new CFLPoint<double>();
 						flcResult.GetCenter(ref flpLineCenter);

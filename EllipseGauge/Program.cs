@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace Gauge
 {
-    class Program
+	class Program
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -27,7 +27,7 @@ namespace Gauge
 
 		[STAThread]
 
-        static void Main(string[] args)
+		static void Main(string[] args)
 		{
 			const int i32ExampleCount = 12;
 
@@ -211,7 +211,7 @@ namespace Gauge
 					CFLEllipse<double> fleRegion = ellipseGauge.GetMeasurementRegion();
 					CFLEllipse<double> fleInner = new CFLEllipse<double>(fleRegion);
 					CFLEllipse<double> fleOuter = new CFLEllipse<double>(fleRegion);
-					float f64Radius1, f64Radius2;
+					float f64Radius1 = 0, f64Radius2 = 0;
 
 					fleInner.GetRadius1(ref f64Radius1);
 					fleInner.GetRadius2(ref f64Radius2);
@@ -325,5 +325,5 @@ namespace Gauge
 			}
 			while(false);
 		}
-    }
+	}
 }

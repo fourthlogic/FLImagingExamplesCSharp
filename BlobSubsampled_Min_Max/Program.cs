@@ -39,8 +39,6 @@ namespace Blob
 
 			do
 			{
-				CResult res;
-
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
 				{
