@@ -64,7 +64,7 @@ namespace DeviceCameraiRAYPLE
 				Console.Write("Other : Exit\n");
 				Console.Write("Select Connect Type: ");
 				strInput = Console.ReadLine();
-				Int32.TryParse(strInput, ref i32ConnectType);
+				Int32.TryParse(strInput, out i32ConnectType);
 
 				bool bFailed = false;
 
@@ -81,7 +81,7 @@ namespace DeviceCameraiRAYPLE
 					// 장치가 연결된 포트 번호를 입력합니다. // Connected devices port number.
 					Console.Write("Port Number : ");
 					strInput = Console.ReadLine();
-					Int32.TryParse(strInput, ref i32PortNumber);
+					Int32.TryParse(strInput, out i32PortNumber);
 				}
 				else
 					bFailed = true;
@@ -121,13 +121,13 @@ namespace DeviceCameraiRAYPLE
 				// Axis resolution을 입력합니다. // Set axis resolution value.
 				Console.Write("Enter axis resolution(mm/pulse) : ");
 				strInput = Console.ReadLine();
-				double.TryParse(strInput, ref f64Resolution);
+				double.TryParse(strInput, out f64Resolution);
 				pDMAxis.SetResolution(f64Resolution);
 
 				// Axis Jerk을 입력합니다. // Set axis jerk value.
 				Console.Write("Enter axis Jerk(mm/s3) : ");
 				strInput = Console.ReadLine();
-				double.TryParse(strInput, ref f64Jerk);
+				double.TryParse(strInput, out f64Jerk);
 				pDMAxis.SetJerk(f64Jerk);
 
 				while(true)
@@ -146,7 +146,7 @@ namespace DeviceCameraiRAYPLE
 						Console.Write("\n");
 
 						int i32Select = 0;
-						int.TryParse(strInput, ref i32Select);
+						int.TryParse(strInput, out i32Select);
 						bool bSelected = true;
 
 						switch(i32Select)
@@ -204,17 +204,17 @@ namespace DeviceCameraiRAYPLE
 						// 이동 속도를 입력합니다. // Set axis speed.
 						Console.Write("Enter Axis Speed(mm/s): ");
 						strInput = Console.ReadLine();
-						double.TryParse(strInput, ref f64MoveSpeed);
+						double.TryParse(strInput, out f64MoveSpeed);
 
 						// 가감속을 입력합니다. // Set axis acceleation.
 						Console.Write("Enter Axis Acceleation(mm/s2): ");
 						strInput = Console.ReadLine();
-						double.TryParse(strInput, ref f64AccDecSpeed);
+						double.TryParse(strInput, out f64AccDecSpeed);
 
 						// 이동거리나 절대위치를 입력합니다. // Set incremental or absolute position.
 						Console.Write("Enter Axis Position(mm): ");
 						strInput = Console.ReadLine();
-						double.TryParse(strInput, ref f64Position);
+						double.TryParse(strInput, out f64Position);
 
 						if(eMotionType == EMotion.MoveAbsolutePosition)
 						{
