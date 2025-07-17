@@ -112,7 +112,7 @@ namespace Projection
 					listResult.Clear();
 
 					// Projection 결과 값 가져오기 // get projection result
-					if((res = (Projection.GetResult(i, out listResult))).IsFail())
+					if((res = (Projection.GetResult(i, ref listResult))).IsFail())
 					{
 						ErrorPrint(res, "Failed to Get Result.");
 						break;
