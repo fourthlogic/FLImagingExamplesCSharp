@@ -35,11 +35,10 @@ namespace Blob
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
+			CResult res = new CResult();
 
 			do
 			{
-				CResult res;
-
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/Blob/Perforated.flif")).IsFail())
 				{
@@ -101,10 +100,10 @@ namespace Blob
 				}
 
 				// Blob 결과를 얻어오기 위해 FigureArray 선언
-				CFLFigureArray flfaContours;
+				CFLFigureArray flfaContours = new CFLFigureArray();
 
 				// Blob 결과들 중 Contour를 얻어옴
-				if((res = (res = sBlob.GetResultContours(out flfaContours))).IsFail())
+				if((res = (res = sBlob.GetResultContours(ref flfaContours))).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
@@ -189,7 +188,7 @@ namespace Blob
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

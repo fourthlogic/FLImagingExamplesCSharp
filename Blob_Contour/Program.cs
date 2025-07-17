@@ -35,11 +35,10 @@ namespace Blob
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
+			CResult res = new CResult();
 
 			do
 			{
-				CResult res;
-
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/Blob/Ball.flif")).IsFail())
 				{
@@ -67,7 +66,7 @@ namespace Blob
 					ErrorPrint(res, "Failed to zoom fit\n");
 					break;
 				}
-								
+
 				// Blob 객체 생성 // Create Blob object
 				CBlob sBlob = new CBlob();
 
@@ -115,10 +114,10 @@ namespace Blob
 
 
 				// Blob 결과를 얻어오기 위해 FigureArray 선언
-				CFLFigureArray flfaContours;
+				CFLFigureArray flfaContours = new CFLFigureArray();
 
 				// Blob 결과들 중 Contour를 얻어옴
-				if((res = sBlob.GetResultContours(out flfaContours)).IsFail())
+				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
@@ -153,11 +152,11 @@ namespace Blob
 				// Rect 정보값을 각각 확인하는 코드
 				for(Int64 i = 0; i < flfaContours.GetCount(); ++i)
 				{
-                    CFLRegion pFlrg = (CFLRegion)flfaContours.GetAt(i);
+					CFLRegion pFlrg = (CFLRegion)flfaContours.GetAt(i);
 
 					string str = string.Format("{0}", i);
 
-                    layer.DrawTextImage(pFlrg.GetCenter(), str, EColor.CYAN);
+					layer.DrawTextImage(pFlrg.GetCenter(), str, EColor.CYAN);
 				}
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
@@ -165,7 +164,7 @@ namespace Blob
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

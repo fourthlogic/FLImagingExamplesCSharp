@@ -52,11 +52,10 @@ namespace Blob
 				arrViewImage[i] = new CGUIViewImage();
 			}
 
+			CResult res = new CResult();
 
 			do
 			{
-				CResult res;
-
 				for(int i = 0; i < (int)EType.ETypeCount; ++i)
 				{
 					string strFileName = string.Format("../../ExampleImages/Blob/Blob Sort {0}.flif", i + 1);
@@ -130,7 +129,7 @@ namespace Blob
 					}
 
 					// Blob 결과를 얻어오기 위해 FigureArray 선언
-					CFLFigureArray flfaSortClusterModeBoundaryRects;
+					CFLFigureArray flfaSortClusterModeBoundaryRects = new CFLFigureArray();
 
 					// SortClusterMode 함수를 통해 영역을 정렬 (객체의 Center좌표를 바탕으로 1순위 Y오름차순, 2순위 X오름차순)
 					if((res = sBlob.SortClusterMode(CBlob.ESortClusterModeMethod.Center_Y_Asc_X_Asc)).IsFail())
@@ -140,7 +139,7 @@ namespace Blob
 					}
 
 					// 복구된 Blob 결과들 중 Boundary Rectangle 을 얻어옴
-					if((res = sBlob.GetResultBoundaryRects(out flfaSortClusterModeBoundaryRects)).IsFail())
+					if((res = sBlob.GetResultBoundaryRects(ref flfaSortClusterModeBoundaryRects)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 						break;
@@ -200,7 +199,7 @@ namespace Blob
 					for(int i = 0; i < (int)EType.ETypeCount; ++i)
 						bRun &= arrViewImage[i].IsAvailable();
 
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 				}
 			}
 			while(false);

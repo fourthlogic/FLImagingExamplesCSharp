@@ -36,11 +36,10 @@ namespace Blob
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
 			CGUIViewImage viewImageRecover = new CGUIViewImage();
+			CResult res = new CResult();
 
 			do
 			{
-				CResult res;
-
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/Blob/Ball.flif")).IsFail())
 				{
@@ -140,8 +139,8 @@ namespace Blob
 				}
 
 				// Blob 결과를 얻어오기 위해 FigureArray 선언
-				CFLFigureArray flfaSortedBoundaryRects;
-				CFLFigureArray flfaRecoverBoundaryRects;
+				CFLFigureArray flfaSortedBoundaryRects = new CFLFigureArray();
+				CFLFigureArray flfaRecoverBoundaryRects = new CFLFigureArray();
 
 				List<Int32> flaItem = new List<int>();
 				List<Int32> flaOrder = new List<int>();
@@ -162,7 +161,7 @@ namespace Blob
 				}
 
 				// Blob 결과들 중 Boundary Rectangle 을 얻어옴
-				if((res = sBlob.GetResultBoundaryRects(out flfaSortedBoundaryRects)).IsFail())
+				if((res = sBlob.GetResultBoundaryRects(ref flfaSortedBoundaryRects)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
@@ -176,7 +175,7 @@ namespace Blob
 				}
 
 				// 복구된 Blob 결과들 중 Boundary Rectangle 을 얻어옴
-				if((res = sBlob.GetResultBoundaryRects(out flfaRecoverBoundaryRects)).IsFail())
+				if((res = sBlob.GetResultBoundaryRects(ref flfaRecoverBoundaryRects)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
@@ -260,7 +259,7 @@ namespace Blob
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable() && viewImageRecover.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

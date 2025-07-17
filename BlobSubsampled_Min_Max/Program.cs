@@ -35,6 +35,7 @@ namespace Blob
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
+			CResult res = new CResult();
 
 			do
 			{
@@ -101,7 +102,7 @@ namespace Blob
 				}
 
 				// Blob 결과를 얻어오기 위해 FigureArray 선언
-				CFLFigureArray flfaContour;
+				CFLFigureArray flfaContour = new CFLFigureArray();
 
 				List<Int32> flaItem = new List<int>();
 				List<Int32> flaOrder = new List<int>();
@@ -114,7 +115,7 @@ namespace Blob
 				imgStatistics.SetSourceImage(ref fliImage);
 
 				// Blob 결과들 중 Contour 를 얻어옴
-				if(sBlob.GetResultContours(out flfaContour).IsFail())
+				if(sBlob.GetResultContours(ref flfaContour).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
@@ -129,7 +130,7 @@ namespace Blob
 
 					CMultiVar<double> mvMin = new CMultiVar<double>();
 
-					if(imgStatistics.GetMin(out mvMin).IsFail())
+					if(imgStatistics.GetMin(ref mvMin).IsFail())
 					{
 						ErrorPrint(res, "Failed to get Min Value from the Blob object.");
 						break;
@@ -140,7 +141,7 @@ namespace Blob
 
 					CMultiVar<double> mvMax = new CMultiVar<double>();
 
-					if(imgStatistics.GetMax(out mvMax).IsFail())
+					if(imgStatistics.GetMax(ref mvMax).IsFail())
 					{
 						ErrorPrint(res, "Failed to get Max Value from the Blob object.");
 						break;
@@ -188,7 +189,7 @@ namespace Blob
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}

@@ -34,11 +34,10 @@ namespace Blob
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImage = new CGUIViewImage();
+			CResult res = new CResult();
 
 			do
 			{
-				CResult res;
-
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
 				{
@@ -92,26 +91,26 @@ namespace Blob
 					break;
 				}
 
-					// 면적이 100보다 작은 객체들을 제거
-					if((res = sBlob.Filter(CBlob.EFilterItem.Area, 100, ELogicalCondition.Less)).IsFail())
+				// 면적이 100보다 작은 객체들을 제거
+				if((res = sBlob.Filter(CBlob.EFilterItem.Area, 100, ELogicalCondition.Less)).IsFail())
 				{
 					ErrorPrint(res, "Blob filtering algorithm error occurred.");
 					break;
 				}
 
 				// Blob 결과를 얻어오기 위해 FigureArray, List<ulong> 선언
-				CFLFigureArray flfaContours;
-				List<ulong> flaArea;
+				CFLFigureArray flfaContours = new CFLFigureArray();
+				List<ulong> flaArea = new List<ulong>();
 
 				// Blob 결과들 중 Contours 을 얻어옴
-				if((res = sBlob.GetResultContours(out flfaContours)).IsFail())
+				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get contours from the Blob object.");
 					break;
 				}
 
 				// Blob 결과들 중 Area 을 얻어옴
-				if((res = sBlob.GetResultAreas(out flaArea)).IsFail())
+				if((res = sBlob.GetResultAreas(ref flaArea)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get area from the Blob object.");
 					break;
@@ -159,7 +158,7 @@ namespace Blob
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage.IsAvailable())
-					Thread.Sleep(1);
+					CThreadUtilities.Sleep(1);
 			}
 			while(false);
 		}
