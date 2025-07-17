@@ -134,17 +134,17 @@ namespace GetPointsOfMaximumDistance
 				}
 
 				// Figure 사이의 최대 거리를 나타내는 점을 추출 // Get the point representing the maximum distance between figures
-				CFLPointArray flpaResult1;
+				CFLPointArray flpaResult1 = new CFLPointArray();
 
-				if((res = flcSource1.GetPointsOfMaximumDistance(flqOperand1, out flpaResult1)).IsFail())
+				if((res = flcSource1.GetPointsOfMaximumDistance(flqOperand1, ref flpaResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
-				CFLPointArray flpaResult2;
+				CFLPointArray flpaResult2 = new CFLPointArray();
 
-				if((res = flfaSource2.GetPointsOfMaximumDistance(flfaOperand2, out flpaResult2)).IsFail())
+				if((res = flfaSource2.GetPointsOfMaximumDistance(flfaOperand2, ref flpaResult2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
@@ -153,7 +153,7 @@ namespace GetPointsOfMaximumDistance
 				// Figure 사이의 최대 거리를 계산 // Calculate the maximum distance between figures
 				double f64MaximumDistance1 = 0;
 
-				if((res = flcSource1.GetMaximumDistance(flqOperand1, out f64MaximumDistance1)).IsFail())
+				if((res = flcSource1.GetMaximumDistance(flqOperand1, ref f64MaximumDistance1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
@@ -161,7 +161,7 @@ namespace GetPointsOfMaximumDistance
 
 				double f64MaximumDistance2 = 0;
 
-				if((res = flfaSource2.GetMaximumDistance(flfaOperand2, out f64MaximumDistance2)).IsFail())
+				if((res = flfaSource2.GetMaximumDistance(flfaOperand2, ref f64MaximumDistance2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;

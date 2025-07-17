@@ -134,18 +134,18 @@ namespace GetIndexOfMinimumDistance
 				}
 
 				// Figure 사이의 최소 거리를 나타내는 인덱스를 추출 // Get the index of representing the minimum distance between figures
-				CFLFigureArray flfaResultSrc1;
+				CFLFigureArray flfaResultSrc1 = new CFLFigureArray();
 
-				if((res = flpaSource1.GetIndexOfMinimumDistance(flcDestination1, out flfaResultSrc1)).IsFail())
+				if((res = flpaSource1.GetIndexOfMinimumDistance(flcDestination1, ref flfaResultSrc1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
-				CFLFigureArray flfaResultSrc2;
-				CFLFigureArray flfaResultDst2;
+				CFLFigureArray flfaResultSrc2 = new CFLFigureArray();
+				CFLFigureArray flfaResultDst2 = new CFLFigureArray();
 
-				if((res = flfaSource2.GetIndexOfMinimumDistance(flfaDestination2, out flfaResultSrc2, true, true, out flfaResultDst2)).IsFail())
+				if((res = flfaSource2.GetIndexOfMinimumDistance(flfaDestination2, ref flfaResultSrc2, true, true, ref flfaResultDst2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;

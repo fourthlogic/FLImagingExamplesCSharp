@@ -105,11 +105,11 @@ namespace FigureWarp
 				Console.WriteLine("Target Quad Region : {0}\n", CFigureUtilities.ConvertFigureObjectToString(flqTargetRegion));
 
 				// Warp 결과를 받아올 FigureArray // FigureArray to receive the warp result
-				CFLFigureArray flfaResult;
+				CFLFigureArray flfaResult = new CFLFigureArray();
 
 				// Perspective Type으로 Warp 함수 동작 (Perspective, Bilinear 두 타입으로 함수 동작 가능)
 				// Warp function works with perspective type (function can be operated with two types, perspective and bilinear)
-				if((cResult = flfaSource.Warp(flqSourceRegion, flqTargetRegion, out flfaResult, EWarpingType.Perspective)).IsFail())
+				if((cResult = flfaSource.Warp(flqSourceRegion, flqTargetRegion, ref flfaResult, EWarpingType.Perspective)).IsFail())
 				{
 					ErrorPrint(cResult, "Failed to process.\n");
 					break;

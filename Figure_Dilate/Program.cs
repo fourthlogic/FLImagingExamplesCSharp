@@ -130,10 +130,10 @@ namespace Figure_Dilate
 
 				// Dilate 함수 실행 (KernelSize : 21, default kernel : Rectangle)
 				// Dilate function execution (KernelSize : 21, default kernel : Rectangle)
-				CFLFigureArray flfaResult1;
+				CFLFigureArray flfaResult1 = new CFLFigureArray();
 				long i64KernelSize = 21;
 
-				if((res = flrgSourceFig.Dilate(i64KernelSize, i64KernelSize, out flfaResult1)).IsFail())
+				if((res = flrgSourceFig.Dilate(i64KernelSize, i64KernelSize, ref flfaResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
@@ -141,9 +141,9 @@ namespace Figure_Dilate
 
 				// Dilate 함수 실행 (KernelSize : 21, kernel shape : Circle)
 				// Dilate function execution (KernelSize : 21, kernel shape : Circle)
-				CFLFigureArray flfaResult2;
+				CFLFigureArray flfaResult2 = new CFLFigureArray();
 
-				if((res = flrgSourceFig.Dilate(i64KernelSize, i64KernelSize, out flfaResult2, EKernelShape.Circle)).IsFail())
+				if((res = flrgSourceFig.Dilate(i64KernelSize, i64KernelSize, ref flfaResult2, EKernelShape.Circle)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
@@ -151,7 +151,7 @@ namespace Figure_Dilate
 
 				// Dilate 함수 실행 (Figure Kernel : 반지름이 10인 원)
 				// Dilate function execution (Figure Kernel : Circle with radius 10)
-				CFLFigureArray flfaResult3;
+				CFLFigureArray flfaResult3 = new CFLFigureArray();
 
 				CFLEllipse<double> fleKernel = new CFLEllipse<double>(0, 0, 5, 20, 90);
 				CFLEllipse<double> fleForDrawing = new CFLEllipse<double>();
@@ -163,7 +163,7 @@ namespace Figure_Dilate
 
 				fleForDrawing.Offset(flpOffset);
 
-				if((res = flrgSourceFig.Dilate(fleKernel, out flfaResult3)).IsFail())
+				if((res = flrgSourceFig.Dilate(fleKernel, ref flfaResult3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;

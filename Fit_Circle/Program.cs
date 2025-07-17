@@ -131,11 +131,11 @@ namespace Fit_Circle
 				CFLCircle<double> flcResult2 = new CFLCircle<double>();
 				long i64OutlierThresholdCount2 = 1;
 				double f64OutlierThreshold2 = 2.0;
-				List<long> listOutlierIndices2;
+				List<long> listOutlierIndices2 = new List<long>();
 				CFLPointArray flpaOutlier2 = new CFLPointArray();
 
 				// Fit 함수 실행 (Parameter1) // Fit function execution (Parameter1)
-				if((res = flcResult2.Fit(flpaNoise, i64OutlierThresholdCount2, f64OutlierThreshold2, out listOutlierIndices2)).IsFail())
+				if((res = flcResult2.Fit(flpaNoise, i64OutlierThresholdCount2, f64OutlierThreshold2, ref listOutlierIndices2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
@@ -157,11 +157,11 @@ namespace Fit_Circle
 				CFLCircle<double> flcResult3 = new CFLCircle<double>();
 				long i64OutlierThresholdCount3 = 3;
 				double f64OutlierThreshold3 = 1.0;
-				List<long> listOutlierIndices3;
+				List<long> listOutlierIndices3 = new List<long>();
 				CFLPointArray flpaOutlier3 = new CFLPointArray();
 
 				// Fit 함수 실행 (Parameter2) // Fit function execution (Parameter2)
-				if((res = flcResult3.Fit(flpaNoise, i64OutlierThresholdCount3, f64OutlierThreshold3, out listOutlierIndices3)).IsFail())
+				if((res = flcResult3.Fit(flpaNoise, i64OutlierThresholdCount3, f64OutlierThreshold3, ref listOutlierIndices3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;

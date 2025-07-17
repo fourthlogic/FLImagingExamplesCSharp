@@ -110,20 +110,20 @@ namespace Reduce
 
 
 				// Reduce 함수 실행 (Epsilon : 10.0) // Reduce function execution (Epsilon : 10.0)
-				CFLRegion flrgResult1;
+				CFLRegion flrgResult1 = new CFLRegion();
 				double f64Epsilon1 = 10.0;
 
-				if((res = flrgSourceFig.Reduce(f64Epsilon1, true, out flrgResult1)).IsFail())
+				if((res = flrgSourceFig.Reduce(f64Epsilon1, true, ref flrgResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
 				}
 
 				// Reduce 함수 실행 (Epsilon : 15.0) // Reduce function execution (Epsilon : 15.0)
-				CFLRegion flrgResult2;
+				CFLRegion flrgResult2 = new CFLRegion();
 				double f64Epsilon2 = 15.0;
 
-				if((res = flrgSourceFig.Reduce(f64Epsilon2, true, out flrgResult2)).IsFail())
+				if((res = flrgSourceFig.Reduce(f64Epsilon2, true, ref flrgResult2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;

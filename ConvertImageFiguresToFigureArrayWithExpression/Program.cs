@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace GetFigure
+namespace ConvertImageFiguresToFigureArrayWithExpression
 {
 	class Program
 	{
@@ -275,9 +275,9 @@ namespace GetFigure
 				layerResult1.DrawTextCanvas(new TPoint<double>(0, 20), strExpression1, EColor.YELLOW, EColor.BLACK, 13);
 
 				// 조건식을 만족하는 Figure를 flfaResult1에 추출 // Extract the figure that satisfies the conditional expression to flfaResult1
-				CFLFigureArray flfaResult1;
+				CFLFigureArray flfaResult1 = new CFLFigureArray();
 
-				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression1, fliSource, out flfaResult1)).IsFail())
+				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression1, fliSource, ref flfaResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
@@ -291,9 +291,9 @@ namespace GetFigure
 				layerResult2.DrawTextCanvas(new TPoint<double>(0, 20), strExpression2, EColor.YELLOW, EColor.BLACK, 13);
 
 				// 조건식을 만족하는 Figure를 flfaResult2에 추출 // Get the figure that satisfies the conditional expression to flfaResult2
-				CFLFigureArray flfaResult2;
+				CFLFigureArray flfaResult2 = new CFLFigureArray();
 
-				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression2, fliSource, out flfaResult2)).IsFail())
+				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression2, fliSource, ref flfaResult2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
@@ -307,9 +307,9 @@ namespace GetFigure
 				layerResult3.DrawTextCanvas(new TPoint<double>(0, 20), strExpression3, EColor.YELLOW, EColor.BLACK, 13);
 
 				// 조건식을 만족하는 Figure를 flfaResult3에 추출 // Get the figure that satisfies the conditional expression to flfaResult3
-				CFLFigureArray flfaResult3;
+				CFLFigureArray flfaResult3 = new CFLFigureArray();
 
-				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression3, fliSource, out flfaResult3)).IsFail())
+				if((res = CFigureUtilities.ConvertImageFiguresToFigureArrayWithExpression(strExpression3, fliSource, ref flfaResult3)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;

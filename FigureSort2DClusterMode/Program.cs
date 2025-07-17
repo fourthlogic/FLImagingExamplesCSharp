@@ -151,7 +151,7 @@ namespace FigureSort2DClusterMode
 				{
 					CFLFigureArray flfaCluster = (CFLFigureArray)flfaSort2DClusterMode.GetAt(i);
 
-					CFLRect<double> flrBoundary;
+					CFLRect<double> flrBoundary = new CFLRect<double>();
 					flfaCluster.GetBoundaryRect(ref flrBoundary);
 
 					Console.Write("Sort2DClusterMode Cluster No. {0}\n", i);

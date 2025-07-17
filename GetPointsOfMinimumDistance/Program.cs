@@ -134,17 +134,17 @@ namespace GetPointsOfMinimumDistance
 				}
 
 				// Figure 사이의 최소 거리를 나타내는 점을 추출 // Get the point representing the minimum distance between figures
-				CFLPointArray flpaResult1;
+				CFLPointArray flpaResult1 = new CFLPointArray();
 
-				if((res = flcSource1.GetPointsOfMinimumDistance(flqOperand1, out flpaResult1)).IsFail())
+				if((res = flcSource1.GetPointsOfMinimumDistance(flqOperand1, ref flpaResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
-				CFLPointArray flpaResult2;
+				CFLPointArray flpaResult2 = new CFLPointArray();
 
-				if((res = flfaSource2.GetPointsOfMinimumDistance(flfaOperand2, out flpaResult2)).IsFail())
+				if((res = flfaSource2.GetPointsOfMinimumDistance(flfaOperand2, ref flpaResult2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
@@ -153,7 +153,7 @@ namespace GetPointsOfMinimumDistance
 				// Figure 사이의 최소 거리를 계산 // Calculate the minimum distance between figures
 				double f64MinimumDistance1 = 0;
 
-				if((res = flcSource1.GetMinimumDistance(flqOperand1, out f64MinimumDistance1)).IsFail())
+				if((res = flcSource1.GetMinimumDistance(flqOperand1, ref f64MinimumDistance1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
@@ -161,7 +161,7 @@ namespace GetPointsOfMinimumDistance
 
 				double f64MinimumDistance2 = 0;
 
-				if((res = flfaSource2.GetMinimumDistance(flfaOperand2, out f64MinimumDistance2)).IsFail())
+				if((res = flfaSource2.GetMinimumDistance(flfaOperand2, ref f64MinimumDistance2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;

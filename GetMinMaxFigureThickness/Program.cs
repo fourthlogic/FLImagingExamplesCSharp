@@ -108,36 +108,36 @@ namespace GetMinMaxFigureThickness
 				CFLFigure flfSource = CFigureUtilities.LoadFigure("../../ExampleImages/Figure/Thickness1.fig");
 
 				// 도형의 최소 두께를 나타내는 점을 얻어옴 // Get a point representing the minimum thickness of the figure
-				CFLPointArray flpaResultMinPoints1;
+				CFLPointArray flpaResultMinPoints1 = new CFLPointArray();
 
-				if((res = flfSource.GetPointsOfMinimumThickness(out flpaResultMinPoints1)).IsFail())
+				if((res = flfSource.GetPointsOfMinimumThickness(ref flpaResultMinPoints1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
 				// 두께를 측정한 값들에 대해 Trimming 파라미터 적용하여 계산 // Calculated by applying trimming parameters to the measured thickness values
-				CFLPointArray flpaResultMinPoints2;
+				CFLPointArray flpaResultMinPoints2 = new CFLPointArray();
 
-				if((res = flfSource.GetPointsOfMinimumThickness(out flpaResultMinPoints2, 0.01)).IsFail())
+				if((res = flfSource.GetPointsOfMinimumThickness(ref flpaResultMinPoints2, 0.01)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
 				// 도형의 최대 두께를 나타내는 점을 얻어옴 // Get a point representing the maximum thickness of the figure
-				CFLPointArray flpaResultMaxPoints1;
+				CFLPointArray flpaResultMaxPoints1 = new CFLPointArray();
 
-				if((res = flfSource.GetPointsOfMaximumThickness(out flpaResultMaxPoints1)).IsFail())
+				if((res = flfSource.GetPointsOfMaximumThickness(ref flpaResultMaxPoints1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
 				}
 
 				// 두께를 측정한 값들에 대해 Trimming 파라미터 적용하여 계산 // Calculated by applying trimming parameters to the measured thickness values
-				CFLPointArray flpaResultMaxPoints2;
+				CFLPointArray flpaResultMaxPoints2 = new CFLPointArray();
 
-				if((res = flfSource.GetPointsOfMaximumThickness(out flpaResultMaxPoints2, 0.05)).IsFail())
+				if((res = flfSource.GetPointsOfMaximumThickness(ref flpaResultMaxPoints2, 0.05)).IsFail())
 				{
 					ErrorPrint(res, "Failed to process.\n");
 					break;
