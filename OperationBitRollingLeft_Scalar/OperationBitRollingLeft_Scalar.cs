@@ -11,10 +11,18 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationBitRollingLeft_Image
+namespace OperationBitRollingLeft_Scalar
 {
-	class Program
+	class OperationBitRollingLeft_Scalar
 	{
+		enum EType
+		{
+			Source = 0,
+			Destination1,
+			Destination2,
+			ETypeCount,
+		}
+
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -23,14 +31,6 @@ namespace OperationBitRollingLeft_Image
 			Console.WriteLine("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
 			Console.WriteLine("\n");
 			Console.ReadKey();
-		}
-
-		enum EType
-		{
-			Source = 0,
-			Operand,
-			Destination,
-			ETypeCount,
 		}
 
 		[STAThread]
@@ -52,21 +52,21 @@ namespace OperationBitRollingLeft_Image
 			{
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationBitRolling/wave.flif")).IsFail())
+				if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationBitRolling/wave.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Operand 이미지 로드 // Loads the operand image
-				if((res = arrFliImage[(int)EType.Operand].Load("../../ExampleImages/OperationBitRolling/smoke.flif")).IsFail())
+				// Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
+				if((res = arrFliImage[(int)EType.Destination1].Assign(arrFliImage[(int)EType.Source])).IsFail())
 				{
-					ErrorPrint(res, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
-				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-				if((res = arrFliImage[(int)EType.Destination].Assign(arrFliImage[(int)EType.Source])).IsFail())
+				// Destination2 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination2 image as same as source image
+				if((res = arrFliImage[(int)EType.Destination2].Assign(arrFliImage[(int)EType.Source])).IsFail())
 				{
 					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
@@ -79,7 +79,7 @@ namespace OperationBitRollingLeft_Image
 					// 이미지 뷰 생성 // Create image view
 					if((res = arrViewImage[i].Create(i * 512 + 100, 0, i * 512 + 100 + 512, 512)).IsFail())
 					{
-						ErrorPrint(res, "Failed to create the image view.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");;
 						bError = true;
 						break;
 					}
@@ -87,7 +87,7 @@ namespace OperationBitRollingLeft_Image
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 					if((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
 					{
-						ErrorPrint(res, "Failed to set image object on the image view.\n");
+						ErrorPrint(res, "Failed to set image object on the image view.\n");;
 						bError = true;
 						break;
 					}
@@ -106,7 +106,7 @@ namespace OperationBitRollingLeft_Image
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 					if((res = arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i])).IsFail())
 					{
-						ErrorPrint(res, "Failed to synchronize view\n");
+						ErrorPrint(res, "Failed to synchronize window.\n");
 						bError = true;
 						break;
 					}
@@ -115,17 +115,30 @@ namespace OperationBitRollingLeft_Image
 				if(bError)
 					break;
 
-				// Operation BitRollingLeft 객체 생성 // Create Operation BitRollingLeft object
+				// Operation Bit Rolling 객체 생성 // Create Operation Bit Rolling object
 				COperationBitRollingLeft rollingLeft = new COperationBitRollingLeft();
 				// Source 이미지 설정 // Set the source image
 				rollingLeft.SetSourceImage(ref arrFliImage[(int)EType.Source]);
-				// Operand 이미지 설정 // Set the operand image
-				rollingLeft.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Destination 이미지 설정 // Set the destination image
-				rollingLeft.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				rollingLeft.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				// Operation source를 scalar로 설정 // Set operation source to scalar
+				rollingLeft.SetOperationSource(EOperationSource.Scalar);
+				// rollingLeft 값 설정 // Set rollingLeft value
+				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(1.0, 1.0, 1.0);
+				rollingLeft.SetScalarValue(mvScalarValue1);
 
-				// Operation source를 이미지로 설정 // Set operation source to image
-				rollingLeft.SetOperationSource(EOperationSource.Image);
+				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				if((res = rollingLeft.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute operation rollingLeft.");
+					break;
+				}
+
+				// Destination 이미지를 Destination2로 설정 // Set the Destination image to Destination2
+				rollingLeft.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				// rollingLeft 값 설정 // Set rollingLeft value
+				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(7.0, 7.0, 7.0);
+				rollingLeft.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = rollingLeft.Execute()).IsFail())
@@ -161,13 +174,13 @@ namespace OperationBitRollingLeft_Image
 					break;
 				}
 
-				if((res = arrLayer[(int)EType.Operand].DrawTextCanvas(flpZero, "Operand Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(BitRollingLeft 1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = arrLayer[(int)EType.Destination].DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(BitRollingLeft 7)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;

@@ -17,7 +17,7 @@ using System.Net.NetworkInformation;
 
 namespace SemanticSegmentation
 {
-	class Program
+	class UnnamedLabelRemover
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

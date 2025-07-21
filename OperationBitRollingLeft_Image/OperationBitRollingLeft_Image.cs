@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace EmphasizeFilter
+namespace OperationBitRollingLeft_Image
 {
-	class Program
+	class OperationBitRollingLeft_Image
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -28,8 +28,8 @@ namespace EmphasizeFilter
 		enum EType
 		{
 			Source = 0,
-			Destination1,
-			Destination2,
+			Operand,
+			Destination,
 			ETypeCount,
 		}
 
@@ -52,21 +52,21 @@ namespace EmphasizeFilter
 			{
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/EmphasizeFilter/houses.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationBitRolling/wave.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
-				if((res = arrFliImage[(int)EType.Destination1].Assign(arrFliImage[(int)EType.Source])).IsFail())
+				// Operand 이미지 로드 // Loads the operand image
+				if((res = arrFliImage[(int)EType.Operand].Load("../../ExampleImages/OperationBitRolling/smoke.flif")).IsFail())
 				{
-					ErrorPrint(res, "Failed to assign the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Destination2 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination2 image as same as source image
-				if((res = arrFliImage[(int)EType.Destination2].Assign(arrFliImage[(int)EType.Source])).IsFail())
+				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
+				if((res = arrFliImage[(int)EType.Destination].Assign(arrFliImage[(int)EType.Source])).IsFail())
 				{
 					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
@@ -79,7 +79,7 @@ namespace EmphasizeFilter
 					// 이미지 뷰 생성 // Create image view
 					if((res = arrViewImage[i].Create(i * 512 + 100, 0, i * 512 + 100 + 512, 512)).IsFail())
 					{
-						ErrorPrint(res, "Failed to create the image view.\n");;
+						ErrorPrint(res, "Failed to create the image view.\n");
 						bError = true;
 						break;
 					}
@@ -87,7 +87,7 @@ namespace EmphasizeFilter
 					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 					if((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
 					{
-						ErrorPrint(res, "Failed to set image object on the image view.\n");;
+						ErrorPrint(res, "Failed to set image object on the image view.\n");
 						bError = true;
 						break;
 					}
@@ -106,7 +106,7 @@ namespace EmphasizeFilter
 					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 					if((res = arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i])).IsFail())
 					{
-						ErrorPrint(res, "Failed to synchronize window.\n");
+						ErrorPrint(res, "Failed to synchronize view\n");
 						bError = true;
 						break;
 					}
@@ -115,34 +115,22 @@ namespace EmphasizeFilter
 				if(bError)
 					break;
 
-				// EmphasizeFilter 객체 생성 // Create EmphasizeFilter object
-				CEmphasizeFilter emphasizeFilter = new CEmphasizeFilter();
+				// Operation BitRollingLeft 객체 생성 // Create Operation BitRollingLeft object
+				COperationBitRollingLeft rollingLeft = new COperationBitRollingLeft();
 				// Source 이미지 설정 // Set the source image
-				emphasizeFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				rollingLeft.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				// Operand 이미지 설정 // Set the operand image
+				rollingLeft.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Destination 이미지 설정 // Set the destination image
-				emphasizeFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
-				// 파라미터 값 설정 // Set 파라미터 value
-				emphasizeFilter.SetKernel(7);
-                emphasizeFilter.SetFactor(1.5);
-				emphasizeFilter.SetPaddingMethod(EPaddingMethod.DecreasingKernel);
+				rollingLeft.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+
+				// Operation source를 이미지로 설정 // Set operation source to image
+				rollingLeft.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = emphasizeFilter.Execute()).IsFail())
+				if((res = rollingLeft.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation emphasizeFilter.");
-					break;
-				}
-
-				// Destination 이미지를 Destination2로 설정
-				emphasizeFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
-				// 파라미터 값 설정 // Set 파라미터 value
-				emphasizeFilter.SetKernel(3);
-				emphasizeFilter.SetFactor(2.5);
-
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = emphasizeFilter.Execute()).IsFail())
-				{
-					ErrorPrint(res, "Failed to execute operation emphasizeFilter.");
+					ErrorPrint(res, "Failed to execute operation rollingLeft.");
 					break;
 				}
 
@@ -158,7 +146,7 @@ namespace EmphasizeFilter
 					arrLayer[i].Clear();
 				}
 
-				// View 정보를 디스플레이 한다. // View Display information.
+				// View 정보를 디스플레이 한다. // Display the view information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다. // The function DrawTextCanvas below draws a String based on the screen coordinates.
 				// 색상 파라미터를 EGUIViewImageLayerTransparencyColor 으로 넣어주게되면 배경색으로 처리함으로 불투명도를 0으로 한것과 같은 효과가 있다. // If the color parameter is added as EGUIViewImageLayerTransparencyColor, it has the same effect as setting the opacity to 0 by processing it as a background color.
 				// 파라미터 순서 : 레이어 -> 기준 좌표 Figure 객체 -> 문자열 -> 폰트 색 -> 면 색 -> 폰트 크기 -> 실제 크기 유무 -> 각도 ->
@@ -173,13 +161,13 @@ namespace EmphasizeFilter
 					break;
 				}
 
-				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "EmphasizeFilter Mask: 7x7 Factor: 1.5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Operand].DrawTextCanvas(flpZero, "Operand Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-                if ((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "EmphasizeFilter Mask: 3x3 Factor: 2.5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination].DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;

@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace OperationBitRollingRight_Image
 {
-	class Program
+	class OperationBitRollingRight_Image
 	{
 		enum EType
 		{

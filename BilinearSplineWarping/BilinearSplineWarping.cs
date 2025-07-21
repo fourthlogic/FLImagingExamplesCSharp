@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace BicubicSplineWarping
+namespace BilinearSplineWarping
 {
-	class Program
+	class BilinearSplineWarping
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -43,12 +43,9 @@ namespace BicubicSplineWarping
 
 			do
 			{
-
-				// 알고리즘 동작 결과 // Algorithm execution result
-				CResult res = new CResult();
-
+				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if ((res = arrFliImage[0].Load("../../ExampleImages/BicubicSplineWarping/chess.flif")).IsFail())
+				if ((res = arrFliImage[0].Load("../../ExampleImages/BilinearSplineWarping/chess.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
@@ -68,14 +65,14 @@ namespace BicubicSplineWarping
                     break;
                 }
 
-                // Source 이미지 뷰 2 생성 // Create Source image view2
+                // Source 이미지 뷰 2 생성 // Create source image view2
                 if((res = arrViewImage[2].Create(100, 512, 612, 1024)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view.\n");;
                     break;
                 }
 
-                // Destination 이미지 뷰 2 생성 // Create destination2 image view
+                // Destination 이미지 뷰 2 생성 // Create destination image view2
                 if((res = arrViewImage[3].Create(612, 512, 1124, 1024)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view.\n");;
@@ -87,7 +84,7 @@ namespace BicubicSplineWarping
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 4; ++i)
                 {
-                    if ((arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
+                    if ((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
                     {
                         ErrorPrint(res, "Failed to set image object on the image view.\n");;
                         bError = true;
@@ -126,19 +123,14 @@ namespace BicubicSplineWarping
                     break;
                 }
 
-
-                
-
-                // BicubicSplineWarping 객체 생성 // Create BicubicSplineWarping object
-                CBicubicSplineWarping BicubicSplineWarping = new CBicubicSplineWarping();
+                // BilinearSplineWarping 객체 생성 // Create BilinearSplineWarping object
+                CBilinearSplineWarping BilinearSplineWarping = new CBilinearSplineWarping();
                 // Source 이미지 설정 // Set the source image
-                BicubicSplineWarping.SetSourceImage(ref arrFliImage[0]);
+                BilinearSplineWarping.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                BicubicSplineWarping.SetDestinationImage(ref arrFliImage[1]);
+                BilinearSplineWarping.SetDestinationImage(ref arrFliImage[1]);
                 // Interpolation Method 설정 // Set the interpolation method
-                BicubicSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
-                // Extension 설정
-                BicubicSplineWarping.SetExtension(2);
+                BilinearSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
                 // 그리드를 (5,5)로 초기화 // Initialize the grid to (5,5)
                 CFLPoint<int> flpGridSize = new CFLPoint<int>(5, 5);
@@ -187,11 +179,11 @@ namespace BicubicSplineWarping
                 }
 
                 // 위에서 설정한 좌표들을 바탕으로 BicubicSplineWarping 클래스에 Point 배열 설정 // Set the Point array in the BicubicSplineWarping class based on the coordinates set above
-                BicubicSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
+                BilinearSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
 
                 CGUIViewImageLayer layer = arrViewImage[0].GetLayer(0);
 
-                // BicubicSplineWarping 클래스에 설정된 Vertex 정보를 화면에 Display // Display the vertex information set in the BicubicSplineWarping class on the screen.
+                // BicubicSplineWarping 클래스에 설정된 Vertex 정보를 화면에 Display // Display the vertex information set in the BicubicSplineWarping class on the screen
                 for(int k = 0; k < flpaSource.GetCount(); ++k)
                 {
                     CFLPoint<double> flpSource = new CFLPoint<double>();
@@ -205,8 +197,8 @@ namespace BicubicSplineWarping
 
                     flfaArrow = fllLine.MakeArrowWithRatio(0.25, true, 20);
 
-                    // Destination Vertex를 각 View Layer에 Drawing // Drawing the destination vertex on each view layer
-                    if((res = layer.DrawFigureImage(flpDestination, EColor.BLUE, 1)).IsFail())
+					// Destination Vertex를 각 View Layer에 Drawing // Drawing the destination vertex on each view layer
+					if((res = layer.DrawFigureImage(flpDestination, EColor.BLUE, 1)).IsFail())
                     {
                         ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
                         break;
@@ -228,55 +220,53 @@ namespace BicubicSplineWarping
                 }
 
                 // 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
-                if((res = BicubicSplineWarping.Calibrate()).IsFail())
+                if((res = BilinearSplineWarping.Calibrate()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to calibrate BicubicSplineWarping.");
+                    ErrorPrint(res, "Failed to calibrate BilinearSplineWarping.");
                     
                     break;
                 }
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = BicubicSplineWarping.Execute()).IsFail())
+                if ((res = BilinearSplineWarping.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute BicubicSplineWarping.");
+                    ErrorPrint(res, "Failed to execute BilinearSplineWarping.");
                     
                     break;
                 }
 
-                // 두번째 Source 이미지 설정 // set the second source image
-                arrFliImage[2].Assign(arrFliImage[1]);
+				// 두번째 Source 이미지 설정 // Set the second source image
+				arrFliImage[2].Assign(arrFliImage[1]);
 
                 // Source 이미지 설정 // Set the source image
-                BicubicSplineWarping.SetSourceImage(ref arrFliImage[2]);
+                BilinearSplineWarping.SetSourceImage(ref arrFliImage[2]);
                 // Destination 이미지 설정 // Set the destination image
-                BicubicSplineWarping.SetDestinationImage(ref arrFliImage[3]);
+                BilinearSplineWarping.SetDestinationImage(ref arrFliImage[3]);
                 // Interpolation Method 설정 // Set the interpolation method
-                BicubicSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+                BilinearSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
                 // Calibration Src, Destination Points 바꿔서 셋팅 // Set Calibration Src, Destination Points by changing
-                BicubicSplineWarping.SetCalibrationPointArray(flpaDestination, flpaSource);
-				// Extension 설정
-				BicubicSplineWarping.SetExtension(2);
+                BilinearSplineWarping.SetCalibrationPointArray(flpaDestination, flpaSource);
 
-				// 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
-				if((res = BicubicSplineWarping.Calibrate()).IsFail())
+                // 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
+                if((res = BilinearSplineWarping.Calibrate()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to calibrate BicubicSplineWarping.");
+                    ErrorPrint(res, "Failed to calibrate BilinearSplineWarping.");
                     
                     break;
                 }
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = BicubicSplineWarping.Execute()).IsFail())
+                if ((res = BilinearSplineWarping.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute BicubicSplineWarping.");
+                    ErrorPrint(res, "Failed to execute BilinearSplineWarping.");
                     
                     break;
                 }
 
                 layer = arrViewImage[2].GetLayer(0);
 
-                // BicubicSplineWarping 클래스에 설정된 Vertex 정보를 화면에 Display // Display the vertex information set in the BicubicSplineWarping class on the screen
-                for(int k = 0; k < flpaSource.GetCount(); ++k)
+				// BicubicSplineWarping 클래스에 설정된 Vertex 정보를 화면에 Display // Display the vertex information set in the BicubicSplineWarping class on the screen.
+                                for (int k = 0; k < flpaSource.GetCount(); ++k)
                 {
                     CFLPoint<double> flpSource = new CFLPoint<double>();
                     CFLPoint<double> flpDestination = new CFLPoint<double>();
@@ -289,22 +279,22 @@ namespace BicubicSplineWarping
 
                     flfaArrow = fllLine.MakeArrowWithRatio(0.25, true, 20);
 
-					// Destination Vertex를 각 View Layer에 Drawing // Drawing the destination vertex on each view layer
-					if((res = layer.DrawFigureImage(flpDestination, EColor.BLUE, 1)).IsFail())
+                    // Destination Vertex를 각 View Layer에 Drawing // Drawing the destination vertex on each view layer
+                    if((res = layer.DrawFigureImage(flpDestination, EColor.BLUE, 1)).IsFail())
                     {
-                        ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
-                        break;
-                    }
-
-                    // Source Vertex를 각 View Layer에 Drawing // Drawing the source vertex on each view layer
-                    if((res = layer.DrawFigureImage(flpSource, EColor.RED, 1)).IsFail())
-                    {
-                        ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
+						ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
                         break;
                     }
 
 					// Source Vertex를 각 View Layer에 Drawing // Drawing the source vertex on each view layer
-					if((res = layer.DrawFigureImage(flfaArrow, EColor.YELLOW, 1)).IsFail())
+					if((res = layer.DrawFigureImage(flpSource, EColor.RED, 1)).IsFail())
+                    {
+						ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
+                        break;
+                    }
+
+                    // Source Vertex를 각 View Layer에 Drawing // Drawing the source vertex on each view layer
+                    if((res = layer.DrawFigureImage(flfaArrow, EColor.YELLOW, 1)).IsFail())
                     {
                         ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
                         break;

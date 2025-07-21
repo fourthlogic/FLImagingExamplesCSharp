@@ -17,7 +17,7 @@ using System.Net.NetworkInformation;
 
 namespace InstanceSegmentation
 {
-	class Program
+	class InstanceSegmentation
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

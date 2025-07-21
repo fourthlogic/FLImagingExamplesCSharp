@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace IntensityClamping
 {
-    class Program
+    class IntensityClamping
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -18,7 +18,7 @@ using FLImagingCLR.AI;
 
 namespace CharacterBasedOCRDL
 {
-	class Program
+	class CharacterBasedOCRDL
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

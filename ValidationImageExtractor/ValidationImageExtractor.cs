@@ -17,7 +17,7 @@ using System.Net.NetworkInformation;
 
 namespace SemanticSegmentation
 {
-	class Program
+	class ValidationImageExtractor
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

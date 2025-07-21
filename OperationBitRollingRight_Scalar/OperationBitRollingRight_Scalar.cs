@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationBitRollingLeft_Scalar
+namespace OperationBitRollingRight_Scalar
 {
-	class Program
+	class OperationBitRollingRight_Scalar
 	{
 		enum EType
 		{
@@ -22,7 +22,6 @@ namespace OperationBitRollingLeft_Scalar
 			Destination2,
 			ETypeCount,
 		}
-
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -52,7 +51,7 @@ namespace OperationBitRollingLeft_Scalar
 			{
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationBitRolling/wave.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationBitRolling/wave.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -116,34 +115,34 @@ namespace OperationBitRollingLeft_Scalar
 					break;
 
 				// Operation Bit Rolling 객체 생성 // Create Operation Bit Rolling object
-				COperationBitRollingLeft rollingLeft = new COperationBitRollingLeft();
+				COperationBitRollingRight rollingRight = new COperationBitRollingRight();
 				// Source 이미지 설정 // Set the source image
-				rollingLeft.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				rollingRight.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				rollingLeft.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				rollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Operation source를 scalar로 설정 // Set operation source to scalar
-				rollingLeft.SetOperationSource(EOperationSource.Scalar);
-				// rollingLeft 값 설정 // Set rollingLeft value
+				rollingRight.SetOperationSource(EOperationSource.Scalar);
+				// rollingRight 값 설정 // Set rollingRight value
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(1.0, 1.0, 1.0);
-				rollingLeft.SetScalarValue(mvScalarValue1);
+				rollingRight.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = rollingLeft.Execute()).IsFail())
+				if((res = rollingRight.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation rollingLeft.");
+					ErrorPrint(res, "Failed to execute operation rollingRight.");
 					break;
 				}
 
-				// Destination 이미지를 Destination2로 설정 // Set the Destination image to Destination2
-				rollingLeft.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
-				// rollingLeft 값 설정 // Set rollingLeft value
-				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(7.0, 7.0, 7.0);
-				rollingLeft.SetScalarValue(mvScalarValue2);
+				// Destination 이미지를 Destination2로 설정 // Set Destination image to Destination2
+				rollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				// rollingRight 값 설정 // Set rollingRight value
+				CMultiVar<double> mvScalarValue2 = new CMultiVar<double> (7.0, 7.0, 7.0);
+				rollingRight.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = rollingLeft.Execute()).IsFail())
+				if((res = rollingRight.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation rollingLeft.");
+					ErrorPrint(res, "Failed to execute operation rollingRight.");
 					break;
 				}
 
@@ -174,13 +173,13 @@ namespace OperationBitRollingLeft_Scalar
 					break;
 				}
 
-				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(BitRollingLeft 1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(BitRollingRight 1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-                if((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(BitRollingLeft 7)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(BitRollingRight 7)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;

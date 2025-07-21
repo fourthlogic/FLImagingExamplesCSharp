@@ -11,17 +11,10 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationBitRollingRight_Scalar
+namespace EmphasizeFilter
 {
-	class Program
+	class EmphasizeFilter
 	{
-		enum EType
-		{
-			Source = 0,
-			Destination1,
-			Destination2,
-			ETypeCount,
-		}
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -30,6 +23,14 @@ namespace OperationBitRollingRight_Scalar
 			Console.WriteLine("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
 			Console.WriteLine("\n");
 			Console.ReadKey();
+		}
+
+		enum EType
+		{
+			Source = 0,
+			Destination1,
+			Destination2,
+			ETypeCount,
 		}
 
 		[STAThread]
@@ -51,7 +52,7 @@ namespace OperationBitRollingRight_Scalar
 			{
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationBitRolling/wave.flif")).IsFail())
+				if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/EmphasizeFilter/houses.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -114,35 +115,34 @@ namespace OperationBitRollingRight_Scalar
 				if(bError)
 					break;
 
-				// Operation Bit Rolling 객체 생성 // Create Operation Bit Rolling object
-				COperationBitRollingRight rollingRight = new COperationBitRollingRight();
+				// EmphasizeFilter 객체 생성 // Create EmphasizeFilter object
+				CEmphasizeFilter emphasizeFilter = new CEmphasizeFilter();
 				// Source 이미지 설정 // Set the source image
-				rollingRight.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				emphasizeFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				rollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
-				// Operation source를 scalar로 설정 // Set operation source to scalar
-				rollingRight.SetOperationSource(EOperationSource.Scalar);
-				// rollingRight 값 설정 // Set rollingRight value
-				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(1.0, 1.0, 1.0);
-				rollingRight.SetScalarValue(mvScalarValue1);
+				emphasizeFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				// 파라미터 값 설정 // Set 파라미터 value
+				emphasizeFilter.SetKernel(7);
+                emphasizeFilter.SetFactor(1.5);
+				emphasizeFilter.SetPaddingMethod(EPaddingMethod.DecreasingKernel);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = rollingRight.Execute()).IsFail())
+				if((res = emphasizeFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation rollingRight.");
+					ErrorPrint(res, "Failed to execute operation emphasizeFilter.");
 					break;
 				}
 
-				// Destination 이미지를 Destination2로 설정 // Set Destination image to Destination2
-				rollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
-				// rollingRight 값 설정 // Set rollingRight value
-				CMultiVar<double> mvScalarValue2 = new CMultiVar<double> (7.0, 7.0, 7.0);
-				rollingRight.SetScalarValue(mvScalarValue2);
+				// Destination 이미지를 Destination2로 설정
+				emphasizeFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				// 파라미터 값 설정 // Set 파라미터 value
+				emphasizeFilter.SetKernel(3);
+				emphasizeFilter.SetFactor(2.5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = rollingRight.Execute()).IsFail())
+				if((res = emphasizeFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation rollingRight.");
+					ErrorPrint(res, "Failed to execute operation emphasizeFilter.");
 					break;
 				}
 
@@ -158,7 +158,7 @@ namespace OperationBitRollingRight_Scalar
 					arrLayer[i].Clear();
 				}
 
-				// View 정보를 디스플레이 한다. // Display the view information.
+				// View 정보를 디스플레이 한다. // View Display information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다. // The function DrawTextCanvas below draws a String based on the screen coordinates.
 				// 색상 파라미터를 EGUIViewImageLayerTransparencyColor 으로 넣어주게되면 배경색으로 처리함으로 불투명도를 0으로 한것과 같은 효과가 있다. // If the color parameter is added as EGUIViewImageLayerTransparencyColor, it has the same effect as setting the opacity to 0 by processing it as a background color.
 				// 파라미터 순서 : 레이어 -> 기준 좌표 Figure 객체 -> 문자열 -> 폰트 색 -> 면 색 -> 폰트 크기 -> 실제 크기 유무 -> 각도 ->
@@ -173,13 +173,13 @@ namespace OperationBitRollingRight_Scalar
 					break;
 				}
 
-				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(BitRollingRight 1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "EmphasizeFilter Mask: 7x7 Factor: 1.5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-                if ((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(BitRollingRight 7)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "EmphasizeFilter Mask: 3x3 Factor: 2.5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;

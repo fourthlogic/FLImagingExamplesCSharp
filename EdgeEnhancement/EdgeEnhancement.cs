@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace EdgeEnhancement
 {
-    class Program
+    class EdgeEnhancement
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

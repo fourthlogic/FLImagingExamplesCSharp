@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace FreiFilter
 {
-    class Program
+    class FreiFilter
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
