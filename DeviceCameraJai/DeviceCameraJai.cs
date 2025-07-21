@@ -12,9 +12,8 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
-using System.Linq.Expressions;
 
-namespace DeviceCameraArena
+namespace DeviceCameraJai
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase
@@ -55,7 +54,7 @@ namespace DeviceCameraArena
         CFLImage m_fliImage;
     }
 
-    class Program
+    class DeviceCameraJai
     {
         [STAThread]
         static void Main(string[] args)
@@ -65,22 +64,57 @@ namespace DeviceCameraArena
             // 이미지 뷰 선언 // Declare the image view
 	        CGUIViewImage viewImage = new CGUIViewImage();
 
-	        // Arena 카메라 선언
-	        CDeviceCameraArena camArena = new CDeviceCameraArena();
+	        // Jai 카메라 선언
+	        CDeviceCameraJai camJai = new CDeviceCameraJai();
 
-			// 이벤트를 받을 객체 선언
-			CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
-
-			// 카메라에 이벤트 객체 설정
-			camArena.RegisterDeviceEvent(eventImage);
-
-			do
+	        do
 	        {
 		        String strInput = "";
 
+		        CDeviceGenICamTypeBase.EDeviceType eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
 		        bool bAutoDetect = false;
 		        int i32SelectDevice = -1;
+		        CDeviceGenICamBase.EConnectionMethod eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
 		        String strConnection = "";
+
+		        // 장치 타입을 선택합니다.
+		        while(true)
+		        {
+			        Console.Write("1. GigE\n");
+			        Console.Write("2. USB\n");
+			        Console.Write("Select Device Type: ");
+
+                    strInput = Console.ReadLine();
+
+                    int i32Select = 0;
+
+                    if(Int32.TryParse(strInput, out i32Select) == true)
+                    {
+			            bool bSelected = true;
+
+			            switch(i32Select)
+			            {
+			            case 1:
+				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
+				            break;
+
+			            case 2:
+				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.USB;
+				            break;
+
+			            default:
+				            bSelected = false;
+				            break;
+			            }
+
+			            if(bSelected)
+				            break;
+                    }
+
+			        Console.Write("Incorrect input. Please select again.\n\n");
+		        }
+
+		        Console.Write("\n");
 
 		        // 장치 찾기 방법을 선택합니다.
 		        while(true)
@@ -125,8 +159,20 @@ namespace DeviceCameraArena
 		        {
                     List<String> listSerialNumbers = new List<String>();
 
-                    // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
-                    drResult = camArena.GetAutoDetectCameraSerialNumbers(ref listSerialNumbers);
+			        // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
+			        switch(eDeviceType)
+			        {
+			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
+				        drResult = camJai.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
+				        break;
+
+			        case CDeviceGenICamTypeBase.EDeviceType.USB:
+                        drResult = camJai.GetAutoDetectUSBCameraSerialNumbers(ref listSerialNumbers);
+				        break;
+
+			        default:
+				        break;
+			        }
 
 			        if(drResult.IsFail() || listSerialNumbers == null || listSerialNumbers.Count == 0)
 			        {
@@ -168,26 +214,99 @@ namespace DeviceCameraArena
 		        }
 		        else
 		        {
-			        // 시리얼 번호를 입력 받는다.
-				    Console.Write("Input Serial Number: ");
+			        if(eDeviceType == CDeviceGenICamTypeBase.EDeviceType.GigE)
+			        {
+				        // 연결 방법을 선택합니다.
+				        while(true)
+				        {
+					        Console.Write("1. Serial Number\n");
+					        Console.Write("2. IP Address\n");
+					        Console.Write("Select Connection Method: ");
+
+                            strInput = Console.ReadLine();
+
+                            int i32Select = 0;
+                            if(Int32.TryParse(strInput, out i32Select) == true)
+                            {
+                                bool bSelected = true;
+
+					            switch(i32Select)
+					            {
+					            case 1:
+						            eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
+						            break;
+
+					            case 2:
+						            eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.IPAddress;
+						            break;
+
+					            default:
+						            bSelected = false;
+						            break;
+					            }
+
+					            if(bSelected)
+						            break;
+                            }
+
+					        Console.Write("Incorrect input. Please select again.\n\n");
+				        }
+
+				        Console.Write("\n");
+			        }
+			        else
+				        eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
+
+			        // 시리얼 번호 혹은 IP 주소를 입력 받는다.
+			        if(eConnectionMethod == CDeviceGenICamBase.EConnectionMethod.SerialNumber)
+				        Console.Write("Input Serial Number: ");
+			        else
+				        Console.Write("Input IP Address: ");
 
                     strConnection = Console.ReadLine();
 		        }
 
+		        // 이벤트를 받을 객체 선언
+		        CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
+
+		        // 카메라에 이벤트 객체 설정
+		        camJai.RegisterDeviceEvent(eventImage);
+
+		        // 카메라에 장치 타입 설정
+		        camJai.SetDeviceType(eDeviceType);
+
+		        // 인덱스에 해당하는 카메라로 연결을 설정한다.
 		        if(bAutoDetect)
 		        {
-                    // 인덱스에 해당하는 카메라로 연결을 설정한다.
-                    drResult = camArena.AutoDetectCamera(i32SelectDevice);
+			        switch(eDeviceType)
+			        {
+			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
+				        drResult = camJai.AutoDetectGigECamera(i32SelectDevice);
+				        break;
+
+			        case CDeviceGenICamTypeBase.EDeviceType.USB:
+                        drResult = camJai.AutoDetectUSBCamera(i32SelectDevice);
+				        break;
+
+			        default:
+				        break;
+			        }
 		        }
 		        else
 		        {
-				    // 시리얼 번호를 설정합니다.
-				    camArena.SetSerialNumber(strConnection);
+			        // 장치 연결 방법을 설정합니다.
+			        camJai.SetConnectionMethod(eConnectionMethod);
+
+			        if(eConnectionMethod == CDeviceGenICamBase.EConnectionMethod.SerialNumber)
+				        // 시리얼 번호를 설정합니다.
+				        camJai.SetSerialNumber(strConnection);
+			        else
+				        // IP 주소를 설정합니다.
+                        camJai.SetIPAddress(strConnection);
 		        }
 
 		        // 카메라를 초기화 합니다.
-                drResult = camArena.Initialize();
-
+                drResult = camJai.Initialize();
                 if (drResult.IsFail())
 		        {
 			        Console.Write("Failed to initialize the camera.\n");
@@ -205,8 +324,7 @@ namespace DeviceCameraArena
                 eventImage.SetViewImage(viewImage);
 
 		        // 카메라를 Live 합니다.
-                drResult = camArena.Live();
-
+                drResult = camJai.Live();
                 if (drResult.IsFail())
 		        {
 			        Console.Write("Failed to live the camera.\n");
@@ -220,8 +338,8 @@ namespace DeviceCameraArena
 	        while(false);
 
 	        // 카메라의 초기화를 해제합니다.
-	        camArena.Terminate();
-			camArena.ClearDeviceEvents();
+	        camJai.Terminate();
+			camJai.ClearDeviceEvents();
 
 			if (drResult.IsFail())
                 Console.ReadLine();

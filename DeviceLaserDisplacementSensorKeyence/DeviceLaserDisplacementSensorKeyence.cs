@@ -15,7 +15,7 @@ using FLImagingCLR.Devices;
 
 namespace DeviceLaserDisplacementSensorKeyence
 {
-    class Program
+    class DeviceLaserDisplacementSensorKeyence
     {
         public static void ErrorPrint(CResult cResult, string str)
         {

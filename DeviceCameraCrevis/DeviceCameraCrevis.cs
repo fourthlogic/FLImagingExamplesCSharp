@@ -13,7 +13,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
 
-namespace DeviceCameraJai
+namespace DeviceCameraCrevis
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase
@@ -54,7 +54,7 @@ namespace DeviceCameraJai
         CFLImage m_fliImage;
     }
 
-    class Program
+    class DeviceCameraCrevis
     {
         [STAThread]
         static void Main(string[] args)
@@ -64,8 +64,8 @@ namespace DeviceCameraJai
             // 이미지 뷰 선언 // Declare the image view
 	        CGUIViewImage viewImage = new CGUIViewImage();
 
-	        // Jai 카메라 선언
-	        CDeviceCameraJai camJai = new CDeviceCameraJai();
+	        // Crevis 카메라 선언
+	        CDeviceCameraCrevis camCrevis = new CDeviceCameraCrevis();
 
 	        do
 	        {
@@ -163,11 +163,11 @@ namespace DeviceCameraJai
 			        switch(eDeviceType)
 			        {
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
-				        drResult = camJai.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
+				        drResult = camCrevis.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.USB:
-                        drResult = camJai.GetAutoDetectUSBCameraSerialNumbers(ref listSerialNumbers);
+                        drResult = camCrevis.GetAutoDetectUSBCameraSerialNumbers(ref listSerialNumbers);
 				        break;
 
 			        default:
@@ -270,10 +270,10 @@ namespace DeviceCameraJai
 		        CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
 
 		        // 카메라에 이벤트 객체 설정
-		        camJai.RegisterDeviceEvent(eventImage);
+		        camCrevis.RegisterDeviceEvent(eventImage);
 
 		        // 카메라에 장치 타입 설정
-		        camJai.SetDeviceType(eDeviceType);
+		        camCrevis.SetDeviceType(eDeviceType);
 
 		        // 인덱스에 해당하는 카메라로 연결을 설정한다.
 		        if(bAutoDetect)
@@ -281,11 +281,11 @@ namespace DeviceCameraJai
 			        switch(eDeviceType)
 			        {
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
-				        drResult = camJai.AutoDetectGigECamera(i32SelectDevice);
+				        drResult = camCrevis.AutoDetectGigECamera(i32SelectDevice);
 				        break;
 
 			        case CDeviceGenICamTypeBase.EDeviceType.USB:
-                        drResult = camJai.AutoDetectUSBCamera(i32SelectDevice);
+                        drResult = camCrevis.AutoDetectUSBCamera(i32SelectDevice);
 				        break;
 
 			        default:
@@ -295,18 +295,18 @@ namespace DeviceCameraJai
 		        else
 		        {
 			        // 장치 연결 방법을 설정합니다.
-			        camJai.SetConnectionMethod(eConnectionMethod);
+			        camCrevis.SetConnectionMethod(eConnectionMethod);
 
 			        if(eConnectionMethod == CDeviceGenICamBase.EConnectionMethod.SerialNumber)
 				        // 시리얼 번호를 설정합니다.
-				        camJai.SetSerialNumber(strConnection);
+				        camCrevis.SetSerialNumber(strConnection);
 			        else
 				        // IP 주소를 설정합니다.
-                        camJai.SetIPAddress(strConnection);
+                        camCrevis.SetIPAddress(strConnection);
 		        }
 
 		        // 카메라를 초기화 합니다.
-                drResult = camJai.Initialize();
+                drResult = camCrevis.Initialize();
                 if (drResult.IsFail())
 		        {
 			        Console.Write("Failed to initialize the camera.\n");
@@ -324,7 +324,7 @@ namespace DeviceCameraJai
                 eventImage.SetViewImage(viewImage);
 
 		        // 카메라를 Live 합니다.
-                drResult = camJai.Live();
+                drResult = camCrevis.Live();
                 if (drResult.IsFail())
 		        {
 			        Console.Write("Failed to live the camera.\n");
@@ -338,8 +338,8 @@ namespace DeviceCameraJai
 	        while(false);
 
 	        // 카메라의 초기화를 해제합니다.
-	        camJai.Terminate();
-			camJai.ClearDeviceEvents();
+	        camCrevis.Terminate();
+			camCrevis.ClearDeviceEvents();
 
 			if (drResult.IsFail())
                 Console.ReadLine();

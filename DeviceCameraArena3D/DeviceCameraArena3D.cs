@@ -92,7 +92,7 @@ namespace DeviceCameraArena3D
         CGUIView3D m_view3D;
     }
 
-    class Program
+    class DeviceCameraArena3D
     {
         [STAThread]
         static void Main(string[] args)

@@ -16,7 +16,7 @@ using System.Reflection;
 
 namespace DeviceLightController
 {
-	class Program
+	class DeviceLightControllerProtecPSLC_CH06
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -33,8 +33,8 @@ namespace DeviceLightController
 		{
 			CResult res = new CResult();
 
-			// 조명 컨트롤러 ProtecPMSC_CH03 선언 // Declare the ProtecPMSC_CH03 Light Controller
-			CDeviceLightControllerProtecPMSC_CH03 lightController = new CDeviceLightControllerProtecPMSC_CH03();
+			// 조명 컨트롤러 ProtecPSLC_CH06 선언 // Declare the ProtecPSLC_CH06 Light Controller
+			CDeviceLightControllerProtecPSLC_CH06 lightController = new CDeviceLightControllerProtecPSLC_CH06();
 
 			bool bExit = false;
 
@@ -83,7 +83,7 @@ namespace DeviceLightController
 
 					if(operationMode == 1)
 					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPMSC_CH03.EOperationMode.Live);
+						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.Live);
 
 						// On/Off 상태를 설정합니다. // Set the On/Off state.
 						Console.WriteLine("\n1. Live On\n2. Live Off");
@@ -91,6 +91,7 @@ namespace DeviceLightController
 
 						if(int.TryParse(Console.ReadLine(), out var onOff))
 						{
+
 							if(onOff == 1)
 							{
 								lightController.EnableLiveTurnOn(true);
@@ -116,7 +117,7 @@ namespace DeviceLightController
 					}
 					else if(operationMode == 2)
 					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPMSC_CH03.EOperationMode.Strobe);
+						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.Strobe);
 
 						Console.Write("Select Trigger Index: ");
 
@@ -142,7 +143,7 @@ namespace DeviceLightController
 					}
 					else if(operationMode == 3)
 					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPMSC_CH03.EOperationMode.MultiShotStrobe);
+						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.MultiShotStrobe);
 
 						Console.Write("Select Trigger Index: ");
 

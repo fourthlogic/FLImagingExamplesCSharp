@@ -15,7 +15,7 @@ using FLImagingCLR.Devices;
 
 namespace DeviceTriggerAxl
 {
-    class Program
+    class DeviceTriggerAxl
     {
         public static void ErrorPrint(CResult cResult, string str)
         {

@@ -16,7 +16,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace DeviceCameraiRAYPLE
 {
-	class Program
+	class DeviceMotionEziMotionPlusRV6
     {
 		// 모션 타입 enum // motion type enum
 		enum EMotion
@@ -41,69 +41,40 @@ namespace DeviceCameraiRAYPLE
         {
 			CResult res;
 
-			// XMC 선언 // Declare XMC
-			CDeviceMotionXMC motionXMC = new CDeviceMotionXMC();
+			// Ezi Motion Plus R V6 선언 // Declare Ezi Motion Plus R V6
+			CDeviceMotionEziMotionPlusRV6 motionEziMotionPluse = new CDeviceMotionEziMotionPlusRV6();
 
 			do
 			{
 				int i32PortNumber = 0;
 				int i32AxisNumber = 0;
 				double f64Resolution = 0;
-				double f64Jerk = 0;
 				double f64MoveSpeed = 0;
 				double f64AccDecSpeed = 0;
 				double f64Position = 0;
 				EMotion eMotionType = EMotion.SearchOriginPosition;
 				String strInput = "";
-				String strIPAddress = "";
-				int i32ConnectType;
 
-				// 장치 연결 방법을 선택합니다. // Select how to connect the device.
-				Console.Write("1. IP & Port\n");
-				Console.Write("2. Port\n");
-				Console.Write("Other : Exit\n");
-				Console.Write("Select Connect Type: ");
+				// 장치가 연결된 포트 번호를 입력합니다. // Connected devices port number.
+				Console.Write("Port Number : ");
 				strInput = Console.ReadLine();
-				Int32.TryParse(strInput, out i32ConnectType);
+				Int32.TryParse(strInput, out i32PortNumber);
 
-				bool bFailed = false;
-
-				if(i32ConnectType == 1)
-				{
-					// 장치가 연결된 포트 번호를 입력합니다. // Connected devices port number.
-					Console.Write("IP : ");
-					strInput = Console.ReadLine();
-					strIPAddress = strInput;
-				}
-
-				if(i32ConnectType == 2 || i32ConnectType == 1)
-				{
-					// 장치가 연결된 포트 번호를 입력합니다. // Connected devices port number.
-					Console.Write("Port Number : ");
-					strInput = Console.ReadLine();
-					Int32.TryParse(strInput, out i32PortNumber);
-				}
-				else
-					bFailed = true;
-
-				if(bFailed)
-					break;
-
-				// 아이피와 포트 번호를 설정합니다. // Set IP or Port Number.
-				motionXMC.SetConnectionIPAddress(strIPAddress, (UInt16)i32PortNumber);
+				// 포트 번호를 설정합니다. // Set Port Number.
+				motionEziMotionPluse.SetPortNo((byte)i32PortNumber);
 
 				// 연결할 축 갯수 // connected axis Count
-				motionXMC.SetAxisCount(1);
+				motionEziMotionPluse.SetAxisCount(1);
 
 				// 장치 초기화 // devices initialize
-				if((res = motionXMC.Initialize()).IsFail())
+				if((res = motionEziMotionPluse.Initialize()).IsFail())
 				{
 					ErrorPrint(res, "Failed to initialize the motion.\n");
 					break;
 				}
 
 				// 모션 축 객체 // motion axis object
-				CDeviceMotionAxisXMC pDMAxis = (CDeviceMotionAxisXMC)motionXMC.GetMotionAxis(i32AxisNumber);
+				CDeviceMotionAxisEziMotionPlusRV6 pDMAxis = (CDeviceMotionAxisEziMotionPlusRV6)motionEziMotionPluse.GetMotionAxis(i32AxisNumber);
 
 				// 서보 On // Servo On
 				if((res = pDMAxis.SetServoOn(true)).IsFail())
@@ -123,12 +94,6 @@ namespace DeviceCameraiRAYPLE
 				strInput = Console.ReadLine();
 				double.TryParse(strInput, out f64Resolution);
 				pDMAxis.SetResolution(f64Resolution);
-
-				// Axis Jerk을 입력합니다. // Set axis jerk value.
-				Console.Write("Enter axis Jerk(mm/s3) : ");
-				strInput = Console.ReadLine();
-				double.TryParse(strInput, out f64Jerk);
-				pDMAxis.SetJerk(f64Jerk);
 
 				while(true)
 				{
@@ -192,9 +157,9 @@ namespace DeviceCameraiRAYPLE
 						{
 							Thread.Sleep(100);
 						}
-						while(!pDMAxis.IsInMotion());
+						while(pDMAxis.IsSearchOrigin());
 
-						if(!pDMAxis.IsMotionDone())
+						if(!pDMAxis.IsSearchOriginEnd())
 							Console.Write("Failed to search origin position.\n");
 						else
 							Console.Write("Successed to search origin position.\n");
@@ -221,7 +186,7 @@ namespace DeviceCameraiRAYPLE
 							// 절대 좌표로 이동 // move absolute position
 							if((res = pDMAxis.MovePosition(f64Position, f64MoveSpeed, f64AccDecSpeed, f64AccDecSpeed, false)).IsFail())
 							{
-								ErrorPrint(res, "Failed to absolute position.\n");
+								ErrorPrint(res, "Failed to move absolute position.\n");
 								break;
 							}
 
@@ -232,7 +197,7 @@ namespace DeviceCameraiRAYPLE
 							}
 							while(pDMAxis.IsInMotion());
 
-							if(!pDMAxis.GetInposition())
+							if(!pDMAxis.IsMotionDone())
 								Console.Write("Failed to move absolute position.\n");
 							else
 								Console.Write("Successed to move absolute position.\n");
@@ -241,7 +206,7 @@ namespace DeviceCameraiRAYPLE
 						{
 							if((res = pDMAxis.MoveDistance(f64Position, f64MoveSpeed, f64AccDecSpeed, f64AccDecSpeed, false)).IsFail())
 							{
-								ErrorPrint(res, "Failed to incremental position.\n");
+								ErrorPrint(res, "Failed to move incremental position.\n");
 								break;
 							}
 
@@ -252,7 +217,7 @@ namespace DeviceCameraiRAYPLE
 							}
 							while(pDMAxis.IsInMotion());
 
-							if(!pDMAxis.GetInposition())
+							if(!pDMAxis.IsMotionDone())
 								Console.Write("Failed to move incremental position.\n");
 							else
 								Console.Write("Successed to move incremental position.\n");
@@ -264,7 +229,7 @@ namespace DeviceCameraiRAYPLE
 			while(false);
 
 			// Motion 객체에 연결을 종료 합니다. // Terminate the connection to the motion object.
-			if((res = motionXMC.Terminate()).IsFail())
+			if((res = motionEziMotionPluse.Terminate()).IsFail())
 			{
 				ErrorPrint(res, "Failed to terminate the motion.\n");
 			}

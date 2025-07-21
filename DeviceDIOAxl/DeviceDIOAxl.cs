@@ -15,7 +15,7 @@ using FLImagingCLR.Devices;
 
 namespace DeviceDIOAxl
 {
-    class Program
+    class DeviceDIOAxl
     {
         public static void ErrorPrint(CResult cResult, string str)
         {

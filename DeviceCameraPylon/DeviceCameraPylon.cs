@@ -54,7 +54,7 @@ namespace DeviceCameraPylon
         CFLImage m_fliImage;
     }
 
-    class Program
+    class DeviceCameraPylon
     {
         [STAThread]
         static void Main(string[] args)

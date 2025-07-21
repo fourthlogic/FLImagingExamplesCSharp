@@ -13,7 +13,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
 
-namespace DeviceCameraMatrox
+namespace DeviceCameraMulticam
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase
@@ -29,6 +29,9 @@ namespace DeviceCameraMatrox
         public void SetViewImage(CGUIViewImage viewImage)
         {
             m_viewImage = viewImage;
+
+            // 이미지 뷰에 이미지 포인터 설정
+            m_viewImage.SetImagePtr(ref m_fliImage);
         }
 
         // 카메라에서 이미지 취득 시 호출 되는 함수
@@ -42,14 +45,8 @@ namespace DeviceCameraMatrox
 				pDeviceImage.GetAcquiredImage(ref m_fliImage);
 				m_fliImage.Unlock();
 
-				if (m_viewImage.GetImage() != m_fliImage)
-                {
-                    // 이미지 뷰에 이미지 포인터 설정
-                    m_viewImage.SetImagePtr(ref m_fliImage);
-                }
-
-                // 이미지 뷰를 재갱신 한다.
-                m_viewImage.Invalidate();
+				// 이미지 뷰를 재갱신 한다.
+				m_viewImage.Invalidate();
             }
         }
 
@@ -57,7 +54,7 @@ namespace DeviceCameraMatrox
         CFLImage m_fliImage;
     }
 
-    class Program
+    class DeviceCameraMulticam
     {
         public static void ErrorPrint(CResult cResult, string str)
         {
@@ -77,50 +74,68 @@ namespace DeviceCameraMatrox
 	        // 이미지 뷰 선언 // Declare image view
 	        CGUIViewImage viewImage = new CGUIViewImage();
 
-	        // Matrox 카메라 선언
-	        CDeviceCameraMatrox camMatrox = new CDeviceCameraMatrox();
+	        // Multicam 카메라 선언
+	        CDeviceCameraMulticam camMulticam = new CDeviceCameraMulticam();
 
 	        do
 	        {
                 String strInput = "";
 
                 String strCamfilePath = "";
-		        CDeviceCameraMatrox.EDeviceType eDeviceType = CDeviceCameraMatrox.EDeviceType.Unknown;
-		        int i32DeviceIndex = 0;
-		        int i32ModuleIndex = 0;
+		        int i32BoardIndex = 0;
+		        CDeviceCameraMulticam.EBoardTopology eBoardTopology = CDeviceCameraMulticam.EBoardTopology.Mono;
 
-                // Cam file 의 전체 경로를 입력합니다.
-                Console.Write("Enter camfile full path (e.g. C:/Camfile/AnyCamfile.cam): ");
+		        // Cam file 의 전체 경로를 입력합니다.
+		        Console.Write("Enter camfile full path (e.g. C:/Camfile/AnyCamfile.cam): ");
                 strCamfilePath = Console.ReadLine();
 
-                // 장치 타입을 입력합니다.
-                Console.Write("Device type\n");
-                Console.Write("1.Clarity UHD\t\t2.Concord POE\t\t3.GenTL\n");
-                Console.Write("4.GevIQ\t\t\t5.GigE\t\t\t6.Host\n");
-                Console.Write("7.Indio\t\t\t8.Iris GTX\t\t9.Morphis\n");
-                Console.Write("10.Radient eV-CXP\t11.Radient eV-CL\t12.Rapixo Pro CL\n");
-                Console.Write("13.Rapixo CXP\t\t14.Solios\t\t15.USB3\n");
-                Console.Write("Enter device type: ");
+		        // 보드의 인덱스를 입력합니다.
+		        Console.Write("Enter board index: ");
                 strInput = Console.ReadLine();
 
-                int i32DeviceType = 0;
+                if(Int32.TryParse(strInput, out i32BoardIndex) == false)
+                    i32BoardIndex = 0;
 
-                if (Int32.TryParse(strInput, out i32DeviceType) == true)
-                    eDeviceType = (CDeviceCameraMatrox.EDeviceType)i32DeviceType;
+		        // 보드의 Topology를 선택합니다.
+		        while(true)
+		        {
+			        Console.Write("1. Mono\n");
+			        Console.Write("2. Mono deca\n");
+			        Console.Write("3. Mono slow\n");
+			        Console.Write("Select board topology: ");
+                    strInput = Console.ReadLine();
 
-                // 장치의 인덱스를 입력합니다.
-                Console.Write("Enter device index: ");
-                strInput = Console.ReadLine();
+			        int i32Select = 0;
 
-                if(Int32.TryParse(strInput, out i32DeviceIndex) == false)
-                    i32DeviceIndex = 0;
+                    if(Int32.TryParse(strInput, out i32Select) == true)
+                    {
+                        bool bSelected = true;
 
-                // 모듈의 인덱스를 입력합니다.
-                Console.Write("Enter module index: ");
-                strInput = Console.ReadLine();
+			            switch(i32Select)
+			            {
+			            case 1:
+				            eBoardTopology = CDeviceCameraMulticam.EBoardTopology.Mono;
+				            break;
 
-                if (Int32.TryParse(strInput, out i32ModuleIndex) == false)
-                    i32ModuleIndex = 0;
+			            case 2:
+				            eBoardTopology = CDeviceCameraMulticam.EBoardTopology.MonoDeca;
+				            break;
+
+			            case 3:
+				            eBoardTopology = CDeviceCameraMulticam.EBoardTopology.MonoSlow;
+				            break;
+
+			            default:
+				            bSelected = false;
+				            break;
+			            }
+
+			            if(bSelected)
+				            break;
+                    }
+
+			        Console.Write("Incorrect input. Please select again.\n\n");
+		        }
 
 		        Console.Write("\n");
 
@@ -128,16 +143,15 @@ namespace DeviceCameraMatrox
 		        CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
 
 		        // 카메라에 이벤트 객체 설정
-		        camMatrox.RegisterDeviceEvent(eventImage);
+		        camMulticam.RegisterDeviceEvent(eventImage);
 
 		        // 카메라에 장치 설정
-                camMatrox.SetCamFilePath(strCamfilePath);
-                camMatrox.SetDeviceType(eDeviceType);
-                camMatrox.SetDeviceIndex(i32DeviceIndex);
-                camMatrox.SetModuleIndex(i32ModuleIndex);
+		        camMulticam.SetCamFilePath(strCamfilePath);
+		        camMulticam.SetBoardIndex(i32BoardIndex);
+		        camMulticam.SetBoardTopology(eBoardTopology);
 
 		        // 카메라를 초기화 합니다.
-		        if((res = camMatrox.Initialize()).IsFail())
+		        if((res = camMulticam.Initialize()).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to initialize the camera.\n");
 			        break;
@@ -153,7 +167,7 @@ namespace DeviceCameraMatrox
 		        eventImage.SetViewImage(viewImage);
 
 		        // 카메라를 Live 합니다.
-		        if((res = camMatrox.Live()).IsFail())
+		        if((res = camMulticam.Live()).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to live the camera.\n");
 			        break;
@@ -166,8 +180,7 @@ namespace DeviceCameraMatrox
 	        while(false);
 
 	        // 카메라의 초기화를 해제합니다.
-	        camMatrox.Terminate();
-			camMatrox.ClearDeviceEvents();
-		}
+	        camMulticam.Terminate();
+        }
     }
 }

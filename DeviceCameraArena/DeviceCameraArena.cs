@@ -12,8 +12,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
+using System.Linq.Expressions;
 
-namespace DeviceCameraProntoCam
+namespace DeviceCameraArena
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase
@@ -54,7 +55,7 @@ namespace DeviceCameraProntoCam
         CFLImage m_fliImage;
     }
 
-    class Program
+    class DeviceCameraArena
     {
         [STAThread]
         static void Main(string[] args)
@@ -64,14 +65,14 @@ namespace DeviceCameraProntoCam
             // 이미지 뷰 선언 // Declare the image view
 	        CGUIViewImage viewImage = new CGUIViewImage();
 
-	        // ProntoCam 카메라 선언
-	        CDeviceCameraProntoCam camProntoCam = new CDeviceCameraProntoCam();
+	        // Arena 카메라 선언
+	        CDeviceCameraArena camArena = new CDeviceCameraArena();
 
 			// 이벤트를 받을 객체 선언
 			CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
 
 			// 카메라에 이벤트 객체 설정
-			camProntoCam.RegisterDeviceEvent(eventImage);
+			camArena.RegisterDeviceEvent(eventImage);
 
 			do
 	        {
@@ -125,7 +126,7 @@ namespace DeviceCameraProntoCam
                     List<String> listSerialNumbers = new List<String>();
 
                     // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
-                    drResult = camProntoCam.GetAutoDetectCameraSerialNumbers(ref listSerialNumbers);
+                    drResult = camArena.GetAutoDetectCameraSerialNumbers(ref listSerialNumbers);
 
 			        if(drResult.IsFail() || listSerialNumbers == null || listSerialNumbers.Count == 0)
 			        {
@@ -176,16 +177,16 @@ namespace DeviceCameraProntoCam
 		        if(bAutoDetect)
 		        {
                     // 인덱스에 해당하는 카메라로 연결을 설정한다.
-                    drResult = camProntoCam.AutoDetectCamera(i32SelectDevice);
+                    drResult = camArena.AutoDetectCamera(i32SelectDevice);
 		        }
 		        else
 		        {
 				    // 시리얼 번호를 설정합니다.
-				    camProntoCam.SetSerialNumber(strConnection);
+				    camArena.SetSerialNumber(strConnection);
 		        }
 
 		        // 카메라를 초기화 합니다.
-                drResult = camProntoCam.Initialize();
+                drResult = camArena.Initialize();
 
                 if (drResult.IsFail())
 		        {
@@ -204,7 +205,7 @@ namespace DeviceCameraProntoCam
                 eventImage.SetViewImage(viewImage);
 
 		        // 카메라를 Live 합니다.
-                drResult = camProntoCam.Live();
+                drResult = camArena.Live();
 
                 if (drResult.IsFail())
 		        {
@@ -219,8 +220,8 @@ namespace DeviceCameraProntoCam
 	        while(false);
 
 	        // 카메라의 초기화를 해제합니다.
-	        camProntoCam.Terminate();
-			camProntoCam.ClearDeviceEvents();
+	        camArena.Terminate();
+			camArena.ClearDeviceEvents();
 
 			if (drResult.IsFail())
                 Console.ReadLine();

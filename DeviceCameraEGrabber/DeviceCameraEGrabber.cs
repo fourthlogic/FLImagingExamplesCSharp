@@ -54,7 +54,7 @@ namespace DeviceCameraEGrabber
         CFLImage m_fliImage;
     }
 
-    class Program
+    class DeviceCameraEGrabber
     {
         public static void ErrorPrint(CResult cResult, string str)
         {

@@ -92,7 +92,7 @@ namespace DeviceCameraMechEye
         CGUIView3D m_view3D;
     }
 
-    class Program
+    class DeviceCameraMechEye
     {
         [STAThread]
         static void Main(string[] args)

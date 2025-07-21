@@ -15,7 +15,7 @@ using FLImagingCLR.Devices;
 
 namespace DeviceMotionAxl
 {
-	class Program
+	class DeviceMotionAxl
     {
 		// 모션 기능 enum // motion feature enum
 		enum EMotionFeature

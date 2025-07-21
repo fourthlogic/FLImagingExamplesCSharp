@@ -16,7 +16,7 @@ using System.Reflection;
 
 namespace DeviceLightController
 {
-	class Program
+	class DeviceLightControllerProtecPSC_CH03
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -33,8 +33,8 @@ namespace DeviceLightController
 		{
 			CResult res = new CResult();
 
-			// 조명 컨트롤러 ProtecPSLC_CH06 선언 // Declare the ProtecPSLC_CH06 Light Controller
-			CDeviceLightControllerProtecPSLC_CH06 lightController = new CDeviceLightControllerProtecPSLC_CH06();
+			// 조명 컨트롤러 ProtecPSC_CH03 선언 // Declare the ProtecPSC_CH03 Light Controller
+			CDeviceLightControllerProtecPSC_CH03 lightController = new CDeviceLightControllerProtecPSC_CH03();
 
 			bool bExit = false;
 
@@ -60,7 +60,6 @@ namespace DeviceLightController
 					// 작업 모드를 선택합니다. // Select the operation mode.
 					Console.WriteLine("1. Live Mode");
 					Console.WriteLine("2. Strobe Mode");
-					Console.WriteLine("3. Multi Shot Strobe");
 					Console.WriteLine("0. Exit\n");
 					Console.Write("Select Number: ");
 
@@ -83,7 +82,7 @@ namespace DeviceLightController
 
 					if(operationMode == 1)
 					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.Live);
+						lightController.SetOperationMode(CDeviceLightControllerProtecPSC_CH03.EOperationMode.Live);
 
 						// On/Off 상태를 설정합니다. // Set the On/Off state.
 						Console.WriteLine("\n1. Live On\n2. Live Off");
@@ -91,7 +90,6 @@ namespace DeviceLightController
 
 						if(int.TryParse(Console.ReadLine(), out var onOff))
 						{
-
 							if(onOff == 1)
 							{
 								lightController.EnableLiveTurnOn(true);
@@ -117,7 +115,7 @@ namespace DeviceLightController
 					}
 					else if(operationMode == 2)
 					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.Strobe);
+						lightController.SetOperationMode(CDeviceLightControllerProtecPSC_CH03.EOperationMode.Strobe);
 
 						Console.Write("Select Trigger Index: ");
 
@@ -135,37 +133,6 @@ namespace DeviceLightController
 								{
 									// 조명 값을 설정합니다. // Set the light value.
 									lightController.SetStrobe(i32triggerIndex, channel, (UInt16)strobeValue);
-								}
-							}
-						}
-
-						Console.Clear();
-					}
-					else if(operationMode == 3)
-					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.MultiShotStrobe);
-
-						Console.Write("Select Trigger Index: ");
-
-						if(int.TryParse(Console.ReadLine(), out i32triggerIndex))
-						{
-							lightController.EnableLiveTurnOn(true);
-
-							Console.Write("Select Memory Index: ");
-
-							if(int.TryParse(Console.ReadLine(), out var memoryIndex))
-							{
-								Console.Write("Select Channel Index: ");
-
-								if(int.TryParse(Console.ReadLine(), out var channel))
-								{
-									Console.Write("Input Strobe Value (0 ~ 4000us): ");
-
-									if(int.TryParse(Console.ReadLine(), out var strobeValue))
-									{
-										// 조명 값을 설정합니다. // Set the light value.
-										lightController.SetMultiShotStrobe(i32triggerIndex, memoryIndex, channel, (UInt16)strobeValue);
-									}
 								}
 							}
 						}

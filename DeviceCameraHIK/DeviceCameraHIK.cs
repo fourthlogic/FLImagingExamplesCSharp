@@ -54,7 +54,7 @@ namespace DeviceCameraHIK
         CFLImage m_fliImage;
     }
 
-    class Program
+    class DeviceCameraHIK
     {
         [STAThread]
         static void Main(string[] args)

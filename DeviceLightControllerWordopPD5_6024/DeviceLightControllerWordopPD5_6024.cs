@@ -16,7 +16,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace DeviceLightController
 {
-	class Program
+	class DeviceLightControllerWordopPD5_6024
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
