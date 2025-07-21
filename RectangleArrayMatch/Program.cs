@@ -171,9 +171,9 @@ namespace Match
 				long i64ResultCount = arrayMatch.GetResultCount();
 				double f64Score = 0, f64Angle = 0;
 				// 검출 결과 배열의 점수를 가져옵니다. // Get the score of the detection result array.
-				arrayMatch.GetResultForArrayScore(ref f64Score);
+				arrayMatch.GetResultArrayScore(ref f64Score);
 				// 검출 결과 배열의 각도를 가져옵니다. // Get the angle of the detection result array.
-				arrayMatch.GetResultForArrayAngle(ref f64Angle);
+				arrayMatch.GetResultArrayAngle(ref f64Angle);
 
 				for(int i = 0; i < i64ResultCount; ++i)
 				{
