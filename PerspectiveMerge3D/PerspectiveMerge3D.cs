@@ -16,7 +16,7 @@ using System.Collections;
 
 namespace PerspectiveMerge3D
 {
-	class Program
+	class PerspectiveMerge3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

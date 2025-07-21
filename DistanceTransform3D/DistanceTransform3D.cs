@@ -16,7 +16,7 @@ using System.Collections;
 
 namespace DistanceTransform3D
 {
-	class Program
+	class DistanceTransform3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

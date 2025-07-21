@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace OperationBinaryComplement
 {
-    class Program
+    class OperationBinaryComplement_Image
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

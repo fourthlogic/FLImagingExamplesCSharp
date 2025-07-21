@@ -16,7 +16,7 @@ using System.Collections;
 
 namespace PointCloudGenerator3D
 {
-	class Program
+	class PointCloudGenerator3D
 	{
         public static void ErrorPrint(CResult cResult, string str)
         {

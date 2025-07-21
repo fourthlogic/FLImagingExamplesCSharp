@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace Projection3D
 {
-    class Program
+    class Projection3D
     {
         public static void ErrorPrint(CResult cResult, string str)
         {

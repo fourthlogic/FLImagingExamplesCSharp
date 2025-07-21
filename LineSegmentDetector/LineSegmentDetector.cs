@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace LineSegmentDetector
 {
-	class Program
+	class LineSegmentDetector
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

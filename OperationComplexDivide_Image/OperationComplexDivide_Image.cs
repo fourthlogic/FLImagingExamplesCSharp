@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationComplexDivide
 {
-	class Program
+	class OperationComplexDivide_Image
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

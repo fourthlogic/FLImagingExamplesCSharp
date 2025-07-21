@@ -13,7 +13,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ConvexHull3D
 {
-    class Program
+    class ConvexHull3D
     {
         public static void ErrorPrint(CResult cResult, string str)
         {

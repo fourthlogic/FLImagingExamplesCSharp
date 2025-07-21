@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationLeadingOnes
 {
-	class Program
+	class OperationLeadingOnes
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
