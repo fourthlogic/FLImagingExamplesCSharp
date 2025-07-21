@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace IlluminateFilter
 {
-	class Program
+	class IlluminateFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

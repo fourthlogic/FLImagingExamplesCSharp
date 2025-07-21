@@ -16,7 +16,7 @@ using FLImagingCLR.AI;
 
 namespace Classifier
 {
-	class Program
+	class Classifier_PageNameLabel
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -34,17 +34,17 @@ namespace Classifier
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliLearnImage = new CFLImage();
 			CFLImage fliSourceImage = new CFLImage();
-			CFLImage fliValidateIamge = new CFLImage();
 
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageSource = new CGUIViewImage();
-			CGUIViewImage viewImageValidate = new CGUIViewImage();
 
 			// 그래프 뷰 선언 // Declare the graph view
 			CGUIViewGraph viewGraph = new CGUIViewGraph();
-			bool bTerminated = false;
+
 			CResult res = new CResult();
+
+			bool bTerminated = false;
 
 			do
 			{
@@ -52,45 +52,32 @@ namespace Classifier
 				Thread.Sleep(1000);
 
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("../../ExampleImages/Classifier/CircleLabel_Learn.flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/Classifier/mnist1000.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				if((res = fliSourceImage.Load("../../ExampleImages/Classifier/CircleLabel_Validation.flif")).IsFail())
-				{
-					ErrorPrint(res, "Failed to load the image file. \n");
-					break;
-				}
-
-				if((res = fliValidateIamge.Load("../../ExampleImages/Classifier/CircleLabel_Validation.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/Classifier/mnist100.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImageLearn.Create(100, 0, 612, 512)).IsFail())
+				if((res = viewImageLearn.Create(100, 0, 600, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
-				if((res = viewImageSource.Create(612, 0, 1124, 512)).IsFail())
+				if((res = viewImageSource.Create(600, 0, 1100, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
-
-				if((res = viewImageValidate.Create(1124, 0, 1636, 512)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view. \n");
-					break;
-				}
-
 				// Graph 뷰 생성 // Create graph view
-				if((res = viewGraph.Create(100, 512, 612, 1024)).IsFail())
+				if((res = viewGraph.Create(1100, 0, 1600, 500)).IsFail())
 				{
 					ErrorPrint(res, " Failed to create the graph view. \n");
 					break;
@@ -109,14 +96,8 @@ namespace Classifier
 					break;
 				}
 
-				if((res = viewImageValidate.SetImagePtr(ref fliValidateIamge)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view. \n");
-					break;
-				}
-
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageSource.SynchronizePointOfView(ref viewImageValidate)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageSource)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
@@ -126,12 +107,10 @@ namespace Classifier
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
 				CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
-				CGUIViewImageLayer layerValidate = viewImageValidate.GetLayer(0);
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
 				layerSource.Clear();
-				layerValidate.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -153,12 +132,6 @@ namespace Classifier
 					break;
 				}
 
-				if((res = layerValidate.DrawTextCanvas(flpPoint, "VALIDATE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text\n");
-					break;
-				}
-
 				// Classifier 객체 생성 // Create Classifier object
 				CClassifierDL classifier = new CClassifierDL();
 
@@ -172,7 +145,7 @@ namespace Classifier
 				// 분류할 이미지 설정 // Set the image to classify
 				classifier.SetInferenceImage(ref fliSourceImage);
 				classifier.SetInferenceResultImage(ref fliSourceImage);
-				
+
 				// 학습할 Classifier 모델 설정 // Set up the Classifier model to learn
 				classifier.SetModel(CClassifierDL.EModel.FL_CF_C);
 				// 학습할 Classifier 모델 설정 // Set up the Classifier model to learn
@@ -183,7 +156,7 @@ namespace Classifier
 				classifier.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
-				optSpec.SetLearningRate(1e-3f);
+				optSpec.SetLearningRate(.001f);
 				// 설정한 Optimizer를 Classifier에 적용 // Apply Optimizer that we set up to Classifier
 				classifier.SetLearningOptimizerSpec(optSpec);
 				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
@@ -213,7 +186,7 @@ namespace Classifier
 
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					eLearnResult = classifier.Learn();					
+					eLearnResult = classifier.Learn();
 					bTerminated = true;
 				}, null);
 
@@ -327,12 +300,11 @@ namespace Classifier
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.Invalidate(true);
 				viewImageSource.Invalidate(true);
-				viewImageValidate.Invalidate(true);
 				// 그래프 뷰를 갱신 // Update the Graph view.
 				viewGraph.Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageLearn.IsAvailable() && viewImageSource.IsAvailable() && viewImageValidate.IsAvailable() && viewGraph.IsAvailable())
+				while(viewImageLearn.IsAvailable() && viewImageSource.IsAvailable() && viewGraph.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);

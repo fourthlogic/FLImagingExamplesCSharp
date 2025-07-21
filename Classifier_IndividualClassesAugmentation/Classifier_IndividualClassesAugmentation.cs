@@ -16,7 +16,7 @@ using FLImagingCLR.AI;
 
 namespace Classifier
 {
-	class Program
+	class Classifier_IndividualClassesAugmentation
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -34,17 +34,17 @@ namespace Classifier
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliLearnImage = new CFLImage();
 			CFLImage fliSourceImage = new CFLImage();
+			CFLImage fliValidateIamge = new CFLImage();
 
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageSource = new CGUIViewImage();
+			CGUIViewImage viewImageValidate = new CGUIViewImage();
 
 			// 그래프 뷰 선언 // Declare the graph view
 			CGUIViewGraph viewGraph = new CGUIViewGraph();
-
-			CResult res = new CResult();
-
 			bool bTerminated = false;
+			CResult res = new CResult();
 
 			do
 			{
@@ -52,32 +52,45 @@ namespace Classifier
 				Thread.Sleep(1000);
 
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("../../ExampleImages/Classifier/mnist1000.flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/Classifier/mnist100.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				if((res = fliSourceImage.Load("../../ExampleImages/Classifier/mnist100.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/Classifier/mnist20.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file. \n");
+					break;
+				}
+
+				if((res = fliValidateIamge.Load("../../ExampleImages/Classifier/mnist20.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImageLearn.Create(100, 0, 600, 500)).IsFail())
+				if((res = viewImageLearn.Create(100, 0, 612, 512)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
-				if((res = viewImageSource.Create(600, 0, 1100, 500)).IsFail())
+				if((res = viewImageSource.Create(612, 0, 1124, 512)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
+
+				if((res = viewImageValidate.Create(1124, 0, 1636, 512)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view. \n");
+					break;
+				}
+
 				// Graph 뷰 생성 // Create graph view
-				if((res = viewGraph.Create(1100, 0, 1600, 500)).IsFail())
+				if((res = viewGraph.Create(100, 512, 612, 1024)).IsFail())
 				{
 					ErrorPrint(res, " Failed to create the graph view. \n");
 					break;
@@ -96,8 +109,14 @@ namespace Classifier
 					break;
 				}
 
+				if((res = viewImageValidate.SetImagePtr(ref fliValidateIamge)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
+					break;
+				}
+
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImageSource)).IsFail())
+				if((res = viewImageSource.SynchronizePointOfView(ref viewImageValidate)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
@@ -107,10 +126,12 @@ namespace Classifier
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
 				CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
+				CGUIViewImageLayer layerValidate = viewImageValidate.GetLayer(0);
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
 				layerSource.Clear();
+				layerValidate.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -127,6 +148,12 @@ namespace Classifier
 				}
 
 				if((res = layerSource.DrawTextCanvas(flpPoint, "INFERENCE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = layerValidate.DrawTextCanvas(flpPoint, "VALIDATE", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
@@ -156,7 +183,7 @@ namespace Classifier
 				classifier.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
-				optSpec.SetLearningRate(.001f);
+				optSpec.SetLearningRate(1e-3f);
 				// 설정한 Optimizer를 Classifier에 적용 // Apply Optimizer that we set up to Classifier
 				classifier.SetLearningOptimizerSpec(optSpec);
 				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
@@ -180,6 +207,78 @@ namespace Classifier
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				classifier.SetLearningAutoSaveSpec(autoSaveSpec);
+
+				// Augmentation Preset 설정 // Set Augmentation Preset
+				CAugmentationSpec augSpec1 = new CAugmentationSpec();
+
+				augSpec1.EnableAugmentation(true);
+				augSpec1.SetCommonActivationRate(1.000000);
+				augSpec1.SetCommonIoUThreshold(0.000000);
+				augSpec1.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
+
+				augSpec1.EnableRotation(true);
+				augSpec1.SetRotationParam(-30.000000, 30.000000, false, false, 1.000000);
+
+				CAugmentationPreset AugmentationPreset1 = new CAugmentationPreset();
+				List<int> flaClassNum1 = new List<int>();
+				flaClassNum1.Add(0);
+				flaClassNum1.Add(1);
+				AugmentationPreset1.SetClassNumbers(flaClassNum1);
+				AugmentationPreset1.SetName("Class 0");
+				AugmentationPreset1.SetAugmentationSpec(augSpec1);
+				classifier.AddLearningAugmentationPreset(AugmentationPreset1);
+				CAugmentationSpec augSpec2 = new CAugmentationSpec();
+
+				augSpec2.EnableAugmentation(true);
+				augSpec2.SetCommonActivationRate(0.500000);
+				augSpec2.SetCommonIoUThreshold(0.000000);
+				augSpec2.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
+
+				augSpec2.EnableRotation(true);
+				augSpec2.SetRotationParam(-180.000000, 180.000000, false, false, 1.000000);
+
+				CAugmentationPreset AugmentationPreset2 = new CAugmentationPreset();
+				List<int> flaClassNum2 = new List<int>();
+				flaClassNum2.Add(2);
+				AugmentationPreset2.SetClassNumbers(flaClassNum2);
+				AugmentationPreset2.SetName("Class 2");
+				AugmentationPreset2.SetAugmentationSpec(augSpec2);
+				classifier.AddLearningAugmentationPreset(AugmentationPreset2);
+				CAugmentationSpec augSpec3 = new CAugmentationSpec();
+
+				augSpec3.EnableAugmentation(true);
+				augSpec3.SetCommonActivationRate(1.000000);
+				augSpec3.SetCommonIoUThreshold(0.000000);
+				augSpec3.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
+
+				augSpec3.EnableScale(true);
+				augSpec3.SetScaleParam(0.670000, 1.500000, 0.670000, 1.500000, true, 1.000000);
+
+				CAugmentationPreset AugmentationPreset3 = new CAugmentationPreset();
+				List<int> flaClassNum3 = new List<int>();
+				flaClassNum3.Add(3);
+				AugmentationPreset3.SetClassNumbers(flaClassNum3);
+				AugmentationPreset3.SetName("Class 3");
+				AugmentationPreset3.SetAugmentationSpec(augSpec3);
+				classifier.AddLearningAugmentationPreset(AugmentationPreset3);
+				CAugmentationSpec augSpec4 = new CAugmentationSpec();
+
+				augSpec4.EnableAugmentation(true);
+				augSpec4.SetCommonActivationRate(1.000000);
+				augSpec4.SetCommonIoUThreshold(0.000000);
+				augSpec4.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
+
+				augSpec4.EnableQuarterRotation(true);
+				augSpec4.SetQuarterRotationParam(true, true, true, true, 1.000000);
+
+				CAugmentationPreset AugmentationPreset4 = new CAugmentationPreset();
+				List<int> flaClassNum4 = new List<int>();
+				flaClassNum4.Add(4);
+				flaClassNum4.Add(5);
+				AugmentationPreset4.SetClassNumbers(flaClassNum4);
+				AugmentationPreset4.SetName("Class 4,5");
+				AugmentationPreset4.SetAugmentationSpec(augSpec4);
+				classifier.AddLearningAugmentationPreset(AugmentationPreset4);
 
 				// Classifier learn function을 진행하는 스레드 생성 // Create the Classifier Learn function thread
 				CResult eLearnResult = new CResult();
@@ -300,11 +399,12 @@ namespace Classifier
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.Invalidate(true);
 				viewImageSource.Invalidate(true);
+				viewImageValidate.Invalidate(true);
 				// 그래프 뷰를 갱신 // Update the Graph view.
 				viewGraph.Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageLearn.IsAvailable() && viewImageSource.IsAvailable() && viewGraph.IsAvailable())
+				while(viewImageLearn.IsAvailable() && viewImageSource.IsAvailable() && viewImageValidate.IsAvailable() && viewGraph.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);

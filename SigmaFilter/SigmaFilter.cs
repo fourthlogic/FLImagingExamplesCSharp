@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace SigmaFilter
 {
-	class Program
+	class SigmaFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

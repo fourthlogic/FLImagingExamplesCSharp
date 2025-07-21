@@ -17,7 +17,7 @@ using System.Net.NetworkInformation;
 
 namespace SemanticSegmentation
 {
-	class Program
+	class LabelRenamer
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

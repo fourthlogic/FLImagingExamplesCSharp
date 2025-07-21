@@ -11,11 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-
-namespace KirschFilter
+namespace OperationLesser
 {
-
-    class Program
+    class OperationLesser_Scalar
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -39,7 +37,7 @@ namespace KirschFilter
 			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult result = new CResult();
 
-			for(int i = 0; i < 2; ++i)
+			for (int i = 0; i < 2; ++i)
             {
                 arrFliImage[i] = new CFLImage();
                 arrViewImage[i] = new CGUIViewImage();
@@ -48,7 +46,7 @@ namespace KirschFilter
             do
             {
                 // Source 이미지 로드 // Load source image
-                if ((result = arrFliImage[0].Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
+                if ((result = arrFliImage[0].Load("../../ExampleImages/OperationLesser/block.flif")).IsFail())
                 {
                     ErrorPrint(result, "Failed to load the image file.\n");
                     break;
@@ -105,22 +103,40 @@ namespace KirschFilter
                     break;
                 }
 
-				// CKirschFilter 객체 생성 // Create CKirschFilter object
-				CKirschFilter kirschFilter = new CKirschFilter();
-                // Source 이미지 설정 // Set source image
-                kirschFilter.SetSourceImage(ref arrFliImage[0]);
-                // Destination 이미지 설정 // Set destination image
-                kirschFilter.SetDestinationImage(ref arrFliImage[1]);
+                CMultiVar<double> mvScalar = new CMultiVar<double>(128);
 
-                // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((result = kirschFilter.Execute()).IsFail())
+				// COperationLesser 객체 생성 // Create COperationLesser object
+				COperationLesser lesser = new COperationLesser();
+                // Source 이미지 설정 // Set source image
+                lesser.SetSourceImage(ref arrFliImage[0]);
+                // Destination 이미지 설정 // Set destination image
+                lesser.SetDestinationImage(ref arrFliImage[1]);
+                // Scalar Operation 모드로 설정 // Set operation mode to scalar
+                lesser.SetOperationSource(EOperationSource.Scalar);
+				// Lesser Scalar 값 설정 // Set comparsion value of lesser operation
+				lesser.SetScalarValue(mvScalar);
+
+				// Source가 Scalar보다 작을 경우 값 설정 // Set output value if source is lesser than scalar
+				CMultiVar<double> mvInRange = new CMultiVar<double>(255.0);
+
+				lesser.SetRangeValue(mvInRange);
+
+				// Source가 Scalar보다 크거나 같을 경우 값 설정 // Set output value if source is greater than or equal to scalar
+				CMultiVar<double> mvOutOfRange = new CMultiVar<double>(50.0);
+
+				lesser.SetOutOfRangeValue(mvOutOfRange);
+
+				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				if ((result = lesser.Execute()).IsFail())
                 {
-                    ErrorPrint(result, "Failed to execute KirschFilter.");
+                    ErrorPrint(result, "Failed to execute operation lesser.");
                     Console.WriteLine(result.GetString());
                     break;
                 }
 
-                CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[3];
+                CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[2];
+                arrLayer[0] = new CGUIViewImageLayer();
+                arrLayer[1] = new CGUIViewImageLayer();
 
                 for (int i = 0; i < 2; ++i)
                 {
@@ -148,7 +164,7 @@ namespace KirschFilter
                     break;
                 }
 
-                if ((result = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((result = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image(Lesser 128)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(result, "Failed to draw text\n");
                     break;
