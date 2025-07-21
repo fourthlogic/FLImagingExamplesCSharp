@@ -101,6 +101,7 @@ namespace PointCloudGenerator3D
 					break;
 				}
 
+                // 출력 뷰의 시점을 계산 // Calculate the viewpoint of destination view
 				viewObject.UpdateAll();
 				view3DDst.UpdateObject(0);
 				view3DDst.ZoomFit();
