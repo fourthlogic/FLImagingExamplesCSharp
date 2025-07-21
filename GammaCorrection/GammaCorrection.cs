@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace GammaCorrection
 {
-	class Program
+	class GammaCorrection
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

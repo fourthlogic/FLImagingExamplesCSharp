@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace FLDenoisingType1
+namespace Decolorization
 {
-	class Program
+	class Decolorization
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -41,7 +41,7 @@ namespace FLDenoisingType1
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/Decolorization/Pattern.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -111,53 +111,32 @@ namespace FLDenoisingType1
 					break;
 				}
 
-				// FLDenoisingType1 객체 생성 // Create FLDenoisingType1 object
-				CFLDenoisingType1 FLDenoisingType1 = new CFLDenoisingType1();
+				// Decolorization 객체 생성 // Create Decolorization object
+				CDecolorization Decolorization = new CDecolorization();
 
 				// Source 이미지 설정 // Set source image 
-				if((res = FLDenoisingType1.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = Decolorization.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = FLDenoisingType1.SetDestinationImage(ref fliConvertedImage)).IsFail())
+				if((res = Decolorization.SetDestinationImage(ref fliConvertedImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Destination Image.");
 					break;
 				}
 
-				// Kernel 크기 설정 // Set the Kernel Size
-				if((res = (FLDenoisingType1.SetKernel(5))).IsFail())
+				// 연산 속도 설정 // Set the Operation Speed
+				if((res = (Decolorization.SetOperationSpeed(CDecolorization.EOperationSpeed.Normal))).IsFail())
 				{
-					ErrorPrint(res, "Failed to set Kernel Size.");
-					break;
-				}
-
-				// Sigma 설정 // Set the Sigma
-				if((res = (FLDenoisingType1.SetSigma(2))).IsFail())
-				{
-					ErrorPrint(res, "Failed to set Sigma.");
-					break;
-				}
-
-				// Amplitude 설정 // Set the Amplitude
-				if((res = (FLDenoisingType1.SetAmplitude(20))).IsFail())
-				{
-					ErrorPrint(res, "Failed to set Amplitude.");
-					break;
-				}
-
-				// Operation Mode 설정 // Set the Operation Mode
-				if((res = (FLDenoisingType1.SetOperationMode(CFLDenoisingType1.EOperationMode.Normal))).IsFail())
-				{
-					ErrorPrint(res, "Failed to set Operation Mode.");
+					ErrorPrint(res, "Failed to set Operation Speed.");
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (FLDenoisingType1.Execute())).IsFail())
+				if((res = (Decolorization.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

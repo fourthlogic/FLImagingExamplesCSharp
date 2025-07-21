@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace ColorFilterArrayConverter
+namespace CameraMotionDeblurring
 {
-	class Program
+	class CameraMotionDeblurring
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -45,7 +45,7 @@ namespace ColorFilterArrayConverter
 			{
 				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[0].Load("../../ExampleImages/ColorFilterArrayConverter/Library_RGGB.flif")).IsFail())
+				if((res = arrFliImage[0].Load("../../ExampleImages/CameraMotionDeblurring/CircuitBlur.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -102,26 +102,20 @@ namespace ColorFilterArrayConverter
 					break;
 				}
 
-				// ColorFilterArrayConverter 객체 생성 // Create ColorFilterArrayConverter object
-				CColorFilterArrayConverter ColorFilterArrayConverter = new CColorFilterArrayConverter();
+				// CameraMotionDeblurring 객체 생성 // Create CameraMotionDeblurring object
+				CCameraMotionDeblurring CameraMotionDeblurring = new CCameraMotionDeblurring();
 				// Source 이미지 설정 // Set the source image
-				ColorFilterArrayConverter.SetSourceImage(ref arrFliImage[0]);
+				CameraMotionDeblurring.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				ColorFilterArrayConverter.SetDestinationImage(ref arrFliImage[1]);
+				CameraMotionDeblurring.SetDestinationImage(ref arrFliImage[1]);
 
-				// Bayer Pattern 설정 // Set Bayer Pattern
-				ColorFilterArrayConverter.SetBayerPattern(CColorFilterArrayConverter.EBayerPattern.RGGB);
-
-				// Bayer Interpolation 설정 // Set Bayer Interpolation
-				ColorFilterArrayConverter.SetBayerInterpolation(CColorFilterArrayConverter.EBayerInterpolation.Adaptive2);
-
-				// 채널 타입 설정 // Set Channel Type
-				ColorFilterArrayConverter.SetChannelType(CColorFilterArrayConverter.EChannelType.Separation);
+				// Mode 설정 // Set Mode
+				CameraMotionDeblurring.EnableWithEstimation(true);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = ColorFilterArrayConverter.Execute()).IsFail())
+				if((res = CameraMotionDeblurring.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ColorFilterArrayConverter.");
+					ErrorPrint(res, "Failed to execute CameraMotionDeblurring.");
 					ErrorPrint(res, res.GetString());
 					break;
 				}

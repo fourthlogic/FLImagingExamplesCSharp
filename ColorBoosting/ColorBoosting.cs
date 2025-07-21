@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace Decolorization
+namespace ColorBoosting
 {
-	class Program
+	class ColorBoosting
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -41,7 +41,7 @@ namespace Decolorization
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/Decolorization/Pattern.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ColorBoosting/Butterfly.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -111,32 +111,32 @@ namespace Decolorization
 					break;
 				}
 
-				// Decolorization 객체 생성 // Create Decolorization object
-				CDecolorization Decolorization = new CDecolorization();
+				// ColorBoosting 객체 생성 // Create ColorBoosting object
+				CColorBoosting ColorBoosting = new CColorBoosting();
 
 				// Source 이미지 설정 // Set source image 
-				if((res = Decolorization.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = ColorBoosting.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = Decolorization.SetDestinationImage(ref fliConvertedImage)).IsFail())
+				if((res = ColorBoosting.SetDestinationImage(ref fliConvertedImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Destination Image.");
 					break;
 				}
 
-				// 연산 속도 설정 // Set the Operation Speed
-				if((res = (Decolorization.SetOperationSpeed(CDecolorization.EOperationSpeed.Normal))).IsFail())
+				// 연산 타입 설정 // Set the Operation Type
+				if((res = (ColorBoosting.SetOperationType(CColorBoosting.EOperationType.Constant))).IsFail())
 				{
-					ErrorPrint(res, "Failed to set Operation Speed.");
+					ErrorPrint(res, "Failed to set Operation Type.");
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Decolorization.Execute())).IsFail())
+				if((res = (ColorBoosting.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

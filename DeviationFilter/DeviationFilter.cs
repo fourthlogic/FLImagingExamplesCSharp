@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace DeviationFilter
 {
-	class Program
+	class DeviationFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

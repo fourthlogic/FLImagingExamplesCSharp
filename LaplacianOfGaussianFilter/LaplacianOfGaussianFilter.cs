@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace LaplacianOfGaussianFilter
 {
-	class Program
+	class LaplacianOfGaussianFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

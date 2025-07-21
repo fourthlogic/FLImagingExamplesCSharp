@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationLogicalOr
+namespace OperationLogicalAnd
 {
-    class Program
+    class OperationLogicalAnd_Image
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -28,63 +28,63 @@ namespace OperationLogicalOr
 		[STAThread]
         static void Main(string[] args)
         {
-            // 이미지 객체 선언 // Declare the image object
-            CFLImage fliSourceImage = new CFLImage();
+	        // 이미지 객체 선언 // Declare the image object
+	        CFLImage fliSourceImage = new CFLImage();
             CFLImage fliOperandImage = new CFLImage();
             CFLImage fliDestinationImage = new CFLImage();
 
-            // 이미지 뷰 선언 // Declare the image view
-            CGUIViewImage viewImageSource = new CGUIViewImage();
+	        // 이미지 뷰 선언 // Declare the image view
+	        CGUIViewImage viewImageSource = new CGUIViewImage();
             CGUIViewImage viewImageOperand = new CGUIViewImage();
             CGUIViewImage viewImageDestination = new CGUIViewImage();
 
 			CResult res = new CResult();
 
 			do
-            {
+	        {
                 // Source 이미지 로드 // Load the source image
-                if ((res = fliSourceImage.Load("../../ExampleImages/OperationLogicalOr/Cat.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/OperationLogicalAnd/circle.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Operand 이미지 로드 // Loads the operand image
-                if ((res = fliOperandImage.Load("../../ExampleImages/OperationLogicalOr/Space.flif")).IsFail())
+                if ((res = fliOperandImage.Load("../../ExampleImages/OperationLogicalAnd/square.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
-                // Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
-                if ((res = fliDestinationImage.Assign(fliSourceImage)).IsFail())
+                // Destination 이미지 로드 // Loads the destination image
+                if((res = fliDestinationImage.Create(250, 250)).IsFail())
                 {
-                    ErrorPrint(res, "Failed to assign the image file. \n");
+                    ErrorPrint(res, "Failed to create the image file. \n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
-                if ((res = viewImageSource.Create(100, 0, 612, 512)).IsFail())
+                if ((res = viewImageSource.Create(100, 0, 600, 500)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Operand 이미지 뷰 생성 // Create operand image view
-                if ((res = viewImageOperand.Create(612, 0, 1124, 512)).IsFail())
+                if ((res = viewImageOperand.Create(600, 0, 1100, 500)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
-                if ((res = viewImageDestination.Create(1124, 0, 1636, 512)).IsFail())
+                if ((res = viewImageDestination.Create(1100, 0, 1600, 500)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
-                // Source 이미지 뷰와 Operand 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the source view and the operand view
+                // Source 이미지 뷰와 Operand 이미지 뷰의 시점을 동기화 한다
                 if ((res = viewImageSource.SynchronizePointOfView(ref viewImageOperand)).IsFail())
                 {
                     ErrorPrint(res, "Failed to synchronize view. \n");
@@ -105,7 +105,7 @@ namespace OperationLogicalOr
                     break;
                 }
 
-                // Operand 이미지 뷰에 이미지를 디스플레이 // Display the image in the operand image view // Display the image in the operand image view
+                // Operand 이미지 뷰에 이미지를 디스플레이 // Display the image in the operand image view
                 if ((res = viewImageOperand.SetImagePtr(ref fliOperandImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
@@ -133,8 +133,8 @@ namespace OperationLogicalOr
                     break;
                 }
 
-                // OperationLogicalOr 객체 생성 // Create OperationLogicalOr object
-                COperationLogicalOr logical = new COperationLogicalOr();
+                // OperationLogicalAnd 객체 생성 // Create OperationLogicalAnd object
+                COperationLogicalAnd logical = new COperationLogicalAnd();
 
                 // Source 이미지 설정 // Set the source image
                 logical.SetSourceImage(ref fliSourceImage);
@@ -148,10 +148,14 @@ namespace OperationLogicalOr
                 // Image Operation 소스로 설정 // Set Operation Source to image
                 logical.SetOperationSource(EOperationSource.Image);
 
+				// 공백 색상 칠하기 모드 해제 // Set the Fill blank color mode false
+				// 결과 이미지가 이미 존재할 경우 연산되지 않은 영역을 공백 색상으로 칠하지 않고 원본 그대로 둔다. // If the destination image already exists, the uncomputed area is left intact without being painted in a blank color.
+				logical.EnableFillBlankColorMode(false);
+
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = logical.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute operation logical or. \n");
+                    ErrorPrint(res, "Failed to execute Operation LogicalAnd.");
                     break;
                 }
 
@@ -167,25 +171,25 @@ namespace OperationLogicalOr
                 layerDestination.Clear();
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
+                CFLPoint<double> flpPoint = new CFLPoint<double> (0, 0);
 
                 if ((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+		        {
                     ErrorPrint(res, "Failed to draw text. \n");
-                    break;
-                }
+		        	break;
+		        }
 
                 if ((res = layerOperand.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+		        {
                     ErrorPrint(res, "Failed to draw text. \n");
-                    break;
-                }
+		        	break;
+		        }
 
                 if ((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+		        {
                     ErrorPrint(res, "Failed to draw text. \n");
-                    break;
-                }
+		        	break;
+		        }
 
                 // 이미지 뷰를 갱신 // Update image view
                 viewImageSource.Invalidate(true);
@@ -195,8 +199,8 @@ namespace OperationLogicalOr
                 // 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
                 while (viewImageSource.IsAvailable() && viewImageOperand.IsAvailable() && viewImageDestination.IsAvailable())
                     Thread.Sleep(1);
-            }
-            while (false);
+	        }
+	        while(false);
         }
     }
 }

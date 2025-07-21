@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationLogicalNand
+namespace OperationLogicalAnd
 {
-    class Program
+    class OperationLogicalAnd_Scalar
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -41,7 +41,7 @@ namespace OperationLogicalNand
 			do
             {
                 // Source 이미지 로드 // Load the source image
-                if ((res = fliSourceImage.Load("../../ExampleImages/OperationLogicalNand/Cat.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/OperationLogicalAnd/Cat.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
@@ -96,8 +96,8 @@ namespace OperationLogicalNand
                     break;
                 }
 
-                // OperationLogicalNand 객체 생성 // Create OperationLogicalNand object
-                COperationLogicalNand logical = new COperationLogicalNand();
+                // OperationLogicalAnd 객체 생성 // Create OperationLogicalAnd object
+                COperationLogicalAnd logical = new COperationLogicalAnd();
 
                 // Source 이미지 설정 // Set the source image
                 logical.SetSourceImage(ref fliDestinationImage);
@@ -117,7 +117,7 @@ namespace OperationLogicalNand
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = logical.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute Operation LogicalNand. \n");
+                    ErrorPrint(res, "Failed to execute Operation LogicalAnd. \n");
                     break;
                 }
 

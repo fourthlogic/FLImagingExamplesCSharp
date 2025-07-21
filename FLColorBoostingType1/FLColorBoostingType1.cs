@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLColorBoostingType1
 {
-	class Program
+	class FLColorBoostingType1
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

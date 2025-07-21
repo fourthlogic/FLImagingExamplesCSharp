@@ -13,7 +13,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace Statistics
 {
-	class Program
+	class FuzzyEntropy
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

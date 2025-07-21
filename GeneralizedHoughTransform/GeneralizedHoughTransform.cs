@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace GeneralizedHoughTransform
 {
-	class Program
+	class GeneralizedHoughTransform
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationLogicalXor
+namespace OperationLogicalOr
 {
-    class Program
+    class OperationLogicalOr_Image
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -43,14 +43,14 @@ namespace OperationLogicalXor
 			do
             {
                 // Source 이미지 로드 // Load the source image
-                if ((res = fliSourceImage.Load("../../ExampleImages/OperationLogicalXor/Cat.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/OperationLogicalOr/Cat.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Operand 이미지 로드 // Loads the operand image
-                if ((res = fliOperandImage.Load("../../ExampleImages/OperationLogicalXor/Space.flif")).IsFail())
+                if ((res = fliOperandImage.Load("../../ExampleImages/OperationLogicalOr/Space.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
@@ -105,14 +105,14 @@ namespace OperationLogicalXor
                     break;
                 }
 
-                // Operand 이미지 뷰에 이미지를 디스플레이 // Display the image in the operand image view
+                // Operand 이미지 뷰에 이미지를 디스플레이 // Display the image in the operand image view // Display the image in the operand image view
                 if ((res = viewImageOperand.SetImagePtr(ref fliOperandImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
-                // Destiantion 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
+                // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
                 if ((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
@@ -133,8 +133,8 @@ namespace OperationLogicalXor
                     break;
                 }
 
-                // OperationLogicalXor 객체 생성 // Create OperationLogicalXor object
-                COperationLogicalXor logical = new COperationLogicalXor();
+                // OperationLogicalOr 객체 생성 // Create OperationLogicalOr object
+                COperationLogicalOr logical = new COperationLogicalOr();
 
                 // Source 이미지 설정 // Set the source image
                 logical.SetSourceImage(ref fliSourceImage);
@@ -151,7 +151,7 @@ namespace OperationLogicalXor
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = logical.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute operation logical xor. \n");
+                    ErrorPrint(res, "Failed to execute operation logical or. \n");
                     break;
                 }
 

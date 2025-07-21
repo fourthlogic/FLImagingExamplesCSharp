@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationTangentH
 {
-	class Program
+	class OperationTangentH
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

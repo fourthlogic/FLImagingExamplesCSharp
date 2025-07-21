@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace OperationLogicalNand
 {
-    class Program
+    class OperationLogicalNand_Image
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

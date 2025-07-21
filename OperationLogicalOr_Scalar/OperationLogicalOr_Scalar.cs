@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace OperationLogicalOr
 {
-    class Program
+    class OperationLogicalOr_Scalar
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

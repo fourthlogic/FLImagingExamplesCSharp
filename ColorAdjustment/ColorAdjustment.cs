@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace ColorAdjustment
 {
-	class Program
+	class ColorAdjustment
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

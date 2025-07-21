@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationSineH
 {
-	class Program
+	class OperationSineH
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

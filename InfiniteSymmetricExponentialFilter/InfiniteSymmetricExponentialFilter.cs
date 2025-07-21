@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace InfiniteSymmetricExponentialFilter
 {
-	class Program
+	class InfiniteSymmetricExponentialFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

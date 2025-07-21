@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace Convolution_Gaussian
 {
-	class Program
+	class GaussFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
