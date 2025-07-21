@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace OutFocusDeblurring
 {
-	class Program
+	class OutFocusDeblurring
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

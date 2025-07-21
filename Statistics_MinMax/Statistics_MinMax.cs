@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace Statistics
 {
-    class Program
+    class Statistics_MinMax
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -38,22 +38,22 @@ namespace Statistics
 
 			do
             {
-                // 이미지 로드 // Load image
-                if ((res = fliImage.Load("../../ExampleImages/Statistics/StatisticsSource.flif")).IsFail())
-                {
-                    ErrorPrint(res, "Failed to load the image file.");
-                    break;
-                }
+				// 이미지 로드 // Load image
+				if((res = fliImage.Load("../../ExampleImages/Statistics/StatisticsSource.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.");
+					break;
+				}
 
-                // 이미지 뷰 생성 // Create image view
-                if ((res = viewImage.Create(400, 0, 1150, 500)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to create the image view.");
-                    break;
-                }
+				// 이미지 뷰 생성 // Create image view
+				if((res = viewImage.Create(400, 0, 1150, 500)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.");
+					break;
+				}
 
-                // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-                if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
+				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
+				if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
                 {
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
@@ -62,27 +62,27 @@ namespace Statistics
                 // Statistics 객체 생성 // Create Statistics object
                 CImageStatistics statistics = new CImageStatistics();
 
-                // ROI 범위 설정 // Set the ROI value
-                CFLRect<Int32> flrROI = new CFLRect<Int32>(264, 189, 432, 364);
+				// ROI 범위 설정 // Set the ROI value
+				CFLRect<Int32> flrROI = new CFLRect<Int32>(264, 189, 432, 364);
 
-                // Source 이미지 설정 // Set the Source Image
-                statistics.SetSourceImage(ref fliImage);
+				// Source 이미지 설정 // Set the Source Image
+				statistics.SetSourceImage(ref fliImage);
                 // Source ROI 설정 // Set the Source ROI
                 statistics.SetSourceROI(flrROI);
 
                 // 결과값을 받아올 CMultiVarD 컨테이너 생성 // Create the CMultiVarD object to push the result
-                CMultiVar<double> mvSum = new CMultiVar<double>();
-                CMultiVar<double> mvSumOfSquares = new CMultiVar<double>();
+                CMultiVar<double> mvMin = new CMultiVar<double>();
+                CMultiVar<double> mvMax = new CMultiVar<double>();
 
-				// 이미지 전체(혹은 ROI 영역) 픽셀값의 합을 구하는 함수 // Function that calculate the sum of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetSum(ref mvSum)).IsFail())
+				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
+				if((res = statistics.GetMin(ref mvMin)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
-                // 이미지 전체(혹은 ROI 영역) 픽셀값의 제곱합을 구하는 함수
-                if ((res = statistics.GetSumOfSquares(ref mvSumOfSquares)).IsFail()) // Function that calculate the sum of squares of the pixel value of the image(or the region of ROI)
+				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
+				if((res = statistics.GetMax(ref mvMax)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -93,18 +93,18 @@ namespace Statistics
                 statistics.SetTrimming(0.4, CImageStatistics.ETrimmingLocation.Upper);
 
                 // trimming 된 결과값을 받아올 CMultiVarD 컨테이너 생성 // Create the CMultiVarD object to push the trimmed result
-                CMultiVar<double> mvTrimmingSum = new CMultiVar<double>();
-                CMultiVar<double> mvTrimmingSumOfSquares = new CMultiVar<double>();
+                CMultiVar<double> mvTrimmingMin = new CMultiVar<double>();
+                CMultiVar<double> mvTrimmingMax = new CMultiVar<double>();
 
-                // 이미지 전체(혹은 ROI 영역) 픽셀값의 합을 구하는 함수 // Function that calculate the sum of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetSum(ref mvTrimmingSum)).IsFail())
+                // 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
+                if((res = statistics.GetMin(ref mvTrimmingMin)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
-                // 이미지 전체(혹은 ROI 영역) 픽셀값의 제곱합을 구하는 함수 // Function that calculate the sum of squares of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetSumOfSquares(ref mvTrimmingSumOfSquares)).IsFail())
+                // 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
+                if((res = statistics.GetMax(ref mvTrimmingMax)).IsFail())
                 {
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -121,26 +121,26 @@ namespace Statistics
                 if ((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
                     ErrorPrint(res, "Failed to draw figure");
 
+                string strMinValue, strMaxValue;
+                strMinValue = String.Format("Min Of Region : {0}", mvMin.GetAt(0));
+                strMaxValue = String.Format("Max Of Region : {0}", mvMax.GetAt(0));
+
+                string strTrimmingMinValue, strTrimmingMaxValue;
+                strTrimmingMinValue = String.Format("Min Of Trimmed Region : {0}", mvTrimmingMin.GetAt(0));
+                strTrimmingMaxValue = String.Format("Max Of Trimmed Region : {0}", mvTrimmingMax.GetAt(0));
+
                 string strTrimming = String.Format("Trimming Lower : {0}, Upper : {1}", statistics.GetTrimming(CImageStatistics.ETrimmingLocation.Lower), statistics.GetTrimming(CImageStatistics.ETrimmingLocation.Upper));
 
-                string strSumValue, strSumOfSquaresValue;
-                strSumValue = String.Format("Sum Of Region : {0}", mvSum.GetAt(0));
-                strSumOfSquaresValue = String.Format("Sum of Squares of Region : {0}", mvSumOfSquares.GetAt(0));
-
-                string strTrimmingSumValue, strTrimmingSumOfSquaresValue;
-                strTrimmingSumValue = String.Format("Sum Of Region : {0}", mvTrimmingSum.GetAt(0));
-                strTrimmingSumOfSquaresValue = String.Format("Sum of Squares of Region : {0}", mvTrimmingSumOfSquares.GetAt(0));
-
-				Console.WriteLine(strSumValue);
-				Console.WriteLine(strSumOfSquaresValue);
-				Console.WriteLine(strTrimming);
-				Console.WriteLine(strTrimmingSumValue);
-				Console.WriteLine(strTrimmingSumOfSquaresValue);
-
+                Console.WriteLine(strMinValue);
+                Console.WriteLine(strMaxValue);
+                Console.WriteLine(strTrimming);
+                Console.WriteLine(strTrimmingMinValue);
+                Console.WriteLine(strTrimmingMaxValue);
+                
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strSumValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
@@ -149,7 +149,7 @@ namespace Statistics
                 flpPoint.Offset(0, 30);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strSumOfSquaresValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
@@ -167,7 +167,7 @@ namespace Statistics
                 flpPoint.Offset(0, 30);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingSumValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
@@ -176,16 +176,24 @@ namespace Statistics
                 flpPoint.Offset(0, 30);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingSumOfSquaresValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((res = layer.DrawFigureImage(flrROI, EColor.GREEN, 1, EColor.LIGHTGREEN, EGUIViewImagePenStyle.Solid, 0.5F, 0.5F)).IsFail())
-                    ErrorPrint(res, "Failed to draw figure.\n");
+                CFLRect<double> flrMinRegion = new CFLRect<double>(429, 336, 430, 337);
+                CFLRect<double> flrMaxRegion = new CFLRect<double>(492, 370, 493, 371);
+                flrMinRegion.Inflate(0.5);
+                flrMaxRegion.Inflate(0.5);
 
                 if ((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
+                    ErrorPrint(res, "Failed to draw figure.\n");
+
+                if ((res = layer.DrawFigureImage(flrMinRegion, EColor.BLUE, 1, EColor.LIGHTBLUE, EGUIViewImagePenStyle.Solid, 0.5F, 0.5F)).IsFail())
+                    ErrorPrint(res, "Failed to draw figure.\n");
+
+                if ((res = layer.DrawFigureImage(flrMaxRegion, EColor.LIGHTRED, 1, EColor.RED, EGUIViewImagePenStyle.Solid, 0.5F, 0.5F)).IsFail())
                     ErrorPrint(res, "Failed to draw figure.\n");
 
                 // 이미지 뷰를 갱신 합니다. // Update image view

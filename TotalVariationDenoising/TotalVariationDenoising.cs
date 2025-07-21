@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace TotalVariationDenoising
 {
-	class Program
+	class TotalVariationDenoising
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace Statistics
 {
-    class Program
+    class Statistics_Median_Quartile
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

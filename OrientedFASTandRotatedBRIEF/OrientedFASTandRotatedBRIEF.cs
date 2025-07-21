@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OrientedFASTandRotatedBRIEF
 {
-	class Program
+	class OrientedFASTandRotatedBRIEF
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

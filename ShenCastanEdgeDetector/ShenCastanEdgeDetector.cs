@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ShenCastanEdgeDetector
 {
-	class Program
+	class ShenCastanEdgeDetector
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -10,11 +10,12 @@ using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
+using static FLImagingCLR.Devices.CDeviceGenICamBase;
 
 
-namespace ThinPlateSplineWarping
+namespace WhiteBalance
 {
-	class Program
+	class WhiteBalance
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -35,9 +36,6 @@ namespace ThinPlateSplineWarping
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] arrViewImage = new CGUIViewImage[2];
 
-			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult res = new CResult();
-
 			for(int i = 0; i < 2; ++i)
 			{
 				arrFliImage[i] = new CFLImage();
@@ -46,10 +44,18 @@ namespace ThinPlateSplineWarping
 
 			do
 			{
+				CResult res;
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[0].Load("../../ExampleImages/ThinPlateSplineWarping/Undistortion.flif")).IsFail())
+				if((res = arrFliImage[0].Load("../../ExampleImages/WhiteBalance/WBTest.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
+
+				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
+				if((res = arrFliImage[1].Assign(arrFliImage[0])).IsFail())
+				{
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
@@ -97,97 +103,24 @@ namespace ThinPlateSplineWarping
 					break;
 				}
 
-				// ThinPlateSplineWarping 객체 생성 // Create ThinPlateSplineWarping object
-				CThinPlateSplineWarping ThinPlateSplineWarping = new CThinPlateSplineWarping();
+				// WhiteBalance 객체 생성 // Create WhiteBalance object
+				CWhiteBalance WhiteBalance = new CWhiteBalance();
 				// Source 이미지 설정 // Set the source image
-				ThinPlateSplineWarping.SetSourceImage(ref arrFliImage[0]);
+				WhiteBalance.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				ThinPlateSplineWarping.SetDestinationImage(ref arrFliImage[1]);
-				// Interpolation Method 설정 // Set the interpolation method
-				ThinPlateSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				WhiteBalance.SetDestinationImage(ref arrFliImage[1]);
 
-				// 그리드를 (5,5)로 초기화
-				CFLPoint<int> flpGridSize = new CFLPoint<int>(5, 5);
+				// 보정 방법 설정 // Set correction method
+				WhiteBalance.SetCorrectionMethod(CWhiteBalance.ECorrectionMethod.ColorTemperature);
 
-				CFLPoint<int> flpGridIndex = new CFLPoint<int>();
-
-				CFLPointArray flpaSource = new CFLPointArray();
-				CFLPointArray flpaDestination = new CFLPointArray();
-
-				double f64ScaleX = arrFliImage[0].GetWidth() / 4.0;
-				double f64ScaleY = arrFliImage[0].GetHeight() / 4.0;
-
-				for(int y = 0; y < flpGridSize.y; ++y)
-				{
-					flpGridIndex.y = y;
-
-					for(int x = 0; x < flpGridSize.x; ++x)
-					{
-						flpGridIndex.x = x;
-
-						// Grid Index와 같은 좌표로 Source 좌표를 설정 // Set source vertex same as the grid index
-						CFLPoint<double> flpSource = new CFLPoint<double>(flpGridIndex.x * f64ScaleX, flpGridIndex.y * f64ScaleY);
-						// Grid Index와 같은 좌표에서 미세한 랜덤 값을 부여해서 왜곡된 Destination 좌표 설정 // Set distorted destination coordinates by giving fine random values in coordinates such as Grid Index
-						CFLPoint<double> flpDistortion = new CFLPoint<double>((flpGridIndex.x + CRandomGenerator.Double(-0.2, 0.2)) * f64ScaleX, (flpGridIndex.y + CRandomGenerator.Double(-0.2, 0.2)) * f64ScaleY);
-
-						flpaSource.PushBack(flpSource);
-						flpaDestination.PushBack(flpDistortion);
-					}
-				}
-
-				// 위에서 설정한 좌표들을 바탕으로 ThinPlateSplineMapping 클래스에 Point 배열 설정
-				ThinPlateSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
-
-				CGUIViewImageLayer layer = arrViewImage[0].GetLayer(0);
-
-				// ThinPlateSplineMapping 클래스에 설정된 Vertex 정보를 화면에 Display
-				for(int k = 0; k < flpaSource.GetCount(); ++k)
-				{
-					CFLPoint<double> flpSource = new CFLPoint<double>();
-					CFLPoint<double> flpDestination = new CFLPoint<double>();
-
-					flpSource = flpaSource.GetAt(k);
-					flpDestination = flpaDestination.GetAt(k);
-
-					// Source Vertex를 Source 이미지 뷰 Layer에 그리기 // Draw the source vertex on the source image view layer
-					CFLLine<double> fllLine = new CFLLine<double>(flpSource, flpDestination);
-					CFLFigureArray flfaArrow = new CFLFigureArray();
-
-					// 선분을 화살표로 변경 // Change a line to an arrow
-					flfaArrow = fllLine.MakeArrowWithRatio(0.25, true, 20);
-
-					if(layer.DrawFigureImage(flpDestination, EColor.BLUE, 1).IsFail())
-					{
-						ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
-						break;
-					}
-
-					if(layer.DrawFigureImage(flpSource, EColor.RED, 1).IsFail())
-					{
-						ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
-						break;
-					}
-
-					if(layer.DrawFigureImage(flfaArrow, EColor.YELLOW, 1).IsFail())
-					{
-						ErrorPrint(res, "Failed to draw figure objects on the image view.\n");
-						break;
-					}
-				}
-
-				// 앞서 설정된 Source Image, Calibration Point Array를 기반으로 Calibrate 수행 // Calibrate based on previously set Source Image, Calibration Point Array
-				if((res = ThinPlateSplineWarping.Calibrate()).IsFail())
-				{
-					ErrorPrint(res, "Failed to calibrate ThinPlateSplineWarping.");
-					Console.WriteLine(res.GetString());
-					break;
-				}
+				// 색온도 설정 // Set color temperature
+				WhiteBalance.SetColorTemperature(5700);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = ThinPlateSplineWarping.Execute()).IsFail())
+				if((res = WhiteBalance.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ThinPlateSplineWarping.");
-					Console.WriteLine(res.GetString());
+					ErrorPrint(res, "Failed to execute WhiteBalance.");
+					ErrorPrint(res, res.GetString());
 					break;
 				}
 
@@ -197,7 +130,7 @@ namespace ThinPlateSplineWarping
 				{
 					// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 					// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
-					arrLayer[i] = arrViewImage[i].GetLayer(1);
+					arrLayer[i] = arrViewImage[i].GetLayer(0);
 
 					// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 					arrLayer[i].Clear();
@@ -214,13 +147,13 @@ namespace ThinPlateSplineWarping
 
 				if((res = arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
 				if((res = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 

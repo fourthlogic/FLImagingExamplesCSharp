@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace Statistics
 {
-    class Program
+    class Statistics_Mean_Variance_StandardDeviation_Coefficient
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
