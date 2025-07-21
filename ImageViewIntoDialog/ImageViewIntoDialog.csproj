@@ -125,7 +125,7 @@
     <Compile Include="FormImageViewIntoDialog.Designer.cs">
       <DependentUpon>FormImageViewIntoDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="ImageViewIntoDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

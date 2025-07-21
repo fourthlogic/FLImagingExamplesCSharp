@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace ImageViewAvailableContextMenu
+namespace ImageView
 {
-	class Program
+	class ImageViewAvailableContextMenu
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

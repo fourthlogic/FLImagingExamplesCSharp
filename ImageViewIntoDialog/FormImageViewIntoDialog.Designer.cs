@@ -1,4 +1,4 @@
-﻿namespace ImageViewIntoDialog
+﻿namespace ImageView
 {
 	partial class FormImageViewIntoDialog
 	{

@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace ImageViewMessageReceiver
+namespace ImageView
 {
 	// 메세지를 전달 받기 위해 CFLBase 를 상속 받아서 구현
 	public class CMessageReceiver : CFLBase
@@ -169,7 +169,7 @@ namespace ImageViewMessageReceiver
         CGUIViewImage m_viewImage;
 	}
 
-	class Program
+	class ImageViewMessageReceiver
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

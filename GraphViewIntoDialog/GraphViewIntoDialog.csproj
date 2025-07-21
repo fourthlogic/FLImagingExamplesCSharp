@@ -126,7 +126,7 @@
     <Compile Include="FormGraphViewIntoDialog.Designer.cs">
       <DependentUpon>FormGraphViewIntoDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="GraphViewIntoDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

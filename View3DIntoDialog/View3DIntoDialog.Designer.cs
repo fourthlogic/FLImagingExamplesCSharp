@@ -1,4 +1,4 @@
-﻿namespace View3DIntoDialog
+﻿namespace View3D
 {
 	partial class FormView3DIntoDialog
 	{

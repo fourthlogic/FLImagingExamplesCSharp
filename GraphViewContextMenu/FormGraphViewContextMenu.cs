@@ -19,7 +19,7 @@ using FLImagingCLR.AdvancedFunctions;
 using System.Text.RegularExpressions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace GraphViewContextMenu
+namespace GraphView
 {
 	public partial class FormGraphViewContextMenu : Form
 	{

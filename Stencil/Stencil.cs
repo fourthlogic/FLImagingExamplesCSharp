@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace Stencil
 {
-    class Program
+    class Stencil
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

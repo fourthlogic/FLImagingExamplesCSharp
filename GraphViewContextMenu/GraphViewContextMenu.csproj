@@ -126,7 +126,7 @@
     <Compile Include="FormGraphViewContextMenu.Designer.cs">
       <DependentUpon>FormGraphViewContextMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="GraphViewContextMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

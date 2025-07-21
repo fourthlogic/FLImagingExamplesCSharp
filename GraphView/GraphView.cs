@@ -14,8 +14,8 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace GraphView
 {
-    class Program
-    {
+    class GraphView
+	{
 		[STAThread]
 		static void Main(string[] args)
         {

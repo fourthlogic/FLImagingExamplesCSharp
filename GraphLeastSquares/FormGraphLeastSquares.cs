@@ -17,7 +17,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace GraphLeastSquares
+namespace GraphView
 {
 	public partial class FormGraphLeastSquares : Form
 	{

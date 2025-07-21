@@ -1,4 +1,4 @@
-﻿namespace GraphLeastSquares
+﻿namespace GraphView
 {
     partial class FormGraphLeastSquares
     {

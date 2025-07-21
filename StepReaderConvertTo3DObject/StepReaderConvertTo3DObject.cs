@@ -10,9 +10,9 @@ using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using CResult = FLImagingCLR.CResult;
 
-namespace StepReaderConvertTo3DObject
+namespace Utilities3D
 {
-	class Program
+	class StepReaderConvertTo3DObject
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

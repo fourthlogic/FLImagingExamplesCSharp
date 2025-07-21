@@ -12,18 +12,16 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace ImageViewIntoDialog
+namespace ImageView
 {
-    class Program
-    {
-        [STAThread]
-        static void Main(string[] args)
+    class ImageView
+	{
+		[STAThread]
+		static void Main(string[] args)
         {
-            var formImageView = new FormImageViewIntoDialog();
-
-            Application.Run(formImageView);
-
-            // 예제 코드는 FormImageViewInToDialog.cs 에 있습니다.
+            var formImageView = new FormImageView();			
+			Application.Run(formImageView);
+            // 예제 코드는 FormImageView.cs 에 있습니다.
         }
     }
 }

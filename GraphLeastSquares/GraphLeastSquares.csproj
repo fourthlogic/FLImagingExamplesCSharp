@@ -125,7 +125,7 @@
     <Compile Include="FormGraphLeastSquares.Designer.cs">
       <DependentUpon>FormGraphLeastSquares.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="GraphLeastSquares.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,9 +17,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace GraphViewDisplayMinMax
+namespace GraphView
 {
-	class Program
+	class GraphViewDisplayMinMax
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -12,7 +12,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace View3D
 {
-	class Program
+	class View3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

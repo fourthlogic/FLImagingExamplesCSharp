@@ -12,10 +12,10 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace GraphViewIntoDialog
+namespace GraphView
 {
-    class Program
-    {
+    class GraphViewIntoDialog
+	{
         [STAThread]
         static void Main(string[] args)
         {

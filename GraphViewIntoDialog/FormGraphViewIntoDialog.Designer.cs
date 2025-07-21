@@ -1,4 +1,4 @@
-﻿namespace GraphViewIntoDialog
+﻿namespace GraphView
 {
     partial class FormGraphViewIntoDialog
     {

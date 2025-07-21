@@ -17,9 +17,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace GraphViewTheme
+namespace GraphView
 {
-	class Program
+	class GraphViewTheme
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -1,4 +1,4 @@
-﻿namespace GraphViewContextMenu
+﻿namespace GraphView
 {
     partial class FormGraphViewContextMenu
     {

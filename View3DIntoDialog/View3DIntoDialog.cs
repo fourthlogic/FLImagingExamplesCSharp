@@ -17,7 +17,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace View3DIntoDialog
+namespace View3D
 {
 	public partial class FormView3DIntoDialog : Form
 	{

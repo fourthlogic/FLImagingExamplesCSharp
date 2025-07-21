@@ -12,10 +12,10 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace View3DIntoDialog
+namespace View3D
 {
-    class Program
-    {
+    class View3DIntoDialog
+	{
         [STAThread]
         static void Main(string[] args)
         {

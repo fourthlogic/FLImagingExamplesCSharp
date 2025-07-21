@@ -10,10 +10,10 @@ using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using CResult = FLImagingCLR.CResult;
 
-namespace ProjectionUtilities3D
+namespace Utilities3D
 {
-    class Program
-    {
+    class ProjectionUtilities3D
+	{
         public static void ErrorPrint(CResult cResult, string str)
         {
             if (str.Length > 1)

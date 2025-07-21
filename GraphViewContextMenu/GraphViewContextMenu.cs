@@ -12,10 +12,10 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace GraphViewContextMenu
+namespace GraphView
 {
-    class Program
-    {
+    class GraphViewContextMenu
+	{
         [STAThread]
         static void Main(string[] args)
         {

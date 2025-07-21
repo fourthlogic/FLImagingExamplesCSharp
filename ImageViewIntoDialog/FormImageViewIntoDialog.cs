@@ -17,7 +17,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace ImageViewIntoDialog
+namespace ImageView
 {
 	public partial class FormImageViewIntoDialog : Form
 	{

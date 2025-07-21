@@ -12,17 +12,18 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace GraphLeastSquares
+namespace ImageView
 {
-    class Program
-    {
+    class ImageViewIntoDialog
+	{
         [STAThread]
         static void Main(string[] args)
         {
-            var formImageView = new FormGraphLeastSquares();
+            var formImageView = new FormImageViewIntoDialog();
 
             Application.Run(formImageView);
-            // 예제 코드는 FormGraphLeastSquares.cs 에 있습니다.
+
+            // 예제 코드는 FormImageViewInToDialog.cs 에 있습니다.
         }
     }
 }
