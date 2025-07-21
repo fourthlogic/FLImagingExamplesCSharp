@@ -100,7 +100,7 @@ namespace GainOffset
 				CGainOffset GainOffset = new CGainOffset();
 
 				// Source 이미지 설정 // Set the source image
-                GainOffset.SetSourceImage(ref fliDestinationImage);
+                GainOffset.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set the destination image
 				GainOffset.SetDestinationImage(ref fliDestinationImage);

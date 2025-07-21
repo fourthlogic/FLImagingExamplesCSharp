@@ -100,7 +100,7 @@ namespace OffsetGain
 				COffsetGain offsetGain = new COffsetGain();
 
 				// Source 이미지 설정 // Set the source image
-                offsetGain.SetSourceImage(ref fliDestinationImage);
+                offsetGain.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set the destination image
 				offsetGain.SetDestinationImage(ref fliDestinationImage);

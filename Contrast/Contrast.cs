@@ -100,7 +100,7 @@ namespace Contrast
 				CContrast Contrast = new CContrast();
 
 				// Source 이미지 설정 // Set the source image
-                Contrast.SetSourceImage(ref fliDestinationImage);
+                Contrast.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set the destination image
 				Contrast.SetDestinationImage(ref fliDestinationImage);
