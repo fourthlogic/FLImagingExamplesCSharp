@@ -125,7 +125,7 @@
     <Compile Include="FormFigureOperation.Designer.cs">
       <DependentUpon>FormFigureOperation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="FigureOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
