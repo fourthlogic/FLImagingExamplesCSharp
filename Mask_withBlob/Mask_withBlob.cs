@@ -207,7 +207,7 @@ namespace Mask
 				{
 					CFLRegion pFlrg = (CFLRegion)flfaContours.GetAt(i);
 
-					// 폴리곤의 정점 정보를 콘솔에 출력 // Print polygon vertex information to the console
+					// Region의 정점 정보를 콘솔에 출력 // Print region vertex information to the console
 					Console.Write("Blob Result No. {0} : [\n", i);
 
 					for(Int64 j = 0; j < pFlrg.GetCount(); ++j)
