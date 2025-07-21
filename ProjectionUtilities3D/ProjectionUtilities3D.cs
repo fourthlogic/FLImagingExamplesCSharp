@@ -135,11 +135,13 @@ namespace Utilities3D
                 // 결과 이미지를 이미지 뷰에 로드 // Load result image into image view
                 viewImage[0].SetImagePtr(ref fliFinal[0]);
                 viewImage[0].SetFixThumbnailView(true);
+				viewImage[0].ShowImageMiniMap(false);
+				viewImage[0].ShowPageIndex(false);
 
 
 				// 2. 카메라 1과 카메라 2 사이의 시점에 대한 프로젝션 // 2. Projection for viewpoints between Camera 1 and Camera 2		
-			
-                pu.SetTopologyType(ETopologyType3D.Wireframe);
+
+				pu.SetTopologyType(ETopologyType3D.Wireframe);
 
 				for(int i = 0; i <= 10; ++i)
                 {
@@ -172,6 +174,8 @@ namespace Utilities3D
                 // 결과 이미지를 이미지 뷰에 로드 // Load result image into image view
                 viewImage[1].SetImagePtr(ref fliFinal[1]);
                 viewImage[1].SetFixThumbnailView(true);
+				viewImage[1].ShowImageMiniMap(false);
+				viewImage[1].ShowPageIndex(false);
 
 
 				// 3. Zoom Fit 시점의 이미지 얻기 // 3. Get image at Zoom Fit viewpoint
@@ -194,8 +198,10 @@ namespace Utilities3D
                 // 결과 이미지를 이미지 뷰에 로드 // Load result image into image view
                 viewImage[2].SetImagePtr(ref fliFinal[2]);
                 viewImage[2].SetFixThumbnailView(true);
+				viewImage[2].ShowImageMiniMap(false);
+				viewImage[2].ShowPageIndex(false);
 
-                while (viewImage[0].IsAvailable() && viewImage[1].IsAvailable() && viewImage[2].IsAvailable())
+				while (viewImage[0].IsAvailable() && viewImage[1].IsAvailable() && viewImage[2].IsAvailable())
                     CThreadUtilities.Sleep(1);
             }
             while (false);
