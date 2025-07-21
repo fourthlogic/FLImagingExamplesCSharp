@@ -128,8 +128,8 @@ namespace PerspectiveMerge3D
 				CFL3DCamera cam = new CFL3DCamera();
 
 				cam.SetProjectionType(E3DCameraProjectionType.Perspective);
-				cam.SetDirection(new CFLPoint3<float>(0.34, -0.126, -0.94));
-				cam.SetDirectionUp(new CFLPoint3<float>(0.14, 0.987, -0.081));
+				cam.SetDirection(new CFLPoint3<float>(0.337466, -0.125061, -0.932993));
+				cam.SetDirectionUp(new CFLPoint3<float>(0.139977, 0.986837, -0.080987));
 				cam.SetPosition(new CFLPoint3<float>(-0.70, 0.16, 1.0));
 				cam.SetAngleOfViewY(45);
 
