@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ChannelInsertion
 {
-	class Program
+	class ChannelInsertion
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace AdaptiveThreshold
 {
-	class Program
+	class AdaptiveThresholdMedian
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

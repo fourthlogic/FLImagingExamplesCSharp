@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace OperationSignedSquareDifference
 {
-    class Program
+    class OperationSignedSquareDifference_Image
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
