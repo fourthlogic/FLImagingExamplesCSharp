@@ -31,9 +31,8 @@ namespace PointCloudGenerator3D
         [STAThread]
         static void Main(string[] args)
         {
-            // 이미지 뷰 선언 // Declare the image view
-            CGUIView3D view3DDst = new CGUIView3D();
-            CFL3DObject fl3DObjectDst = new CFL3DObject();
+			// 이미지 뷰 선언 // Declare the image view
+			CGUIView3D view3DDst = new CGUIView3D();
 
             // 알고리즘 동작 결과 // Algorithm execution result
             CResult res = new CResult();
@@ -46,10 +45,14 @@ namespace PointCloudGenerator3D
                     break;
                 }
 
+                view3DDst.PushObject(new CFL3DObject());
+                var viewObject = view3DDst.GetView3DObject(0);
+                var floDst = viewObject.Get3DObject();
+
                 CPointCloudGenerator3D alg = new CPointCloudGenerator3D();
 
                 // 파라미터 설정 // Set parameter
-                alg.SetDestinationObject(ref fl3DObjectDst);
+                alg.SetDestinationObject(ref floDst);
                 alg.EnableColorGeneration(true);
 				alg.EnableNormalGeneration(false);
 
@@ -72,23 +75,15 @@ namespace PointCloudGenerator3D
                 sCount.i64Interiors = 0;
 
 
-                // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-
-                if ((res = alg.Execute()).IsFail())
-                {
-                    ErrorPrint(res, "Failed to execute.");
-                    break;
-                }
-
-                // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-                // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
-                CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
+				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
+				CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
 
                 // 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
                 layer3DDst.Clear();
 
                 // Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
-                view3DDst.PushObject(fl3DObjectDst);
+                view3DDst.PushObject(floDst);
                 view3DDst.ZoomFit();
 
                 CFLPoint<double> flp = new CFLPoint<double>();
@@ -99,12 +94,36 @@ namespace PointCloudGenerator3D
                     break;
                 }
 
-                // 이미지 뷰를 갱신 합니다. // Update image view
-                view3DDst.Invalidate(true);
+				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				if((res = alg.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute.");
+					break;
+				}
+
+				viewObject.UpdateAll();
+				view3DDst.UpdateObject(0);
+				view3DDst.ZoomFit();
 
                 // 이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
-                while (view3DDst.IsAvailable())
-                    Thread.Sleep(1);
+                while(view3DDst.IsAvailable())
+				{
+					if((res = alg.Execute()).IsFail())
+					{
+						ErrorPrint(res, "Failed to execute.");
+						break;
+					}
+
+					if(!view3DDst.IsAvailable())
+						break;
+
+					viewObject.UpdateVertex(true);
+					view3DDst.UpdateObject(0);
+
+					view3DDst.UpdateScreen();
+
+					Thread.Sleep(1);
+                }
             }
             while (false);
         }
