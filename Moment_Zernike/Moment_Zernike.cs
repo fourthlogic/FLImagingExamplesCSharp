@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 
 namespace Moment
 {
-    class Program
+    class Moment_Zernike
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

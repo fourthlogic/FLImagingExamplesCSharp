@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace Moment
 {
-    class Program
+    class Moment_Invariant
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

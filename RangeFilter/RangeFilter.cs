@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace StackBlurFilter
+namespace RangeFilter
 {
-	class Program
+	class RangeFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -42,7 +42,7 @@ namespace StackBlurFilter
 				CResult res = new CResult();
 
 				// 이미지 로드 // Load image
-				if((res = fliSrcImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -104,22 +104,22 @@ namespace StackBlurFilter
 					break;
 				}
 
-				// StackBlurFilter 객체 생성 // Create StackBlurFilter object
-				CStackBlurFilter stackBlurFilter = new CStackBlurFilter();
+				// RangeFilter 객체 생성 // Create RangeFilter object
+				CRangeFilter rangeFilter = new CRangeFilter();
 
 				// 처리할 이미지 설정 // Set the image to process
-				stackBlurFilter.SetSourceImage(ref fliSrcImage);
+				rangeFilter.SetSourceImage(ref fliSrcImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				stackBlurFilter.SetDestinationImage(ref fliDstImage);
+				rangeFilter.SetDestinationImage(ref fliDstImage);
 
-				// 처리할 Filter의 커널 크기 설정 // Set the kernel size of of the filter
-				stackBlurFilter.SetKernel(11);
+				// 처리할 필터의 커널 크기 설정 // Set the kernel size of the filter
+				rangeFilter.SetKernel(7);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = stackBlurFilter.Execute()).IsFail())
+				if((res = rangeFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Stack Blur Filter.");
+					ErrorPrint(res, "Failed to execute Range Filter.");
 					break;
 				}
 

@@ -11,9 +11,11 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OffsetGain
+using CResult = FLImagingCLR.CResult;
+
+namespace OperationTrailingZeros
 {
-	class Program
+	class OperationTrailingZeros
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -36,39 +38,39 @@ namespace OffsetGain
 			CGUIViewImage viewImageSrc = new CGUIViewImage();
 			CGUIViewImage viewImageDst = new CGUIViewImage();
 
-			CResult res = new CResult();
+			CResult res;
 
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSourceImage.Load("../../ExampleImages/OffsetGain/Color.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationTrailingZeros/Src.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
+				// Destination 이미지를 Src 이미지와 동일한 이미지로 생성
 				if((res = fliDestinationImage.Assign(fliSourceImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to load the image file. \n");
+					ErrorPrint(res, "Failed to assign the image file. \n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create source image view
-				if((res = viewImageSrc.Create(100, 0, 612, 512)).IsFail())
+				if((res = viewImageSrc.Create(100, 0, 600, 545)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
-				// Destination 이미지 뷰 생성 // Create the destination image view
-				if((res = viewImageDst.Create(612, 0, 1124, 512)).IsFail())
+				// Destination1 이미지 뷰 생성 // Create destination1 image view
+				if((res = viewImageDst.Create(600, 0, 1100, 545)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
+				// 두 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the two image views
 				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
@@ -82,41 +84,34 @@ namespace OffsetGain
 					break;
 				}
 
-				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
+				// Destination 이미지 뷰에 이미지를 디스플레이
 				if((res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
+				// 두 이미지 뷰 윈도우의 위치를 동기화한다 // Synchronize the positions of the two image view windows
 				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
-				// Offset Gain 객체 생성 // Create Offset Gain object
-				COffsetGain offsetGain = new COffsetGain();
+				// Operation Trailing Zeros 객체 생성 // Create Operation Trailing Zeros object
+				COperationTrailingZeros tz = new COperationTrailingZeros();
 
 				// Source 이미지 설정 // Set the source image
-                offsetGain.SetSourceImage(ref fliDestinationImage);
+				tz.SetSourceImage(ref fliSourceImage);
+
 
 				// Destination 이미지 설정 // Set the destination image
-				offsetGain.SetDestinationImage(ref fliDestinationImage);
-
-				// Offset 값 지정 // Set the Offset value
-				CMultiVar<double> mvOffset = new CMultiVar<double>(10, 10, 10);
-				offsetGain.SetOffset(mvOffset);
-
-				// Gain 값 지정 // Set the Gain value
-				CMultiVar<double> mvGain = new CMultiVar<double>(2, 2, 2);
-				offsetGain.SetGain(mvGain);
+				tz.SetDestinationImage(ref fliDestinationImage);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = offsetGain.Execute()).IsFail())
+				if((res = tz.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Offset Gain. \n");
+					ErrorPrint(res, "Failed to execute operation trailing zeros.");
 					break;
 				}
 
@@ -132,17 +127,20 @@ namespace OffsetGain
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
-				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
+
+				// Source 이미지 뷰의 Pixel 값을 Binary로 설정 // Show Pixel Values on Source Image View to Binary
+				viewImageSrc.SetPixelNumberMode(EPixelNumberMode.Binary);
 
 				// 이미지 뷰를 갱신 // Update image view
 				viewImageSrc.Invalidate(true);

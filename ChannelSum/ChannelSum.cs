@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ChannelSum
 {
-	class Program
+	class ChannelSum
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

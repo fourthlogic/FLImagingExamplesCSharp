@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace Contrast
+namespace OffsetGain
 {
-	class Program
+	class OffsetGain
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -41,7 +41,7 @@ namespace Contrast
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSourceImage.Load("../../ExampleImages/Contrast/low_contrast.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OffsetGain/Color.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
@@ -96,22 +96,27 @@ namespace Contrast
 					break;
 				}
 
-				// Contrast 객체 생성 // Create Contrast object
-				CContrast Contrast = new CContrast();
+				// Offset Gain 객체 생성 // Create Offset Gain object
+				COffsetGain offsetGain = new COffsetGain();
 
 				// Source 이미지 설정 // Set the source image
-                Contrast.SetSourceImage(ref fliDestinationImage);
+                offsetGain.SetSourceImage(ref fliDestinationImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				Contrast.SetDestinationImage(ref fliDestinationImage);
+				offsetGain.SetDestinationImage(ref fliDestinationImage);
 
-				// Coefficient 값 지정 // Set the Coefficient value
-				Contrast.SetCoefficient(2.0);
+				// Offset 값 지정 // Set the Offset value
+				CMultiVar<double> mvOffset = new CMultiVar<double>(10, 10, 10);
+				offsetGain.SetOffset(mvOffset);
+
+				// Gain 값 지정 // Set the Gain value
+				CMultiVar<double> mvGain = new CMultiVar<double>(2, 2, 2);
+				offsetGain.SetGain(mvGain);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = Contrast.Execute()).IsFail())
+				if((res = offsetGain.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Contrast. \n");
+					ErrorPrint(res, "Failed to execute Offset Gain. \n");
 					break;
 				}
 

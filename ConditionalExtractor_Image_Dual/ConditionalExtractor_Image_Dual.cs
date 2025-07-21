@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace ConditionalExtractor
 {
-    class Program
+    class ConditionalExtractor_Image_Dual
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

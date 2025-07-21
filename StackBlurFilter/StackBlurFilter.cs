@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace ContraharmonicMeanFilter
+namespace StackBlurFilter
 {
-	class Program
+	class StackBlurFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -104,25 +104,22 @@ namespace ContraharmonicMeanFilter
 					break;
 				}
 
-				// ContraharmonicMeanFilter 객체 생성 // Create ContraharmonicMeanFilter object
-				CContraharmonicMeanFilter contraharmonicMeanFilter = new CContraharmonicMeanFilter();
+				// StackBlurFilter 객체 생성 // Create StackBlurFilter object
+				CStackBlurFilter stackBlurFilter = new CStackBlurFilter();
 
 				// 처리할 이미지 설정 // Set the image to process
-				contraharmonicMeanFilter.SetSourceImage(ref fliSrcImage);
+				stackBlurFilter.SetSourceImage(ref fliSrcImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				contraharmonicMeanFilter.SetDestinationImage(ref fliDstImage);
+				stackBlurFilter.SetDestinationImage(ref fliDstImage);
 
-				// 처리할 Filter의 커널 크기 설정 // Set the kernel size of the filter
-				contraharmonicMeanFilter.SetKernel(5);
-
-				// 차수 설정 // Set the order
-				contraharmonicMeanFilter.SetOrder(1);
+				// 처리할 Filter의 커널 크기 설정 // Set the kernel size of of the filter
+				stackBlurFilter.SetKernel(11);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = contraharmonicMeanFilter.Execute()).IsFail())
+				if((res = stackBlurFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ContraharmonicMean Filter.");
+					ErrorPrint(res, "Failed to execute Stack Blur Filter.");
 					break;
 				}
 

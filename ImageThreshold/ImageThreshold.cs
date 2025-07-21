@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ImageThreshold
 {
-	class Program
+	class ImageThreshold
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

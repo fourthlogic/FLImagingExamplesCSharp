@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ChannelMedian
 {
-	class Program
+	class ChannelMedian
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationGreatestCommonDivisor_Scalar
 {
-	class Program
+	class OperationGreatestCommonDivisor_Scalar
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

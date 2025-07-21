@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace GeometricMeanFilter
+namespace NonLocalMeansFilter
 {
-	class Program
+	class NonLocalMeansFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -104,22 +104,31 @@ namespace GeometricMeanFilter
 					break;
 				}
 
-				// GeometricMeanFilter 객체 생성 // Create GeometricMeanFilter object
-				CGeometricMeanFilter geometricMeanFilter = new CGeometricMeanFilter();
+				// NonLocalMeansFilter 객체 생성 // Create NonLocalMeansFilter object
+				CNonLocalMeansFilter nonLocalMeansFilter = new CNonLocalMeansFilter();
 
 				// 처리할 이미지 설정 // Set the image to process
-				geometricMeanFilter.SetSourceImage(ref fliSrcImage);
+				nonLocalMeansFilter.SetSourceImage(ref fliSrcImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				geometricMeanFilter.SetDestinationImage(ref fliDstImage);
+				nonLocalMeansFilter.SetDestinationImage(ref fliDstImage);
 
-				// 처리할 Filter의 Kernel Size 설정 // Set the kernel size of the filter
-				geometricMeanFilter.SetKernel(3);
+				// 처리할 Filter의 패치 커널 크기 설정 // Set the patch kernel size of the filter
+				nonLocalMeansFilter.SetPatchKernel(3);
+
+				// 처리할 Filter의 윈도우 커널 크기 설정 // Set the window kernel size of the filter
+				nonLocalMeansFilter.SetWindowKernel(7);
+
+				// Sigma (노이즈의 표준편차) 설정 // Set the sigma (standard deviation of the noise)
+				nonLocalMeansFilter.SetSigma(0.3);
+
+				// H (필터링 파라미터) 설정 // Set the H (filtering parameter)
+				nonLocalMeansFilter.SetH(0.3);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = geometricMeanFilter.Execute()).IsFail())
+				if((res = nonLocalMeansFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Geometric Mean Filter.");
+					ErrorPrint(res, "Failed to execute Non Local Means Filter.");
 					break;
 				}
 

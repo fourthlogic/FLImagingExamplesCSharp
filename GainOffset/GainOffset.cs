@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace GainOffset
 {
-	class Program
+	class GainOffset
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

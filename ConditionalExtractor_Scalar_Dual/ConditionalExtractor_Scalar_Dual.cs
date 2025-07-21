@@ -11,9 +11,10 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationSquare
+
+namespace ConditionalExtractor
 {
-    class Program
+    class ConditionalExtractor_Scalar_Dual
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -24,64 +25,48 @@ namespace OperationSquare
 			Console.WriteLine("\n");
 			Console.ReadKey();
 		}
-
 		[STAThread]
         static void Main(string[] args)
         {
             // 이미지 객체 선언 // Declare the image object
-            CFLImage[] arrFliImage = new CFLImage[3];
+            CFLImage[] arrFliImage = new CFLImage[2];
 
             // 이미지 뷰 선언 // Declare the image view
-            CGUIViewImage[] arrViewImage = new CGUIViewImage[3];
+            CGUIViewImage[] arrViewImage = new CGUIViewImage[2];
 
-			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult res = new CResult();
-
-			for(int i = 0; i < 3; ++i)
+            for(int i = 0; i < 2; ++i)
             {
                 arrFliImage[i] = new CFLImage();
                 arrViewImage[i] = new CGUIViewImage();
             }
 
-            do
+			CResult res = new CResult();
+
+			do
             {
-                // Source 이미지 로드 // Load the source image
-                if ((res = arrFliImage[0].Load("../../ExampleImages/OperationSquare/Sun.flif")).IsFail())
+				// Source 이미지 로드 // Load the source image
+				if ((res = arrFliImage[0].Load("../../ExampleImages/ConditionalExtractor/1ChSource.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
-                // Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
+                // Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
                 if ((res = arrFliImage[1].Assign(arrFliImage[0])).IsFail())
                 {
                     ErrorPrint(res, "Failed to assign the image file.\n");
                     break;
                 }
 
-				// Destination2 이미지 로드. // Load the destination2 image
-				if((res = arrFliImage[2].Load("../../ExampleImages/OperationSquare/DstF32Depth.flif")).IsFail())
-				{
-					ErrorPrint(res, "Failed to load the image file.\n");
-					break;
-				}
-
-				// Source 이미지 뷰 생성 // Create source image view
-				if((res = arrViewImage[0].Create(100, 0, 548, 448)).IsFail())
+                // Source 이미지 뷰 생성 // Create source image view
+                if ((res = arrViewImage[0].Create(100, 0, 700, 512)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
-                // Destination1 이미지 뷰 생성 // Create destination1 image view
-                if ((res = arrViewImage[1].Create(548, 0, 996, 448)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to create the image view.\n");
-                    break;
-                }
-
-                // Destination2 이미지 뷰 생성 // Create destination2 image view
-                if ((res = arrViewImage[2].Create(996, 0, 1444, 448)).IsFail())
+                // Destination 이미지 뷰 생성 // Create destination image view
+                if ((res = arrViewImage[1].Create(700, 0, 1300, 512)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
@@ -90,7 +75,7 @@ namespace OperationSquare
                 bool bError = false;
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-                for (int i = 0; i < 3; ++i)
+                for (int i = 0; i < 2; ++i)
                 {
                     if ((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
                     {
@@ -110,13 +95,6 @@ namespace OperationSquare
                     break;
                 }
 
-                // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2])).IsFail())
-                {
-                    ErrorPrint(res, "Failed to synchronize view\n");
-                    break;
-                }
-
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
                 {
@@ -124,48 +102,47 @@ namespace OperationSquare
                     break;
                 }
 
-                // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-                if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[2])).IsFail())
-                {
-                    ErrorPrint(res, "Failed to synchronize window.\n");
-                    break;
-                }
-
-                // Operation Square 객체 생성 // Create Operation Square object
-                COperationSquare square = new COperationSquare();
-
+                // Conditional Extractor 객체 생성 // Create Conditional Extractor object
+                CConditionalExtractor conditionalExtractor = new CConditionalExtractor();
                 // Source 이미지 설정 // Set the source image
-                square.SetSourceImage(ref arrFliImage[0]);
+                conditionalExtractor.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                square.SetDestinationImage(ref arrFliImage[1]);
-				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				square.SetOverflowMethod(EOverflowMethod.Clamping);
+                conditionalExtractor.SetDestinationImage(ref arrFliImage[1]);
+
+                // Operation Source 설정 // Set the Operation Source
+                conditionalExtractor.SetOperationSource(EOperationSource.Scalar);
+
+                // Threshold Mode 설정 // Set the threshold mode
+                conditionalExtractor.SetThresholdMode(EThresholdMode.Dual_And);
+
+                // Threshold value 설정 // Set the threshold value
+                conditionalExtractor.SetThreshold(100.0);
+                conditionalExtractor.SetThreshold(128.0, EThresholdIndex.Second);
+
+                // 1채널 논리조건 설정 // Set the 1Channel logical condition
+                conditionalExtractor.SetLogicalCondition((long)ELogicalCondition.Less);
+                conditionalExtractor.SetLogicalCondition((long)ELogicalCondition.NotEqual, EThresholdIndex.Second);
+
+                // 조건이 거짓일 경우 Out of Range 값 설정 여부 결정 // Determine the Out of Range value if the condition is false
+                conditionalExtractor.EnableOutOfRange(true);
+
+                // 조건이 거짓일 경우 Out of range 값 설정하기 위한 MultiVar 객체 생성 // Create the MultiVar object that sets the Out of Range value if the condition is false
+                CMultiVar<double> mvOutOfRange = new CMultiVar<double>(255.0);
+
+                // Out of Range 값 설정 // Set Out of Range value
+                conditionalExtractor.SetOutOfRangeValue(mvOutOfRange);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = square.Execute()).IsFail())
+                if ((res = res = conditionalExtractor.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute operation Square.\n");
+                    ErrorPrint(res, "Failed to execute conditional extractor.");
+                    ErrorPrint(res, res.GetString());
                     break;
                 }
 
-				// Destination 이미지 설정 // Set the destination image
-				square.SetDestinationImage(ref arrFliImage[2]);
-				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				square.SetOverflowMethod(EOverflowMethod.Clamping);
+                CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[2];
 
-                // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = square.Execute()).IsFail())
-                {
-                    ErrorPrint(res, "Failed to execute operation Square.\n");
-                    break;
-                }
-
-                CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[3];
-                arrLayer[0] = new CGUIViewImageLayer();
-                arrLayer[1] = new CGUIViewImageLayer();
-                arrLayer[2] = new CGUIViewImageLayer();
-
-                for (int i = 0; i < 3; ++i)
+                for (int i = 0; i < 2; ++i)
                 {
                     // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
                     // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
@@ -182,34 +159,15 @@ namespace OperationSquare
                 //                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
                 // Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
                 //                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-                TPoint<double> tpPosition0 = new TPoint<double>(5, 0);
-                TPoint<double> tpPosition1 = new TPoint<double>(5, 27);
+                TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-                if ((res = arrLayer[0].DrawTextCanvas(tpPosition0, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                if ((res = arrLayer[1].DrawTextCanvas(tpPosition0, "Destination1 Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw text.\n");
-                    break;
-                }
-
-                if ((res = arrLayer[1].DrawTextCanvas(tpPosition1, "Unsigned Int / 8 / Clamping", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw text.\n");
-                    break;
-                }
-
-                if ((res = arrLayer[2].DrawTextCanvas(tpPosition0, "Destination2 Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to draw text.\n");
-                    break;
-                }
-
-                if ((res = arrLayer[2].DrawTextCanvas(tpPosition1, "Floating Point / 32", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+                if ((res = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image\nDual And(Less than 100 and Not Equal 128)", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
@@ -218,12 +176,10 @@ namespace OperationSquare
                 // 이미지 뷰를 갱신 // Update image view
                 arrViewImage[0].Invalidate(true);
                 arrViewImage[1].Invalidate(true);
-                arrViewImage[2].Invalidate(true);
 
                 // 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
                 while (arrViewImage[0].IsAvailable()
-                      && arrViewImage[1].IsAvailable()
-                      && arrViewImage[2].IsAvailable())
+                      && arrViewImage[1].IsAvailable())
                     Thread.Sleep(1);
             }
             while (false);

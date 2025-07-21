@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ContrastEnhancement
 {
-	class Program
+	class ContrastEnhancement
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

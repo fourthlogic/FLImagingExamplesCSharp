@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace RangeFilter
+namespace ContraharmonicMeanFilter
 {
-	class Program
+	class ContraharmonicMeanFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -42,7 +42,7 @@ namespace RangeFilter
 				CResult res = new CResult();
 
 				// 이미지 로드 // Load image
-				if((res = fliSrcImage.Load("../../ExampleImages/EdgeDetection/Alphabat.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -104,22 +104,25 @@ namespace RangeFilter
 					break;
 				}
 
-				// RangeFilter 객체 생성 // Create RangeFilter object
-				CRangeFilter rangeFilter = new CRangeFilter();
+				// ContraharmonicMeanFilter 객체 생성 // Create ContraharmonicMeanFilter object
+				CContraharmonicMeanFilter contraharmonicMeanFilter = new CContraharmonicMeanFilter();
 
 				// 처리할 이미지 설정 // Set the image to process
-				rangeFilter.SetSourceImage(ref fliSrcImage);
+				contraharmonicMeanFilter.SetSourceImage(ref fliSrcImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				rangeFilter.SetDestinationImage(ref fliDstImage);
+				contraharmonicMeanFilter.SetDestinationImage(ref fliDstImage);
 
-				// 처리할 필터의 커널 크기 설정 // Set the kernel size of the filter
-				rangeFilter.SetKernel(7);
+				// 처리할 Filter의 커널 크기 설정 // Set the kernel size of the filter
+				contraharmonicMeanFilter.SetKernel(5);
+
+				// 차수 설정 // Set the order
+				contraharmonicMeanFilter.SetOrder(1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = rangeFilter.Execute()).IsFail())
+				if((res = contraharmonicMeanFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Range Filter.");
+					ErrorPrint(res, "Failed to execute ContraharmonicMean Filter.");
 					break;
 				}
 

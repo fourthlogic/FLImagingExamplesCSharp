@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace TopographicThreshold
+namespace ConditionalReplacer
 {
-	class Program
+	class ConditionalReplacer_Image
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -46,27 +46,27 @@ namespace TopographicThreshold
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[0].Load("../../ExampleImages/TopographicThreshold/Lena_1Ch_F32.flif")).IsFail())
+				if((res = arrFliImage[0].Load("../../ExampleImages/ConditionalReplacer/CatSource.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
+
+				// Operand 이미지 로드 // Loads the operand image
+				if((res = arrFliImage[1].Load("../../ExampleImages/ConditionalReplacer/CatOperand.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
-				if((res = arrFliImage[1].Assign(arrFliImage[0])).IsFail())
-				{
-					ErrorPrint(res, "Failed to load the image file.\n");
-					break;
-				}
-
-				// Destination2 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination2 image as same as source image
 				if((res = arrFliImage[2].Assign(arrFliImage[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
-				// Destination3 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination3 image as same as source image
+				// Destination2 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination2 image as same as source image
 				if((res = arrFliImage[3].Assign(arrFliImage[0])).IsFail())
 				{
 					ErrorPrint(res, "Failed to assign the image file.\n");
@@ -80,21 +80,21 @@ namespace TopographicThreshold
 					break;
 				}
 
-				// Destination1 이미지 뷰 생성 // Create destination1 image view
+				// Operand 이미지 뷰 생성 // Create operand image view
 				if((res = arrViewImage[1].Create(548, 0, 996, 448)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// Destination2 이미지 뷰 생성 // Create destination2 image view
+				// Destination1 이미지 뷰 생성 // Create destination1 image view
 				if((res = arrViewImage[2].Create(996, 0, 1444, 448)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// Destination3 이미지 뷰 생성 // Create destination3 image view
+				// Destination2 이미지 뷰 생성 // Create destination2 image view
 				if((res = arrViewImage[3].Create(1444, 0, 1892, 448)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
@@ -159,46 +159,50 @@ namespace TopographicThreshold
 					break;
 				}
 
-				// Topographic Threshold 객체 생성 // Create Topographic Threshold object
-				CTopographicThreshold topographicThreshold = new CTopographicThreshold();
+				// Conditional Replacer 객체 생성 // Create Conditional Replacer object
+				CConditionalReplacer conditionalReplacer = new CConditionalReplacer();
 				// Source 이미지 설정 // Set the source image
-				topographicThreshold.SetSourceImage(ref arrFliImage[0]);
+				conditionalReplacer.SetSourceImage(ref arrFliImage[0]);
+				// Operand 이미지 설정 // Set the operand image
+				conditionalReplacer.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set the destination image
-				topographicThreshold.SetDestinationImage(ref arrFliImage[1]);
+				conditionalReplacer.SetDestinationImage(ref arrFliImage[2]);
 
-				// 커널 크기 설정 // Set the Kernel Size
-				topographicThreshold.SetKernel(5);
+				// Operation Source 설정 // Set the Operation Source
+				conditionalReplacer.SetOperationSource(EOperationSource.Image);
+
+				// Threshold Mode 설정 // Set the threshold mode
+				conditionalReplacer.SetThresholdMode(EThresholdMode.Single);
+
+				// 논리조건 설정 // Set the logical condition
+				conditionalReplacer.SetLogicalCondition(ELogicalCondition.GreaterEqual);
+
+				// 채널 논리조건 설정 // Set the logical condition of channels
+				conditionalReplacer.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And);
+
+				// 조건이 참일 경우 Replacement 값 설정하기 위한 MultiVar 객체 생성 // Create the MultiVar object that sets the Replacement value if the condition is true
+				CMultiVar<double> mvReplacement = new CMultiVar<double>(0.0);
+
+				// Replacement 값 설정 // Set Replacement value
+				conditionalReplacer.SetReplacementValue(mvReplacement);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = topographicThreshold.Execute()).IsFail())
+				if((res = conditionalReplacer.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute conditional replacer.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set the destination image
-				topographicThreshold.SetDestinationImage(ref arrFliImage[2]);
+				conditionalReplacer.SetDestinationImage(ref arrFliImage[3]);
 
-				// 커널 크기 설정 // Set the Kernel Size
-				topographicThreshold.SetKernel(7);
+				// 채널 논리조건 설정 // Set the logical condition of channels
+				conditionalReplacer.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.Or);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = topographicThreshold.Execute()).IsFail())
+				if((res = conditionalReplacer.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute conditional replacer.");
-					break;
-				}
-
-				// Destination 이미지 설정 // Set the destination image
-				topographicThreshold.SetDestinationImage(ref arrFliImage[3]);
-
-				// 커널 크기 설정 // Set the Kernel Size
-				topographicThreshold.SetKernel(9);
-
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = topographicThreshold.Execute()).IsFail())
-				{
-					ErrorPrint(res, "Failed to execute Topogrpahic Threshold.");
 					break;
 				}
 
@@ -229,27 +233,23 @@ namespace TopographicThreshold
 					break;
 				}
 
-				if((res = arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Image\nKernel Size: 5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Image\nKernel Size: 7", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[2].DrawTextCanvas(tpPosition, "Destination1 Image\nThreshold Mode: Single(Greater Equal)\nChannel Condition: And", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = arrLayer[3].DrawTextCanvas(tpPosition, "Destination3 Image\nKernel Size: 9", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[3].DrawTextCanvas(tpPosition, "Destination2 Image\nThreshold Mode: Single(Greater Equal)\nChannel Condition: Or", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
-
-				// Destination 이미지 뷰의 Pixel 값을 컬러링하여 볼 수 있도록 설정 // Show Colored Pixel Values on Destination Image Views
-				for(int i = 1; i < 4; ++i)
-					arrViewImage[i].EnablePixelSegmentationMode(true);
 
 				// 이미지 뷰를 갱신 // Update image view
 				arrViewImage[0].Invalidate(true);

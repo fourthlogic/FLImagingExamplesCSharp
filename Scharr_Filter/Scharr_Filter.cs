@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace Convolution_Scharr
 {
-	class Program
+	class Scharr_Filter
 	{
 		enum EType
 		{

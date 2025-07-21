@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace ConditionalReplacer
 {
-    class Program
+    class ConditionalReplacer_Scalar
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -11,11 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-using CResult = FLImagingCLR.CResult;
-
-namespace OperationTrailingZeros
+namespace Contrast
 {
-	class Program
+	class Contrast
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -38,39 +36,39 @@ namespace OperationTrailingZeros
 			CGUIViewImage viewImageSrc = new CGUIViewImage();
 			CGUIViewImage viewImageDst = new CGUIViewImage();
 
-			CResult res;
+			CResult res = new CResult();
 
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationTrailingZeros/Src.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/Contrast/low_contrast.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				// Destination 이미지를 Src 이미지와 동일한 이미지로 생성
+				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
 				if((res = fliDestinationImage.Assign(fliSourceImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to assign the image file. \n");
+					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
 				// Source 이미지 뷰 생성 // Create source image view
-				if((res = viewImageSrc.Create(100, 0, 600, 545)).IsFail())
+				if((res = viewImageSrc.Create(100, 0, 612, 512)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
-				// Destination1 이미지 뷰 생성 // Create destination1 image view
-				if((res = viewImageDst.Create(600, 0, 1100, 545)).IsFail())
+				// Destination 이미지 뷰 생성 // Create the destination image view
+				if((res = viewImageDst.Create(612, 0, 1124, 512)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the two image views
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
 				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
@@ -84,34 +82,36 @@ namespace OperationTrailingZeros
 					break;
 				}
 
-				// Destination 이미지 뷰에 이미지를 디스플레이
+				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
 				if((res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				// 두 이미지 뷰 윈도우의 위치를 동기화한다 // Synchronize the positions of the two image view windows
+				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
 				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
-				// Operation Trailing Zeros 객체 생성 // Create Operation Trailing Zeros object
-				COperationTrailingZeros tz = new COperationTrailingZeros();
+				// Contrast 객체 생성 // Create Contrast object
+				CContrast Contrast = new CContrast();
 
 				// Source 이미지 설정 // Set the source image
-				tz.SetSourceImage(ref fliSourceImage);
-
+                Contrast.SetSourceImage(ref fliDestinationImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				tz.SetDestinationImage(ref fliDestinationImage);
+				Contrast.SetDestinationImage(ref fliDestinationImage);
+
+				// Coefficient 값 지정 // Set the Coefficient value
+				Contrast.SetCoefficient(2.0);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = tz.Execute()).IsFail())
+				if((res = Contrast.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation trailing zeros.");
+					ErrorPrint(res, "Failed to execute Contrast. \n");
 					break;
 				}
 
@@ -127,20 +127,17 @@ namespace OperationTrailingZeros
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
-				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
-
-				// Source 이미지 뷰의 Pixel 값을 Binary로 설정 // Show Pixel Values on Source Image View to Binary
-				viewImageSrc.SetPixelNumberMode(EPixelNumberMode.Binary);
 
 				// 이미지 뷰를 갱신 // Update image view
 				viewImageSrc.Invalidate(true);
