@@ -48,7 +48,10 @@ namespace Utilities3D
                     break;
                 }
 
-                view3D[0].SetTopologyType(ETopologyType3D.Wireframe);
+				// 윈도우의 위치 동기화 // / Synchronize the positions of windows
+				view3D[0].SynchronizeWindow(ref view3D[1]);
+
+				view3D[0].SetTopologyType(ETopologyType3D.Wireframe);
                 view3D[1].SetTopologyType(ETopologyType3D.Wireframe);
 
 				// 우선 빈 CGUIView3DObject 객체를 뷰에 추가한 후 해당 객체의 인덱스를 i32ReturnIndex 에 얻어 오기

@@ -53,8 +53,12 @@ namespace Utilities3D
                     break;
                 }
 
-                // 3D Object 파일 로드 // Load 3D Object file
-                CFL3DObject pObj3D = new CFL3DObject();
+				// 윈도우의 위치 동기화 // / Synchronize the positions of windows
+				viewImage[0].SynchronizeWindow(ref viewImage[1]);
+                viewImage[0].SynchronizeWindow(ref viewImage[2]);
+
+				// 3D Object 파일 로드 // Load 3D Object file
+				CFL3DObject pObj3D = new CFL3DObject();
                 pObj3D.Load("../../ExampleImages/ProjectionUtilities3D/Cylinder.step");
 
                 CFLImage[] fliFinal = { new CFLImage(), new CFLImage(), new CFLImage() };

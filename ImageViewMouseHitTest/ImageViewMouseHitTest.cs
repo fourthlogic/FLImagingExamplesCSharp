@@ -75,67 +75,67 @@ namespace ImageView
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.MiniMap))
 							{
 								strHitArea += str + "MiniMap";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.MiniMapDisplayingArea))
 							{
 								strHitArea += str + "MiniMapDisplayingArea";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.ThumbnailView))
 							{
 								strHitArea += str + "ThumbnailView";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.ThumbnailViewTop))
 							{
 								strHitArea += str + "ThumbnailViewTop";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.Figure))
 							{
 								strHitArea += str + "Figure";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.MultiFigures))
 							{
 								strHitArea += str + "MultiFigures";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.ImageFigure))
 							{
 								strHitArea += str + "ImageROI";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.StatusBar))
 							{
 								strHitArea += str + "StatusBar";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.PageIndex))
 							{
 								strHitArea += str + "PageIndex";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.PrevPageArrow))
 							{
 								strHitArea += str + "PrevPageArrow";
-								str = "and ";
+								str = " and ";
 							}
 
 							if(eHitArea.HasFlag(EGUIViewImageHitArea.NextPageArrow))
 							{
 								strHitArea += str + "NextPageArrow";
-								str = "and ";
+								str = " and ";
 							}
 							strHitArea += ".";
 						}
