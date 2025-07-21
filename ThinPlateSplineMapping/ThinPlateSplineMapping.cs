@@ -30,9 +30,6 @@ namespace ThinPlateSplineMapping
 		[STAThread]
 		static void Main(string[] args)
 		{
-			// 이미지 객체 선언 // Declare the image object
-			CFLImage fliImage = new CFLImage();
-
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage[] viewImage = { new CGUIViewImage(), new CGUIViewImage(), new CGUIViewImage() };
 
