@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationComplexMultiply
 {
-	class Program
+	class OperationComplexMultiply_Image
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

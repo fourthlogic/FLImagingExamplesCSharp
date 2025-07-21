@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ChannelSwap
 {
-	class Program
+	class ChannelSwap
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

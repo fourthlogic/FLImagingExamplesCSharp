@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace StereoCalibrator3D
 {
-	class Program
+	class StereoCalibrator3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

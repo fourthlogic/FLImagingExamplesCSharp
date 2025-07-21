@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace StereoDisparity3D
 {
-	class Program
+	class StereoDisparity3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

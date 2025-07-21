@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace LaserTriangulation
 {
-	class Program
+	class LaserTriangulation3D_Profile
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -44,7 +44,7 @@ namespace LaserTriangulation
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliSrcImage.Load("../../ExampleImages/LaserTriangulation3D/SrcImage.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/LaserTriangulation3D/SrcProfile.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -110,13 +110,10 @@ namespace LaserTriangulation
 
 				viewImageSrc.SetFixThumbnailView(true);
 
-                // Laser Triangulation 객체 생성 // Create Laser Triangulation object
-                CLaserTriangulation3D LaserTriangulation = new CLaserTriangulation3D();
+				// LaserTriangulation 객체 생성 // Create LaserTriangulation object
+				CLaserTriangulation3D LaserTriangulation = new CLaserTriangulation3D();
 
 				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
-
-				// Baseline ROI 생성 // Set the base line of the laser
-				CFLLine<double> fliBaseLine = new CFLLine<double>(0, 61, 1216, 61);
 
 				// Source 이미지 설정 // Set the source image
 				LaserTriangulation.SetSourceImage(ref fliSrcImage);
@@ -124,22 +121,16 @@ namespace LaserTriangulation
 				LaserTriangulation.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destination 3D Object 설정 // Set the Destination 3D Object 
 				LaserTriangulation.SetDestinationObject(ref fl3DOHM);
-				// Baseline ROI 설정 // Set the base line of the laser
-				LaserTriangulation.SetBaseLine(fliBaseLine);
 				// Source 이미지 타입 설정 // Set the type of the source image
-				LaserTriangulation.SetSourceType(CLaserTriangulation3D.ESourceType.Image);
+				LaserTriangulation.SetSourceType(CLaserTriangulation3D.ESourceType.Profile);
 				// Pixel Accuracy 설정 // Set the pixel accuracy
-				LaserTriangulation.SetPixelAccuracy(0.165);
+				LaserTriangulation.SetPixelAccuracy(0.33);
 				// Scan Accuracy 설정 // Set the scan accuracy
 				LaserTriangulation.SetScanAccuracy(0.2);
 				// Working Distance 설정 // Set the working distance
 				LaserTriangulation.SetWorkingDistance(214.7);
 				// 레이저 각도 설정 // Set the angle of laser
 				LaserTriangulation.SetAngleOfLaser(60);
-				// 레이저 밝기 설정 // Set laser brightness threshold
-				LaserTriangulation.SetLaserThreshold(64);
-				// 평균 Window의 pixel 길이 설정 // Set Average Window Pixel Length
-				LaserTriangulation.SetAverageWindowLength(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = LaserTriangulation.Execute()).IsFail())

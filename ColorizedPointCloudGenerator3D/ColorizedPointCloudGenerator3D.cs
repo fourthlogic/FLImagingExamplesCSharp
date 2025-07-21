@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace ColorizedPointCloudGenerator3D
 {
-	class Program
+	class ColorizedPointCloudGenerator3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

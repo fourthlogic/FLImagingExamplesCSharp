@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace StereoPhotometric
 {
-	class Program
+	class PhotometricStereo3D_Calibration
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

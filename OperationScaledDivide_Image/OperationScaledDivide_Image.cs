@@ -13,9 +13,9 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationScaledDivide_Scalar
+namespace OperationScaledDivide_Image
 {
-	class Program
+	class OperationScaledDivide_Image
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -30,8 +30,8 @@ namespace OperationScaledDivide_Scalar
 		enum EType
 		{
 			Source = 0,
-			Destination1,
-			Destination2,
+			Operand,
+			Destination,
 			ETypeCount,
 		}
 
@@ -61,15 +61,15 @@ namespace OperationScaledDivide_Scalar
 					break;
 				}
 
-				// Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
-				if((res = (arrFliImage[(int)EType.Destination1].Assign(arrFliImage[(int)EType.Source]))).IsFail())
+				// Operand 이미지 로드 // Loads the operand image
+				if((res = arrFliImage[(int)EType.Operand].Load("../../ExampleImages/OperationScaledDivide/Gradation_R2W.flif")).IsFail())
 				{
-					ErrorPrint(res, "Failed to assign the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Destination2 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination2 image as same as source image
-				if((res = (arrFliImage[(int)EType.Destination2].Assign(arrFliImage[(int)EType.Source]))).IsFail())
+				// Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
+				if((res = (arrFliImage[(int)EType.Destination].Assign(arrFliImage[(int)EType.Source]))).IsFail())
 				{
 					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
@@ -118,30 +118,26 @@ namespace OperationScaledDivide_Scalar
 				if(bError)
 					break;
 
+				// ROI 설정을 위한 CFLRect 객체 생성 // Create a CFLRect object for setting ROI
+				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
+
 				// Operation ScaledDivide 객체 생성 // Create Operation ScaledDivide object
 				COperationScaledDivide scaledDivide = new COperationScaledDivide();
 				// Source 이미지 설정 // Set the source image
 				scaledDivide.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				// Source ROI 설정 // Set the Source ROI
+				scaledDivide.SetSourceROI(flrROI);
+				// Operand 이미지 설정 // Set the operand image
+				scaledDivide.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				// Operand ROI 설정
+				scaledDivide.SetOperandROI(flrROI);
 				// Destination 이미지 설정 // Set the destination image
-				scaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				scaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				// Destination ROI 설정 // Set Destination ROI
+				scaledDivide.SetDestinationROI(flrROI);
+
 				// 연산 방식 설정 // Set operation source
-				scaledDivide.SetOperationSource(EOperationSource.Scalar);
-				// ScaledDivide 값 설정 // Set ScaledDivide value
-				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(192, 192, 192);
-				scaledDivide.SetScalarValue(mvScalarValue1);
-
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaledDivide.Execute())).IsFail())
-				{
-					ErrorPrint(res, "Failed to execute operation ScaledDivide.");
-					break;
-				}
-
-				// Destination 이미지를 Destination2로 설정
-				scaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
-				// ScaledDivide 값 설정 // Set ScaledDivide value
-				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(512, 512, 512);
-				scaledDivide.SetScalarValue(mvScalarValue2);
+				scaledDivide.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = (scaledDivide.Execute())).IsFail())
@@ -160,6 +156,14 @@ namespace OperationScaledDivide_Scalar
 
 					// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 					arrLayer[i].Clear();
+
+					// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
+					// FLImaging의 Figure 객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능 // FLimaging's Figure objects can be displayed as a function regardless of the shape
+					// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
+					// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
+					// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
+					if((res = (arrLayer[i].DrawFigureImage(flrROI, EColor.LIME))).IsFail())
+						ErrorPrint(res, "Failed to draw figure.\n");
 				}
 
 				// View 정보를 디스플레이 한다. // Display view information
@@ -177,13 +181,13 @@ namespace OperationScaledDivide_Scalar
 					break;
 				}
 
-				if((res = (arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(ScaledDivide 192)", EColor.YELLOW, EColor.BLACK, 18))).IsFail())
+				if((res = (arrLayer[(int)EType.Operand].DrawTextCanvas(flpZero, "Operand Image", EColor.YELLOW, EColor.BLACK, 18))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = (arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(ScaledDivide 512)", EColor.YELLOW, EColor.BLACK, 18))).IsFail())
+				if((res = (arrLayer[(int)EType.Destination].DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 18))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
