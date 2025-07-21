@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelVariance
+namespace ChannelMax
 {
-	class Program
+	class ChannelMax
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -41,7 +41,7 @@ namespace ChannelVariance
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ChannelVariance/Color.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelMax/Color.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -89,19 +89,19 @@ namespace ChannelVariance
 					break;
 				}
 
-				// Channel Variance 객체 생성 // Create Channel Variance object
-				CChannelVariance channelVariance = new CChannelVariance();
+				// Channel Max 객체 생성 // Create Channel Max object
+				CChannelMax channelMax = new CChannelMax();
 
 				// Source 이미지 설정 // Set source image 
-				channelVariance.SetSourceImage(ref fliSourceImage);
+				channelMax.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set destination image
-				channelVariance.SetDestinationImage(ref fliDestinationImage);
+				channelMax.SetDestinationImage(ref fliDestinationImage);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (channelVariance.Execute())).IsFail())
+				if((res = (channelMax.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Channel Variance. \n");
+					ErrorPrint(res, "Failed to execute Channel Max. \n");
 					break;
 				}
 

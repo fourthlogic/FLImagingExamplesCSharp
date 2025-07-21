@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelStdev
+namespace ChannelMean
 {
-	class Program
+	class ChannelMean
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -41,7 +41,7 @@ namespace ChannelStdev
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ChannelStdev/Color.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelMean/Color.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -89,19 +89,19 @@ namespace ChannelStdev
 					break;
 				}
 
-				// Channel Stdev 객체 생성 // Create Channel Stdev object
-				CChannelStdev channelStdev = new CChannelStdev();
+				// Channel Mean 객체 생성 // Create Channel Mean object
+				CChannelMean channelMean = new CChannelMean();
 
 				// Source 이미지 설정 // Set source image 
-				channelStdev.SetSourceImage(ref fliSourceImage);
+				channelMean.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set destination image
-				channelStdev.SetDestinationImage(ref fliDestinationImage);
+				channelMean.SetDestinationImage(ref fliDestinationImage);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (channelStdev.Execute())).IsFail())
+				if((res = (channelMean.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Channel Stdev. \n");
+					ErrorPrint(res, "Failed to execute Channel Mean. \n");
 					break;
 				}
 

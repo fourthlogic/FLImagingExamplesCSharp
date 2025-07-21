@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationMultiply_Scalar
 {
-	class Program
+	class OperationScaledMultiply_Scalar
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

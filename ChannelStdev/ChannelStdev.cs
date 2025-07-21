@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelMin
+namespace ChannelStdev
 {
-	class Program
+	class ChannelStdev
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -41,7 +41,7 @@ namespace ChannelMin
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ChannelMin/Color.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelStdev/Color.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -89,19 +89,19 @@ namespace ChannelMin
 					break;
 				}
 
-				// Channel Min 객체 생성 // Create Channel Min object
-				CChannelMin channelMin = new CChannelMin();
+				// Channel Stdev 객체 생성 // Create Channel Stdev object
+				CChannelStdev channelStdev = new CChannelStdev();
 
 				// Source 이미지 설정 // Set source image 
-				channelMin.SetSourceImage(ref fliSourceImage);
+				channelStdev.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set destination image
-				channelMin.SetDestinationImage(ref fliDestinationImage);
+				channelStdev.SetDestinationImage(ref fliDestinationImage);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (channelMin.Execute())).IsFail())
+				if((res = (channelStdev.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Channel Min. \n");
+					ErrorPrint(res, "Failed to execute Channel Stdev. \n");
 					break;
 				}
 

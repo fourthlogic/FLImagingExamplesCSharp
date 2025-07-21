@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace NoiseGenerator
 {
-    class Program
+    class NoiseGenerator_Uniform
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -107,9 +107,10 @@ namespace NoiseGenerator
 				noiseGenerator.SetDestinationROI(flrROI);
 
 				// 생성할 노이즈 설정 // Set the noise to generate
-				noiseGenerator.SetNoiseType(CNoiseGenerator.ENoiseType.SpeckleNoise);
-				// 간섭 잡음의 비율 설정 // Set the ratio of speckle noise
-				noiseGenerator.SetSpeckleNoise(0.05);
+				noiseGenerator.SetNoiseType(CNoiseGenerator.ENoiseType.UniformNoise);
+				// 균등 분포 잡음의 크기 비율 설정 // Set the magnitude ratio of uniformly distributed noise
+				// 범위 0 ~ 1사이에서 1에 가까울 수록 이미지 포맷에서의 각 픽셀 잡음의 변동성이 커지며, 0에 가까울 수록 잡음의 변동성이 작아짐 // From 0 to 1, the closer to 1, the greater the variability of each pixel noise in the image format, and the closer to 0, the less the variability of the noise.
+				noiseGenerator.SetUniformDistNoise(0.05);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = noiseGenerator.Execute()).IsFail())
@@ -127,13 +128,13 @@ namespace NoiseGenerator
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
 				if((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
 				if((res = layerDst.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 

@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace OperationLogicalXnor
 {
-    class Program
+    class OperationLogicalXnor_Scalar
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

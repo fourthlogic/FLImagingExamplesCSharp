@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationAbsolute
+namespace OperationScaledSubtract_Image
 {
-	class Program
+	class OperationScaledSubtract_Image
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -30,12 +30,12 @@ namespace OperationAbsolute
 		static void Main(string[] args)
 		{
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage[] arrFliImage = new CFLImage[2];
+			CFLImage[] arrFliImage = new CFLImage[3];
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage[] arrViewImage = new CGUIViewImage[2];
+			CGUIViewImage[] arrViewImage = new CGUIViewImage[3];
 
-			for(int i = 0; i < 2; ++i)
+			for(int i = 0; i < 3; ++i)
 			{
 				arrFliImage[i] = new CFLImage();
 				arrViewImage[i] = new CGUIViewImage();
@@ -45,9 +45,23 @@ namespace OperationAbsolute
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = (arrFliImage[0].Load("../../ExampleImages/OperationAbsolute/Flower.flif"))).IsFail())
+				if((res = (arrFliImage[0].Load("../../ExampleImages/OperationScaledSubtract/CityNight.flif"))).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
+
+				// 이미지 로드 // Load image
+				if((res = (arrFliImage[1].Load("../../ExampleImages/OperationScaledSubtract/Gradation.flif"))).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
+
+				// 이미지를 Copy // image copy
+				if((res = (arrFliImage[2].Assign(arrFliImage[0]))).IsFail())
+				{
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
@@ -65,10 +79,17 @@ namespace OperationAbsolute
 					break;
 				}
 
+				// 이미지 뷰 생성 // Create image view
+				if((res = (arrViewImage[2].Create(1124, 0, 1636, 512))).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
 				bool bError = false;
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				for(int i = 0; i < 2; ++i)
+				for(int i = 0; i < 3; ++i)
 				{
 					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{
@@ -88,6 +109,12 @@ namespace OperationAbsolute
 					break;
 				}
 
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
+				if((res = (arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2]))).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize view\n");
+					break;
+				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 				if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[1]))).IsFail())
@@ -96,25 +123,37 @@ namespace OperationAbsolute
 					break;
 				}
 
-				// Operation absolute 객체 생성 // Create Absolute object
-				COperationAbsolute absolute = new COperationAbsolute();
-				// Source 이미지 설정 // Set source image
-				absolute.SetSourceImage(ref arrFliImage[0]);
-				// Destination 이미지 설정 // Set destination image 
-				absolute.SetDestinationImage(ref arrFliImage[1]);
-
-				// 알고리즘 수행 // Execute the algorithm
-				if((res = (absolute.Execute())).IsFail())
+				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
+				if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[2]))).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation absolute.");
+					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;
 				}
 
-				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[2];
+				// Operation ScaledSubtract 객체 생성 // Create Operation ScaledSubtract object
+				COperationScaledSubtract ScaledSubtract = new COperationScaledSubtract();
+				// Source 이미지 설정 // Set source image
+				ScaledSubtract.SetSourceImage(ref arrFliImage[0]);
+				// Operand 이미지 설정 // Set Operand image
+				ScaledSubtract.SetOperandImage(ref arrFliImage[1]);
+				// Destination 이미지 설정 // Set destination image 
+				ScaledSubtract.SetDestinationImage(ref arrFliImage[2]);
+				// 연산 방식 설정 // Set operation source
+				ScaledSubtract.SetOperationSource(EOperationSource.Image);
+
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = (ScaledSubtract.Execute())).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute operation ScaledSubtract.");
+					break;
+				}
+
+				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[3];
 				arrLayer[0] = new CGUIViewImageLayer();
 				arrLayer[1] = new CGUIViewImageLayer();
+				arrLayer[2] = new CGUIViewImageLayer();
 
-				for(int i = 0; i < 2; ++i)
+				for(int i = 0; i < 3; ++i)
 				{
 					// 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
 					// 따로 해제할 필요 없음 // No need to release separately
@@ -132,13 +171,19 @@ namespace OperationAbsolute
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-				if((res = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
+				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+				if((res = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
@@ -147,10 +192,12 @@ namespace OperationAbsolute
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				arrViewImage[0].Invalidate(true);
 				arrViewImage[1].Invalidate(true);
+				arrViewImage[2].Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(arrViewImage[0].IsAvailable()
-					  && arrViewImage[1].IsAvailable())
+					  && arrViewImage[1].IsAvailable()
+					  && arrViewImage[2].IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);

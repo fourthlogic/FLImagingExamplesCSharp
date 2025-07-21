@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace MidpointFilter
 {
-	class Program
+	class MidpointFilter
 	{
 		[STAThread]
 		static void Main(string[] args)

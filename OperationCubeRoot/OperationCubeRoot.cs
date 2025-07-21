@@ -11,9 +11,9 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationFourthRoot
+namespace OperationCubeRoot
 {
-    class Program
+    class OperationCubeRoot
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -46,7 +46,7 @@ namespace OperationFourthRoot
             do
             {
                 // Source 이미지 로드 // Load the source image
-                if ((res = arrFliImage[0].Load("../../ExampleImages/OperationFourthRoot/Sea3ChF32.flif")).IsFail())
+                if ((res = arrFliImage[0].Load("../../ExampleImages/OperationCubeRoot/Sea3ChF32.flif")).IsFail())
                 {
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
@@ -103,20 +103,20 @@ namespace OperationFourthRoot
                     break;
                 }
 
-                // Operation FourthRoot 객체 생성 // Create Operation FourthRoot object
-                COperationFourthRoot fourthRoot = new COperationFourthRoot();
+                // Operation CubeRoot 객체 생성 // Create Operation CubeRoot object
+                COperationCubeRoot cubeRoot = new COperationCubeRoot();
 
                 // Source 이미지 설정 // Set the source image
-                fourthRoot.SetSourceImage(ref arrFliImage[0]);
+                cubeRoot.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                fourthRoot.SetDestinationImage(ref arrFliImage[1]);
+                cubeRoot.SetDestinationImage(ref arrFliImage[1]);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				fourthRoot.SetOverflowMethod(EOverflowMethod.Clamping);
+				cubeRoot.SetOverflowMethod(EOverflowMethod.Clamping);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = fourthRoot.Execute()).IsFail())
+                if ((res = cubeRoot.Execute()).IsFail())
                 {
-                    ErrorPrint(res, "Failed to execute operation FourthRoot.\n");
+                    ErrorPrint(res, "Failed to execute operation CubeRoot.\n");
                     break;
                 }
 

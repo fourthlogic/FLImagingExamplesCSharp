@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace HybridMedianFilter
 {
-	class Program
+	class HybridMedianFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

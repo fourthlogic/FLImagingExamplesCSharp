@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace HarmonicMeanFilter
 {
-	class Program
+	class HarmonicMeanFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

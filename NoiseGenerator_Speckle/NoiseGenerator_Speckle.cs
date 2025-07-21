@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace NoiseGenerator
 {
-    class Program
+    class NoiseGenerator_Speckle
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -107,9 +107,9 @@ namespace NoiseGenerator
 				noiseGenerator.SetDestinationROI(flrROI);
 
 				// 생성할 노이즈 설정 // Set the noise to generate
-				noiseGenerator.SetNoiseType(CNoiseGenerator.ENoiseType.SaltAndPepper);
-				// 소금&후추 잡음 비율 설정 // Set salt & pepper noise ratio
-				noiseGenerator.SetSaltAndPepperNoise(0.1);
+				noiseGenerator.SetNoiseType(CNoiseGenerator.ENoiseType.SpeckleNoise);
+				// 간섭 잡음의 비율 설정 // Set the ratio of speckle noise
+				noiseGenerator.SetSpeckleNoise(0.05);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = noiseGenerator.Execute()).IsFail())
@@ -127,13 +127,13 @@ namespace NoiseGenerator
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
 				if((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 
 				if((res = layerDst.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw figure");
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 

@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationScaledSubtract_Image
+namespace OperationScaledSubtract_Scalar
 {
-	class Program
+	class OperationScaledSubtract_Scalar
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -51,10 +51,10 @@ namespace OperationScaledSubtract_Image
 					break;
 				}
 
-				// 이미지 로드 // Load image
-				if((res = (arrFliImage[1].Load("../../ExampleImages/OperationScaledSubtract/Gradation.flif"))).IsFail())
+				// 이미지를 Copy // image copy
+				if((res = (arrFliImage[1].Assign(arrFliImage[0]))).IsFail())
 				{
-					ErrorPrint(res, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to assign the image file.\n");
 					break;
 				}
 
@@ -130,16 +130,33 @@ namespace OperationScaledSubtract_Image
 					break;
 				}
 
+				CMultiVar<double> mvScalr = new CMultiVar<double>(30, 0, 0);
+				CMultiVar<double> mvScalr2 = new CMultiVar<double>(0, 0, 30);
+
 				// Operation ScaledSubtract 객체 생성 // Create Operation ScaledSubtract object
 				COperationScaledSubtract ScaledSubtract = new COperationScaledSubtract();
 				// Source 이미지 설정 // Set source image
 				ScaledSubtract.SetSourceImage(ref arrFliImage[0]);
-				// Operand 이미지 설정 // Set Operand image
-				ScaledSubtract.SetOperandImage(ref arrFliImage[1]);
+				// Destination 이미지 설정 // Set destination image 
+				ScaledSubtract.SetDestinationImage(ref arrFliImage[1]);
+				// 연산 방식 설정 // Set operation source
+				ScaledSubtract.SetOperationSource(EOperationSource.Scalar);
+				// Scalar 값 설정 // Set Scalar value
+				ScaledSubtract.SetScalarValue(mvScalr);
+
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = (ScaledSubtract.Execute())).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute operation ScaledSubtract.");
+					break;
+				}
+
 				// Destination 이미지 설정 // Set destination image 
 				ScaledSubtract.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				ScaledSubtract.SetOperationSource(EOperationSource.Image);
+				ScaledSubtract.SetOperationSource(EOperationSource.Scalar);
+				// Scalar 값 설정 // Set Scalar value
+				ScaledSubtract.SetScalarValue(mvScalr2);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (ScaledSubtract.Execute())).IsFail())
@@ -177,13 +194,13 @@ namespace OperationScaledSubtract_Image
 					break;
 				}
 
-				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Image(Scaled Subtract 30, 0, 0)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Image(Scaled Subtract 0, 0, 30)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
