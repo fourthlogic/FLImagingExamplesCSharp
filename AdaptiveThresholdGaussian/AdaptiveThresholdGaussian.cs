@@ -108,7 +108,7 @@ namespace AdaptiveThreshold
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (adaptiveThresholdGaussian.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute AdaptiveThreshold.");
+                    ErrorPrint(res, "Failed to execute AdaptiveThresholdGaussian.");
 					break;
 				}
 
