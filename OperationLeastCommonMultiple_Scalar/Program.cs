@@ -55,23 +55,9 @@ namespace OperationLeastCommonMultiple_Scalar
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationLeastCommonMultiple/Plate.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationLeastCommonMultiple/Gradient.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
-					break;
-				}
-
-				// Destination1 이미지를 16-bit 이미지로 로드 // Load the 16-bit destination image
-				if((res = arrFliImage[(int)EType.Destination1].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
-				{
-					ErrorPrint(res, "Failed to assign the image file.\n");
-					break;
-				}
-
-				// Destination2 이미지를 16-bit 이미지로 로드 // Load the 16-bit destination image
-				if((res = arrFliImage[(int)EType.Destination2].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
-				{
-					ErrorPrint(res, "Failed to load  image file.\n");
 					break;
 				}
 
@@ -127,7 +113,7 @@ namespace OperationLeastCommonMultiple_Scalar
 				// 연산 방식 설정 // Set operation source
 				lcm.SetOperationSource(EOperationSource.Scalar);
 				// lcm 값 설정 // Set LCM value
-				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(255, 255, 255);
+				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(5);
 				lcm.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
@@ -140,7 +126,7 @@ namespace OperationLeastCommonMultiple_Scalar
 				// Destination 이미지를 Destination2로 설정
 				lcm.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// LCM 값 설정 // Set LCM value
-				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(251, 251, 251);
+				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(17);
 				lcm.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters

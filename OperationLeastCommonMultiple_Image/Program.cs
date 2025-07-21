@@ -55,21 +55,14 @@ namespace OperationLeastCommonMultiple_Image
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationLeastCommonMultiple/Plate.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationLeastCommonMultiple/Gradient.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Operand 이미지 로드 // Loads the operand image
-				if((res = arrFliImage[(int)EType.Operand].Load("../../ExampleImages/OperationLeastCommonMultiple/Gradient.flif")).IsFail())
-				{
-					ErrorPrint(res, "Failed to load the image file.\n");
-					break;
-				}
-
-				// Destination 이미지 로드 // Loads the destination image
-				if((res = arrFliImage[(int)EType.Destination].Load("../../ExampleImages/OperationLeastCommonMultiple/PlateDestination.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Operand].Load("../../ExampleImages/OperationLeastCommonMultiple/GradientVertical.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -118,23 +111,14 @@ namespace OperationLeastCommonMultiple_Image
 				if(bError)
 					break;
 
-				// ROI 설정을 위한 CFLRect 객체 생성 // Create a CFLRect object for setting ROI
-				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
-
 				// Operation LeastCommonMultiple 객체 생성 // Create Operation LeastCommonMultiple object
 				COperationLeastCommonMultiple lcm = new COperationLeastCommonMultiple();
 				// Source 이미지 설정 // Set the source image
 				lcm.SetSourceImage(ref arrFliImage[(int)EType.Source]);
-				// Source ROI 설정 // Set the Source ROI
-				lcm.SetSourceROI(flrROI);
 				// Operand 이미지 설정 // Set the operand image
 				lcm.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
-				// Operand ROI 설정
-				lcm.SetOperandROI(flrROI);
 				// Destination 이미지 설정 // Set the destination image
 				lcm.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
-				// Destination ROI 설정 // Set Destination ROI
-				lcm.SetDestinationROI(flrROI);
 
 				// 연산 방식 설정 // Set operation source
 				lcm.SetOperationSource(EOperationSource.Image);
@@ -156,14 +140,6 @@ namespace OperationLeastCommonMultiple_Image
 
 					// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 					arrLayer[i].Clear();
-
-					// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
-					// FLImaging의 Figure 객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능 // FLimaging's Figure objects can be displayed as a function regardless of the shape
-					// 아래 함수 DrawFigureImage는 Image좌표를 기준으로 하는 Figure를 Drawing 한다는 것을 의미하며 // The function DrawFigureImage below means drawing a picture based on the image coordinates
-					// 맨 마지막 두개의 파라미터는 불투명도 값이고 1일경우 불투명, 0일경우 완전 투명을 의미한다. // The last two parameters are opacity values, which mean opacity for 1 day and complete transparency for 0 day.
-					// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
-					if((res = (arrLayer[i].DrawFigureImage(flrROI, EColor.LIME))).IsFail())
-						ErrorPrint(res, "Failed to draw figure.\n");
 				}
 
 				// View 정보를 디스플레이 한다. // Display view information
