@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ChannelRemoval
 {
-	class Program
+	class ChannelRemoval
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
