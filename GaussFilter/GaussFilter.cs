@@ -139,6 +139,8 @@ namespace Convolution_Gaussian
 
 				// Sigma 값 설정 // Set the sigma value
 				GaussFilter.SetSigma(0.5);
+				// kernel 크기 설정 // Set Kernel Size
+				GaussFilter.SetKernel(3);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = GaussFilter.Execute()).IsFail())
@@ -154,6 +156,8 @@ namespace Convolution_Gaussian
 
                 // Sigma 값 설정 // Set the sigma value
                 GaussFilter.SetSigma(1);
+				// kernel 크기 설정 // Set Kernel Size
+				GaussFilter.SetKernel(7);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = GaussFilter.Execute()).IsFail())
@@ -169,6 +173,8 @@ namespace Convolution_Gaussian
 
                 // Sigma 값 설정 // Set the sigma value
                 GaussFilter.SetSigma(3);
+				// kernel 크기 설정 // Set Kernel Size
+				GaussFilter.SetKernel(19);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = GaussFilter.Execute()).IsFail())
@@ -184,6 +190,8 @@ namespace Convolution_Gaussian
 
                 // Sigma 값 설정 // Set the sigma value
                 GaussFilter.SetSigma(5);
+				// kernel 크기 설정 // Set Kernel Size
+				GaussFilter.SetKernel(31);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = GaussFilter.Execute()).IsFail())
