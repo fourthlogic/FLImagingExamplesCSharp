@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace MeanShiftFilter
 {
-	class Program
+	class MeanShiftFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

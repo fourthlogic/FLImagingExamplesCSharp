@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace StationaryConeBeamTranslateCT3D
 {
-	class Program
+	class StationaryConeBeamTranslateCT3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

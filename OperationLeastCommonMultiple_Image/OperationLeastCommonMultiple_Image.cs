@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationLeastCommonMultiple_Image
 {
-	class Program
+	class OperationLeastCommonMultiple_Image
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

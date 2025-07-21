@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace HysteresisThreshold
+namespace NonMaximumSuppression
 {
-	class Program
+	class NonMaximumSuppression
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -43,7 +43,7 @@ namespace HysteresisThreshold
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliISrcImage.Load("../../ExampleImages/Threshold/Checker Board_1Ch.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/NonMaximumSuppression/Circuit Board.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -90,36 +90,31 @@ namespace HysteresisThreshold
 					break;
 				}
 
-				// Hysteresis Threshold 객체 생성 // Create Hysteresis Threshold object
-				CHysteresisThreshold ht = new CHysteresisThreshold();
+				// Non Maximum Suppression 객체 생성 // Create Non Maximum Suppression object
+				CNonMaximumSuppression nms = new CNonMaximumSuppression();
 
 				// Source 이미지 설정 // Set source image 
-				ht.SetSourceImage(ref fliISrcImage);
+				nms.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				ht.SetDestinationImage(ref fliIDstImage);
+				nms.SetDestinationImage(ref fliIDstImage);
 
-				// Max Length 설정 // Set Max Length
-				ht.SetMaxLength(100);
+				// Filter 설정 // Set Filter
+				nms.SetFilter(CNonMaximumSuppression.EFilter.Sobel);
 
-				// Output Mode 설정 // Set Output Mode
-				ht.SetOutputMode(CHysteresisThreshold.EOutputMode.Binary);
+				// Grayscale 옵션 설정 // Set grayscale option
+				nms.EnableGrayscale(false);
 
-				// Logical Condition Of Channels 설정 // Set Logical Condition Of Channels
-				ht.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And);
+				// Conflict Handling Method 설정 // Set conflict handling method
+				nms.SetConflictHandlingMethod(CNonMaximumSuppression.EConflictHandlingMethod.KeepAll);
 
-                // Low Threshold 설정 // Set Low Threshold
-                CMultiVar<double> mvLowThreshold = new CMultiVar<double>(110);
-                ht.SetLowThreshold(mvLowThreshold);
-
-                // High Threshold 설정 // Set High Threshold
-                CMultiVar<double> mvHighThreshold = new CMultiVar<double>(190);
-                ht.SetHighThreshold(mvHighThreshold);
+				// NMS Interpolation Method 설정 // Set NMS interpolation method
+				nms.SetNMSInterpolationMethod(CNonMaximumSuppression.ENMSInterpolationMethod.NearestNeighbor);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ht.Execute())).IsFail())
+				if((res = (nms.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Hysteresis Threshold.");
+					ErrorPrint(res, "Failed to execute Non Maximum Suppression.");
 					break;
 				}
 

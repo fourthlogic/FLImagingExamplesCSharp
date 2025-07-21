@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace BilateralFilterGrid
 {
-    class Program
+    class BilateralFilterGrid
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

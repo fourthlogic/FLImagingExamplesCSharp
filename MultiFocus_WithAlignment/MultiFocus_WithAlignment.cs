@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace MultiFocus
 {
-	class Program
+	class MultiFocus_WithAlignment
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -23,6 +23,90 @@ namespace MultiFocus
 			Console.WriteLine("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
 			Console.WriteLine("\n");
 			Console.ReadKey();
+		}
+		public class CMessageReceiver : CFLBase
+		{
+			// CMessageReceiver 생성자 // CMessageReceiver constructor
+			public CMessageReceiver(ref CGUIViewImage viewImage)
+			{
+				m_viewImage = viewImage;
+
+				// 메세지를 전달 받기 위해 CBroadcastManager 에 구독 등록 //Subscribe to CBroadcast Manager to receive messages
+				CBroadcastManager.Subscribe(this);
+			}
+
+			// CMessageReceiver 소멸자 // CMessageReceiver Destructor
+			~CMessageReceiver()
+			{
+				// 객체가 소멸할때 메세지 수신을 중단하기 위해 구독을 해제한다. // Unsubscribe to stop receiving messages when the object disappears.
+				CBroadcastManager.Unsubscribe(this);
+			}
+
+			// 메세지가 들어오면 호출되는 함수 OnReceiveBroadcast 오버라이드하여 구현 // Implemented by overriding the function OnReceive Broadcast that is invoked when a message is received
+			public override void OnReceiveBroadcast(CBroadcastMessage message)
+			{
+				do
+				{
+					// message 가 null 인지 확인 // Verify message is null
+					if(message == null)
+						break;
+
+					// GetCaller() 가 등록한 이미지뷰인지 확인 // Verify that GetCaller() is a registered image view
+					if(message.GetCaller() != m_viewImage)
+						break;
+
+					// 메세지의 채널을 확인 // Check the channel of the message
+					switch(message.GetChannel())
+					{
+					case (uint)EGUIBroadcast.ViewImage_PostPageChange:
+						{
+							// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅 // Casting the object that called the message as CGUIViewImage
+							CGUIViewImage viewImage = message.GetCaller() as CGUIViewImage;
+
+							// viewImage 가 null 인지 확인 // Verify viewImage is null
+							if(viewImage == null)
+								break;
+
+							CFLImage fliSrc = viewImage.GetImage();
+
+							if(fliSrc == null)
+								break;
+
+							int i64CurPage = fliSrc.GetSelectedPageIndex();
+
+							if(i64CurPage == 0)
+							{
+								// 이미지뷰의 3번 레이어 가져오기 // Get layer 3rd of image view
+								CGUIViewImageLayer wrapImageLayer = viewImage.GetLayer(3);
+								wrapImageLayer.DrawFigureImage(m_fliFirstPageAlignment, EColor.LIME, 1);
+
+								TPoint<double> tpPoint = new TPoint<double>(m_fliFirstPageAlignment.flpPoints[0].x, m_fliFirstPageAlignment.flpPoints[0].y);
+
+								wrapImageLayer.DrawTextImage(tpPoint, "First Page Alignment", EColor.CYAN);
+							}
+							else if(i64CurPage == fliSrc.GetPageCount() - 1)
+							{
+								// 이미지뷰의 4번 레이어 가져오기 // Get layer 4th of image view
+								CGUIViewImageLayer wrapImageLayer = viewImage.GetLayer(4);
+								wrapImageLayer.DrawFigureImage(m_fliLastPageAlignment, EColor.LIME, 1);
+
+								TPoint<double> tpPoint = new TPoint<double>(m_fliLastPageAlignment.flpPoints[0].x, m_fliLastPageAlignment.flpPoints[0].y);
+
+								wrapImageLayer.DrawTextImage(tpPoint, "Last Page Alignment", EColor.CYAN);
+							}
+
+							// 이미지뷰를 갱신 // Update the image view.
+							viewImage.Invalidate();
+						}
+						break;
+					}
+				}
+				while(false);
+			}
+
+			public CFLQuad<double> m_fliFirstPageAlignment = new CFLQuad<double>();
+			public CFLQuad<double> m_fliLastPageAlignment = new CFLQuad<double>();
+			CGUIViewImage m_viewImage;
 		}
 
 		[STAThread]
@@ -36,13 +120,16 @@ namespace MultiFocus
 			CGUIViewImage viewImageSrc = new CGUIViewImage();
 			CGUIViewImage viewImageDst = new CGUIViewImage();
 
+			// Message Reciever 객체 생성 // Create Message Reciever object
+			CMessageReceiver msgReceiver = new CMessageReceiver(ref viewImageSrc);
+
 			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult res = new CResult();
 
 			do
 			{
 				// 이미지 로드 // Load image
-                if ((res = fliSrcImage.Load("../../ExampleImages/MultiFocus/Source.flif")).IsFail())
+                if ((res = fliSrcImage.Load("../../ExampleImages/MultiFocus/SourceAlignment.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -50,8 +137,27 @@ namespace MultiFocus
 
 				fliSrcImage.SelectPage(0);
 
+				CFLQuad<double> flqFirstPageAlignment = new CFLQuad<double>();
+				CFLQuad<double> flqLastPageAlignment = new CFLQuad<double>();
+
+				if((res = flqFirstPageAlignment.Load("../../ExampleImages/MultiFocus/FirstPageAlignment.fig")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load Source Projection Figure.");
+					break;
+				}
+
+				if((res = flqLastPageAlignment.Load("../../ExampleImages/MultiFocus/LastPageAlignment.fig")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load Destination Projection Figure.");
+					break;
+				}
+
+				// 메시지 리시버에 Figure Pointer 설정 // Set Figure Point to message receiver
+				msgReceiver.m_fliFirstPageAlignment = flqFirstPageAlignment;
+				msgReceiver.m_fliLastPageAlignment = flqLastPageAlignment;
+
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImageSrc.Create(400, 0, 1012, 550)).IsFail())
+				if((res = viewImageSrc.Create(400, 0, 800, 400)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
@@ -64,8 +170,11 @@ namespace MultiFocus
 					break;
 				}
 
+				// Source 이미지 뷰 썸네일 뷰 높이 설정 // Set thumbnail view height
+				viewImageSrc.SetThumbnailViewHeight(0.05);
+
 				// Destination 이미지 뷰 생성 // Create the destination image view
-				if((res = viewImageDst.Create(1012, 0, 1624, 550)).IsFail())
+				if((res = viewImageDst.Create(800, 0, 1200, 400)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
@@ -92,8 +201,6 @@ namespace MultiFocus
 					break;
 				}
 
-                viewImageSrc.SetFixThumbnailView(true);
-
 				// MultiFocus 객체 생성 // Create MultiFocus object
 				CMultiFocus multiFocus = new CMultiFocus();
 				// Source 이미지 설정 // Set the source image
@@ -101,7 +208,11 @@ namespace MultiFocus
 				// Destination 이미지 설정 // Set the destination image
 				multiFocus.SetDestinationImage(ref fliDstImage);
 				// Kernel Size 설정 // Set the kernel size
-				multiFocus.SetKernel(41);
+				multiFocus.SetKernel(23);
+				// 첫번째 페이지 Alignment 설정 // Set first page alignment
+				multiFocus.SetFirstPageAlignment(flqFirstPageAlignment);
+				// 마지막 페이지 Alignment 설정 // Set last page alignment
+				multiFocus.SetLastPageAlignment(flqLastPageAlignment);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = multiFocus.Execute()).IsFail())
@@ -125,6 +236,8 @@ namespace MultiFocus
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerSrc.Clear();
 				layerDst.Clear();
+
+				layerSrc.SetAutoClearMode(ELayerAutoClearMode.PageChanged, false);
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.

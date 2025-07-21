@@ -13,9 +13,9 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationHardShrinkage
+namespace OperationMish
 {
-	class Program
+	class OperationMish
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -44,7 +44,7 @@ namespace OperationHardShrinkage
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationHardShrinkage/Coord1D.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationMish/Coord1D.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -84,27 +84,26 @@ namespace OperationHardShrinkage
 					break;
 				}
 
-				COperationHardShrinkage algObject = new COperationHardShrinkage();
+				COperationMish algObject = new COperationMish();
 
 				algObject.SetSourceImage(ref fliSourceImage);
 				algObject.SetDestinationImage(ref fliDestinationImage0);
-				algObject.SetOperationMode(COperationHardShrinkage.EOperationMode.Forward);
-				algObject.SetLambda(0.2);
+				algObject.SetOperationMode(COperationMish.EOperationMode.Forward);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation HardShrinkage.");
+					ErrorPrint(res, "Failed to execute operation Mish.");
 					break;
 				}
 
 				algObject.SetDestinationImage(ref fliDestinationImage1);
-				algObject.SetOperationMode(COperationHardShrinkage.EOperationMode.Backward);
+				algObject.SetOperationMode(COperationMish.EOperationMode.Backward);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation HardShrinkage.");
+					ErrorPrint(res, "Failed to execute operation Mish.");
 					break;
 				}
 

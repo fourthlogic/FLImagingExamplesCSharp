@@ -13,9 +13,9 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationSoftShrinkage
+namespace OperationPReLU
 {
-	class Program
+	class OperationPReLU
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -44,7 +44,7 @@ namespace OperationSoftShrinkage
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationSoftShrinkage/Coord1D.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationPReLU/Coord1D.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -84,27 +84,27 @@ namespace OperationSoftShrinkage
 					break;
 				}
 
-				COperationSoftShrinkage algObject = new COperationSoftShrinkage();
+				COperationPReLU algObject = new COperationPReLU();
 
 				algObject.SetSourceImage(ref fliSourceImage);
 				algObject.SetDestinationImage(ref fliDestinationImage0);
-				algObject.SetOperationMode(COperationSoftShrinkage.EOperationMode.Forward);
-				algObject.SetLambda(0.2);
+				algObject.SetOperationMode(COperationPReLU.EOperationMode.Forward);
+				algObject.SetAlpha(0.2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation SoftShrinkage.");
+					ErrorPrint(res, "Failed to execute operation PReLU.");
 					break;
 				}
 
 				algObject.SetDestinationImage(ref fliDestinationImage1);
-				algObject.SetOperationMode(COperationSoftShrinkage.EOperationMode.Backward);
+				algObject.SetOperationMode(COperationPReLU.EOperationMode.Backward);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation SoftShrinkage.");
+					ErrorPrint(res, "Failed to execute operation PReLU.");
 					break;
 				}
 

@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace FPP
 {
-	class Program
+	class Moire3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelL2Norm
+namespace ChannelL1Norm
 {
-	class Program
+	class ChannelL1Norm
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -41,7 +41,7 @@ namespace ChannelL2Norm
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/ChannelL2Norm/Coord.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/ChannelL1Norm/Coord.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -89,19 +89,19 @@ namespace ChannelL2Norm
 					break;
 				}
 
-				// Channel L2 Norm 객체 생성 // Create Channel L2 Norm object
-				CChannelL2Norm ChannelL2Norm = new CChannelL2Norm();
+				// Channel L1 Norm 객체 생성 // Create Channel L1 Norm object
+				CChannelL1Norm ChannelL1Norm = new CChannelL1Norm();
 
 				// Source 이미지 설정 // Set source image 
-				ChannelL2Norm.SetSourceImage(ref fliSourceImage);
+				ChannelL1Norm.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set destination image
-				ChannelL2Norm.SetDestinationImage(ref fliDestinationImage);
+				ChannelL1Norm.SetDestinationImage(ref fliDestinationImage);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ChannelL2Norm.Execute())).IsFail())
+				if((res = (ChannelL1Norm.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Channel L2 Norm. \n");
+					ErrorPrint(res, "Failed to execute Channel L1 Norm. \n");
 					break;
 				}
 

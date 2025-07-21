@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace OperationPopcount
 {
-	class Program
+	class OperationPopcount
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

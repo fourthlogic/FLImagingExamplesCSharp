@@ -13,9 +13,9 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationMish
+namespace OperationSoftplus
 {
-	class Program
+	class OperationSoftplus
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -44,7 +44,7 @@ namespace OperationMish
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationMish/Coord1D.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationSoftplus/Coord1D.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -84,26 +84,26 @@ namespace OperationMish
 					break;
 				}
 
-				COperationMish algObject = new COperationMish();
+				COperationSoftplus algObject = new COperationSoftplus();
 
 				algObject.SetSourceImage(ref fliSourceImage);
 				algObject.SetDestinationImage(ref fliDestinationImage0);
-				algObject.SetOperationMode(COperationMish.EOperationMode.Forward);
+				algObject.SetOperationMode(COperationSoftplus.EOperationMode.Forward);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation Mish.");
+					ErrorPrint(res, "Failed to execute operation Softplus.");
 					break;
 				}
 
 				algObject.SetDestinationImage(ref fliDestinationImage1);
-				algObject.SetOperationMode(COperationMish.EOperationMode.Backward);
+				algObject.SetOperationMode(COperationSoftplus.EOperationMode.Backward);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation Mish.");
+					ErrorPrint(res, "Failed to execute operation Softplus.");
 					break;
 				}
 

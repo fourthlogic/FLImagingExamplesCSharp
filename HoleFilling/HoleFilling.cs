@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace HoleFilling
 {
-	class Program
+	class HoleFilling
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -13,9 +13,9 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationReLU
+namespace OperationELU
 {
-	class Program
+	class OperationELU
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -44,7 +44,7 @@ namespace OperationReLU
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationReLU/Coord1D.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationELU/Coord1D.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -84,26 +84,27 @@ namespace OperationReLU
 					break;
 				}
 
-				COperationReLU algObject = new COperationReLU();
+				COperationELU algObject = new COperationELU();
 
 				algObject.SetSourceImage(ref fliSourceImage);
 				algObject.SetDestinationImage(ref fliDestinationImage0);
-				algObject.SetOperationMode(COperationReLU.EOperationMode.Forward);
+				algObject.SetOperationMode(COperationELU.EOperationMode.Forward);
+				algObject.SetAlpha(1.0);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation ReLU.");
+					ErrorPrint(res, "Failed to execute operation ELU.");
 					break;
 				}
 
 				algObject.SetDestinationImage(ref fliDestinationImage1);
-				algObject.SetOperationMode(COperationReLU.EOperationMode.Backward);
+				algObject.SetOperationMode(COperationELU.EOperationMode.Backward);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation ReLU.");
+					ErrorPrint(res, "Failed to execute operation ELU.");
 					break;
 				}
 

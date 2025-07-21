@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace MultiFocus
 {
-	class Program
+	class MultiFocusDerivativeBased3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -45,7 +45,7 @@ namespace MultiFocus
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliSrcImage.Load("../../ExampleImages/MultiFocusMAPBased3D/")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/MultiFocusDerivativeBased3D/")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -111,70 +111,32 @@ namespace MultiFocus
 
 				viewImageSrc.SetFixThumbnailView(true);
 
-				// Multi Focus MAP Based 객체 생성 // Create Multi Focus MAP Based object
-				CMultiFocusMAPBased3D algMultiFocusMAPBased3D = new CMultiFocusMAPBased3D();
+				// Multi Focus Derivative Based 객체 생성 // Create Multi Focus Derivative Based object
+				CMultiFocusDerivativeBased3D algMultiFocusDerivativeBased3D = new CMultiFocusDerivativeBased3D();
 
 				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 
 				// Source 이미지 설정 // Set the source image
-				if((res = algMultiFocusMAPBased3D.SetSourceImage(ref fliSrcImage)).IsFail())
-					break;
-				// 결과 destination height map 이미지 설정 // Set the destination height map image
-				if((res = algMultiFocusMAPBased3D.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
-					break;
-				// 결과 destination texture 이미지 설정 // Set the destination texture image
-				if((res = algMultiFocusMAPBased3D.SetDestinationTextureImage(ref fliTxtImage)).IsFail())
-					break;
-
-				// Focus measure bias page index 설정 // Set the focus measure bias page index
-				if((res = algMultiFocusMAPBased3D.SetFMBiasPageIndex(3)).IsFail())
-					break;
-				// Focus measure bias value 설정 // Set the Focus measure bias value
-				if((res = algMultiFocusMAPBased3D.SetFMBiasValue(0.02)).IsFail())
-					break;
-				// Focus measure method 설정 // Set focus measure method
-				if((res = algMultiFocusMAPBased3D.SetFocusMeasureMethod(CMultiFocusMAPBased3D.EFocusMeasureMethod.DoG)).IsFail())
-					break;
-				// Sigma1 설정 // Set the sigma1
-				if((res = algMultiFocusMAPBased3D.SetSigma1(0.4)).IsFail())
-					break;
-				// Sigma2 설정 // Set the sigma2
-				if((res = algMultiFocusMAPBased3D.SetSigma2(0.8)).IsFail())
-					break;
-
-				// Local regularization factor 설정 // Set the local regularization factor
-				if((res = algMultiFocusMAPBased3D.SetLocalRegularizationFactor(0.02)).IsFail())
-					break;
-				// Global regularization factor 설정 // Set the global regularization factor
-				if((res = algMultiFocusMAPBased3D.SetGlobalRegularizationFactor(0.00000000001)).IsFail())
-					break;
-				// Conjugate Gradient Method 의 tolerance 설정 // Set the tolerance for Conjugate Gradient Method
-				if((res = algMultiFocusMAPBased3D.SetCGMTolerance(0.00001)).IsFail())
-					break;
-				// Conjugate Gradient Method 의 max iterations 설정 // Set the max iterations for Conjugate Gradient Method
-				if((res = algMultiFocusMAPBased3D.SetCGMMaxIterations(100)).IsFail())
-					break;
-
-				// Page Direction 설정 // Set the page direction
-				if((res = algMultiFocusMAPBased3D.SetDirection(CMultiFocusMAPBased3D.EDirection.BottomToTop)).IsFail())
-					break;
+				algMultiFocusDerivativeBased3D.SetSourceImage(ref fliSrcImage);
+				// Destination Height Map 이미지 설정 // Set the destination height map image
+				algMultiFocusDerivativeBased3D.SetDestinationHeightMapImage(ref fliDstImage);
+				// Destination Texture 이미지 설정 // Set the destination texture image
+				algMultiFocusDerivativeBased3D.SetDestinationTextureImage(ref fliTxtImage);
+				// Destination 3D Object 설정 // Set the Destination 3D Object 
+				algMultiFocusDerivativeBased3D.SetDestinationObject(ref fl3DOHM);
 				// Pixel Accuracy 설정 // Set the pixel accuracy
-				if((res = algMultiFocusMAPBased3D.SetPixelAccuracy(1.0)).IsFail())
-					break;
+				algMultiFocusDerivativeBased3D.SetPixelAccuracy(0.1);
 				// Depth Pitch 설정 // Set the depth pitch
-				if((res = algMultiFocusMAPBased3D.SetDepthPitch(2.0)).IsFail())
-					break;
-
-				// Destination 3D object 생성 활성화 // Enable the Destination 3D object generation
-				if((res = algMultiFocusMAPBased3D.Enable3DObjectGeneration(true)).IsFail())
-					break;
-				// Destination 3D object 설정 // Set the Destination 3D object 
-				if((res = algMultiFocusMAPBased3D.SetDestinationObject(ref fl3DOHM)).IsFail())
-					break;
-
+				algMultiFocusDerivativeBased3D.SetDepthPitch(0.2);
+				// Filter 설정 // Set filter
+				algMultiFocusDerivativeBased3D.SetFilter(CMultiFocusDerivativeBased3D.EFilter.Guided);
+				// Set the sigma range value
+				algMultiFocusDerivativeBased3D.SetSigmaSpatial(5);
+				// Set the sigma spatial value
+				algMultiFocusDerivativeBased3D.SetSigmaRange(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = algMultiFocusMAPBased3D.Execute()).IsFail())
+				if((res = algMultiFocusDerivativeBased3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute MultiFocus.\n");
 					break;

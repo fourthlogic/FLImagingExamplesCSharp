@@ -13,9 +13,9 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationPReLU
+namespace OperationSigmoid
 {
-	class Program
+	class OperationSigmoid
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -44,7 +44,7 @@ namespace OperationPReLU
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationPReLU/Coord1D.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/OperationSigmoid/Coord1D.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -84,27 +84,30 @@ namespace OperationPReLU
 					break;
 				}
 
-				COperationPReLU algObject = new COperationPReLU();
+				COperationSigmoid algObject = new COperationSigmoid();
 
 				algObject.SetSourceImage(ref fliSourceImage);
 				algObject.SetDestinationImage(ref fliDestinationImage0);
-				algObject.SetOperationMode(COperationPReLU.EOperationMode.Forward);
-				algObject.SetAlpha(0.2);
+				algObject.SetOperationMode(COperationSigmoid.EOperationMode.Forward);
+				algObject.EnableGeneralizedMode(true);
+				algObject.SetB(1.0);
+				algObject.SetM(0.0);
+				algObject.SetK(1.0);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation PReLU.");
+					ErrorPrint(res, "Failed to execute operation Sigmoid.");
 					break;
 				}
 
 				algObject.SetDestinationImage(ref fliDestinationImage1);
-				algObject.SetOperationMode(COperationPReLU.EOperationMode.Backward);
+				algObject.SetOperationMode(COperationSigmoid.EOperationMode.Backward);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation PReLU.");
+					ErrorPrint(res, "Failed to execute operation Sigmoid.");
 					break;
 				}
 

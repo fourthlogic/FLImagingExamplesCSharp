@@ -12,9 +12,9 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ActiveContour
+namespace WignerVilleDistribution
 {
-	class Program
+	class WignerVilleDistribution
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -43,7 +43,7 @@ namespace ActiveContour
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliISrcImage.Load("../../ExampleImages/ActiveContour/Grid Of Cross.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/WignerVilleDistribution/chirp.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -90,74 +90,47 @@ namespace ActiveContour
 					break;
 				}
 
-				// Active Contour 객체 생성 // Create Active Contour object
-				CActiveContour ac = new CActiveContour();
+				// Wigner Ville Distribution 객체 생성 // Create Wigner Ville Distribution object
+				CWignerVilleDistribution wvd = new CWignerVilleDistribution();
 
 				// Source 이미지 설정 // Set source image 
-                ac.SetSourceImage(ref fliISrcImage);
-
-				// Source ROI 설정 // Set Source ROI
-				CFLFigure flfSourceROI = CFigureUtilities.ConvertFigureStringToObject("RG[D(129.22800000000007, 126.67680000000001), D(731.22800000000007, 120.67680000000001), D(733.22800000000007, 262.67680000000001), D(253.22800000000007, 246.67680000000001), D(265.22800000000007, 600.67679999999996), D(603.22800000000007, 594.67679999999996), D(607.22800000000007, 400.67680000000001), D(403.22800000000007, 396.67680000000001), D(409.22800000000007, 448.67680000000001), D(565.22800000000007, 450.67680000000001), D(549.22800000000007, 556.67679999999996), D(289.22800000000007, 558.67679999999996), D(291.22800000000007, 292.67680000000001), D(721.22800000000007, 294.67680000000001), D(721.22800000000007, 720.67679999999996), D(119.22800000000007, 718.67679999999996), D(113.22800000000007, 142.67680000000001)]");
-				ac.SetSourceROI(flfSourceROI);
+				if((res = wvd.SetSourceImage(ref fliISrcImage)).IsFail())
+					break;
 
 				// Destination 이미지 설정 // Set destination image
-				ac .SetDestinationImage(ref fliIDstImage);
+				if((res = wvd.SetDestinationImage(ref fliIDstImage)).IsFail())
+					break;
 
-				// Point Count 설정 // Set Point Count
-				ac.SetPointCount(3000);
+				// Scale 설정 // Set Scale
+				if((res = wvd.SetScale(0.00004)).IsFail())
+					break;
 
-				// Max Length 설정 // Set Max Length
-				ac.SetMaxLength(3);
+				// Self Correlation Half Size 설정 // Set Self Correlation Half Size
+				if((res = wvd.SetSelfCorrelationHalfSize(511)).IsFail())
+					break;
 
-				// Low Threshold 설정 // Set Low Threshold
-				ac.SetLowThreshold(20);
+				// Self Correlation Window 설정 // Set Self Correlation Window
+				if((res = wvd.SetSelfCorrelationWindow(CWignerVilleDistribution.ESelfCorrelationWindow.Gaussian)).IsFail())
+					break;
 
-				// High Threshold 설정 // Set High Threshold
-				ac.SetHighThreshold(50);
+				// Sigma 설정 // Set Sigma
+				if((res = wvd.SetSigma(0.3)).IsFail())
+					break;
 
-				// Fit Margin 설정 // Set Fit Margin
-				ac.SetFitMargin(3);
+				// Output Mode 설정 // Set Output Mode
+				if((res = wvd.SetOutputMode(CWignerVilleDistribution.EOutputMode.L2Norm)).IsFail())
+					break;
+
+				// Output Direction 설정 // Set Output Direction
+				if((res = wvd.SetOutputDirection(CWignerVilleDistribution.EOutputDirection.Horizontal)).IsFail())
+					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (ac.Execute())).IsFail())
+				if((res = (wvd.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Active Contour.");
+					ErrorPrint(res, "Failed to execute Wigner Ville Distribution.");
 					break;
 				}
-
-				// 이미지 뷰를 갱신 합니다. // Update image view
-				viewImage[0].Invalidate(true);
-				viewImage[1].Invalidate(true);
-
-				for(Int32 i32Iteration = 0; i32Iteration < 20; ++i32Iteration)
-				{
-					ac.Fit();
-					ac.Fit();
-					ac.Fit();
-					ac.Fit();
-					ac.Fit();
-					ac.Fit();
-					ac.Fit();
-					ac.Fit();
-					ac.Fit();
-					ac.Fit();
-					ac.Spacing();
-					ac.Spacing();
-					ac.Spacing();
-					ac.Spacing();
-					ac.Spacing();
-
-                    /* PushBack Figure */
-                    {
-						viewImage[0].ClearFigureObject();
-                        viewImage[0].PushBackFigureObject(ac.GetContourFigure());
-                        viewImage[0].Invalidate(true);
-
-						Thread.Sleep(50);
-                    }
-				}
-
-				viewImage[0].PushBackFigureObject(ac.GetSourceROI());
 
 				// 레이어는 따로 해제하지 않아도 View가 해제 될 때 같이 해제된다. // The layer is released together when View is released without releasing it separately.
 				CGUIViewImageLayer layer1 = viewImage[0].GetLayer(0);
@@ -171,6 +144,8 @@ namespace ActiveContour
 				if((res = layer2.DrawTextImage(flpTemp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
+				viewImage[0].ZoomFit();
+				viewImage[1].ZoomFit();
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				viewImage[0].Invalidate(true);
