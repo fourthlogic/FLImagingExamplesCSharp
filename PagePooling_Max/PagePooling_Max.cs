@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace PagePooling
 {
-    class Program
+    class PagePooling_Max
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{

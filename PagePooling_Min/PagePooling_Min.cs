@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace PagePooling
 {
-    class Program
+    class PagePooling_Min
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -28,8 +28,8 @@ namespace PagePooling
 		[STAThread]
 		static void Main(string[] args)
         {
-            // 이미지 객체 선언 // Declare the image object
-            CFLImage fliSourceImage = new CFLImage();
+			// 이미지 객체 선언 // Declare the image object
+			CFLImage fliSourceImage = new CFLImage();
             CFLImage fliDestinationImage = new CFLImage();
             CFLImage fliIndexImage = new CFLImage();
 
@@ -44,7 +44,7 @@ namespace PagePooling
 			do
 			{
                 // Source 이미지 로드 // Load the source image
-                if ((res = fliSourceImage.Load("../../ExampleImages/PagePooling/Multiple File_Max.flif")).IsFail())
+                if ((res = fliSourceImage.Load("../../ExampleImages/PagePooling/Multiple File_Min.flif")).IsFail())
                 {
 					ErrorPrint(res, "Failed to load the image file. \n");
                     break;
@@ -120,7 +120,6 @@ namespace PagePooling
                     break;
                 }
 
-                
                 // Page Pooling 객체 생성 // Create Page Pooling object
                 CPagePooling pagePooling = new CPagePooling();
 
@@ -149,7 +148,7 @@ namespace PagePooling
 				//	- Min : 입력된 이미지 가운데 최소 값을 출력합니다. // Min : Outputs the minimum value of the entered image.
 				//	- MinGaussian : 입력된 이미지 가운데 가장 앞 쪽 인덱스에 위치한 최소 값을 기준으로 가우시안 값을 출력합니다. // MinGaussian : Outputs the Gaussian value based on the minimum value located in the leading index of the entered image.
 				//	- Mean : 입력된 이미지들의 평균 값을 출력합니다. (최대 16843009 장 까지 지원됩니다.) // Mean: Outputs the average value of the entered images. (Up to 16843009 pages are supported.)
-				pagePooling.SetSamplingMethod(CPagePooling.ESamplingMethod.MaxGaussian);
+				pagePooling.SetSamplingMethod(CPagePooling.ESamplingMethod.Min);
 
                 if((res = pagePooling.Execute()).IsFail())
                 {

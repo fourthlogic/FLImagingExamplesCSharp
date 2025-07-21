@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace PagePooling
 {
-    class Program
+    class PagePixelPicker
     {
 		public static void ErrorPrint(CResult cResult, string str)
 		{
