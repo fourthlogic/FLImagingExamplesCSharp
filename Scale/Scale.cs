@@ -150,7 +150,7 @@ namespace Scale
 
 				// Destination 이미지 설정 // Set the destination image
 				scale.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
-				// Scale 변환 방식 픽셀로 설정
+				// Scale 변환 방식 픽셀로 설정 // Scale conversion method set to pixel
 				scale.SetScaleMethod(EScaleMethod.ScaleUnitsToPixels);
 				// Scale 변환 크기 설정 // Set the Scale transform size
 				scale.SetScale(1024, 1024);

@@ -120,7 +120,7 @@ namespace Move
 				if(bError)
 					break;
 
-				// ROI 설정을 위한 CFLRect 객체 생성 // Create a CFLRect object for setting ROI
+				// ROI 설정을 위한 CFLEllipse 객체 생성 // Create a CFLEllipse object for setting ROI
 				CFLEllipse<double> fleROI = new CFLEllipse<double>(370, 260, 100, 50, 34);
 
 				// Move 객체 생성 // Create Move object
