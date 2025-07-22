@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2A7FA528-C4E6-4A20-A2F7-C784520CC502}</ProjectGuid>
+    <ProjectGuid>{F33161E8-CD59-4B16-93E1-D134CE032438}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PointCloudGenerator3D</RootNamespace>
-    <AssemblyName>PointCloudGenerator3D</AssemblyName>
+    <RootNamespace>UniformPointCloudUpsampler3D</RootNamespace>
+    <AssemblyName>UniformPointCloudUpsampler3D</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -111,7 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PointCloudGenerator3D.cs" />
+    <Compile Include="UniformPointCloudUpsampler3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
