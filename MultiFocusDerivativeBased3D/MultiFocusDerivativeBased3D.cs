@@ -151,6 +151,8 @@ namespace MultiFocus
 					break;
 				}
 
+				viewImageSrc.SetLayerAutoClearMode(ELayerAutoClearMode.PageChanged, false);
+
 				// Zoom Fit
 				viewImageSrc.ZoomFit();
 				viewImageDst.ZoomFit();

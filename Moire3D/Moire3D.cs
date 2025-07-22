@@ -117,10 +117,10 @@ namespace FPP
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res= viewImageSrc[0].SynchronizePointOfView(ref viewImageSrc[1])).IsFail() ||
-					(res= viewImageSrc[0].SynchronizePointOfView(ref viewImageLrn[0])).IsFail() ||
-					(res= viewImageSrc[0].SynchronizePointOfView(ref viewImageLrn[1])).IsFail() ||
-					(res= viewImageSrc[0].SynchronizePointOfView(ref viewImageDst)).IsFail())
+				if((res = viewImageSrc[0].SynchronizePointOfView(ref viewImageSrc[1])).IsFail() ||
+					(res = viewImageSrc[0].SynchronizePointOfView(ref viewImageLrn[0])).IsFail() ||
+					(res = viewImageSrc[0].SynchronizePointOfView(ref viewImageLrn[1])).IsFail() ||
+					(res = viewImageSrc[0].SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 
 					ErrorPrint(res, "Failed to synchronize window.\n");
@@ -128,8 +128,8 @@ namespace FPP
 				}
 
 				// 두 이미지 뷰의 페이지 인덱스를 동기화 한다 // Synchronize the page index of the two image views
-				if((res= viewImageSrc[0].SynchronizePageIndex(ref viewImageSrc[1])).IsFail() ||
-					(res= viewImageSrc[0].SynchronizePageIndex(ref viewImageLrn[0])).IsFail() ||
+				if((res = viewImageSrc[0].SynchronizePageIndex(ref viewImageSrc[1])).IsFail() ||
+					(res = viewImageSrc[0].SynchronizePageIndex(ref viewImageLrn[0])).IsFail() ||
 					(res = viewImageSrc[0].SynchronizePageIndex(ref viewImageLrn[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
@@ -137,8 +137,8 @@ namespace FPP
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res= viewImageSrc[0].SynchronizeWindow(ref viewImageSrc[1])).IsFail() ||
-					(res= viewImageSrc[0].SynchronizeWindow(ref viewImageLrn[0])).IsFail() ||
+				if((res = viewImageSrc[0].SynchronizeWindow(ref viewImageSrc[1])).IsFail() ||
+					(res = viewImageSrc[0].SynchronizeWindow(ref viewImageLrn[0])).IsFail() ||
 					(res = viewImageSrc[0].SynchronizeWindow(ref viewImageLrn[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");

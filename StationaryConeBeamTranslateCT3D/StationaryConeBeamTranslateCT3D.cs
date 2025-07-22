@@ -174,6 +174,9 @@ namespace StationaryConeBeamTranslateCT3D
 					break;
 				}
 
+				viewImageSrc.SetLayerAutoClearMode(ELayerAutoClearMode.PageChanged, false);
+				viewImageDst.SetLayerAutoClearMode(ELayerAutoClearMode.PageChanged, false);
+
 				// Zoom Fit
 				viewImageSrc.ZoomFit();
 				viewImageDst.ZoomFit();
