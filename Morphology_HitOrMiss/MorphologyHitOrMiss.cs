@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace Morphology_HitOrMiss
 {
-	class Program
+	class MorphologyHitOrMiss
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
