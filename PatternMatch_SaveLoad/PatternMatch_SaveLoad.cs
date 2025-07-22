@@ -42,28 +42,49 @@ namespace Match
 			{
 				// 이미지 로드 // Load image
 				if((res = fliLearnImage.Load("../../ExampleImages/Matching/Pattern Single Learn.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.");
 					break;
+				}
 
 				if((res = fliFindImage.Load("../../ExampleImages/Matching/Pattern Single Find.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.");
 					break;
+				}
 
 				// 이미지 뷰 생성 // Create image view
 				if((res = viewImageLearn.Create(400, 0, 912, 384)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
+				}
 
 				if((res = viewImageFind.Create(912, 0, 1680, 576)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.");
 					break;
+				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // display the image in the imageview
 				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
+				}
 
 				if((res = viewImageFind.SetImagePtr(ref fliFindImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.");
 					break;
+				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 				if((res = viewImageLearn.SynchronizeWindow(ref viewImageFind)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window.");
 					break;
+				}
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
@@ -77,10 +98,16 @@ namespace Match
 				CFLPoint<double> flp00 = new CFLPoint<double>(0, 0);
 
 				if((res = layerLearn.DrawTextCanvas(flp00, "LEARN", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
 					break;
+				}
 
 				if((res = layerFind.DrawTextCanvas(flp00, "FIND", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
 					break;
+				}
 
 				// Pattern Match 객체 생성 // Create Pattern Match object
 				CPatternMatch FLPatternMatchSave = new CPatternMatch();
@@ -97,7 +124,10 @@ namespace Match
 
 				// 알고리즘 수행 // Execute the Algoritm
 				if((res = FLPatternMatchSave.Learn()).IsFail())
+				{
+					ErrorPrint(res, "Failed to load\n");
 					break;
+				}
 
 				// 데이터 Save를 진행합니다. // Proceed to save data.
 				if((res = FLPatternMatchSave.Save("../../ExampleImages/Matching/Pattern Single Learn")).IsFail())
@@ -108,19 +138,31 @@ namespace Match
 
 				// 측정 영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the measurement area is
 				if((res = layerLearn.DrawFigureImage(learnRegion, EColor.BLACK, 3)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw figure");
 					break;
+				}
 
 				if((res = layerLearn.DrawFigureImage(learnRegion, EColor.CYAN)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw figure");
 					break;
+				}
 
 				// 설정된 중심점의 위치를 디스플레이 한다 // Display the position of the set center point
 				CFLFigureArray flfaPointPivot = flpLearnPivot.MakeCrossHair(3, false);
 
 				if((res = layerLearn.DrawFigureImage(flfaPointPivot, EColor.BLACK, 3)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw figure");
 					break;
+				}
 
 				if((res = layerLearn.DrawFigureImage(flfaPointPivot, EColor.LIME)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw figure");
 					break;
+				}
 
 				// 학습한 정보에 대해 Console창에 출력한다 // Print the learned information to the console window
 				Console.WriteLine(" ▷ Learn Information");
@@ -207,17 +249,29 @@ namespace Match
 					flfaPoint.Rotate(f32Angle, flpPivot);
 
 					if((res = layerFind.DrawFigureImage(flfaPoint, EColor.BLACK, 3)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw figure");
 						break;
+					}
 
 					if((res = layerFind.DrawFigureImage(flfaPoint, EColor.LIME)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw figure");
 						break;
+					}
 
 					// 결과 영역을 디스플레이 한다 // Display the result area
 					if((res = layerFind.DrawFigureImage(flrResultRegion, EColor.BLACK, 3)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw figure");
 						break;
+					}
 
 					if((res = layerFind.DrawFigureImage(flrResultRegion, EColor.LIME)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw figure");
 						break;
+					}
 
 					TPoint<double> tpPosition = new TPoint<double>();
 					tpPosition.x = flpPivot.x;

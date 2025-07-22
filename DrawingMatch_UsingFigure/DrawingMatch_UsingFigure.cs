@@ -113,10 +113,10 @@ namespace Match
 				// 추출할 특징점 처리과정에서의 허용 임계값을 설정합니다. // Set the allowable threshold in the feature point processing process to be extracted.
 				FLDrawingMatch.SetLearnThresholdCoefficient(1.0);
 
-				// 알고리즘 수행 // Execute the Algoritm
+				// 알고리즘 학습 수행 // Learn the Algoritm
 				if((res = FLDrawingMatch.Learn()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Learn.");
+					ErrorPrint(res, "Failed to Learn.");
 					break;
 				}
 

@@ -218,7 +218,6 @@ namespace Match
 				FLGeometricMatchMulti.SetFindThresholdCoefficient(1.0);
 				// 검출 시 겹쳐짐 허용 정도를 설정합니다. // Set the allowable degree of overlap during detection.
 				FLGeometricMatchMulti.SetObjectOverlap(0.8);
-				// 검출 시 이미지 전처리 유무를 설정합니다. // Set whether or not to pre-process the image during detection.
 
 				// 알고리즘 수행 // Execute the Algoritm
 				if((res = FLGeometricMatchMulti.Execute()).IsFail())

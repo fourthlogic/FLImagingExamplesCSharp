@@ -95,7 +95,6 @@ namespace Match
 				// Geometric Match 객체 생성 // Create Geometric Match object
 				CDrawingMatch FLDrawingMatch = new CDrawingMatch();
 
-				// 학습할 이미지 설정 // Set the image to learn
 				// 학습할 도면을 설정합니다. // Set the drawing to learn.
 				FLDrawingMatch.SetDrawing("../../ExampleImages/Matching/Drawing.gbr");
 				// 도면에 대한 분해능 단위를 설정합니다. // Set unit of pixel accuracy.
@@ -111,10 +110,10 @@ namespace Match
 				// 추출할 특징점 처리과정에서의 허용 임계값을 설정합니다. // Set the allowable threshold in the feature point processing process to be extracted.
 				FLDrawingMatch.SetLearnThresholdCoefficient(1.0);
 
-				// 알고리즘 수행 // Execute the Algoritm
+				// 알고리즘 학습 수행 // Learn the Algoritm
 				if((res = FLDrawingMatch.Learn()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Learn.");
+					ErrorPrint(res, "Failed to Learn.");
 					break;
 				}
 

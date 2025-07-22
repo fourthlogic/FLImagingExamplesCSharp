@@ -126,23 +126,23 @@ namespace Match
 				// 추출할 특징점 처리과정에서의 허용 임계값을 설정합니다. // Set the allowable threshold in the feature point processing process to be extracted.
 				FLGeometricMatch.SetLearnThresholdCoefficient(1.0);
 
-				// 알고리즘 수행 // Execute the Algoritm
+				// 학습 수행 // Learn the Algoritm
 				if((res = FLGeometricMatch.Learn()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Learn.");
+					ErrorPrint(res, "Failed to Learn.");
 					break;
 				}
-
+				
 				// 학습 영역이 어디인지 알기 위해 디스플레이 한다 // Display to see where the learning area is
 				if((res = layerLearn.DrawFigureImage(learnRegion, EColor.BLACK, 3)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
 				if((res = layerLearn.DrawFigureImage(learnRegion, EColor.CYAN)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text");
+					ErrorPrint(res, "Failed to draw figure");
 					break;
 				}
 
