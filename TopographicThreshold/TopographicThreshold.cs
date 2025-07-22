@@ -172,7 +172,7 @@ namespace TopographicThreshold
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = topographicThreshold.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute conditional replacer.");
+					ErrorPrint(res, "Failed to execute Topographic Threshold.");
 					break;
 				}
 
@@ -185,7 +185,7 @@ namespace TopographicThreshold
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = topographicThreshold.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute conditional replacer.");
+					ErrorPrint(res, "Failed to execute Topographic Threshold.");
 					break;
 				}
 
@@ -198,7 +198,7 @@ namespace TopographicThreshold
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = topographicThreshold.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Topogrpahic Threshold.");
+					ErrorPrint(res, "Failed to execute Topographic Threshold.");
 					break;
 				}
 
