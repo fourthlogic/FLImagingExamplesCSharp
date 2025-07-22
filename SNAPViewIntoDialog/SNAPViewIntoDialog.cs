@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace SNAPViewIntoDialog
 {
-    class SNAPViewIntoDialogProgram
+    class SNAPViewIntoDialog
     {
         [STAThread]
         static void Main(string[] args)
