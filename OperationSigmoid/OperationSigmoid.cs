@@ -86,13 +86,13 @@ namespace OperationSigmoid
 
 				COperationSigmoid algObject = new COperationSigmoid();
 
-				algObject.SetSourceImage(ref fliSourceImage);
-				algObject.SetDestinationImage(ref fliDestinationImage0);
-				algObject.SetOperationMode(COperationSigmoid.EOperationMode.Forward);
-				algObject.EnableGeneralizedMode(true);
-				algObject.SetB(1.0);
-				algObject.SetM(0.0);
-				algObject.SetK(1.0);
+				if((res = algObject.SetSourceImage(ref fliSourceImage)).IsFail()) break;
+				if((res = algObject.SetDestinationImage(ref fliDestinationImage0)).IsFail()) break;
+				if((res = algObject.SetOperationMode(COperationSigmoid.EOperationMode.Forward)).IsFail()) break;
+				if((res = algObject.EnableGeneralizedMode(true)).IsFail()) break;
+				if((res = algObject.SetB(1.0)).IsFail()) break;
+				if((res = algObject.SetM(0.0)).IsFail()) break;
+				if((res = algObject.SetK(1.0)).IsFail()) break;
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
@@ -101,8 +101,8 @@ namespace OperationSigmoid
 					break;
 				}
 
-				algObject.SetDestinationImage(ref fliDestinationImage1);
-				algObject.SetOperationMode(COperationSigmoid.EOperationMode.Backward);
+				if((res = algObject.SetDestinationImage(ref fliDestinationImage1)).IsFail()) break;
+				if((res = algObject.SetOperationMode(COperationSigmoid.EOperationMode.Backward)).IsFail()) break;
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())

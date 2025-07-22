@@ -86,10 +86,10 @@ namespace OperationSwish
 
 				COperationSwish algObject = new COperationSwish();
 
-				algObject.SetSourceImage(ref fliSourceImage);
-				algObject.SetDestinationImage(ref fliDestinationImage0);
-				algObject.SetOperationMode(COperationSwish.EOperationMode.Forward);
-				algObject.SetBeta(1.0);
+				if((res = algObject.SetSourceImage(ref fliSourceImage)).IsFail()) break;
+				if((res = algObject.SetDestinationImage(ref fliDestinationImage0)).IsFail()) break;
+				if((res = algObject.SetOperationMode(COperationSwish.EOperationMode.Forward)).IsFail()) break;
+				if((res = algObject.SetBeta(1.0)).IsFail()) break;
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
@@ -98,8 +98,8 @@ namespace OperationSwish
 					break;
 				}
 
-				algObject.SetDestinationImage(ref fliDestinationImage1);
-				algObject.SetOperationMode(COperationSwish.EOperationMode.Backward);
+				if((res = algObject.SetDestinationImage(ref fliDestinationImage1)).IsFail()) break;
+				if((res = algObject.SetOperationMode(COperationSwish.EOperationMode.Backward)).IsFail()) break;
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())

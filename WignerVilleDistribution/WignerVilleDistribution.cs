@@ -34,14 +34,13 @@ namespace WignerVilleDistribution
 			CFLImage fliIDstImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage[] viewImage = new CGUIViewImage[2];
+			CGUIViewImage viewImageSrc = new CGUIViewImage();
+			CGUIViewImage viewImageDst = new CGUIViewImage();
 
-			viewImage[0] = new CGUIViewImage();
-			viewImage[1] = new CGUIViewImage();
+			CResult res;
 
 			do
 			{
-				CResult res;
 				// 이미지 로드 // Load image
 				if((res = fliISrcImage.Load("../../ExampleImages/WignerVilleDistribution/chirp.flif")).IsFail())
 				{
@@ -50,109 +49,83 @@ namespace WignerVilleDistribution
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
-				if((res = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
+				if((res = viewImageSrc.Create(100, 0, 600, 500)).IsFail() ||
+					(res = viewImageDst.Create(600, 0, 1100, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliISrcImage)).IsFail() ||
+					(res = viewImageDst.SetImagePtr(ref fliIDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[1].SetImagePtr(ref fliIDstImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
 
-				// Wigner Ville Distribution 객체 생성 // Create Wigner Ville Distribution object
+				// 알고리즘 객체 생성 // Create algorithm object
 				CWignerVilleDistribution wvd = new CWignerVilleDistribution();
 
-				// Source 이미지 설정 // Set source image 
 				if((res = wvd.SetSourceImage(ref fliISrcImage)).IsFail())
 					break;
-
-				// Destination 이미지 설정 // Set destination image
 				if((res = wvd.SetDestinationImage(ref fliIDstImage)).IsFail())
 					break;
-
-				// Scale 설정 // Set Scale
 				if((res = wvd.SetScale(0.00004)).IsFail())
 					break;
-
-				// Self Correlation Half Size 설정 // Set Self Correlation Half Size
 				if((res = wvd.SetSelfCorrelationHalfSize(511)).IsFail())
 					break;
-
-				// Self Correlation Window 설정 // Set Self Correlation Window
 				if((res = wvd.SetSelfCorrelationWindow(CWignerVilleDistribution.ESelfCorrelationWindow.Gaussian)).IsFail())
 					break;
-
-				// Sigma 설정 // Set Sigma
 				if((res = wvd.SetSigma(0.3)).IsFail())
 					break;
-
-				// Output Mode 설정 // Set Output Mode
 				if((res = wvd.SetOutputMode(CWignerVilleDistribution.EOutputMode.L2Norm)).IsFail())
 					break;
-
-				// Output Direction 설정 // Set Output Direction
 				if((res = wvd.SetOutputDirection(CWignerVilleDistribution.EOutputDirection.Horizontal)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (wvd.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Wigner Ville Distribution.");
+					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
 
+
 				// 레이어는 따로 해제하지 않아도 View가 해제 될 때 같이 해제된다. // The layer is released together when View is released without releasing it separately.
-				CGUIViewImageLayer layer1 = viewImage[0].GetLayer(0);
-				CGUIViewImageLayer layer2 = viewImage[1].GetLayer(0);
-				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
+				CGUIViewImageLayer layer1 = viewImageSrc.GetLayer(0);
+				CGUIViewImageLayer layer2 = viewImageDst.GetLayer(0);
 
 				// View 정보를 디스플레이 합니다. // Display View information.
-				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
+				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layer2.DrawTextImage(flpTemp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = layer2.DrawTextImage(flpTemp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(res, "Failed to draw text.\n");
-
-				viewImage[0].ZoomFit();
-				viewImage[1].ZoomFit();
+				viewImageSrc.ZoomFit();
+				viewImageDst.ZoomFit();
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
-				viewImage[0].Invalidate(true);
-				viewImage[1].Invalidate(true);
+				viewImageSrc.Invalidate(true);
+				viewImageDst.Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImage[0].IsAvailable())
+				while(viewImageSrc.IsAvailable() && viewImageDst.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);

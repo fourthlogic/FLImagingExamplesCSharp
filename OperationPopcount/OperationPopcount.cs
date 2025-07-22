@@ -58,8 +58,8 @@ namespace OperationPopcount
 				}
 
 				// 이미지 뷰 생성 // Create image views
-				if ((res = viewImageSrc.Create(100, 0, 600, 545)).IsFail() ||
-					(res = viewImageDst.Create(600, 0, 1100, 545)).IsFail())
+				if ((res = viewImageSrc.Create(100, 0, 600, 500)).IsFail() ||
+					(res = viewImageDst.Create(600, 0, 1100, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
@@ -88,8 +88,8 @@ namespace OperationPopcount
 
 				COperationPopcount algObject = new COperationPopcount();
 
-				algObject.SetSourceImage(ref fliSourceImage);
-				algObject.SetDestinationImage(ref fliDestinationImage);
+				if((res = algObject.SetSourceImage(ref fliSourceImage)).IsFail()) break;
+				if((res = algObject.SetDestinationImage(ref fliDestinationImage)).IsFail()) break;
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())

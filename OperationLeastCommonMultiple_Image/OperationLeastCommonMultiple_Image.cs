@@ -27,166 +27,120 @@ namespace OperationLeastCommonMultiple_Image
 			Console.ReadKey();
 		}
 
-		enum EType
-		{
-			Source = 0,
-			Operand,
-			Destination,
-			ETypeCount,
-		}
-
 		[STAThread]
 		static void Main(string[] args)
 		{
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage[] arrFliImage = new CFLImage[(int)EType.ETypeCount];
-
-			for(int i = 0; i < (int)EType.ETypeCount; ++i)
-				arrFliImage[i] = new CFLImage();
+			CFLImage fliSrcImage = new CFLImage();
+			CFLImage fliOprImage = new CFLImage();
+			CFLImage fliDstImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage[] arrViewImage = new CGUIViewImage[(int)EType.ETypeCount];
-
-			for(int i = 0; i < (int)EType.ETypeCount; ++i)
-				arrViewImage[i] = new CGUIViewImage();
+			CGUIViewImage viewImageSrc = new CGUIViewImage();
+			CGUIViewImage viewImageOpr = new CGUIViewImage();
+			CGUIViewImage viewImageDst = new CGUIViewImage();
 
 			CResult res;
 
 			do
 			{
 				// Source 이미지 로드 // Load the source image
-				if((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/OperationLeastCommonMultiple/Gradient.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/OperationLeastCommonMultiple/Gradient.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Operand 이미지 로드 // Loads the operand image
-				if((res = arrFliImage[(int)EType.Operand].Load("../../ExampleImages/OperationLeastCommonMultiple/GradientVertical.flif")).IsFail())
+				// Operand 이미지 로드 // Load the operand image
+				if((res = fliOprImage.Load("../../ExampleImages/OperationLeastCommonMultiple/GradientVertical.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				bool bError = false;
-
-				for(int i = 0; i < (int)EType.ETypeCount; ++i)
+				// 이미지 뷰 생성 // Create image view
+				if((res = viewImageSrc.Create(100, 0, 600, 500)).IsFail() ||
+					(res = viewImageOpr.Create(600, 0, 1100, 500)).IsFail() ||
+					(res = viewImageDst.Create(1100, 0, 1600, 500)).IsFail())
 				{
-					// 이미지 뷰 생성 // Create image view
-					if((res = (arrViewImage[i].Create(i * 512 + 100, 0, i * 512 + 100 + 512, 512))).IsFail())
-					{
-						ErrorPrint(res, "Failed to create the image view.\n");
-						bError = true;
-						break;
-					}
-
-					// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
-					{
-						ErrorPrint(res, "Failed to set image object on the image view.\n");
-						bError = true;
-						break;
-					}
-
-					if(i == (int)EType.Source)
-						continue;
-
-					// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-					if((res = (arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i]))).IsFail())
-					{
-						ErrorPrint(res, "Failed to synchronize view\n");
-						bError = true;
-						break;
-					}
-
-					// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
-					if((res = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
-					{
-						ErrorPrint(res, "Failed to synchronize window.\n");
-						bError = true;
-						break;
-					}
-				}
-
-				if(bError)
-					break;
-
-				// Operation LeastCommonMultiple 객체 생성 // Create Operation LeastCommonMultiple object
-				COperationLeastCommonMultiple lcm = new COperationLeastCommonMultiple();
-				// Source 이미지 설정 // Set the source image
-				lcm.SetSourceImage(ref arrFliImage[(int)EType.Source]);
-				// Operand 이미지 설정 // Set the operand image
-				lcm.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
-				// Destination 이미지 설정 // Set the destination image
-				lcm.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
-
-				// 연산 방식 설정 // Set operation source
-				lcm.SetOperationSource(EOperationSource.Image);
-
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (lcm.Execute())).IsFail())
-				{
-					ErrorPrint(res, "Failed to execute operation LCM.");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[(int)EType.ETypeCount];
-
-				for(int i = 0; i < (int)EType.ETypeCount; ++i)
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. .
+				// ref 파라미터를 입력 받는 함수는 리턴이 tuple로 생성되며 [return], [ref 0], ... [ref n-1] 형태로 tuple 을 반환한다. // A function that receives ref parameters returns a tuple structured as [return], [ref 0], ... [ref n-1].
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageOpr)).IsFail() ||
+					(res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
-					// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-					// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
-					arrLayer[i] = arrViewImage[i].GetLayer(0);
-
-					// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
-					arrLayer[i].Clear();
+					ErrorPrint(res, "Failed to synchronize view. \n");
+					break;
 				}
 
-				// View 정보를 디스플레이 한다. // Display view information
-				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다. // The function DrawTextCanvas below draws a String based on the screen coordinates.
-				// 색상 파라미터를 EGUIViewImageLayerTransparencyColor 으로 넣어주게되면 배경색으로 처리함으로 불투명도를 0으로 한것과 같은 효과가 있다. // If the color parameter is added as EGUIViewImageLayerTransparencyColor, it has the same effect as setting the opacity to 0 by processing it as a background color.
-				// 파라미터 순서 : 레이어 -> 기준 좌표 Figure 객체 -> 문자열 -> 폰트 색 -> 면 색 -> 폰트 크기 -> 실제 크기 유무 -> 각도 ->
-				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
-				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
-				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
+				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
+				// ref 파라미터를 입력 받는 함수는 리턴이 tuple로 생성되며 [return], [ref 0], ... [ref n-1] 형태로 tuple 을 반환한다. // A function that receives ref parameters returns a tuple structured as [return], [ref 0], ... [ref n-1].
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageOpr)).IsFail() ||
+					(res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
+				// ref 파라미터를 입력 받는 함수는 리턴이 tuple로 생성되며 [return], [ref 0], ... [ref n-1] 형태로 tuple 을 반환한다. // A function that receives ref parameters returns a tuple structured as [return], [ref 0], ... [ref n-1].
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail() ||
+					(res = viewImageOpr.SetImagePtr(ref fliOprImage)).IsFail() ||
+					(res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
+					break;
+				}
+
+
+				// 알고리즘 객체 생성 // Create algorithm object
+				COperationLeastCommonMultiple algObject = new COperationLeastCommonMultiple();
+
+				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail()) break;
+				if((res = algObject.SetOperandImage(ref fliOprImage)).IsFail()) break;
+				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail()) break;
+				if((res = algObject.SetOperationSource(EOperationSource.Image)).IsFail()) break;
+
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = (algObject.Execute())).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute the algorithm.");
+					break;
+				}
+
+
+				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
+				CGUIViewImageLayer layerSrc = viewImageSrc.GetLayer(0);
+				CGUIViewImageLayer layerOpr = viewImageOpr.GetLayer(0);
+				CGUIViewImageLayer layerDst = viewImageDst.GetLayer(0);
+
+				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
+				layerSrc.Clear();
+				layerOpr.Clear();
+				layerDst.Clear();
+
+				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpZero = new CFLPoint<double>(0, 0);
-
-				if((res = (arrLayer[(int)EType.Source].DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+				if((res = (layerSrc.DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail() ||
+					(res = (layerOpr.DrawTextCanvas(flpZero, "Operand Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail() ||
+					(res = (layerDst.DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = (arrLayer[(int)EType.Operand].DrawTextCanvas(flpZero, "Operand Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
+				// 이미지 뷰를 갱신 // Update image view
+				viewImageSrc.Invalidate(true);
+				viewImageOpr.Invalidate(true);
+				viewImageDst.Invalidate(true);
 
-				if((res = (arrLayer[(int)EType.Destination].DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
-
-				// 이미지 뷰를 갱신 합니다. // Update image view
-				for(int i = 0; i < (int)EType.ETypeCount; ++i)
-					arrViewImage[i].Invalidate(true);
-
-				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				bool bAvailable = true;
-				while(bAvailable)
-				{
-					for(int i = 0; i < (int)EType.ETypeCount; ++i)
-					{
-						bAvailable = arrViewImage[i].IsAvailable();
-
-						if(!bAvailable)
-							break;
-					}
-
+				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to 
+				while(viewImageSrc.IsAvailable() && viewImageOpr.IsAvailable() && viewImageDst.IsAvailable())
 					Thread.Sleep(1);
-				}
 			}
 			while(false);
 		}

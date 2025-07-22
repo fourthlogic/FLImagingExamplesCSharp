@@ -86,9 +86,9 @@ namespace OperationSoftplus
 
 				COperationSoftplus algObject = new COperationSoftplus();
 
-				algObject.SetSourceImage(ref fliSourceImage);
-				algObject.SetDestinationImage(ref fliDestinationImage0);
-				algObject.SetOperationMode(COperationSoftplus.EOperationMode.Forward);
+				if((res = algObject.SetSourceImage(ref fliSourceImage)).IsFail()) break;
+				if((res = algObject.SetDestinationImage(ref fliDestinationImage0)).IsFail()) break;
+				if((res = algObject.SetOperationMode(COperationSoftplus.EOperationMode.Forward)).IsFail()) break;
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if ((res = algObject.Execute()).IsFail())
@@ -97,8 +97,8 @@ namespace OperationSoftplus
 					break;
 				}
 
-				algObject.SetDestinationImage(ref fliDestinationImage1);
-				algObject.SetOperationMode(COperationSoftplus.EOperationMode.Backward);
+				if((res = algObject.SetDestinationImage(ref fliDestinationImage1)).IsFail()) break;
+				if((res = algObject.SetOperationMode(COperationSoftplus.EOperationMode.Backward)).IsFail()) break;
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = algObject.Execute()).IsFail())
