@@ -81,7 +81,7 @@ namespace LaserTriangulation
 				}
 
 				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
-				if((res = view3DDst.Create(400, 200, 1300, 800)).IsFail())
+				if((res = view3DDst.Create(100, 448, 1100, 896)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
