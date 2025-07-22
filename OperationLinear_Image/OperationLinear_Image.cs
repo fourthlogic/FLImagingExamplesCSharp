@@ -215,13 +215,13 @@ namespace OperationLinear
                     break;
                 }
 
-                if ((res = layerOperand1.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerOperand1.DrawTextCanvas(flpPoint, "Operand1 Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 
-                if ((res = layerOperand2.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerOperand2.DrawTextCanvas(flpPoint, "Operand2 Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text. \n");
                     break;
