@@ -53,6 +53,11 @@
         - The example of an algorithm that detect the edge of a given point clouds.
         - 주어진 포인트 클라우드의 엣지를 검출하는 알고리즘 예제.
 
+    - [Convex Hull]
+      - ConvexHull3D
+        - An example of an algorithm that calucalates the convex hull of a point cloud.
+        - 3D 포인트 클라우드의 볼록껍질을 구하는 알고리즘 예제.
+
   - [Filter]
     
     - [Smoothing 3D]
