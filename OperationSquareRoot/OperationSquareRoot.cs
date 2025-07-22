@@ -13,8 +13,8 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace OperationSquareRoot
 {
-    class Program
-    {
+    class OperationSquareRoot
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
