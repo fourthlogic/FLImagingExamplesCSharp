@@ -62,52 +62,52 @@ namespace HoughTransformCircle
 				}
 
 				// HoughTransform 객체 생성 // Create HoughTransform  object
-				CHoughTransform HoughTransform = new CHoughTransform();
+				CHoughTransform houghTransform = new CHoughTransform();
 
 				// Source 이미지 설정 // Set the source image
-				HoughTransform.SetSourceImage(ref fliISrcImage);
+				houghTransform.SetSourceImage(ref fliISrcImage);
 
 				// HoughTransform Circle 변환 선택 // Select HoughTransform Circle transform
-				HoughTransform.SetHoughShape(CHoughTransform.EHoughShape.Circle);
+				houghTransform.SetHoughShape(CHoughTransform.EHoughShape.Circle);
 
 				// 이미지로 임계값으로 동작하는 모드 적용 // Apply the mode that operates as a threshold to the image
-				HoughTransform.SetExecuteMode(CHoughTransform.EExecuteMode.Image);
+				houghTransform.SetExecuteMode(CHoughTransform.EExecuteMode.Image);
 
 				// Threshold 값 설정 // Set Threshold value
-				HoughTransform.SetPixelThreshold(200);
+				houghTransform.SetPixelThreshold(200);
 
 				// 조건 타입 설정 Less (Threshold 값 이하의 픽셀) // Set the condition type Less (pixels below the Threshold value)
-				HoughTransform.SetLogicalCondition(ELogicalCondition.Less);
+				houghTransform.SetLogicalCondition(ELogicalCondition.Less);
 
 				// 검출할 최소 반지름 설정 // Set minimum radius to detect
-				HoughTransform.SetMinRadius(35);
+				houghTransform.SetMinRadius(35);
 
 				// 검출할 최대 반지름 설정 // Set the maximum radius to detect
-				HoughTransform.SetMaxRadius(40);
+				houghTransform.SetMaxRadius(40);
 
 				// 탐색할 반지름 단위 설정 (1로 설정할 시 35(Min), 36, 37 ... 40(Max) 으로 탐색)
 				// Set the radius unit to search (when set to 1, search with 35 (Min), 36, 37 ... 40 (Max))
-				HoughTransform.SetPixelResolution(1);
+				houghTransform.SetPixelResolution(1);
 
 				// 탐색할 각도 단위 설정 (degree) // Set the angle unit to search (degree)
-				HoughTransform.SetAngleResolution(5);
+				houghTransform.SetAngleResolution(5);
 
 				// 신뢰도 설정 (%) // set confidence (%)
-				HoughTransform.SetConfidence(70);
+				houghTransform.SetConfidence(70);
 
 				// 최대 검출 수 설정 // Set the maximum number of detections
-				HoughTransform.SetMaxCount(100);
+				houghTransform.SetMaxCount(100);
 
 				// Canny Edge 적용유무 설정 (true 로 설정할 경우, SetPixelThreshold와 SetLogicalCondition로 설정한 값은 활용하지 않음)
 				// Setting whether to apply Canny Edge (if set to true, the values set by SetPixelThreshold and SetLogicalCondition are not used)
-				HoughTransform.EnableCannyEdgeAppliance(false);
+				houghTransform.EnableCannyEdgeAppliance(false);
 
 				// 인접하게 검출된 원을 필터링하는 옵션 // Option to filter adjacent detected circles
-				HoughTransform.EnableAdjacentFilterAppliance(true);
+				houghTransform.EnableAdjacentFilterAppliance(true);
 
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (HoughTransform.Execute())).IsFail())
+				if((res = (houghTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute HoughTransform.");
 					break;
@@ -121,7 +121,7 @@ namespace HoughTransformCircle
 				layer.Clear();
 
 				// Result 갯수 가져오기 // Get the number of results
-				long i64ResultCount = HoughTransform.GetResultCirclesCount();
+				long i64ResultCount = houghTransform.GetResultCirclesCount();
 
 				Console.WriteLine("Result Circle Count : {0}", i64ResultCount);
 
@@ -129,7 +129,7 @@ namespace HoughTransformCircle
 
 				for(long i = 0; i < i64ResultCount; i++)
 				{
-					HoughTransform.GetResultCircle(i, ref flcResult);
+					houghTransform.GetResultCircle(i, ref flcResult);
 
 					// 이미지 뷰에 검출된 원 객체 출력 // Output the detected original object to the image view
 					if((res = (layer.DrawFigureImage(flcResult, EColor.LIGHTGREEN, 1))).IsFail())
