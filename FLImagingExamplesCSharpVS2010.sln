@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36310.24 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigureSaveLoad", "FigureSaveLoad\FigureSaveLoad.csproj", "{1BA5E9C7-A411-4956-A52E-0242584A7A64}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GUI, Figures", "GUI, Figures", "{A62F0C54-12A5-4CB6-A4F1-14527CA60D75}"
@@ -38,7 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImageProcessing", "ImagePro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Channel", "Channel", "{8ECB703D-A2EF-4EE2-A41E-106F6F6DC473}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feature Extractor", "Feature Extractor", "{4BD5DBD1-33A5-4135-A24C-65C8310BEFE4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feature Extraction", "Feature Extraction", "{4BD5DBD1-33A5-4135-A24C-65C8310BEFE4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image Operation", "Image Operation", "{E130322D-3AE8-46CF-9FB3-23D7C1F1E977}"
 EndProject
