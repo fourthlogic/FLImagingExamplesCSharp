@@ -154,7 +154,6 @@ namespace Match
 				FLDrawingMatch.SetFindThresholdCoefficient(1.2);
 				// 검출 시 겹쳐짐 허용 정도를 설정합니다. // Set the allowable degree of overlap during detection.
 				FLDrawingMatch.SetObjectOverlap(0.5);
-				// 검출 시 이미지 전처리 유무를 설정합니다. // Set whether or not to pre-process the image during detection.
 
 				// 알고리즘 수행 // Execute the Algoritm
 				res = FLDrawingMatch.Execute();
