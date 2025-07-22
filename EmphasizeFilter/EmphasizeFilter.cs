@@ -121,7 +121,7 @@ namespace EmphasizeFilter
 				emphasizeFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
 				emphasizeFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
-				// 파라미터 값 설정 // Set 파라미터 value
+				// 파라미터 값 설정 // Set parameters
 				emphasizeFilter.SetKernel(7);
                 emphasizeFilter.SetFactor(1.5);
 				emphasizeFilter.SetPaddingMethod(EPaddingMethod.DecreasingKernel);
@@ -135,7 +135,7 @@ namespace EmphasizeFilter
 
 				// Destination 이미지를 Destination2로 설정
 				emphasizeFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
-				// 파라미터 값 설정 // Set 파라미터 value
+				// 파라미터 값 설정 // Set parameters
 				emphasizeFilter.SetKernel(3);
 				emphasizeFilter.SetFactor(2.5);
 
@@ -173,13 +173,13 @@ namespace EmphasizeFilter
 					break;
 				}
 
-				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "EmphasizeFilter Mask: 7x7 Factor: 1.5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "EmphasizeFilter Kernel: 7x7 Factor: 1.5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-                if ((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "EmphasizeFilter Mask: 3x3 Factor: 2.5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if ((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "EmphasizeFilter Kernel: 3x3 Factor: 2.5", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
