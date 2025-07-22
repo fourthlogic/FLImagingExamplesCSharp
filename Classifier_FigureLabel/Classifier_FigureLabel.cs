@@ -34,7 +34,7 @@ namespace Classifier
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliLearnImage = new CFLImage();
 			CFLImage fliSourceImage = new CFLImage();
-			CFLImage fliValidateIamge = new CFLImage();
+			CFLImage fliValidateImage = new CFLImage();
 
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
@@ -64,7 +64,7 @@ namespace Classifier
 					break;
 				}
 
-				if((res = fliValidateIamge.Load("../../ExampleImages/Classifier/CircleLabel_Validation.flif")).IsFail())
+				if((res = fliValidateImage.Load("../../ExampleImages/Classifier/CircleLabel_Validation.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
@@ -109,7 +109,7 @@ namespace Classifier
 					break;
 				}
 
-				if((res = viewImageValidate.SetImagePtr(ref fliValidateIamge)).IsFail())
+				if((res = viewImageValidate.SetImagePtr(ref fliValidateImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
@@ -168,7 +168,7 @@ namespace Classifier
 				// 학습할 이미지 설정 // Set the image to learn
 				classifier.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
-				classifier.SetLearningValidationImage(ref fliSourceImage);
+				classifier.SetLearningValidationImage(ref fliValidateImage);
 				// 분류할 이미지 설정 // Set the image to classify
 				classifier.SetInferenceImage(ref fliSourceImage);
 				classifier.SetInferenceResultImage(ref fliSourceImage);
