@@ -106,7 +106,7 @@ namespace Blob
 				// Blob 결과를 얻어오기 위해 FigureArray 선언
 				CFLFigureArray flfaContours = new CFLFigureArray();
 
-				// Blob 결과들 중 Contours 을 얻어옴
+				// Blob 결과들 중 Contours 를 얻어옴
 				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get contours from the Blob object.");

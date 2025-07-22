@@ -109,7 +109,7 @@ namespace BlobSubsampled
 				// BlobSubsampled 결과를 얻어오기 위해 FigureArray 선언
 				CFLFigureArray flfaContours = new CFLFigureArray();
 
-				// BlobSubsampled 결과들 중 Contours 을 얻어옴
+				// BlobSubsampled 결과들 중 Contours 를 얻어옴
 				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get contours from the BlobSubsampled object.");

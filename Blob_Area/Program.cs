@@ -102,14 +102,14 @@ namespace Blob
 				CFLFigureArray flfaContours = new CFLFigureArray();
 				List<ulong> flaArea = new List<ulong>();
 
-				// Blob 결과들 중 Contours 을 얻어옴
+				// Blob 결과들 중 Contours 를 얻어옴
 				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get contours from the Blob object.");
 					break;
 				}
 
-				// Blob 결과들 중 Area 을 얻어옴
+				// Blob 결과들 중 Area 를 얻어옴
 				if((res = sBlob.GetResultAreas(ref flaArea)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get area from the Blob object.");

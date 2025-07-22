@@ -110,14 +110,14 @@ namespace Blob
 				CFLFigureArray flfaContours = new CFLFigureArray();
 				CFLFigureArray flfGravityCenter = new CFLFigureArray();
 
-				// Blob 결과들 중 Contours 을 얻어옴
+				// Blob 결과들 중 Contours 를 얻어옴
 				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get contours from the Blob object.");
 					break;
 				}
 
-				// Blob 결과들 중 Gravity Center 을 얻어옴
+				// Blob 결과들 중 Gravity Center 를 얻어옴
 				if((res = sBlob.GetResultGravityCenters(ref flfGravityCenter)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get gravity center from the Blob object.");

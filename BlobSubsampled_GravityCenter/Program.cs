@@ -112,14 +112,14 @@ namespace BlobSubsampled
 				CFLFigureArray flfaContours = new CFLFigureArray();
 				CFLFigureArray flfGravityCenter = new CFLFigureArray();
 
-				// BlobSubsampled 결과들 중 Contours 을 얻어옴
+				// BlobSubsampled 결과들 중 Contours 를 얻어옴
 				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get contours from the BlobSubsampled object.");
 					break;
 				}
 
-				// BlobSubsampled 결과들 중 Gravity Center 을 얻어옴
+				// BlobSubsampled 결과들 중 Gravity Center 를 얻어옴
 				if((res = sBlob.GetResultGravityCenters(ref flfGravityCenter)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get gravity center from the BlobSubsampled object.");
