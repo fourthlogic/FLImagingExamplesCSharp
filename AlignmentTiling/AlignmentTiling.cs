@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace AlignmentTiling
 {
-	class Program
+	class AlignmentTiling
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
