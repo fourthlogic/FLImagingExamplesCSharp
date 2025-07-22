@@ -125,7 +125,7 @@
     <Compile Include="FormSNAPViewIntoDialog.Designer.cs">
       <DependentUpon>FormSNAPViewIntoDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="SNAPViewIntoDialogProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

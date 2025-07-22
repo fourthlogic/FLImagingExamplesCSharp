@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace ImageDrawing2
 {
-    class Program
+    class ImageDrawing2
     {
         public static void ErrorPrint(CResult cResult, string str)
         {

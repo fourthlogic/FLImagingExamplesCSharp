@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace SNAPBuild
 {
-    class Program
+    class SNAPBuild
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -39,7 +39,7 @@ namespace SNAPBuild
 		        CSNAPBuild snapBuild = new CSNAPBuild();
 
 		        // 스냅 파일 로드 // Load SNAP file
-                if ((res = snapBuild.Load("C:/Users/Public/Documents/FLImaging/ExamplesSNAP/Advanced Functions/Object/Blob.flsf")).IsFail())
+                if ((res = snapBuild.Load("C:/Users/Public/Documents/FLImaging/FLImagingExamplesSNAP/Advanced Functions/Object/Blob.flsf")).IsFail())
 		        {
 			        ErrorPrint(res, "Failed to load the SNAP file.\n");
 			        break;

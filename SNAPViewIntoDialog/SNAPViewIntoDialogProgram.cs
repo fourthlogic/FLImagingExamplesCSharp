@@ -12,18 +12,18 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace View3D
+namespace SNAPViewIntoDialog
 {
-    class View3DIntoDialog
-	{
+    class SNAPViewIntoDialogProgram
+    {
         [STAThread]
         static void Main(string[] args)
         {
-            var formImageView = new FormView3DIntoDialog();
+            var formSNAPView = new FormSNAPViewIntoDialog();
 
-            Application.Run(formImageView);
+            Application.Run(formSNAPView);
 
-            // 예제 코드는 FormImageViewInToDialog.cs 에 있습니다.
+            // 예제 코드는 FormSNAPViewInToDialog.cs 에 있습니다.
         }
     }
 }
