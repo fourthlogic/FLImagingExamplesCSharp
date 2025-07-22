@@ -33,6 +33,7 @@ namespace MultiFocus
 			CFLImage fliSrcImage = new CFLImage();
 			CFLImage fliDstImage = new CFLImage();
 			CFLImage fliTxtImage = new CFLImage();
+			CFL3DObject floDstObject = new CFL3DObjectHeightMap();
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageSrc = new CGUIViewImage();
@@ -51,38 +52,10 @@ namespace MultiFocus
 					break;
 				}
 
-				fliSrcImage.SelectPage(0);
-
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImageSrc.Create(100, 0, 548, 448)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
-				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				// Destination 이미지 뷰 생성 // Create the destination image view
-				if((res = viewImageDst.Create(548, 0, 996, 448)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
-				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
-				if((res = view3DDst.Create(400, 200, 1300, 800)).IsFail())
+				if((res = viewImageSrc.Create(100, 0, 600, 500)).IsFail() ||
+					(res = viewImageDst.Create(600, 0, 1100, 500)).IsFail() ||
+					(res = view3DDst.Create(400, 200, 1300, 800)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
@@ -95,13 +68,6 @@ namespace MultiFocus
 					break;
 				}
 
-				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((res = viewImageSrc.ZoomFit()).IsFail())
-				{
-					ErrorPrint(res, "Failed to zoom fit\n");
-					break;
-				}
-
 				// 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two view windows.
 				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
@@ -109,43 +75,58 @@ namespace MultiFocus
 					break;
 				}
 
-				viewImageSrc.SetFixThumbnailView(true);
-
-				// Multi Focus Derivative Based 객체 생성 // Create Multi Focus Derivative Based object
-				CMultiFocusDerivativeBased3D algMultiFocusDerivativeBased3D = new CMultiFocusDerivativeBased3D();
-
-				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
-
-				// Source 이미지 설정 // Set the source image
-				algMultiFocusDerivativeBased3D.SetSourceImage(ref fliSrcImage);
-				// Destination Height Map 이미지 설정 // Set the destination height map image
-				algMultiFocusDerivativeBased3D.SetDestinationHeightMapImage(ref fliDstImage);
-				// Destination Texture 이미지 설정 // Set the destination texture image
-				algMultiFocusDerivativeBased3D.SetDestinationTextureImage(ref fliTxtImage);
-				// Destination 3D Object 설정 // Set the Destination 3D Object 
-				algMultiFocusDerivativeBased3D.SetDestinationObject(ref fl3DOHM);
-				// Pixel Accuracy 설정 // Set the pixel accuracy
-				algMultiFocusDerivativeBased3D.SetPixelAccuracy(0.1);
-				// Depth Pitch 설정 // Set the depth pitch
-				algMultiFocusDerivativeBased3D.SetDepthPitch(0.2);
-				// Filter 설정 // Set filter
-				algMultiFocusDerivativeBased3D.SetFilter(CMultiFocusDerivativeBased3D.EFilter.Guided);
-				// Set the sigma range value
-				algMultiFocusDerivativeBased3D.SetSigmaSpatial(5);
-				// Set the sigma spatial value
-				algMultiFocusDerivativeBased3D.SetSigmaRange(5);
-
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = algMultiFocusDerivativeBased3D.Execute()).IsFail())
+				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail() ||
+					(res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute MultiFocus.\n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((res = viewImageDst.ZoomFit()).IsFail())
+				viewImageSrc.SetFixThumbnailView(true);
+
+
+				// 알고리즘 객체 생성 // Create algorithm object
+				CMultiFocusDerivativeBased3D algObject = new CMultiFocusDerivativeBased3D();
+
+				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+					break;
+				if((res = algObject.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
+					break;
+				if((res = algObject.SetDestinationTextureImage(ref fliTxtImage)).IsFail())
+					break;
+				if((res = algObject.SetDestinationObject(ref floDstObject)).IsFail())
+					break;
+				if((res = algObject.SetPixelAccuracy(0.1)).IsFail())
+					break;
+				if((res = algObject.SetDepthPitch(0.2)).IsFail())
+					break;
+				if((res = algObject.SetFilter(CMultiFocusDerivativeBased3D.EFilter.FLDenoisingType1)).IsFail())
+					break;
+				if((res = algObject.SetFLDenoisingKernel(7)).IsFail())
+					break;
+				if((res = algObject.SetFLDenoisingSigma(15.00)).IsFail())
+					break;
+				if((res = algObject.SetFLDenoisingAmplitude(15.00)).IsFail())
+					break;
+				if((res = algObject.EnableGaussianInterpolation(true)).IsFail())
+					break;
+
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to zoom fit\n");
+					ErrorPrint(res, "Failed to execute the algorithm.");
+					break;
+				}
+
+
+				// ((CFL3DObjectHeightMap)floDstObject).SetTextureImage(fliTxtImage);
+				// ((CFL3DObjectHeightMap)floDstObject).ActivateVertexColorTexture(true);
+
+				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
+				if(view3DDst.PushObject(floDstObject).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
@@ -158,43 +139,22 @@ namespace MultiFocus
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerSrc.Clear();
 				layerDst.Clear();
+				layer3D.Clear();
 
-				// View 정보를 디스플레이 합니다. // Display View information.
-				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
-				// 파라미터 순서 : 레이어 -> 기준 좌표 Figure 객체 -> 문자열 -> 폰트 색 -> 면 색 -> 폰트 크기 -> 실제 크기 유무 -> 각도 ->
-				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
-				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
-				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
+				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flp = new CFLPoint<double>();
-
-				if((res = layerSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layerDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layer3D.DrawTextCanvas(flp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = layerDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
-
-				CFL3DObjectHeightMap fl3DOHMResult = new CFL3DObjectHeightMap(fliDstImage, fliTxtImage);
-
-				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if(view3DDst.PushObject(fl3DOHMResult).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
+				// Zoom Fit
+				viewImageSrc.ZoomFit();
+				viewImageDst.ZoomFit();
 				view3DDst.ZoomFit();
-
-				if((res = layer3D.DrawTextCanvas(flp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				viewImageSrc.Invalidate(true);

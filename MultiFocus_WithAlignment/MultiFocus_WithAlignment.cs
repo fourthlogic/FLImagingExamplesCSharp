@@ -135,8 +135,6 @@ namespace MultiFocus
 					break;
 				}
 
-				fliSrcImage.SelectPage(0);
-
 				CFLQuad<double> flqFirstPageAlignment = new CFLQuad<double>();
 				CFLQuad<double> flqLastPageAlignment = new CFLQuad<double>();
 
@@ -157,76 +155,64 @@ namespace MultiFocus
 				msgReceiver.m_fliLastPageAlignment = flqLastPageAlignment;
 
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImageSrc.Create(400, 0, 800, 400)).IsFail())
+				if((res = viewImageSrc.Create(400, 0, 800, 400)).IsFail() ||
+					(res = viewImageDst.Create(800, 0, 1200, 400)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize view.\n");
+					break;
+				}
+
+				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
-				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail() ||
+					(res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				// Source 이미지 뷰 썸네일 뷰 높이 설정 // Set thumbnail view height
-				viewImageSrc.SetThumbnailViewHeight(0.05);
+				viewImageSrc.SetFixThumbnailView(true);
 
-				// Destination 이미지 뷰 생성 // Create the destination image view
-				if((res = viewImageDst.Create(800, 0, 1200, 400)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
 
-				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
+				// 알고리즘 객체 생성 // Create algorithm object
+				CMultiFocus algObject = new CMultiFocus();
 
-                // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-                if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
-                {
-                    ErrorPrint(res, "Failed to synchronize view.\n");
-                    break;
-                }
-
-				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((res = viewImageSrc.ZoomFit()).IsFail())
-				{
-					ErrorPrint(res, "Failed to zoom fit.\n");
-					break;
-				}
-
-				// MultiFocus 객체 생성 // Create MultiFocus object
-				CMultiFocus multiFocus = new CMultiFocus();
 				// Source 이미지 설정 // Set the source image
-				multiFocus.SetSourceImage(ref fliSrcImage);
+				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+					break;
 				// Destination 이미지 설정 // Set the destination image
-				multiFocus.SetDestinationImage(ref fliDstImage);
+				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail())
+					break;
 				// Kernel Size 설정 // Set the kernel size
-				multiFocus.SetKernel(23);
+				if((res = algObject.SetKernel(23)).IsFail())
+					break;
 				// 첫번째 페이지 Alignment 설정 // Set first page alignment
-				multiFocus.SetFirstPageAlignment(flqFirstPageAlignment);
+				if((res = algObject.SetFirstPageAlignment(flqFirstPageAlignment)).IsFail())
+					break;
 				// 마지막 페이지 Alignment 설정 // Set last page alignment
-				multiFocus.SetLastPageAlignment(flqLastPageAlignment);
+				if((res = algObject.SetLastPageAlignment(flqLastPageAlignment)).IsFail())
+					break;
 
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = multiFocus.Execute()).IsFail())
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute algorithm.\n");
+					ErrorPrint(res, "Failed to execute the algorithm.\n");
 					break;
 				}
 
-				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
-				if((res = viewImageDst.ZoomFit()).IsFail())
-				{
-					ErrorPrint(res, "Failed to zoom fit.\n");
-					break;
-				}
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
@@ -240,27 +226,20 @@ namespace MultiFocus
 				layerSrc.SetAutoClearMode(ELayerAutoClearMode.PageChanged, false);
 
 				// View 정보를 디스플레이 합니다. // Display View information.
-				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
-				// 파라미터 순서 : 레이어 -> 기준 좌표 Figure 객체 -> 문자열 -> 폰트 색 -> 면 색 -> 폰트 크기 -> 실제 크기 유무 -> 각도 ->
-				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
-				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
-				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flp = new CFLPoint<double>();
-
-				if((res = layerSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSrc.DrawTextCanvas(flp, ("Source Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layerDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = layerDst.DrawTextCanvas(flp, ("Destination Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
+				viewImageSrc.ZoomFit();
+				viewImageDst.ZoomFit();
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				viewImageSrc.Invalidate(true);
+				viewImageDst.Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImageSrc.IsAvailable() && viewImageDst.IsAvailable())

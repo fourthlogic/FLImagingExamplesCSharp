@@ -31,121 +31,135 @@ namespace OperationSoftplus
 		static void Main(string[] args)
 		{
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage fliSourceImage = new CFLImage();
-			CFLImage fliDestinationImage0 = new CFLImage();
-			CFLImage fliDestinationImage1 = new CFLImage();
+			CFLImage fliSrcImage = new CFLImage();
+			CFLImage fliDstImage0 = new CFLImage();
+			CFLImage fliDstImage1 = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage viewImageSource = new CGUIViewImage();
-			CGUIViewImage viewImageDestination0 = new CGUIViewImage();
-			CGUIViewImage viewImageDestination1 = new CGUIViewImage();
+			CGUIViewImage viewImageSrc = new CGUIViewImage();
+			CGUIViewImage viewImageDst0 = new CGUIViewImage();
+			CGUIViewImage viewImageDst1 = new CGUIViewImage();
+
+			CResult res;
 
 			do
 			{
-				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/OperationSoftplus/Coord1D.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/OperationSoftplus/Coord1D.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImageSource.Create(100, 0, 600, 500)).IsFail() ||
-					(res = viewImageDestination0.Create(600, 0, 1100, 500)).IsFail() ||
-					(res = viewImageDestination1.Create(1100, 0, 1600, 500)).IsFail())
+				if((res = viewImageSrc.Create(100, 0, 600, 500)).IsFail() ||
+					(res = viewImageDst0.Create(600, 0, 1100, 500)).IsFail() ||
+					(res = viewImageDst1.Create(1100, 0, 1600, 500)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. .
-				if((res = viewImageSource.SynchronizePointOfView(ref viewImageDestination0)).IsFail() ||
-					(res = viewImageSource.SynchronizePointOfView(ref viewImageDestination1)).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst0)).IsFail() ||
+					(res = viewImageSrc.SynchronizePointOfView(ref viewImageDst1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageSource.SynchronizeWindow(ref viewImageDestination0)).IsFail() ||
-					(res = viewImageSource.SynchronizeWindow(ref viewImageDestination1)).IsFail())
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst0)).IsFail() ||
+					(res = viewImageSrc.SynchronizeWindow(ref viewImageDst1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail() ||
-					(res = viewImageDestination0.SetImagePtr(ref fliDestinationImage0)).IsFail() ||
-					(res = viewImageDestination1.SetImagePtr(ref fliDestinationImage1)).IsFail())
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail() ||
+					(res = viewImageDst0.SetImagePtr(ref fliDstImage0)).IsFail() ||
+					(res = viewImageDst1.SetImagePtr(ref fliDstImage1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
+
+				// 알고리즘 객체 생성 // Create algorithm object
 				COperationSoftplus algObject = new COperationSoftplus();
 
-				if((res = algObject.SetSourceImage(ref fliSourceImage)).IsFail()) break;
-				if((res = algObject.SetDestinationImage(ref fliDestinationImage0)).IsFail()) break;
-				if((res = algObject.SetOperationMode(COperationSoftplus.EOperationMode.Forward)).IsFail()) break;
-
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((res = algObject.Execute()).IsFail())
-				{
-					ErrorPrint(res, "Failed to execute operation Softplus.");
+				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				}
+				if((res = algObject.SetDestinationImage(ref fliDstImage0)).IsFail())
+					break;
+				if((res = algObject.SetOperationMode(COperationSoftplus.EOperationMode.Forward)).IsFail())
+					break;
 
-				if((res = algObject.SetDestinationImage(ref fliDestinationImage1)).IsFail()) break;
-				if((res = algObject.SetOperationMode(COperationSoftplus.EOperationMode.Backward)).IsFail()) break;
-
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
+				// 알고리즘 수행 // Execute the algorithm
 				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation Softplus.");
+					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
+
+				if((res = algObject.SetDestinationImage(ref fliDstImage1)).IsFail())
+					break;
+				if((res = algObject.SetOperationMode(COperationSoftplus.EOperationMode.Backward)).IsFail())
+					break;
+
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = algObject.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute the algorithm.");
+					break;
+				}
+
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
-				CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
-				CGUIViewImageLayer layerDestination0 = viewImageDestination0.GetLayer(0);
-				CGUIViewImageLayer layerDestination1 = viewImageDestination1.GetLayer(0);
+				CGUIViewImageLayer layerSrc = viewImageSrc.GetLayer(0);
+				CGUIViewImageLayer layerDst0 = viewImageDst0.GetLayer(0);
+				CGUIViewImageLayer layerDst1 = viewImageDst1.GetLayer(0);
 
 				// 기존에 Layer 에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
-				layerSource.Clear();
-				layerDestination0.Clear();
-				layerDestination1.Clear();
+				layerSrc.Clear();
+				layerDst0.Clear();
+				layerDst1.Clear();
 
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if ((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
-					(res = layerDestination0.DrawTextCanvas(flpPoint, "Destination Forward Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
-					(res = layerDestination1.DrawTextCanvas(flpPoint, "Destination Backward Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if ((res = layerSrc.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layerDst0.DrawTextCanvas(flpPoint, "Destination Forward Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layerDst1.DrawTextCanvas(flpPoint, "Destination Backward Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
 				// 이미지 뷰의 값 표현 방식 설정 // Set how values are expressed in image view
-				viewImageSource.SetPixelNumberMode(EPixelNumberMode.Decimal);
-				viewImageDestination0.SetPixelNumberMode(EPixelNumberMode.Decimal);
-				viewImageDestination1.SetPixelNumberMode(EPixelNumberMode.Decimal);
+				viewImageSrc.SetPixelNumberMode(EPixelNumberMode.Decimal);
+				viewImageDst0.SetPixelNumberMode(EPixelNumberMode.Decimal);
+				viewImageDst1.SetPixelNumberMode(EPixelNumberMode.Decimal);
 
 				// floating 이미지의 색상 표현 범위 설정 // Set the color expression range of floating images
-				viewImageSource.SetFloatingImageValueRange(-1.0, 1.0);
-				viewImageDestination0.SetFloatingImageValueRange(-1.0, 1.0);
-				viewImageDestination1.SetFloatingImageValueRange(-1.0, 1.0);
+				viewImageSrc.SetFloatingImageValueRange(-1.0, 1.0);
+				viewImageDst0.SetFloatingImageValueRange(-1.0, 1.0);
+				viewImageDst1.SetFloatingImageValueRange(-1.0, 1.0);
+
+				// Zoom Fit
+				viewImageSrc.ZoomFit();
+				viewImageDst0.ZoomFit();
+				viewImageDst1.ZoomFit();
 
 				// 이미지 뷰를 갱신 // Update image view
-				viewImageSource.Invalidate(true);
-				viewImageDestination0.Invalidate(true);
-				viewImageDestination1.Invalidate(true);
+				viewImageSrc.Invalidate(true);
+				viewImageDst0.Invalidate(true);
+				viewImageDst1.Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageSource.IsAvailable() && viewImageDestination0.IsAvailable() && viewImageDestination1.IsAvailable())
+				while(viewImageSrc.IsAvailable() && viewImageDst0.IsAvailable() && viewImageDst1.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);

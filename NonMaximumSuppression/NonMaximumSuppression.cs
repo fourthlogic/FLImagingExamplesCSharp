@@ -30,113 +30,107 @@ namespace NonMaximumSuppression
 		static void Main(string[] args)
 		{
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage fliISrcImage = new CFLImage();
-			CFLImage fliIDstImage = new CFLImage();
+			CFLImage fliSrcImage = new CFLImage();
+			CFLImage fliDstImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage[] viewImage = new CGUIViewImage[2];
+			CGUIViewImage viewImageSrc = new CGUIViewImage();
+			CGUIViewImage viewImageDst = new CGUIViewImage();
 
-			viewImage[0] = new CGUIViewImage();
-			viewImage[1] = new CGUIViewImage();
+			CResult res;
 
 			do
 			{
-				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliISrcImage.Load("../../ExampleImages/NonMaximumSuppression/Circuit Board.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/NonMaximumSuppression/Circuit Board.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// 이미지 뷰 생성 // Create image view
-				if((res = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
+				// 이미지 뷰 생성 // Create image views
+				if((res = viewImageSrc.Create(100, 0, 600, 500)).IsFail() ||
+					(res = viewImageDst.Create(600, 0, 1100, 500)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
-				if((res = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view. \n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
-				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[0].SetImagePtr(ref fliISrcImage)).IsFail())
+				// 이미지 뷰에 이미지를 디스플레이 // Display the images in the image views
+				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail() ||
+					(res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
-				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[1].SetImagePtr(ref fliIDstImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
+
+				// 알고리즘 객체 생성 // Create algorithm object
+				CNonMaximumSuppression algObject = new CNonMaximumSuppression();
+
+				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				}
-
-				// Non Maximum Suppression 객체 생성 // Create Non Maximum Suppression object
-				CNonMaximumSuppression nms = new CNonMaximumSuppression();
-
-				// Source 이미지 설정 // Set source image 
-				nms.SetSourceImage(ref fliISrcImage);
-
-				// Destination 이미지 설정 // Set destination image
-				nms.SetDestinationImage(ref fliIDstImage);
-
-				// Filter 설정 // Set Filter
-				nms.SetFilter(CNonMaximumSuppression.EFilter.Sobel);
-
-				// Grayscale 옵션 설정 // Set grayscale option
-				nms.EnableGrayscale(false);
-
-				// Conflict Handling Method 설정 // Set conflict handling method
-				nms.SetConflictHandlingMethod(CNonMaximumSuppression.EConflictHandlingMethod.KeepAll);
-
-				// NMS Interpolation Method 설정 // Set NMS interpolation method
-				nms.SetNMSInterpolationMethod(CNonMaximumSuppression.ENMSInterpolationMethod.NearestNeighbor);
+				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail())
+					break;
+				if((res = algObject.SetFilter(CNonMaximumSuppression.EFilter.Sobel)).IsFail())
+					break;
+				if((res = algObject.EnableGrayscale(false)).IsFail())
+					break;
+				if((res = algObject.SetConflictHandlingMethod(CNonMaximumSuppression.EConflictHandlingMethod.KeepAll)).IsFail())
+					break;
+				if((res = algObject.SetNMSInterpolationMethod(CNonMaximumSuppression.ENMSInterpolationMethod.NearestNeighbor)).IsFail())
+					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (nms.Execute())).IsFail())
+				if((res = algObject.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Non Maximum Suppression.");
+					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
 
-				// 레이어는 따로 해제하지 않아도 View가 해제 될 때 같이 해제된다. // The layer is released together when View is released without releasing it separately.
-				CGUIViewImageLayer layer1 = viewImage[0].GetLayer(0);
-				CGUIViewImageLayer layer2 = viewImage[1].GetLayer(0);
-				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
-				// View 정보를 디스플레이 합니다. // Display View information.
-				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(res, "Failed to draw text.\n");
+				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
+				CGUIViewImageLayer layerSrc = viewImageSrc.GetLayer(0);
+				CGUIViewImageLayer layerDst = viewImageDst.GetLayer(0);
 
-				if((res = layer2.DrawTextImage(flpTemp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(res, "Failed to draw text.\n");
+				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
+				layerSrc.Clear();
+				layerDst.Clear();
 
+				// 이미지 뷰 정보 표시 // Display image view information
+				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
+				if((res = layerSrc.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layerDst.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text. \n");
+					break;
+				}
+
+				// Zoom Fit
+				viewImageSrc.ZoomFit();
+				viewImageDst.ZoomFit();
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
-				viewImage[0].Invalidate(true);
-				viewImage[1].Invalidate(true);
+				viewImageSrc.Invalidate(true);
+				viewImageDst.Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImage[0].IsAvailable())
+				while(viewImageSrc.IsAvailable() && viewImageDst.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);

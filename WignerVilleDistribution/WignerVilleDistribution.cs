@@ -107,14 +107,19 @@ namespace WignerVilleDistribution
 				}
 
 
-				// 레이어는 따로 해제하지 않아도 View가 해제 될 때 같이 해제된다. // The layer is released together when View is released without releasing it separately.
-				CGUIViewImageLayer layer1 = viewImageSrc.GetLayer(0);
-				CGUIViewImageLayer layer2 = viewImageDst.GetLayer(0);
+				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
+				CGUIViewImageLayer layerSrc = viewImageSrc.GetLayer(0);
+				CGUIViewImageLayer layerDst = viewImageDst.GetLayer(0);
+
+				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
+				layerSrc.Clear();
+				layerDst.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
-				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
-					(res = layer2.DrawTextImage(flpTemp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSrc.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layerDst.DrawTextImage(flpTemp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				viewImageSrc.ZoomFit();

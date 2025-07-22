@@ -31,8 +31,8 @@ namespace OperationPopcount
 		static void Main(string[] args)
 		{
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage fliSourceImage = new CFLImage();
-			CFLImage fliDestinationImage = new CFLImage();
+			CFLImage fliSrcImage = new CFLImage();
+			CFLImage fliDstImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageSrc = new CGUIViewImage();
@@ -51,7 +51,7 @@ namespace OperationPopcount
 				}
 
 				// 버퍼로부터 Source 이미지 생성 // Create the source image from the buffer
-				if((res = fliSourceImage.Create(4, 4, arrU8, EPixelFormat.C1_U16)).IsFail())
+				if((res = fliSrcImage.Create(4, 4, arrU8, EPixelFormat.C1_U16)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
@@ -72,46 +72,51 @@ namespace OperationPopcount
 					break;
 				}
 
-				// 이미지 뷰에 이미지를 디스플레이 // Display the images in the image views
-				if ((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail() ||
-					(res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view. \n");
-					break;
-				}
-
+				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
-				COperationPopcount algObject = new COperationPopcount();
-
-				if((res = algObject.SetSourceImage(ref fliSourceImage)).IsFail()) break;
-				if((res = algObject.SetDestinationImage(ref fliDestinationImage)).IsFail()) break;
-
-				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((res = algObject.Execute()).IsFail())
+				// 이미지 뷰에 이미지를 디스플레이 // Display the images in the image views
+				if ((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail() ||
+					(res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation popcount.");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
+
+				// 알고리즘 객체 생성 // Create algorithm object
+				COperationPopcount algObject = new COperationPopcount();
+
+				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+					break;
+				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail())
+					break;
+
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = algObject.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute the algorithm.");
+					break;
+				}
+
+
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
-				CGUIViewImageLayer layerSource = viewImageSrc.GetLayer(0);
-				CGUIViewImageLayer layerDestination = viewImageDst.GetLayer(0);
+				CGUIViewImageLayer layerSrc = viewImageSrc.GetLayer(0);
+				CGUIViewImageLayer layerDst = viewImageDst.GetLayer(0);
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
-				layerSource.Clear();
-				layerDestination.Clear();
+				layerSrc.Clear();
+				layerDst.Clear();
 
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
-
-				if ((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
-					(res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if ((res = layerSrc.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
+					(res = layerDst.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text. \n");
 					break;
@@ -119,6 +124,10 @@ namespace OperationPopcount
 
 				// Source 이미지 뷰의 Pixel 값을 16진법으로 설정 // Show Pixel Values on Source Image View to Hexadecimal
 				viewImageSrc.SetPixelNumberMode(EPixelNumberMode.Hexadecimal);
+
+				// Zoom Fit
+				viewImageSrc.ZoomFit();
+				viewImageDst.ZoomFit();
 
 				// 이미지 뷰를 갱신 // Update image view
 				viewImageSrc.Invalidate(true);
