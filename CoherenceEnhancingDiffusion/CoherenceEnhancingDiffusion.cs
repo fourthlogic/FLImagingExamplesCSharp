@@ -97,10 +97,10 @@ namespace CoherenceEnhancingDiffusion
 				// Destination 이미지 설정 // Set destination image
 				CoherenceEnhancingDiffusion.SetDestinationImage(ref fliIDstImage);
 
-				// 미분 평활화(가우사안) // Smoothing for derivative operator.(Gaussian)
+				// 미분 평활화(가우시안) // Smoothing for derivative operator.(Gaussian)
 				CoherenceEnhancingDiffusion.SetSigma(0.5);
 
-				// 확산 계수(가우사안) // Smoothing for diffusion coefficients.(Gaussian)
+				// 확산 계수(가우시안) // Smoothing for diffusion coefficients.(Gaussian)
 				CoherenceEnhancingDiffusion.SetRho(4);
 
 				// Theta 업데이트 비율 설정 // Set update rate
