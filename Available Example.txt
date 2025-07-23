@@ -1284,7 +1284,7 @@
         - The example of an algorithm that processes a normalize(MinMax Method).
         - 이미지에서 정규화 처리하는 알고리즘 예제(MinMax 방식).
       - Normalization_Trimming
-        - The example of an algorithm that processes a normalize(MinMax Method ,Trimming Apply).
+        - The example of an algorithm that processes a normalize(MinMax Method, Trimming Apply).
         - 이미지에서 정규화 처리하는 알고리즘 예제(Trimming 적용).
 
     - AdaptiveEqualization
