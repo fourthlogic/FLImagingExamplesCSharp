@@ -60,8 +60,7 @@ namespace OperationLeastCommonMultiple_Scalar
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. .
-				// ref 파라미터를 입력 받는 함수는 리턴이 tuple로 생성되며 [return], [ref 0], ... [ref n-1] 형태로 tuple 을 반환한다. // A function that receives ref parameters returns a tuple structured as [return], [ref 0], ... [ref n-1].
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
 				if((res= viewImageSrc.SynchronizePointOfView(ref viewImageDst0)).IsFail() ||
 					(res= viewImageSrc.SynchronizePointOfView(ref viewImageDst1)).IsFail())
 				{
@@ -70,7 +69,6 @@ namespace OperationLeastCommonMultiple_Scalar
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				// ref 파라미터를 입력 받는 함수는 리턴이 tuple로 생성되며 [return], [ref 0], ... [ref n-1] 형태로 tuple 을 반환한다. // A function that receives ref parameters returns a tuple structured as [return], [ref 0], ... [ref n-1].
 				if((res= viewImageSrc.SynchronizeWindow(ref viewImageDst0)).IsFail() ||
 					(res= viewImageSrc.SynchronizeWindow(ref viewImageDst1)).IsFail())
 				{
@@ -79,7 +77,6 @@ namespace OperationLeastCommonMultiple_Scalar
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				// ref 파라미터를 입력 받는 함수는 리턴이 tuple로 생성되며 [return], [ref 0], ... [ref n-1] 형태로 tuple 을 반환한다. // A function that receives ref parameters returns a tuple structured as [return], [ref 0], ... [ref n-1].
 				if((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail() ||
 					(res = viewImageDst0.SetImagePtr(ref fliDstImage0)).IsFail() ||
 					(res = viewImageDst1.SetImagePtr(ref fliDstImage1)).IsFail())
@@ -131,8 +128,8 @@ namespace OperationLeastCommonMultiple_Scalar
 				// 이미지 뷰 정보 표시 // Display image view information
 				CFLPoint<double> flpZero = new CFLPoint<double>(0, 0);
 				if((res = (layerSrc.DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail() ||
-					(res = (layerDst0.DrawTextCanvas(flpZero, "Destination1 Image(LCM 5)", EColor.YELLOW, EColor.BLACK, 20))).IsFail() ||
-					(res = (layerDst1.DrawTextCanvas(flpZero, "Destination2 Image(LCM 17)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
+					(res = (layerDst0.DrawTextCanvas(flpZero, "Destination Image(LCM 5)", EColor.YELLOW, EColor.BLACK, 20))).IsFail() ||
+					(res = (layerDst1.DrawTextCanvas(flpZero, "Destination Image(LCM 17)", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
