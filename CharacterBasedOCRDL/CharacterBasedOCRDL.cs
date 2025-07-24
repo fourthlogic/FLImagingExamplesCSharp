@@ -108,8 +108,6 @@ namespace CharacterBasedOCRDL
 					break;
 				}
 
-				viewImagesLabel.EnablePixelSegmentationMode(true);
-
 				if((res = viewImagesLabel.SetImagePtr(ref fliResultLabelImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
@@ -345,16 +343,6 @@ namespace CharacterBasedOCRDL
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
-				}
-
-				int i32LearningClassCount = ocr.GetLearningResultClassCount();
-				// ResultContours 인덱스와 매칭 되는 라벨 번호배열을 가져오기 // ResultContours Get an array of label numbers matching the index.
-				for(int classNum = 1; classNum < i32LearningClassCount; ++classNum)
-				{
-					List<string> flaNames = new List<string>();
-
-					ocr.GetLearningResultClassNames(classNum, ref flaNames);
-					viewImagesLabel.SetSegmentationLabelText(0, (double)classNum, flaNames[0]);
 				}
 
 				// ResultLabl 뷰에 Floating Value Range를 설정
