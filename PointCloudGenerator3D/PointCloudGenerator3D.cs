@@ -56,24 +56,10 @@ namespace PointCloudGenerator3D
                 alg.EnableColorGeneration(true);
 				alg.EnableNormalGeneration(false);
 
-                var sCount = new CPointCloudGenerator3D.SCountInfo { bCopyOriginalVertices = false, i64Edges = 0, i64Faces = 0, i64Interiors = 0};
-
-			    sCount.bCopyOriginalVertices = true;
-			    alg.AddPredefinedObject(sCount, EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 255, 255));
-                sCount.bCopyOriginalVertices = false;
-
-                sCount.i64Edges = 4000;
-                alg.AddPredefinedObject(sCount, EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 0, 0));
-                sCount.i64Edges = 0;
-
-                sCount.i64Faces = 20000;
-                alg.AddPredefinedObject(sCount, EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(0, 255, 0));
-                sCount.i64Faces = 0;
-
-                sCount.i64Interiors = 100000;
-                alg.AddPredefinedObject(sCount, EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(0, 0, 255));
-                sCount.i64Interiors = 0;
-
+				alg.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(true, 0, 0, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 255, 255));
+				alg.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 4000, 0, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 0, 0));
+				alg.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 0, 20000, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(0, 255, 0));
+				alg.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 0, 0, 100000), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(0, 0, 255));
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
