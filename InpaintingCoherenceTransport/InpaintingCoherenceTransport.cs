@@ -114,9 +114,9 @@ namespace InpaintingCoherenceTransport
 				InpaintingCoherenceTransport.SetEpsilon(5);
 				// 선명도 % // Sharpness parameter(%)
 				InpaintingCoherenceTransport.SetKappa(25);
-				// 미분 평활화(가우사안) // Smoothing for derivative operator.(Gaussian)
+				// 미분 평활화(가우시안) // Smoothing for derivative operator.(Gaussian)
 				InpaintingCoherenceTransport.SetSigma(1.400000);
-				// 확산 계수(가우사안) // Smoothing for diffusion coefficients.(Gaussian)
+				// 확산 계수(가우시안) // Smoothing for diffusion coefficients.(Gaussian)
 				InpaintingCoherenceTransport.SetRho(5.000000);
                 // Channel 가중치 // Channel Weight
                 CMultiVar<double> mvChannelWeight = new CMultiVar<double>(0.114, 0.587, 0.299);
