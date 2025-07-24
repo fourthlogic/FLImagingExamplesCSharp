@@ -9,8 +9,8 @@
     <ProjectGuid>{4028BC3F-83FF-41C4-A2CE-A6EDBD2F84E4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gradient_Filter</RootNamespace>
-    <AssemblyName>Gradient_Filter</AssemblyName>
+    <RootNamespace>GradientFilter</RootNamespace>
+    <AssemblyName>GradientFilter</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -111,7 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="GradientFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
