@@ -92,7 +92,7 @@ namespace Utilities3D
 				double f64ChordalDeviation = 0;
 
 				// 방법 1. CFL3DObject 에서 Step 파일 로드
-				// Method 1. Load the STEP file in CFL3DObject
+				// Method 1. Load the STEP file directly into a CFL3DObject
 
 				// 뷰에 추가된 CGUIView3DObject 객체의 내부 CFL3DObject 에 STEP 파일 로드
 				// Load the STEP file into the internal CFL3DObject of the CGUIView3DObject object added to the view.

@@ -24,13 +24,6 @@ namespace Utilities3D
 			Console.ReadKey();
 		}
 
-		public enum EType
-		{
-			Model = 0,
-			Texture,
-			Count,
-		};
-
 		[STAThread]
 		static void Main(string[] args)
 		{

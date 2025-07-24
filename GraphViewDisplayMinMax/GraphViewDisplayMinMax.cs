@@ -110,7 +110,7 @@ namespace GraphView
 					EColor eColor = new EColor();
 					eColor = (EColor)((uint)(((char)(rand.Next() % 255) | ((uint)((char)(rand.Next() % 255)) << 8)) | (((uint)(char)(rand.Next() % 255)) << 16)));
 
-					string strName = "Chart";
+					string strName = string.Format("Chart {0}", k);
 
 					// 그래프에 생성한 데이터를 추가한다. // Plot chart on the graph view.
 					arrViewGraph[0].Plot(arrF64DataX, arrF64DataY, i32DataCount, EChartType.Line, eColor, strName);
