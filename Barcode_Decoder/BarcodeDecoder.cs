@@ -68,18 +68,18 @@ namespace Barcode
 					break;
 				}
 
-				// Blob 객체 생성 // Create Blob object
-				CBarcodeDecoder sBarcode = new CBarcodeDecoder();
+				// Barcode 객체 생성 // Create Barcode object
+				CBarcodeDecoder barcode = new CBarcodeDecoder();
 
 				// 처리할 이미지 설정 // Set the image to process
-				sBarcode.SetSourceImage(ref fliImage);
+				barcode.SetSourceImage(ref fliImage);
 
 				// Barcode 타입 설정
 				// 미 설정시 EBarcodeDecodingType.Auto 로 모든 심볼을 탐색한다 동작한다.
-				sBarcode.SetSymbolType(EBarcodeSymbolType.EAN13);
+				barcode.SetSymbolType(EBarcodeSymbolType.EAN13);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sBarcode.Execute()).IsFail())
+				if((res = barcode.Execute()).IsFail())
 					ErrorPrint(res, "Failed to execute Barcode decoder.");
 
 
@@ -91,7 +91,7 @@ namespace Barcode
 				layer.Clear();
 
 				// 검출된 총 바코드 개수
-				Int64 i64Results = sBarcode.GetResultCount();
+				Int64 i64Results = barcode.GetResultCount();
 
 				// 바코드 정보 출력
 				for(Int32 i = 0; i < i64Results; i++)
@@ -100,7 +100,7 @@ namespace Barcode
 					CFLQuad<double> flqRegion = new CFLQuad<double>();
 
 					// Barcode Decoder 결과들 중 Data Region 을 얻어옴
-					if((res = sBarcode.GetResultDataRegion(i, ref flqRegion)).IsFail())
+					if((res = barcode.GetResultDataRegion(i, ref flqRegion)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get data region from the barcode decoder object.");
 						continue;
@@ -116,19 +116,19 @@ namespace Barcode
 						ErrorPrint(res, "Failed to draw figure object on the image view.\n");
 						continue;
 					}
-
+					
 					//string strDecodedMsg = "";
 					StringBuilder strDecodedMsg = new StringBuilder();
 
 					// Barcode Decoder 결과들 중 Decoded String 을 얻어옴
-					if((res = sBarcode.GetResultDecodedString(i, ref strDecodedMsg)).IsFail())
+					if((res = barcode.GetResultDecodedString(i, ref strDecodedMsg)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get decoded string from the barcode decoder object.");
 						continue;
 					}
 
 					CBarcodeSpec bcs = new CBarcodeSpec();
-					sBarcode.GetResultBarcodeSpec(i, ref bcs);
+					barcode.GetResultBarcodeSpec(i, ref bcs);
 
 					EBarcodeSymbolType eSymbol = bcs.GetSymbolType();
 
@@ -179,13 +179,13 @@ namespace Barcode
 						strSymbol = "[CODE-93]";
 						break;
 					case EBarcodeSymbolType.GS1DatabarOmniTrunc:
-						strSymbol = "[GS1 DatabarOmniTrunc]";
+						strSymbol = "[GS1 Databar Omni-Trunc]";
 						break;
 					case EBarcodeSymbolType.GS1DatabarLimited:
-						strSymbol = "[GS1 DatabarLimited]";
+						strSymbol = "[GS1 Databar Limited]";
 						break;
 					case EBarcodeSymbolType.GS1DatabarExpanded:
-						strSymbol = "[GS1 DatabarExpanded]";
+						strSymbol = "[GS1 Databar Expanded]";
 						break;
 					case EBarcodeSymbolType.USPSIntelligent:
 						strSymbol = "[USPS Intelligent]";
@@ -198,9 +198,6 @@ namespace Barcode
 					}
 
 					Console.Write("No. {0} Code : {1} {2}\n", i, strSymbol, strDecodedMsg);
-
-					// String 을 디스플레이 하기 위한 기준 좌표 FLPointL 선언
-					CFLPoint<Int32> flplPos = new CFLPoint<int>(flqRegion.flpPoints[3]);
 
 					// Decoded String 을 디스플레이 한다.
 					// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다. // The function DrawTextCanvas below draws a String based on the screen coordinates.

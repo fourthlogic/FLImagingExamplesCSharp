@@ -46,7 +46,7 @@ namespace QRCode
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
-
+				fliImage.Assign(fliImage);
 				// 이미지 뷰 생성 // Create image view
 				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
 				{

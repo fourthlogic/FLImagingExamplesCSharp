@@ -51,21 +51,21 @@ namespace Barcode
 				string strInput = Console.ReadLine();
 
 				// Barcode Encoder 객체 생성 // Create Barcode Encoder object
-				CBarcodeEncoder sBarcodeEncoder = new CBarcodeEncoder();
+				CBarcodeEncoder barcode = new CBarcodeEncoder();
 				CBarcodeSpec codeSpec = new CBarcodeSpec();
 
 				// 처리할 이미지 설정 // Set the image to process
-				sBarcodeEncoder.SetSourceImage(ref fliImage);
+				barcode.SetSourceImage(ref fliImage);
 				// Encoding Barcode 타입 설정
 				codeSpec.SetSymbolType(EBarcodeSymbolType.EAN128);
 				// Encoding Message 설정
-				sBarcodeEncoder.SetEncodingMessage(strInput);
+				barcode.SetEncodingMessage(strInput);
 
 				// 설정된 Barcode 스펙
-				sBarcodeEncoder.SetBarcodeEncodingSpec(codeSpec);
+				barcode.SetBarcodeEncodingSpec(codeSpec);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sBarcodeEncoder.Execute()).IsFail())
+				if((res = barcode.Execute()).IsFail())
 					ErrorPrint(res, "Failed to execute Barcode encoder.");
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
@@ -103,7 +103,7 @@ namespace Barcode
 				layer.Clear();
 
 				// 검출된 총 바코드 개수
-				Int64 i64Results = sBarcodeDecoder.GetResultCount();
+				Int64 i64Results = sBarcodeDecoder.GetResultCount();23
 
 				// 바코드 정보 출력
 				for(Int32 i = 0; i < i64Results; i++)

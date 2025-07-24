@@ -149,7 +149,7 @@ namespace QRCode
 					// QR Code Decoder 결과를 얻어오기 위해 FigureArray 선언
 					CFLFigureArray flfaFinderPattern = new CFLFigureArray();
 
-					// QR Code Decoder 결과들 중 Grid Region 을 얻어옴
+					// QR Code Decoder 결과들 중 Finder Pattern을 얻어옴
 					if((res = qrCodeDecoder.GetResultFinderPattern(i, ref flfaFinderPattern)).IsFail())
 					{
 						ErrorPrint(res, "Failed to get grid region from the QR Code decoder object.");

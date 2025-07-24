@@ -153,10 +153,6 @@ namespace Gauge
 
 				// 처리할 이미지 설정 // Set the image to process
 				lineGauge.SetSourceImage(ref fliImage);
-				// 선을 추정하기위해 추출할 경계점 변화 방향에 대해 설정합니다. // Set the boundary point change direction to extract to estimate the line.
-				lineGauge.SetTransitionType(CLineGauge.ETransitionType.DarkToBrightOrBrightToDark);
-				// 선을 추정하기위해 추출한 경계점 중 사용할 경계점 유형을 선택합니다. // Select the boundary point type to use among the boundary points extracted to estimate the line.
-				lineGauge.SetTransitionChoice(CLineGauge.ETransitionChoice.Closest);
 				// 선을 추정하기위해 추출할 경계점의 변화 임계값에 대해 설정합니다. // Set the threshold change of the boundary point to be extracted to estimate the line.
 				lineGauge.SetThreshold(20);
 				// 선을 추정하기위해 추출할 경계점의 변화 임계값에 보정값을 설정합니다. // Set the correction value to the threshold change of the boundary point to be extracted to estimate the line.
@@ -203,7 +199,7 @@ namespace Gauge
 					lineGauge.GetMeasuredValidPoints(ref flfaResultsValid, i % 4);
 					// 추정된 선을 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid boundary point that is not used to extract the estimated line.
 					lineGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, i % 4);
-
+					
 					CGUIViewImageLayer layer = viewImage[i].GetLayer(0);
 
 					layer.Clear();

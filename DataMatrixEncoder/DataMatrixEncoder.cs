@@ -41,13 +41,6 @@ namespace DataMatrix
 			{
 				CResult res;
 
-				// 이미지 뷰 생성 // Create image view
-				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
 				// DataMatrix Encoder 객체 생성 // Create DataMatrix Encoder object
 				CDataMatrixEncoder dataMatrixEncoder = new CDataMatrixEncoder();
 				CDataMatrixSpec codeSpec = new CDataMatrixSpec();
@@ -59,10 +52,23 @@ namespace DataMatrix
 				Console.WriteLine("Please input encoding message.: ");
 				string strInput = Console.ReadLine();
 
+				// 이미지 뷰 생성 // Create image view
+				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
 				dataMatrixEncoder.SetEncodingMessage(strInput);
 
-				// 인코딩 이미지 포멧
+				// 인코딩 이미지 포멧 설정 // Set encoding image format
 				codeSpec.SetImageFormat(EPixelFormat.C3_U8);
+
+				// Decode 데이터 영역 색상 설정 // Set the DataMatrix encoding type.
+				codeSpec.SetColorMode(EDataCodeColor.WhiteOnBlack);
+
+				// 설정된 DataMatrix 스펙
+				dataMatrixEncoder.SetDataMatrixEncodingSpec(codeSpec);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = dataMatrixEncoder.Execute()).IsFail())
@@ -70,7 +76,7 @@ namespace DataMatrix
 					ErrorPrint(res, "Failed to execute DataMatrix Encoder.");
 					break;
 				}
-
+				
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
@@ -99,9 +105,6 @@ namespace DataMatrix
 
 				// 처리할 이미지 설정 // Set the image to process
 				dataMatrixDecoder.SetSourceImage(ref fliImage);
-
-				// Decode 데이터 영역 색상 설정
-				codeSpec.SetColorMode(EDataCodeColor.WhiteOnBlack);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = dataMatrixDecoder.Execute()).IsFail())

@@ -108,7 +108,7 @@ namespace ShapeMatch
 					Console.Write("    Pivot X: {0}\n", matchResult.flpPivot.x);
 					Console.Write("    Pivot Y: {0}\n", matchResult.flpPivot.y);
 					Console.Write("    Angle    : {0}\n", matchResult.fllResultObject.GetAngle());
-					Console.Write("  2. Score : {0}\n  3. Score : {1}\n  4. Scale : {2}\n\n", matchResult.f32Score, matchResult.f32Angle, matchResult.f32Scale);
+					Console.Write("  2. Score : {0}\n  3. Angle : {1}\n  4. Scale : {2}\n\n", matchResult.f32Score, matchResult.f32Angle, matchResult.f32Scale);
 
 					if((res = layer.DrawFigureImage(matchResult.fllResultObject, EColor.CYAN, 3)).IsFail())
 					{
