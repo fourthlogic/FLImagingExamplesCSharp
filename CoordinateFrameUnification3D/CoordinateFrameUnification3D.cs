@@ -38,7 +38,7 @@ namespace PerspectiveMerge3D
 			CFL3DObject floSource0 = new CFL3DObject();
 			CFL3DObject floSource1 = new CFL3DObject();
 			CFL3DObject floWorld = new CFL3DObject();
-			CFL3DObject fl3DObjectDst = new CFL3DObject();
+			CFL3DObject floDst = new CFL3DObject();
 
 			CResult res = new CResult();
 
@@ -89,8 +89,7 @@ namespace PerspectiveMerge3D
 
 				cfu.AddSourceObject(ref floSource1, flaWorld1, flaScene1);
 
-				CFL3DObject floDestination = new CFL3DObject();
-				cfu.SetDestinationObject(ref floDestination);
+				cfu.SetDestinationObject(ref floDst);
 
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
@@ -117,7 +116,7 @@ namespace PerspectiveMerge3D
 				view3DSrc0.PushObject(floSource0);
 				view3DWorld.PushObject(floWorld);
 				view3DSrc1.PushObject(floSource1);
-				view3DDst.PushObject(floDestination);
+				view3DDst.PushObject(floDst);
 
 				view3DDst.SynchronizePointOfView(ref view3DSrc0);
 				view3DDst.SynchronizePointOfView(ref view3DWorld);
