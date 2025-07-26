@@ -159,7 +159,7 @@ namespace KMeansClusterThreshold
 					break;
 				}
 
-				// K-Means Cluster Threshold 객체 생성 // Create K-Means Cluster Threshold object
+				// K-means Cluster Threshold 객체 생성 // Create K-means Cluster Threshold object
 				CKMeansClusterThreshold kMeans = new CKMeansClusterThreshold();
 				// Source 이미지 설정 // Set the source image
 				kMeans.SetSourceImage(ref arrFliImage[0]);
@@ -172,7 +172,7 @@ namespace KMeansClusterThreshold
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = kMeans.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute K-Means Cluster Threshold.");
+					ErrorPrint(res, "Failed to execute K-means Cluster Threshold.");
 					break;
 				}
 
@@ -185,7 +185,7 @@ namespace KMeansClusterThreshold
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = kMeans.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute K-Means Cluster Threshold.");
+					ErrorPrint(res, "Failed to execute K-means Cluster Threshold.");
 					break;
 				}
 
@@ -198,7 +198,7 @@ namespace KMeansClusterThreshold
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = kMeans.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute K-Means Cluster Threshold.");
+					ErrorPrint(res, "Failed to execute K-means Cluster Threshold.");
 					break;
 				}
 
@@ -246,10 +246,6 @@ namespace KMeansClusterThreshold
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
-
-				// Destination 이미지 뷰의 Pixel 값을 컬러링하여 볼 수 있도록 설정 // Show Colored Pixel Values on Destination Image Views
-				for(int i = 1; i < 4; ++i)
-					arrViewImage[i].EnablePixelSegmentationMode(true);
 
 				// 이미지 뷰를 갱신 // Update image view
 				arrViewImage[0].Invalidate(true);
