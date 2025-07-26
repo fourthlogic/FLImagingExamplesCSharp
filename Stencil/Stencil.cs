@@ -46,7 +46,6 @@ namespace Stencil
 				}
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
 				// 스텐실 클래스 선언 // Declare CStencil class instance. 
@@ -157,10 +156,11 @@ namespace Stencil
 				// 레이어에 도형을 그리기 // Draw the figure on a layer.
 				layer.DrawFigureImage(flfaRes, EColor.BLACK, 1, EColor.CYAN);
 
-				// 이미지 뷰를 갱신 합니다.
+				// 이미지 뷰를 갱신 // Refresh the image viewer
 				viewImage.Invalidate(true);
 
-				// 이미지 뷰가 꺼지면 종료로 간주
+				// 이미지 뷰어가 닫히기 전까지 뷰어를 열려 있는 상태로 유지
+				// Keep the viewer open until it is manually closed
 				while(viewImage.IsAvailable())
 					Thread.Sleep(1);
 			}
