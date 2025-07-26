@@ -94,7 +94,11 @@ namespace Utilities3D
 				for(int i = 0; i < 6; ++i)
 					arrView3D[i].PushBackROI(flfr);
 
-				// CROIUtilities3D 객체 선언 // Declare the CROIUtilities3D object
+				/////////////////////////////////
+				//           Include           //
+				/////////////////////////////////
+				// CROIUtilities3D 객체 선언
+				// Declare the CROIUtilities3D object
 				CROIUtilities3D roiUtil3D = new CROIUtilities3D();
 
 				// CROIUtilities3D 객체에 3D Object 추가 // Add 3D objects to the CROIUtilities3D object
@@ -116,13 +120,6 @@ namespace Utilities3D
 
 				if((res = roiUtil3D.GetResult(ref arr2ResultROIIndexInclude)).IsFail())
 					break;
-
-				// EResultSelectionType.Add 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Include 연산으로 얻은 결과값까지 복사됨
-				// Declare and copy construct a CROIUtilities3D object for the EResultSelectionType.Add operation. 
-				// The results from the Include operation are also copied.
-				CROIUtilities3D roiUtil3DAdd = new CROIUtilities3D(roiUtil3D);
-				// 복사한 객체에서 ROI를 모두 클리어 // Clear all ROIs from the copied object
-				roiUtil3DAdd.ClearROI();
 
 				if(arr2ResultROIIndexInclude.Count() > 0)
 				{
@@ -169,7 +166,20 @@ namespace Utilities3D
 					view3DInclude.UpdateScreen();
 
 				}
-				// 선택 타입 설정 : ROI 바깥의 정점만 선택 // Set selection type: Select only vertices outside the ROI
+
+				// EResultSelectionType.Add 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Include 연산으로 얻은 결과값까지 복사됨
+				// Declare and copy construct a CROIUtilities3D object for the EResultSelectionType.Add operation. 
+				// The results from the Include operation are also copied.
+				CROIUtilities3D roiUtil3DAdd = new CROIUtilities3D(roiUtil3D);
+				// 복사한 객체에서 ROI를 모두 클리어 // Clear all ROIs from the copied object
+				roiUtil3DAdd.ClearROI();
+
+
+				/////////////////////////////////
+				//           Exclude           //
+				/////////////////////////////////
+				// 선택 타입 설정 : ROI 바깥의 정점만 선택 
+				// Set selection type: Select only vertices outside the ROI
 				roiUtil3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Exclude);
 
 				// CROIUtilities3D 실행 // Execute CROIUtilities3D
@@ -181,14 +191,6 @@ namespace Utilities3D
 
 				if((res = roiUtil3D.GetResult(ref arr2ResultROIIndexExclude)).IsFail())
 					break;
-
-				// EResultSelectionType.Remove 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.Remove operation and copy roiUtil3D. Results from the Exclude operation are also copied.
-				CROIUtilities3D roiUtil3DRemove = new CROIUtilities3D(roiUtil3D);
-				// EResultSelectionType.XOR 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.XOR operation and copy roiUtil3D. Results from the Exclude operation are also copied.
-				CROIUtilities3D roiUtil3DXOR = new CROIUtilities3D(roiUtil3D);
-				// 복사한 객체에서 ROI를 모두 클리어 // Clear all ROIs from the copied objects
-				roiUtil3DRemove.ClearROI();
-				roiUtil3DXOR.ClearROI();
 
 				if(arr2ResultROIIndexExclude.Count() > 0)
 				{
@@ -234,7 +236,20 @@ namespace Utilities3D
 					view3DExclude.UpdateScreen();
 				}
 
-				// 기존 선택 영역(위에서 Include로 선택한 영역)에 추가로 선택할 영역을 ROI로 설정 // Set an additional ROI to be selected in the existing selection area (previously selected with Include)
+				// EResultSelectionType.Remove 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.Remove operation and copy roiUtil3D. Results from the Exclude operation are also copied.
+				CROIUtilities3D roiUtil3DRemove = new CROIUtilities3D(roiUtil3D);
+				// EResultSelectionType.XOR 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.XOR operation and copy roiUtil3D. Results from the Exclude operation are also copied.
+				CROIUtilities3D roiUtil3DXOR = new CROIUtilities3D(roiUtil3D);
+				// 복사한 객체에서 ROI를 모두 클리어 // Clear all ROIs from the copied objects
+				roiUtil3DRemove.ClearROI();
+				roiUtil3DXOR.ClearROI();
+
+
+				//////////////////////////////////
+				//    Add(to Include Result)    //
+				//////////////////////////////////
+				// 기존 선택 영역(위에서 Include로 선택한 영역)에 추가로 선택할 영역을 ROI로 설정
+				// Set an additional ROI to be selected in the existing selection area (previously selected with Include)
 				CFLFrustum3<float> flfrAdd = new CFLFrustum3<float>();
 				flfrAdd.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Add.fig");
 
@@ -300,7 +315,12 @@ namespace Utilities3D
 					view3DAdd.UpdateScreen();
 				}
 
-				// 기존 선택 영역(위에서 Exclude로 선택한 영역)에서 제거할 영역을 ROI로 설정 // Set ROIs to remove areas from the existing selection (previously selected with Exclude)
+
+				/////////////////////////////////
+				// Remove(from Exclude Result) //
+				/////////////////////////////////
+				// 기존 선택 영역(위에서 Exclude로 선택한 영역)에서 제거할 영역을 ROI로 설정
+				// Set ROIs to remove areas from the existing selection (previously selected with Exclude)
 				CFLFrustum3<float> flfrRemove1 = new CFLFrustum3<float>();
 				CFLFrustum3<float> flfrRemove2 = new CFLFrustum3<float>();
 				flfrRemove1.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Remove1.fig");
@@ -371,7 +391,12 @@ namespace Utilities3D
 					view3DRemove.UpdateScreen();
 				}
 
-				// 기존 선택 영역(위에서 Exclude로 선택한 영역)에서 XOR 선택할 영역을 ROI로 설정 // Set an ROI to perform XOR operation on the existing selection (previously selected with Exclude)
+
+				///////////////////////////////
+				// XOR(from Exclude Result)  //
+				///////////////////////////////
+				// 기존 선택 영역(위에서 Exclude로 선택한 영역)에서 XOR 선택할 영역을 ROI로 설정 
+				// Set an ROI to perform XOR operation on the existing selection (previously selected with Exclude)
 				CFLFrustum3<float> flfrXOR = new CFLFrustum3<float>();
 				flfrXOR.Load("../../ExampleImages/ROIUtilities3D/frustumROI_XOR.fig");
 
@@ -486,7 +511,8 @@ namespace Utilities3D
 				for(int i = 0; i < 6; ++i)
 					arrView3D[i].Invalidate(true);
 
-				// 3D 뷰가 종료될 때 까지 기다림 // Wait for the 3D view 
+				// 3D 뷰들이 종료될 때까지 대기
+				// Wait until 3D views are closed
 				while(arrView3D[0].IsAvailable() && arrView3D[1].IsAvailable() && arrView3D[2].IsAvailable() && arrView3D[3].IsAvailable() && arrView3D[4].IsAvailable() && arrView3D[5].IsAvailable())
 					Thread.Sleep(1);
 			}
