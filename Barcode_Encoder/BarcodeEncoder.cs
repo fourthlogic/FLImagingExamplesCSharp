@@ -103,7 +103,7 @@ namespace Barcode
 				layer.Clear();
 
 				// 검출된 총 바코드 개수
-				Int64 i64Results = sBarcodeDecoder.GetResultCount();23
+				Int64 i64Results = sBarcodeDecoder.GetResultCount();
 
 				// 바코드 정보 출력
 				for(Int32 i = 0; i < i64Results; i++)
