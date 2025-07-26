@@ -30,6 +30,10 @@ namespace AlignmentTiling
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			int i32SrcImageCount = 4;
 
 			// 이미지 객체 선언 // Declare the image object

@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace OperationBitwiseXor
 {
     class OperationBitwiseXor_Scalar
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -27,7 +27,11 @@ namespace OperationBitwiseXor
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliSourceImage = new CFLImage();
             CFLImage fliDestinationImage1 = new CFLImage();
@@ -41,94 +45,94 @@ namespace OperationBitwiseXor
 			CResult res = new CResult();
 
 			do
-	        {
+			{
                 // Source 이미지 로드 // Load the source image
 		        if((res = fliSourceImage.Load("../../ExampleImages/OperationBitwiseXor/Cat.flif")).IsFail())
-		        {
+				{
                     ErrorPrint(res, "Failed to load the image file. \n");
 		        	break;
 		        }
 
                 // Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
                 if ((res = fliDestinationImage1.Assign(fliSourceImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Destination2 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination2 image as same as source image
                 if ((res = fliDestinationImage2.Assign(fliSourceImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if ((res = viewImageSrc.Create(100, 0, 612, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination1 이미지 뷰 생성 // Create destination1 image view
                 if ((res = viewImageDst1.Create(612, 0, 1124, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination2 이미지 뷰 생성 // Create destination2 image view
                 if ((res = viewImageDst2.Create(1124, 0, 1636, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
                 if ((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destination1 이미지 뷰에 이미지를 디스플레이  // Display the image in the destination1 image view
                 if ((res = viewImageDst1.SetImagePtr(ref fliDestinationImage1)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destination2 이미지 뷰에 이미지를 디스플레이  // Display the image in the destination2 image view
                 if ((res = viewImageDst2.SetImagePtr(ref fliDestinationImage2)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst1)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst2)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res = viewImageSrc.SynchronizeWindow(ref viewImageDst1)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res = viewImageSrc.SynchronizeWindow(ref viewImageDst2)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window. \n");
                     break;
                 }
@@ -151,7 +155,7 @@ namespace OperationBitwiseXor
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = bitwiseXor.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseXor. \n");
                     break;
                 }
@@ -168,7 +172,7 @@ namespace OperationBitwiseXor
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = bitwiseXor.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseXor. \n");
                     break;
                 }
@@ -188,19 +192,19 @@ namespace OperationBitwiseXor
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
                 if ((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 
                 if ((res = layerDestination1.DrawTextCanvas(flpPoint, "Destination1 Image(BitwiseXor 64)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 
                 if ((res = layerDestination2.DrawTextCanvas(flpPoint, "Destination2 Image(BitwiseXor 128)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }

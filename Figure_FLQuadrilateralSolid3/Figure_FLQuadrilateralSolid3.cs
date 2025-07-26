@@ -27,6 +27,10 @@ namespace Figure
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 3D 뷰 선언
 			// Declaration of the 3D view 
 			CGUIView3D[] view3D = new CGUIView3D[4];

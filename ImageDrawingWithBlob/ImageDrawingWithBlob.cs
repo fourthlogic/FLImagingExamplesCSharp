@@ -16,9 +16,9 @@ using CResult = FLImagingCLR.CResult;
 namespace ImageDrawingWithBlob
 {
     class ImageDrawingWithBlob
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -30,6 +30,10 @@ namespace ImageDrawingWithBlob
         [STAThread]
         static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare image object
 	        CFLImage fliImage = new CFLImage();
 
@@ -41,55 +45,55 @@ namespace ImageDrawingWithBlob
 	        CGUIViewImage viewImageDst = new CGUIViewImage();
 
 	        do
-	        {
+			{
                 // 수행 결과 객체 선언 // Declare the execution result object
 			    CResult res;
 
 		        // 이미지 로드 // Load image
 		        if((res = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to load the image file.\n");
 			        break;
 		        }
 
 		        // Drawing 이미지를 Src 이미지와 동일한 이미지로 생성
 		        if((res = fliImageDrawing.Assign(fliImage)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to assign the image file.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
 		        if((res = viewImageSrc.Create(400, 0, 800, 400)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to create the image view.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
 		        if((res = viewImageDst.Create(800, 0, 1200, 400)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to create the image view.\n");
 			        break;
 		        }
 
 		        // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
 		        if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to synchronize view\n");
 			        break;
 		        }
 
 		        // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 		        if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to synchronize window.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 		        if((res = viewImageSrc.SetImagePtr(ref fliImage)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;
 		        }
@@ -141,7 +145,7 @@ namespace ImageDrawingWithBlob
 
 		        // 이미지 뷰 정보 표시 // Display image view information
 		        if((res = layer3.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to draw text\n");
 			        break;
 		        }
@@ -197,27 +201,27 @@ namespace ImageDrawingWithBlob
 
 		        // 기존 레이어에 드로잉된 원소들을 해당 레이어 뒤쪽에 추가합니다. // Add elements drawn from an existing layer to the back of that layer.
 		        if((res = layer.PushBack(layer1)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to push back.\n");
 			        break;
 		        }
 
 		        if((res = layer.PushBack(layer2)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to push back.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 정보 표시 // Display image view information
 		        if((res = layer.DrawTextImage(new CFLPoint<double>(0, 0), "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to draw text\n");
 			        break;
 		        }
 
 		        // 이미지에 그립니다. // Draw in the image.
 		        if((res = fliImageDrawing.Draw()).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to draw.\n");
 			        break;
 		        }
@@ -225,7 +229,7 @@ namespace ImageDrawingWithBlob
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 CFLImage fliTemp = (CFLImage)fliImageDrawing;
                 if ((res = viewImageDst.SetImagePtr(ref fliTemp)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;
 		        }

@@ -31,6 +31,10 @@ namespace PerspectiveMerge3D
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			CGUIView3D view3DSrc0 = new CGUIView3D();
 			CGUIView3D view3DSrc1 = new CGUIView3D();
 			CGUIView3D view3DWorld = new CGUIView3D();

@@ -15,10 +15,14 @@ using FLImagingCLR.AdvancedFunctions;
 namespace SNAPViewIntoDialog
 {
     class SNAPViewIntoDialog
-    {
+	{
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             var formSNAPView = new FormSNAPViewIntoDialog();
 
             Application.Run(formSNAPView);

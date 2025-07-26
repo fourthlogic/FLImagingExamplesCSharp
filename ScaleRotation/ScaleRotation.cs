@@ -39,6 +39,10 @@ namespace ScaleRotation
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage[] arrFliImage = new CFLImage[(int)EType.ETypeCount];
 

@@ -15,7 +15,7 @@ namespace Utilities3D
     class ProjectionUtilities3D
 	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -26,29 +26,33 @@ namespace Utilities3D
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 뷰 선언 // Declare image view
             CGUIViewImage[] viewImage = { new CGUIViewImage(), new CGUIViewImage(), new CGUIViewImage() };
 
             CResult res;
 
             do
-            {
+			{
                 // 이미지 뷰 생성 // Create image view
                 if ((res = viewImage[0].Create(0, 0, 400, 440)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 if ((res = viewImage[1].Create(400, 0, 800, 440)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 if ((res = viewImage[2].Create(800, 0, 1200, 440)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
@@ -144,7 +148,7 @@ namespace Utilities3D
 				pu.SetTopologyType(ETopologyType3D.Wireframe);
 
 				for(int i = 0; i <= 10; ++i)
-                {
+				{
                     // 카메라 시점 설정 // Set camera viewpoint
                     CFL3DCamera camInterpolation = new CFL3DCamera();
                     float f32T = (float)i * 0.1f;

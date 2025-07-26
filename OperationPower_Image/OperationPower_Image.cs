@@ -15,7 +15,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace OperationPower
 {
     class OperationPower_Image
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -28,7 +28,11 @@ namespace OperationPower
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage[] arrFliImage0 = new CFLImage[3];
             CFLImage[] arrFliImage1 = new CFLImage[3];
@@ -41,7 +45,7 @@ namespace OperationPower
 			CResult res = new CResult();
 
 			for(int i = 0; i < 3; ++i)
-            {
+			{
                 arrFliImage0[i] = new CFLImage();
                 arrViewImage0[i] = new CGUIViewImage();
                 arrFliImage1[i] = new CFLImage();
@@ -49,59 +53,59 @@ namespace OperationPower
             }
 
             do
-            {
+			{
                 // Source 이미지 로드 // Load the source image
                 if ((res = arrFliImage0[0].Load("../../ExampleImages/OperationPower/Sea3Ch.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Operand 이미지 로드 // Loads the operand image
                 if ((res = arrFliImage0[1].Load("../../ExampleImages/OperationPower/Gradation.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Source 이미지 로드 // Load the source image
                 if ((res =  arrFliImage1[0].Load("../../ExampleImages/OperationPower/Sea3ChF32.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Operand 이미지 로드 // Loads the operand image
                 if ((res =  arrFliImage1[1].Load("../../ExampleImages/OperationPower/Gradation.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
                 if ((res =  arrFliImage0[2].Assign(arrFliImage0[0])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to assign the image file.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if ((res =  arrViewImage0[0].Create(100, 0, 548, 448)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Operand 이미지 뷰 생성 // Create operand image view
                 if ((res =  arrViewImage0[1].Create(548, 0, 996, 448)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
                 if ((res =  arrViewImage0[2].Create(996, 0, 1444, 448)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
@@ -109,28 +113,28 @@ namespace OperationPower
 
                 // Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
                 if ((res =  arrFliImage1[2].Assign(arrFliImage1[0])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to assign the image file.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if ((res =  arrViewImage1[0].Create(100, 448, 548, 896)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Operand 이미지 뷰 생성 // Create operand image view
                 if ((res =  arrViewImage1[1].Create(548, 448, 996, 896)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
                 if ((res =  arrViewImage1[2].Create(996, 448, 1444, 896)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
@@ -140,9 +144,9 @@ namespace OperationPower
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 3; ++i)
-                {
+				{
                     if ((res =  arrViewImage0[i].SetImagePtr(ref arrFliImage0[i])).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
                         break;
@@ -150,9 +154,9 @@ namespace OperationPower
                 }
 
                 for (int i = 0; i < 3; ++i)
-                {
+				{
                     if ((res =  arrViewImage1[i].SetImagePtr(ref arrFliImage1[i])).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
                         break;
@@ -164,70 +168,70 @@ namespace OperationPower
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage0[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage0[2])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage0[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage0[2])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage1[0])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage1[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res =  arrViewImage0[0].SynchronizePointOfView(ref arrViewImage1[2])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage1[0])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage1[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res =  arrViewImage0[0].SynchronizeWindow(ref arrViewImage1[2])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
@@ -246,7 +250,7 @@ namespace OperationPower
              
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = power.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute operation power.");
                     Console.WriteLine(res.GetString());
                     break;
@@ -264,7 +268,7 @@ namespace OperationPower
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = power.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute operation power.");
                     Console.WriteLine(res.GetString());
                     break;
@@ -274,7 +278,7 @@ namespace OperationPower
                 CGUIViewImageLayer[] arrLayer1 = new CGUIViewImageLayer[3];
 
                 for (int i = 0; i < 3; ++i)
-                {
+				{
                     // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
                     // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
                     arrLayer0[i] = arrViewImage0[i].GetLayer(0);
@@ -284,7 +288,7 @@ namespace OperationPower
                 }
 
                 for (int i = 0; i < 3; ++i)
-                {
+				{
                     // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
                     // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
                     arrLayer1[i] = arrViewImage1[i].GetLayer(0);
@@ -303,38 +307,38 @@ namespace OperationPower
                 TPoint<double> tpPosition = new TPoint<double>(5, 5);
 
                 if ((res =  arrLayer0[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res =  arrLayer0[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res =  arrLayer0[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
 
                 if ((res =  arrLayer1[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res =  arrLayer1[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res =  arrLayer1[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }

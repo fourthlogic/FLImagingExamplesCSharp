@@ -27,7 +27,11 @@ namespace NoiseGenerator
 
 		[STAThread]
 		static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliImage = new CFLImage();
 			CFLImage fliDestinationImage = new CFLImage();

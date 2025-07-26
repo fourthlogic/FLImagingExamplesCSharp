@@ -1,7 +1,7 @@
 ﻿namespace FigureOperation
 {
     partial class FormFigureOperation
-    {
+	{
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -12,9 +12,9 @@
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
-        {
+		{
             if (disposing && (components != null))
-            {
+			{
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -27,7 +27,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
-        {
+		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFigureOperation));
 			this.groupBoxFigureObject = new System.Windows.Forms.GroupBox();
 			this.buttonClear = new System.Windows.Forms.Button();

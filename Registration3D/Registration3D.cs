@@ -29,6 +29,10 @@ namespace Registration3D
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 3D 객체 선언 // Declare 3D object
 			CFL3DObject floDestinationObject = new CFL3DObject();
 			CFL3DObject floLearnObject = new CFL3DObject();

@@ -29,6 +29,10 @@ namespace Figure
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// Figure 객체 선언 // Declare figure object
 			CFLFigureArray flfaSource = new CFLFigureArray();
 

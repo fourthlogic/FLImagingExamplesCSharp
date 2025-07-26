@@ -17,23 +17,23 @@ namespace DeviceCameraMechEye
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase
-    {
+	{
         // CDeviceEvent3DEx 생성자
         public CDeviceEventImageEx()
-        {
+		{
         }
 
         // 취득한 이미지를 표시할 이미지 뷰를 설정하는 함수
         public void SetView3D(CGUIView3D view3D)
-        {
+		{
             m_view3D = view3D;
         }
 
         // 카메라에서 이미지 취득 시 호출 되는 함수
         public override void OnAcquisition(CDeviceImageBase pDeviceImage)
-        {
+		{
             do
-            {
+			{
 	            if(m_view3D == null)
 		            break;
 
@@ -93,10 +93,14 @@ namespace DeviceCameraMechEye
     }
 
     class DeviceCameraMechEye
-    {
+	{
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             CResult drResult = new CResult(EResult.UnknownError);
 
             // 이미지 뷰 선언 // Declare the 3D view
@@ -106,7 +110,7 @@ namespace DeviceCameraMechEye
 	        CDeviceCameraMechEye camMechEye = new CDeviceCameraMechEye();
 
 	        do
-	        {
+			{
 		        String strInput = "";
 		        bool bAutoDetect = false;
 		        int i32SelectDevice = -1;
@@ -114,7 +118,7 @@ namespace DeviceCameraMechEye
 
 		        // 장치 찾기 방법을 선택합니다.
 		        while(true)
-		        {
+				{
 			        Console.Write("1. Auto Detect\n");
 			        Console.Write("2. Manual\n");
 			        Console.Write("Select Detection Method: ");
@@ -124,11 +128,11 @@ namespace DeviceCameraMechEye
                     int i32Select = 0;
 
                     if(Int32.TryParse(strInput, out i32Select) == true)
-                    {
+					{
                         bool bSelected = true;
 
 			            switch(i32Select)
-			            {
+						{
 			            case 1:
 				            bAutoDetect = true;
 				            break;
@@ -152,14 +156,14 @@ namespace DeviceCameraMechEye
 		        Console.Write("\n");
 
 		        if(bAutoDetect)
-		        {
+				{
                     List<String> listSerialNumbers = new List<String>();
 
                     // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
                     drResult = camMechEye.GetAutoDetectCameraSerialNumbers(ref listSerialNumbers);
 
 			        if(drResult.IsFail() || listSerialNumbers == null || listSerialNumbers.Count == 0)
-			        {
+					{
                         drResult = new CResult(EResult.FailedToRead);
 				        Console.Write("Not Found Device.\n");
 				        break;
@@ -167,9 +171,9 @@ namespace DeviceCameraMechEye
 
 			        // 연결 할 카메라를 선택합니다.
 			        while(true)
-			        {
+					{
 				        for(int i = 0; i < listSerialNumbers.Count; ++i)
-				        {
+						{
                             String strElement = String.Format("{0}. ", i + 1);
                             strElement += listSerialNumbers[i] + "\n";
 
@@ -183,11 +187,11 @@ namespace DeviceCameraMechEye
                         int i32Select = 0;
 
                         if(Int32.TryParse(strInput, out i32Select) == true)
-                        {
+						{
                             --i32Select;
 
                             if(i32Select >= 0 && i32Select < listSerialNumbers.Count)
-				            {
+							{
                                 i32SelectDevice = i32Select;
 				                break;
 				            }
@@ -197,7 +201,7 @@ namespace DeviceCameraMechEye
 			        }
 		        }
 		        else
-		        {
+				{
 			        // 시리얼 번호를 입력 받는다.
                     Console.Write("Input Serial Number: ");
 
@@ -222,14 +226,14 @@ namespace DeviceCameraMechEye
                 drResult = camMechEye.Initialize();
 
                 if (drResult.IsFail())
-		        {
+				{
 			        Console.Write("Failed to initialize the camera.\n");
 			        break;
 		        }
 
                 // 이미지 뷰 생성 // Create 3D view
                 if (view3D.Create(0, 0, 1000, 1000).IsFail())
-                {
+				{
                     drResult = new CResult(EResult.FailedToCreateObject);
                     Console.Write("Failed to create the 3D view.\n");
                     break;
@@ -241,7 +245,7 @@ namespace DeviceCameraMechEye
                 drResult = camMechEye.Live();
 
                 if (drResult.IsFail())
-		        {
+				{
 			        Console.Write("Failed to live the camera.\n");
 			        break;
 		        }

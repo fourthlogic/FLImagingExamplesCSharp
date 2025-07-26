@@ -27,6 +27,10 @@ namespace Gauge
 
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			const int i32ExampleCount = 12;
 
 			string[] arrViewText =

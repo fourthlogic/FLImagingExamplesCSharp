@@ -17,7 +17,7 @@ using CResult = FLImagingCLR.CResult;
 namespace DeviceCameraiRAYPLE
 {
 	class DeviceMotionEziMotionPlusRV6
-    {
+	{
 		// 모션 타입 enum // motion type enum
 		enum EMotion
 		{
@@ -38,7 +38,11 @@ namespace DeviceCameraiRAYPLE
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			CResult res;
 
 			// Ezi Motion Plus R V6 선언 // Declare Ezi Motion Plus R V6

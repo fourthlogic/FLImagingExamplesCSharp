@@ -28,6 +28,10 @@ namespace HighDynamicRange
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliSrcImage = new CFLImage();
 			CFLImage fliDstImage = new CFLImage();
@@ -80,7 +84,7 @@ namespace HighDynamicRange
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if (viewImageSrc.SynchronizePointOfView(ref viewImageDst).IsFail())
-                {
+				{
                     ErrorPrint(result, "Failed to synchronize view. \n");
                     break;
                 }

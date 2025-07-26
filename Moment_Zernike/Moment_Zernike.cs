@@ -28,7 +28,11 @@ namespace Moment
 
 		[STAThread]
 		static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliImage = new CFLImage();
 
@@ -37,24 +41,24 @@ namespace Moment
 			CResult res = new CResult();
 
             do
-            {
+			{
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/Moment/airEdge.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
 				// 이미지 뷰 생성 // Create imageview
 				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the imageview
 				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
@@ -82,7 +86,7 @@ namespace Moment
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = moment.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute moment.");
                     break;
                 }
@@ -92,7 +96,7 @@ namespace Moment
                 long i64ZernikeCount = (long)moment.GetZernikeCount();
 
                 for (int i = 0; i < i64ZernikeCount; ++i)
-                {
+				{
                     moment.GetZernike(ref zernike, i);
 					Console.WriteLine("Zernike N = {0}, M = {1}, RealValue : {2}, Imaginary : {3}", zernike.i32N, zernike.i32M, zernike.f64ZernikeReal, zernike.f64ZernikeImag);
                 }

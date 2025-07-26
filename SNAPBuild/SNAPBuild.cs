@@ -30,6 +30,10 @@ namespace SNAPBuild
 		[STAThread]
         static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 수행 결과 객체 선언 // Declare the execution result object
 			CResult res;
 
@@ -40,7 +44,7 @@ namespace SNAPBuild
 
 		        // 스냅 파일 로드 // Load SNAP file
                 if ((res = snapBuild.Load("C:/Users/Public/Documents/FLImaging/FLImagingExamplesSNAP/Advanced Functions/Object/Blob.flsf")).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to load the SNAP file.\n");
 			        break;
 		        }

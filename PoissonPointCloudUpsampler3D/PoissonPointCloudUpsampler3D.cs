@@ -19,7 +19,7 @@ namespace PoissonPointCloudUpsampler3D
 	class PoissonPointCloudUpsampler3D
 	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -30,7 +30,11 @@ namespace PoissonPointCloudUpsampler3D
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIView3D view3DSrc= new CGUIView3D();
 			CGUIView3D view3DDst = new CGUIView3D();
@@ -39,10 +43,10 @@ namespace PoissonPointCloudUpsampler3D
 			CResult res = new CResult();
 
             do
-            {
+			{
                 if ((res = view3DSrc.Create(100, 0, 600, 500)).IsFail() ||
 					(res = view3DDst.Create(600, 0, 1100, 500)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }

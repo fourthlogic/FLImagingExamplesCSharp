@@ -16,9 +16,9 @@ using CResult = FLImagingCLR.CResult;
 namespace MorphologyErode
 {
     class MorphologyErode_Region
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -28,7 +28,7 @@ namespace MorphologyErode
         }
 
         enum EType
-        {
+		{
             Source = 0,
             Destination,
             Region,
@@ -37,7 +37,11 @@ namespace MorphologyErode
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage[] arrFliImage = new CFLImage[(int)EType.ETypeCount];
 
@@ -53,10 +57,10 @@ namespace MorphologyErode
             CResult res;
 
             do
-            {
+			{
                 // 이미지 로드 // Load image
                 if ((res = arrFliImage[(int)EType.Source].Load("../../ExampleImages/Morphology/CityNight.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
@@ -64,10 +68,10 @@ namespace MorphologyErode
                 bool bError = false;
 
                 for (int i = (int)EType.Destination; i < (int)EType.ETypeCount - 1; ++i)
-                {
+				{
                     // Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
                     if ((res = (arrFliImage[i].Assign(arrFliImage[(int)EType.Source]))).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to assign the image file.\n");
                         bError = true;
                         break;
@@ -78,13 +82,13 @@ namespace MorphologyErode
                     break;
 
                 for (int i = 0; i < (int)EType.ETypeCount - 1; ++i)
-                {
+				{
                     int x = i % 2;
                     int y = i / 2;
 
                     // 이미지 뷰 생성 // Create image view
                     if ((res = (arrViewImage[i].Create(x * 400 + 400, y * 400, x * 400 + 400 + 400, y * 400 + 400))).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to create the image view.\n");
                         bError = true;
                         break;
@@ -92,7 +96,7 @@ namespace MorphologyErode
 
                     // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                     if ((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
                         break;
@@ -103,7 +107,7 @@ namespace MorphologyErode
 
                     // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                     if ((res = (arrViewImage[(int)EType.Source].SynchronizePointOfView(ref arrViewImage[i]))).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to synchronize view\n");
                         bError = true;
                         break;
@@ -111,7 +115,7 @@ namespace MorphologyErode
 
                     // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                     if ((res = (arrViewImage[(int)EType.Source].SynchronizeWindow(ref arrViewImage[i]))).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to synchronize window.\n");
                         bError = true;
                         break;
@@ -124,7 +128,7 @@ namespace MorphologyErode
                 //연산에 사용되는 Region 출력 // Displaty Region Shape
                 // 이미지 뷰 생성 // Create image view
                 if ((res = (arrViewImage[(int)EType.Region].Create(400, 400, 600, 600))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     bError = true;
                     break;
@@ -132,7 +136,7 @@ namespace MorphologyErode
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 if ((res = (arrViewImage[(int)EType.Region].SetImagePtr(ref arrFliImage[(int)EType.Region]))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.\n");
                     bError = true;
                     break;
@@ -159,7 +163,7 @@ namespace MorphologyErode
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = (morphologyErode.Execute())).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute morphology Erode.");
                     break;
                 }
@@ -167,7 +171,7 @@ namespace MorphologyErode
                 CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[(int)EType.ETypeCount];
 
                 for (int i = 0; i < (int)EType.ETypeCount - 1; ++i)
-                {
+				{
                     // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
                     // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
                     arrLayer[i] = arrViewImage[i].GetLayer(0);
@@ -201,19 +205,19 @@ namespace MorphologyErode
                 CFLPoint<double> flpZero = new CFLPoint<double>(0, 0);
 
                 if ((res = (arrLayer[(int)EType.Source].DrawTextCanvas(flpZero, "Source Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res = (arrLayer[(int)EType.Destination].DrawTextCanvas(flpZero, "Destination Image", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res = (arrLayer[(int)EType.Region].DrawTextCanvas(flpZero, "Region Shape", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -225,9 +229,9 @@ namespace MorphologyErode
                 // 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
                 bool bAvailable = true;
                 while (bAvailable)
-                {
+				{
                     for (int i = 0; i < (int)EType.ETypeCount; ++i)
-                    {
+					{
                         bAvailable = arrViewImage[i].IsAvailable();
 
                         if (!bAvailable)

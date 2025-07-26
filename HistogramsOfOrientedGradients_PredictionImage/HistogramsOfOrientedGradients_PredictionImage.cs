@@ -14,9 +14,9 @@ using FLImagingCLR.AdvancedFunctions;
 namespace HistogramsOfOrientedGradients
 {
     class Program
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -27,7 +27,11 @@ namespace HistogramsOfOrientedGradients
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare image object
             CFLImage fliSrcImage = new CFLImage();
             CFLImage fliDstImage = new CFLImage();
@@ -40,59 +44,59 @@ namespace HistogramsOfOrientedGradients
             CResult res = new CResult();
 
             do
-            {
+			{
                 // Source 이미지 로드 // Load the source image
                 if ((res = fliSrcImage.Load("../../ExampleImages/OperationCompare/candle.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
                 // Destination이미지를 Src 이미지와 동일한 이미지로 생성 // Create the destination Image same as source image
                 if ((res = fliDstImage.Assign(fliSrcImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to assign the image file.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create the source image view
                 if ((res = viewImageSrc.Create(400, 0, 912, 484)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
                 if ((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create the destination image view
                 if ((res = viewImageDst.Create(912, 0, 1424, 484)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
                 if ((res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
@@ -105,21 +109,21 @@ namespace HistogramsOfOrientedGradients
 
                 // Source 이미지 설정 // Set the source image
                 if ((res = hog.SetSourceImage(ref fliSrcImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set Source Image.");
                     break;
                 }
 
                 // 연산할 ROI 설정 // Set ROI to Calculate
                 if ((res = hog.SetSourceROI(flrROI)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set Source ROI.");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set the destination image
                 if ((res = hog.SetSourceImage(ref fliDstImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set Source Image.");
                     break;
                 }
@@ -135,7 +139,7 @@ namespace HistogramsOfOrientedGradients
 
                 // 알고리즘 수행 // Execute the algorithm
                 if ((res = hog.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute Histograms Of Oriented Gradients.");
                     break;
                 }
@@ -151,13 +155,13 @@ namespace HistogramsOfOrientedGradients
 
                 // ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
                 if ((res = layerSrc.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
                     break;
                 }
 
                 if ((res = layerDst.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
                     break;
                 }
@@ -171,13 +175,13 @@ namespace HistogramsOfOrientedGradients
                 //                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
                 TPoint<double> tpPosition = new TPoint<double>(0, 0);
                 if ((res = layerSrc.DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
                 }
 
                 if ((res = layerDst.DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
                 }

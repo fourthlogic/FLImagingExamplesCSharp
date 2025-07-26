@@ -18,7 +18,11 @@ namespace View3D
 	{
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             var formImageView = new FormView3DIntoDialog();
 
             Application.Run(formImageView);

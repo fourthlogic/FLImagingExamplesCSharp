@@ -27,23 +27,27 @@ namespace Utilities3D
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 3D 뷰 선언 // Declare the 3D view
             CGUIView3D[] view3D = { new CGUIView3D(), new CGUIView3D() };
 
             CResult res;
 
             do
-            {
+			{
                 // 3D 뷰 생성
                 // Create 3D views.
                 if ((res = view3D[0].Create(100, 0, 612, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the 3D view.\n");
                     break;
                 }
 
                 if ((res = view3D[1].Create(612, 0, 1124, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the 3D view.\n");
                     break;
                 }
@@ -135,13 +139,13 @@ namespace Utilities3D
 				}
 
 				if ((res = sr.Load("../../ExampleImages/StepReaderConvertTo3DObject/Cylinder.step")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load step file.\n");
                     break;
                 }
 
                 if ((res = sr.GetResult3DObject(ref fl3DObject2, f64ChordalDeviation)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to get 3D object from the StepReader.\n");
                     break;
                 }
@@ -182,13 +186,13 @@ namespace Utilities3D
                 //                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
                 CFLPoint<double> flp = new CFLPoint<double>(0, 0);
                 if ((res = view3D[0].GetLayer(2).DrawTextCanvas(flp, "Chordal Deviation = 0.0", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
                 }
 
                 if ((res = view3D[1].GetLayer(2).DrawTextCanvas(flp, "Chordal Deviation = 0.00001", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
                 }

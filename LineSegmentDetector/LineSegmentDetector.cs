@@ -29,6 +29,10 @@ namespace LineSegmentDetector
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliSrc = new CFLImage();
             CFLImage fliDst = new CFLImage();
@@ -53,7 +57,7 @@ namespace LineSegmentDetector
 
                 if ((res = viewImageSrc.Create(0, 0, 600, 600)).IsFail() ||
                    (res = viewImageDst.Create(600, 0, 1200, 600)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
@@ -61,21 +65,21 @@ namespace LineSegmentDetector
                 // 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
                 if ((res = viewImageSrc.SetImagePtr(ref fliSrc)).IsFail() ||
                    (res =  viewImageDst.SetImagePtr(ref fliDst)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize point of view.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
                 if ((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }

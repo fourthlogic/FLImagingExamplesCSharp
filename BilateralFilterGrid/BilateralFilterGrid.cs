@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace BilateralFilterGrid
 {
     class BilateralFilterGrid
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -28,6 +28,10 @@ namespace BilateralFilterGrid
 		[STAThread]
         static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliSrcImage = new CFLImage();
 			CFLImage fliDstImage = new CFLImage();
@@ -39,10 +43,10 @@ namespace BilateralFilterGrid
 			CResult res;
 
 			do
-	        {
+			{
                 // Source 이미지 로드 // Load the source image
                 if ((res = fliSrcImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file. \n");
                     break;
                 }
@@ -50,14 +54,14 @@ namespace BilateralFilterGrid
                 // Source 이미지 뷰 생성 // Create source image view
                 if ((res = viewImageSrc.Create(100, 0, 600, 500)).IsFail() ||
 					(res = viewImageDst.Create(600, 0, 1100, 500)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
@@ -72,7 +76,7 @@ namespace BilateralFilterGrid
 				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
 				if ((res = viewImageSrc.SetImagePtr(ref fliSrcImage)).IsFail() ||
 					(res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view. \n");
                     break;
                 }
@@ -94,7 +98,7 @@ namespace BilateralFilterGrid
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = algObject.Execute()).IsFail())
-		        {
+				{
                     ErrorPrint(res, "Failed to execute the algorithm.");
                     break;
 		        }

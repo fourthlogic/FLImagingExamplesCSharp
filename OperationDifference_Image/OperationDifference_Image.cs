@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace OperationDifference
 {
     class OperationDifference_Image
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -27,7 +27,11 @@ namespace OperationDifference
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliSourceImage = new CFLImage();
             CFLImage fliOperandImage = new CFLImage();
@@ -39,98 +43,98 @@ namespace OperationDifference
             CGUIViewImage viewImageDestination = new CGUIViewImage();
 
 	        do
-	        {
+			{
 				// 알고리즘 동작 결과 // Algorithm execution result
 				CResult res = new CResult();
 
 
 				// Source 이미지 로드 // Load the source image
 				if((res =fliSourceImage.Load("../../ExampleImages/OperationDifference/siamesecat3ch.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to load the image file. \n");
                     break;
                 }
 
                 // Operand 이미지 로드 // Loads the operand image
                 if((res =fliOperandImage.Load("../../ExampleImages/OperationDifference/space3ch.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to load the image file. \n");
                     break;
                 }
 
                 // Destination 이미지 로드 // Load the destination image
                 if((res =fliDestinationImage.Load("../../ExampleImages/OperationDifference/sea3ch.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to load the image file. \n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if((res =viewImageSource.Create(100, 0, 612, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to create the image view. \n");
                     break;
                 }
 
                 // Operand 이미지 뷰 생성 // Create operand image view
                 if((res =viewImageOperand.Create(612, 0, 1124, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
                 if((res =viewImageDestination.Create(1124, 0, 1636, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to create the image view. \n");
                     break;
                 }
 
                 // Source 이미지 뷰와 Operand 이미지 뷰의 시점을 동기화 한다
                 if((res =viewImageSource.SynchronizePointOfView(ref viewImageOperand)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if((res =viewImageSource.SynchronizePointOfView(ref viewImageDestination)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to synchronize view. \n");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
                 if((res =viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Operand 이미지 뷰에 이미지를 디스플레이
                 if((res =viewImageOperand.SetImagePtr(ref fliOperandImage)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
                 if((res =viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
                 if((res =viewImageSource.SynchronizeWindow(ref viewImageOperand)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to synchronize window. \n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
                 if((res =viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to synchronize window. \n");
                     break;
                 }
@@ -168,7 +172,7 @@ namespace OperationDifference
 
 		        // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 		        if((res = difference.Execute()).IsFail())
-		        {
+				{
                     ErrorPrint(res,"Failed to execute Operation Difference. \n");
                     ErrorPrint(res,"\n");
 
@@ -189,7 +193,7 @@ namespace OperationDifference
                 // FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
                 // Source ROI 영역이 어디인지 알기 위해 디스플레이 한다
                 if((res =layerSource.DrawFigureImage(flcSourceROI, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }
@@ -198,13 +202,13 @@ namespace OperationDifference
                 CFLFigureArray flfaDestinationPivotCrossHair = flpDestinationPivot.MakeCrossHair(20, true);
 
                 if((res =layerDestination.DrawFigureImage(flfaDestinationPivotCrossHair, EColor.BLACK, 3)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }
 
                 if((res =layerDestination.DrawFigureImage(flfaDestinationPivotCrossHair, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }
@@ -213,19 +217,19 @@ namespace OperationDifference
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
                 if((res =layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw text. \n");
                     break;
                 }
 
                 if((res =layerOperand.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw text. \n");
                     break;
                 }
 
                 if((res =layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw text. \n");
                     break;
                 }

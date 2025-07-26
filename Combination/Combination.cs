@@ -15,19 +15,23 @@ using FLImagingCLR.AdvancedFunctions;
 namespace Combination
 {
     class Combination
-    {
+	{
         [STAThread]
         static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 조합 객체 선언 // Declare a combination object
 			CCombination C = new CCombination();
 
             while (true)
-            {
+			{
                 string flstrResult = "";
 
                 do
-                {
+				{
                     Console.Write("Please input n and k as n, k.\n");
                     Console.Write("Combination : k objects are selected from a set of n objects to produce subsets withref ordering.\n");
                     Console.Write("ex) 6, 2\n");
@@ -47,7 +51,7 @@ namespace Combination
                     int nCount = 0;
 
                     foreach (var input in arrStrInput)
-                    {
+					{
                         if (input.Length == 0)
                             break;
 
@@ -65,7 +69,7 @@ namespace Combination
                     }
 
                     if (k <= 0 || n <= 0 || n < k)
-                    {
+					{
                         flstrResult = "\nCount : 0";
                         break;
                     }
@@ -86,7 +90,7 @@ namespace Combination
                     int i64CombinationCnt = 0;
 
                     for (int i = 0; i < listCombination.Count; i++)
-                    {
+					{
                         flstrCombination += "(";
 
                         for (int j = 0; j < listCombination[i].Count; j++)

@@ -17,33 +17,33 @@ namespace DeviceCameraMatrox
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase
-    {
+	{
         // CDeviceEventImageEx 생성자
         public CDeviceEventImageEx()
-        {
+		{
             // 이미지를 받을 객체 생성 // Create 이미지를 받을 object
             m_fliImage = new CFLImage();
         }
 
         // 취득한 이미지를 표시할 이미지 뷰를 설정하는 함수
         public void SetViewImage(CGUIViewImage viewImage)
-        {
+		{
             m_viewImage = viewImage;
         }
 
         // 카메라에서 이미지 취득 시 호출 되는 함수
         public override void OnAcquisition(CDeviceImageBase pDeviceImage)
-        {
+		{
             // 이미지 뷰의 유효성을 확인한다.
             if (m_viewImage.IsAvailable())
-            {
+			{
 				// 카메라에서 취득 한 이미지를 얻어온다.
 				m_fliImage.Lock();
 				pDeviceImage.GetAcquiredImage(ref m_fliImage);
 				m_fliImage.Unlock();
 
 				if (m_viewImage.GetImage() != m_fliImage)
-                {
+				{
                     // 이미지 뷰에 이미지 포인터 설정
                     m_viewImage.SetImagePtr(ref m_fliImage);
                 }
@@ -58,9 +58,9 @@ namespace DeviceCameraMatrox
     }
 
     class DeviceCameraMatrox
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -71,7 +71,11 @@ namespace DeviceCameraMatrox
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             CResult res = new CResult(EResult.UnknownError);
 
 	        // 이미지 뷰 선언 // Declare image view
@@ -81,7 +85,7 @@ namespace DeviceCameraMatrox
 	        CDeviceCameraMatrox camMatrox = new CDeviceCameraMatrox();
 
 	        do
-	        {
+			{
                 String strInput = "";
 
                 String strCamfilePath = "";
@@ -138,14 +142,14 @@ namespace DeviceCameraMatrox
 
 		        // 카메라를 초기화 합니다.
 		        if((res = camMatrox.Initialize()).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to initialize the camera.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
 		        if((res = viewImage.Create(0, 0, 1000, 1000)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to create the image view.\n");
 			        break;
 		        }
@@ -154,7 +158,7 @@ namespace DeviceCameraMatrox
 
 		        // 카메라를 Live 합니다.
 		        if((res = camMatrox.Live()).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to live the camera.\n");
 			        break;
 		        }

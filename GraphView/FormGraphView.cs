@@ -17,9 +17,9 @@ using FLImagingCLR.AdvancedFunctions;
 namespace GraphView
 {
     public partial class FormGraphView : Form
-    {
+	{
         public void ErrorMessageBox(CResult cResult, string str)
-        {
+		{
             string strMessage = String.Format("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
 
             if (str.Length > 1)
@@ -29,7 +29,7 @@ namespace GraphView
         }
 
         public FormGraphView()
-        {
+		{
             InitializeComponent();
 
             this.buttonOpenView.Click += new System.EventHandler(this.ClickButtonOpenView);
@@ -43,7 +43,7 @@ namespace GraphView
             this.CenterToScreen();
         }
         private void FormGraphViewLoad(object sender, EventArgs e)
-        {
+		{
             m_timer = new Timer();
             m_timer.Tick += new System.EventHandler(this.TimerTick);
             m_timer.Interval = 100;
@@ -54,9 +54,9 @@ namespace GraphView
             UpdateControls();
         }
         private void ClickButtonOpenView(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 그래프 뷰 유효성 체크
                 if (m_viewGraph.IsAvailable())
                     break;
@@ -70,9 +70,9 @@ namespace GraphView
             while (false);
         }
         private void ClickButtonTerminateView(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 그래프 뷰 유효성 체크
                 if (!m_viewGraph.IsAvailable())
                     break;
@@ -86,9 +86,9 @@ namespace GraphView
             while (false);
         }
         private void ClickButtonLoadGraph(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 그래프 뷰 유효성 체크
                 if (!m_viewGraph.IsAvailable())
                     break;
@@ -109,9 +109,9 @@ namespace GraphView
             while (false);
         }
         private void ClickButtonSaveGraph(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 그래프 뷰 유효성 체크
                 if (!m_viewGraph.IsAvailable())
                     break;
@@ -126,12 +126,12 @@ namespace GraphView
             while (false);
         }
         private void ClickButtonChartAdd(object sender, EventArgs e)
-        {
+		{
             // TODO: Add your control notification handler code here
             Random rand = new Random();
 
             do
-            {
+			{
                 // 그래프 뷰 유효성 체크
                 if (!m_viewGraph.IsAvailable())
                     break;
@@ -151,7 +151,7 @@ namespace GraphView
                 List<double> arrF64DataY1 = new List<double>();
 
                 for (int i = 0; i < i32DataCount; ++i)
-                {
+				{
                     arrF64DataX1.Add((double)(rand.Next() % 100));
                     arrF64DataY1.Add((double)(rand.Next() % 100));
                 }
@@ -168,9 +168,9 @@ namespace GraphView
             while (false);
         }
         private void ClickButtonClear(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 그래프 뷰 유효성 체크
                 if (!m_viewGraph.IsAvailable())
                     break;
@@ -184,18 +184,18 @@ namespace GraphView
             while (false);
         }
         private void LockControls(bool bLock)
-        {
+		{
             m_bLockControls = bLock;
             UpdateControls();
         }
         private void TimerTick(object sender, EventArgs e)
-        {
+		{
             this.UpdateControls();
         }
         private void UpdateControls()
-        {
+		{
             if (m_bLockControls)
-            {
+			{
                 buttonOpenView.Enabled = false;
                 buttonTerminateView.Enabled = false;
 
@@ -209,7 +209,7 @@ namespace GraphView
             }
             // 그래프 뷰 유효성 체크
             else if (!m_viewGraph.IsAvailable())
-            {
+			{
                 buttonOpenView.Enabled = true;
                buttonTerminateView.Enabled = false;
 
@@ -222,7 +222,7 @@ namespace GraphView
                 buttonClear.Enabled = false;
             }
             else
-            {
+			{
                 buttonOpenView.Enabled = false;
                buttonTerminateView.Enabled = true;
 
@@ -230,12 +230,12 @@ namespace GraphView
 
                 // 그래프 차트 데이터/수식 데이터의 존재 유무를 얻어 온다.
                 if (m_viewGraph.DoesGraphExist())
-                {
+				{
                     buttonSaveGraph.Enabled = true;
                     buttonClear.Enabled = true;
                 }
                 else
-                {
+				{
                     buttonSaveGraph.Enabled = false;
                     buttonClear.Enabled = false;
                 }

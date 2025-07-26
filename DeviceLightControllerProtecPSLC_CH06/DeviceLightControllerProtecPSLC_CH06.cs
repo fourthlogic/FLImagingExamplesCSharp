@@ -31,6 +31,10 @@ namespace DeviceLightController
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			CResult res = new CResult();
 
 			// 조명 컨트롤러 ProtecPSLC_CH06 선언 // Declare the ProtecPSLC_CH06 Light Controller

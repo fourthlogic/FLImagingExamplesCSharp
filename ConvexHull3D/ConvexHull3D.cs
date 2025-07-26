@@ -14,9 +14,9 @@ using CResult = FLImagingCLR.CResult;
 namespace ConvexHull3D
 {
     class ConvexHull3D
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -28,6 +28,10 @@ namespace ConvexHull3D
         [STAThread]
         static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			CFL3DObject floSrc = new CFL3DObject();
 			CFL3DObject floDst = new CFL3DObject();
 			CGUIView3D view3DSrc = new CGUIView3D();

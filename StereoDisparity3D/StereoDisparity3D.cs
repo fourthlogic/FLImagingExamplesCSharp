@@ -29,6 +29,10 @@ namespace StereoDisparity3D
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliSrcImage = new CFLImage();
 			CFLImage fliSrcImage2 = new CFLImage();
@@ -142,21 +146,21 @@ namespace StereoDisparity3D
 
                 // 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two view windows.
                 if ((res = viewImageSrc.SynchronizeWindow(ref viewImageSrc2)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two view windows.
                 if ((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }
 
                 // 두 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of the two view windows.
                 if ((res = viewImageSrc.SynchronizeWindow(ref viewImage3DDst)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view. \n");
                     break;
                 }

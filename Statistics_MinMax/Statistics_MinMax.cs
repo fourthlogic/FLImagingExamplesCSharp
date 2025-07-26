@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace Statistics
 {
     class Statistics_MinMax
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -27,7 +27,11 @@ namespace Statistics
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliImage = new CFLImage();
 
@@ -37,7 +41,7 @@ namespace Statistics
 			CResult res = new CResult();
 
 			do
-            {
+			{
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/Statistics/StatisticsSource.flif")).IsFail())
 				{
@@ -54,7 +58,7 @@ namespace Statistics
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 				if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
@@ -76,14 +80,14 @@ namespace Statistics
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
 				if((res = statistics.GetMin(ref mvMin)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
 				if((res = statistics.GetMax(ref mvMax)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
@@ -98,14 +102,14 @@ namespace Statistics
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
                 if((res = statistics.GetMin(ref mvTrimmingMin)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
                 if((res = statistics.GetMax(ref mvTrimmingMax)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
@@ -141,7 +145,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -150,7 +154,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -159,7 +163,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strTrimming, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -168,7 +172,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -177,7 +181,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }

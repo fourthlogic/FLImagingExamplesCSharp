@@ -16,7 +16,7 @@ using CResult = FLImagingCLR.CResult;
 namespace OperationBlend
 {
     class OperationBlend_Image
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -29,7 +29,11 @@ namespace OperationBlend
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage[] arrFliImage = new CFLImage[3];
 
@@ -37,7 +41,7 @@ namespace OperationBlend
             CGUIViewImage[] arrViewImage = new CGUIViewImage[3];
 
             for(int i = 0; i < 3; ++i)
-            {
+			{
                 arrFliImage[i] = new CFLImage();
                 arrViewImage[i] = new CGUIViewImage();
             }
@@ -46,45 +50,45 @@ namespace OperationBlend
 			CResult res = new CResult();
 
 			do
-            {
+			{
                 // Source 이미지 로드 // Load the source image
                 if ((res = arrFliImage[0].Load("../../ExampleImages/OperationBlend/Sky.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Operand 이미지 로드 // Load the operand image
                 if ((res = arrFliImage[1].Load("../../ExampleImages/OperationBlend/Flower.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Destination 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
                 if ((res = arrFliImage[2].Assign(arrFliImage[0])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to assign the image file.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if ((res = arrViewImage[0].Create(100, 0, 612, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Operand 이미지 뷰 생성 // Create operand image view
                 if ((res = arrViewImage[1].Create(612, 0, 1124, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
                 if ((res = arrViewImage[2].Create(1124, 0, 1636, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
@@ -93,9 +97,9 @@ namespace OperationBlend
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 3; ++i)
-                {
+				{
                     if ((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
                         break;
@@ -107,28 +111,28 @@ namespace OperationBlend
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[2])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
@@ -150,7 +154,7 @@ namespace OperationBlend
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = blend.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute operation blend.");
                     break;
                 }
@@ -158,7 +162,7 @@ namespace OperationBlend
                 CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[3];
 
                 for (int i = 0; i < 3; ++i)
-                {
+				{
 					// 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
 					// 따로 해제할 필요 없음 // No need to release separately
 					arrLayer[i] = arrViewImage[i].GetLayer(0);
@@ -178,25 +182,25 @@ namespace OperationBlend
                 TPoint<double> tpPositionSub = new TPoint<double>(0, 32);
 
                 if ((res = arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
                 }
 
                 if ((res = arrLayer[1].DrawTextCanvas(tpPosition, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
                 }
 
                 if ((res = arrLayer[2].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
                 }
 
                 if ((res = arrLayer[2].DrawTextCanvas(tpPositionSub, "Source Ratio 0.75, Operand Ratio 0.25", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
                 }

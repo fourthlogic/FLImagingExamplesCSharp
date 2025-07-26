@@ -16,9 +16,9 @@ using FLImagingCLR.Devices;
 namespace DeviceDIOAxl
 {
     class DeviceDIOAxl
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -29,25 +29,29 @@ namespace DeviceDIOAxl
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             CResult res;
 
             // Axl DIO 장치를 선언 // Declare Axl DIO device
             CDeviceDIOAxl devDIO = new CDeviceDIOAxl();
 
             do
-            {
+			{
                 String strInput = "";
 
 	            // DIO 장치를 초기화 합니다. // Initialize the DIO device.
 	            if((res = devDIO.Initialize()).IsFail())
-	            {
+				{
                     ErrorPrint(res, "Failed to initialize the device.");
 			        break;
 	            }
 
 	            while(true)
-	            {
+				{
 		            // 사용할 기능을 선택합니다. // Select the features you want to use.
 		            Console.Write("1. Read input\n");
 		            Console.Write("2. Read output\n");
@@ -60,10 +64,10 @@ namespace DeviceDIOAxl
                     Int32.TryParse(strInput, out i32Select);
 
 		            switch(i32Select)
-		            {
+					{
 		            case 1:
 		            case 2:
-			            {
+						{
 				            // Bit 를 입력 받습니다. // Enter Bit.
 				            Console.Write("Bit input: ");
 				            strInput = Console.ReadLine();
@@ -85,7 +89,7 @@ namespace DeviceDIOAxl
 
 		            case 3:
 		            case 4:
-			            {
+						{
 				            // Bit 를 입력 받습니다. // Enter Bit.
 				            Console.Write("Bit input: ");
 				            strInput = Console.ReadLine();

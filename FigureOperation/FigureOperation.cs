@@ -15,10 +15,14 @@ using FLImagingCLR.AdvancedFunctions;
 namespace FigureOperation
 {
     class FigureOperation
-    {
+	{
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             var formImageView = new FormFigureOperation();
 
             Application.Run(formImageView);

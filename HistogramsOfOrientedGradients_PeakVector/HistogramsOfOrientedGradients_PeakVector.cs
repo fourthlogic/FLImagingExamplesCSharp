@@ -14,9 +14,9 @@ using FLImagingCLR.AdvancedFunctions;
 namespace HistogramsOfOrientedGradients
 {
     class Program
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -27,7 +27,11 @@ namespace HistogramsOfOrientedGradients
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare image object
             CFLImage fliImage = new CFLImage();
 
@@ -38,24 +42,24 @@ namespace HistogramsOfOrientedGradients
             CResult res = new CResult();
 
             do
-            {
+			{
                 // 이미지 로드 // Load image
                 if ((res = fliImage.Load("../../ExampleImages/OperationCompare/candle.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
                 if ((res = viewSrcImage.Create(400, 0, 912, 484)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 if ((res = viewSrcImage.SetImagePtr(ref fliImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
@@ -75,21 +79,21 @@ namespace HistogramsOfOrientedGradients
 
                 // 연산할 이미지 설정 // Set Image to Calculate
                 if ((res = hog.SetSourceImage(ref fliImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set Source Image.");
                     break;
                 }
 
                 // 연산할 ROI 설정 // Set ROI to Calculate
                 if ((res = hog.SetSourceROI(flrROI)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set Source ROI.");
                     break;
                 }
 
                 // 알고리즘 수행 // Execute the algorithm
                 if ((res = hog.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute Histograms Of Oriented Gradients.");
                     break;
                 }
@@ -99,7 +103,7 @@ namespace HistogramsOfOrientedGradients
 
                 // 피크 벡터 추출 // Get Peak Vectors
                 if ((res = hog.GetPeakVectorsFigure(0, ref flfaPeakVectors)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to get result.");
                     break;
                 }
@@ -111,7 +115,7 @@ namespace HistogramsOfOrientedGradients
 
                 // ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
                 if ((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw figures objects on the image view.\n");
                     break;
                 }

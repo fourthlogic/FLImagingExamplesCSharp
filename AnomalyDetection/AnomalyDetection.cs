@@ -32,6 +32,10 @@ namespace AnomalyDetection
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 라이브러리가 완전히 로드 될 때까지 기다림 // Wait for the library to fully load
 			Thread.Sleep(1000);
 

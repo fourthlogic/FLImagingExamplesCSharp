@@ -16,9 +16,9 @@ using CResult = FLImagingCLR.CResult;
 namespace ImageDrawing
 {
     class ImageDrawing
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -30,6 +30,10 @@ namespace ImageDrawing
         [STAThread]
         static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare image object
 	        CFLImage fliImage = new CFLImage();
 
@@ -41,55 +45,55 @@ namespace ImageDrawing
 	        CGUIViewImage viewImageDst = new CGUIViewImage();
 
 	        do
-	        {
+			{
                 // 수행 결과 객체 선언 // Declare the execution result object
 			    CResult res;
 
 		        // 이미지 로드 // Load image
 		        if((res = fliImage.Load("../../ExampleImages/Blob/AlignBall.flif")).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to load the image file.\n");
 			        break;
 		        }
 
 		        // Drawing 이미지를 Src 이미지와 동일한 이미지로 생성
 		        if((res = fliImageDrawing.Assign(fliImage)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to assign the image file.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
 		        if((res = viewImageSrc.Create(400, 0, 800, 400)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to create the image view.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰 생성 // Create image view
 		        if((res = viewImageDst.Create(800, 0, 1200, 400)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to create the image view.\n");
 			        break;
 		        }
 
 		        // 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
 		        if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to synchronize view\n");
 			        break;
 		        }
 
 		        // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 		        if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to synchronize window.\n");
 			        break;
 		        }
 
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 		        if((res = viewImageSrc.SetImagePtr(ref fliImage)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;
 		        }
@@ -141,7 +145,7 @@ namespace ImageDrawing
 
 		        // 이미지에 그립니다. // Draw in the image.
 		        if((res = fliImageDrawing.Draw()).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to draw.\n");
 			        break;
 		        }
@@ -149,7 +153,7 @@ namespace ImageDrawing
 		        // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 CFLImage fliTemp = (CFLImage)fliImageDrawing;
                 if ((res = viewImageDst.SetImagePtr(ref fliTemp)).IsFail())
-		        {
+				{
 			        ErrorPrint(res, "Failed to set image object on the image view.\n");
 			        break;
 		        }

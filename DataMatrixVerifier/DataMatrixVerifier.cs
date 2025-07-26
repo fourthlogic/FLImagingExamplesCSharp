@@ -16,9 +16,9 @@ using CResult = FLImagingCLR.CResult;
 namespace DataMatrix
 {
     class DataMatrixVerifier
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -28,7 +28,11 @@ namespace DataMatrix
         }
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliImage = new CFLImage();
 

@@ -26,9 +26,9 @@ namespace ImageViewIntoWPF
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+	{
         public void ErrorMessageBox(CResult cResult, string str)
-        {
+		{
             string strMessage = String.Format("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
 
             if (str.Length > 1)
@@ -38,23 +38,23 @@ namespace ImageViewIntoWPF
         }
 
         public MainWindow()
-        {
+		{
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+		{
             CResult res;
 
             do
-            {
+			{
                 m_viewImage = new CGUIViewImage();
 
 				// 메인 윈도우의 핸들을 얻어옵니다.
 				IntPtr hWindow = new WindowInteropHelper(this).Handle;
 
                 if (hWindow == null)
-                {
+				{
                     res = new CResult(EResult.InvalidHandle);
                     break;
                 }
@@ -82,9 +82,9 @@ namespace ImageViewIntoWPF
         }
 
         private void ViewImage_KeyDownEvent(int i32Key)
-        {
+		{
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && i32Key == (int)System.Windows.Forms.Keys.S)
-            {
+			{
                 string strMessage = String.Format("Key Down Event: Ctrl + {0}", (char)i32Key);
                 MessageBox.Show(strMessage);
             }

@@ -17,9 +17,9 @@ using FLImagingCLR.AdvancedFunctions;
 namespace ImageView
 {
     public partial class FormImageView : Form
-    {
+	{
         public void ErrorMessageBox(CResult cResult, string str)
-        {
+		{
             string strMessage = String.Format("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
 
             if (str.Length > 1)
@@ -29,7 +29,7 @@ namespace ImageView
         }
 
         public FormImageView()
-        {
+		{
             InitializeComponent();
 
             this.buttonOpenView.Click += new System.EventHandler(this.ClickButtonOpenView);
@@ -43,7 +43,7 @@ namespace ImageView
             this.CenterToScreen();
         }
         private void FormImageViewLoad(object sender, EventArgs e)
-        {
+		{
             m_timer = new Timer();
             m_timer.Tick += new System.EventHandler(this.TimerTick);
             m_timer.Interval = 100;
@@ -54,9 +54,9 @@ namespace ImageView
             UpdateControls();
         }
         private void ClickButtonOpenView(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 이미지 뷰 유효성 체크
                 if (m_viewImage.IsAvailable())
                     break;
@@ -70,9 +70,9 @@ namespace ImageView
             while (false);
         }
         private void ClickButtonTerminateView(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 이미지 뷰 유효성 체크
                 if (!m_viewImage.IsAvailable())
                     break;
@@ -86,9 +86,9 @@ namespace ImageView
             while (false);
         }
         private void ClickButtonLoadImage(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 이미지 뷰 유효성 체크
                 if (!m_viewImage.IsAvailable())
                     break;
@@ -107,9 +107,9 @@ namespace ImageView
             while (false);
         }
         private void ClickButtonSaveImage(object sender, EventArgs e)
-        {
+		{
             do
-            {
+			{
                 // 이미지 뷰 유효성 체크
                 if (!m_viewImage.IsAvailable())
                     break;
@@ -128,11 +128,11 @@ namespace ImageView
             while (false);
         }
         private void ClickButtonCreate(object sender, EventArgs e)
-        {
+		{
             CFLFigure flFigure = null;
 
             do
-            {
+			{
                 // 이미지 뷰 유효성 체크
                 if (!m_viewImage.IsAvailable())
                     break;
@@ -174,11 +174,11 @@ namespace ImageView
                 // 선택한 Decl Type, Template Type 으로 Figure 를 생성한다.
                 // CubicSpline, ComplexRegion 같은 경우에는 Template Type 이 double 형으로 고정이다.
                 switch (SelectedDeclType())
-                {
+				{
                     case EFigureDeclType.Point:
-                        {
+						{
                             switch (eTemplateType)
-                            {
+							{
                                 case EFigureTemplateType.Int32:
                                     flFigure = new CFLPoint<int>();
                                     break;
@@ -202,9 +202,9 @@ namespace ImageView
                         break;
 
                     case EFigureDeclType.Line:
-                        {
+						{
                             switch (eTemplateType)
-                            {
+							{
                                 case EFigureTemplateType.Int32:
                                     flFigure = new CFLLine<int>();
                                     break;
@@ -228,9 +228,9 @@ namespace ImageView
                         break;
 
                     case EFigureDeclType.Rect:
-                        {
+						{
                             switch (eTemplateType)
-                            {
+							{
                                 case EFigureTemplateType.Int32:
                                     flFigure = new CFLRect<int>();
                                     break;
@@ -254,9 +254,9 @@ namespace ImageView
                         break;
 
                     case EFigureDeclType.Quad:
-                        {
+						{
                             switch (eTemplateType)
-                            {
+							{
                                 case EFigureTemplateType.Int32:
                                     flFigure = new CFLQuad<int>();
                                     break;
@@ -280,9 +280,9 @@ namespace ImageView
                         break;
 
                     case EFigureDeclType.Circle:
-                        {
+						{
                             switch (eTemplateType)
-                            {
+							{
                                 case EFigureTemplateType.Int32:
                                     flFigure = new CFLCircle<int>();
                                     break;
@@ -306,9 +306,9 @@ namespace ImageView
                         break;
 
                     case EFigureDeclType.Ellipse:
-                        {
+						{
                             switch (eTemplateType)
-                            {
+							{
                                 case EFigureTemplateType.Int32:
                                     flFigure = new CFLEllipse<int>();
                                     break;
@@ -332,27 +332,27 @@ namespace ImageView
                         break;
 
                     case EFigureDeclType.CubicSpline:
-                        {
+						{
                             flFigure = new CFLCubicSpline();
                         }
                         break;
 
                     case EFigureDeclType.Region:
-                        {
+						{
                             flFigure = new CFLRegion();
                         }
                         break;
 
                     case EFigureDeclType.ComplexRegion:
-                        {
+						{
                             flFigure = new CFLComplexRegion();
                         }
                         break;
 
                     case EFigureDeclType.Doughnut:
-                        {
+						{
                             switch (eTemplateType)
-                            {
+							{
                                 case EFigureTemplateType.Int32:
                                     flFigure = new CFLDoughnut<int>();
                                     break;
@@ -397,12 +397,12 @@ namespace ImageView
             while (false);
         }
         private void ClickButtonPopFront(object sender, EventArgs e)
-        {
+		{
             CFLFigure flFigure = null;
             string strFigureInfo = "Error";
 
             do
-            {
+			{
                 // 이미지 뷰 유효성 체크
                 if (!m_viewImage.IsAvailable())
                     break;
@@ -422,20 +422,20 @@ namespace ImageView
             richTextBoxInfo.Text = strFigureInfo;
         }
         private void LockControls(bool bLock)
-        {
+		{
             m_bLockControls = bLock;
             UpdateControls();
         }
         private EFigureDeclType SelectedDeclType()
-        {
+		{
             EFigureDeclType eReturn = EFigureDeclType.Unknown;
 
             do
-            {
+			{
                 int i32CurSel = comboBoxDeclType.SelectedIndex;
 
                 switch (i32CurSel)
-                {
+				{
                     case 0:
                         eReturn = EFigureDeclType.Point;
                         break;
@@ -485,13 +485,13 @@ namespace ImageView
             return eReturn;
         }
         private void TimerTick(object sender, EventArgs e)
-        {
+		{
             this.UpdateControls();
         }
         private void UpdateControls()
-        {
+		{
             if (m_bLockControls)
-            {
+			{
                 buttonOpenView.Enabled = false;
 
                 buttonTerminateView.Enabled = false;
@@ -504,7 +504,7 @@ namespace ImageView
             }
             // 이미지 뷰 유효성 체크
             else if (!m_viewImage.IsAvailable())
-            {
+			{
                 buttonOpenView.Enabled = true;
 
                 buttonTerminateView.Enabled = false;
@@ -516,7 +516,7 @@ namespace ImageView
                 buttonPopFront.Enabled = false;
             }
             else
-            {
+			{
                 buttonOpenView.Enabled = false;
 
                 buttonTerminateView.Enabled = true;
@@ -535,9 +535,9 @@ namespace ImageView
 				}
 
 				if(comboBoxDeclType.DroppedDown == false)
-                {
+				{
                     if (SelectedDeclType() == EFigureDeclType.CubicSpline || SelectedDeclType() == EFigureDeclType.Region || SelectedDeclType() == EFigureDeclType.ComplexRegion)
-                    {
+					{
                         comboBoxTemplateType.SelectedIndex = comboBoxTemplateType.Items.Count - 1;
 						comboBoxTemplateType.Enabled = false;
 					}
@@ -553,7 +553,7 @@ namespace ImageView
 
 				// 이미지 뷰의 Figure object 개수를 얻어온다.
 				if (m_viewImage.GetFigureObjectCount() == 0)
-                {
+				{
                     buttonPopFront.Enabled = false;
 				}
 				else

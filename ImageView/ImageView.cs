@@ -18,7 +18,11 @@ namespace ImageView
 	{
 		[STAThread]
 		static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             var formImageView = new FormImageView();			
 			Application.Run(formImageView);
             // 예제 코드는 FormImageView.cs 에 있습니다.

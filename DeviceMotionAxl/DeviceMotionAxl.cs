@@ -16,7 +16,7 @@ using FLImagingCLR.Devices;
 namespace DeviceMotionAxl
 {
 	class DeviceMotionAxl
-    {
+	{
 		// 모션 기능 enum // motion feature enum
 		enum EMotionFeature
 		{
@@ -37,7 +37,11 @@ namespace DeviceMotionAxl
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			CResult res;
 
 			// Axl Motion 장치를 선언 // Declare Axl Motion device

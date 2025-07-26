@@ -26,17 +26,17 @@ namespace CircleGauge
 		}
 
 		static bool Undistortion(CCameraCalibrator sCC, CFLImage fliSourceImage, CFLImage fliDestinationImage, CGUIViewImage viewImageSource, CGUIViewImage viewImageDestination)
-        {
+		{
             bool bResult = false;
 
             
             CResult res = new CResult();
 
             do
-            {
+			{
                 // Source 이미지 로드 // Load the source image
                 if ((res = fliSourceImage.Load("../../ExampleImages/CameraCalibrator/Undistortion.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
@@ -46,63 +46,63 @@ namespace CircleGauge
 
                 // Destination 이미지 생성 // Create destination image
                 if ((res = fliDestinationImage.Create(fliSourceImage.GetWidth(), fliSourceImage.GetHeight(), mvBlank, fliSourceImage.GetPixelFormat())).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image file.");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create Source image view
                 if ((res = viewImageSource.Create(400, 480, 1040, 960)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create the Destination image view
                 if ((res = viewImageDestination.Create(1040, 480, 1680, 960)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the Source ImageView
                 if ((res = viewImageSource.SetImagePtr(ref fliSourceImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the Destination image view
                 if ((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 // Source 이미지 설정 // Set Source image
                 if ((res = sCC.SetSourceImage(ref fliSourceImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load image");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set destination image
                 if ((res = sCC.SetDestinationImage(ref fliDestinationImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load image");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
                 if ((res = viewImageSource.SynchronizeWindow(ref viewImageDestination)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.");
                     break;
                 }
 
                 // Interpolation 알고리즘 설정 // Set the Interpolation Algorithm
                 if ((res = sCC.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set interpolation method");
                     break;
                 }
@@ -112,7 +112,7 @@ namespace CircleGauge
 
                 // Undistortion 실행 // Execute Undistortion
                 if ((res = sCC.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Undistortion failed");
                     break;
                 }
@@ -130,7 +130,7 @@ namespace CircleGauge
                 CFLPoint<double> ptTop = new CFLPoint<double>(20,20);
 
                 if ((res = layerDestination.DrawTextImage(ptTop, "Undistortion - Bilinear method", EColor.GREEN, EColor.BLACK, 20)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text");
                     break;
                 }
@@ -141,7 +141,7 @@ namespace CircleGauge
                 CFLPoint<double> ptMS = new CFLPoint<double>(20, 50);
 
                 if ((res = layerDestination.DrawTextImage(ptMS, strMS, EColor.GREEN, EColor.BLACK, 20)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text");
                     break;
                 }
@@ -157,7 +157,11 @@ namespace CircleGauge
 
         [STAThread]
 		static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             
             CResult res = new CResult();
 

@@ -30,6 +30,10 @@ namespace ScaleInvariantFeatureTransform
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliImage = new CFLImage();
 
@@ -101,7 +105,7 @@ namespace ScaleInvariantFeatureTransform
 
                 // 파라미터 Sigma를 설정
                 if ((res = (SIFT.SetSigma(1.6f))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set param sigma.");
                     break;
                 }

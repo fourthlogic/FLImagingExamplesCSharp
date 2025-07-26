@@ -17,17 +17,17 @@ namespace DeviceCameraHIK
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase
-    {
+	{
         // CDeviceEventImageEx 생성자
         public CDeviceEventImageEx()
-        {
+		{
             // 이미지를 받을 객체 생성 // Create 이미지를 받을 object
             m_fliImage = new CFLImage();
         }
 
         // 취득한 이미지를 표시할 이미지 뷰를 설정하는 함수
         public void SetViewImage(CGUIViewImage viewImage)
-        {
+		{
             m_viewImage = viewImage;
 
             // 이미지 뷰에 이미지 포인터 설정
@@ -36,10 +36,10 @@ namespace DeviceCameraHIK
 
         // 카메라에서 이미지 취득 시 호출 되는 함수
         public override void OnAcquisition(CDeviceImageBase pDeviceImage)
-        {
+		{
             // 이미지 뷰의 유효성을 확인한다.
             if (m_viewImage.IsAvailable())
-            {
+			{
 				// 카메라에서 취득 한 이미지를 얻어온다.
 				m_fliImage.Lock();
 				pDeviceImage.GetAcquiredImage(ref m_fliImage);
@@ -55,10 +55,14 @@ namespace DeviceCameraHIK
     }
 
     class DeviceCameraHIK
-    {
+	{
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             CResult drResult = new CResult(EResult.UnknownError);
 
             // 이미지 뷰 선언 // Declare the image view
@@ -68,7 +72,7 @@ namespace DeviceCameraHIK
 	        CDeviceCameraHIK camHik = new CDeviceCameraHIK();
 
 	        do
-	        {
+			{
 		        String strInput = "";
 
 		        CDeviceGenICamTypeBase.EDeviceType eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
@@ -79,7 +83,7 @@ namespace DeviceCameraHIK
 
 		        // 장치 타입을 선택합니다.
 		        while(true)
-		        {
+				{
 			        Console.Write("1. GigE\n");
 			        Console.Write("2. IEEE 1394\n");
 			        Console.Write("3. USB\n");
@@ -91,11 +95,11 @@ namespace DeviceCameraHIK
                     int i32Select = 0;
 
                     if(Int32.TryParse(strInput, out i32Select) == true)
-                    {
+					{
 			            bool bSelected = true;
 
 			            switch(i32Select)
-			            {
+						{
 			            case 1:
 				            eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
 				            break;
@@ -128,7 +132,7 @@ namespace DeviceCameraHIK
 
 		        // 장치 찾기 방법을 선택합니다.
 		        while(true)
-		        {
+				{
 			        Console.Write("1. Auto Detect\n");
 			        Console.Write("2. Manual\n");
 			        Console.Write("Select Detection Method: ");
@@ -138,11 +142,11 @@ namespace DeviceCameraHIK
                     int i32Select = 0;
 
                     if(Int32.TryParse(strInput, out i32Select) == true)
-                    {
+					{
                         bool bSelected = true;
 
 			            switch(i32Select)
-			            {
+						{
 			            case 1:
 				            bAutoDetect = true;
 				            break;
@@ -166,12 +170,12 @@ namespace DeviceCameraHIK
 		        Console.Write("\n");
 
 		        if(bAutoDetect)
-		        {
+				{
                     List<String> listSerialNumbers = new List<String>();
 
 			        // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
 			        switch(eDeviceType)
-			        {
+					{
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
 				        drResult = camHik.GetAutoDetectGigECameraSerialNumbers(ref listSerialNumbers);
 				        break;
@@ -193,7 +197,7 @@ namespace DeviceCameraHIK
 			        }
 
 			        if(drResult.IsFail() || listSerialNumbers == null || listSerialNumbers.Count == 0)
-			        {
+					{
                         drResult = new CResult(EResult.FailedToRead);
 				        Console.Write("Not Found Device.\n");
 				        break;
@@ -201,9 +205,9 @@ namespace DeviceCameraHIK
 
 			        // 연결 할 카메라를 선택합니다.
 			        while(true)
-			        {
+					{
 				        for(int i = 0; i < listSerialNumbers.Count; ++i)
-				        {
+						{
                             String strElement = String.Format("{0}. ", i + 1);
                             strElement += listSerialNumbers[i] + "\n";
 
@@ -217,11 +221,11 @@ namespace DeviceCameraHIK
                         int i32Select = 0;
 
                         if(Int32.TryParse(strInput, out i32Select) == true)
-                        {
+						{
                             --i32Select;
 
                             if(i32Select >= 0 && i32Select < listSerialNumbers.Count)
-				            {
+							{
                                 i32SelectDevice = i32Select;
 				                break;
 				            }
@@ -231,12 +235,12 @@ namespace DeviceCameraHIK
 			        }
 		        }
 		        else
-		        {
+				{
 			        if(eDeviceType == CDeviceGenICamTypeBase.EDeviceType.GigE)
-			        {
+					{
 				        // 연결 방법을 선택합니다.
 				        while(true)
-				        {
+						{
 					        Console.Write("1. Serial Number\n");
 					        Console.Write("2. IP Address\n");
 					        Console.Write("Select Connection Method: ");
@@ -245,11 +249,11 @@ namespace DeviceCameraHIK
 
                             int i32Select = 0;
                             if(Int32.TryParse(strInput, out i32Select) == true)
-                            {
+							{
                                 bool bSelected = true;
 
 					            switch(i32Select)
-					            {
+								{
 					            case 1:
 						            eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
 						            break;
@@ -295,9 +299,9 @@ namespace DeviceCameraHIK
 
 		        // 인덱스에 해당하는 카메라로 연결을 설정한다.
 		        if(bAutoDetect)
-		        {
+				{
 			        switch(eDeviceType)
-			        {
+					{
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
 				        drResult = camHik.AutoDetectGigECamera(i32SelectDevice);
 				        break;
@@ -319,7 +323,7 @@ namespace DeviceCameraHIK
 			        }
 		        }
 		        else
-		        {
+				{
 			        // 장치 연결 방법을 설정합니다.
 			        camHik.SetConnectionMethod(eConnectionMethod);
 
@@ -334,14 +338,14 @@ namespace DeviceCameraHIK
 		        // 카메라를 초기화 합니다.
                 drResult = camHik.Initialize();
                 if (drResult.IsFail())
-		        {
+				{
 			        Console.Write("Failed to initialize the camera.\n");
 			        break;
 		        }
 
                 // 이미지 뷰 생성 // Create image view
                 if (viewImage.Create(0, 0, 1000, 1000).IsFail())
-                {
+				{
                     drResult = new CResult(EResult.FailedToCreateObject);
                     Console.Write("Failed to create the image view.\n");
                     break;
@@ -352,7 +356,7 @@ namespace DeviceCameraHIK
 		        // 카메라를 Live 합니다.
                 drResult = camHik.Live();
                 if (drResult.IsFail())
-		        {
+				{
 			        Console.Write("Failed to live the camera.\n");
 			        break;
 		        }

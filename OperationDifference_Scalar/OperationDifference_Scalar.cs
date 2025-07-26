@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace OperationDifference
 {
     class OperationDifference_Scalar
-    {
+	{
 		public static void ErrorPrint(CResult res, string str)
 		{
 			if( str.Length > 1)
@@ -27,7 +27,11 @@ namespace OperationDifference
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliSourceImage = new CFLImage();
             CFLImage fliDestinationImage = new CFLImage();
@@ -43,28 +47,28 @@ namespace OperationDifference
 
 				// Source 이미지 로드 // Load the source image
 				if((res = fliSourceImage.Load("../../ExampleImages/OperationDifference/siamesecat3ch.flif")).IsFail())
-		        {
+				{
                     ErrorPrint(res,"Failed to load the image file. \n");
 		        	break;
 		        }
 
                 // Destination 이미지 로드 // Load the destination image
 		        if((res = fliDestinationImage.Load("../../ExampleImages/OperationDifference/sea3ch.flif")).IsFail())
-		        {
+				{
                     ErrorPrint(res,"Failed to load the image file. \n");
 		        	break;
 		        }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if((res = viewImageSrc.Create(100, 0, 612, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
                 if((res = viewImageDst.Create(612, 0, 1124, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to create the image view. \n");
                     break;
                 }
@@ -163,7 +167,7 @@ namespace OperationDifference
 	        	// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
 	        	// Source ROI 영역이 어디인지 알기 위해 디스플레이 한다
 	        	if((res = layerSource.DrawFigureImage(flcSourceROI, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }
@@ -172,20 +176,20 @@ namespace OperationDifference
 	        	CFLFigureArray flfaSourcePivotCrossHair = flpSourcePivot.MakeCrossHair(20, true);
 	        	
 	        	if((res = layerSource.DrawFigureImage(flfaSourcePivotCrossHair, EColor.BLACK, 3)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }
 
 	        	if((res = layerSource.DrawFigureImage(flfaSourcePivotCrossHair, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }
 	        	
 	        	// Destination ROI 영역이 어디인지 알기 위해 디스플레이 한다
 	        	if((res = layerDestination.DrawFigureImage(flrDestinationROI, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }
@@ -194,13 +198,13 @@ namespace OperationDifference
 	        	CFLFigureArray flfaDestinationPivotCrossHair = flpDestinationPivot.MakeCrossHair(20, true);
 
 	        	if((res = layerDestination.DrawFigureImage(flfaDestinationPivotCrossHair, EColor.BLACK, 3)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }
 
 	        	if((res = layerDestination.DrawFigureImage(flfaDestinationPivotCrossHair, EColor.LIME)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to draw figure. \n");
                     break;
                 }

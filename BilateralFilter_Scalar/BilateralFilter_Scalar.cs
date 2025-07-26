@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace BilateralFilter
 {
     class BilateralFilter_Scalar
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -27,7 +27,11 @@ namespace BilateralFilter
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliSourceImage = new CFLImage();
             CFLImage fliDestinationImage = new CFLImage();
@@ -39,31 +43,31 @@ namespace BilateralFilter
 			CResult res = new CResult();
 
 			do
-	        {
+			{
                 // Source 이미지 로드 // Load the source image
                 if ((res = fliSourceImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
-		        {
+				{
                     ErrorPrint(res, "Failed to load the image file. \n");
 		        	break;
 		        }
 
                 // Destination 이미지 로드 // Load the destination image
                 if ((res = fliDestinationImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif")).IsFail())
-		        {
+				{
                     ErrorPrint(res, "Failed to load the image file. \n");
 		        	break;
 		        }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if ((res = viewImageSrc.Create(100, 0, 550, 480)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
                 if ((res = viewImageDst.Create(550, 0, 1000, 480)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view. \n");
                     break;
                 }
@@ -134,13 +138,13 @@ namespace BilateralFilter
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
                 if ((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }
 
                 if ((res = layerOperand.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text. \n");
                     break;
                 }

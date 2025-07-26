@@ -27,7 +27,11 @@ namespace NoiseGenerator
 
 		[STAThread]
 		static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage fliImage = new CFLImage();
             CFLImage fliDestinationImage = new CFLImage();
@@ -39,56 +43,56 @@ namespace NoiseGenerator
             CResult res = new CResult();
 
             do
-            {
+			{
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/NoiseGenerator/Plate.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
                 if ((res = fliDestinationImage.Load("../../ExampleImages/NoiseGenerator/Plate.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
 				// 이미지 뷰 생성 // Create imageview
 				if((res = viewImage[0].Create(400, 0, 912, 384)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 if ((res = viewImage[1].Create(912, 0, 1424, 384)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
 				// 두 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoints of the two image views.
 				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view");
                     break;
                 }
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the imageview
 				if((res = viewImage[0].SetImagePtr(ref fliImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
                 if ((res = viewImage[1].SetImagePtr(ref fliDestinationImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.");
                     break;
                 }
@@ -113,7 +117,7 @@ namespace NoiseGenerator
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = noiseGenerator.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute noise generator.");
                     break;
                 }
@@ -141,13 +145,13 @@ namespace NoiseGenerator
 				CFLPoint<double> flpPosition00 = new CFLPoint<double>(0, 0);
 
                 if ((res = layer.DrawTextCanvas(flpPosition00, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text");
                     break;
                 }
 
                 if ((res = layerDst.DrawTextCanvas(flpPosition00, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text");
                     break;
                 }

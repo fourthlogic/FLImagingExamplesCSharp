@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace OperationSquare
 {
     class OperationSquare
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -27,7 +27,11 @@ namespace OperationSquare
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage[] arrFliImage = new CFLImage[3];
 
@@ -38,23 +42,23 @@ namespace OperationSquare
 			CResult res = new CResult();
 
 			for(int i = 0; i < 3; ++i)
-            {
+			{
                 arrFliImage[i] = new CFLImage();
                 arrViewImage[i] = new CGUIViewImage();
             }
 
             do
-            {
+			{
                 // Source 이미지 로드 // Load the source image
                 if ((res = arrFliImage[0].Load("../../ExampleImages/OperationSquare/Sun.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
                 if ((res = arrFliImage[1].Assign(arrFliImage[0])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to assign the image file.\n");
                     break;
                 }
@@ -68,21 +72,21 @@ namespace OperationSquare
 
 				// Source 이미지 뷰 생성 // Create source image view
 				if((res = arrViewImage[0].Create(100, 0, 548, 448)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination1 이미지 뷰 생성 // Create destination1 image view
                 if ((res = arrViewImage[1].Create(548, 0, 996, 448)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination2 이미지 뷰 생성 // Create destination2 image view
                 if ((res = arrViewImage[2].Create(996, 0, 1444, 448)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
@@ -91,9 +95,9 @@ namespace OperationSquare
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 3; ++i)
-                {
+				{
                     if ((res = arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
-                    {
+					{
                         ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
                         break;
@@ -105,28 +109,28 @@ namespace OperationSquare
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[2])).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
@@ -143,7 +147,7 @@ namespace OperationSquare
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = square.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute operation Square.\n");
                     break;
                 }
@@ -155,7 +159,7 @@ namespace OperationSquare
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = square.Execute()).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to execute operation Square.\n");
                     break;
                 }
@@ -166,7 +170,7 @@ namespace OperationSquare
                 arrLayer[2] = new CGUIViewImageLayer();
 
                 for (int i = 0; i < 3; ++i)
-                {
+				{
                     // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
                     // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
                     arrLayer[i] = arrViewImage[i].GetLayer(0);
@@ -186,31 +190,31 @@ namespace OperationSquare
                 TPoint<double> tpPosition1 = new TPoint<double>(5, 27);
 
                 if ((res = arrLayer[0].DrawTextCanvas(tpPosition0, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res = arrLayer[1].DrawTextCanvas(tpPosition0, "Destination1 Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res = arrLayer[1].DrawTextCanvas(tpPosition1, "Unsigned Int / 8 / Clamping", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res = arrLayer[2].DrawTextCanvas(tpPosition0, "Destination2 Image", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res = arrLayer[2].DrawTextCanvas(tpPosition1, "Floating Point / 32", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }

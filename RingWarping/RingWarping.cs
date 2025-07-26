@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace RingWarping
 {
     class Program
-    {
+	{
 		public static void ErrorPrint(CResult res, string str)
 		{
 			if (str.Length > 1)
@@ -27,7 +27,11 @@ namespace RingWarping
 
 		[STAThread]
 		static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 	        // 이미지 객체 선언 // Declare the image object
 	        CFLImage fliSourceImage = new CFLImage();
 			CFLImage fliDestinationImage = new CFLImage();
@@ -37,27 +41,27 @@ namespace RingWarping
 			CGUIViewImage viewImageDestination = new CGUIViewImage();
 
 			do
-	        {
+			{
 				// 알고리즘 동작 결과 // Algorithm execution result
 				CResult res = new CResult();
 
 				// Source 이미지 로드 // Load the source image
 				if (fliSourceImage.Load("../../ExampleImages/RingWarping/CircleColor.flif").IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to load the image file. \n");
 					break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if (viewImageSource.Create(400, 0, 400 + 512, 384).IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to create the image view. \n");
 					break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
                 if (viewImageDestination.Create(400 + 512, 0, 400 + 512 * 2, 384).IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to create the image view. \n");
 					break;
                 }
@@ -92,7 +96,7 @@ namespace RingWarping
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = ringWarping.Execute()).IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to execute Ringwarping. \n");
 
 					break;
@@ -100,21 +104,21 @@ namespace RingWarping
 
                 // Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
                 if (viewImageSource.SetImagePtr(ref fliSourceImage).IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to set image object on the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
                 if (viewImageDestination.SetImagePtr(ref fliDestinationImage).IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to set image object on the image view.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
                 if (viewImageSource.SynchronizeWindow(ref viewImageDestination).IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to synchronize window. \n");
                     break;
                 }
@@ -140,13 +144,13 @@ namespace RingWarping
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
                 if (layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 30).IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to draw text. \n");
                     break;
                 }
 
                 if (layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30).IsFail())
-                {
+				{
 					ErrorPrint(res,"Failed to draw text. \n");
                     break;
                 }

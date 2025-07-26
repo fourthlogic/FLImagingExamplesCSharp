@@ -29,6 +29,10 @@ namespace PointCloudToDepthMapConverter3D
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			CFLImage fliDestination = new CFLImage(), fliDestinationTexture = new CFLImage();
 			CFL3DObject floSource = new CFL3DObject();
 			CGUIView3D view3D = new CGUIView3D();

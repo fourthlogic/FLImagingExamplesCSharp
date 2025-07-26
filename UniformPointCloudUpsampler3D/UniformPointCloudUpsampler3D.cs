@@ -31,6 +31,10 @@ namespace UniformPointCloudUpsampler3D
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIView3D view3DSrc = new CGUIView3D();
 			CGUIView3D view3DDst = new CGUIView3D();

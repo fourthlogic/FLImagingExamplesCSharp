@@ -15,10 +15,14 @@ using FLImagingCLR.AdvancedFunctions;
 namespace Equation
 {
     class Equation
-    {
+	{
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             String[] arrStrEquation = {
 		        "Linear equation",
 		        "Quadratic equation",
@@ -28,11 +32,11 @@ namespace Equation
 	        };
 
             while (true)
-            {
+			{
                 String strResult = "";
 
                 do
-                {
+				{
                     Console.WriteLine("Please input equation coefficient.");
                     Console.WriteLine("ex) 7.2, 3.8, 10, 2.4");
                     Console.WriteLine("    7.2*x^3 + 3.8*x^2 + 10*x + 2.4\n");
@@ -51,7 +55,7 @@ namespace Equation
 					String[] arrStrInput = strInput.Split(',');
 
                     foreach (var input in arrStrInput)
-                    {
+					{
                         if (input.Length == 0)
                             break;
 
@@ -68,7 +72,7 @@ namespace Equation
 
 					// 최상위 계수가 0 이면 제거해준다. // If the top coefficient is 0, remove it.
 					while(listCoef.Count != 0)
-                    {
+					{
                         Complex cpxValue = listCoef[0];
 
                         if (cpxValue.Real != 0.0)
@@ -96,7 +100,7 @@ namespace Equation
                     String strEquation = "";
 
                     for (int i = 0; i < i32Count; ++i)
-                    {
+					{
                         double f64Coef = listCoef[i].Real;
 
                         if (f64Coef == 0.0)
@@ -107,15 +111,15 @@ namespace Equation
 
                         String strFormat = "";
                         if (i == i32Count - 2)
-                        {
+						{
                             strFormat = String.Format("{0}*x", f64Coef);
                         }
                         else if (i == i32Count - 1)
-                        {
+						{
                             strFormat = String.Format("{0}", f64Coef);
                         }
                         else
-                        {
+						{
                             strFormat = String.Format("{0}*x^{1}", f64Coef, i32Count - 1 - i);
                         }
 
@@ -138,7 +142,7 @@ namespace Equation
 					strResult = "Result \n";
 
                     for (int i = 0; i < listEquationResult.Count; ++i)
-                    {
+					{
                         Complex cpxResult = listEquationResult[i];
 
                         String strCpx = "";

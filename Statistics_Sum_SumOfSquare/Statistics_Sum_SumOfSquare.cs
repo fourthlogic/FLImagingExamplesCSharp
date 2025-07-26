@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace Statistics
 {
     class Statistics_Sum_SumOfSquare
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -27,7 +27,11 @@ namespace Statistics
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliImage = new CFLImage();
 
@@ -37,24 +41,24 @@ namespace Statistics
 			CResult res = new CResult();
 
 			do
-            {
+			{
                 // 이미지 로드 // Load image
                 if ((res = fliImage.Load("../../ExampleImages/Statistics/StatisticsSource.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
                 if ((res = viewImage.Create(400, 0, 1150, 500)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
@@ -76,14 +80,14 @@ namespace Statistics
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 합을 구하는 함수 // Function that calculate the sum of the pixel value of the image(or the region of ROI)
 				if((res = statistics.GetSum(ref mvSum)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 제곱합을 구하는 함수
                 if ((res = statistics.GetSumOfSquares(ref mvSumOfSquares)).IsFail()) // Function that calculate the sum of squares of the pixel value of the image(or the region of ROI)
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
@@ -98,14 +102,14 @@ namespace Statistics
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 합을 구하는 함수 // Function that calculate the sum of the pixel value of the image(or the region of ROI)
                 if((res = statistics.GetSum(ref mvTrimmingSum)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 제곱합을 구하는 함수 // Function that calculate the sum of squares of the pixel value of the image(or the region of ROI)
                 if((res = statistics.GetSumOfSquares(ref mvTrimmingSumOfSquares)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
@@ -141,7 +145,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strSumValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -150,7 +154,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strSumOfSquaresValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -159,7 +163,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strTrimming, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -168,7 +172,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strTrimmingSumValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -177,7 +181,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strTrimmingSumOfSquaresValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }

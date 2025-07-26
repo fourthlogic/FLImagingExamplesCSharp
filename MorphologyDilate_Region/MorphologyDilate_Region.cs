@@ -38,6 +38,10 @@ namespace MorphologyDilate
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			// 이미지 객체 선언 // Declare the image object
 			CFLImage[] arrFliImage = new CFLImage[(int)EType.ETypeCount];
 
@@ -124,7 +128,7 @@ namespace MorphologyDilate
                 //연산에 사용되는 Region 출력 // Displaty Region Shape
                 // 이미지 뷰 생성 // Create image view
                 if ((res = (arrViewImage[(int)EType.Region].Create(400, 400, 600, 600))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.\n");
                     bError = true;
                     break;
@@ -132,7 +136,7 @@ namespace MorphologyDilate
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 if ((res = (arrViewImage[(int)EType.Region].SetImagePtr(ref arrFliImage[(int)EType.Region]))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.\n");
                     bError = true;
                     break;
@@ -213,7 +217,7 @@ namespace MorphologyDilate
 				}
 
                 if ((res = (arrLayer[(int)EType.Region].DrawTextCanvas(flpZero, "Region Shape", EColor.YELLOW, EColor.BLACK, 20))).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }

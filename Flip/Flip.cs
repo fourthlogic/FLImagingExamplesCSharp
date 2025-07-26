@@ -17,7 +17,11 @@ namespace Flip
 	{
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage[] arrFliImage = new CFLImage[4];
 
@@ -25,65 +29,65 @@ namespace Flip
             CGUIViewImage[] arrViewImage = new CGUIViewImage[4];
 
             for (int i = 0; i < 4; ++i)
-            {
+			{
                 arrFliImage[i] = new CFLImage();
                 arrViewImage[i] = new CGUIViewImage();
             }
 
             do
-            {
+			{
                 // Source 이미지 로드 // Load the source image
                 if ((arrFliImage[0].Load("../../ExampleImages/Flip/Deer.flif")).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to load the image file.\n");
                     break;
                 }
 
                 // Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
                 if ((arrFliImage[1].Assign(arrFliImage[0])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to assign the image file.\n");
                     break;
                 }
 
                 // Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
                 if ((arrFliImage[2].Assign(arrFliImage[0])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to assign the image file.\n");
                     break;
                 }
 
                 // Destination1 이미지를 Source 이미지와 동일한 이미지로 생성 // Create destination1 image as same as source image
                 if ((arrFliImage[3].Assign(arrFliImage[0])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to assign the image file.\n");
                     break;
                 }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if ((arrViewImage[0].Create(612, 0, 1124, 512)).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination1 이미지 뷰 생성 // Create destination1 image view
                 if ((arrViewImage[1].Create(100, 512, 612, 1024)).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination2 이미지 뷰 생성 // Create destination2 image view
                 if ((arrViewImage[2].Create(612, 512, 1124, 1024)).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to create the image view.\n");
                     break;
                 }
 
                 // Destination3 이미지 뷰 생성 // Create the destination3 image view
                 if ((arrViewImage[3].Create(1124, 512, 1636, 1024)).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to create the image view.\n");
                     break;
                 }
@@ -92,9 +96,9 @@ namespace Flip
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 for (int i = 0; i < 4; ++i)
-                {
+				{
                     if ((arrViewImage[i].SetImagePtr(ref arrFliImage[i])).IsFail())
-                    {
+					{
                         Console.WriteLine("Failed to set image object on the image view.\n");
                         bError = true;
                         break;
@@ -106,42 +110,42 @@ namespace Flip
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((arrViewImage[0].SynchronizePointOfView(ref arrViewImage[2])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
                 if ((arrViewImage[0].SynchronizePointOfView(ref arrViewImage[3])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((arrViewImage[0].SynchronizeWindow(ref arrViewImage[2])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to synchronize window.\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
                 if ((arrViewImage[0].SynchronizeWindow(ref arrViewImage[3])).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to synchronize window.\n");
                     break;
                 }
@@ -160,7 +164,7 @@ namespace Flip
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = flip.Execute()).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to execute flip.");
                     Console.WriteLine(res.GetString());
                     break;
@@ -173,7 +177,7 @@ namespace Flip
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = flip.Execute()).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to execute flip.");
                     Console.WriteLine(res.GetString());
                     break;
@@ -186,7 +190,7 @@ namespace Flip
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
                 if ((res = flip.Execute()).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to execute flip.");
                     Console.WriteLine(res.GetString());
                     break;
@@ -199,7 +203,7 @@ namespace Flip
                 arrLayer[3] = new CGUIViewImageLayer();
 
                 for (int i = 0; i < 4; ++i)
-                {
+				{
                     // 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
                     // 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
                     arrLayer[i] = arrViewImage[i].GetLayer(0);
@@ -218,25 +222,25 @@ namespace Flip
                 TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
                 if ((arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to draw text\n");
                     break;
                 }
 
                 if ((arrLayer[1].DrawTextCanvas(tpPosition, "Destination1 Horizontal", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to draw text\n");
                     break;
                 }
 
                 if ((arrLayer[2].DrawTextCanvas(tpPosition, "Destination2 Vertical", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to draw text\n");
                     break;
                 }
 
                 if ((arrLayer[3].DrawTextCanvas(tpPosition, "Destination3 Both", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     Console.WriteLine("Failed to draw text\n");
                     break;
                 }

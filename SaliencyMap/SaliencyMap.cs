@@ -30,6 +30,10 @@ namespace SaliencyMap
 		[STAThread]
 		static void Main(string[] args)
 		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage[] arrFliImage = new CFLImage[2];
 
@@ -37,31 +41,31 @@ namespace SaliencyMap
             CGUIViewImage[] arrViewImage = new CGUIViewImage[2];
 
             for (int i = 0; i < 2; ++i)
-            {
+			{
                 arrFliImage[i] = new CFLImage();
                 arrViewImage[i] = new CGUIViewImage();
             }
 
             do
-            {
+			{
                 CResult res;
                 // 이미지 로드 // Load image
                 if ((res = (arrFliImage[0].Load("../../ExampleImages/SaliencyMap/LongTailedTit.flif"))).IsFail())
-                {
+				{
                     //ErrorPrint(res, "Failed to load the image file.\n");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
                 if ((res = (arrViewImage[0].Create(100, 0, 612, 512))).IsFail())
-                {
+				{
                     //ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
                 if ((res = (arrViewImage[1].Create(612, 0, 1124, 512))).IsFail())
-                {
+				{
                     //ErrorPrint(res, "Failed to create the image view.\n");
                     break;
                 }
@@ -70,9 +74,9 @@ namespace SaliencyMap
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
                 for (int i = 0; i < 2; ++i)
-                {
+				{
                     if ((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
-                    {
+					{
                         //ErrorPrint(res, "Failed to set image object on the image view.\n");
                         bError = true;
                         break;
@@ -84,14 +88,14 @@ namespace SaliencyMap
 
                 // 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
                 if ((res = (arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1]))).IsFail())
-                {
+				{
                     //ErrorPrint(res, "Failed to synchronize view\n");
                     break;
                 }
 
                 // 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
                 if ((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[1]))).IsFail())
-                {
+				{
                     //ErrorPrint(res, "Failed to synchronize window.\n");
                     break;
                 }
@@ -105,7 +109,7 @@ namespace SaliencyMap
 
                 // 알고리즘 수행 // Execute the algorithm
                 if ((res = (SaliencyMap.Execute())).IsFail())
-                {
+				{
                     //ErrorPrint(res, "Failed to execute SaliencyMap.");
                     Console.WriteLine(res.GetString());
                     break;
@@ -114,7 +118,7 @@ namespace SaliencyMap
                 CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[2];
 
                 for (int i = 0; i < 2; ++i)
-                {
+				{
                     // 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
                     // 따로 해제할 필요 없음 // No need to release separately
                     arrLayer[i] = arrViewImage[i].GetLayer(0);
@@ -132,13 +136,13 @@ namespace SaliencyMap
                 TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
                 if ((res = (arrLayer[0].DrawTextCanvas(tpPosition, "Source Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
-                {
+				{
                     //ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
                 if ((res = (arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image", EColor.YELLOW, EColor.BLACK, 30))).IsFail())
-                {
+				{
                     //ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }

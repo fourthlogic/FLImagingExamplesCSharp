@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace Statistics
 {
     class Statistics_Covariance_CorrelationCoefficient
-    {
+	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -27,7 +27,11 @@ namespace Statistics
 
 		[STAThread]
 		static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliImage = new CFLImage();
 
@@ -37,24 +41,24 @@ namespace Statistics
 			CResult res = new CResult();
 
 			do
-            {
+			{
                 // 이미지 로드 // Load image
                 if ((res = fliImage.Load("../../ExampleImages/Statistics/MultiChannelSource.flif")).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to load the image file.");
                     break;
                 }
 
                 // 이미지 뷰 생성 // Create image view
                 if ((res = viewImage.Create(400, 0, 1150, 700)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to create the image view.");
                     break;
                 }
 
                 // 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
                 if ((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to set image object on the image view.");
                     break;
                 }
@@ -73,14 +77,14 @@ namespace Statistics
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 공분산을 구하는 함수 // Function that calculate the covariance of the pixel value of the image(or the region of ROI)
 				if((res = statistics.GetCovariance(ref f64Covariance)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 상관계수를 구하는 함수 // Function that calculate the correlation coefficient of the pixel value of the image(or the region of ROI)
                 if((res = statistics.GetCorrelationCoefficient(ref f64CorrelationCoeff)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
@@ -144,7 +148,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strCovarianceValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
@@ -153,7 +157,7 @@ namespace Statistics
 
                 // 이미지 뷰 정보 표시 // Display image view information
                 if((res = layer.DrawTextCanvas(flpPoint, strCorrelationCoeffValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
-                {
+				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }

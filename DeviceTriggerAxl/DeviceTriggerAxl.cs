@@ -16,9 +16,9 @@ using FLImagingCLR.Devices;
 namespace DeviceTriggerAxl
 {
     class DeviceTriggerAxl
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -29,7 +29,11 @@ namespace DeviceTriggerAxl
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
 			CResult res;
 
 			// Axl Trigger 장치를 선언 // Declare Axl Trigger device

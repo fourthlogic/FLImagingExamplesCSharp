@@ -15,9 +15,9 @@ using CResult = FLImagingCLR.CResult;
 namespace Projection3D
 {
     class Projection3D
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -28,8 +28,13 @@ namespace Projection3D
 
         [STAThread]
         static void Main(string[] args)
-        {	// 3D 객체 선언 // Declare 3D object
-            CFL3DObject floSrc = new CFL3DObject();
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();            
+			
+			// 3D 객체 선언 // Declare 3D object
+			CFL3DObject floSrc = new CFL3DObject();
             CFLImage fliDst = new CFLImage();
             // 3D 뷰 선언 // Declare 3D view	
 
@@ -37,35 +42,35 @@ namespace Projection3D
             CGUIViewImage viewImgDst = new CGUIViewImage();
 
             do
-            {
+			{
 	            // 알고리즘 동작 결과 // Algorithm execution result
 	            CResult res = new CResult(EResult.UnknownError);
 
 
 	            // Source Object 로드 // Load the Source object
 	            if((res = floSrc.Load("../../ExampleImages/Projection3D/icosahedron.ply")).IsFail())
-	            {
+				{
 		            ErrorPrint(res, "Failed to load the object file.\n");
 		            break;
 	            }
 
 				// Source 3D 뷰 생성 // Create the Source 3D view
 				if((res = view3DSrc.Create(612, 0, 1124, 512)).IsFail())
-	            {
+				{
 		            ErrorPrint(res, "Failed to create the Source 3D view.\n");
 		            break;
 	            }
 
 				// Destination 이미지 뷰 생성 // Create the destination image view
 				if((res = viewImgDst.Create(1124, 0, 1636, 512)).IsFail())
-	            {
+				{
 		            ErrorPrint(res, "Failed to create the Destination 3D view.\n");
 		            break;
 	            }
 
 	            // Source 객체를 3D 뷰에 추가 // push source object to 3D view
 	            if((res = view3DSrc.PushObject(floSrc)).IsFail())
-	            {
+				{
 		            ErrorPrint(res, "Failed to display the 3D object.\n");
 		            break;
 	            }
@@ -85,7 +90,7 @@ namespace Projection3D
 	            CGUIView3DCamera cam = view3DSrc.GetCamera();
 
 	            TPoint3<float> ToTPoint3(CFLPoint3<float> pt)
-	            {
+				{
 		            return new TPoint3<float>(pt.x, pt.y, pt.z);
 	            };
 
@@ -106,7 +111,7 @@ namespace Projection3D
 
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = projection3D.Execute()).IsFail())
-	            {
+				{
 		            ErrorPrint(res, "Failed to execute Projection 3D.");
 		            break;
 	            }
@@ -131,7 +136,7 @@ namespace Projection3D
 	            CFLPoint<double> flpTopLeft = new CFLPoint<double>(0, 0);
 	            if((res = layer3DSrc.DrawTextCanvas(flpTopLeft, "Source Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
 		            (res = layer3DDst.DrawTextCanvas(flpTopLeft, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-	            {
+				{
 		            ErrorPrint(res, "Failed to draw text.\n");
 		            break;
 	            }

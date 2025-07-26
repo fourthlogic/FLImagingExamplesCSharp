@@ -16,9 +16,9 @@ using FLImagingCLR.Devices;
 namespace DeviceLaserDisplacementSensorKeyence
 {
     class DeviceLaserDisplacementSensorKeyence
-    {
+	{
         public static void ErrorPrint(CResult cResult, string str)
-        {
+		{
             if (str.Length > 1)
                 Console.WriteLine(str);
 
@@ -29,7 +29,11 @@ namespace DeviceLaserDisplacementSensorKeyence
 
         [STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             CResult res;
 
 			// Keyence 레이저 변위 센서 장치를 선언 // Declare keyence laser displacement sensor device

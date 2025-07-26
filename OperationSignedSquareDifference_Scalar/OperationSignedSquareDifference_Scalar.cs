@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 namespace OperationSignedSquareDifference
 {
     class OperationSignedSquareDifference_Scalar
-    {
+	{
 		public static void ErrorPrint(CResult res, string str)
 		{
 			if( str.Length > 1)
@@ -27,7 +27,11 @@ namespace OperationSignedSquareDifference
 
 		[STAThread]
         static void Main(string[] args)
-        {
+		{
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
             // 이미지 객체 선언 // Declare the image object
             CFLImage fliSourceImage = new CFLImage();
             CFLImage fliDestinationImage = new CFLImage();
@@ -43,21 +47,21 @@ namespace OperationSignedSquareDifference
 
 				// Source 이미지 로드 // Load the source image
 				if((res = fliSourceImage.Load("../../ExampleImages/OperationSignedSquareDifference/Gradation.flif")).IsFail())
-		        {
+				{
                     ErrorPrint(res,"Failed to load the image file. \n");
 		        	break;
 		        }
 
                 // Source 이미지 뷰 생성 // Create source image view
                 if((res = viewImageSrc.Create(100, 0, 612, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to create the image view. \n");
                     break;
                 }
 
                 // Destination 이미지 뷰 생성 // Create destination image view
                 if((res = viewImageDst.Create(612, 0, 1124, 512)).IsFail())
-                {
+				{
                     ErrorPrint(res,"Failed to create the image view. \n");
                     break;
                 }
