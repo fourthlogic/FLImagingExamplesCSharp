@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace HandEyeCalibrator3D
+namespace FLImagingExamplesCSharp
 {
 	class HandEyeCalibrator3D
 	{

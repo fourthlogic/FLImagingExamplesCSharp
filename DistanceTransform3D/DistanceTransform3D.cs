@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace DistanceTransform3D
+namespace FLImagingExamplesCSharp
 {
 	class DistanceTransform3D
 	{

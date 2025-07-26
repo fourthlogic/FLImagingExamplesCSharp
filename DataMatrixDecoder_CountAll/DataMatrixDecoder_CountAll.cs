@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace DataMatrix
+namespace FLImagingExamplesCSharp
 {
 	class DataMatrixDecoder_CountAll
 	{

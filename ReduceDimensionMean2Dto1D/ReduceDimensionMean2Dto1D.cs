@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ReduceDimensionMean2Dto1D
+namespace FLImagingExamplesCSharp
 {
 	class ReduceDimensionMean2Dto1D
 	{

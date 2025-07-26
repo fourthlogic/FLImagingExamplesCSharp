@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Paste
+namespace FLImagingExamplesCSharp
 {
 	class Paste_withBlob
 	{

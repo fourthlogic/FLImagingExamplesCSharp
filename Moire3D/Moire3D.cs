@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace FPP
+namespace FLImagingExamplesCSharp
 {
 	class Moire3D
 	{

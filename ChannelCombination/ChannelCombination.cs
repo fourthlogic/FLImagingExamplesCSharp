@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelCombination
+namespace FLImagingExamplesCSharp
 {
 	class ChannelCombination
 	{

@@ -1,4 +1,4 @@
-﻿namespace SNAPViewIntoDialog
+﻿namespace FLImagingExamplesCSharp
 {
     partial class FormSNAPViewIntoDialog
 	{

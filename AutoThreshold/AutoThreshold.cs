@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using CResult = FLImagingCLR.CResult;
 
-namespace Statistics
+namespace FLImagingExamplesCSharp
 {
 	class AutoThreshold
 	{

@@ -12,7 +12,7 @@ using FLImagingCLR.GUI;
 using CResult = FLImagingCLR.CResult;
 using System.Collections;
 
-namespace Figure
+namespace FLImagingExamplesCSharp
 {
 	class FigureSort2DClusterMode
 	{

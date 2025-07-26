@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationSoftplus
+namespace FLImagingExamplesCSharp
 {
 	class OperationSoftplus
 	{

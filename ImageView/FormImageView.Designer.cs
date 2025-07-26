@@ -1,4 +1,4 @@
-﻿namespace ImageView
+﻿namespace FLImagingExamplesCSharp
 {
     partial class FormImageView
 	{

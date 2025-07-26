@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace ConditionalExtractor
+namespace FLImagingExamplesCSharp
 {
     class ConditionalExtractor_Scalar_Dual
 	{

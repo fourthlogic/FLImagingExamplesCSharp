@@ -14,7 +14,7 @@ using FLImaging;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace DataMatrix
+namespace FLImagingExamplesCSharp
 {
 	class DataMatrixEncoder
 	{

@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationLogicalXnor
+namespace FLImagingExamplesCSharp
 {
     class OperationLogicalXnor_Scalar
 	{

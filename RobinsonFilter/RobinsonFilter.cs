@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace RobinsonFilter
+namespace FLImagingExamplesCSharp
 {
 
     class RobinsonFilter

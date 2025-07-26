@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace HarmonicMeanFilter
+namespace FLImagingExamplesCSharp
 {
 	class HarmonicMeanFilter
 	{

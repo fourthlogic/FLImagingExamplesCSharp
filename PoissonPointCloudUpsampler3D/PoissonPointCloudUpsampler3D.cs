@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace PoissonPointCloudUpsampler3D
+namespace FLImagingExamplesCSharp
 {
 	class PoissonPointCloudUpsampler3D
 	{

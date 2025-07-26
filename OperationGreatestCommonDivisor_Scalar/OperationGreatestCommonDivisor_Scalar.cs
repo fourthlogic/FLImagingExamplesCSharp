@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationGreatestCommonDivisor_Scalar
+namespace FLImagingExamplesCSharp
 {
 	class OperationGreatestCommonDivisor_Scalar
 	{

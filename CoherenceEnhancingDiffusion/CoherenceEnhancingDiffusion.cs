@@ -10,7 +10,7 @@ using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 
-namespace CoherenceEnhancingDiffusion
+namespace FLImagingExamplesCSharp
 {
 	class CoherenceEnhancingDiffusion
 	{

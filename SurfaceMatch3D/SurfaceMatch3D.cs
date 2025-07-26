@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace SurfaceMatch3D
+namespace FLImagingExamplesCSharp
 {
 	class SurfaceMatch3D
 	{

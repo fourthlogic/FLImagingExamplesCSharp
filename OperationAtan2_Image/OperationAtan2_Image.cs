@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationAtan2
+namespace FLImagingExamplesCSharp
 {
 	class OperationAtan2_Image
 	{

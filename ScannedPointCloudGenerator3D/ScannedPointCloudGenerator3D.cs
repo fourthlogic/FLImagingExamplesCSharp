@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace ScannedPointCloudGenerator3D
+namespace FLImagingExamplesCSharp
 {
 	class ScannedPointCloudGenerator3D
 	{

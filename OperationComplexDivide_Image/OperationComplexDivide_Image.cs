@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationComplexDivide
+namespace FLImagingExamplesCSharp
 {
 	class OperationComplexDivide_Image
 	{

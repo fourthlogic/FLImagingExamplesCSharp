@@ -14,7 +14,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.ThreeDim;
 
-namespace OCR
+namespace FLImagingExamplesCSharp
 {
 	internal class OCR_Unicode
 	{

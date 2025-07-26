@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationDivide
+namespace FLImagingExamplesCSharp
 {
 	class OperationDivide_Scalar
 	{

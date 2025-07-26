@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Convolution_Prewitt
+namespace FLImagingExamplesCSharp
 {
 	class Program
 	{

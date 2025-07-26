@@ -17,7 +17,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace SNAPViewIntoDialog
+namespace FLImagingExamplesCSharp
 {
 	public partial class FormSNAPViewIntoDialog : Form
 	{

@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace ConditionalReplacer
+namespace FLImagingExamplesCSharp
 {
 	class ConditionalReplacer_Image
 	{

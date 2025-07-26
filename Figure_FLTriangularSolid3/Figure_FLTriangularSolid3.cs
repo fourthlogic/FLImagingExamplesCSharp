@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using CResult = FLImagingCLR.CResult;
 
-namespace Figure
+namespace FLImagingExamplesCSharp
 {
 	class Figure_FLTriangularSolid3
 	{

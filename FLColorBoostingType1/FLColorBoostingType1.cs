@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace FLColorBoostingType1
+namespace FLImagingExamplesCSharp
 {
 	class FLColorBoostingType1
 	{

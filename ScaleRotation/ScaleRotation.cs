@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace ScaleRotation
+namespace FLImagingExamplesCSharp
 {
 	class ScaleRotation
 	{

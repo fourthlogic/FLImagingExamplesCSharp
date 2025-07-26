@@ -12,7 +12,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace SNAPViewIntoDialog
+namespace FLImagingExamplesCSharp
 {
     class SNAPViewIntoDialog
 	{

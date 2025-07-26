@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace RegionExtractor
+namespace FLImagingExamplesCSharp
 {
 	class RegionExtractor
 	{

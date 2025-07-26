@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace SwitchAxes3D
+namespace FLImagingExamplesCSharp
 {
 	class SwitchAxes3D
 	{

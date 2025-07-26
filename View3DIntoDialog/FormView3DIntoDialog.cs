@@ -17,7 +17,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace View3D
+namespace FLImagingExamplesCSharp
 {
 	public partial class FormView3DIntoDialog : Form
 	{

@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationShift_Scalar
+namespace FLImagingExamplesCSharp
 {
 	class OperationBitShift_Scalar
 	{

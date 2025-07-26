@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
 
-namespace OperationBitwiseAnd
+namespace FLImagingExamplesCSharp
 {
 	class OperationHypotenuse_Image
 	{

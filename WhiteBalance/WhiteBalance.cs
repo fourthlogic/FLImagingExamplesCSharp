@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 using static FLImagingCLR.Devices.CDeviceGenICamBase;
 
 
-namespace WhiteBalance
+namespace FLImagingExamplesCSharp
 {
 	class WhiteBalance
 	{

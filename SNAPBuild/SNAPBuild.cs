@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace SNAPBuild
+namespace FLImagingExamplesCSharp
 {
     class SNAPBuild
 	{

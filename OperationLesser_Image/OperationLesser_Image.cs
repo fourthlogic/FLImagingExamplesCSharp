@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace OperationLesser
+namespace FLImagingExamplesCSharp
 {
     class OperationLesser_Image
 	{

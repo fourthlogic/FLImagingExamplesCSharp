@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace ThinPlateSplineWarping
+namespace FLImagingExamplesCSharp
 {
 	class ThinPlateSplineWarping
 	{

@@ -14,7 +14,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.ThreeDim;
 
-namespace OCV
+namespace FLImagingExamplesCSharp
 {
 	internal class OCV_Quality
 	{

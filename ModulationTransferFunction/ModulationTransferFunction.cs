@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace ModulationTransferFunction
+namespace FLImagingExamplesCSharp
 {
 	class ModulationTransferFunction
 	{

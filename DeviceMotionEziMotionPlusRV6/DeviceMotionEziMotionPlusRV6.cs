@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
 using CResult = FLImagingCLR.CResult;
 
-namespace DeviceCameraiRAYPLE
+namespace FLImagingExamplesCSharp
 {
 	class DeviceMotionEziMotionPlusRV6
 	{

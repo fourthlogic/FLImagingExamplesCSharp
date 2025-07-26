@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationOverlay_Image
+namespace FLImagingExamplesCSharp
 {
 	class OperationOverlay_Image
 	{

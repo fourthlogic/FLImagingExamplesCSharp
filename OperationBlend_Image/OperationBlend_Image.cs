@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationBlend
+namespace FLImagingExamplesCSharp
 {
     class OperationBlend_Image
 	{

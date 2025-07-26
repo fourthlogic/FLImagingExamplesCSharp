@@ -14,7 +14,7 @@ using FLImagingCLR.Devices;
 using CResult = FLImagingCLR.CResult;
 using System.Reflection;
 
-namespace DeviceLightController
+namespace FLImagingExamplesCSharp
 {
 	class DeviceLightControllerProtecPMSC_CH03
 	{

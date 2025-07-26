@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace OperationLog
+namespace FLImagingExamplesCSharp
 {
     class OperationLog_Image
 	{

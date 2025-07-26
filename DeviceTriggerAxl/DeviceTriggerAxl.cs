@@ -13,7 +13,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
 
-namespace DeviceTriggerAxl
+namespace FLImagingExamplesCSharp
 {
     class DeviceTriggerAxl
 	{

@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace MorphologyClose
+namespace FLImagingExamplesCSharp
 {
 	class MorphologyClose_Region
 	{

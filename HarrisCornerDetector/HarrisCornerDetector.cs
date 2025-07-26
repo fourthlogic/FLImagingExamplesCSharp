@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace HarrisCornerDetector
+namespace FLImagingExamplesCSharp
 {
 	class HarrisCornerDetector
 	{

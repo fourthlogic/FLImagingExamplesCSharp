@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace VertexMatch3D
+namespace FLImagingExamplesCSharp
 {
 	class VertexMatch3D_SaveLoad
 	{

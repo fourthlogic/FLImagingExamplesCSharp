@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace PerspectiveMerge3D
+namespace FLImagingExamplesCSharp
 {
 	class CoordinateFrameUnification3D
 	{

@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace BlobSubsampled
+namespace FLImagingExamplesCSharp
 {
 	class BlobSubsampled_Sort
 	{

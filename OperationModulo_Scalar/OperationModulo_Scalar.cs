@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationModulo_Scalar
+namespace FLImagingExamplesCSharp
 {
 	class OperationModulo_Scalar
 	{

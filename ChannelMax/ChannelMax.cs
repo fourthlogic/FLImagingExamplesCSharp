@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelMax
+namespace FLImagingExamplesCSharp
 {
 	class ChannelMax
 	{

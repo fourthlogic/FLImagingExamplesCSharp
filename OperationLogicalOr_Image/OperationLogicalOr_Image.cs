@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationLogicalOr
+namespace FLImagingExamplesCSharp
 {
     class OperationLogicalOr_Image
 	{

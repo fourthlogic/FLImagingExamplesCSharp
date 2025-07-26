@@ -13,9 +13,9 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationCensusTransform
+namespace FLImagingExamplesCSharp
 {
-	class Program
+	class CensusTransform
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace StereoCalibrator3D
+namespace FLImagingExamplesCSharp
 {
 	class StereoCalibrator3D
 	{

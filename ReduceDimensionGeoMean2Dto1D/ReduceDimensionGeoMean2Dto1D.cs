@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ReduceDimensionGeoMean2Dto1D
+namespace FLImagingExamplesCSharp
 {
 	class ReduceDimensionGeoMean2Dto1D
 	{

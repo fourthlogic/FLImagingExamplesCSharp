@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace PointCloudGenerator3D
+namespace FLImagingExamplesCSharp
 {
 	class PointCloudGenerator3D
 	{

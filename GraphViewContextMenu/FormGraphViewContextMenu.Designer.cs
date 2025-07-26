@@ -1,4 +1,4 @@
-﻿namespace GraphView
+﻿namespace FLImagingExamplesCSharp
 {
     partial class FormGraphViewContextMenu
 	{

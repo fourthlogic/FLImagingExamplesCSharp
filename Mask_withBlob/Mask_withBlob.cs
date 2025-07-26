@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Mask
+namespace FLImagingExamplesCSharp
 {
 	class Mask_withBlob
 	{

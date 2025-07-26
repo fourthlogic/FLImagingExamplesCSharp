@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace StereoPhotometric
+namespace FLImagingExamplesCSharp
 {
 	class PhotometricStereo3D_Calibration
 	{

@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using System.Runtime.InteropServices;
 
-namespace Moment
+namespace FLImagingExamplesCSharp
 {
     class Moment_Zernike
 	{

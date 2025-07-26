@@ -10,7 +10,7 @@ using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using CResult = FLImagingCLR.CResult;
 
-namespace View3D
+namespace FLImagingExamplesCSharp
 {
 	class View3D
 	{

@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace MorphologyGradient
+namespace FLImagingExamplesCSharp
 {
 	class MorphologyGradient_Region
 	{

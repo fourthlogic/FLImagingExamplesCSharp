@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace Convolution_Gaussian
+namespace FLImagingExamplesCSharp
 {
 	class GaussFilter
 	{

@@ -15,7 +15,7 @@ using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 using System.Net.NetworkInformation;
 
-namespace InstanceSegmentation
+namespace FLImagingExamplesCSharp
 {
 	class InstanceSegmentationGroupLabeling
 	{

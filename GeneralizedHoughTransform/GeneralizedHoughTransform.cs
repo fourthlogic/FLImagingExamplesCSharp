@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace GeneralizedHoughTransform
+namespace FLImagingExamplesCSharp
 {
 	class GeneralizedHoughTransform
 	{

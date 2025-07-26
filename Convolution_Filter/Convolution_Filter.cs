@@ -13,9 +13,9 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Convolution_UserDefinedKernel
+namespace FLImagingExamplesCSharp
 {
-	class Program
+	class Convolution_Filter
 	{
 		enum EType
 		{

@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace VoxelGrid3D
+namespace FLImagingExamplesCSharp
 {
 	class VoxelGrid3D
 	{

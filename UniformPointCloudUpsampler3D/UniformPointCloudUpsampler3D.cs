@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace UniformPointCloudUpsampler3D
+namespace FLImagingExamplesCSharp
 {
 	class UniformPointCloudUpsampler3D
 	{

@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 using System.Collections;
 
-namespace Blob
+namespace FLImagingExamplesCSharp
 {
 	class BlobSubsampled_SortClusterMode
 	{

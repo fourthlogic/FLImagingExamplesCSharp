@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationBitwiseOr
+namespace FLImagingExamplesCSharp
 {
     class OperationBitwiseOr_Scalar
 	{

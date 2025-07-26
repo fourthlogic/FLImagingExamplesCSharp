@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace EdgeDetector3D
+namespace FLImagingExamplesCSharp
 {
 	class EdgeDetector3D
 	{

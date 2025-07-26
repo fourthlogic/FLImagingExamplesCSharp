@@ -13,7 +13,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
 
-namespace DeviceCameraHIK
+namespace FLImagingExamplesCSharp
 {
     // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
     public class CDeviceEventImageEx : CDeviceEventImageBase

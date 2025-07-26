@@ -15,7 +15,7 @@ using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 using System.Net.NetworkInformation;
 
-namespace SemanticSegmentation
+namespace FLImagingExamplesCSharp
 {
 	class ValidationImageExtractor
 	{

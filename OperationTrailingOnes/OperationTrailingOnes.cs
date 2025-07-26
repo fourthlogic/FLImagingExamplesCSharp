@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationTrailingOnes
+namespace FLImagingExamplesCSharp
 {
 	class OperationTrailingOnes
 	{

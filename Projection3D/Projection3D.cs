@@ -12,7 +12,7 @@ using FLImagingCLR.ThreeDim;
 using FLImagingCLR.ImageProcessing;
 using CResult = FLImagingCLR.CResult;
 
-namespace Projection3D
+namespace FLImagingExamplesCSharp
 {
     class Projection3D
 	{

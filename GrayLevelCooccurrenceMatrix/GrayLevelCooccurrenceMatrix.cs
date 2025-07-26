@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using CResult = FLImagingCLR.CResult;
 
-namespace GrayLevelCooccurrenceMatrix
+namespace FLImagingExamplesCSharp
 {
 	class GrayLevelCooccurrenceMatrix
 	{

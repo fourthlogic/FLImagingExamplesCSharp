@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace CameraPose3D
+namespace FLImagingExamplesCSharp
 {
 	class CameraPose3D
 	{

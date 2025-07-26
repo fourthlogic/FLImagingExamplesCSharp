@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ReduceDimensionGeoMeanMultiPageTo2D
+namespace FLImagingExamplesCSharp
 {
 	class ReduceDimensionGeoMeanMultiPageTo2D
 	{

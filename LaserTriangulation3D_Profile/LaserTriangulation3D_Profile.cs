@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace LaserTriangulation
+namespace FLImagingExamplesCSharp
 {
 	class LaserTriangulation3D_Profile
 	{

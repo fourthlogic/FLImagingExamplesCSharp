@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 using System.Diagnostics;
 using System.Collections;
 
-namespace PerspectiveTransform3D
+namespace FLImagingExamplesCSharp
 {
 	class PerspectiveTransform3D
 	{

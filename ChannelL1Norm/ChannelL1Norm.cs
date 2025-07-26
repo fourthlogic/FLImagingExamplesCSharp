@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ChannelL1Norm
+namespace FLImagingExamplesCSharp
 {
 	class ChannelL1Norm
 	{

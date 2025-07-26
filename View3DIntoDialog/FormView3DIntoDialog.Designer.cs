@@ -1,4 +1,4 @@
-﻿namespace View3D
+﻿namespace FLImagingExamplesCSharp
 {
 	partial class FormView3DIntoDialog
 	{

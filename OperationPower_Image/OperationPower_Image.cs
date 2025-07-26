@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace OperationPower
+namespace FLImagingExamplesCSharp
 {
     class OperationPower_Image
 	{

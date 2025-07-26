@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace Statistics
+namespace FLImagingExamplesCSharp
 {
     class Statistics_Mean_Variance_StandardDeviation_Coefficient
 	{

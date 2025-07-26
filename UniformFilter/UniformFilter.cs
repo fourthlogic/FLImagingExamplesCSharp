@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Filter
+namespace FLImagingExamplesCSharp
 {
 	class UniformFilter
 	{

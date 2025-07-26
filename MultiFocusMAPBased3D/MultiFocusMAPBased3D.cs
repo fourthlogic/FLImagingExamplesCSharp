@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace MultiFocus
+namespace FLImagingExamplesCSharp
 {
 	class MultiFocusMAPBased3D
 	{

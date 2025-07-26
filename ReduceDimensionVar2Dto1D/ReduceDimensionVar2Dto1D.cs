@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ReduceDimensionVar2Dto1D
+namespace FLImagingExamplesCSharp
 {
 	class ReduceDimensionVar2Dto1D
 	{

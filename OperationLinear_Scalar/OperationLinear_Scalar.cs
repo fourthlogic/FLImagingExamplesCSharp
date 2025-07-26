@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationLinear
+namespace FLImagingExamplesCSharp
 {
 	class OperationLinear_Scalar
 	{

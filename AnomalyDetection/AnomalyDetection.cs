@@ -15,7 +15,7 @@ using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 using System.Net.NetworkInformation;
 
-namespace AnomalyDetection
+namespace FLImagingExamplesCSharp
 {
 	class AnomalyDetection
 	{

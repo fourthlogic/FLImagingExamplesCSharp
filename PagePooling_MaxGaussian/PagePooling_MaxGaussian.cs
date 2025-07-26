@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace PagePooling
+namespace FLImagingExamplesCSharp
 {
     class PagePooling_MaxGaussian
 	{

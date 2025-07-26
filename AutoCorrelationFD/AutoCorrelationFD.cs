@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
 
-namespace AutoCorrelation
+namespace FLImagingExamplesCSharp
 {
 	class AutoCorrelationFD
 	{

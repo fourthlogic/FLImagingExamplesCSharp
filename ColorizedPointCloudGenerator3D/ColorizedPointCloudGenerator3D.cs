@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace ColorizedPointCloudGenerator3D
+namespace FLImagingExamplesCSharp
 {
 	class ColorizedPointCloudGenerator3D
 	{

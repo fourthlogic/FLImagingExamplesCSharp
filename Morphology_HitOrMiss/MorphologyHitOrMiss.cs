@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Morphology_HitOrMiss
+namespace FLImagingExamplesCSharp
 {
 	class MorphologyHitOrMiss
 	{

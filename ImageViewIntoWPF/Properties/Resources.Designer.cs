@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImageViewIntoWPF.Properties
+namespace FLImagingExamplesCSharp
 {
 
 

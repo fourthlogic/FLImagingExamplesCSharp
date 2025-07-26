@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace StereoDisparity3D
+namespace FLImagingExamplesCSharp
 {
 	class StereoDisparity3D
 	{

@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 
-namespace GenerativeAdversarialNetwork
+namespace FLImagingExamplesCSharp
 {
 	class GenerativeAdversarialNetwork_Label
 	{

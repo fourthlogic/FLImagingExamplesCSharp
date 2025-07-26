@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationLeastCommonMultiple_Image
+namespace FLImagingExamplesCSharp
 {
 	class OperationLeastCommonMultiple_Image
 	{

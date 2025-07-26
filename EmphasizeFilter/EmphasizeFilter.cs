@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace EmphasizeFilter
+namespace FLImagingExamplesCSharp
 {
 	class EmphasizeFilter
 	{

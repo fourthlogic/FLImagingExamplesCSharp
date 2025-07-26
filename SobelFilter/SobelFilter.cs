@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Convolution_Sobel
+namespace FLImagingExamplesCSharp
 {
 	class Program
 	{

@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace PointCloudToDepthMapConverter3D
+namespace FLImagingExamplesCSharp
 {
 	class PointCloudToDepthMapConverter3D
 	{

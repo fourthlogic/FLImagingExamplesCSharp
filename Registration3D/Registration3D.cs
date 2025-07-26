@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace Registration3D
+namespace FLImagingExamplesCSharp
 {
 	class Registration3D
 	{

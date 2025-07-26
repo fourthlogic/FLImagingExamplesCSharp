@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace NoiseGenerator
+namespace FLImagingExamplesCSharp
 {
     class NoiseGenerator_Photon
 	{

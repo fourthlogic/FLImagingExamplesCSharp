@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace MultiFocus
+namespace FLImagingExamplesCSharp
 {
 	class MultiFocus_WithAlignment
 	{

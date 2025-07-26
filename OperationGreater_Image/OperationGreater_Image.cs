@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
 
-namespace OperationGreater
+namespace FLImagingExamplesCSharp
 {
     class OperationGreater_Image
 	{

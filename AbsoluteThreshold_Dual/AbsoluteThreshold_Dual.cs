@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace AbsoluteThreshold
+namespace FLImagingExamplesCSharp
 {
 	class AbsoluteThreshold_Dual
 	{

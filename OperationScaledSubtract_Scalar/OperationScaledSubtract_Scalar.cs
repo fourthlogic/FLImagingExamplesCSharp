@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationScaledSubtract_Scalar
+namespace FLImagingExamplesCSharp
 {
 	class OperationScaledSubtract_Scalar
 	{

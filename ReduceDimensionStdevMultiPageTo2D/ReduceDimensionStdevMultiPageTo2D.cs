@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 
-namespace ReduceDimensionStdevMultiPageTo2D
+namespace FLImagingExamplesCSharp
 {
 	class ReduceDimensionStdevMultiPageTo2D
 	{

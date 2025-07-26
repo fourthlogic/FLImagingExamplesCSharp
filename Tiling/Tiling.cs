@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 using Microsoft.SqlServer.Server;
 
-namespace Tiling
+namespace FLImagingExamplesCSharp
 {
 	class Tiling
 	{

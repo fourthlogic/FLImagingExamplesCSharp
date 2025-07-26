@@ -16,7 +16,7 @@ using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 
-namespace CharacterBasedOCRDL
+namespace FLImagingExamplesCSharp
 {
 	class CharacterBasedOCRDL
 	{

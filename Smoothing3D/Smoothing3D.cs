@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace Smoothing3D
+namespace FLImagingExamplesCSharp
 {
 	class Smoothing3D
 	{

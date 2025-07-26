@@ -1,4 +1,4 @@
-﻿namespace FigureOperation
+﻿namespace FLImagingExamplesCSharp
 {
     partial class FormFigureOperation
 	{

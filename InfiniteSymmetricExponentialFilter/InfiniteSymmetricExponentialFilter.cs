@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace InfiniteSymmetricExponentialFilter
+namespace FLImagingExamplesCSharp
 {
 	class InfiniteSymmetricExponentialFilter
 	{

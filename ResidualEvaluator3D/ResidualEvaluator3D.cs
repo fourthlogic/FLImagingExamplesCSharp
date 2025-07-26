@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace ResidualEvaluator3D
+namespace FLImagingExamplesCSharp
 {
 	class ResidualEvaluator3D
 	{

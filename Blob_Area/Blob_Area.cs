@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Blob
+namespace FLImagingExamplesCSharp
 {
 	class Blob_Area
 	{

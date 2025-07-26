@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace PointCloudBasedHandEyeCalibrator3D
+namespace FLImagingExamplesCSharp
 {
 	class PointCloudBasedHandEyeCalibrator3D
 	{

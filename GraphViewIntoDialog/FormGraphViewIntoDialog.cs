@@ -17,7 +17,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace GraphView
+namespace FLImagingExamplesCSharp
 {
 	public partial class FormGraphViewIntoDialog : Form
 	{

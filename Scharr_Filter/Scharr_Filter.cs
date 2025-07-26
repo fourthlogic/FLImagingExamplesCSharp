@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Convolution_Scharr
+namespace FLImagingExamplesCSharp
 {
 	class Scharr_Filter
 	{

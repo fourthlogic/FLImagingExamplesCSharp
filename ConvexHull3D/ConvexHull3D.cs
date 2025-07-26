@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ThreeDim;
 using CResult = FLImagingCLR.CResult;
 
-namespace ConvexHull3D
+namespace FLImagingExamplesCSharp
 {
     class ConvexHull3D
 	{

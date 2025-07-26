@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Figure
+namespace FLImagingExamplesCSharp
 {
 	class GetFigure
 	{

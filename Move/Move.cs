@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace Move
+namespace FLImagingExamplesCSharp
 {
 	class Move
 	{

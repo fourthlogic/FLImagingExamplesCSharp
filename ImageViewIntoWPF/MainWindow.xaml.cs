@@ -20,7 +20,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace ImageViewIntoWPF
+namespace FLImagingExamplesCSharp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 using FLImagingCLR.AI;
 
-namespace Classifier
+namespace FLImagingExamplesCSharp
 {
 	class Classifier_IndividualClassesAugmentation
 	{

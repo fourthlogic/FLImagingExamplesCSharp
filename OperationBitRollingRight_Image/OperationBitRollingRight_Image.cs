@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace OperationBitRollingRight_Image
+namespace FLImagingExamplesCSharp
 {
 	class OperationBitRollingRight_Image
 	{

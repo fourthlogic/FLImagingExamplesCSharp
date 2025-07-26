@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 using CResult = FLImagingCLR.CResult;
 
-namespace OperationComplexMultiply
+namespace FLImagingExamplesCSharp
 {
 	class OperationComplexMultiply_Image
 	{

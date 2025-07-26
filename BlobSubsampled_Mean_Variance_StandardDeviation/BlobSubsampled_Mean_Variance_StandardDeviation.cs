@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 using CResult = FLImagingCLR.CResult;
 using System.IO;
 
-namespace Blob
+namespace FLImagingExamplesCSharp
 {
 	class BlobSubsampled_Mean_Variance_StandardDeviation
 	{

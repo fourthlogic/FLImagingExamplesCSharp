@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.Devices;
 using CResult = FLImagingCLR.CResult;
 
-namespace DeviceLightController
+namespace FLImagingExamplesCSharp
 {
 	class DeviceLightControllerWordopPD5_6024
 	{

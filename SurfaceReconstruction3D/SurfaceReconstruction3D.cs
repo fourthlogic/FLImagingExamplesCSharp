@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace SurfaceReconstruction3D
+namespace FLImagingExamplesCSharp
 {
 	class SurfaceReconstruction3D
 	{

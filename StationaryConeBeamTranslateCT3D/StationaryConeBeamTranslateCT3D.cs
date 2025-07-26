@@ -12,7 +12,7 @@ using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
 
-namespace StationaryConeBeamTranslateCT3D
+namespace FLImagingExamplesCSharp
 {
 	class StationaryConeBeamTranslateCT3D
 	{

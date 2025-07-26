@@ -11,7 +11,7 @@ using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
 
-namespace Moment
+namespace FLImagingExamplesCSharp
 {
     class Moment_Invariant
 	{
