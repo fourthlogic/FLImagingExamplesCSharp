@@ -17,7 +17,7 @@ using System.Net.NetworkInformation;
 
 namespace FLImagingExamplesCSharp
 {
-	class Program
+	class SuperResolution
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

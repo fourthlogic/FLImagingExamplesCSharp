@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace FLImagingExamplesCSharp
 {
-    class Program
+    class OperationLogicalXor
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-    class Program
+    class Morphology_Open_Region
 	{
         public static void ErrorPrint(CResult cResult, string str)
 		{

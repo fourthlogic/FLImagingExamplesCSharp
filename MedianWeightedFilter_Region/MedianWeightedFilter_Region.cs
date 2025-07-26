@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace FLImagingExamplesCSharp
 {
-    class Program
+    class MedianWeightedFilter_Region
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

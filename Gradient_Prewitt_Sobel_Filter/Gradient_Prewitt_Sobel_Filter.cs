@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class Program
+	class Gradient_Prewitt_Sobel_Filter
 	{
 		enum EDst
 		{

@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace FLImagingExamplesCSharp
 {
-    class Program
+    class HistogramsOfOrientedGradients_PeakVector
 	{
         public static void ErrorPrint(CResult cResult, string str)
 		{

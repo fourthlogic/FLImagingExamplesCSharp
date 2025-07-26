@@ -13,7 +13,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace FLImagingExamplesCSharp
 {
-    class Program
+    class RingWarping
 	{
 		public static void ErrorPrint(CResult res, string str)
 		{

@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class Program
+	class AdaptiveThresholdGaussian
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

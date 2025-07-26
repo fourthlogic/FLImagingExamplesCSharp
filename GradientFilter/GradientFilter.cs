@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class Program
+	class GradientFilter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class Program
+	class PrewittFilter
 	{
 		enum EType
 		{

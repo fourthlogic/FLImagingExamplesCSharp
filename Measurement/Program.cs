@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class Program
+	class OrthogonalCalibrator
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{

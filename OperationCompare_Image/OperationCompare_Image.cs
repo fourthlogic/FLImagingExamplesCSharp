@@ -14,7 +14,7 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace FLImagingExamplesCSharp
 {
-    class Program
+    class OperationCompare_Image
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
