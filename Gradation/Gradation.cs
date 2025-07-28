@@ -95,37 +95,37 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Gradation  객체 생성 // Create Gradation object
-				CGradation Gradation = new CGradation();
+				CGradation gradation = new CGradation();
 
 				// Source 이미지 설정 // Set source image 
-				Gradation.SetSourceImage(ref fliISrcImage);
+				gradation.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				Gradation.SetDestinationImage(ref fliIDstImage);
+				gradation.SetDestinationImage(ref fliIDstImage);
 
 				// 시작 Alpha 값 설정 // Set start alpha value
 				CMultiVar<double> mvStartAlpha = new CMultiVar<double>(0, 0, 0);
-				Gradation.SetStartAlpha(mvStartAlpha);
+				gradation.SetStartAlpha(mvStartAlpha);
 
 				// 끝 Alpha 값 설정 // Set end alpha value
 				CMultiVar<double> mvEndAlpha = new CMultiVar<double>(0.1, 0.6, 0.9);
-				Gradation.SetEndAlpha(mvEndAlpha);
+				gradation.SetEndAlpha(mvEndAlpha);
 
 				// Gradation Start Value 설정(3Ch) // Set Gradation Start Value(3Ch)
 				CMultiVar<double> mvStartValue = new CMultiVar<double>(255, 0, 0);
-				Gradation.SetStartValue(mvStartValue);
+				gradation.SetStartValue(mvStartValue);
 
 				// Gradation End Value 설정(3Ch) // Set Gradation End Value(3Ch)
 				CMultiVar<double> mvEndValue = new CMultiVar<double>(0, 0, 255);
-				Gradation.SetEndValue(mvEndValue);
+				gradation.SetEndValue(mvEndValue);
 
 				// Gradation Vector Figure 객체 // Gradation Vector Figure object
 				CFLLine<double> fllVector = new CFLLine<double>();
 				fllVector.Load("../../ExampleImages/Gradation/Vector.fig");
-				Gradation.SetVector(fllVector);
+				gradation.SetVector(fllVector);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Gradation.Execute())).IsFail())
+				if((res = (gradation.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Gradation.");
 					break;
@@ -195,7 +195,7 @@ namespace FLImagingExamplesCSharp
 				if((res = layer1.DrawTextImage(new CFLPoint<double>(50, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = layer2.DrawTextImage(new CFLPoint<double>(0, 0), "Gradation Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer2.DrawTextImage(new CFLPoint<double>(0, 0), "gradation Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.

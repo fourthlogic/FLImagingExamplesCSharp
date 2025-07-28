@@ -49,7 +49,7 @@ namespace FLImagingExamplesCSharp
 			CResult res = new CResult();
 
 			// Pattern Match Multi 객체 생성 // Create Pattern Match Multi object
-			CPatternMatchMultiSparse FLPatternMatchMultiSparse = new CPatternMatchMultiSparse();
+			CPatternMatchMultiSparse patternMatchMultiSparse = new CPatternMatchMultiSparse();
 
 			do
 			{
@@ -95,16 +95,16 @@ namespace FLImagingExamplesCSharp
 					layerLearn.Clear();
 
 					// 학습할 이미지 설정 // Set the image to learn
-					FLPatternMatchMultiSparse.SetLearnImage(ref fliLearnImage[i64DataIdx]);
+					patternMatchMultiSparse.SetLearnImage(ref fliLearnImage[i64DataIdx]);
 
 					// 학습할 영역을 설정합니다. // Set the area to learn.
 					CFLPoint<double> flpLearnPivot = new CFLPoint<double>(arrLearnRegion[i64DataIdx].GetCenter());
-					FLPatternMatchMultiSparse.SetLearnROI(arrLearnRegion[i64DataIdx]);
-					FLPatternMatchMultiSparse.SetLearnPivot(flpLearnPivot);
-					FLPatternMatchMultiSparse.SetSampleCount(256);
+					patternMatchMultiSparse.SetLearnROI(arrLearnRegion[i64DataIdx]);
+					patternMatchMultiSparse.SetLearnPivot(flpLearnPivot);
+					patternMatchMultiSparse.SetSampleCount(256);
 
 					// 알고리즘 학습 수행 // Learn the Algoritm
-					if((FLPatternMatchMultiSparse.Learn(arrClassName[i64DataIdx])).IsFail())
+					if((patternMatchMultiSparse.Learn(arrClassName[i64DataIdx])).IsFail())
 					{
 						ErrorPrint(res, "Failed to Learn.");
 						break;
@@ -207,34 +207,34 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 검출할 이미지 설정 // Set image to detect
-				FLPatternMatchMultiSparse.SetSourceImage(ref fliFindImage);
+				patternMatchMultiSparse.SetSourceImage(ref fliFindImage);
 				// 검출 시 사용될 파라미터를 설정합니다. // Set the parameters to be used for detection.
 				// 검출 시 사용될 기본 각도를 설정합니다. // Set the default angle to be used for detection.
-				FLPatternMatchMultiSparse.SetAngleBias(0.0);
+				patternMatchMultiSparse.SetAngleBias(0.0);
 				// 검출 시 사용될 각도의 탐색범위를 설정합니다. // Set the search range of the angle to be used for detection.
 				// 각도는 기본 각도를 기준으로 (기본 각도 - AngleTolerance, 기본 각도 + AngleTolerance)가 최종 탐색범위 // The angle is based on the basic angle (default angle - AngleTolerance, basic angle + AngleTolerance) is the final search range
-				FLPatternMatchMultiSparse.SetAngleTolerance(15.0);
+				patternMatchMultiSparse.SetAngleTolerance(15.0);
 				// 검출 시 최적화 정도를 설정합니다. // Set the degree of optimization for detection.
 				// 검출 시 사용될 최소 탐색점수를 설정합니다. // Set the minimum search score to be used for detection.
-				FLPatternMatchMultiSparse.SetMinimumDetectionScore(0.7);
+				patternMatchMultiSparse.SetMinimumDetectionScore(0.7);
 				// 검출 시 사용될 탐색 방식을 설정합니다. // Set the search method to be used for detection.
-				FLPatternMatchMultiSparse.SetMaxObjectMode(CPatternMatchMultiSparse.EMaxObjectMode.Total);
+				patternMatchMultiSparse.SetMaxObjectMode(CPatternMatchMultiSparse.EMaxObjectMode.Total);
 				// 검출 시 사용될 최대 탐색객체 수를 설정합니다. // Set the maximum number of search objects to be used for detection.
-				FLPatternMatchMultiSparse.SetMaxObjectTotal(2);
+				patternMatchMultiSparse.SetMaxObjectTotal(2);
 				// 검출 시 보간법 사용 유무에 대해 설정합니다. // Set whether to use interpolation when detecting.
-				FLPatternMatchMultiSparse.EnableInterpolation(true);
+				patternMatchMultiSparse.EnableInterpolation(true);
 				// 검출 시 서로 다른 클래스에 대해 영역 중복을 허용 유무에 대해 설정합니다. // Set whether to allow area overlap for different classes during detection.
-				FLPatternMatchMultiSparse.SetConflictDetectionMethod(CPatternMatchMultiSparse.EConflictDetectionMethod.HighestScore);
+				patternMatchMultiSparse.SetConflictDetectionMethod(CPatternMatchMultiSparse.EConflictDetectionMethod.HighestScore);
 
 				// 알고리즘 수행 // Execute the Algoritm
-				if((res = FLPatternMatchMultiSparse.Execute()).IsFail())
+				if((res = patternMatchMultiSparse.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute");
 					break;
 				}
 
 				// 패턴 검출 결과를 가져옵니다. // Get the pattern detection result.
-				long i64ResultCount = FLPatternMatchMultiSparse.GetResultCount();
+				long i64ResultCount = patternMatchMultiSparse.GetResultCount();
 
 				Console.WriteLine(" ▶ Find Information");
 
@@ -242,7 +242,7 @@ namespace FLImagingExamplesCSharp
 				{
 					CPatternMatchMultiSparse.SResult results = new CPatternMatchMultiSparse.SResult();
 
-					FLPatternMatchMultiSparse.GetResult(i, ref results);
+					patternMatchMultiSparse.GetResult(i, ref results);
 
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;

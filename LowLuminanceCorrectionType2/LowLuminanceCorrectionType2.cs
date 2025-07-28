@@ -107,18 +107,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// LowLuminanceCorrectionType2 객체 생성 // Create LowLuminanceCorrectionType2 object
-				CLowLuminanceCorrectionType2 LowLuminanceCorrectionType2 = new CLowLuminanceCorrectionType2();
+				CLowLuminanceCorrectionType2 lowLuminanceCorrectionType2 = new CLowLuminanceCorrectionType2();
 				// Source 이미지 설정 // Set source image
-				LowLuminanceCorrectionType2.SetSourceImage(ref arrFliImage[0]);
+				lowLuminanceCorrectionType2.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				LowLuminanceCorrectionType2.SetDestinationImage(ref arrFliImage[1]);
+				lowLuminanceCorrectionType2.SetDestinationImage(ref arrFliImage[1]);
 				// Noise Reduction 설정 // Set usage Noise Reduction
-				LowLuminanceCorrectionType2.EnableNoiseReduction(true);
+				lowLuminanceCorrectionType2.EnableNoiseReduction(true);
 				// Kernel Size 설정 // Set kernel size
-				LowLuminanceCorrectionType2.SetKernel(5);
+				lowLuminanceCorrectionType2.SetKernel(5);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (LowLuminanceCorrectionType2.Execute())).IsFail())
+				if((res = (lowLuminanceCorrectionType2.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Low Luminance Correction Type 2.");
 					break;

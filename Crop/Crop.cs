@@ -97,19 +97,19 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Crop  객체 생성 // Create Crop object
-				CCrop Crop = new CCrop();
+				CCrop crop = new CCrop();
 
 				// Crop ROI 지정 // Create ROI range
 				CFLRect<double> flrCropROI = new CFLRect<double>(161, 181, 293, 302);
 
 				// Source 이미지 설정 // Set source image 
-				Crop.SetSourceImage(ref fliICropImage);
+				crop.SetSourceImage(ref fliICropImage);
 
 				// Crop 영역 지정 // set source ROI 
-				Crop.SetSourceROI(flrCropROI);
+				crop.SetSourceROI(flrCropROI);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Crop.Execute())).IsFail())
+				if((res = (crop.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Crop.");
 					break;
@@ -125,7 +125,7 @@ namespace FLImagingExamplesCSharp
 				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = layer2.DrawTextImage(flpTemp, "Crop Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer2.DrawTextImage(flpTemp, "crop Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// Crop 영역 표기 // Crop Area draw

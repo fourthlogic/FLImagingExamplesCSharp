@@ -93,28 +93,28 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// CoherenceEnhancingDiffusion  객체 생성 // Create CoherenceEnhancingDiffusion object
-				CCoherenceEnhancingDiffusion CoherenceEnhancingDiffusion = new CCoherenceEnhancingDiffusion();
+				CCoherenceEnhancingDiffusion coherenceEnhancingDiffusion = new CCoherenceEnhancingDiffusion();
 
 				// Source 이미지 설정 // Set source image 
-				CoherenceEnhancingDiffusion.SetSourceImage(ref fliISrcImage);
+				coherenceEnhancingDiffusion.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				CoherenceEnhancingDiffusion.SetDestinationImage(ref fliIDstImage);
+				coherenceEnhancingDiffusion.SetDestinationImage(ref fliIDstImage);
 
 				// 미분 평활화(가우시안) // Smoothing for derivative operator.(Gaussian)
-				CoherenceEnhancingDiffusion.SetSigma(0.5);
+				coherenceEnhancingDiffusion.SetSigma(0.5);
 
 				// 확산 계수(가우시안) // Smoothing for diffusion coefficients.(Gaussian)
-				CoherenceEnhancingDiffusion.SetRho(4);
+				coherenceEnhancingDiffusion.SetRho(4);
 
 				// Theta 업데이트 비율 설정 // Set update rate
-				CoherenceEnhancingDiffusion.SetTheta(0.5);
+				coherenceEnhancingDiffusion.SetTheta(0.5);
 
 				// 반복횟수 설정 // Number of iterations
-				CoherenceEnhancingDiffusion.SetIteration(15);
+				coherenceEnhancingDiffusion.SetIteration(15);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (CoherenceEnhancingDiffusion.Execute())).IsFail())
+				if((res = (coherenceEnhancingDiffusion.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Coherence Enhancing Diffusion.");
 					break;

@@ -66,7 +66,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// PeripheralLuminance 객체 생성 // Create PeripheralLuminance object
-				CPeripheralLuminance PeripheralLuminance = new CPeripheralLuminance();
+				CPeripheralLuminance peripheralLuminance = new CPeripheralLuminance();
 
 				CFLFigureArray flfaMeasurementRegion = new CFLFigureArray();
 
@@ -78,14 +78,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Source 이미지 설정 // Set the Source Image
-				PeripheralLuminance.SetSourceImage(ref fliImage);
+				peripheralLuminance.SetSourceImage(ref fliImage);
 				// Measurement Region 설정 // Set the Measurement Region
-				PeripheralLuminance.SetMeasurementRegion(flfaMeasurementRegion);
+				peripheralLuminance.SetMeasurementRegion(flfaMeasurementRegion);
 				// Thickness 설정 // Set Thickness
-				PeripheralLuminance.SetThickness(2.0);
+				peripheralLuminance.SetThickness(2.0);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (PeripheralLuminance.Execute())).IsFail())
+				if((res = (peripheralLuminance.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Peripheral Luminance.");
 					break;
@@ -95,7 +95,7 @@ namespace FLImagingExamplesCSharp
 				List<double> listResult = new List<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 MTF를 구하는 함수 // Function that calculate MTF of the image(or the region of ROI)
-				if((res = PeripheralLuminance.GetResult(ref listResult)).IsFail())
+				if((res = peripheralLuminance.GetResult(ref listResult)).IsFail())
 				{
 					ErrorPrint(res, "No Result");
 					break;

@@ -101,19 +101,19 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Contrast 객체 생성 // Create Contrast object
-				CContrast Contrast = new CContrast();
+				CContrast contrast = new CContrast();
 
 				// Source 이미지 설정 // Set the source image
-                Contrast.SetSourceImage(ref fliSourceImage);
+                contrast.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				Contrast.SetDestinationImage(ref fliDestinationImage);
+				contrast.SetDestinationImage(ref fliDestinationImage);
 
 				// Coefficient 값 지정 // Set the Coefficient value
-				Contrast.SetCoefficient(2.0);
+				contrast.SetCoefficient(2.0);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = Contrast.Execute()).IsFail())
+				if((res = contrast.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Contrast. \n");
 					break;

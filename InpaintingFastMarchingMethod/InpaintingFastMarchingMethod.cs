@@ -109,13 +109,13 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// InpaintingFastMarchingMethod 객체 생성 // Create InpaintingFastMarchingMethod object
-				CInpaintingFastMarchingMethod InpaintingFastMarchingMethod = new CInpaintingFastMarchingMethod();
+				CInpaintingFastMarchingMethod inpaintingFastMarchingMethod = new CInpaintingFastMarchingMethod();
 				// Source 이미지 설정 // Set the source image
-				InpaintingFastMarchingMethod.SetSourceImage(ref arrFliImage[0]);
+				inpaintingFastMarchingMethod.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				InpaintingFastMarchingMethod.SetDestinationImage(ref arrFliImage[1]);
+				inpaintingFastMarchingMethod.SetDestinationImage(ref arrFliImage[1]);
 				// Inpainting에 사용될 픽셀 영역 설정 // Setting the pixel area to be used for Inpainting
-				InpaintingFastMarchingMethod.SetEpsilon(5);
+				inpaintingFastMarchingMethod.SetEpsilon(5);
 
 				CFLRegion flrInpaintingRegion = new CFLRegion();
 
@@ -127,10 +127,10 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Inpainting을 위한 Painting region 설정 // Set painting region for Inpainting
-				InpaintingFastMarchingMethod.SetPaintingRegion(flrInpaintingRegion);
+				inpaintingFastMarchingMethod.SetPaintingRegion(flrInpaintingRegion);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InpaintingFastMarchingMethod.Execute()).IsFail())
+				if((res = inpaintingFastMarchingMethod.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;

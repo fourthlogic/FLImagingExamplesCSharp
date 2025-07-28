@@ -138,32 +138,32 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvScalr2 = new CMultiVar<double>(0, 0, 30);
 
 				// Operation ScaledSubtract 객체 생성 // Create Operation ScaledSubtract object
-				COperationScaledSubtract ScaledSubtract = new COperationScaledSubtract();
+				COperationScaledSubtract operationScaledSubtract = new COperationScaledSubtract();
 				// Source 이미지 설정 // Set source image
-				ScaledSubtract.SetSourceImage(ref arrFliImage[0]);
+				operationScaledSubtract.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				ScaledSubtract.SetDestinationImage(ref arrFliImage[1]);
+				operationScaledSubtract.SetDestinationImage(ref arrFliImage[1]);
 				// 연산 방식 설정 // Set operation source
-				ScaledSubtract.SetOperationSource(EOperationSource.Scalar);
+				operationScaledSubtract.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				ScaledSubtract.SetScalarValue(mvScalr);
+				operationScaledSubtract.SetScalarValue(mvScalr);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ScaledSubtract.Execute())).IsFail())
+				if((res = (operationScaledSubtract.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledSubtract.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image 
-				ScaledSubtract.SetDestinationImage(ref arrFliImage[2]);
+				operationScaledSubtract.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				ScaledSubtract.SetOperationSource(EOperationSource.Scalar);
+				operationScaledSubtract.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				ScaledSubtract.SetScalarValue(mvScalr2);
+				operationScaledSubtract.SetScalarValue(mvScalr2);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ScaledSubtract.Execute())).IsFail())
+				if((res = (operationScaledSubtract.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledSubtract.");
 					break;

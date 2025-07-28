@@ -95,16 +95,16 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Equalization  객체 생성 // Create Equalization  object
-				CEqualization Equalization = new CEqualization();
+				CEqualization equalization = new CEqualization();
 
 				// Source 이미지 설정 // Set source image 
-				Equalization.SetSourceImage(ref fliISrcImage);
+				equalization.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				Equalization.SetDestinationImage(ref fliIDstImage);
+				equalization.SetDestinationImage(ref fliIDstImage);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Equalization.Execute())).IsFail())
+				if((res = (equalization.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Equalization.");
 					break;

@@ -134,15 +134,15 @@ namespace FLImagingExamplesCSharp
                 
 
                 // BicubicSplineWarping 객체 생성 // Create BicubicSplineWarping object
-                CBicubicSplineWarping BicubicSplineWarping = new CBicubicSplineWarping();
+                CBicubicSplineWarping bicubicSplineWarping = new CBicubicSplineWarping();
                 // Source 이미지 설정 // Set the source image
-                BicubicSplineWarping.SetSourceImage(ref arrFliImage[0]);
+                bicubicSplineWarping.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                BicubicSplineWarping.SetDestinationImage(ref arrFliImage[1]);
+                bicubicSplineWarping.SetDestinationImage(ref arrFliImage[1]);
                 // Interpolation Method 설정 // Set the interpolation method
-                BicubicSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+                bicubicSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
                 // Extension 설정
-                BicubicSplineWarping.SetExtension(2);
+                bicubicSplineWarping.SetExtension(2);
 
                 // 그리드를 (5,5)로 초기화 // Initialize the grid to (5,5)
                 CFLPoint<int> flpGridSize = new CFLPoint<int>(5, 5);
@@ -191,7 +191,7 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // 위에서 설정한 좌표들을 바탕으로 BicubicSplineWarping 클래스에 Point 배열 설정 // Set the Point array in the BicubicSplineWarping class based on the coordinates set above
-                BicubicSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
+                bicubicSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
 
                 CGUIViewImageLayer layer = arrViewImage[0].GetLayer(0);
 
@@ -232,7 +232,7 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
-                if((res = BicubicSplineWarping.Calibrate()).IsFail())
+                if((res = bicubicSplineWarping.Calibrate()).IsFail())
 				{
                     ErrorPrint(res, "Failed to calibrate BicubicSplineWarping.");
                     
@@ -240,7 +240,7 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = BicubicSplineWarping.Execute()).IsFail())
+                if ((res = bicubicSplineWarping.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute BicubicSplineWarping.");
                     
@@ -251,18 +251,18 @@ namespace FLImagingExamplesCSharp
                 arrFliImage[2].Assign(arrFliImage[1]);
 
                 // Source 이미지 설정 // Set the source image
-                BicubicSplineWarping.SetSourceImage(ref arrFliImage[2]);
+                bicubicSplineWarping.SetSourceImage(ref arrFliImage[2]);
                 // Destination 이미지 설정 // Set the destination image
-                BicubicSplineWarping.SetDestinationImage(ref arrFliImage[3]);
+                bicubicSplineWarping.SetDestinationImage(ref arrFliImage[3]);
                 // Interpolation Method 설정 // Set the interpolation method
-                BicubicSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+                bicubicSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
                 // Calibration Src, Destination Points 바꿔서 셋팅 // Set Calibration Src, Destination Points by changing
-                BicubicSplineWarping.SetCalibrationPointArray(flpaDestination, flpaSource);
+                bicubicSplineWarping.SetCalibrationPointArray(flpaDestination, flpaSource);
 				// Extension 설정
-				BicubicSplineWarping.SetExtension(2);
+				bicubicSplineWarping.SetExtension(2);
 
 				// 앞서 설정된 이미지, Calibration Point Array로 Calibrate 수행 // Calibrate with previously set image, Calibration Point Array
-				if((res = BicubicSplineWarping.Calibrate()).IsFail())
+				if((res = bicubicSplineWarping.Calibrate()).IsFail())
 				{
                     ErrorPrint(res, "Failed to calibrate BicubicSplineWarping.");
                     
@@ -270,7 +270,7 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = BicubicSplineWarping.Execute()).IsFail())
+                if ((res = bicubicSplineWarping.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute BicubicSplineWarping.");
                     

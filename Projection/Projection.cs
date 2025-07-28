@@ -80,23 +80,23 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Projection 객체 생성 // Create Projection object
-				CProjection Projection = new CProjection();
+				CProjection projection = new CProjection();
 
 				// Source 이미지 설정 // Set source image 
-				Projection.SetSourceImage(ref fliISrcImage);
+				projection.SetSourceImage(ref fliISrcImage);
 
 				// 연산 방향 설정 // Set operation direction
-				Projection.SetProjectionMode(CProjection.EProjectionDirection.Column);
+				projection.SetProjectionMode(CProjection.EProjectionDirection.Column);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Projection.Execute())).IsFail())
+				if((res = (projection.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Projection.");
 					break;
 				}
 
 				// Result 결과 갯수 확인 // get result count
-				Int64 i64IndexCount = Projection.GetResultCount();
+				Int64 i64IndexCount = projection.GetResultCount();
 
 				// Channel 값 표기를 위한 String 변수 // string variable to indicate Channel value
 				string strChannel;
@@ -116,7 +116,7 @@ namespace FLImagingExamplesCSharp
 					listResult.Clear();
 
 					// Projection 결과 값 가져오기 // get projection result
-					if((res = (Projection.GetResult(i, ref listResult))).IsFail())
+					if((res = (projection.GetResult(i, ref listResult))).IsFail())
 					{
 						ErrorPrint(res, "Failed to Get Result.");
 						break;

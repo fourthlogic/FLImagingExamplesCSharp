@@ -95,27 +95,27 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Absolute Threshold 객체 생성 // Create Absolute Threshold object
-				CAbsoluteThreshold AbsoluteThreshold = new CAbsoluteThreshold();
+				CAbsoluteThreshold absoluteThreshold = new CAbsoluteThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				AbsoluteThreshold.SetSourceImage(ref fliISrcImage);
+				absoluteThreshold.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				AbsoluteThreshold.SetDestinationImage(ref fliIDstImage);
+				absoluteThreshold.SetDestinationImage(ref fliIDstImage);
 
 				// threshold 모드 설정(Dual) // Set Threshold Mode(Dual)
-				AbsoluteThreshold.SetThresholdMode(EThresholdMode.Dual_And);
+				absoluteThreshold.SetThresholdMode(EThresholdMode.Dual_And);
 
 				// 임계값 설정 (다채널 경우 CMultiVarD 사용) // Set threshold value(Use CMultiVarD for multi-channel)
-				AbsoluteThreshold.SetThreshold(100, EThresholdIndex.First);
-				AbsoluteThreshold.SetThreshold(168, EThresholdIndex.Second);
+				absoluteThreshold.SetThreshold(100, EThresholdIndex.First);
+				absoluteThreshold.SetThreshold(168, EThresholdIndex.Second);
 
 				// 논리 조건 설정 // Set condition value
-				AbsoluteThreshold.SetLogicalCondition((long)ELogicalCondition.Greater, EThresholdIndex.First);
-				AbsoluteThreshold.SetLogicalCondition((long)ELogicalCondition.Less, EThresholdIndex.Second);
+				absoluteThreshold.SetLogicalCondition((long)ELogicalCondition.Greater, EThresholdIndex.First);
+				absoluteThreshold.SetLogicalCondition((long)ELogicalCondition.Less, EThresholdIndex.Second);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (AbsoluteThreshold.Execute())).IsFail())
+				if((res = (absoluteThreshold.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute AbsoluteThreshold.");
 					break;

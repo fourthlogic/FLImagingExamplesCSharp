@@ -95,22 +95,22 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Adaptive Equalization 객체 생성 // Create Adaptive Equalization object
-				CAdaptiveEqualization AdaptiveEqualization = new CAdaptiveEqualization();
+				CAdaptiveEqualization adaptiveEqualization = new CAdaptiveEqualization();
 
 				// Source 이미지 설정 // Set source image 
-				AdaptiveEqualization.SetSourceImage(ref fliISrcImage);
+				adaptiveEqualization.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				AdaptiveEqualization.SetDestinationImage(ref fliIDstImage);
+				adaptiveEqualization.SetDestinationImage(ref fliIDstImage);
 
 				// Grid 설정 사이즈(Row = 30,  Col = 20)  // set grid size(Row = 30, Col = 20) 
-				AdaptiveEqualization.SetGridCount(30, 20);
+				adaptiveEqualization.SetGridCount(30, 20);
 
 				// Limit 설정 // Set clip limit
-				AdaptiveEqualization.SetClipLimit(3.0);
+				adaptiveEqualization.SetClipLimit(3.0);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (AdaptiveEqualization.Execute())).IsFail())
+				if((res = (adaptiveEqualization.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Adaptive Equalization.");
 					break;

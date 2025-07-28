@@ -81,26 +81,26 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Histogram  객체 생성 // Create Histogram object
-				CHistogram Histogram = new CHistogram();
+				CHistogram histogram = new CHistogram();
 
 				// ROI 지정 // Create ROI
 				CFLRect<double> flrSrcROI = new CFLRect<double>(161, 181, 293, 302);
 
 				// Source 이미지 설정 // Set source image 
-				Histogram.SetSourceImage(ref fliISrcImage);
+				histogram.SetSourceImage(ref fliISrcImage);
 
 				// Source ROI 영역 지정 // set Source ROI 
-				Histogram.SetSourceROI(flrSrcROI);
+				histogram.SetSourceROI(flrSrcROI);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Histogram.Execute())).IsFail())
+				if((res = (histogram.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Histogram.");
 					break;
 				}
 
 				// Result 결과 갯수 확인 // get result count
-				Int64 i64IndexCount = Histogram.GetResultCount();
+				Int64 i64IndexCount = histogram.GetResultCount();
 
 				// Channel 값 표기를 위한 String 변수 // string variable to indicate Channel value
 				string strChannel;
@@ -120,7 +120,7 @@ namespace FLImagingExamplesCSharp
 					listResult.Clear();
 
 					// Histogram 결과 값 가져오기 // get histogram result
-					if((res = (Histogram.GetResult(i, ref listResult))).IsFail())
+					if((res = (histogram.GetResult(i, ref listResult))).IsFail())
 					{
 						Console.WriteLine("No Result.");
 						break;
@@ -147,10 +147,10 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvMedian = new CMultiVar<double>();
 
 				// 평균, 분산, 표준편차, 중앙값 받기 // get mean, variance, standard deviation, median
-				Histogram.GetResultMean(ref mvMean);
-				Histogram.GetResultVariance(ref mvVariance);
-				Histogram.GetResultStdDev(ref mvStdDev);
-				Histogram.GetResultMedian(ref mvMedian);
+				histogram.GetResultMean(ref mvMean);
+				histogram.GetResultVariance(ref mvVariance);
+				histogram.GetResultStdDev(ref mvStdDev);
+				histogram.GetResultMedian(ref mvMedian);
 
 				// 출력 갯수 // get count
 				int i32ResultCount = (int)mvMean.GetCount();

@@ -113,43 +113,43 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Cross Gauge 객체 생성 // Create Cross Gauge
-				CCrossGauge CrossGauge = new CCrossGauge();
+				CCrossGauge crossGauge = new CCrossGauge();
 
 
 				// 측정할 영역을 설정합니다. // Set the area to measure.
 				CFLRect<double> measureRegion = new CFLRect<double>(126, 126, 400, 400);
 				double tolerance = 70;
-				CrossGauge.SetMeasurementRegion(measureRegion, tolerance);
+				crossGauge.SetMeasurementRegion(measureRegion, tolerance);
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.				
 				// 십자형을 추정하기위해 추출한 경계점 중 사용할 경계점 유형을 선택합니다. // Select the boundary point type to use among the boundary points extracted to estimate the crosshair.
-				CrossGauge.SetTransitionChoice(CCrossGauge.ETransitionChoice.Closest);
+				crossGauge.SetTransitionChoice(CCrossGauge.ETransitionChoice.Closest);
 				// 십자형을 추정하기위해 추출할 경계점의 변화 임계값에 대해 설정합니다. // Set the threshold change of the boundary point to be extracted to estimate the crosshair.
-				CrossGauge.SetThreshold(20);
+				crossGauge.SetThreshold(20);
 				// 십자형을 추정하기위해 추출할 경계점의 변화 임계값에 보정값을 설정합니다. // Set the correction value to the threshold change of the boundary point to be extracted to estimate the crosshair.
-				CrossGauge.SetMinimumAmplitude(10);
+				crossGauge.SetMinimumAmplitude(10);
 				// 십자형을 추정하기위해 추출할 경계점들의 대표값 표본 개수를 설정합니다. // Set the number of representative sample values ??of the boundary points to be extracted to estimate the crosshairs.
-				CrossGauge.SetThickness(1);
+				crossGauge.SetThickness(1);
 				// 십자형을 추정하기위해 추출할 경계점들의 추출 간격을 설정합니다. // Set the extraction interval of boundary points to be extracted to estimate the crosshair.
-				CrossGauge.SetSamplingStep(1.0);
+				crossGauge.SetSamplingStep(1.0);
 				// 십자형을 추정하기위해 추출할 경계점들의 이상치 조정을 위한 임계값을 설정합니다. // Set the threshold value for outlier adjustment of the boundary points to be extracted to estimate the crosshairs.
-				CrossGauge.SetOutliersThreshold(3.0);
+				crossGauge.SetOutliersThreshold(3.0);
 				// 십자형을 추정하기위해 추출할 경계점들의 이상치 조정 횟수을 설정합니다. // Set the number of outlier adjustments for boundary points to be extracted to estimate the crosshairs.
-				CrossGauge.SetOutliersThresholdCount(3);
+				crossGauge.SetOutliersThresholdCount(3);
 				// 십자형을 추정하기위해 점 클러스터링 처리 유무에 대한 설정을 합니다. // Set whether or not to process point clustering to estimate the crosshairs.
-				CrossGauge.EnableClusterMode(true);
+				crossGauge.EnableClusterMode(true);
 				// 십자형을 추정하기위해 마진을 설정합니다. 필요에 따라 각 구역별로 설정가능합니다. // Set the margin to estimate the crosshairs. It can be set for each zone as needed.
-				CrossGauge.SetMeasurementMarginRatio(0.3, 0.1);
+				crossGauge.SetMeasurementMarginRatio(0.3, 0.1);
 
 				for(int i = 0; i < i32ExampleCount; ++i)
 				{
 					// 처리할 이미지 설정 // Set the image to process
-					CrossGauge.SetSourceImage(ref fliImage[i]);
+					crossGauge.SetSourceImage(ref fliImage[i]);
 					// 십자형을 추정하기위해 추출할 경계점 변화 방향에 대해 설정합니다. // Set the boundary point change direction to extract to estimate the crosshair.
-					CrossGauge.SetTransitionType(arrTransitionType[i]);
+					crossGauge.SetTransitionType(arrTransitionType[i]);
 
 					// 알고리즘 수행 // Execute the Algoritm
-					if((res = CrossGauge.Execute()).IsFail())
+					if((res = crossGauge.Execute()).IsFail())
 					{
 						ErrorPrint(res, "Failed to execute Cross gauge.");
 						break;
@@ -161,13 +161,13 @@ namespace FLImagingExamplesCSharp
 					CFLFigureArray flfaResultsInvalid = new CFLFigureArray();
 					CFLFigureArray flfaResultLine = new CFLFigureArray();
 					// 추정을 위한 라인을 가져옵니다. // Get the line for inference.
-					CrossGauge.GetMeasuredLines(ref flfaResultLine);
+					crossGauge.GetMeasuredLines(ref flfaResultLine);
 					// 추정된 십자형을 가져옵니다. // Get the estimated crosshairs.
-					CrossGauge.GetMeasuredObject(ref resultRegion);
+					crossGauge.GetMeasuredObject(ref resultRegion);
 					// 추정된 십자형을 추출에 사용된 유효 경계점을 가져옵니다. // Get the valid boundary points used to extract the estimated crosshairs.
-					CrossGauge.GetMeasuredValidPoints(ref flfaResultsValid);
+					crossGauge.GetMeasuredValidPoints(ref flfaResultsValid);
 					// 추정된 십자형을 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get invalid boundary points that were not used to extract the estimated crosshairs.
-					CrossGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid);
+					crossGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid);
 
 					CGUIViewImageLayer layer = viewImage[i].GetLayer(0);
 
@@ -189,7 +189,7 @@ namespace FLImagingExamplesCSharp
 					if(res.IsOK())
 					{
 						double f64ResultAngle = 0;
-						CrossGauge.GetMeasuredAngle(ref f64ResultAngle);
+						crossGauge.GetMeasuredAngle(ref f64ResultAngle);
 
 						Console.WriteLine("Cross Center : ({0}, {1})\nAngle : {2}˚", resultRegion.x, resultRegion.y, f64ResultAngle);
 					}

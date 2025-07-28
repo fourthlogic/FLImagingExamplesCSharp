@@ -64,22 +64,22 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// OpticalFlowPolynomialExpansion 객체 생성 // Create OpticalFlowPolynomialExpansion object
-				COpticalFlowPolynomialExpansion OpticalFlowPolynomialExpansion = new COpticalFlowPolynomialExpansion();
+				COpticalFlowPolynomialExpansion opticalFlowPolynomialExpansion = new COpticalFlowPolynomialExpansion();
 				// Source 이미지 설정 // Set the source image
-				OpticalFlowPolynomialExpansion.SetSourceImage(ref arrFliImage[0]);
+				opticalFlowPolynomialExpansion.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				OpticalFlowPolynomialExpansion.SetDestinationImage(ref arrFliImage[1]);
+				opticalFlowPolynomialExpansion.SetDestinationImage(ref arrFliImage[1]);
 				// Pyramid Level 설정
-				OpticalFlowPolynomialExpansion.SetPyramidLevel(2);
+				opticalFlowPolynomialExpansion.SetPyramidLevel(2);
 				// Iteration 설정
-				OpticalFlowPolynomialExpansion.SetIteration(3);
+				opticalFlowPolynomialExpansion.SetIteration(3);
 				// Window Size 설정
-				OpticalFlowPolynomialExpansion.SetWindowSize(15);
+				opticalFlowPolynomialExpansion.SetWindowSize(15);
 
 				Console.WriteLine("Processing....");
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = OpticalFlowPolynomialExpansion.Execute()).IsFail())
+				if((res = opticalFlowPolynomialExpansion.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute OpticalFlow Polynomial Expansion.");
 					Console.WriteLine(res.GetString());

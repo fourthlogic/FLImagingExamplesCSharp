@@ -95,28 +95,28 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Maximum Entropy Threshold 객체 생성 // Create Maximum Entropy Threshold object
-				CMaximumEntropyThreshold MaximumEntropyThreshold = new CMaximumEntropyThreshold();
+				CMaximumEntropyThreshold maximumEntropyThreshold = new CMaximumEntropyThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				MaximumEntropyThreshold.SetSourceImage(ref fliISrcImage);
+				maximumEntropyThreshold.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				MaximumEntropyThreshold.SetDestinationImage(ref fliIDstImage);
+				maximumEntropyThreshold.SetDestinationImage(ref fliIDstImage);
 
 				// 논리 조건 설정 // Set condition value
-				MaximumEntropyThreshold.SetLogicalCondition((long)ELogicalCondition.Greater);
+				maximumEntropyThreshold.SetLogicalCondition((long)ELogicalCondition.Greater);
 
 				// MultiVar 객체 생성 // Create MultiVar object
 				CMultiVar<double> mvThreshold;
 
 				// 계산된 Threshold 값을 추출 // get result threshold value
-				mvThreshold = MaximumEntropyThreshold.GetResultThreshold();
+				mvThreshold = maximumEntropyThreshold.GetResultThreshold();
 
 				// Console창에 Threshold 값 출력 // Output the threshold value to the console window
 				Console.WriteLine(String.Format("Result Threshold : {0}", (int)mvThreshold.GetAt(0)));
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (MaximumEntropyThreshold.Execute())).IsFail())
+				if((res = (maximumEntropyThreshold.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute MaximumEntropyThreshold.");
 					break;

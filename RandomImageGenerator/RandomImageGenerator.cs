@@ -97,7 +97,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// RandomImageGenerator  객체 생성 // Create RandomImageGenerator object
-				CRandomImageGenerator RandomImageGenerator = new CRandomImageGenerator();
+				CRandomImageGenerator randomImageGenerator = new CRandomImageGenerator();
 
 				// RandomImageGenerator ROI 지정 // Create ROI range
 				CFLFigureArray flfaSrcROI = new CFLFigureArray();
@@ -105,13 +105,13 @@ namespace FLImagingExamplesCSharp
 				flfaSrcROI.Load("../../ExampleImages/RandomImageGenerator/FigureROI.fig");
 
 				// Source 이미지 설정 // Set source image 
-				RandomImageGenerator.SetSourceImage(ref fliIDstImage);
+				randomImageGenerator.SetSourceImage(ref fliIDstImage);
 
 				// RandomImageGenerator 영역 지정 // set source ROI 
-				RandomImageGenerator.SetSourceROI(flfaSrcROI);
+				randomImageGenerator.SetSourceROI(flfaSrcROI);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (RandomImageGenerator.Execute())).IsFail())
+				if((res = (randomImageGenerator.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute RandomImageGenerator.");
 					break;
@@ -127,7 +127,7 @@ namespace FLImagingExamplesCSharp
 				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = layer2.DrawTextImage(flpTemp, "RandomImageGenerator Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer2.DrawTextImage(flpTemp, "randomImageGenerator Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// RandomImageGenerator 영역 표기 // RandomImageGenerator Area draw

@@ -95,25 +95,25 @@ namespace FLImagingExamplesCSharp
 				}
 
                 // Watersheds Threshold Marker 객체 생성 // Create Watersheds Threshold Marker object
-                CWatershedsThresholdMarker WatershedsThresholdMarker = new CWatershedsThresholdMarker();
+                CWatershedsThresholdMarker watershedsThresholdMarker = new CWatershedsThresholdMarker();
 
 				// Source 이미지 설정 // Set source image 
-                WatershedsThresholdMarker.SetSourceImage(ref fliISrcImage);
+                watershedsThresholdMarker.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-                WatershedsThresholdMarker.SetDestinationImage(ref fliIDstImage);
+                watershedsThresholdMarker.SetDestinationImage(ref fliIDstImage);
 
 				// threshold 모드 설정(Single) // Set threshold mode(Single)
-                WatershedsThresholdMarker.SetThresholdMode(EThresholdMode.Single);
+                watershedsThresholdMarker.SetThresholdMode(EThresholdMode.Single);
 
 				// 임계값 설정 (다채널 경우 CMultiVarD 사용) // Set threshold value(Use CMultiVarD for multi-channel)
-                WatershedsThresholdMarker.SetThreshold(10);
+                watershedsThresholdMarker.SetThreshold(10);
 
 				// 논리 조건 설정 // Set condition value
-                WatershedsThresholdMarker.SetLogicalCondition((long)ELogicalCondition.GreaterEqual, EThresholdIndex.First);
+                watershedsThresholdMarker.SetLogicalCondition((long)ELogicalCondition.GreaterEqual, EThresholdIndex.First);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (WatershedsThresholdMarker.Execute())).IsFail())
+                if ((res = (watershedsThresholdMarker.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute WatershedsThreshold.");
 					break;

@@ -64,32 +64,32 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// HoughTransform  객체 생성 // Create HoughTransform object
-				CHoughTransform HoughTransform = new CHoughTransform();
+				CHoughTransform houghTransform = new CHoughTransform();
 
 				// Source 이미지 설정 // Set source image 
-				HoughTransform.SetSourceImage(ref fliISrcImage);
+				houghTransform.SetSourceImage(ref fliISrcImage);
 
 				// HoughTransform Line 변환 선택 // Set houghTransform line transform
-				HoughTransform.SetHoughShape(CHoughTransform.EHoughShape.Line);
+				houghTransform.SetHoughShape(CHoughTransform.EHoughShape.Line);
 
 				// 연산 방식 설정 // Set calculation method
-				HoughTransform.SetExecuteMode(CHoughTransform.EExecuteMode.Image);
+				houghTransform.SetExecuteMode(CHoughTransform.EExecuteMode.Image);
 
 				// Threshold 값 설정 // set threshold value
-				HoughTransform.SetPixelThreshold(10);
+				houghTransform.SetPixelThreshold(10);
 
 				// 조건 타입 설정 Less (Threshold 값 이하의 픽셀) // set logical condition(pixels below the threshold value)
-				HoughTransform.SetLogicalCondition(ELogicalCondition.Less);
+				houghTransform.SetLogicalCondition(ELogicalCondition.Less);
 
 				// 최소 픽셀 카운터 수 (픽셀 카운터 기준보다 낮을 경우 필터링) // Minimum number of pixel counters (Filter if lower than pixel counter criteria)
-				HoughTransform.SetMinPixelCount(200);
+				houghTransform.SetMinPixelCount(200);
 
 				// 인접 거리 필터링 설정 (거리 +-5, 각도 +-5 기준 가장 카운팅이 많이된 픽셀 값을 Line으로 선정) 
 				// Neighbor Distance Filtering Settings(Based on distance +-5, angle +-5, the most counted pixel value is selected as a line)
-				HoughTransform.SetNearbyLineFilter(5);
+				houghTransform.SetNearbyLineFilter(5);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (HoughTransform.Execute())).IsFail())
+				if((res = (houghTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute HoughTransform.");
 					break;
@@ -103,7 +103,7 @@ namespace FLImagingExamplesCSharp
 				layer.Clear();
 
 				// Result 갯수 가져오기 // get result count
-				long i64ResultCount = HoughTransform.GetResultLinesCount();
+				long i64ResultCount = houghTransform.GetResultLinesCount();
 
 				// Line 객체 선언
 				CFLLine<double> fllLine = new CFLLine<double>();
@@ -111,7 +111,7 @@ namespace FLImagingExamplesCSharp
 				for(long i = 0; i < i64ResultCount; i++) // 출력
 				{
 					// line 결과 가져오기 // get result line
-					HoughTransform.GetResultLine(i, ref fllLine);
+					houghTransform.GetResultLine(i, ref fllLine);
 
 					// line 출력 // display line
 					if((res = (layer.DrawFigureImage(fllLine, EColor.LIME, 1))).IsFail())

@@ -95,25 +95,25 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Absolute Threshold 객체 생성 // Create Absolute Threshold object
-				CAbsoluteThreshold AbsoluteThreshold = new CAbsoluteThreshold();
+				CAbsoluteThreshold absoluteThreshold = new CAbsoluteThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				AbsoluteThreshold.SetSourceImage(ref fliISrcImage);
+				absoluteThreshold.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				AbsoluteThreshold.SetDestinationImage(ref fliIDstImage);
+				absoluteThreshold.SetDestinationImage(ref fliIDstImage);
 
 				// threshold 모드 설정(Single) // Set threshold mode(Single)
-				AbsoluteThreshold.SetThresholdMode(EThresholdMode.Single);
+				absoluteThreshold.SetThresholdMode(EThresholdMode.Single);
 
 				// 임계값 설정 (다채널 경우 CMultiVarD 사용) // Set threshold value(Use CMultiVarD for multi-channel)
-				AbsoluteThreshold.SetThreshold(100);
+				absoluteThreshold.SetThreshold(100);
 
 				// 논리 조건 설정 // Set condition value
-				AbsoluteThreshold.SetLogicalCondition((long)ELogicalCondition.Greater, EThresholdIndex.First);
+				absoluteThreshold.SetLogicalCondition((long)ELogicalCondition.Greater, EThresholdIndex.First);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (AbsoluteThreshold.Execute())).IsFail())
+				if((res = (absoluteThreshold.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute AbsoluteThreshold.");
 					break;

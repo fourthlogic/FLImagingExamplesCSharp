@@ -95,28 +95,28 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// IsoDataThreshold 객체 생성 // Create IsoDataThreshold object
-				CIsoDataThreshold IsoDataThreshold = new CIsoDataThreshold();
+				CIsoDataThreshold isoDataThreshold = new CIsoDataThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				IsoDataThreshold.SetSourceImage(ref fliISrcImage);
+				isoDataThreshold.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				IsoDataThreshold.SetDestinationImage(ref fliIDstImage);
+				isoDataThreshold.SetDestinationImage(ref fliIDstImage);
 
 				// 논리 조건 설정 // Set condition value
-				IsoDataThreshold.SetLogicalCondition((long)ELogicalCondition.Greater);
+				isoDataThreshold.SetLogicalCondition((long)ELogicalCondition.Greater);
 
 				// MultiVar 객체 생성 // Create MultiVar object
 				CMultiVar<double> mvThreshold;
 
 				// 계산된 Threshold 값을 추출 // get result threshold value
-				mvThreshold = IsoDataThreshold.GetResultThreshold();
+				mvThreshold = isoDataThreshold.GetResultThreshold();
 
 				// Console창에 Threshold 값 출력 // Output the threshold value to the console window
 				Console.WriteLine(String.Format("Result Threshold : {0}", (int)mvThreshold.GetAt(0)));
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (IsoDataThreshold.Execute())).IsFail())
+				if((res = (isoDataThreshold.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute IsoDataThreshold.");
 					break;

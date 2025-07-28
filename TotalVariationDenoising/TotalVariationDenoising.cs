@@ -116,45 +116,45 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Total Variation Denoising 객체 생성 // Create Total Variation Denoising object
-				CTotalVariationDenoising TotalVariationDenoising = new CTotalVariationDenoising();
+				CTotalVariationDenoising totalVariationDenoising = new CTotalVariationDenoising();
 
 				// Source 이미지 설정 // Set source image 
-				if((res = TotalVariationDenoising.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = totalVariationDenoising.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = TotalVariationDenoising.SetDestinationImage(ref fliConvertedImage)).IsFail())
+				if((res = totalVariationDenoising.SetDestinationImage(ref fliConvertedImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Destination Image.");
 					break;
 				}
 
 				// 모델 설정 // Set the Model Type
-				if((res = (TotalVariationDenoising.SetModelType(CTotalVariationDenoising.EModelType.Anisotropic))).IsFail())
+				if((res = (totalVariationDenoising.SetModelType(CTotalVariationDenoising.EModelType.Anisotropic))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Model Type.");
 					break;
 				}
 
 				// Lambda 설정 // Set the Lambda
-				if((res = (TotalVariationDenoising.SetLambda(0.1))).IsFail())
+				if((res = (totalVariationDenoising.SetLambda(0.1))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Lambda.");
 					break;
 				}
 
 				// 연산 반복 횟수 설정 // Set the Iteration
-				if((res = (TotalVariationDenoising.SetIteration(3))).IsFail())
+				if((res = (totalVariationDenoising.SetIteration(3))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Iteration.");
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (TotalVariationDenoising.Execute())).IsFail())
+				if((res = (totalVariationDenoising.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

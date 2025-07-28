@@ -95,28 +95,28 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Otsu Threshold 객체 생성 // Create Otsu Threshold object
-				COtsuThreshold OtsuThreshold = new COtsuThreshold();
+				COtsuThreshold otsuThreshold = new COtsuThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				OtsuThreshold.SetSourceImage(ref fliISrcImage);
+				otsuThreshold.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				OtsuThreshold.SetDestinationImage(ref fliIDstImage);
+				otsuThreshold.SetDestinationImage(ref fliIDstImage);
 
 				// 논리 조건 설정 // Set condition value
-				OtsuThreshold.SetLogicalCondition((long)ELogicalCondition.Greater);
+				otsuThreshold.SetLogicalCondition((long)ELogicalCondition.Greater);
 
 				// MultiVar 객체 생성 // Create MultiVar object
 				CMultiVar<double> mvThreshold;
 
 				// 계산된 Threshold 값을 추출 // get result threshold value
-				mvThreshold = OtsuThreshold.GetResultThreshold();
+				mvThreshold = otsuThreshold.GetResultThreshold();
 
 				// Console창에 Threshold 값 출력 // Output the threshold value to the console window
 				Console.WriteLine(String.Format("Result Threshold : {0}", (int)mvThreshold.GetAt(0)));
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (OtsuThreshold.Execute())).IsFail())
+				if((res = (otsuThreshold.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute OtsuThreshold.");
 					break;

@@ -99,38 +99,38 @@ namespace FLImagingExamplesCSharp
 				flcRadialRegion.Load("../../ExampleImages/RadialGradation/RadialRegion.fig");
 
 				// RadialGradation  객체 생성 // Create RadialGradation object
-				CRadialGradation RadialGradation = new CRadialGradation();
+				CRadialGradation radialGradation = new CRadialGradation();
 
 				// Source 이미지 설정 // Set source image 
-				RadialGradation.SetSourceImage(ref fliISrcImage);
+				radialGradation.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				RadialGradation.SetDestinationImage(ref fliIDstImage);
+				radialGradation.SetDestinationImage(ref fliIDstImage);
 
 				// Source ROI 설정 // Set source ROI 
-				RadialGradation.SetSourceROI(flcRadialRegion);
+				radialGradation.SetSourceROI(flcRadialRegion);
 
 				// 시작 Alpha 값 설정 // Set start alpha value
 				CMultiVar<double> mvStartAlpha = new CMultiVar<double>(0.0, 0.0, 0.0);
-				RadialGradation.SetStartAlpha(mvStartAlpha);
+				radialGradation.SetStartAlpha(mvStartAlpha);
 
 				// 끝 Alpha 값 설정 // Set start alpha value
 				CMultiVar<double> mvEndAlpha = new CMultiVar<double>(0.7, 0.5, 0.5);
-				RadialGradation.SetEndAlpha(mvEndAlpha);
+				radialGradation.SetEndAlpha(mvEndAlpha);
 
 				// RadialGradation Start Value 설정(3Ch) // Set RadialGradation Start Value(3Ch)
 				CMultiVar<double> mvStartValue = new CMultiVar<double>(0, 0, 0);
-				RadialGradation.SetStartValue(mvStartValue);
+				radialGradation.SetStartValue(mvStartValue);
 
 				// RadialGradation End Value 설정(3Ch) // Set RadialGradation End Value(3Ch)
 				CMultiVar<double> mvEndValue = new CMultiVar<double>(100, 255, 255);
-				RadialGradation.SetEndValue(mvEndValue);
+				radialGradation.SetEndValue(mvEndValue);
 
 				// RadialGradation Region 설정 // Set RadialGradation Region 
-				RadialGradation.SetRadialRegion(flcRadialRegion);
+				radialGradation.SetRadialRegion(flcRadialRegion);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (RadialGradation.Execute())).IsFail())
+				if((res = (radialGradation.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute RadialGradation.");
 					break;

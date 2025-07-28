@@ -108,19 +108,19 @@ namespace FLImagingExamplesCSharp
                 }
 
 				// CIntensityClamping 객체 생성 // Create CIntensityClamping object
-				CIntensityClamping IntensityClamping = new CIntensityClamping();
+				CIntensityClamping intensityClamping = new CIntensityClamping();
                 // Source 이미지 설정 // Set source image
-                IntensityClamping.SetSourceImage(ref arrFliImage[0]);
+                intensityClamping.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set destination image
-                IntensityClamping.SetDestinationImage(ref arrFliImage[1]);
+                intensityClamping.SetDestinationImage(ref arrFliImage[1]);
 				// IntensityClamping Scalar 값 설정 // Set comparsion value of IntensityClamping operation
 				CMultiVar<double> mvMinScalar = new CMultiVar<double>(150, 150, 150);
 				CMultiVar<double> mvMaxScalar = new CMultiVar<double>(200, 200, 200);
 
-				IntensityClamping.SetIntensity(mvMinScalar, mvMaxScalar);
+				intensityClamping.SetIntensity(mvMinScalar, mvMaxScalar);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((result = IntensityClamping.Execute()).IsFail())
+				if ((result = intensityClamping.Execute()).IsFail())
 				{
                     ErrorPrint(result, "Failed to execute operation IntensityClamping.");
                     Console.WriteLine(result.GetString());
@@ -157,7 +157,7 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-                if ((result = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image(IntensityClamping Min 150 Max 200)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((result = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image(intensityClamping Min 150 Max 200)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
                     ErrorPrint(result, "Failed to draw text\n");
                     break;

@@ -135,18 +135,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation ScaledSubtract 객체 생성 // Create Operation ScaledSubtract object
-				COperationScaledSubtract ScaledSubtract = new COperationScaledSubtract();
+				COperationScaledSubtract operationScaledSubtract = new COperationScaledSubtract();
 				// Source 이미지 설정 // Set source image
-				ScaledSubtract.SetSourceImage(ref arrFliImage[0]);
+				operationScaledSubtract.SetSourceImage(ref arrFliImage[0]);
 				// Operand 이미지 설정 // Set Operand image
-				ScaledSubtract.SetOperandImage(ref arrFliImage[1]);
+				operationScaledSubtract.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set destination image 
-				ScaledSubtract.SetDestinationImage(ref arrFliImage[2]);
+				operationScaledSubtract.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				ScaledSubtract.SetOperationSource(EOperationSource.Image);
+				operationScaledSubtract.SetOperationSource(EOperationSource.Image);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ScaledSubtract.Execute())).IsFail())
+				if((res = (operationScaledSubtract.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledSubtract.");
 					break;

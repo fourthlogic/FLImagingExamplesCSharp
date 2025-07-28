@@ -109,13 +109,13 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// InpaintingNavierStokes 객체 생성 // Create InpaintingNavierStokes object
-				CInpaintingNavierStokes InpaintingNavierStokes = new CInpaintingNavierStokes();
+				CInpaintingNavierStokes inpaintingNavierStokes = new CInpaintingNavierStokes();
 				// Source 이미지 설정 // Set the source image
-				InpaintingNavierStokes.SetSourceImage(ref arrFliImage[0]);
+				inpaintingNavierStokes.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				InpaintingNavierStokes.SetDestinationImage(ref arrFliImage[1]);
+				inpaintingNavierStokes.SetDestinationImage(ref arrFliImage[1]);
 				// Inpainting에 사용될 픽셀 영역 설정 // Setting the pixel area to be used for Inpainting
-				InpaintingNavierStokes.SetEpsilon(5);
+				inpaintingNavierStokes.SetEpsilon(5);
 
 				CFLFigureArray flfaInpaintingRegion = new CFLFigureArray();
 
@@ -127,10 +127,10 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Inpainting을 위한 Painting region 설정 // Set painting region for Inpainting
-				InpaintingNavierStokes.SetPaintingRegion(flfaInpaintingRegion);
+				inpaintingNavierStokes.SetPaintingRegion(flfaInpaintingRegion);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InpaintingNavierStokes.Execute()).IsFail())
+				if((res = inpaintingNavierStokes.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;

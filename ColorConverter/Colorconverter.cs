@@ -116,38 +116,38 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// ColorConverter 객체 생성 // Create ColorConverter object
-				CColorConverter ColorConverter = new CColorConverter();
+				CColorConverter colorConverter = new CColorConverter();
 
 				// Source 이미지 설정 // Set source image 
-				if((res = ColorConverter.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = colorConverter.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = ColorConverter.SetDestinationImage(ref fliConvertedImage)).IsFail())
+				if((res = colorConverter.SetDestinationImage(ref fliConvertedImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
 				}
 
 				// 변환할 픽셀 포멧 입력(C3_U8 -> C4_U8) // Set the pixel format to convert(C3_U8 -> C4_U8)
-				if((res = (ColorConverter.SetPixelFormat(EPixelFormat.C4_U8))).IsFail())
+				if((res = (colorConverter.SetPixelFormat(EPixelFormat.C4_U8))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set PixelFormat.");
 					break;
 				}
 
 				// 변환할 컬러 시퀀스 입력(BGR -> ARGB) // Set the color sequence to convert(BGR -> ARGB)
-				if((res = (ColorConverter.SetColorSequence(EColorSequence.ARGB))).IsFail())
+				if((res = (colorConverter.SetColorSequence(EColorSequence.ARGB))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Color Sequence.");
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ColorConverter.Execute())).IsFail())
+				if((res = (colorConverter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

@@ -95,22 +95,22 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// AdaptiveThreshold  객체 생성 // Create Adaptive Threshold object
-				CAdaptiveThreshold AdaptiveThreshold = new CAdaptiveThreshold();
+				CAdaptiveThreshold adaptiveThreshold = new CAdaptiveThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				AdaptiveThreshold.SetSourceImage(ref fliISrcImage);
+				adaptiveThreshold.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				AdaptiveThreshold.SetDestinationImage(ref fliIDstImage);
+				adaptiveThreshold.SetDestinationImage(ref fliIDstImage);
 
 				// 커널 사이즈 입력 (Kernel 7x7) // set kernel size(Kernel 7x7) 
-				AdaptiveThreshold.SetKernel(7, 7);
+				adaptiveThreshold.SetKernel(7, 7);
 
 				// 임계값 옵셋 설정 // set threshold offset 
-				AdaptiveThreshold.SetThresholdOffset(5);
+				adaptiveThreshold.SetThresholdOffset(5);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (AdaptiveThreshold.Execute())).IsFail())
+				if((res = (adaptiveThreshold.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute AdaptiveThreshold.");
 					break;

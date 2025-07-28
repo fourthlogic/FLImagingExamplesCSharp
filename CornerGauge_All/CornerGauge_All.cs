@@ -133,48 +133,48 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Corner Gauge 객체 생성 // Create Corner Gauge Object
-				CCornerGauge CornerGauge = new CCornerGauge();
+				CCornerGauge cornerGauge = new CCornerGauge();
 
 				// 처리할 이미지 설정 // Set the image to process
-				CornerGauge.SetSourceImage(ref fliImage);
+				cornerGauge.SetSourceImage(ref fliImage);
 
 				// 측정할 영역을 설정합니다. // Set the area to measure.
 				CFLRect<double> measureRegion = new CFLRect<double>(213.577428, 262.324155, 295.020437, 348.179290);
 				double tolerance = 50;
-				CornerGauge.SetMeasurementRegion(measureRegion, tolerance);
+				cornerGauge.SetMeasurementRegion(measureRegion, tolerance);
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.				
 				// 코너를 추정하기위해 추출할 경계점의 변화 임계값에 대해 설정합니다. // Set the threshold change of the boundary point to be extracted to estimate the corner.
-				CornerGauge.SetThreshold(20);
+				cornerGauge.SetThreshold(20);
 				// 코너를 추정하기위해 추출할 경계점의 변화 임계값에 보정값을 설정합니다. // Set the correction value to the threshold change of the boundary point to be extracted to estimate the corner.
-				CornerGauge.SetMinimumAmplitude(10);
+				cornerGauge.SetMinimumAmplitude(10);
 				// 코너를 추정하기위해 추출할 경계점들의 대표값 표본 개수를 설정합니다. // Set the number of representative sample values ??of the boundary points to be extracted to estimate the corner.
-				CornerGauge.SetThickness(1);
+				cornerGauge.SetThickness(1);
 				// 코너를 추정하기위해 추출할 경계점들의 추출 간격을 설정합니다. // Set the extraction interval of boundary points to be extracted to estimate the corner.
-				CornerGauge.SetSamplingStep(1.0);
+				cornerGauge.SetSamplingStep(1.0);
 				// 코너를 추정하기위해 추출할 경계점들의 이상치 조정을 위한 임계값을 설정합니다. // Set the threshold value for outlier adjustment of the boundary points to be extracted to estimate the corner.
-				CornerGauge.SetOutliersThreshold(3);
+				cornerGauge.SetOutliersThreshold(3);
 				// 코너를 추정하기위해 추출할 경계점들의 이상치 조정 횟수을 설정합니다. // Set the number of outlier adjustments for boundary points to be extracted to estimate the corner.
-				CornerGauge.SetOutliersThresholdCount(3);
+				cornerGauge.SetOutliersThresholdCount(3);
 				// 코너를 추정하기위해 점 클러스터링 처리 유무에 대한 설정을 합니다. // Set whether or not to process point clustering to estimate the corner.
-				CornerGauge.EnableClusterMode(true);
+				cornerGauge.EnableClusterMode(true);
 				// 코너를 추정하기위해 마진을 설정합니다. 필요에 따라 각 구역별로 설정가능합니다. // Set the margin to estimate the corner. It can be set for each zone as needed.
-				CornerGauge.SetMeasurementMarginRatio(0, CCornerGauge.EMargin.All);
+				cornerGauge.SetMeasurementMarginRatio(0, CCornerGauge.EMargin.All);
 				// 코너를 추정하기위한 Tolerance를 설정합니다. 필요에 따라 각 구역별로 설정가능합니다. // Set the Tolerance for estimating the corner. It can be set for each zone as needed.
-				CornerGauge.SetTolerance(tolerance, CCornerGauge.ETolerance.All);
+				cornerGauge.SetTolerance(tolerance, CCornerGauge.ETolerance.All);
 				// 코너를 측정하기위한 영역을 설정합니다. // Set the area for measuring corners.
-				CornerGauge.SetCorner(CCornerGauge.ECorner.All);
+				cornerGauge.SetCorner(CCornerGauge.ECorner.All);
 
 
 				for(int i = 0; i < i32ExampleCount; ++i)
 				{
 					// 코너를 추정하기위해 추출할 경계점 변화 방향에 대해 설정합니다. // Set the boundary point change direction to extract to estimate the corner.
-					CornerGauge.SetTransitionType(arrTransitionType[i]);
+					cornerGauge.SetTransitionType(arrTransitionType[i]);
 					// 코너를 추정하기위해 추출한 경계점 중 사용할 경계점 유형을 선택합니다. // Select the boundary point type to use among the boundary points extracted to estimate the corner.
-					CornerGauge.SetTransitionChoice(arrTransitionChoice[i]);
+					cornerGauge.SetTransitionChoice(arrTransitionChoice[i]);
 
 					// 알고리즘 수행 // Execute the Algoritm
-					if((res = CornerGauge.Execute()).IsFail())
+					if((res = cornerGauge.Execute()).IsFail())
 					{
 						ErrorPrint(res, "Failed to execute Corner gauge.");
 						break;
@@ -194,7 +194,7 @@ namespace FLImagingExamplesCSharp
 					{
 						CFLFigureArray flfaResultLine = new CFLFigureArray();
 						// 추정된 선을 가져옵니다. // Get the estimated line.
-						CornerGauge.GetMeasuredLines(ref flfaResultLine, i % 4);
+						cornerGauge.GetMeasuredLines(ref flfaResultLine, i % 4);
 
 						layer.DrawFigureImage(flfaResultLine, EColor.BLACK, 5);
 						layer.DrawFigureImage(flfaResultLine, EColor.CYAN, 3);
@@ -206,7 +206,7 @@ namespace FLImagingExamplesCSharp
 						// 실행 결과를 가져옵니다. // Get the execution result.
 						CFLFigureArray flfaResultCorners = new CFLFigureArray();
 						// 추정된 코너를 가져옵니다. // Get the estimated corner.
-						CornerGauge.GetMeasuredObject(ref flfaResultCorners, i % 4);
+						cornerGauge.GetMeasuredObject(ref flfaResultCorners, i % 4);
 
 						layer.DrawFigureImage(flfaResultCorners, EColor.BLACK, 3);
 						layer.DrawFigureImage(flfaResultCorners, EColor.CYAN, 1);
@@ -225,9 +225,9 @@ namespace FLImagingExamplesCSharp
 					CFLFigureArray flfaResultsValid = new CFLFigureArray();
 					CFLFigureArray flfaResultsInvalid = new CFLFigureArray();
 					// 추정된 코너를 추출에 사용된 유효 경계점을 가져옵니다. // Get the effective boundary point used to extract the estimated corner.
-					CornerGauge.GetMeasuredValidPoints(ref flfaResultsValid, i % 4);
+					cornerGauge.GetMeasuredValidPoints(ref flfaResultsValid, i % 4);
 					// 추정된 코너를 추출에 사용되지 못한 유효하지 않은 경계점을 가져옵니다. // Get an invalid boundary point that is not used to extract the estimated corner.
-					CornerGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, i % 4);
+					cornerGauge.GetMeasuredInvalidPoints(ref flfaResultsInvalid, i % 4);
 
 					for(long i64Index = 0; i64Index < flfaResultsValid.GetCount(); ++i64Index)
 					{

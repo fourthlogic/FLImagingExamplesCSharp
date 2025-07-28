@@ -117,14 +117,14 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Rotation 객체 생성 // Create rotation object
-				CRotation Rotation = new CRotation();
+				CRotation rotation = new CRotation();
 				// Source 이미지 설정 // set source image
-				Rotation.SetSourceImage(ref arrFliImage[(int)EType.Destination1]);
+				rotation.SetSourceImage(ref arrFliImage[(int)EType.Destination1]);
 				// Rotation 각도 설정 // Set Angle
-				Rotation.SetAngle(30.0);
+				rotation.SetAngle(30.0);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Rotation.Execute())).IsFail())
+				if((res = (rotation.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Rotation.");
 					break;
@@ -133,28 +133,28 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvBlankColor = new CMultiVar<double>(0, 0, 0);
 
 				// Source 이미지 설정 // set source image
-				Rotation.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				rotation.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // set destination image
-				Rotation.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				rotation.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// 공백 영역을 지정한 색으로 채우도록 설정 // Set fill blank color mode
-				Rotation.EnableFillBlankColorMode(true);
+				rotation.EnableFillBlankColorMode(true);
 				// 공백 영역 색상 지정 // Set blank color value
-				Rotation.SetBlankColor(mvBlankColor);
+				rotation.SetBlankColor(mvBlankColor);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Rotation.Execute())).IsFail())
+				if((res = (rotation.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Rotation.");
 					break;
 				}
 
 				// Destination 이미지 설정 // set destination image
-				Rotation.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
+				rotation.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
 				// Rotation 변환 방식 픽셀로 설정 // Set Resize mode
-				Rotation.SetResizeMethod(EResizeMethod.Resize);
+				rotation.SetResizeMethod(EResizeMethod.Resize);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Rotation.Execute())).IsFail())
+				if((res = (rotation.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Rotation.");
 					break;

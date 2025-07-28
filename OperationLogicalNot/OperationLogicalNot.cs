@@ -89,16 +89,16 @@ namespace FLImagingExamplesCSharp
                 }
 
 				// Operation Logical Not 객체 생성 // Create Logical Not object
-				COperationLogicalNot LogicalNot = new COperationLogicalNot();
+				COperationLogicalNot operationLogicalNot = new COperationLogicalNot();
 
 				// Source 이미지 설정 // Set source image
-				LogicalNot.SetSourceImage(ref fliSourceImage);
+				operationLogicalNot.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set destination image 
-				LogicalNot.SetDestinationImage(ref fliDestinationImage);
+				operationLogicalNot.SetDestinationImage(ref fliDestinationImage);
 
 				// Operation Logical Not 수행
-				if(LogicalNot.Execute().IsFail())
+				if(operationLogicalNot.Execute().IsFail())
 				{
                     Console.WriteLine("Failed to execute OperationLogicalNot. \n");
                     break;

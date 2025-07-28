@@ -97,25 +97,25 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Geometric Match 객체 생성 // Create Geometric Match object
-				CDrawingMatch FLDrawingMatch = new CDrawingMatch();
+				CDrawingMatch drawingMatch = new CDrawingMatch();
 
 				// 학습할 도면을 설정합니다. // Set the drawing to learn.
-				FLDrawingMatch.SetDrawing("../../ExampleImages/Matching/Drawing.gbr");
+				drawingMatch.SetDrawing("../../ExampleImages/Matching/Drawing.gbr");
 				// 도면에 대한 분해능 단위를 설정합니다. // Set unit of pixel accuracy.
-				FLDrawingMatch.SetDistanceUnit(CDrawingMatch.EDistanceUnit.Millimeter);
+				drawingMatch.SetDistanceUnit(CDrawingMatch.EDistanceUnit.Millimeter);
 				// 도면에 대한 분해능을 설정합니다. // Set pixel accuracy.
-				FLDrawingMatch.SetPixelAccuracy(0.05, 0.05);
+				drawingMatch.SetPixelAccuracy(0.05, 0.05);
 
 				// 학습 파라미터를 설정합니다. // Set the learning parameters.
 				// 추출할 특징점 개수를 설정합니다. // Set the number of feature points to be extracted.
-				FLDrawingMatch.SetFeatureCount(10000);
+				drawingMatch.SetFeatureCount(10000);
 				// 추출할 특징점 처리과정에서의 노이즈 필터링 정도를 설정합니다. // Set the noise filtering degree in the process of processing the feature points to be extracted.
-				FLDrawingMatch.SetFeatureFiltering(0.0);
+				drawingMatch.SetFeatureFiltering(0.0);
 				// 추출할 특징점 처리과정에서의 허용 임계값을 설정합니다. // Set the allowable threshold in the feature point processing process to be extracted.
-				FLDrawingMatch.SetLearnThresholdCoefficient(1.0);
+				drawingMatch.SetLearnThresholdCoefficient(1.0);
 
 				// 알고리즘 학습 수행 // Learn the Algoritm
-				if((res = FLDrawingMatch.Learn()).IsFail())
+				if((res = drawingMatch.Learn()).IsFail())
 				{
 					ErrorPrint(res, "Failed to Learn.");
 					break;
@@ -123,42 +123,42 @@ namespace FLImagingExamplesCSharp
 
 				// 학습한 특징점을 디스플레이 한다 // Display the learned feature point
 				// 학습한 특징점이 찾고자하는 객체를 나타내기에 충분하게 잘 뽑혔는지 확인하고, 그렇지 않다면 학습 파라미터를 재조정함으로써 재확인하면 검출 시 더 효과적입니다. // Check whether the learned feature points are selected well enough to represent the object to be found.
-				CFLFigureArray flfLearnedDrawing = FLDrawingMatch.GetLearnedDrawing();
+				CFLFigureArray flfLearnedDrawing = drawingMatch.GetLearnedDrawing();
 
 				layerLearn.DrawFigureImage(flfLearnedDrawing, EColor.BLUE);
 
 				// 검출할 이미지 설정 // Set image to detect
-				FLDrawingMatch.SetSourceImage(ref fliFindImage);
+				drawingMatch.SetSourceImage(ref fliFindImage);
 
 				// 검출 시 사용될 파라미터를 설정합니다. // Set the parameters to be used for detection.
 				// 검출 시 사용될 기본 각도를 설정합니다. // Set the default angle to be used for detection.
-				FLDrawingMatch.SetAngleBias(0.0);
+				drawingMatch.SetAngleBias(0.0);
 				// 검출 시 사용될 각도의 탐색범위를 설정합니다. // Set the search range of the angle to be used for detection.
 				// 각도는 기본 각도를 기준으로 (기본 각도 - AngleTolerance, 기본 각도 + AngleTolerance)가 최종 탐색범위 // The angle is based on the basic angle (default angle - AngleTolerance, basic angle + AngleTolerance) is the final search range
-				FLDrawingMatch.SetAngleTolerance(5);
+				drawingMatch.SetAngleTolerance(5);
 				// 검출 시 사용될 스케일 탐색범위를 설정합니다. // Set the scale search range to be used for detection.
-				FLDrawingMatch.SetScaleRange(0.9, 1.1);
+				drawingMatch.SetScaleRange(0.9, 1.1);
 				// 검출 시 사용될 최소 탐색점수를 설정합니다. // Set the minimum search score to be used for detection.
-				FLDrawingMatch.SetMinimumDetectionScore(0.5);
+				drawingMatch.SetMinimumDetectionScore(0.5);
 				// 검출 시 사용될 최대 탐색객체 수를 설정합니다. // Set the maximum number of search objects to be used for detection.
-				FLDrawingMatch.SetMaxObject(1);
+				drawingMatch.SetMaxObject(1);
 
 				// 검출 시 보간법 사용 유무에 대해 설정합니다. // Set whether to use interpolation when detecting.
-				FLDrawingMatch.EnableInterpolation(true);
+				drawingMatch.EnableInterpolation(true);
 				// 검출 시 최적화 정도에 대해 설정합니다. // Set the degree of optimization for detection.
-				FLDrawingMatch.SetOptimizationOption(CGeometricMatch.EOptimizationOption.Fast);
+				drawingMatch.SetOptimizationOption(CGeometricMatch.EOptimizationOption.Fast);
 				// 검출 시 대비정도에 대해 설정합니다. // Set the contrast level for detection.
-				FLDrawingMatch.SetContrastOption(FLImagingCLR.AdvancedFunctions.EMatchContrastOption.Any);
+				drawingMatch.SetContrastOption(FLImagingCLR.AdvancedFunctions.EMatchContrastOption.Any);
 				// 검출 시 이미지 영역밖의 탐색 정도를 설정합니다. // Set the degree of search outside the image area when detecting.
-				FLDrawingMatch.SetInvisibleRegionEstimation(1.25);
+				drawingMatch.SetInvisibleRegionEstimation(1.25);
 				// 검출 시 처리과정에서의 허용 임계값을 설정합니다. // Set the allowable threshold in the process of detection.
-				FLDrawingMatch.SetFindThresholdCoefficient(1.2);
+				drawingMatch.SetFindThresholdCoefficient(1.2);
 				// 검출 시 겹쳐짐 허용 정도를 설정합니다. // Set the allowable degree of overlap during detection.
-				FLDrawingMatch.SetObjectOverlap(0.5);
+				drawingMatch.SetObjectOverlap(0.5);
 				// 검출 시 이미지 전처리 유무를 설정합니다. // Set whether or not to pre-process the image during detection.
 
 				// 알고리즘 수행 // Execute the Algoritm
-				res = FLDrawingMatch.Execute();
+				res = drawingMatch.Execute();
 
 				if(res.IsFail())
 				{
@@ -167,14 +167,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 기하학적 패턴 검출 결과를 가져옵니다. // Get the geometric pattern detection result.
-				long i64ResultCount = FLDrawingMatch.GetResultCount();
+				long i64ResultCount = drawingMatch.GetResultCount();
 
 				Console.WriteLine(" ▶ Find Information");
 
 				for(long i = 0; i < i64ResultCount; ++i)
 				{
 					CGeometricMatch.SResult results = new CGeometricMatch.SResult();
-					FLDrawingMatch.GetResult(i, ref results);
+					drawingMatch.GetResult(i, ref results);
 
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;

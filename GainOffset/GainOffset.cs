@@ -101,24 +101,24 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Gain Offset 객체 생성 // Create Gain Offset object
-				CGainOffset GainOffset = new CGainOffset();
+				CGainOffset gainOffset = new CGainOffset();
 
 				// Source 이미지 설정 // Set the source image
-                GainOffset.SetSourceImage(ref fliSourceImage);
+                gainOffset.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				GainOffset.SetDestinationImage(ref fliDestinationImage);
+				gainOffset.SetDestinationImage(ref fliDestinationImage);
 
 				// Gain 값 지정 // Set the Gain value
 				CMultiVar<double> mvGain = new CMultiVar<double>(2, 2, 2);
-				GainOffset.SetGain(mvGain);
+				gainOffset.SetGain(mvGain);
 
 				// Offset 값 지정 // Set the Offset value
 				CMultiVar<double> mvOffset = new CMultiVar<double>(50, 50, 50);
-				GainOffset.SetOffset(mvOffset);
+				gainOffset.SetOffset(mvOffset);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = GainOffset.Execute()).IsFail())
+				if((res = gainOffset.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Gain Offset. \n");
 					break;

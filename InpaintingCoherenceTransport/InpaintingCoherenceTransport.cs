@@ -109,22 +109,22 @@ namespace FLImagingExamplesCSharp
                 }
 
 				// InpaintingCoherenceTransport 객체 생성 // Create InpaintingCoherenceTransport object
-				CInpaintingCoherenceTransport InpaintingCoherenceTransport = new CInpaintingCoherenceTransport();
+				CInpaintingCoherenceTransport inpaintingCoherenceTransport = new CInpaintingCoherenceTransport();
                 // Source 이미지 설정 // Set the source image
-                InpaintingCoherenceTransport.SetSourceImage(ref arrFliImage[0]);
+                inpaintingCoherenceTransport.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                InpaintingCoherenceTransport.SetDestinationImage(ref arrFliImage[1]);
+                inpaintingCoherenceTransport.SetDestinationImage(ref arrFliImage[1]);
 				// Inpainting에 사용될 픽셀 영역 설정 // Setting the pixel area to be used for Inpainting
-				InpaintingCoherenceTransport.SetEpsilon(5);
+				inpaintingCoherenceTransport.SetEpsilon(5);
 				// 선명도 % // Sharpness parameter(%)
-				InpaintingCoherenceTransport.SetKappa(25);
+				inpaintingCoherenceTransport.SetKappa(25);
 				// 미분 평활화(가우시안) // Smoothing for derivative operator.(Gaussian)
-				InpaintingCoherenceTransport.SetSigma(1.400000);
+				inpaintingCoherenceTransport.SetSigma(1.400000);
 				// 확산 계수(가우시안) // Smoothing for diffusion coefficients.(Gaussian)
-				InpaintingCoherenceTransport.SetRho(5.000000);
+				inpaintingCoherenceTransport.SetRho(5.000000);
                 // Channel 가중치 // Channel Weight
                 CMultiVar<double> mvChannelWeight = new CMultiVar<double>(0.114, 0.587, 0.299);
-				InpaintingCoherenceTransport.SetWeightOfChannels(mvChannelWeight);
+				inpaintingCoherenceTransport.SetWeightOfChannels(mvChannelWeight);
 
 				CFLRegion flrInpaintingRegion = new CFLRegion();
 
@@ -136,10 +136,10 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Inpainting을 위한 Painting region 설정 // Set painting region for Inpainting
-				InpaintingCoherenceTransport.SetPaintingRegion(flrInpaintingRegion);
+				inpaintingCoherenceTransport.SetPaintingRegion(flrInpaintingRegion);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InpaintingCoherenceTransport.Execute()).IsFail())
+				if((res = inpaintingCoherenceTransport.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;

@@ -73,62 +73,62 @@ namespace FLImagingExamplesCSharp
 				layer.Clear();
 
 				// 객체 생성
-				COrientedFASTandRotatedBRIEF ORB = new COrientedFASTandRotatedBRIEF();
+				COrientedFASTandRotatedBRIEF orientedFASTandRotatedBRIEF = new COrientedFASTandRotatedBRIEF();
 
 				// ROI 범위 설정
 				CFLRect<int> flrROI = new CFLRect<int>(100, 50, 450, 450);
 
 				// 처리할 이미지 설정 // Set the image to process
-                if ((res = ORB.SetSourceImage(ref fliImage)).IsFail())
+                if ((res = orientedFASTandRotatedBRIEF.SetSourceImage(ref fliImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// 처리할 ROI 설정
-                if ((res = (ORB.SetSourceROI(flrROI))).IsFail())
+                if ((res = (orientedFASTandRotatedBRIEF.SetSourceROI(flrROI))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
 				}
 
 				// 특징점을 추출할 NLevels 수를 설정
-				if((res = (ORB.SetNLevels(4))).IsFail())
+				if((res = (orientedFASTandRotatedBRIEF.SetNLevels(4))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set NLevels.");
 					break;
 				}
 
 				// 특징점을 추출할 Nfeature 수를 설정
-				if((res = (ORB.SetNfeature(500))).IsFail())
+				if((res = (orientedFASTandRotatedBRIEF.SetNfeature(500))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Nfeature.");
 					break;
 				}
 
 				// 특징점을 추출할 ScoreType 설정
-				if((res = (ORB.SetScoreType(COrientedFASTandRotatedBRIEF.EScoreType.FastScore))).IsFail())
+				if((res = (orientedFASTandRotatedBRIEF.SetScoreType(COrientedFASTandRotatedBRIEF.EScoreType.FastScore))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Score Type.");
 					break;
 				}
 
 				// 추출할 특징점의 FAST Threshold 설정
-				if((res = (ORB.SetFASTThreshold(10))).IsFail())
+				if((res = (orientedFASTandRotatedBRIEF.SetFASTThreshold(10))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set FAST Threshold.");
 					break;
                 }
 
 				// ORB의 파라미터 Scale Factor 설정
-				if((res = (ORB.SetScaleFactor(1.2f))).IsFail())
+				if((res = (orientedFASTandRotatedBRIEF.SetScaleFactor(1.2f))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Scale Factor.");
 					break;
                 }
 
 				// ORB 실행 함수
-                if ((res = (ORB.Execute())).IsFail())
+                if ((res = (orientedFASTandRotatedBRIEF.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;
@@ -138,7 +138,7 @@ namespace FLImagingExamplesCSharp
 				CFLPointArray flfaResultPoints = new CFLPointArray();
 
 				// 검출된 점을 가져오는 함수
-                if ((res = (ORB.GetResultPoints(ref flfaResultPoints))).IsFail())
+                if ((res = (orientedFASTandRotatedBRIEF.GetResultPoints(ref flfaResultPoints))).IsFail())
 				{
 					ErrorPrint(res, "Failed to get result.");
 					break;

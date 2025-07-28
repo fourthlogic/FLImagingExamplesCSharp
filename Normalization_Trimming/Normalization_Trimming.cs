@@ -95,23 +95,23 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Normalization  객체 생성 // Create Normalization object
-				CNormalization Normalization = new CNormalization();
+				CNormalization normalization = new CNormalization();
 
 				// Source 이미지 설정 // Set source image 
-				Normalization.SetSourceImage(ref fliISrcImage);
+				normalization.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				Normalization.SetDestinationImage(ref fliIDstImage);
+				normalization.SetDestinationImage(ref fliIDstImage);
 
 				// 정규화 방식 설정(Min/Max) // Set Normalization Method(Min/Max)
-				Normalization.SetNormalizationMethod(CNormalization.ENormalizationMethod.MinMax);
+				normalization.SetNormalizationMethod(CNormalization.ENormalizationMethod.MinMax);
 
 				// Trimming 비율 설정 // Setting the Trimming Ratio
 				// 하한 10%, 상한 30% 설정 // Set trimming Lower 10%, Upper30%
-				Normalization.SetTrimming(CNormalization.ETrimmingMethod.Ratio, 0.1, 0.3);
+				normalization.SetTrimming(CNormalization.ETrimmingMethod.Ratio, 0.1, 0.3);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Normalization.Execute())).IsFail())
+				if((res = (normalization.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Normalization.");
 					break;
