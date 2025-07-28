@@ -44,7 +44,11 @@ namespace FLImagingExamplesCSharp
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-            CResult res;
+			// You must call the following function once
+			// before using any features of the FLImaging(R) library
+			CLibraryUtilities.Initialize();
+
+			CResult res;
 
             do
 			{
@@ -60,7 +64,7 @@ namespace FLImagingExamplesCSharp
                 }
 
 				// 이미지 뷰를 생성합니다.
-				if((res = m_viewImage.Create(5, 0, 505, 305, (ulong)hWindow)).IsFail())
+				if((res = m_viewImage.CreateAndFitParent((ulong)hWindow)).IsFail())
 					break;
 
 				// 키 이벤트를 부모에게 통지하도록 설정합니다.
