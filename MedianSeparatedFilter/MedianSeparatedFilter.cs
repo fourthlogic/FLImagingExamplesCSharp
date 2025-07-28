@@ -115,7 +115,7 @@ namespace FLImagingExamplesCSharp
 				filterMedianSeparate.SetSourceImage(ref fliSrcImage);
 
 				// ROI 범위 설정
-				CFLRect<Int32> flrROI = new CFLRect<int>(100, 190, 360, 420);
+				CFLRect<Int32> flrROI = new CFLRect<Int32>(100, 190, 360, 420);
 
 				// Source ROI 설정 // Set the Source ROI
 				filterMedianSeparate.SetSourceROI(flrROI);

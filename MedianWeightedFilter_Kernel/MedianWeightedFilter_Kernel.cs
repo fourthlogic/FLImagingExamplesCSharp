@@ -140,7 +140,7 @@ namespace FLImagingExamplesCSharp
                 // Source 이미지 설정 // Set the source image
                 medianWeighted.SetSourceImage(ref arrFliImage[0]);
                 // ROI 범위 설정
-                CFLRect<Int32> flrROI = new CFLRect<int>(100, 190, 360, 420);
+                CFLRect<Int32> flrROI = new CFLRect<Int32>(100, 190, 360, 420);
                 // Source ROI 설정 // Set the Source ROI
                 medianWeighted.SetSourceROI(flrROI);
                 // Destination 이미지 설정 // Set the destination image
