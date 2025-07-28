@@ -223,14 +223,14 @@ namespace FLImagingExamplesCSharp
 				augSpec1.EnableRotation(true);
 				augSpec1.SetRotationParam(-30.000000, 30.000000, false, false, 1.000000);
 
-				CAugmentationPreset AugmentationPreset1 = new CAugmentationPreset();
+				CAugmentationPreset augmentationPreset1 = new CAugmentationPreset();
 				List<int> flaClassNum1 = new List<int>();
 				flaClassNum1.Add(0);
 				flaClassNum1.Add(1);
-				AugmentationPreset1.SetClassNumbers(flaClassNum1);
-				AugmentationPreset1.SetName("Class 0");
-				AugmentationPreset1.SetAugmentationSpec(augSpec1);
-				classifier.AddLearningAugmentationPreset(AugmentationPreset1);
+				augmentationPreset1.SetClassNumbers(flaClassNum1);
+				augmentationPreset1.SetName("Class 0");
+				augmentationPreset1.SetAugmentationSpec(augSpec1);
+				classifier.AddLearningAugmentationPreset(augmentationPreset1);
 				CAugmentationSpec augSpec2 = new CAugmentationSpec();
 
 				augSpec2.EnableAugmentation(true);
@@ -241,13 +241,13 @@ namespace FLImagingExamplesCSharp
 				augSpec2.EnableRotation(true);
 				augSpec2.SetRotationParam(-180.000000, 180.000000, false, false, 1.000000);
 
-				CAugmentationPreset AugmentationPreset2 = new CAugmentationPreset();
+				CAugmentationPreset augmentationPreset2 = new CAugmentationPreset();
 				List<int> flaClassNum2 = new List<int>();
 				flaClassNum2.Add(2);
-				AugmentationPreset2.SetClassNumbers(flaClassNum2);
-				AugmentationPreset2.SetName("Class 2");
-				AugmentationPreset2.SetAugmentationSpec(augSpec2);
-				classifier.AddLearningAugmentationPreset(AugmentationPreset2);
+				augmentationPreset2.SetClassNumbers(flaClassNum2);
+				augmentationPreset2.SetName("Class 2");
+				augmentationPreset2.SetAugmentationSpec(augSpec2);
+				classifier.AddLearningAugmentationPreset(augmentationPreset2);
 				CAugmentationSpec augSpec3 = new CAugmentationSpec();
 
 				augSpec3.EnableAugmentation(true);
@@ -258,13 +258,13 @@ namespace FLImagingExamplesCSharp
 				augSpec3.EnableScale(true);
 				augSpec3.SetScaleParam(0.670000, 1.500000, 0.670000, 1.500000, true, 1.000000);
 
-				CAugmentationPreset AugmentationPreset3 = new CAugmentationPreset();
+				CAugmentationPreset augmentationPreset3 = new CAugmentationPreset();
 				List<int> flaClassNum3 = new List<int>();
 				flaClassNum3.Add(3);
-				AugmentationPreset3.SetClassNumbers(flaClassNum3);
-				AugmentationPreset3.SetName("Class 3");
-				AugmentationPreset3.SetAugmentationSpec(augSpec3);
-				classifier.AddLearningAugmentationPreset(AugmentationPreset3);
+				augmentationPreset3.SetClassNumbers(flaClassNum3);
+				augmentationPreset3.SetName("Class 3");
+				augmentationPreset3.SetAugmentationSpec(augSpec3);
+				classifier.AddLearningAugmentationPreset(augmentationPreset3);
 				CAugmentationSpec augSpec4 = new CAugmentationSpec();
 
 				augSpec4.EnableAugmentation(true);
@@ -275,14 +275,14 @@ namespace FLImagingExamplesCSharp
 				augSpec4.EnableQuarterRotation(true);
 				augSpec4.SetQuarterRotationParam(true, true, true, true, 1.000000);
 
-				CAugmentationPreset AugmentationPreset4 = new CAugmentationPreset();
+				CAugmentationPreset augmentationPreset4 = new CAugmentationPreset();
 				List<int> flaClassNum4 = new List<int>();
 				flaClassNum4.Add(4);
 				flaClassNum4.Add(5);
-				AugmentationPreset4.SetClassNumbers(flaClassNum4);
-				AugmentationPreset4.SetName("Class 4,5");
-				AugmentationPreset4.SetAugmentationSpec(augSpec4);
-				classifier.AddLearningAugmentationPreset(AugmentationPreset4);
+				augmentationPreset4.SetClassNumbers(flaClassNum4);
+				augmentationPreset4.SetName("Class 4,5");
+				augmentationPreset4.SetAugmentationSpec(augSpec4);
+				classifier.AddLearningAugmentationPreset(augmentationPreset4);
 
 				// Classifier learn function을 진행하는 스레드 생성 // Create the Classifier Learn function thread
 				CResult eLearnResult = new CResult();

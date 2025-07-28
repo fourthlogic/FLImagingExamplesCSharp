@@ -114,30 +114,30 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Pattern Match 객체 생성 // Create Pattern Match object
-				CPatternMatchSparse FLPatternMatchSparseSave = new CPatternMatchSparse();
-				CPatternMatchSparse FLPatternMatchSparseLoad = new CPatternMatchSparse();
+				CPatternMatchSparse patternMatchSparseSave = new CPatternMatchSparse();
+				CPatternMatchSparse patternMatchSparseLoad = new CPatternMatchSparse();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				FLPatternMatchSparseSave.SetLearnImage(ref fliLearnImage);
+				patternMatchSparseSave.SetLearnImage(ref fliLearnImage);
 
 				// 학습할 영역을 설정합니다. // Set the area to learn.
 				CFLRect<double> learnRegion = new CFLRect<double>(150, 150, 760, 840);
 				CFLPoint<double> flpLearnPivot = new CFLPoint<double>(learnRegion.GetCenter());
-				FLPatternMatchSparseSave.SetLearnROI(learnRegion);
-				FLPatternMatchSparseSave.SetLearnPivot(flpLearnPivot);
+				patternMatchSparseSave.SetLearnROI(learnRegion);
+				patternMatchSparseSave.SetLearnPivot(flpLearnPivot);
 
 				// 샘플링 개수를 설정합니다. // Set the sample count.
-				FLPatternMatchSparseSave.SetSampleCount(64);
+				patternMatchSparseSave.SetSampleCount(64);
 
 				// 알고리즘 수행 // Execute the Algoritm
-				if((res = FLPatternMatchSparseSave.Learn()).IsFail())
+				if((res = patternMatchSparseSave.Learn()).IsFail())
 				{
 					ErrorPrint(res, "Failed to Learn.");
 					break;
 				}
 
 				// 데이터 Save를 진행합니다. // Proceed to save data.
-				if((res = FLPatternMatchSparseSave.Save("../../ExampleImages/Matching/Pattern Single Learn")).IsFail())
+				if((res = patternMatchSparseSave.Save("../../ExampleImages/Matching/Pattern Single Learn")).IsFail())
 				{
 					ErrorPrint(res, "Failed to save\n");
 					break;
@@ -183,36 +183,36 @@ namespace FLImagingExamplesCSharp
 				Console.WriteLine("");
 
 				// 데이터 Load를 진행합니다. // Proceed to load data.
-				if((res = FLPatternMatchSparseLoad.Load("../../ExampleImages/Matching/Pattern Single Learn")).IsFail())
+				if((res = patternMatchSparseLoad.Load("../../ExampleImages/Matching/Pattern Single Learn")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load\n");
 					break;
 				}
 
 				// 검출할 이미지 설정 // Set image to detect
-				FLPatternMatchSparseLoad.SetSourceImage(ref fliFindImage);
+				patternMatchSparseLoad.SetSourceImage(ref fliFindImage);
 
 				// 검출 시 사용될 기본 각도를 설정합니다. // Set the default angle to be used for detection.
-				FLPatternMatchSparseLoad.SetAngleBias(0.0);
+				patternMatchSparseLoad.SetAngleBias(0.0);
 				// 검출 시 사용될 각도의 탐색범위를 설정합니다. // Set the search range of the angle to be used for detection.
 				// 각도는 기본 각도를 기준으로 (기본 각도 - AngleTolerance, 기본 각도 + AngleTolerance)가 최종 탐색범위 // The angle is based on the basic angle (default angle - AngleTolerance, basic angle + AngleTolerance) is the final search range
-				FLPatternMatchSparseLoad.SetAngleTolerance(10.0);
+				patternMatchSparseLoad.SetAngleTolerance(10.0);
 				// 검출 시 사용될 최소 탐색점수를 설정합니다. // Set the minimum search score to be used for detection.
-				FLPatternMatchSparseLoad.SetMinimumDetectionScore(0.7);
+				patternMatchSparseLoad.SetMinimumDetectionScore(0.7);
 				// 검출 시 사용될 최대 탐색객체 수를 설정합니다. // Set the maximum number of search objects to be used for detection.
-				FLPatternMatchSparseLoad.SetMaxObject(1);
+				patternMatchSparseLoad.SetMaxObject(1);
 				// 검출 시 보간법 사용 유무에 대해 설정합니다. // Set whether to use interpolation when detecting.
-				FLPatternMatchSparseLoad.EnableInterpolation(true);
+				patternMatchSparseLoad.EnableInterpolation(true);
 
 				// 알고리즘 수행 // Execute the Algoritm
-				if((res = FLPatternMatchSparseLoad.Execute()).IsFail())
+				if((res = patternMatchSparseLoad.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute");
 					break;
 				}
 
 				// 패턴 검출 결과를 가져옵니다. // Get the pattern detection result.
-				long i64ResultCount = FLPatternMatchSparseLoad.GetResultCount();
+				long i64ResultCount = patternMatchSparseLoad.GetResultCount();
 
 				Console.WriteLine(" ▶ Find Information");
 
@@ -220,7 +220,7 @@ namespace FLImagingExamplesCSharp
 				{
 					CPatternMatchSparse.SResult results = new CPatternMatchMultiSparse.SResult();
 
-					FLPatternMatchSparseLoad.GetResult(i, ref results);
+					patternMatchSparseLoad.GetResult(i, ref results);
 
 					float f32Score = results.f32Score;
 					float f32Angle = results.f32Angle;
