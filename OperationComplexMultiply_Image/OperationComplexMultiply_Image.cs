@@ -141,29 +141,29 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Multiply 객체 생성 // Create Operation Multiply object
-				COperationComplexMultiply cd = new COperationComplexMultiply();
+				COperationComplexMultiply complexMultiply = new COperationComplexMultiply();
 
 				// Source 이미지 설정 // Set the source image
-				cd.SetSourceImage(ref fliSourceImage);
+				complexMultiply.SetSourceImage(ref fliSourceImage);
 
 				// Operand 이미지 설정 // Set the operand image
-				cd.SetOperandImage(ref fliOperandImage);
+				complexMultiply.SetOperandImage(ref fliOperandImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				cd.SetDestinationImage(ref fliDestinationImage);
+				complexMultiply.SetDestinationImage(ref fliDestinationImage);
 
 				// 오버플로 처리 방법 설정 // Set the overflow handling method
-				cd.SetOverflowMethod(EOverflowMethod.Wrapping);
+				complexMultiply.SetOverflowMethod(EOverflowMethod.Wrapping);
 
 				// 연산 방식 이미지로 설정 // Set operation source to image
-				cd.SetOperationSource(EOperationSource.Image);
+				complexMultiply.SetOperationSource(EOperationSource.Image);
 
 				// 공백 색상 칠하기 모드 해제 // Set the Fill blank color mode false
 				// 결과 이미지가 이미 존재할 경우 연산되지 않은 영역을 공백 색상으로 칠하지 않고 원본 그대로 둔다. // If the destination image already exists, the uncomputed area is left intact without being painted in a blank color.
-				cd.EnableFillBlankColorMode(false);
+				complexMultiply.EnableFillBlankColorMode(false);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = cd.Execute()).IsFail())
+				if((res = complexMultiply.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation complex multiply. \n");
 					break;

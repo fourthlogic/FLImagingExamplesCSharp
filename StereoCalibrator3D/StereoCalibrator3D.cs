@@ -266,7 +266,7 @@ namespace FLImagingExamplesCSharp
 			CGUIViewImage m_viewImage;
 		}
 
-		static bool Calibration(CStereoCalibrator3D sSC, CFLImage fliLearnImage, CFLImage fliLearnImage2)
+		static bool Calibration(CStereoCalibrator3D stereoCalibrator, CFLImage fliLearnImage, CFLImage fliLearnImage2)
 		{
 			bool bResult = false;
 
@@ -276,35 +276,35 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// Learn 이미지 설정 // Set learn image
-				if((res = sSC.SetLearnImage(ref fliLearnImage)).IsFail())
+				if((res = stereoCalibrator.SetLearnImage(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image.\n");
 					break;
 				}
 
 				// Learn 이미지 설정 // Set learn image 2
-				if((res = sSC.SetLearnImage2(ref fliLearnImage2)).IsFail())
+				if((res = stereoCalibrator.SetLearnImage2(ref fliLearnImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image.\n");
 					break;
 				}
 
 				// Optimal Solution Accuracy 설정 // Set the optical solution accuracy
-				if((res = sSC.SetOptimalSolutionAccuracy(1e-5)).IsFail())
+				if((res = stereoCalibrator.SetOptimalSolutionAccuracy(1e-5)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Optimal Solution Accuracy.\n");
 					break;
 				}
 
 				// Grid Type 설정 // Set the grid type
-				if((res = sSC.SetGridType(CStereoCalibrator3D.EGridType.ChessBoard)).IsFail())
+				if((res = stereoCalibrator.SetGridType(CStereoCalibrator3D.EGridType.ChessBoard)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Grid Type.\n");
 					break;
 				}
 
 				// Calibration 실행 // Execute calibration
-				if((res = sSC.Calibrate()).IsFail())
+				if((res = stereoCalibrator.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Calibration failed.\n");
 					break;
@@ -317,7 +317,7 @@ namespace FLImagingExamplesCSharp
 			return bResult;
 		}
 
-		static bool Undistortion(CStereoCalibrator3D sSC, CFLImage fliSourceImage, CFLImage fliSourceImage2, CFLImage fliDestinationImage, CFLImage fliDestinationImage2)
+		static bool Undistortion(CStereoCalibrator3D stereoCalibrator, CFLImage fliSourceImage, CFLImage fliSourceImage2, CFLImage fliDestinationImage, CFLImage fliDestinationImage2)
 		{
 			bool bResult = false;
 
@@ -327,42 +327,42 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// Source 이미지 설정 // Set source image
-				if((res = sSC.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = stereoCalibrator.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load image.\n");
 					break;
 				}
 
 				// Source 이미지 2 설정 // Set source image 2
-				if((res = sSC.SetSourceImage2(ref fliSourceImage2)).IsFail())
+				if((res = stereoCalibrator.SetSourceImage2(ref fliSourceImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load image.\n");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set the destination image
-				if((res = sSC.SetDestinationImage(ref fliDestinationImage)).IsFail())
+				if((res = stereoCalibrator.SetDestinationImage(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load image.\n");
 					break;
 				}
 
 				// Destination 이미지 2 설정 // Set destination image 2
-				if((res = sSC.SetDestinationImage2(ref fliDestinationImage2)).IsFail())
+				if((res = stereoCalibrator.SetDestinationImage2(ref fliDestinationImage2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load image.\n");
 					break;
 				}
 
 				// Interpolation 알고리즘 설정 // Set interpolation algorithm
-				if((res = sSC.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
+				if((res = stereoCalibrator.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set interpolation method.\n");
 					break;
 				}
 
 				// Undistortion 실행 // Execute undistortion
-				if((res = sSC.Execute()).IsFail())
+				if((res = stereoCalibrator.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Undistortion failed.\n");
 					break;
@@ -393,7 +393,7 @@ namespace FLImagingExamplesCSharp
 			CGUIViewImage viewImageDestination2 = new CGUIViewImage();
 
 			// Camera Calibrator 객체 생성 // Create Camera Calibrator object
-			CStereoCalibrator3D sSC = new CStereoCalibrator3D();
+			CStereoCalibrator3D stereoCalibrator = new CStereoCalibrator3D();
 			CMessageReceiver msgReceiver = new CMessageReceiver(ref viewImageLearn);
 			CMessageReceiver msgReceiver2 = new CMessageReceiver(ref viewImageLearn2);
 
@@ -423,7 +423,7 @@ namespace FLImagingExamplesCSharp
 				Console.WriteLine("Processing....\n");
 
 				// Stereo calibration 수행 // Execute stereo calibration
-				if(!Calibration(sSC, fliLearnImage, fliLearnImage2))
+				if(!Calibration(stereoCalibrator, fliLearnImage, fliLearnImage2))
 					break;
 
 				// Source 이미지에 Learn 이미지를 복사 (얕은 복사) // Copy the learn image to source image (Shallow Copy)
@@ -449,7 +449,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Undistortion 수행 // Execute undistortion
-				if(!Undistortion(sSC, fliSourceImage, fliSourceImage2, fliDestinationImage, fliDestinationImage2))
+				if(!Undistortion(stereoCalibrator, fliSourceImage, fliSourceImage2, fliDestinationImage, fliDestinationImage2))
 					break;
 
 				// 화면에 격자 탐지 결과 출력 // Display the result of grid detection
@@ -470,14 +470,14 @@ namespace FLImagingExamplesCSharp
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage.GetPageCount(); ++i64ImgIdx)
 				{
 					sArrGridDisplay[i64ImgIdx].sGridData = new CStereoCalibrator3D.SGridResult();
-					sSC.GetResultGridPoints(ref sArrGridDisplay[i64ImgIdx].sGridData, i64ImgIdx);
+					stereoCalibrator.GetResultGridPoints(ref sArrGridDisplay[i64ImgIdx].sGridData, i64ImgIdx);
 					sArrGridDisplay[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 				}
 
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage2.GetPageCount(); ++i64ImgIdx)
 				{
 					sArrGridDisplay2[i64ImgIdx].sGridData = new CStereoCalibrator3D.SGridResult();
-					sSC.GetResultGridPoints2(ref sArrGridDisplay2[i64ImgIdx].sGridData, i64ImgIdx);
+					stereoCalibrator.GetResultGridPoints2(ref sArrGridDisplay2[i64ImgIdx].sGridData, i64ImgIdx);
 					sArrGridDisplay2[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 				}
 
@@ -594,19 +594,19 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// calibration data 출력 // Display the calibration data
-				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam = sSC.GetResultIntrinsicParameters();
-				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef = sSC.GetResultDistortionCoefficients();
+				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam = stereoCalibrator.GetResultIntrinsicParameters();
+				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef = stereoCalibrator.GetResultDistortionCoefficients();
 
-				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam2 = sSC.GetResultIntrinsicParameters2();
-				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef2 = sSC.GetResultDistortionCoefficients2();
+				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam2 = stereoCalibrator.GetResultIntrinsicParameters2();
+				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef2 = stereoCalibrator.GetResultDistortionCoefficients2();
 
-				CStereoCalibrator3D.SRotationParameters sRotationParam = sSC.GetResultRotationParameters();
-				CStereoCalibrator3D.SRotationParameters sRotationParam2 = sSC.GetResultRotationParameters2();
+				CStereoCalibrator3D.SRotationParameters sRotationParam = stereoCalibrator.GetResultRotationParameters();
+				CStereoCalibrator3D.SRotationParameters sRotationParam2 = stereoCalibrator.GetResultRotationParameters2();
 
-				CStereoCalibrator3D.STranslationParameters sTranslationParam = sSC.GetResultTranslationParameters();
-				CStereoCalibrator3D.STranslationParameters sTranslationParam2 = sSC.GetResultTranslationParameters2();
+				CStereoCalibrator3D.STranslationParameters sTranslationParam = stereoCalibrator.GetResultTranslationParameters();
+				CStereoCalibrator3D.STranslationParameters sTranslationParam2 = stereoCalibrator.GetResultTranslationParameters2();
 
-				double f64ReprojError = sSC.GetResultReProjectionError();
+				double f64ReprojError = stereoCalibrator.GetResultReProjectionError();
 
 				string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, 0, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, 0, 0, 1);
 

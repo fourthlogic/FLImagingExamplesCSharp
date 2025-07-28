@@ -115,29 +115,29 @@ namespace FLImagingExamplesCSharp
 				viewImageSrc.SetFixThumbnailView(true);
 
 				// LaserTriangulation 객체 생성 // Create LaserTriangulation object
-				CLaserTriangulation3D LaserTriangulation = new CLaserTriangulation3D();
+				CLaserTriangulation3D laserTriangulation = new CLaserTriangulation3D();
 
 				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 
 				// Source 이미지 설정 // Set the source image
-				LaserTriangulation.SetSourceImage(ref fliSrcImage);
+				laserTriangulation.SetSourceImage(ref fliSrcImage);
 				// Destination Height Map 이미지 설정 // Set the destination height map image
-				LaserTriangulation.SetDestinationHeightMapImage(ref fliDstImage);
+				laserTriangulation.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destination 3D Object 설정 // Set the Destination 3D Object 
-				LaserTriangulation.SetDestinationObject(ref fl3DOHM);
+				laserTriangulation.SetDestinationObject(ref fl3DOHM);
 				// Source 이미지 타입 설정 // Set the type of the source image
-				LaserTriangulation.SetSourceType(CLaserTriangulation3D.ESourceType.Profile);
+				laserTriangulation.SetSourceType(CLaserTriangulation3D.ESourceType.Profile);
 				// Pixel Accuracy 설정 // Set the pixel accuracy
-				LaserTriangulation.SetPixelAccuracy(0.33);
+				laserTriangulation.SetPixelAccuracy(0.33);
 				// Scan Accuracy 설정 // Set the scan accuracy
-				LaserTriangulation.SetScanAccuracy(0.2);
+				laserTriangulation.SetScanAccuracy(0.2);
 				// Working Distance 설정 // Set the working distance
-				LaserTriangulation.SetWorkingDistance(214.7);
+				laserTriangulation.SetWorkingDistance(214.7);
 				// 레이저 각도 설정 // Set the angle of laser
-				LaserTriangulation.SetAngleOfLaser(60);
+				laserTriangulation.SetAngleOfLaser(60);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = LaserTriangulation.Execute()).IsFail())
+				if((res = laserTriangulation.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Laser Triangulation.\n");
 					break;
@@ -181,7 +181,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 3D 이미지 뷰에 Height Map (Destination Image) 이미지를 디스플레이 // Display the Height Map (Destination Image) on the 3D image view
-				if(view3DDst.PushObject(LaserTriangulation.GetDestinationObject()).IsFail())
+				if(view3DDst.PushObject(laserTriangulation.GetDestinationObject()).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;

@@ -94,20 +94,20 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Channel Swap 객체 생성 // Create Channel Swap object
-				CChannelSwap ChannelSwap = new CChannelSwap();
+				CChannelSwap channelSwap = new CChannelSwap();
 
 				// Source 이미지 설정 // Set source image 
-				ChannelSwap.SetSourceImage(ref fliSourceImage);
+				channelSwap.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set destination image
-				ChannelSwap.SetDestinationImage(ref fliDestinationImage);
+				channelSwap.SetDestinationImage(ref fliDestinationImage);
 
 				// 교환할 채널 인덱스 설정 // Set channel indexes to swap
-				ChannelSwap.SetSwapChannelFrom(EChannelSelection.Channel_0);
-				ChannelSwap.SetSwapChannelTo(EChannelSelection.Channel_1);
+				channelSwap.SetSwapChannelFrom(EChannelSelection.Channel_0);
+				channelSwap.SetSwapChannelTo(EChannelSelection.Channel_1);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ChannelSwap.Execute())).IsFail())
+				if((res = (channelSwap.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Channel Swap. \n");
 					break;

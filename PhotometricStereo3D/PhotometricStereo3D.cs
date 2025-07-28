@@ -123,22 +123,22 @@ namespace FLImagingExamplesCSharp
 				viewImageSrc.SetFixThumbnailView(true);
 
 				// PhotometricStereo 객체 생성 // Create PhotometricStereo object
-				CPhotometricStereo3D photometric = new CPhotometricStereo3D();
+				CPhotometricStereo3D photometricStereo = new CPhotometricStereo3D();
 
 				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 
 				// Source 이미지 설정 // Set the source image
-				photometric.SetSourceImage(ref fliSrcImage);
+				photometricStereo.SetSourceImage(ref fliSrcImage);
 				// Destination Height Map 이미지 설정 // Set the destination height map image
-				photometric.SetDestinationHeightMapImage(ref fliDstImage);
+				photometricStereo.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destination 객체 설정 // Set the destination object
-				photometric.SetDestinationObject(ref fl3DOHM);
+				photometricStereo.SetDestinationObject(ref fl3DOHM);
 				// Destination Texture 이미지 설정 // Set the destination texture image
-				photometric.SetDestinationTextureImage(ref fliTxtImage);
+				photometricStereo.SetDestinationTextureImage(ref fliTxtImage);
 				// 동작 방식 설정 // Set Operation Mode
-				photometric.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
+				photometricStereo.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
 				// Valid 픽셀의 기준 설정 // Set valid pixel ratio
-				photometric.SetValidPixelThreshold(0.125);
+				photometricStereo.SetValidPixelThreshold(0.125);
 
 
 				// 각 이미지의 광원 Slant 값 입력
@@ -189,10 +189,10 @@ namespace FLImagingExamplesCSharp
 				mvdTilt.PushBack(13.056294);
 				mvdTilt.PushBack(-5.976723);
 
-				photometric.SetLightAngleDegrees(mvdSlant, mvdTilt);
+				photometricStereo.SetLightAngleDegrees(mvdSlant, mvdTilt);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = photometric.Execute()).IsFail())
+				if((res = photometricStereo.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;
@@ -234,7 +234,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				CFL3DObjectHeightMap fl3DObject = photometric.GetDestinationObject() as CFL3DObjectHeightMap;
+				CFL3DObjectHeightMap fl3DObject = photometricStereo.GetDestinationObject() as CFL3DObjectHeightMap;
 				fl3DObject.SetTextureImage(fliTxtImage);
 				fl3DObject.ActivateVertexColorTexture(false);
 
