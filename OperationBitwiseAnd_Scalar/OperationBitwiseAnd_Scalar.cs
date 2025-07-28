@@ -101,25 +101,25 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseAnd 객체 생성 // Create OperationBitwiseAnd object
-                COperationBitwiseAnd bitand = new COperationBitwiseAnd();
+                COperationBitwiseAnd bitwiseAnd = new COperationBitwiseAnd();
 
                 // Source 이미지 설정 // Set the source image
-                bitand.SetSourceImage(ref fliDestinationImage);
+                bitwiseAnd.SetSourceImage(ref fliDestinationImage);
 
                 // ROI 범위 설정 // Set the ROI value
                 CFLCircle<double> flcSourceROI = new CFLCircle<double>(128, 128, 80, 0, 0, 360, EArcClosingMethod.EachOther);
 
                 // Source 이미지의 ROI 지정 // Set the Source ROI
-                bitand.SetSourceROI(flcSourceROI);
+                bitwiseAnd.SetSourceROI(flcSourceROI);
 
                 // Scalar Operation 소스로 설정 // Set Operation Source to scalar
-                bitand.SetOperationSource(EOperationSource.Scalar);
+                bitwiseAnd.SetOperationSource(EOperationSource.Scalar);
 
                 // 스칼라 값 지정 // Set the Scalar value
-                bitand.SetScalarValue(111);
+                bitwiseAnd.SetScalarValue(111);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitand.Execute()).IsFail())
+                if ((res = bitwiseAnd.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseAnd. \n");
                     break;

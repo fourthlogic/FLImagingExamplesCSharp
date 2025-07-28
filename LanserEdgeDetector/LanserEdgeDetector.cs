@@ -95,19 +95,19 @@ namespace FLImagingExamplesCSharp
 				}
 
                 // Lanser Edge Detector 객체 생성 // Create Lanser Edge Detector object
-                CLanserEdgeDetector LanserEdge = new CLanserEdgeDetector();
+                CLanserEdgeDetector lanserEdgeDetector = new CLanserEdgeDetector();
 
 				// Source 이미지 설정 // Set source image 
-                LanserEdge.SetSourceImage(ref fliISrcImage);
+                lanserEdgeDetector.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-                LanserEdge.SetDestinationImage(ref fliIDstImage);
+                lanserEdgeDetector.SetDestinationImage(ref fliIDstImage);
 
 				// Edge Detector Mode 설정 // Set Edge Detector Mode
-                LanserEdge.SetEdgeDetectorMode(CLanserEdgeDetector.EEdgeDetectorMode.Shen);
+                lanserEdgeDetector.SetEdgeDetectorMode(CLanserEdgeDetector.EEdgeDetectorMode.Shen);
 
                 // 이미지 전처리 Smoothing/Normal 설정 / Set Image Preprocessing Mode Smoothing/Normal
-                LanserEdge.SetNoiseReduction(CLanserEdgeDetector.ENoiseReduction.Smoothing);
+                lanserEdgeDetector.SetNoiseReduction(CLanserEdgeDetector.ENoiseReduction.Smoothing);
 
 				// threshold 값 // threshold value
 				CMultiVar<double> mvThresholdValue = new CMultiVar<double>();
@@ -116,12 +116,12 @@ namespace FLImagingExamplesCSharp
 				// 최대 threshold 값 입력 // maximum threshold value push
 				mvThresholdValue.PushBack(30);
 				// 최소, 최대 threshold 설정 // Set minimum, maximum threshold
-                LanserEdge.SetThreshold(mvThresholdValue);
+                lanserEdgeDetector.SetThreshold(mvThresholdValue);
                 // Alpha 값 설정 // Set alpha value
-                LanserEdge.SetAlphaValue(2.0f);
+                lanserEdgeDetector.SetAlphaValue(2.0f);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (LanserEdge.Execute())).IsFail())
+                if ((res = (lanserEdgeDetector.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Lanser Edge Detector.");
 					break;

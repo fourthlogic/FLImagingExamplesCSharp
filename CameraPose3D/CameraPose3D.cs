@@ -76,21 +76,21 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// CameraPose3D 객체 생성 // Create CameraPose3D object
-				CCameraPose3D CameraPose3D = new CCameraPose3D();
+				CCameraPose3D cameraPose3D = new CCameraPose3D();
 
 				// Camera Matrix 설정 // Set the camera matrix
 				CFLPoint<double> flpFocalLength = new CFLPoint<double>(617.8218, 618.2815);
 				CFLPoint<double> flpPrincipalPoint = new CFLPoint<double>(319.05237, 243.0472);
-				CameraPose3D.SetCameraMatrix(flpFocalLength, flpPrincipalPoint);
+				cameraPose3D.SetCameraMatrix(flpFocalLength, flpPrincipalPoint);
 
 				// 셀 간격 설정 // Set the board cell pitch
-				CameraPose3D.SetBoardCellPitch(5, 5);
+				cameraPose3D.SetBoardCellPitch(5, 5);
 
 				// 캘리브레이션 객체 타입 설정 // Set the calibration object type
-				CameraPose3D.SetCalibrationObjectType(ECalibrationObjectType.ChessBoard);
+				cameraPose3D.SetCalibrationObjectType(ECalibrationObjectType.ChessBoard);
 
 				// 이미지 전처리 타입 설정 // Set the image preprocessing method
-				CameraPose3D.SetPreprocessingMethod(ECalibrationPreprocessingMethod.ShadingCorrection);
+				cameraPose3D.SetPreprocessingMethod(ECalibrationPreprocessingMethod.ShadingCorrection);
 
 				int i32PageCount = fliSource.GetPageCount();
 
@@ -124,13 +124,13 @@ namespace FLImagingExamplesCSharp
 					CFLImage fliPage = new CFLImage(fliSource.GetPage(i));
 
 					// 처리할 이미지 설정
-					CameraPose3D.SetSourceImage(ref fliPage);
+					cameraPose3D.SetSourceImage(ref fliPage);
 
 					// 이미지 포인터 설정 // Set image pointer
 					arrViewWrap[i].SetImagePtr(ref fliPage);
 
 					// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-					if((eResult = CameraPose3D.Execute()).IsFail())
+					if((eResult = cameraPose3D.Execute()).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to execute Camera Pose 3D.");
 						break;
@@ -158,11 +158,11 @@ namespace FLImagingExamplesCSharp
 
 					// 결과 객체 영역 가져오기 // Get the result board region
 					CFLQuad<double> flqBoardRegion = new CFLQuad<double>();
-					CameraPose3D.GetResultBoardRegion(ref flqBoardRegion);
+					cameraPose3D.GetResultBoardRegion(ref flqBoardRegion);
 
 					// 결과 코너점 가져오기 // Get the result corner points
 					CFLFigureArray flfaCornerPoints = new CFLFigureArray();
-					CameraPose3D.GetResultCornerPoints(ref flfaCornerPoints);
+					cameraPose3D.GetResultCornerPoints(ref flfaCornerPoints);
 
 					// 결과 객체 영역 그리기 // Draw the result board region
 					layerViewSource.DrawFigureImage(flqBoardRegion, EColor.BLUE, 3);
@@ -180,10 +180,10 @@ namespace FLImagingExamplesCSharp
 					List<double> listResultRotationVector = new List<double>(), listResultTranslationVector = new List<double>(), listResultEulerAngle = new List<double>();
 					CMatrix<double> matResultRotationMatrix = new CMatrix<double>();
 
-					CameraPose3D.GetResultRotationVector(ref listResultRotationVector);
-					CameraPose3D.GetResultRotationMatrix(ref matResultRotationMatrix);
-					CameraPose3D.GetResultTranslationVector(ref listResultTranslationVector);
-					CameraPose3D.GetResultEulerAngle(eEulerSequence, ref listResultEulerAngle);
+					cameraPose3D.GetResultRotationVector(ref listResultRotationVector);
+					cameraPose3D.GetResultRotationMatrix(ref matResultRotationMatrix);
+					cameraPose3D.GetResultTranslationVector(ref listResultTranslationVector);
+					cameraPose3D.GetResultEulerAngle(eEulerSequence, ref listResultEulerAngle);
 
 					CFLPoint<double> flpImageSize = new CFLPoint<double>(fliSource);
 					flpImageSize.x *= 2;

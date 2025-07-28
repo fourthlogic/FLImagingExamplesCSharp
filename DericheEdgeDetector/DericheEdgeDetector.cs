@@ -95,16 +95,16 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Deriche Edge Detector 객체 생성 // Create Deriche Edge Detector object
-				CDericheEdgeDetector DericheEdge = new CDericheEdgeDetector();
+				CDericheEdgeDetector dericheEdgeDetector = new CDericheEdgeDetector();
 
 				// Source 이미지 설정 // Set source image 
-				DericheEdge.SetSourceImage(ref fliISrcImage);
+				dericheEdgeDetector.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				DericheEdge.SetDestinationImage(ref fliIDstImage);
+				dericheEdgeDetector.SetDestinationImage(ref fliIDstImage);
 
 				// Smoothing 전처리 설정 // Set Smoothing preprocessing
-				DericheEdge.SetConvolutionMode(CDericheEdgeDetector.EConvolutionMode.Normal);
+				dericheEdgeDetector.SetConvolutionMode(CDericheEdgeDetector.EConvolutionMode.Normal);
 
 				// threshold 값 // threshold value
 				CMultiVar<double> mvThresholdValue = new CMultiVar<double>();
@@ -113,12 +113,12 @@ namespace FLImagingExamplesCSharp
 				// 최대 threshold 값 입력 // maximum threshold value push
 				mvThresholdValue.PushBack(25);
 				// 최소, 최대 threshold 설정 // Set minimum, maximum threshold
-				DericheEdge.SetThreshold(mvThresholdValue);
+				dericheEdgeDetector.SetThreshold(mvThresholdValue);
 				// Alpha 값 설정 // Set alpha value
-				DericheEdge.SetAlpha(1.0f);
+				dericheEdgeDetector.SetAlpha(1.0f);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (DericheEdge.Execute())).IsFail())
+				if((res = (dericheEdgeDetector.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Deriche Edge Detector.");
 					break;

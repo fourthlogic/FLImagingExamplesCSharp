@@ -89,17 +89,17 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// ResidualEvaluator3D 객체 생성 // Create ResidualEvaluator3D object
-				CResidualEvaluator3D ResidualEvaluator3D = new CResidualEvaluator3D();
+				CResidualEvaluator3D residualEvaluator3D = new CResidualEvaluator3D();
 
 				// Destination object 설정 // Set the destination object
-				ResidualEvaluator3D.SetLearnObject(ref fl3DOReferenceObject);
+				residualEvaluator3D.SetLearnObject(ref fl3DOReferenceObject);
 				// Target object 설정 // Set the target object
-				ResidualEvaluator3D.SetSourceObject(ref fl3DOTargetObject);
+				residualEvaluator3D.SetSourceObject(ref fl3DOTargetObject);
 				// 최대 결과 개수 설정 // Set the max count of match result
-				ResidualEvaluator3D.SetResidualType(CResidualEvaluator3D.EResidualType.RMSE);
+				residualEvaluator3D.SetResidualType(CResidualEvaluator3D.EResidualType.RMSE);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = ResidualEvaluator3D.Execute()).IsFail())
+				if((eResult = residualEvaluator3D.Execute()).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to execute Residual Evaluator 3D.");
 					break;
@@ -135,7 +135,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				double f64Residual = ResidualEvaluator3D.GetResidual();
+				double f64Residual = residualEvaluator3D.GetResidual();
 
 				string strChannel = String.Format("Residual : {0}", f64Residual);
 

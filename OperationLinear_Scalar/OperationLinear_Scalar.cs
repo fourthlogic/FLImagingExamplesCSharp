@@ -101,27 +101,27 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// OperationLinear 객체 생성 // Create OperationLinear object
-				COperationLinear Linear = new COperationLinear();
+				COperationLinear linear = new COperationLinear();
 
 				// Source 이미지 설정 // Set the source image
-                Linear.SetSourceImage(ref fliDestinationImage);
+                linear.SetSourceImage(ref fliDestinationImage);
 
 				// ROI 범위 설정 // Set the ROI value
 				CFLCircle<double> flcSourceROI = new CFLCircle<double>(128, 128, 80, 0, 0, 360, EArcClosingMethod.EachOther);
 
 				// Source 이미지의 ROI 지정 // Set the Source ROI
-                Linear.SetSourceROI(flcSourceROI);
+                linear.SetSourceROI(flcSourceROI);
 
 				// Scalar Operation 소스로 설정 // Set Operation Source to scalar
-                Linear.SetOperationSource(EOperationSource.Scalar);
+                linear.SetOperationSource(EOperationSource.Scalar);
 
 				// 스칼라 값 지정 // Set the Scalar value
-				Linear.SetScalarValue(111, EScalarIndex.First);
-				Linear.SetScalarValue(111, EScalarIndex.Second);
-				Linear.SetDestinationImage(ref fliDestinationImage);
+				linear.SetScalarValue(111, EScalarIndex.First);
+				linear.SetScalarValue(111, EScalarIndex.Second);
+				linear.SetDestinationImage(ref fliDestinationImage);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((res = Linear.Execute()).IsFail())
+				if ((res = linear.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Operation Linear. \n");
 					break;

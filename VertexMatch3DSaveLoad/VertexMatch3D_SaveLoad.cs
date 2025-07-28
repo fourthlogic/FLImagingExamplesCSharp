@@ -91,33 +91,33 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// VertexMatch3D 객체 생성 // Create VertexMatch3D object
-				CVertexMatch3D VertexMatch3D = new CVertexMatch3D();
+				CVertexMatch3D vertexMatch3D = new CVertexMatch3D();
 
 				// Learn object 설정 // Set the learn object
-				VertexMatch3D.SetLearnObject(ref fl3DOLearnObject);
+				vertexMatch3D.SetLearnObject(ref fl3DOLearnObject);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = VertexMatch3D.Learn()).IsFail())
+				if((eResult = vertexMatch3D.Learn()).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to learn Vertex Match 3D.");
 					break;
 				}
 
 				// 학습 데이터 저장 // Save the learnt data
-				if((eResult = VertexMatch3D.Save("../../ExampleImages/VertexMatch3D/Example FLVM Data.flvm")).IsFail())
+				if((eResult = vertexMatch3D.Save("../../ExampleImages/VertexMatch3D/Example FLVM Data.flvm")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to save the learnt data file.\n");
 					break;
 				}
 
 				// 학습 데이터 불러오기 // Load the learnt data
-				if((eResult = VertexMatch3D.Load("../../ExampleImages/VertexMatch3D/Example FLVM Data.flvm")).IsFail())
+				if((eResult = vertexMatch3D.Load("../../ExampleImages/VertexMatch3D/Example FLVM Data.flvm")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the learnt data file.\n");
 					break;
 				}
 
-				VertexMatch3D.GetSampledLearn3DObject(ref fl3DOSampleObject);
+				vertexMatch3D.GetSampledLearn3DObject(ref fl3DOSampleObject);
 
 				// Learn Object 출력 // Display the learn object
 				if((eResult = view3DLearn.PushObject(fl3DOLearnObject)).IsFail())
@@ -134,30 +134,30 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Source object 설정 // Set the source object
-				VertexMatch3D.SetSourceObject(ref fl3DOSourceObject);
+				vertexMatch3D.SetSourceObject(ref fl3DOSourceObject);
 				// Min score 설정 // Set the min score
-				VertexMatch3D.SetMinScore(0.3);
+				vertexMatch3D.SetMinScore(0.3);
 				// 최대 결과 개수 설정 // Set the max count of match result
-				VertexMatch3D.SetMaxObject(4);
+				vertexMatch3D.SetMaxObject(4);
 				// 학습 샘플링 거리 설정 // Set the learn sampling distance
-				VertexMatch3D.SetLearnSamplingDistance(0.03);
+				vertexMatch3D.SetLearnSamplingDistance(0.03);
 				// 장면 샘플링 거리 설정 // Set the scene sampling distance
-				VertexMatch3D.SetSceneSamplingDistance(0.03);
+				vertexMatch3D.SetSceneSamplingDistance(0.03);
 				// 키포인트 비율 설정 // Set the keypoint ratio.
-				VertexMatch3D.SetKeypointRatio(0.5);
+				vertexMatch3D.SetKeypointRatio(0.5);
 				// 엣지 학습 여부 설정 // Set the edge train
-				VertexMatch3D.EnableTrainEdge(false);
+				vertexMatch3D.EnableTrainEdge(false);
 				// 배경 제거 여부 설정 // Set the background removal
-				VertexMatch3D.EnableBackgroundRemoval(false);
+				vertexMatch3D.EnableBackgroundRemoval(false);
 				// 클러스터링 범위 설정 // Set the clustering range
-				VertexMatch3D.SetClusterRange(0.02);
+				vertexMatch3D.SetClusterRange(0.02);
 				// 포즈 조정 반복 횟수 설정 // Set the iteration value of pose refinement
-				VertexMatch3D.SetIteration(15);
+				vertexMatch3D.SetIteration(15);
 				// 초기 점수 설정 // Set the initial score
-				VertexMatch3D.SetInitialScore(0.1);
+				vertexMatch3D.SetInitialScore(0.1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = VertexMatch3D.Execute()).IsFail())
+				if((eResult = vertexMatch3D.Execute()).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to execute Vertex Match 3D.");
 					break;
@@ -207,7 +207,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 3D 오브젝트 뷰에 결과 Object와 비교를 위한 Source 오브젝트 디스플레이
-				if((eResult = view3DDst.PushObject((CFL3DObject)VertexMatch3D.GetSourceObject())).IsFail())
+				if((eResult = view3DDst.PushObject((CFL3DObject)vertexMatch3D.GetSourceObject())).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to set image object on the image view.\n");
 					break;
@@ -225,7 +225,7 @@ namespace FLImagingExamplesCSharp
 				double f64Score;
 				double f64Residual;
 
-				long i64ResultCount = VertexMatch3D.GetResultCount();
+				long i64ResultCount = vertexMatch3D.GetResultCount();
 
 				if(i64ResultCount == 0)
 				{
@@ -241,7 +241,7 @@ namespace FLImagingExamplesCSharp
 					TPoint3<double> tp3RotVec = new TPoint3<double>();
 
 					// 추정된 포즈 행렬 가져오기
-					if((eResult = VertexMatch3D.GetResultPoseMatrix(i, ref sResult)).IsFail())
+					if((eResult = vertexMatch3D.GetResultPoseMatrix(i, ref sResult)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to estimate pose matrix.\n");
 						break;
@@ -275,7 +275,7 @@ namespace FLImagingExamplesCSharp
 					Console.WriteLine("    Residual : {0}", f64Residual);
 					Console.WriteLine("\n");
 
-					if((eResult = VertexMatch3D.GetResultObject(i, ref fl3DOLearnTransform, ref tp3Center)).IsFail())
+					if((eResult = vertexMatch3D.GetResultObject(i, ref fl3DOLearnTransform, ref tp3Center)).IsFail())
 					{
 						ErrorPrint(eResult, "Failed to set object on the 3d view.\n");
 						break;

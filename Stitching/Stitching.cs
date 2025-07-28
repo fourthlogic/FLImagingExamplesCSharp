@@ -95,26 +95,26 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Canny Edge Detector 객체 생성 // Create Canny Edge Detector object
-				CStitching Stitching = new CStitching();
+				CStitching stitching = new CStitching();
 
 				// Source 이미지 설정 // Set source image 
-				Stitching.SetSourceImage(ref fliISrcImage);
+				stitching.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				Stitching.SetDestinationImage(ref fliIDstImage);
+				stitching.SetDestinationImage(ref fliIDstImage);
 
 				// Gaussian 전처리 설정 // Set Gaussian preprocessing
-				Stitching.SetProjectionMethod(CStitching.EProjectionMethod.Spherical);
+				stitching.SetProjectionMethod(CStitching.EProjectionMethod.Spherical);
 
 				// threshold 값 // threshold value
-				Stitching.SetThreshold(0.6f);
+				stitching.SetThreshold(0.6f);
 
 				// NFeature 값 // NFeature value
-				Stitching.SetNFeature(1000);
+				stitching.SetNFeature(1000);
 
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Stitching.Execute())).IsFail())
+				if((res = (stitching.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Canny Edge Detector.");
 					break;

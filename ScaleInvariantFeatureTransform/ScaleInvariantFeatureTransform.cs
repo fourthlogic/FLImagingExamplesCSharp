@@ -73,45 +73,45 @@ namespace FLImagingExamplesCSharp
 				layer.Clear();
 
 				// 객체 생성
-                CScaleInvariantFeatureTransform SIFT = new CScaleInvariantFeatureTransform();
+                CScaleInvariantFeatureTransform scaleInvariantFeatureTransform = new CScaleInvariantFeatureTransform();
 
 				// 처리할 이미지 설정 // Set the image to process
-                if ((res = SIFT.SetSourceImage(ref fliImage)).IsFail())
+                if ((res = scaleInvariantFeatureTransform.SetSourceImage(ref fliImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
                 // 특징점을 추출할 Octave Layer 수를 설정
-                if ((res = (SIFT.SetOctaveLayers(3))).IsFail())
+                if ((res = (scaleInvariantFeatureTransform.SetOctaveLayers(3))).IsFail())
 				{
                     ErrorPrint(res, "Failed to set octave layers.");
 					break;
 				}
 
 				// 검출할 특징점의 대비 임계값을 설정
-                if ((res = (SIFT.SetContrastThreshold(0.04f))).IsFail())
+                if ((res = (scaleInvariantFeatureTransform.SetContrastThreshold(0.04f))).IsFail())
 				{
                     ErrorPrint(res, "Failed to set contrast threshold.");
 					break;
 				}
 
                 // 검출할 특징점의 에지 임계값을 설정
-                if ((res = (SIFT.SetEdgeThreshold(10f))).IsFail())
+                if ((res = (scaleInvariantFeatureTransform.SetEdgeThreshold(10f))).IsFail())
 				{
                     ErrorPrint(res, "Failed to set edge threshold.");
 					break;
                 }
 
                 // 파라미터 Sigma를 설정
-                if ((res = (SIFT.SetSigma(1.6f))).IsFail())
+                if ((res = (scaleInvariantFeatureTransform.SetSigma(1.6f))).IsFail())
 				{
                     ErrorPrint(res, "Failed to set param sigma.");
                     break;
                 }
 
 				// SIFT 실행 함수
-                if ((res = (SIFT.Execute())).IsFail())
+                if ((res = (scaleInvariantFeatureTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;
@@ -121,7 +121,7 @@ namespace FLImagingExamplesCSharp
 				CFLPointArray flfaResultPoints = new CFLPointArray();
 
 				// 검출된 점을 가져오는 함수
-                if ((res = (SIFT.GetResultPoints(ref flfaResultPoints))).IsFail())
+                if ((res = (scaleInvariantFeatureTransform.GetResultPoints(ref flfaResultPoints))).IsFail())
 				{
 					ErrorPrint(res, "Failed to get result.");
 					break;

@@ -138,22 +138,22 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalNor 객체 생성 // Create OperationLogicalNor object
-                COperationLogicalNor logical = new COperationLogicalNor();
+                COperationLogicalNor logicalNor = new COperationLogicalNor();
 
                 // Source 이미지 설정 // Set the source image
-                logical.SetSourceImage(ref fliSourceImage);
+                logicalNor.SetSourceImage(ref fliSourceImage);
 
                 // Operand 이미지 설정 // Set the operand image
-                logical.SetOperandImage(ref fliOperandImage);
+                logicalNor.SetOperandImage(ref fliOperandImage);
 
                 // Destination 이미지 설정 // Set the destination image
-                logical.SetDestinationImage(ref fliDestinationImage);
+                logicalNor.SetDestinationImage(ref fliDestinationImage);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                logical.SetOperationSource(EOperationSource.Image);
+                logicalNor.SetOperationSource(EOperationSource.Image);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logical.Execute()).IsFail())
+                if ((res = logicalNor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation logical Nor. \n");
                     break;

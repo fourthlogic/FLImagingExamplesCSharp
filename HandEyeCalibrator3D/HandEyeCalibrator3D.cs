@@ -78,41 +78,41 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// HandEyeCalibrator3D 객체 생성 // Create HandEyeCalibrator3D object
-				CHandEyeCalibrator3D HandEyeCalibrator3D = new CHandEyeCalibrator3D();
+				CHandEyeCalibrator3D handEyeCalibrator3D = new CHandEyeCalibrator3D();
 
 				// 엔드 이펙터 포즈 로드 // Load the end effector pose
-				if((eResult = HandEyeCalibrator3D.LoadEndEffectorPose("../../ExampleImages/HandEyeCalibrator3D/EndEffectorPose.csv")).IsFail())
+				if((eResult = handEyeCalibrator3D.LoadEndEffectorPose("../../ExampleImages/HandEyeCalibrator3D/EndEffectorPose.csv")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the file.\n");
 					break;
 				}
 
 				// 처리할 이미지 설정
-				HandEyeCalibrator3D.SetSourceImage(ref fliSource);
+				handEyeCalibrator3D.SetSourceImage(ref fliSource);
 
 				// Camera Matrix 설정 // Set the camera matrix
 				CFLPoint<double> flpFocalLength = new CFLPoint<double>(428.668823242188, 428.268188476563);
 				CFLPoint<double> flpPrincipalPoint = new CFLPoint<double>(422.934997558594, 240.188659667969);
 
-				HandEyeCalibrator3D.SetCalibrationCameraMatrix(flpFocalLength, flpPrincipalPoint);
+				handEyeCalibrator3D.SetCalibrationCameraMatrix(flpFocalLength, flpPrincipalPoint);
 
 				// 셀 간격 설정 // Set the board cell pitch
-				HandEyeCalibrator3D.SetCalibrationBoardCellPitch(15, 15);
+				handEyeCalibrator3D.SetCalibrationBoardCellPitch(15, 15);
 
 				// 캘리브레이션 객체 타입 설정 // Set the calibration object type
-				HandEyeCalibrator3D.SetCalibrationObjectType(ECalibrationObjectType.ChessBoard);
+				handEyeCalibrator3D.SetCalibrationObjectType(ECalibrationObjectType.ChessBoard);
 
 				// 최적화 방법 설정 // Set the optimization method
-				HandEyeCalibrator3D.SetOptimizationMethod(EOptimizationMethod.Nonlinear);
+				handEyeCalibrator3D.SetOptimizationMethod(EOptimizationMethod.Nonlinear);
 
 				// 회전 타입 설정 // Set the rotation type
-				HandEyeCalibrator3D.SetRotationType(ERotationType.RotationVector);
+				handEyeCalibrator3D.SetRotationType(ERotationType.RotationVector);
 
 				// 엔드 이펙터 각 단위 설정 // Set the end effector angle unit
-				HandEyeCalibrator3D.SetEndEffectorAngleUnit(EAngleUnit.Radian);
+				handEyeCalibrator3D.SetEndEffectorAngleUnit(EAngleUnit.Radian);
 
 				// 오일러 각 순서 설정 // Set the euler sequence
-				HandEyeCalibrator3D.SetEulerSequence(EEulerSequence.Extrinsic_XYZ);
+				handEyeCalibrator3D.SetEulerSequence(EEulerSequence.Extrinsic_XYZ);
 
 				//왜곡 계수 설정 // Set the distortion coefficient
 				List<double> listDistortionCoefficient = new List<double>();
@@ -123,7 +123,7 @@ namespace FLImagingExamplesCSharp
 				listDistortionCoefficient.Add(0.000785713375080377);
 				listDistortionCoefficient.Add(-0.0189481563866138);
 
-				HandEyeCalibrator3D.SetCalibrationDistortionCoefficient(listDistortionCoefficient);
+				handEyeCalibrator3D.SetCalibrationDistortionCoefficient(listDistortionCoefficient);
 
 				int i32PageCount = fliSource.GetPageCount();
 
@@ -165,7 +165,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = HandEyeCalibrator3D.Calibrate()).IsFail())
+				if((eResult = handEyeCalibrator3D.Calibrate()).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to execute Hand Eye Calibrator 3D.");
 					break;
@@ -181,11 +181,11 @@ namespace FLImagingExamplesCSharp
 					double f64RotationError = 0;
 					double f64TranslationError = 0;
 					// 캘리브레이션 결과 얻어오기 // Get the calibration result
-					HandEyeCalibrator3D.GetResultHandToEyeRotationVector(ref matResultRotationVector);
-					HandEyeCalibrator3D.GetResultHandToEyeTranslationVector(ref tp3ResultTranslationVector);
-					HandEyeCalibrator3D.GetResultHandToEyeEulerAngle(ref listResultEulerAngle);
-					HandEyeCalibrator3D.GetResultRotationError(ref f64RotationError);
-					HandEyeCalibrator3D.GetResultTranslationError(ref f64TranslationError);
+					handEyeCalibrator3D.GetResultHandToEyeRotationVector(ref matResultRotationVector);
+					handEyeCalibrator3D.GetResultHandToEyeTranslationVector(ref tp3ResultTranslationVector);
+					handEyeCalibrator3D.GetResultHandToEyeEulerAngle(ref listResultEulerAngle);
+					handEyeCalibrator3D.GetResultRotationError(ref f64RotationError);
+					handEyeCalibrator3D.GetResultTranslationError(ref f64TranslationError);
 
 					// 3D View의 canvas rect 영역 얻어오기 // Get the canvas rect region
 					CFLRect<int> flrCanvasRegion = view3D.GetClientRectCanvasRegion();
@@ -205,7 +205,7 @@ namespace FLImagingExamplesCSharp
 					CFL3DObject fl3DOCalibrationBoard = new CFL3DObject();
 					TPoint3<double> tp3BoardCenter = new TPoint3<double>();
 
-					HandEyeCalibrator3D.GetResultCalibration3DObject(ref fl3DOCalibrationBoard, ref tp3BoardCenter);
+					handEyeCalibrator3D.GetResultCalibration3DObject(ref fl3DOCalibrationBoard, ref tp3BoardCenter);
 					String strIdx = "";
 
 					strIdx = String.Format("Calibration Board");
@@ -220,10 +220,10 @@ namespace FLImagingExamplesCSharp
 
 						// 결과 3D 객체 얻어오기 // Get the result 3D object
 
-						if(HandEyeCalibrator3D.GetResultCamera3DObject(i, ref fl3DCam, ref tp3CamCenter).IsOK())
+						if(handEyeCalibrator3D.GetResultCamera3DObject(i, ref fl3DCam, ref tp3CamCenter).IsOK())
 						{
 							// 카메라 포즈 추정에 실패할 경우 NOK 출력 // NOK output if camera pose estimation fails
-							if((HandEyeCalibrator3D.GetResultReprojectionPoint(i, ref tp3Cam, ref tp3Board)).IsFail())
+							if((handEyeCalibrator3D.GetResultReprojectionPoint(i, ref tp3Cam, ref tp3Board)).IsFail())
 							{
 								strIdx = String.Format("Cam {0} (NOK)", i);
 								view3DLayer.DrawText3D(tp3CamCenter, strIdx, EColor.CYAN, 0, 9);
@@ -238,7 +238,7 @@ namespace FLImagingExamplesCSharp
 							view3D.PushObject(new CGUIView3DObjectLine(tp3Cam, tp3Board, EColor.CYAN));
 						}
 
-						if(HandEyeCalibrator3D.GetEndEffector3DObject(i, ref fl3DORobot, ref tp3RobotCenter).IsOK())
+						if(handEyeCalibrator3D.GetEndEffector3DObject(i, ref fl3DORobot, ref tp3RobotCenter).IsOK())
 						{
 							strIdx = String.Format("End Effector {0}", i);
 							view3DLayer.DrawText3D(tp3RobotCenter, strIdx, EColor.BLUE, 0, 9);
