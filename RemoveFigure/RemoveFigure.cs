@@ -68,15 +68,15 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// SourceView, DstView 의 0번 레이어 가져오기 // Get Layer 0 of SourceView, DstView
-				CGUIViewImageLayer Src1Layer0 = viewImage[0].GetLayer(0);
-				CGUIViewImageLayer Dst1Layer0 = viewImage[1].GetLayer(0);
-				CGUIViewImageLayer Src2Layer0 = viewImage[2].GetLayer(0);
-				CGUIViewImageLayer Dst2Layer0 = viewImage[3].GetLayer(0);
+				CGUIViewImageLayer layerSrc1 = viewImage[0].GetLayer(0);
+				CGUIViewImageLayer layerDst1 = viewImage[1].GetLayer(0);
+				CGUIViewImageLayer layerSrc2 = viewImage[2].GetLayer(0);
+				CGUIViewImageLayer layerDst2 = viewImage[3].GetLayer(0);
 
-				Src1Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 1", EColor.YELLOW, EColor.BLACK, 15);
-				Src2Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 2", EColor.YELLOW, EColor.BLACK, 15);
-				Dst1Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 1", EColor.YELLOW, EColor.BLACK, 15);
-				Dst2Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 2", EColor.YELLOW, EColor.BLACK, 15);
+				layerSrc1.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 1", EColor.YELLOW, EColor.BLACK, 15);
+				layerSrc2.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 2", EColor.YELLOW, EColor.BLACK, 15);
+				layerDst1.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 1", EColor.YELLOW, EColor.BLACK, 15);
+				layerDst2.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 2", EColor.YELLOW, EColor.BLACK, 15);
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
 				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
@@ -272,7 +272,7 @@ namespace FLImagingExamplesCSharp
 				strForDraw = string.Format("vertexcount > 1 or area > 400\n || (center.x > 300 || center.y < 100)");
 
 				// 조건식을 View에 표기 // Draw the conditional expression in the View
-				Dst1Layer0.DrawTextCanvas(new TPoint<double>(0, 20), strForDraw, EColor.YELLOW, EColor.BLACK, 13);
+				layerDst1.DrawTextCanvas(new TPoint<double>(0, 20), strForDraw, EColor.YELLOW, EColor.BLACK, 13);
 
 				// Source Figure 원본을 복사 // Copy Source Figure original
 				CFLFigureArray flfaResult1 = new CFLFigureArray(flfaSource1);
@@ -289,7 +289,7 @@ namespace FLImagingExamplesCSharp
 				strExpression2 = string.Format("area >= mean('area')");
 
 				// 조건식을 View에 표기 // Draw the conditional expression in the View
-				Dst2Layer0.DrawTextCanvas(new TPoint<double>(0, 20), strExpression2, EColor.YELLOW, EColor.BLACK, 13);
+				layerDst2.DrawTextCanvas(new TPoint<double>(0, 20), strExpression2, EColor.YELLOW, EColor.BLACK, 13);
 
 				// Source Figure 원본을 복사 // Copy Source Figure original
 				CFLFigureArray flfaResult2 = new CFLFigureArray(flfaSource2);
@@ -302,16 +302,16 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// SourceView의 0번 레이어에 Source Figure 그리기 // Draw the Source Figure on Layer 0 of the SourceView
-				Src1Layer0.DrawFigureImage(flfaSource1, EColor.CYAN);
-				Src2Layer0.DrawFigureImage(flfaSource2, EColor.CYAN);
+				layerSrc1.DrawFigureImage(flfaSource1, EColor.CYAN);
+				layerSrc2.DrawFigureImage(flfaSource2, EColor.CYAN);
 
 				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1
-				Dst1Layer0.DrawFigureImage(flfaSource1, EColor.CYAN);
-				Dst1Layer0.DrawFigureImage(flfaResult1, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				layerDst1.DrawFigureImage(flfaSource1, EColor.CYAN);
+				layerDst1.DrawFigureImage(flfaResult1, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
 
 				// DstView2의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView2
-				Dst2Layer0.DrawFigureImage(flfaSource2, EColor.CYAN);
-				Dst2Layer0.DrawFigureImage(flfaResult2, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				layerDst2.DrawFigureImage(flfaSource2, EColor.CYAN);
+				layerDst2.DrawFigureImage(flfaResult2, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
 
 				// Console 출력 // Console output
 				Console.WriteLine("Source1 Figure Array\n");

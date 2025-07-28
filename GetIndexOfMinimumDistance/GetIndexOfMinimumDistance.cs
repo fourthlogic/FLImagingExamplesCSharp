@@ -68,18 +68,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// SourceView, DstView 의 0번 레이어 가져오기 // Get Layer 0 of SourceView, DstView
-				CGUIViewImageLayer Src1Layer0 = viewImage[0].GetLayer(0);
-				CGUIViewImageLayer Dst1Layer0 = viewImage[1].GetLayer(0);
-				CGUIViewImageLayer Src2Layer0 = viewImage[2].GetLayer(0);
-				CGUIViewImageLayer Dst2Layer0 = viewImage[3].GetLayer(0);
+				CGUIViewImageLayer layerSrc1 = viewImage[0].GetLayer(0);
+				CGUIViewImageLayer layerDst1 = viewImage[1].GetLayer(0);
+				CGUIViewImageLayer layerSrc2 = viewImage[2].GetLayer(0);
+				CGUIViewImageLayer layerDst2 = viewImage[3].GetLayer(0);
 
-				Src1Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 1", EColor.YELLOW, EColor.BLACK, 15);
-				Src2Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 2", EColor.YELLOW, EColor.BLACK, 15);
-				Dst1Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 1", EColor.YELLOW, EColor.BLACK, 15);
-				Dst2Layer0.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 2", EColor.YELLOW, EColor.BLACK, 15);
+				layerSrc1.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 1", EColor.YELLOW, EColor.BLACK, 15);
+				layerSrc2.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure 2", EColor.YELLOW, EColor.BLACK, 15);
+				layerDst1.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 1", EColor.YELLOW, EColor.BLACK, 15);
+				layerDst2.DrawTextCanvas(new TPoint<double>(0, 0), "Result Figure 2", EColor.YELLOW, EColor.BLACK, 15);
 
-				Dst1Layer0.DrawTextCanvas(new TPoint<double>(0, 20), "Index of Minimum Distance", EColor.CYAN, EColor.BLACK);
-				Dst2Layer0.DrawTextCanvas(new TPoint<double>(0, 20), "Index of Minimum Distance", EColor.CYAN, EColor.BLACK);
+				layerDst1.DrawTextCanvas(new TPoint<double>(0, 20), "Index of Minimum Distance", EColor.CYAN, EColor.BLACK);
+				layerDst2.DrawTextCanvas(new TPoint<double>(0, 20), "Index of Minimum Distance", EColor.CYAN, EColor.BLACK);
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
 				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
@@ -156,29 +156,29 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// SourceView1의 0번 레이어에 Source, Destination Figure 그리기 // Draw Source and Destination Figure on Layer 0 of SourceView1
-				Src1Layer0.DrawFigureImage(flpaSource1, EColor.BLACK, 3);
-				Src1Layer0.DrawFigureImage(flpaSource1, EColor.LIME);
-				Src1Layer0.DrawFigureImage(flcDestination1, EColor.BLACK, 3);
-				Src1Layer0.DrawFigureImage(flcDestination1, EColor.KHAKI);
+				layerSrc1.DrawFigureImage(flpaSource1, EColor.BLACK, 3);
+				layerSrc1.DrawFigureImage(flpaSource1, EColor.LIME);
+				layerSrc1.DrawFigureImage(flcDestination1, EColor.BLACK, 3);
+				layerSrc1.DrawFigureImage(flcDestination1, EColor.KHAKI);
 
 				for(long i = 0; i < flpaSource1.GetCount(); ++i)
-					Src1Layer0.DrawTextImage(flpaSource1.GetAt(i).GetCenter(), String.Format("{0}", i), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_BOTTOM);
+					layerSrc1.DrawTextImage(flpaSource1.GetAt(i).GetCenter(), String.Format("{0}", i), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_BOTTOM);
 
 				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1
 				CFLScalar<long> flvSrc = (CFLScalar<long>)flfaResultSrc1.Front();
-				Dst1Layer0.DrawFigureImage(flpaSource1, EColor.BLACK, 3);
-				Dst1Layer0.DrawFigureImage(flpaSource1, EColor.LIME);
-				Dst1Layer0.DrawFigureImage(flcDestination1, EColor.BLACK, 3);
-				Dst1Layer0.DrawFigureImage(flcDestination1, EColor.KHAKI);
-				Dst1Layer0.DrawFigureImage(flpaSource1.GetAt(flvSrc.v), EColor.CYAN, 3);
-				Dst1Layer0.DrawTextImage(flpaSource1.GetAt(flvSrc.v).GetCenter(), String.Format("{0}", flvSrc.v), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_BOTTOM);
-				Dst1Layer0.DrawTextImage(flcDestination1.GetCenter(), String.Format("{0}", flvSrc.v), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
+				layerDst1.DrawFigureImage(flpaSource1, EColor.BLACK, 3);
+				layerDst1.DrawFigureImage(flpaSource1, EColor.LIME);
+				layerDst1.DrawFigureImage(flcDestination1, EColor.BLACK, 3);
+				layerDst1.DrawFigureImage(flcDestination1, EColor.KHAKI);
+				layerDst1.DrawFigureImage(flpaSource1.GetAt(flvSrc.v), EColor.CYAN, 3);
+				layerDst1.DrawTextImage(flpaSource1.GetAt(flvSrc.v).GetCenter(), String.Format("{0}", flvSrc.v), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_BOTTOM);
+				layerDst1.DrawTextImage(flcDestination1.GetCenter(), String.Format("{0}", flvSrc.v), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
 
 				// SourceView2의 0번 레이어에 Source, Destination Figure 그리기 // Draw Source and Destination Figure on Layer 0 of SourceView2
-				Src2Layer0.DrawFigureImage(flfaSource2, EColor.BLACK, 3);
-				Src2Layer0.DrawFigureImage(flfaSource2, EColor.LIME);
-				Src2Layer0.DrawFigureImage(flfaDestination2, EColor.BLACK, 3);
-				Src2Layer0.DrawFigureImage(flfaDestination2, EColor.KHAKI);
+				layerSrc2.DrawFigureImage(flfaSource2, EColor.BLACK, 3);
+				layerSrc2.DrawFigureImage(flfaSource2, EColor.LIME);
+				layerSrc2.DrawFigureImage(flfaDestination2, EColor.BLACK, 3);
+				layerSrc2.DrawFigureImage(flfaDestination2, EColor.KHAKI);
 
 				for(long i = 0; i < flfaSource2.GetCount(); ++i)
 				{
@@ -186,21 +186,21 @@ namespace FLImagingExamplesCSharp
 					CFLRect<double> flrBoundary = new CFLRect<double>();
 					flfaArrayDepth1.GetBoundaryRect(ref flrBoundary);
 
-					Src2Layer0.DrawFigureImage(flrBoundary, EColor.LIGHTBLUE, 1);
-					Src2Layer0.DrawTextImage(flfaArrayDepth1.GetCenter(), String.Format("{0}", i), EColor.LIGHTBLUE, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
+					layerSrc2.DrawFigureImage(flrBoundary, EColor.LIGHTBLUE, 1);
+					layerSrc2.DrawTextImage(flfaArrayDepth1.GetCenter(), String.Format("{0}", i), EColor.LIGHTBLUE, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
 
 					for(long j = 0; j < flfaArrayDepth1.GetCount(); ++j)
-						Src2Layer0.DrawTextImage(flfaArrayDepth1.GetAt(j).GetCenter(), String.Format("{0}", j), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
+						layerSrc2.DrawTextImage(flfaArrayDepth1.GetAt(j).GetCenter(), String.Format("{0}", j), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
 				}
 
 				for(long i = 0; i < flfaDestination2.GetCount(); ++i)
-					Src2Layer0.DrawTextImage(flfaDestination2.GetAt(i).GetCenter(), String.Format("{0}", i), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
+					layerSrc2.DrawTextImage(flfaDestination2.GetAt(i).GetCenter(), String.Format("{0}", i), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
 
 				// DstView2의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView2
-				Dst2Layer0.DrawFigureImage(flfaSource2, EColor.BLACK, 3);
-				Dst2Layer0.DrawFigureImage(flfaSource2, EColor.LIME);
-				Dst2Layer0.DrawFigureImage(flfaDestination2, EColor.BLACK, 3);
-				Dst2Layer0.DrawFigureImage(flfaDestination2, EColor.KHAKI);
+				layerDst2.DrawFigureImage(flfaSource2, EColor.BLACK, 3);
+				layerDst2.DrawFigureImage(flfaSource2, EColor.LIME);
+				layerDst2.DrawFigureImage(flfaDestination2, EColor.BLACK, 3);
+				layerDst2.DrawFigureImage(flfaDestination2, EColor.KHAKI);
 
 
 				CFLScalar<long> flvSrcDepth1 = (CFLScalar<long>)flfaResultSrc2.GetAt(0);
@@ -214,18 +214,18 @@ namespace FLImagingExamplesCSharp
 				CFLRect<double> flrBoundary2 = new CFLRect<double>();
 				flfaArraySrcDepth1.GetBoundaryRect(ref flrBoundary2);
 
-				Dst2Layer0.DrawFigureImage(flrBoundary2, EColor.LIGHTORANGE, 1);
-				Dst2Layer0.DrawTextImage(flfaArraySrcDepth1.GetCenter(), String.Format("{0}", flvSrcDepth1.v), EColor.LIGHTORANGE, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
+				layerDst2.DrawFigureImage(flrBoundary2, EColor.LIGHTORANGE, 1);
+				layerDst2.DrawTextImage(flfaArraySrcDepth1.GetCenter(), String.Format("{0}", flvSrcDepth1.v), EColor.LIGHTORANGE, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
 
-				Dst2Layer0.DrawTextImage(flfaArraySrcDepth1.GetAt(flvSrcDepth2.v).GetCenter(), String.Format("{0}", flvSrcDepth2.v), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
-				Dst2Layer0.DrawFigureImage(flfSrcDepth2, EColor.CYAN, 1);
+				layerDst2.DrawTextImage(flfaArraySrcDepth1.GetAt(flvSrcDepth2.v).GetCenter(), String.Format("{0}", flvSrcDepth2.v), EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
+				layerDst2.DrawFigureImage(flfSrcDepth2, EColor.CYAN, 1);
 
 				CFLScalar<long> flvDstDepth1 = (CFLScalar<long>)flfaResultDst2.GetAt(0);
 
 				CFLFigure flfDstDepth1 = flfaDestination2.GetAt(flvDstDepth1.v);
 
-				Dst2Layer0.DrawTextImage(flfDstDepth1.GetCenter(), String.Format("{0}", flvDstDepth1.v), EColor.MAGENTA, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
-				Dst2Layer0.DrawFigureImage(flfDstDepth1, EColor.MAGENTA, 1);
+				layerDst2.DrawTextImage(flfDstDepth1.GetCenter(), String.Format("{0}", flvDstDepth1.v), EColor.MAGENTA, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
+				layerDst2.DrawFigureImage(flfDstDepth1, EColor.MAGENTA, 1);
 
 
 				// Console 출력 // Console output

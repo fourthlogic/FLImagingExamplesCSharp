@@ -70,15 +70,15 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// SourceView, DstView 의 0번 레이어 가져오기 // Get Layer 0 of SourceView, DstView
-				CGUIViewImageLayer SrcLayer0 = viewImage[0].GetLayer(0);
-				CGUIViewImageLayer DstLayer0 = viewImage[1].GetLayer(0);
-				CGUIViewImageLayer SrcLayer1 = viewImage[2].GetLayer(0);
-				CGUIViewImageLayer DstLayer1 = viewImage[3].GetLayer(0);
+				CGUIViewImageLayer layerSrc0 = viewImage[0].GetLayer(0);
+				CGUIViewImageLayer layerDst0 = viewImage[1].GetLayer(0);
+				CGUIViewImageLayer layerSrc1 = viewImage[2].GetLayer(0);
+				CGUIViewImageLayer layerDst1 = viewImage[3].GetLayer(0);
 
-				SrcLayer0.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure And Region1", EColor.YELLOW, EColor.BLACK, 15);
-				DstLayer0.DrawTextCanvas(new TPoint<double>(0, 0), "Get Figure Within Region1", EColor.YELLOW, EColor.BLACK, 15);
-				SrcLayer1.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure And Region2", EColor.YELLOW, EColor.BLACK, 15);
-				DstLayer1.DrawTextCanvas(new TPoint<double>(0, 0), "Get Figure Within Region2", EColor.YELLOW, EColor.BLACK, 15);
+				layerSrc0.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure And Region1", EColor.YELLOW, EColor.BLACK, 15);
+				layerDst0.DrawTextCanvas(new TPoint<double>(0, 0), "Get Figure Within Region1", EColor.YELLOW, EColor.BLACK, 15);
+				layerSrc1.DrawTextCanvas(new TPoint<double>(0, 0), "Source Figure And Region2", EColor.YELLOW, EColor.BLACK, 15);
+				layerDst1.DrawTextCanvas(new TPoint<double>(0, 0), "Get Figure Within Region2", EColor.YELLOW, EColor.BLACK, 15);
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
 				for(int i = 1; i < 4; ++i)
@@ -164,8 +164,8 @@ namespace FLImagingExamplesCSharp
 				Console.WriteLine("{0}", strFigure);
 
 				// SourceView1의 0번 레이어에 Source Figure, Region1 그리기 // Draw Source Figure, Region1 on Layer 0 of SourceView1
-				SrcLayer0.DrawFigureImage(flfaSource, EColor.CYAN);
-				SrcLayer0.DrawFigureImage(flcrRegion1, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				layerSrc0.DrawFigureImage(flfaSource, EColor.CYAN);
+				layerSrc0.DrawFigureImage(flcrRegion1, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1, 0.2f);
 
 				Console.WriteLine("Region2\n");
 
@@ -173,8 +173,8 @@ namespace FLImagingExamplesCSharp
 				Console.WriteLine("{0}", strFigure);
 
 				// SourceView2의 0번 레이어에 Source Figure, Region2 그리기 // Draw Source Figure, Region2 on Layer 0 of SourceView2
-				SrcLayer1.DrawFigureImage(flfaSource, EColor.CYAN);
-				SrcLayer1.DrawFigureImage(flcrRegion2, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				layerSrc1.DrawFigureImage(flfaSource, EColor.CYAN);
+				layerSrc1.DrawFigureImage(flcrRegion2, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1, 0.2f);
 
 				// Region1과 겹쳐지는 Figure 추출 // Get figure overlapping with Region1
 				CFLFigureArray flfaResult1 = new CFLFigureArray();
@@ -186,9 +186,9 @@ namespace FLImagingExamplesCSharp
 				Console.WriteLine("{0}", strFigure);
 
 				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1
-				DstLayer0.DrawFigureImage(flfaSource, EColor.CYAN);
-				DstLayer0.DrawFigureImage(flcrRegion1, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1, 0.2f);
-				DstLayer0.DrawFigureImage(flfaResult1, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				layerDst0.DrawFigureImage(flfaSource, EColor.CYAN);
+				layerDst0.DrawFigureImage(flcrRegion1, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				layerDst0.DrawFigureImage(flfaResult1, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
 
 				// Region2과 겹쳐지는 Figure 추출 // Get figure overlapping with Region2
 				CFLFigureArray flfaResult2 = new CFLFigureArray();
@@ -200,9 +200,9 @@ namespace FLImagingExamplesCSharp
 				Console.WriteLine("{0}", strFigure);
 
 				// DstView1의 0번 레이어에 결과 그리기 // Draw the result on layer 0 of DstView1
-				DstLayer1.DrawFigureImage(flfaSource, EColor.CYAN);
-				DstLayer1.DrawFigureImage(flcrRegion2, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1, 0.2f);
-				DstLayer1.DrawFigureImage(flfaResult2, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				layerDst1.DrawFigureImage(flfaSource, EColor.CYAN);
+				layerDst1.DrawFigureImage(flcrRegion2, EColor.BLUE, 1, EColor.BLUE, EGUIViewImagePenStyle.Solid, 1, 0.2f);
+				layerDst1.DrawFigureImage(flfaResult2, EColor.LIME, 3, EColor.LIME, EGUIViewImagePenStyle.Solid, 1, 0.2f);
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
 				for(int i = 0; i < 4; ++i)

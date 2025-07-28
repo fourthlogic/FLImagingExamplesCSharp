@@ -89,10 +89,10 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// SourceView, DstView 의 0번 레이어 가져오기 // Get Layer 0 of SourceView, DstView
-				CGUIViewImageLayer[] ViewLayer = new CGUIViewImageLayer[i32ViewCount];
+				CGUIViewImageLayer[] layerView = new CGUIViewImageLayer[i32ViewCount];
 
 				for(int i = 0; i < i32ViewCount; ++i)
-					ViewLayer[i] = viewImage[i].GetLayer(0);
+					layerView[i] = viewImage[i].GetLayer(0);
 
 				// Figure 생성 // Create figure
 				CFLRect<double> flr = new CFLRect<double>(50, 50, 100, 100, 15);
@@ -120,7 +120,7 @@ namespace FLImagingExamplesCSharp
 
 				// Figure 그리기 // Draw Figure
 				for(int i = 0; i < flfa.GetCount(); ++i)
-					ViewLayer[i].DrawFigureImage(flfa, EColor.LIME);
+					layerView[i].DrawFigureImage(flfa, EColor.LIME);
 
 				//////////////////////////////// GetCenterElementwise()
 				// 중심점 좌표를 담을 FigureArray 생성 // Create a FigureArray to hold the coordinates of the center point
@@ -130,8 +130,8 @@ namespace FLImagingExamplesCSharp
 				flfa.GetCenterElementwise(ref flfaCenter);
 
 				// 중심들을 View0의 0번 레이어에 그리기 // Draw the centers on layer 0 of View0
-				ViewLayer[0].DrawFigureImage(flfaCenter, EColor.RED);
-				ViewLayer[0].DrawTextCanvas(new TPoint<double>(0, 0), "GetCenterElementwise() Result", EColor.YELLOW, EColor.BLACK, 15);
+				layerView[0].DrawFigureImage(flfaCenter, EColor.RED);
+				layerView[0].DrawTextCanvas(new TPoint<double>(0, 0), "GetCenterElementwise() Result", EColor.YELLOW, EColor.BLACK, 15);
 
 				// 콘솔에 중심 좌표 표시 // Print center coordinates in console
 				Console.WriteLine("Center Point\n");
@@ -157,9 +157,9 @@ namespace FLImagingExamplesCSharp
 				{
 					String strPerimeter;
 					strPerimeter = String.Format("{0}", ((CFLScalar<double>)flfaPerimeter.GetAt(i)).v);
-					ViewLayer[1].DrawTextImage(flfaCenter.GetAt(i), strPerimeter, EColor.BLACK);
+					layerView[1].DrawTextImage(flfaCenter.GetAt(i), strPerimeter, EColor.BLACK);
 				}
-				ViewLayer[1].DrawTextCanvas(new TPoint<double>(0, 0), "GetPerimeterElementwise() Result", EColor.YELLOW, EColor.BLACK, 15);
+				layerView[1].DrawTextCanvas(new TPoint<double>(0, 0), "GetPerimeterElementwise() Result", EColor.YELLOW, EColor.BLACK, 15);
 
 				// 콘솔에 길이 표시 // Display the length in the console
 				Console.WriteLine("Perimeter\n");
@@ -181,8 +181,8 @@ namespace FLImagingExamplesCSharp
 				flfa.GetCenterOfGravityElementwise(ref flfaCenterOfGravity);
 
 				// 무게중심들을 View0의 0번 레이어에 그리기 // Draw the centers of gravity on Layer 0 of View0
-				ViewLayer[2].DrawFigureImage(flfaCenterOfGravity, EColor.CYAN);
-				ViewLayer[2].DrawTextCanvas(new TPoint<double>(0, 0), "GetCenterOfGravityElementwise() Result", EColor.YELLOW, EColor.BLACK, 15);
+				layerView[2].DrawFigureImage(flfaCenterOfGravity, EColor.CYAN);
+				layerView[2].DrawTextCanvas(new TPoint<double>(0, 0), "GetCenterOfGravityElementwise() Result", EColor.YELLOW, EColor.BLACK, 15);
 
 				// 콘솔에 무게중심 좌표 표시 // Display barycentric coordinates in console
 				Console.WriteLine("Center Of Gravity Point\n");
@@ -204,8 +204,8 @@ namespace FLImagingExamplesCSharp
 				flfa.GetMinimumEnclosingRectangleElementwise(ref flfaMER);
 
 				// 최소둘레 직사각형들을 View0의 0번 레이어에 그리기 // Draw the minimum enclosing rectangle on Layer 0 of View0
-				ViewLayer[3].DrawFigureImage(flfaMER, EColor.BLUE);
-				ViewLayer[3].DrawTextCanvas(new TPoint<double>(0, 0), "GetMinimumEnclosingRectangleElementwise() Result", EColor.YELLOW, EColor.BLACK, 15);
+				layerView[3].DrawFigureImage(flfaMER, EColor.BLUE);
+				layerView[3].DrawTextCanvas(new TPoint<double>(0, 0), "GetMinimumEnclosingRectangleElementwise() Result", EColor.YELLOW, EColor.BLACK, 15);
 
 				// 콘솔에 최소둘레 직사각형을 표시 // Display the minimum enclosing rectangle in console
 				Console.WriteLine("Minimum Enclosing Rectangle\n");
