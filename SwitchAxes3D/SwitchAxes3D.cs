@@ -40,8 +40,8 @@ namespace FLImagingExamplesCSharp
 			CGUIViewImage viewImageDst = new CGUIViewImage();
 			CGUIView3D view3DSrc = new CGUIView3D();
 			CGUIView3D view3DDst = new CGUIView3D();
-			CFL3DObject fl3DObjectSrc = new CFL3DObject();
-			CFL3DObject fl3DObjectDst = new CFL3DObject();
+			CFL3DObject floSrc = new CFL3DObject();
+			CFL3DObject floDst = new CFL3DObject();
 
 			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult res = new CResult();
@@ -62,18 +62,18 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				fl3DObjectSrc.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
+				floSrc.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CSwitchAxes3D SwitchAxes3D = new CSwitchAxes3D();
+				CSwitchAxes3D alg = new CSwitchAxes3D();
 
 				// 파라미터 설정 // Set parameter
-				SwitchAxes3D.SetSourceObject(ref fl3DObjectSrc);
-				SwitchAxes3D.SetDestinationObject(ref fl3DObjectDst);
-                SwitchAxes3D.SetAxisMappings(CSwitchAxes3D.EAxisMapping.From_PX, CSwitchAxes3D.EAxisMapping.From_NY, CSwitchAxes3D.EAxisMapping.Deduce, false);
+				alg.SetSourceObject(ref floSrc);
+				alg.SetDestinationObject(ref floDst);
+                alg.SetAxisMappings(CSwitchAxes3D.EAxisMapping.From_PX, CSwitchAxes3D.EAxisMapping.From_NY, CSwitchAxes3D.EAxisMapping.Deduce, false);
 
                 // 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = SwitchAxes3D.Execute()).IsFail())
+                if ((res = alg.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
@@ -89,10 +89,10 @@ namespace FLImagingExamplesCSharp
 				layer3DDst.Clear();
 
 				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
-				view3DSrc.PushObject(fl3DObjectSrc);
+				view3DSrc.PushObject(floSrc);
 				view3DSrc.ZoomFit();
 
-				view3DDst.PushObject(fl3DObjectDst);
+				view3DDst.PushObject(floDst);
 				view3DDst.ZoomFit();
 
 				CFLPoint<double> flp = new CFLPoint<double>();

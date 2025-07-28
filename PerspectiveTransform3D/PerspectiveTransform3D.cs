@@ -40,8 +40,8 @@ namespace FLImagingExamplesCSharp
 			CGUIViewImage viewImageDst = new CGUIViewImage();
 			CGUIView3D view3DSrc = new CGUIView3D();
 			CGUIView3D view3DDst = new CGUIView3D();
-			CFL3DObject fl3DObjectSrc = new CFL3DObject();
-			CFL3DObject fl3DObjectDst = new CFL3DObject();
+			CFL3DObject floSrc = new CFL3DObject();
+			CFL3DObject floDst = new CFL3DObject();
 
 			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult res = new CResult();
@@ -62,25 +62,25 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				fl3DObjectSrc.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
+				floSrc.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
 
 				// Perspective Transform 3D 객체 생성 // Create Perspective Transform 3D object
-				CPerspectiveTransform3D PerspectiveTransform3D = new CPerspectiveTransform3D();
+				CPerspectiveTransform3D alg = new CPerspectiveTransform3D();
 
 				TPoint3<float> tpPosition = new TPoint3<float>(2.0f, 0.0f, 1.5f);
 				TPoint3<float> tpDirection = new TPoint3<float>(-1.0f, 0.0f, -1.0f);
 				TPoint3<float> tpUpVector = new TPoint3<float>(0.0f, 1.0f, 0.0f);
 
 				// 파라미터 설정 // Set parameter
-				PerspectiveTransform3D.SetSourceObject(ref fl3DObjectSrc);
-				PerspectiveTransform3D.SetDestinationObject(ref fl3DObjectDst);
-				PerspectiveTransform3D.SetPosition(tpPosition);
-				PerspectiveTransform3D.SetDirection(tpDirection);
-				PerspectiveTransform3D.SetDirectionType(EDirectionType.Decrement);
-				PerspectiveTransform3D.SetUpVector(tpUpVector);
+				alg.SetSourceObject(ref floSrc);
+				alg.SetDestinationObject(ref floDst);
+				alg.SetPosition(tpPosition);
+				alg.SetDirection(tpDirection);
+				alg.SetDirectionType(EDirectionType.Decrement);
+				alg.SetUpVector(tpUpVector);
 
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = PerspectiveTransform3D.Execute()).IsFail())
+				if((res = alg.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
@@ -96,10 +96,10 @@ namespace FLImagingExamplesCSharp
 				layer3DDst.Clear();
 
 				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
-				view3DSrc.PushObject(fl3DObjectSrc);
+				view3DSrc.PushObject(floSrc);
 				view3DSrc.ZoomFit();
 
-				view3DDst.PushObject(fl3DObjectDst);
+				view3DDst.PushObject(floDst);
 				view3DDst.ZoomFit();
 
 				CFLPoint<double> flp = new CFLPoint<double>();
