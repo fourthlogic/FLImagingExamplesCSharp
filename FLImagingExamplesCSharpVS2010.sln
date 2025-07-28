@@ -1728,9 +1728,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorphologyTopHat_Kernel", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorphologyTopHat_Region", "MorphologyTopHat_Region\MorphologyTopHat_Region.csproj", "{4F5AC1E1-B4A1-478A-AF1B-3C8A5EDA1AE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoissonPointCloudUpsampler3D", "PoissonPointCloudUpsampler3D\PoissonPointCloudUpsampler3D.csproj", "{385E1A28-9C44-4BCE-A4AD-1C35E17FF139}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointCloudUpsamplerPoisson3D", "PointCloudUpsamplerPoisson3D\PointCloudUpsamplerPoisson3D.csproj", "{385E1A28-9C44-4BCE-A4AD-1C35E17FF139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniformPointCloudUpsampler3D", "UniformPointCloudUpsampler3D\UniformPointCloudUpsampler3D.csproj", "{F33161E8-CD59-4B16-93E1-D134CE032438}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointCloudUpsamplerUniform3D", "PointCloudUpsamplerUniform3D\PointCloudUpsamplerUniform3D.csproj", "{F33161E8-CD59-4B16-93E1-D134CE032438}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image Drawing", "Image Drawing", "{37C3A317-9CAC-4D89-8D82-C564158CFACA}"
 EndProject

@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{385E1A28-9C44-4BCE-A4AD-1C35E17FF139}</ProjectGuid>
+    <ProjectGuid>{F33161E8-CD59-4B16-93E1-D134CE032438}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PoissonPointCloudUpsampler3D</RootNamespace>
-    <AssemblyName>PoissonPointCloudUpsampler3D</AssemblyName>
+    <RootNamespace>UniformPointCloudUpsampler3D</RootNamespace>
+    <AssemblyName>UniformPointCloudUpsampler3D</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -111,7 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PoissonPointCloudUpsampler3D.cs" />
+    <Compile Include="PointCloudUpsamplerUniform3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
