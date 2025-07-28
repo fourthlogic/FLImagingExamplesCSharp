@@ -122,19 +122,19 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Fourier Transform Real 객체 생성 // Create Fourier Transform Real object
-				CFourierTransformReal FourierTransformReal = new CFourierTransformReal();
+				CFourierTransformReal fourierTransformReal = new CFourierTransformReal();
 
 				// Source 이미지 설정 // Set source image 
-				FourierTransformReal.SetSourceImage(ref fliISrcImage);
+				fourierTransformReal.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				FourierTransformReal.SetDestinationImage(ref fliFTImage);
+				fourierTransformReal.SetDestinationImage(ref fliFTImage);
 
 				// 결과 이미지 포멧 설정 (RFT image, 32/64 bit Floating Point 설정 가능) // Set Result image format(RFT image, 32/64 bit Floating Point) 
-				FourierTransformReal.SetResultType(EFloatingPointAccuracy.Bit32);
+				fourierTransformReal.SetResultType(EFloatingPointAccuracy.Bit32);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (FourierTransformReal.Execute())).IsFail())
+				if((res = (fourierTransformReal.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute FourierTransformReal.");
 					break;
@@ -142,10 +142,10 @@ namespace FLImagingExamplesCSharp
 
 				// 이미지의 노이즈를 감소하기(Mask 사용) // Reduce the noise in the image (using Mask)
 				// Mask 객체 생성 // Create Mask object
-				CMask Mask = new CMask();
+				CMask mask = new CMask();
 
 				// 변환 이미지를 설정(RFT) // Set source image(RFT image)
-				Mask.SetSourceImage(ref fliFTImage);
+				mask.SetSourceImage(ref fliFTImage);
 
 				// CFLFigureArray 객체를 생성 // Create CFLFigureArray object
 				CFLFigureArray flfArray = new CFLFigureArray();
@@ -158,26 +158,26 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 지정한 ROI를 입력 // Set mask ROI
-				Mask.SetSourceROI(flfArray);
+				mask.SetSourceROI(flfArray);
 
 				// 마스크 값을 입력 // set mask value
-				Mask.SetMask(0.0);
+				mask.SetMask(0.0);
 
 				// 알고리즘 수행(mask) // Execute the algorithm(mask)		
-				if((res = (Mask.Execute())).IsFail())
+				if((res = (mask.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Image Mask.");
 					break;
 				}
 
 				// Source 이미지 설정(RFT image) // Set source image (RFT image)
-				FourierTransformReal.SetSourceImage(ref fliFTImage);
+				fourierTransformReal.SetSourceImage(ref fliFTImage);
 
 				// Destination 이미지 설정(IRFT image) // Set destination image(IRFT image)
-				FourierTransformReal.SetDestinationImage(ref fliIRFTImage);
+				fourierTransformReal.SetDestinationImage(ref fliIRFTImage);
 
 				// 알고리즘 수행(IRFT) // Execute the algorithm(IRFT)
-				if((res = (FourierTransformReal.Execute())).IsFail())
+				if((res = (fourierTransformReal.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Fourier Transform Real.");
 					break;

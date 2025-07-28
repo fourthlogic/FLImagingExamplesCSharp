@@ -137,12 +137,12 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// ShadingCalibrator 객체 생성 // Create ShadingCalibrator object
-				CShadingCalibrator ShadingCalibrator = new CShadingCalibrator();
+				CShadingCalibrator shadingCalibrator = new CShadingCalibrator();
 				// Learn 이미지 설정 // Set the learn image
-				ShadingCalibrator.SetLearnImageForShadingCalibration(ref arrFliImage[0]);
+				shadingCalibrator.SetLearnImageForShadingCalibration(ref arrFliImage[0]);
 
 				// 앞서 설정된 이미지로 Calibration을 수행 // Perform Calibration with the previously set image
-				if((res = ShadingCalibrator.Calibrate()).IsFail())
+				if((res = shadingCalibrator.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Failed to calibrate.");
 					Console.WriteLine(res.GetString());
@@ -150,12 +150,12 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Source 이미지 설정 // Set the source image
-				ShadingCalibrator.SetSourceImage(ref arrFliImage[1]);
+				shadingCalibrator.SetSourceImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set the destination image
-				ShadingCalibrator.SetDestinationImage(ref arrFliImage[2]);
+				shadingCalibrator.SetDestinationImage(ref arrFliImage[2]);
 				
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((res = ShadingCalibrator.Execute()).IsFail())
+				if ((res = shadingCalibrator.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute ShadingCalibrator.");
                     Console.WriteLine(res.GetString());

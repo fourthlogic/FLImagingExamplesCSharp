@@ -107,14 +107,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// DiscreteCosineTransform 객체 생성 // Create DiscreteCosineTransform object
-				CDiscreteCosineTransform DiscreteCosineTransform = new CDiscreteCosineTransform();
+				CDiscreteCosineTransform discreteCosineTransform = new CDiscreteCosineTransform();
 				// Source 이미지 설정 // Set source image
-				DiscreteCosineTransform.SetSourceImage(ref arrFliImage[0]);
+				discreteCosineTransform.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				DiscreteCosineTransform.SetDestinationImage(ref arrFliImage[1]);
+				discreteCosineTransform.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (DiscreteCosineTransform.Execute())).IsFail())
+				if((res = (discreteCosineTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Discrete Cosine Transform.");
 					break;

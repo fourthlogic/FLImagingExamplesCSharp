@@ -158,19 +158,19 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// InpaintingTexture 객체 생성 // Create InpaintingTexture object
-				CInpaintingTexture InpaintingTexture = new CInpaintingTexture();
+				CInpaintingTexture inpaintingTexture = new CInpaintingTexture();
                 // Source 이미지 설정 // Set the source image
-                InpaintingTexture.SetSourceImage(ref arrFliImage[0]);
+                inpaintingTexture.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                InpaintingTexture.SetDestinationImage(ref arrFliImage[1]);
+                inpaintingTexture.SetDestinationImage(ref arrFliImage[1]);
 				// Patching을 진행할 Mask의 크기 설정 // Set the size of the mask for patching
-				InpaintingTexture.SetMaskSize(13);
+				inpaintingTexture.SetMaskSize(13);
 				// Patching의 Source가 되는 Mask를 찾기 위한 검색 영역의 크기 설정 // Set the size of the search area to find the mask that is the source of the patching
-				InpaintingTexture.SetSearchSize(100);
+				inpaintingTexture.SetSearchSize(100);
 				// Search step size 설정 // Set the search step size
-				InpaintingTexture.SetSearchStepSize(1);
+				inpaintingTexture.SetSearchStepSize(1);
 				// 매치를 위한 Gradient Value 곱 계수 설정 // Set a coefficient multiplied by gradient value for match
-				InpaintingTexture.SetAnisotropy(1);
+				inpaintingTexture.SetAnisotropy(1);
 
 				CFLFigureArray flfaPaintingRegion = new CFLFigureArray();
 
@@ -182,27 +182,27 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Inpainting을 위한 Painting region 설정 // Set painting region for Inpainting
-				InpaintingTexture.SetPaintingRegion(flfaPaintingRegion);
+				inpaintingTexture.SetPaintingRegion(flfaPaintingRegion);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InpaintingTexture.Execute()).IsFail())
+				if((res = inpaintingTexture.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;
                 }
 
 				// Source 이미지 설정 // Set the source image
-				InpaintingTexture.SetSourceImage(ref arrFliImage[2]);
+				inpaintingTexture.SetSourceImage(ref arrFliImage[2]);
 				// Destination 이미지 설정 // Set the destination image
-				InpaintingTexture.SetDestinationImage(ref arrFliImage[3]);
+				inpaintingTexture.SetDestinationImage(ref arrFliImage[3]);
 				// Patching을 진행할 Mask의 크기 설정 // Set the size of the mask for patching
-				InpaintingTexture.SetMaskSize(15);
+				inpaintingTexture.SetMaskSize(15);
 				// Patching의 Source가 되는 Mask를 찾기 위한 검색 영역의 크기 설정 // Set the size of the search area to find the mask that is the source of the patching
-				InpaintingTexture.SetSearchSize(-1);
+				inpaintingTexture.SetSearchSize(-1);
 				// Search step size 설정 // Set the search step size
-				InpaintingTexture.SetSearchStepSize(1);
+				inpaintingTexture.SetSearchStepSize(1);
 				// 매치를 위한 Gradient Value 곱 계수 설정 // Set a coefficient multiplied by gradient value for match
-				InpaintingTexture.SetAnisotropy(0);
+				inpaintingTexture.SetAnisotropy(0);
 
 				CFLFigureArray flfaPaintingRegion2 = new CFLFigureArray();
 
@@ -214,10 +214,10 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Inpainting을 위한 Painting region 2 설정 // Set painting region 2 for Inpainting
-				InpaintingTexture.SetPaintingRegion(flfaPaintingRegion2);
+				inpaintingTexture.SetPaintingRegion(flfaPaintingRegion2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InpaintingTexture.Execute()).IsFail())
+				if((res = inpaintingTexture.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;

@@ -250,22 +250,22 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Fourier Transform 객체 생성 // Create Fourier Transform object
-				CFourierTransform FourierTransform = new CFourierTransform();
+				CFourierTransform fourierTransform = new CFourierTransform();
 
 				// Source 이미지 설정 // Set source image 
-				FourierTransform.SetSourceImage(ref fliSrcImage);
+				fourierTransform.SetSourceImage(ref fliSrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				FourierTransform.SetDestinationImage(ref fliFFTImage);
+				fourierTransform.SetDestinationImage(ref fliFFTImage);
 
 				// 결과 이미지 포멧 설정 (FFT image, 32/64 bit Floating Point 설정 가능) // Set Result image format(FFT image, 32/64 bit Floating Point) 
-				FourierTransform.SetResultType(EFloatingPointAccuracy.Bit32);
+				fourierTransform.SetResultType(EFloatingPointAccuracy.Bit32);
 
 				// 푸리에 변환 결과 이미지를 쉬프트해서 받도록 설정 // Set to receive a shifted image of the Fourier transform result
-				FourierTransform.SetShiftSpectrum(EFourierTransformShiftSpectrum.Shift);
+				fourierTransform.SetShiftSpectrum(EFourierTransformShiftSpectrum.Shift);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (FourierTransform.Execute())).IsFail())
+				if((res = (fourierTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute FourierTransform.");
 					break;
@@ -389,39 +389,39 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Source 이미지 설정(FFT image) // Set source image (FFT image)
-				FourierTransform.SetSourceImage(ref fliIdealDst);
+				fourierTransform.SetSourceImage(ref fliIdealDst);
 
 				// Destination 이미지 설정(IFFT image) // Set destination image(IFFT image)
-				FourierTransform.SetDestinationImage(ref fliIdealDst);
+				fourierTransform.SetDestinationImage(ref fliIdealDst);
 
 				// 알고리즘 수행(IFFT) // Execute the algorithm(IFFT)
-				if((res = (FourierTransform.Execute())).IsFail())
+				if((res = (fourierTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Fourier Transform.");
 					break;
 				}
 
 				// Source 이미지 설정(FFT image) // Set source image (FFT image)
-				FourierTransform.SetSourceImage(ref fliButterworthDst);
+				fourierTransform.SetSourceImage(ref fliButterworthDst);
 
 				// Destination 이미지 설정(IFFT image) // Set destination image(IFFT image)
-				FourierTransform.SetDestinationImage(ref fliButterworthDst);
+				fourierTransform.SetDestinationImage(ref fliButterworthDst);
 
 				// 알고리즘 수행(IFFT) // Execute the algorithm(IFFT)
-				if((res = (FourierTransform.Execute())).IsFail())
+				if((res = (fourierTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Fourier Transform.");
 					break;
 				}
 
 				// Source 이미지 설정(FFT image) // Set source image (FFT image)
-				FourierTransform.SetSourceImage(ref fliGaussianDst);
+				fourierTransform.SetSourceImage(ref fliGaussianDst);
 
 				// Destination 이미지 설정(IFFT image) // Set destination image(IFFT image)
-				FourierTransform.SetDestinationImage(ref fliGaussianDst);
+				fourierTransform.SetDestinationImage(ref fliGaussianDst);
 
 				// 알고리즘 수행(IFFT) // Execute the algorithm(IFFT)
-				if((res = (FourierTransform.Execute())).IsFail())
+				if((res = (fourierTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Fourier Transform.");
 					break;

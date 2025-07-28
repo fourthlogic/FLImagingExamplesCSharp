@@ -107,14 +107,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// DiscreteSineTransform 객체 생성 // Create DiscreteSineTransform object
-				CDiscreteSineTransform DiscreteSineTransform = new CDiscreteSineTransform();
+				CDiscreteSineTransform discreteSineTransform = new CDiscreteSineTransform();
 				// Source 이미지 설정 // Set source image
-				DiscreteSineTransform.SetSourceImage(ref arrFliImage[0]);
+				discreteSineTransform.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				DiscreteSineTransform.SetDestinationImage(ref arrFliImage[1]);
+				discreteSineTransform.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (DiscreteSineTransform.Execute())).IsFail())
+				if((res = (discreteSineTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Discrete Sine Transform.");
 					break;

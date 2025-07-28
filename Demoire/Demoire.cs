@@ -107,14 +107,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Demoire 객체 생성 // Create Demoire object
-				CDemoire Demoire = new CDemoire();
+				CDemoire demoire = new CDemoire();
 				// Source 이미지 설정 // Set source image
-				Demoire.SetSourceImage(ref arrFliImage[0]);
+				demoire.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				Demoire.SetDestinationImage(ref arrFliImage[1]);
+				demoire.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (Demoire.Execute())).IsFail())
+                if ((res = (demoire.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation add.");
 					break;

@@ -100,18 +100,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// DiscreteWaveletTransform 객체 생성 // Create DiscreteWaveletTransform object
-				CDiscreteWaveletTransform DiscreteWaveletTransform = new CDiscreteWaveletTransform();
+				CDiscreteWaveletTransform discreteWaveletTransform = new CDiscreteWaveletTransform();
 				// Source 이미지 설정 // Set source image
-				DiscreteWaveletTransform.SetSourceImage(ref arrFliImage[0]);
+				discreteWaveletTransform.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				DiscreteWaveletTransform.SetDestinationImage(ref arrFliImage[1]);
+				discreteWaveletTransform.SetDestinationImage(ref arrFliImage[1]);
 				// Basis Function 설정 // Set Basis Function
-				DiscreteWaveletTransform.SetBasisFunction(CDiscreteWaveletTransform.EBasisFunction.Haar);
+				discreteWaveletTransform.SetBasisFunction(CDiscreteWaveletTransform.EBasisFunction.Haar);
 				// 분해 단계 설정 // Set Decomposition Level
-				DiscreteWaveletTransform.SetDecompositionLevel(1);
+				discreteWaveletTransform.SetDecompositionLevel(1);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (DiscreteWaveletTransform.Execute())).IsFail())
+				if((res = (discreteWaveletTransform.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Discrete Wavelet Transform.");
 					break;

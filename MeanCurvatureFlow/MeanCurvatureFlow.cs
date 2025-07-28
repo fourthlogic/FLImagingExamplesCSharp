@@ -109,20 +109,20 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // MeanCurvatureFlow 객체 생성 // Create MeanCurvatureFlow object
-                CMeanCurvatureFlow MeanCurvatureFlow = new CMeanCurvatureFlow();
+                CMeanCurvatureFlow meanCurvatureFlow = new CMeanCurvatureFlow();
                 // Source 이미지 설정 // Set the source image
-                MeanCurvatureFlow.SetSourceImage(ref arrFliImage[0]);
+                meanCurvatureFlow.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                MeanCurvatureFlow.SetDestinationImage(ref arrFliImage[1]);
+                meanCurvatureFlow.SetDestinationImage(ref arrFliImage[1]);
 				// Algorithm 반복 수행 횟수 설정 // Set the number of iterations of an algorithm
-				MeanCurvatureFlow.SetIteration(20);
+				meanCurvatureFlow.SetIteration(20);
 				// Time Step 설정 // Set the time step value
-				MeanCurvatureFlow.SetTimeStep(0.5);
+				meanCurvatureFlow.SetTimeStep(0.5);
 				// Sigma 설정 // Set the sigma value
-				MeanCurvatureFlow.SetSigma(0);
+				meanCurvatureFlow.SetSigma(0);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((res = MeanCurvatureFlow.Execute()).IsFail())
+				if ((res = meanCurvatureFlow.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;

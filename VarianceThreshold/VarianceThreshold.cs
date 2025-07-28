@@ -95,25 +95,25 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// VarianceThreshold  객체 생성 // Create Variance Threshold object
-				CVarianceThreshold VarianceThreshold = new CVarianceThreshold();
+				CVarianceThreshold varianceThreshold = new CVarianceThreshold();
 
 				// Source 이미지 설정 // Set source image 
-				VarianceThreshold.SetSourceImage(ref fliISrcImage);
+				varianceThreshold.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				VarianceThreshold.SetDestinationImage(ref fliIDstImage);
+				varianceThreshold.SetDestinationImage(ref fliIDstImage);
 
 				// Kernel 사이즈 입력 // set kernel size
-				VarianceThreshold.SetKernel(15, 15);
+				varianceThreshold.SetKernel(15, 15);
 
                 // StdDevScale 설정 // set StdDevScale
-                VarianceThreshold.SetStdDevScale(0.2);
+                varianceThreshold.SetStdDevScale(0.2);
 
                 // AbsThreshold 설정 // Set AbsThreshold
-                VarianceThreshold.SetAbsThreshold(2);
+                varianceThreshold.SetAbsThreshold(2);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (VarianceThreshold.Execute())).IsFail())
+				if((res = (varianceThreshold.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute VarianceThreshold.");
 					break;

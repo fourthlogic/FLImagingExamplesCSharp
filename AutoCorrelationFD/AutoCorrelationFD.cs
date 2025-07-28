@@ -108,16 +108,16 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Auto Correlation FD 객체 생성 // Create AutoCorrelation FD object
-				CAutoCorrelationFD AutoCorrelationFD = new CAutoCorrelationFD();
+				CAutoCorrelationFD autoCorrelationFD = new CAutoCorrelationFD();
 				// Source 이미지 설정 // Set source image
-				AutoCorrelationFD.SetSourceImage(ref arrFliImage[0]);
+				autoCorrelationFD.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				AutoCorrelationFD.SetDestinationImage(ref arrFliImage[1]);
+				autoCorrelationFD.SetDestinationImage(ref arrFliImage[1]);
 				// 출력 방식 설정 // Set Output Method
-				AutoCorrelationFD.EnableNormalizedAutoCorrelation(true);
+				autoCorrelationFD.EnableNormalizedAutoCorrelation(true);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (AutoCorrelationFD.Execute())).IsFail())
+				if((res = (autoCorrelationFD.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Auto Correlation.");
 					Console.WriteLine(res.GetString());

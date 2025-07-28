@@ -101,14 +101,14 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // SaliencyMap 객체 생성 // Create SaliencyMap object
-                CSaliencyMap SaliencyMap = new CSaliencyMap();
+                CSaliencyMap saliencyMap = new CSaliencyMap();
                 // Source 이미지 설정 // Set source image
-                SaliencyMap.SetSourceImage(ref arrFliImage[0]);
+                saliencyMap.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set destination image 
-                SaliencyMap.SetDestinationImage(ref arrFliImage[1]);
+                saliencyMap.SetDestinationImage(ref arrFliImage[1]);
 
                 // 알고리즘 수행 // Execute the algorithm
-                if ((res = (SaliencyMap.Execute())).IsFail())
+                if ((res = (saliencyMap.Execute())).IsFail())
 				{
                     //ErrorPrint(res, "Failed to execute SaliencyMap.");
                     Console.WriteLine(res.GetString());

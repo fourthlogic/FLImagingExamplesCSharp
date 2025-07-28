@@ -136,18 +136,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Cross Correlation FD 객체 생성 // Create CrossCorrelationFD object
-				CCrossCorrelationFD CrossCorrelationFD = new CCrossCorrelationFD();
+				CCrossCorrelationFD crossCorrelationFD = new CCrossCorrelationFD();
 				// Source 이미지 설정 // Set source image
-				CrossCorrelationFD.SetSourceImage(ref arrFliImage[0]);
+				crossCorrelationFD.SetSourceImage(ref arrFliImage[0]);
 				// Operand 이미지 설정 // Set Operand image
-				CrossCorrelationFD.SetOperandImage(ref arrFliImage[1]);
+				crossCorrelationFD.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set destination image 
-				CrossCorrelationFD.SetDestinationImage(ref arrFliImage[2]);
+				crossCorrelationFD.SetDestinationImage(ref arrFliImage[2]);
 				// 출력 방식 설정 // Set Output Method
-				CrossCorrelationFD.EnableNormalizedCrossCorrelation(true);
+				crossCorrelationFD.EnableNormalizedCrossCorrelation(true);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (CrossCorrelationFD.Execute())).IsFail())
+				if((res = (crossCorrelationFD.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Cross Correlation.");
 					Console.WriteLine(res.GetString());

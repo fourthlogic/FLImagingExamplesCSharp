@@ -101,17 +101,17 @@ namespace FLImagingExamplesCSharp
 				CResult ipResult;
 
 				// HighDynamicRange 객체 생성 // Create HighDynamicRange object
-				CHighDynamicRange HighDynamicRange = new CHighDynamicRange();
+				CHighDynamicRange highDynamicRange = new CHighDynamicRange();
 
 				// 처리할 이미지 설정 // Set the source image
-				HighDynamicRange.SetSourceImage(ref fliSrcImage);
+				highDynamicRange.SetSourceImage(ref fliSrcImage);
 				// Destination 이미지 설정 // Set the destination image
-				HighDynamicRange.SetDestinationImage(ref fliDstImage);
+				highDynamicRange.SetDestinationImage(ref fliDstImage);
 				// Rate Value 설정 // Set the rate value
-				HighDynamicRange.SetRateValue(0.8);
+				highDynamicRange.SetRateValue(0.8);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((result = ipResult = HighDynamicRange.Execute()).IsFail())
+				if((result = ipResult = highDynamicRange.Execute()).IsFail())
 				{
 					ErrorPrint(result, "Failed to execute HighDynamicRange.");
 					Console.WriteLine(ipResult.GetString());
