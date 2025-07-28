@@ -95,33 +95,33 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// ShenCastan Edge Detector 객체 생성 // Create ShenCastan Edge Detector object
-				CShenCastanEdgeDetector ShenCastanEdge = new CShenCastanEdgeDetector();
+				CShenCastanEdgeDetector shenCastanEdge = new CShenCastanEdgeDetector();
 
 				// Source 이미지 설정 // Set source image 
-				ShenCastanEdge.SetSourceImage(ref fliISrcImage);
+				shenCastanEdge.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				ShenCastanEdge.SetDestinationImage(ref fliIDstImage);
+				shenCastanEdge.SetDestinationImage(ref fliIDstImage);
 
 				// Preprocessing 전처리 설정 // Set Preprocessing preprocessing
-				ShenCastanEdge.SetSmoothingMode(CShenCastanEdgeDetector.ESmoothingMode.ISEF);
+				shenCastanEdge.SetSmoothingMode(CShenCastanEdgeDetector.ESmoothingMode.ISEF);
 
 				// threshold 값 // threshold value
 				CMultiVar<double> mvThresholdValue = new CMultiVar<double>();
 				// 최소 threshold 값 입력 // minimum threshold value push
-				mvThresholdValue.PushBack(5.0);
+				shenCastanEdge.PushBack(5.0);
 				// 최대 threshold 값 입력 // maximum threshold value push
-				mvThresholdValue.PushBack(8.0);
+				shenCastanEdge.PushBack(8.0);
 				// 최소, 최대 threshold 설정 // Set minimum, maximum threshold
-				ShenCastanEdge.SetThreshold(mvThresholdValue);
+				shenCastanEdge.SetThreshold(mvThresholdValue);
 
 				// p 값 설정 // Set p value
-				ShenCastanEdge.SetPValue(0.5);
+				shenCastanEdge.SetPValue(0.5);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (ShenCastanEdge.Execute())).IsFail())
+				if((res = (shenCastanEdge.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ShenCastan Edge Detector.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 

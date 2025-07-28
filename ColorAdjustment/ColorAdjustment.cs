@@ -105,23 +105,23 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// ColorAdjustment 객체 생성 // Create ColorAdjustment object
-				CColorAdjustment ColorAdjustment = new CColorAdjustment();
+				// Color Adjustment 객체 생성 // Create Color Adjustment object
+				CColorAdjustment colorAdjustment = new CColorAdjustment();
 				// Source 이미지 설정 // Set the source image
-				ColorAdjustment.SetSourceImage(ref arrFliImage[0]);
+				colorAdjustment.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				ColorAdjustment.SetDestinationImage(ref arrFliImage[1]);
+				colorAdjustment.SetDestinationImage(ref arrFliImage[1]);
 
 				// Color Space 설정 // Set Color Space
-				ColorAdjustment.SetColorSpace(CColorAdjustment.EColorSpace.CIELCh);
+				colorAdjustment.SetColorSpace(CColorAdjustment.EColorSpace.CIELCh);
 
 				// Offset 설정 // Set Offset
-				ColorAdjustment.SetOffset(new CMultiVar<double>(-10, 20, -50));
+				colorAdjustment.SetOffset(new CMultiVar<double>(-10, 20, -50));
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = ColorAdjustment.Execute()).IsFail())
+				if((res = colorAdjustment.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ColorAdjustment.");
+					ErrorPrint(res, "Failed to execute.");
 					ErrorPrint(res, res.GetString());
 					break;
 				}

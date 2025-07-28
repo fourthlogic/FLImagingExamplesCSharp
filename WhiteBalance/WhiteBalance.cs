@@ -107,23 +107,23 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// WhiteBalance 객체 생성 // Create WhiteBalance object
-				CWhiteBalance WhiteBalance = new CWhiteBalance();
+				// White Balance 객체 생성 // Create White Balance object
+				CWhiteBalance whiteBalance = new CWhiteBalance();
 				// Source 이미지 설정 // Set the source image
-				WhiteBalance.SetSourceImage(ref arrFliImage[0]);
+				whiteBalance.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				WhiteBalance.SetDestinationImage(ref arrFliImage[1]);
+				whiteBalance.SetDestinationImage(ref arrFliImage[1]);
 
 				// 보정 방법 설정 // Set correction method
-				WhiteBalance.SetCorrectionMethod(CWhiteBalance.ECorrectionMethod.ColorTemperature);
+				whiteBalance.SetCorrectionMethod(CWhiteBalance.ECorrectionMethod.ColorTemperature);
 
 				// 색온도 설정 // Set color temperature
-				WhiteBalance.SetColorTemperature(5700);
+				whiteBalance.SetColorTemperature(5700);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = WhiteBalance.Execute()).IsFail())
+				if((res = whiteBalance.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute WhiteBalance.");
+					ErrorPrint(res, "Failed to execute.");
 					ErrorPrint(res, res.GetString());
 					break;
 				}

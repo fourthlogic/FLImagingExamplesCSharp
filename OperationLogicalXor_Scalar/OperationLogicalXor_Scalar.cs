@@ -138,42 +138,42 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalXor 객체 생성 // Create OperationLogicalXor object
-                COperationLogicalXor logical = new COperationLogicalXor();
+                COperationLogicalXor logicalXor = new COperationLogicalXor();
 
-                // Source 이미지 설정 // Set the source image
-                logical.SetSourceImage(ref fliSourceImage);
+				// Source 이미지 설정 // Set the source image
+				logicalXor.SetSourceImage(ref fliSourceImage);
 
-                // Destination 이미지 설정 // Set the destination image
-                logical.SetDestinationImage(ref fliDestinationImage1);
+				// Destination 이미지 설정 // Set the destination image
+				logicalXor.SetDestinationImage(ref fliDestinationImage1);
 
-                // Image Operation 소스로 설정 // Set Operation Source to image
-                logical.SetOperationSource(EOperationSource.Scalar);
+				// Image Operation 소스로 설정 // Set Operation Source to image
+				logicalXor.SetOperationSource(EOperationSource.Scalar);
 
                 // LogicalXor 값 설정 // Set LogicalXor value
                 CMultiVar<double> mvScalar = new CMultiVar<double>(0, 0, 0);
-                logical.SetScalarValue(mvScalar);
+				logicalXor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logical.Execute()).IsFail())
+                if ((res = logicalXor.Execute()).IsFail())
 				{
-                    ErrorPrint(res, "Failed to execute Operation LogicalXor. \n");
+                    ErrorPrint(res, "Failed to execute. \n");
                     break;
                 }
 
-                // Destination 이미지 설정 // Set the destination image
-                logical.SetDestinationImage(ref fliDestinationImage2);
+				// Destination 이미지 설정 // Set the destination image
+				logicalXor.SetDestinationImage(ref fliDestinationImage2);
 
-                // Image Operation 소스로 설정 // Set Operation Source to image
-                logical.SetOperationSource(EOperationSource.Scalar);
+				// Image Operation 소스로 설정 // Set Operation Source to image
+				logicalXor.SetOperationSource(EOperationSource.Scalar);
 
                 // LogicalXor 값 설정 // Set LogicalXor value
                 mvScalar = new CMultiVar<double>(255, 255, 255);
-                logical.SetScalarValue(mvScalar);
+				logicalXor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logical.Execute()).IsFail())
+                if ((res = logicalXor.Execute()).IsFail())
 				{
-                    ErrorPrint(res, "Failed to execute Operation LogicalXor. \n");
+                    ErrorPrint(res, "Failed to execute.\n");
                     break;
                 }
 

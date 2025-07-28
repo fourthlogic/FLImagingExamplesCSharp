@@ -65,34 +65,34 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// GeneralizedHoughTransform 객체 생성 // Create GeneralizedHoughTransform object
-				CGeneralizedHoughTransform GeneralizedHoughTransform = new CGeneralizedHoughTransform();
+				// Generalized Hough Transform 객체 생성 // Create Generalized Hough Transform object
+				CGeneralizedHoughTransform generalizedHoughTransform = new CGeneralizedHoughTransform();
 
 				// Source 이미지 설정 // Set the source image
-				GeneralizedHoughTransform.SetSourceImage(ref fliISrcImage);
+				generalizedHoughTransform.SetSourceImage(ref fliISrcImage);
 
 				CFLCircle<long> flfPatternROI = new CFLCircle<long>(575, 755, 71, 0, 0, 360, EArcClosingMethod.EachOther);
-				GeneralizedHoughTransform.SetPatternROI(flfPatternROI);
+				generalizedHoughTransform.SetPatternROI(flfPatternROI);
 
 				// Threshold 값 설정 // Set Threshold value
-				GeneralizedHoughTransform.SetPixelThreshold(128);
+				generalizedHoughTransform.SetPixelThreshold(128);
 
 				// 신뢰도 설정 // set confidence
-				GeneralizedHoughTransform.SetConfidence(0.5);
+				generalizedHoughTransform.SetConfidence(0.5);
 
 				// 탐색할 각도 단위 설정 (degree) // Set the angle unit to search (degree)
-				GeneralizedHoughTransform.SetAngleTolerance(90);
+				generalizedHoughTransform.SetAngleTolerance(90);
 
 				// 탐색할 크기 설정 (percent) // Set the scale tolerance to search (percent)
-				GeneralizedHoughTransform.SetScaleTolerance(10);
+				generalizedHoughTransform.SetScaleTolerance(10);
 
 				// 최대 검출 수 설정 // Set the maximum number of detections
-				GeneralizedHoughTransform.SetMaxObjectCount(100);
+				generalizedHoughTransform.SetMaxObjectCount(100);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (GeneralizedHoughTransform.Execute())).IsFail())
+				if((res = (generalizedHoughTransform.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute GeneralizedHoughTransform.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 
@@ -104,10 +104,10 @@ namespace FLImagingExamplesCSharp
 				layer.Clear();
 
 				// Result 갯수 체크 // Check the number of results
-				if(GeneralizedHoughTransform.GetDetectedObjectCount() > 0)
+				if(generalizedHoughTransform.GetDetectedObjectCount() > 0)
 				{
 					CFLFigureArray flfaDetectedObjects = new CFLFigureArray();
-					GeneralizedHoughTransform.GetDetectedObjects(ref flfaDetectedObjects);
+					generalizedHoughTransform.GetDetectedObjects(ref flfaDetectedObjects);
 
 					// 이미지 뷰에 검출된 객체 출력 // Output the detected object to the image view
 					if((res = (layer.DrawFigureImage(flfaDetectedObjects, EColor.BRIGHTCYAN, 2))).IsFail())

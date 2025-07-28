@@ -101,14 +101,14 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// ThinPlateSplineWarping 객체 생성 // Create ThinPlateSplineWarping object
-				CThinPlateSplineWarping ThinPlateSplineWarping = new CThinPlateSplineWarping();
+				// Thin Plate Spline Warping 객체 생성 // Create Thin Plate Spline Warping object
+				CThinPlateSplineWarping tpsWarping = new CThinPlateSplineWarping();
 				// Source 이미지 설정 // Set the source image
-				ThinPlateSplineWarping.SetSourceImage(ref arrFliImage[0]);
+				tpsWarping.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				ThinPlateSplineWarping.SetDestinationImage(ref arrFliImage[1]);
+				tpsWarping.SetDestinationImage(ref arrFliImage[1]);
 				// Interpolation Method 설정 // Set the interpolation method
-				ThinPlateSplineWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				tpsWarping.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// 그리드를 (5,5)로 초기화
 				CFLPoint<int> flpGridSize = new CFLPoint<int>(5, 5);
@@ -140,7 +140,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 위에서 설정한 좌표들을 바탕으로 ThinPlateSplineMapping 클래스에 Point 배열 설정
-				ThinPlateSplineWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
+				tpsWarping.SetCalibrationPointArray(flpaSource, flpaDestination);
 
 				CGUIViewImageLayer layer = arrViewImage[0].GetLayer(0);
 
@@ -180,18 +180,16 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 앞서 설정된 Source Image, Calibration Point Array를 기반으로 Calibrate 수행 // Calibrate based on previously set Source Image, Calibration Point Array
-				if((res = ThinPlateSplineWarping.Calibrate()).IsFail())
+				if((res = tpsWarping.Calibrate()).IsFail())
 				{
-					ErrorPrint(res, "Failed to calibrate ThinPlateSplineWarping.");
-					Console.WriteLine(res.GetString());
+					ErrorPrint(res, "Failed to calibrate.");
 					break;
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = ThinPlateSplineWarping.Execute()).IsFail())
+				if((res = tpsWarping.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ThinPlateSplineWarping.");
-					Console.WriteLine(res.GetString());
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 

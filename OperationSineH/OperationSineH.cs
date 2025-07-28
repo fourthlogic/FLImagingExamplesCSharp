@@ -92,7 +92,6 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 				if((res = (arrViewImage[0].SynchronizeWindow(ref arrViewImage[1]))).IsFail())
 				{
@@ -101,16 +100,16 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation SineH 객체 생성 // Create SineH object
-				COperationSineH SineH = new COperationSineH();
+				COperationSineH sineH = new COperationSineH();
 				// Source 이미지 설정 // Set source image
-				SineH.SetSourceImage(ref arrFliImage[0]);
+				sineH.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				SineH.SetDestinationImage(ref arrFliImage[1]);
+				sineH.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (SineH.Execute())).IsFail())
+				if((res = (sineH.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation SineH.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 

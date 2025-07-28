@@ -110,19 +110,19 @@ namespace FLImagingExamplesCSharp
 
 				// Operation TangentH 객체 생성
 				// Create TangentH object
-				COperationTangentH TangentH = new COperationTangentH();
+				COperationTangentH tangentH = new COperationTangentH();
 				// Source 이미지 설정
 				// Set source image
-				TangentH.SetSourceImage(ref arrFliImage[0]);
+				tangentH.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정
 				// Set destination image 
-				TangentH.SetDestinationImage(ref arrFliImage[1]);
+				tangentH.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행
 				// Execute the algorithm
-				if((res = (TangentH.Execute())).IsFail())
+				if((res = (tangentH.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation TangentH.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 

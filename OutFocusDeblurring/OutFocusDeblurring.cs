@@ -106,20 +106,20 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// OutFocusDeblurring 객체 생성 // Create OutFocusDeblurring object
-				COutFocusDeblurring OutFocusDeblurring = new COutFocusDeblurring();
+				// Out Focus Deblurring 객체 생성 // Create Out Focus Deblurring object
+				COutFocusDeblurring outFocusDeblurring = new COutFocusDeblurring();
 				// Source 이미지 설정 // Set the source image
-				OutFocusDeblurring.SetSourceImage(ref arrFliImage[0]);
+				outFocusDeblurring.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				OutFocusDeblurring.SetDestinationImage(ref arrFliImage[1]);
+				outFocusDeblurring.SetDestinationImage(ref arrFliImage[1]);
 
 				// Mode 설정 // Set Mode
-				OutFocusDeblurring.EnableWithEstimation(true);
+				outFocusDeblurring.EnableWithEstimation(true);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = OutFocusDeblurring.Execute()).IsFail())
+				if((res = outFocusDeblurring.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute OutFocusDeblurring.");
+					ErrorPrint(res, "Failed to execute.");
 					ErrorPrint(res, res.GetString());
 					break;
 				}

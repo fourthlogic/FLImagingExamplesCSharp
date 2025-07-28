@@ -138,24 +138,24 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalOr 객체 생성 // Create OperationLogicalOr object
-                COperationLogicalOr logical = new COperationLogicalOr();
+                COperationLogicalOr logicalOr = new COperationLogicalOr();
 
-                // Source 이미지 설정 // Set the source image
-                logical.SetSourceImage(ref fliSourceImage);
+				// Source 이미지 설정 // Set the source image
+				logicalOr.SetSourceImage(ref fliSourceImage);
 
-                // Operand 이미지 설정 // Set the operand image
-                logical.SetOperandImage(ref fliOperandImage);
+				// Operand 이미지 설정 // Set the operand image
+				logicalOr.SetOperandImage(ref fliOperandImage);
 
-                // Destination 이미지 설정 // Set the destination image
-                logical.SetDestinationImage(ref fliDestinationImage);
+				// Destination 이미지 설정 // Set the destination image
+				logicalOr.SetDestinationImage(ref fliDestinationImage);
 
-                // Image Operation 소스로 설정 // Set Operation Source to image
-                logical.SetOperationSource(EOperationSource.Image);
+				// Image Operation 소스로 설정 // Set Operation Source to image
+				logicalOr.SetOperationSource(EOperationSource.Image);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logical.Execute()).IsFail())
+                if ((res = logicalOr.Execute()).IsFail())
 				{
-                    ErrorPrint(res, "Failed to execute operation logical or. \n");
+                    ErrorPrint(res, "Failed to execute. \n");
                     break;
                 }
 

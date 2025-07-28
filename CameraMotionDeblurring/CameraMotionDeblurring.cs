@@ -106,20 +106,20 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// CameraMotionDeblurring 객체 생성 // Create CameraMotionDeblurring object
-				CCameraMotionDeblurring CameraMotionDeblurring = new CCameraMotionDeblurring();
+				// Camera Motion Deblurring 객체 생성 // Create Camera Motion Deblurring object
+				CCameraMotionDeblurring cameraMotionDeblurring = new CCameraMotionDeblurring();
 				// Source 이미지 설정 // Set the source image
-				CameraMotionDeblurring.SetSourceImage(ref arrFliImage[0]);
+				cameraMotionDeblurring.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				CameraMotionDeblurring.SetDestinationImage(ref arrFliImage[1]);
+				cameraMotionDeblurring.SetDestinationImage(ref arrFliImage[1]);
 
 				// Mode 설정 // Set Mode
-				CameraMotionDeblurring.EnableWithEstimation(true);
+				cameraMotionDeblurring.EnableWithEstimation(true);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = CameraMotionDeblurring.Execute()).IsFail())
+				if((res = cameraMotionDeblurring.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute CameraMotionDeblurring.");
+					ErrorPrint(res, "Failed to execute.");
 					ErrorPrint(res, res.GetString());
 					break;
 				}

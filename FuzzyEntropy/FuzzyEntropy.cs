@@ -63,25 +63,25 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// Statistics 객체 생성 // Create Statistics object
-				CFuzzyEntropy fuzzyentropy = new CFuzzyEntropy();
+				// Fuzzy Entropy 객체 생성 // Create Fuzzy Entropy object
+				CFuzzyEntropy fuzzyEntropy = new CFuzzyEntropy();
 
 				// ROI 범위 설정 // Set the ROI value
 				CFLCircle<double> flrROI = new CFLCircle<double>(310.466830, 81.769042, 81.769042, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther);
 
 				// Source 이미지 설정 // Set the Source Image
-				fuzzyentropy.SetSourceImage(ref fliImage);
+				fuzzyEntropy.SetSourceImage(ref fliImage);
 				// Source ROI 설정 // Set the Source ROI
-				fuzzyentropy.SetSourceROI(flrROI);
+				fuzzyEntropy.SetSourceROI(flrROI);
 
 				// Parameter 설정(A: 0, C: 255) // Set the parameter(A: 0, C: 255)
-				fuzzyentropy.SetParameterA(0);
-				fuzzyentropy.SetParameterC(255);
+				fuzzyEntropy.SetParameterA(0);
+				fuzzyEntropy.SetParameterC(255);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (fuzzyentropy.Execute())).IsFail())
+				if((res = (fuzzyEntropy.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Fuzzy Entropy.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 
@@ -89,9 +89,9 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvFuzzyEntropy = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 Fuzzy Entropy를 구하는 함수 // Function that calculate the fuzzy entropy of the image(or the region of ROI)
-				if((res = fuzzyentropy.GetResultFuzzyEntropy(ref mvFuzzyEntropy)).IsFail())
+				if((res = fuzzyEntropy.GetResultFuzzyEntropy(ref mvFuzzyEntropy)).IsFail())
 				{
-					ErrorPrint(res, "Failed to process.");
+					ErrorPrint(res, "Failed to get result.");
 					break;
 				}
 

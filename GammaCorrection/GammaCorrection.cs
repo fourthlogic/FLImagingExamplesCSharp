@@ -106,20 +106,20 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// GammaCorrection 객체 생성 // Create GammaCorrection object
-				CGammaCorrection GammaCorrection = new CGammaCorrection();
+				// Gamma Correction 객체 생성 // Create Gamma Correction object
+				CGammaCorrection gammaCorrection = new CGammaCorrection();
 				// Source 이미지 설정 // Set the source image
-				GammaCorrection.SetSourceImage(ref arrFliImage[0]);
+				gammaCorrection.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
-				GammaCorrection.SetDestinationImage(ref arrFliImage[1]);
+				gammaCorrection.SetDestinationImage(ref arrFliImage[1]);
 
 				// Mode 설정 // Set Mode
-				GammaCorrection.EnableWithEstimation(true);
+				gammaCorrection.EnableWithEstimation(true);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = GammaCorrection.Execute()).IsFail())
+				if((res = gammaCorrection.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute GammaCorrection.");
+					ErrorPrint(res, "Failed to execute.");
 					ErrorPrint(res, res.GetString());
 					break;
 				}

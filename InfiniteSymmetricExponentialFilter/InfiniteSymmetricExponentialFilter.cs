@@ -129,70 +129,70 @@ namespace FLImagingExamplesCSharp
 				// ROI 설정을 위한 CFLRect 객체 생성 // Create a CFLRect object for setting ROI
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
-				// InfiniteSymmetricExponential filter 객체 생성 // Create InfiniteSymmetricExponential filter object
-				CInfiniteSymmetricExponentialFilter InfiniteSymmetricExponentialFilter = new CInfiniteSymmetricExponentialFilter();
+				// Infinite Symmetric Exponential Filter 객체 생성 // Create Infinite Symmetric Exponential Filter object
+				CInfiniteSymmetricExponentialFilter infiniteSymmetricExponentialFilter = new CInfiniteSymmetricExponentialFilter();
 				// Source 이미지 설정 // Set the source image
-				InfiniteSymmetricExponentialFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				infiniteSymmetricExponentialFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				InfiniteSymmetricExponentialFilter.SetSourceROI(flrROI);
+				infiniteSymmetricExponentialFilter.SetSourceROI(flrROI);
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				InfiniteSymmetricExponentialFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				infiniteSymmetricExponentialFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Destination1 ROI 설정 // Set the destination1 ROI
-				InfiniteSymmetricExponentialFilter.SetDestinationROI(flrROI);
+				infiniteSymmetricExponentialFilter.SetDestinationROI(flrROI);
 
 				// PValue 값 설정 // Set the PValue value
-				InfiniteSymmetricExponentialFilter.SetPValue(0.3);
+				infiniteSymmetricExponentialFilter.SetPValue(0.3);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InfiniteSymmetricExponentialFilter.Execute()).IsFail())
+				if((res = infiniteSymmetricExponentialFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute InfiniteSymmetricExponential filter.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 
 				// Destination2 이미지 설정 // Set the destination2 image
-				InfiniteSymmetricExponentialFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				infiniteSymmetricExponentialFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Destination2 ROI 설정 // Set the destination2 ROI
-				InfiniteSymmetricExponentialFilter.SetDestinationROI(flrROI);
+				infiniteSymmetricExponentialFilter.SetDestinationROI(flrROI);
 
-                // PValue 값 설정 // Set the PValue value
-                InfiniteSymmetricExponentialFilter.SetPValue(0.6);
+				// PValue 값 설정 // Set the PValue value
+				infiniteSymmetricExponentialFilter.SetPValue(0.6);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InfiniteSymmetricExponentialFilter.Execute()).IsFail())
+				if((res = infiniteSymmetricExponentialFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute InfiniteSymmetricExponential filter.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 
 				// Destination3 이미지 설정 // Set the destination3 image
-				InfiniteSymmetricExponentialFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
+				infiniteSymmetricExponentialFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
 				// Destination3 ROI 설정 // Set the destination3 ROI
-				InfiniteSymmetricExponentialFilter.SetDestinationROI(flrROI);
+				infiniteSymmetricExponentialFilter.SetDestinationROI(flrROI);
 
-                // PValue 값 설정 // Set the PValue value
-                InfiniteSymmetricExponentialFilter.SetPValue(0.9);
+				// PValue 값 설정 // Set the PValue value
+				infiniteSymmetricExponentialFilter.SetPValue(0.9);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InfiniteSymmetricExponentialFilter.Execute()).IsFail())
+				if((res = infiniteSymmetricExponentialFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute InfiniteSymmetricExponential filter.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 
 				// Destination4 이미지 설정 // Set the destination4 image
-				InfiniteSymmetricExponentialFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination4]);
+				infiniteSymmetricExponentialFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination4]);
 				// Destination4 ROI 설정 // Set the destination4 ROI
-				InfiniteSymmetricExponentialFilter.SetDestinationROI(flrROI);
+				infiniteSymmetricExponentialFilter.SetDestinationROI(flrROI);
 
-                // PValue 값 설정 // Set the PValue value
-                InfiniteSymmetricExponentialFilter.SetPValue(1.5);
+				// PValue 값 설정 // Set the PValue value
+				infiniteSymmetricExponentialFilter.SetPValue(1.5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = InfiniteSymmetricExponentialFilter.Execute()).IsFail())
+				if((res = infiniteSymmetricExponentialFilter.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute InfiniteSymmetricExponential filter.");
+					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
 

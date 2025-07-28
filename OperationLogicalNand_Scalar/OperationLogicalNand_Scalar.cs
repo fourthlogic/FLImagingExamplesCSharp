@@ -101,27 +101,27 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalNand 객체 생성 // Create OperationLogicalNand object
-                COperationLogicalNand logical = new COperationLogicalNand();
+                COperationLogicalNand logicalNand = new COperationLogicalNand();
 
-                // Source 이미지 설정 // Set the source image
-                logical.SetSourceImage(ref fliDestinationImage);
+				// Source 이미지 설정 // Set the source image
+				logicalNand.SetSourceImage(ref fliDestinationImage);
 
                 // ROI 범위 설정 // Set the ROI value
                 CFLCircle<double> flcSourceROI = new CFLCircle<double>(128, 128, 80, 0, 0, 360, EArcClosingMethod.EachOther);
 
-                // Source 이미지의 ROI 지정 // Set the Source ROI
-                logical.SetSourceROI(flcSourceROI);
+				// Source 이미지의 ROI 지정 // Set the Source ROI
+				logicalNand.SetSourceROI(flcSourceROI);
 
-                // Scalar Operation 소스로 설정 // Set Operation Source to scalar
-                logical.SetOperationSource(EOperationSource.Scalar);
+				// Scalar Operation 소스로 설정 // Set Operation Source to scalar
+				logicalNand.SetOperationSource(EOperationSource.Scalar);
 
-                // 스칼라 값 지정 // Set the Scalar value
-                logical.SetScalarValue(111);
+				// 스칼라 값 지정 // Set the Scalar value
+				logicalNand.SetScalarValue(111);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logical.Execute()).IsFail())
+                if ((res = logicalNand.Execute()).IsFail())
 				{
-                    ErrorPrint(res, "Failed to execute Operation LogicalNand. \n");
+                    ErrorPrint(res, "Failed to execute. \n");
                     break;
                 }
 

@@ -115,32 +115,32 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// FLColorBoostingType1 객체 생성 // Create FLColorBoostingType1 object
-				CFLColorBoostingType1 FLColorBoostingType1 = new CFLColorBoostingType1();
+				// FL Color Boosting Type 1 객체 생성 // Create FL Color Boosting Type 1 object
+				CFLColorBoostingType1 flColorBoostingType1 = new CFLColorBoostingType1();
 
 				// Source 이미지 설정 // Set source image 
-				if((res = FLColorBoostingType1.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = flColorBoostingType1.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = FLColorBoostingType1.SetDestinationImage(ref fliConvertedImage)).IsFail())
+				if((res = flColorBoostingType1.SetDestinationImage(ref fliConvertedImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Destination Image.");
 					break;
 				}
 
 				// Factor 설정 // Set Factor
-				if((res = (FLColorBoostingType1.SetFactor(3))).IsFail())
+				if((res = (flColorBoostingType1.SetFactor(3))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Factor.");
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (FLColorBoostingType1.Execute())).IsFail())
+				if((res = (flColorBoostingType1.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

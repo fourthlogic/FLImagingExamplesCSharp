@@ -115,7 +115,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// TotalVariationDenoising 객체 생성 // Create TotalVariationDenoising object
+				// Total Variation Denoising 객체 생성 // Create Total Variation Denoising object
 				CTotalVariationDenoising TotalVariationDenoising = new CTotalVariationDenoising();
 
 				// Source 이미지 설정 // Set source image 

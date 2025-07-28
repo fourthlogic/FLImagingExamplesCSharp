@@ -115,53 +115,53 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// FLDenoisingType1 객체 생성 // Create FLDenoisingType1 object
-				CFLDenoisingType1 FLDenoisingType1 = new CFLDenoisingType1();
+				// FL Denoising Type 1 객체 생성 // Create FL Denoising Type 1 object
+				CFLDenoisingType1 flDenoisingType1 = new CFLDenoisingType1();
 
 				// Source 이미지 설정 // Set source image 
-				if((res = FLDenoisingType1.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = flDenoisingType1.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = FLDenoisingType1.SetDestinationImage(ref fliConvertedImage)).IsFail())
+				if((res = flDenoisingType1.SetDestinationImage(ref fliConvertedImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Destination Image.");
 					break;
 				}
 
 				// Kernel 크기 설정 // Set the Kernel Size
-				if((res = (FLDenoisingType1.SetKernel(5))).IsFail())
+				if((res = (flDenoisingType1.SetKernel(5))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Kernel Size.");
 					break;
 				}
 
 				// Sigma 설정 // Set the Sigma
-				if((res = (FLDenoisingType1.SetSigma(2))).IsFail())
+				if((res = (flDenoisingType1.SetSigma(2))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Sigma.");
 					break;
 				}
 
 				// Amplitude 설정 // Set the Amplitude
-				if((res = (FLDenoisingType1.SetAmplitude(20))).IsFail())
+				if((res = (flDenoisingType1.SetAmplitude(20))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Amplitude.");
 					break;
 				}
 
 				// Operation Mode 설정 // Set the Operation Mode
-				if((res = (FLDenoisingType1.SetOperationMode(CFLDenoisingType1.EOperationMode.Normal))).IsFail())
+				if((res = (flDenoisingType1.SetOperationMode(CFLDenoisingType1.EOperationMode.Normal))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Operation Mode.");
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (FLDenoisingType1.Execute())).IsFail())
+				if((res = (flDenoisingType1.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

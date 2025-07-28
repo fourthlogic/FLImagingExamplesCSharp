@@ -116,31 +116,31 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Decolorization 객체 생성 // Create Decolorization object
-				CDecolorization Decolorization = new CDecolorization();
+				CDecolorization decolorization = new CDecolorization();
 
 				// Source 이미지 설정 // Set source image 
-				if((res = Decolorization.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = decolorization.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = Decolorization.SetDestinationImage(ref fliConvertedImage)).IsFail())
+				if((res = decolorization.SetDestinationImage(ref fliConvertedImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Destination Image.");
 					break;
 				}
 
 				// 연산 속도 설정 // Set the Operation Speed
-				if((res = (Decolorization.SetOperationSpeed(CDecolorization.EOperationSpeed.Normal))).IsFail())
+				if((res = (decolorization.SetOperationSpeed(CDecolorization.EOperationSpeed.Normal))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Operation Speed.");
 					break;
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (Decolorization.Execute())).IsFail())
+				if((res = (decolorization.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;
