@@ -38,10 +38,10 @@ namespace FLImagingExamplesCSharp
 			CFLImage fliDstImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage[] viewImage = new CGUIViewImage[2];
+			CGUIViewImage[] arrViewImage = new CGUIViewImage[2];
 
-			viewImage[0] = new CGUIViewImage();
-			viewImage[1] = new CGUIViewImage();
+			arrViewImage[0] = new CGUIViewImage();
+			arrViewImage[1] = new CGUIViewImage();
 
 			do
 			{
@@ -54,41 +54,41 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 이미지 뷰 생성 // Create image view
-				if((res = viewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
+				if((res = arrViewImage[0].Create(300, 0, 300 + 520, 430)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				if((res = viewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
+				if((res = arrViewImage[1].Create(300 + 520, 0, 300 + 520 * 2, 430)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
+				if((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");
 					break;
 				}
 
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
+				if((res = arrViewImage[0].SynchronizeWindow(ref arrViewImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[0].SetImagePtr(ref fliSrcImage)).IsFail())
+				if((res = arrViewImage[0].SetImagePtr(ref fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				if((res = viewImage[1].SetImagePtr(ref fliDstImage)).IsFail())
+				if((res = arrViewImage[1].SetImagePtr(ref fliDstImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
@@ -118,8 +118,8 @@ namespace FLImagingExamplesCSharp
 
 				// 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
 				// 따로 해제할 필요 없음 // No need to release separately
-				CGUIViewImageLayer layer1 = viewImage[0].GetLayer(0);
-				CGUIViewImageLayer layer2 = viewImage[1].GetLayer(0);
+				CGUIViewImageLayer layer1 = arrViewImage[0].GetLayer(0);
+				CGUIViewImageLayer layer2 = arrViewImage[1].GetLayer(0);
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
 				// View 정보를 디스플레이 합니다. // Display View information.
@@ -131,11 +131,11 @@ namespace FLImagingExamplesCSharp
 
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
-				viewImage[0].Invalidate(true);
-				viewImage[1].Invalidate(true);
+				arrViewImage[0].Invalidate(true);
+				arrViewImage[1].Invalidate(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImage[0].IsAvailable())
+				while(arrViewImage[0].IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
