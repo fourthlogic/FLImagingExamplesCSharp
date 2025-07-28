@@ -109,9 +109,9 @@ namespace FLImagingExamplesCSharp
 				// threshold 값 // threshold value
 				CMultiVar<double> mvThresholdValue = new CMultiVar<double>();
 				// 최소 threshold 값 입력 // minimum threshold value push
-				shenCastanEdge.PushBack(5.0);
+				mvThresholdValue.PushBack(5.0);
 				// 최대 threshold 값 입력 // maximum threshold value push
-				shenCastanEdge.PushBack(8.0);
+				mvThresholdValue.PushBack(8.0);
 				// 최소, 최대 threshold 설정 // Set minimum, maximum threshold
 				shenCastanEdge.SetThreshold(mvThresholdValue);
 
