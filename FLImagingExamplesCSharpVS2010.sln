@@ -1744,6 +1744,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SobelFilter", "SobelFilter\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMeansClusterThreshold", "KMeansClusterThreshold\KMeansClusterThreshold.csproj", "{6272E190-37EF-416C-8C30-0DA2DD48D70C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointCloudDownsamplerStochastic3D", "PointCloudDownsamplerStochastic3D\PointCloudDownsamplerStochastic3D.csproj", "{51BDB50A-76BD-499B-8AFA-2CB42D3ECA62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -5416,6 +5418,12 @@ Global
 		{6272E190-37EF-416C-8C30-0DA2DD48D70C}.Release|Win32.ActiveCfg = Release|x64
 		{6272E190-37EF-416C-8C30-0DA2DD48D70C}.Release|x64.ActiveCfg = Release|x64
 		{6272E190-37EF-416C-8C30-0DA2DD48D70C}.Release|x64.Build.0 = Release|x64
+		{51BDB50A-76BD-499B-8AFA-2CB42D3ECA62}.Debug|Win32.ActiveCfg = Debug|x64
+		{51BDB50A-76BD-499B-8AFA-2CB42D3ECA62}.Debug|x64.ActiveCfg = Debug|x64
+		{51BDB50A-76BD-499B-8AFA-2CB42D3ECA62}.Debug|x64.Build.0 = Debug|x64
+		{51BDB50A-76BD-499B-8AFA-2CB42D3ECA62}.Release|Win32.ActiveCfg = Release|x64
+		{51BDB50A-76BD-499B-8AFA-2CB42D3ECA62}.Release|x64.ActiveCfg = Release|x64
+		{51BDB50A-76BD-499B-8AFA-2CB42D3ECA62}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -6279,6 +6287,7 @@ Global
 		{2A7FA528-C4E6-4A20-A2F7-C784520CC502} = {0DFB586E-F64C-451B-9E20-B7C5EEC15383}
 		{385E1A28-9C44-4BCE-A4AD-1C35E17FF139} = {0DFB586E-F64C-451B-9E20-B7C5EEC15383}
 		{F33161E8-CD59-4B16-93E1-D134CE032438} = {0DFB586E-F64C-451B-9E20-B7C5EEC15383}
+		{51BDB50A-76BD-499B-8AFA-2CB42D3ECA62} = {0DFB586E-F64C-451B-9E20-B7C5EEC15383}
 		{18A0B069-B96E-456D-A347-65991E8E692D} = {80E2435A-3170-4B4C-A7BF-8AE5D4376B86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
