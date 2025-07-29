@@ -65,17 +65,17 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				CPointCloudUpsamplerUniform3D alg = new CPointCloudUpsamplerUniform3D();
+				CPointCloudUpsamplerUniform3D pointCloudUpsampler = new CPointCloudUpsamplerUniform3D();
 
 				// 파라미터 설정 // Set parameter
-				alg.SetSourceObject(ref floSrc);
-				alg.SetDestinationObject(ref floDst);
-				alg.SetColoringMode(CPointCloudUpsampler3DBase.EColoringMode.Interpolate);
-				alg.EnableNormalInterpolation(true);
-				alg.SetSamplingSize((long)1e7);
-				alg.EnableCopyVertex(true);
-				alg.EnableFaceReconstruction(false);
-				alg.EnableFaceRetainment(false);
+				pointCloudUpsampler.SetSourceObject(ref floSrc);
+				pointCloudUpsampler.SetDestinationObject(ref floDst);
+				pointCloudUpsampler.SetColoringMode(CPointCloudUpsampler3DBase.EColoringMode.Interpolate);
+				pointCloudUpsampler.EnableNormalInterpolation(true);
+				pointCloudUpsampler.SetSamplingSize((long)1e7);
+				pointCloudUpsampler.EnableCopyVertex(true);
+				pointCloudUpsampler.EnableFaceReconstruction(false);
+				pointCloudUpsampler.EnableFaceRetainment(false);
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIView3DLayer layer3DSrc = view3DSrc.GetLayer(0);
@@ -95,7 +95,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = alg.Execute()).IsFail())
+				if((res = pointCloudUpsampler.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

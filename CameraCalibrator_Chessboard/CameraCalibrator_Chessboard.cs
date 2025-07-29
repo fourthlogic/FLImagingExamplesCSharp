@@ -32,7 +32,7 @@ namespace FLImagingExamplesCSharp
 			public CCameraCalibrator.CCalibratorGridResult sGridData;
 		};
 
-		static bool Calibration(CCameraCalibrator sCC, CFLImage fliLearnImage)
+		static bool Calibration(CCameraCalibrator cameraCalibrator, CFLImage fliLearnImage)
 		{
 			bool bResult = false;
 
@@ -42,19 +42,19 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// Learn 이미지 설정 // Learn image settings
-				if((res = sCC.SetCalibrationImage(ref fliLearnImage)).IsFail())
+				if((res = cameraCalibrator.SetCalibrationImage(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image");
 					break;
 				}
 
 				// Calibator할 대상 종류를 설정합니다. // Set the target type for Calibator.
-				sCC.SetGridType(CCameraCalibrator.EGridType.ChessBoard);
+				cameraCalibrator.SetGridType(CCameraCalibrator.EGridType.ChessBoard);
 				// 결과에 대한 학습률을 설정합니다.
-				sCC.SetOptimalSolutionAccuracy(1e-5);
+				cameraCalibrator.SetOptimalSolutionAccuracy(1e-5);
 
 				// Calibration 실행 // Execute Calibration
-				if((res = sCC.Calibrate()).IsFail())
+				if((res = cameraCalibrator.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Calibration failed");
 					break;
@@ -67,7 +67,7 @@ namespace FLImagingExamplesCSharp
 			return bResult;
 		}
 
-		static bool Undistortion(CCameraCalibrator sCC, CFLImage fliSourceImage, CFLImage fliDestinationImage)
+		static bool Undistortion(CCameraCalibrator cameraCalibrator, CFLImage fliSourceImage, CFLImage fliDestinationImage)
 		{
 			bool bResult = false;
 
@@ -77,28 +77,28 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// Source 이미지 설정 // Set Source image
-				if((res = sCC.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = cameraCalibrator.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load image");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = sCC.SetDestinationImage(ref fliDestinationImage)).IsFail())
+				if((res = cameraCalibrator.SetDestinationImage(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load image");
 					break;
 				}
 
 				// Interpolation 알고리즘 설정 // Set the Interpolation Algorithm
-				if((res = sCC.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
+				if((res = cameraCalibrator.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set interpolation method");
 					break;
 				}
 
 				// Undistortion 실행 // Execute Undistortion
-				if((res = sCC.Execute()).IsFail())
+				if((res = cameraCalibrator.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Undistortion failed");
 					break;
@@ -135,7 +135,7 @@ namespace FLImagingExamplesCSharp
 			viewImageLearn[2] = new CGUIViewImage();
 
 			// Camera Calibrator 객체 생성 // Create Camera Calibrator object
-			CCameraCalibrator sCC = new CCameraCalibrator();
+			CCameraCalibrator cameraCalibrator = new CCameraCalibrator();
 			CResult res = new CResult();
 
 			do
@@ -172,7 +172,7 @@ namespace FLImagingExamplesCSharp
 					}
 				}
 
-				if(!Calibration(sCC, fliLearnImage))
+				if(!Calibration(cameraCalibrator, fliLearnImage))
 					break;
 
 				// Source 이미지 로드 // Load the source image
@@ -191,7 +191,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if(!Undistortion(sCC, fliSourceImage, fliDestinationImage))
+				if(!Undistortion(cameraCalibrator, fliSourceImage, fliDestinationImage))
 					break;
 
 				// 화면에 격자 탐지 결과 출력 // Output the grid detection result on the screen
@@ -208,11 +208,11 @@ namespace FLImagingExamplesCSharp
 
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage.GetPageCount(); ++i64ImgIdx)
 				{
-					long i64ObjectCount = sCC.GetResultGridPointsObjectCnt(i64ImgIdx);
+					long i64ObjectCount = cameraCalibrator.GetResultGridPointsObjectCnt(i64ImgIdx);
 
 					for(long i64ObjectIdx = 0; i64ObjectIdx < i64ObjectCount; ++i64ObjectIdx)
 					{
-						sCC.GetResultGridPoints(i64ObjectIdx, i64ImgIdx, ref sArrGridDisplay[i64ImgIdx].sGridData);
+						cameraCalibrator.GetResultGridPoints(i64ObjectIdx, i64ImgIdx, ref sArrGridDisplay[i64ImgIdx].sGridData);
 						sArrGridDisplay[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 						sArrGridDisplay[i64ImgIdx].i64ObjectIdx = sArrGridDisplay[i64ImgIdx].sGridData.i64ID;
 					}
@@ -423,8 +423,8 @@ namespace FLImagingExamplesCSharp
 
 				// calibration data 출력 // Output calibration data 
 				CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
-				CCameraCalibrator.CCalibratorIntrinsicParameters sIntrinsicParam = sCC.GetResultIntrinsicParameters();
-				CCameraCalibrator.CCalibratorDistortionCoefficients sDistortCoeef = sCC.GetResultDistortionCoefficients();
+				CCameraCalibrator.CCalibratorIntrinsicParameters sIntrinsicParam = cameraCalibrator.GetResultIntrinsicParameters();
+				CCameraCalibrator.CCalibratorDistortionCoefficients sDistortCoeef = cameraCalibrator.GetResultDistortionCoefficients();
 
 				string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, 0, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, 0, 0, 1);
 

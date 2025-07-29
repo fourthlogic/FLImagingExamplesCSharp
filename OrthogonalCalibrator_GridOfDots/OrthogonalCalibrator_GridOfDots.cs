@@ -32,7 +32,7 @@ namespace FLImagingExamplesCSharp
 			public COrthogonalCalibrator.CCalibratorGridResult sGridData;
 		};
 
-		static bool Calibration(COrthogonalCalibrator sCC, CFLImage fliLearnImage)
+		static bool Calibration(COrthogonalCalibrator orthogonalCalibrator, CFLImage fliLearnImage)
 		{
 			bool bResult = false;
 
@@ -42,30 +42,30 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// Learn 이미지 설정 // Learn image settings
-				if((res = sCC.SetCalibrationImage(ref fliLearnImage)).IsFail())
+				if((res = orthogonalCalibrator.SetCalibrationImage(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image");
 					break;
 				}
 
 				// Calibator할 대상 종류를 설정합니다. // Set the target type for Calibator.
-				sCC.SetGridTypeForCameraCalibration(COrthogonalCalibrator.EGridType.GridOfDots);
+				orthogonalCalibrator.SetGridTypeForCameraCalibration(COrthogonalCalibrator.EGridType.GridOfDots);
 
 				// 직교 보정 계산을 할 Learn 이미지 설정 // Learn image settings for orthogonal correction
-				if((res = sCC.SetOrthogonalCorrectionImage(ref fliLearnImage)).IsFail())
+				if((res = orthogonalCalibrator.SetOrthogonalCorrectionImage(ref fliLearnImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image");
 					break;
 				}
 
 				// 직교 보정할 대상 종류를 설정합니다. // Set the target type for orthogonal correction.
-				sCC.SetGridTypeForOrthogonalCorrection(COrthogonalCalibrator.EGridType.GridOfDots);
+				orthogonalCalibrator.SetGridTypeForOrthogonalCorrection(COrthogonalCalibrator.EGridType.GridOfDots);
 
 				// 결과에 대한 학습률을 설정합니다.
-				sCC.SetOptimalSolutionAccuracy(1e-5);
+				orthogonalCalibrator.SetOptimalSolutionAccuracy(1e-5);
 
 				// Calibration 실행 // Execute Calibration
-				if((res = sCC.Calibrate()).IsFail())
+				if((res = orthogonalCalibrator.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Calibration failed");
 					break;
@@ -78,7 +78,7 @@ namespace FLImagingExamplesCSharp
 			return bResult;
 		}
 
-		static bool Undistortion(COrthogonalCalibrator sCC, CFLImage fliSourceImage, CFLImage fliDestinationImage)
+		static bool Undistortion(COrthogonalCalibrator orthogonalCalibrator, CFLImage fliSourceImage, CFLImage fliDestinationImage)
 		{
 			bool bResult = false;
 
@@ -88,28 +88,28 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// Source 이미지 설정 // Set Source image
-				if((res = sCC.SetSourceImage(ref fliSourceImage)).IsFail())
+				if((res = orthogonalCalibrator.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load image");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image
-				if((res = sCC.SetDestinationImage(ref fliDestinationImage)).IsFail())
+				if((res = orthogonalCalibrator.SetDestinationImage(ref fliDestinationImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to load image");
 					break;
 				}
 
 				// Interpolation 알고리즘 설정 // Set the Interpolation Algorithm
-				if((res = sCC.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
+				if((res = orthogonalCalibrator.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set interpolation method");
 					break;
 				}
 
 				// Undistortion 실행 // Execute Undistortion
-				if((res = sCC.Execute()).IsFail())
+				if((res = orthogonalCalibrator.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Undistortion failed");
 					break;
@@ -137,7 +137,7 @@ namespace FLImagingExamplesCSharp
 			CGUIViewImage viewImageSource = new CGUIViewImage(), viewImageDestination = new CGUIViewImage();
 
 			// Orthogonal Calibrator 객체 생성 // Create Orthogonal Calibrator object
-			COrthogonalCalibrator sCC = new COrthogonalCalibrator();
+			COrthogonalCalibrator orthogonalCalibrator = new COrthogonalCalibrator();
 			CResult res = new CResult();
 
 			do
@@ -165,7 +165,7 @@ namespace FLImagingExamplesCSharp
 
 				Console.WriteLine("Processing....");
 
-				if(!Calibration(sCC, fliLearnImage))
+				if(!Calibration(orthogonalCalibrator, fliLearnImage))
 					break;
 
 				// Source 이미지 로드 // Load the source image
@@ -184,7 +184,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if(!Undistortion(sCC, fliSourceImage, fliDestinationImage))
+				if(!Undistortion(orthogonalCalibrator, fliSourceImage, fliDestinationImage))
 					break;
 
 				// 화면에 격자 탐지 결과 출력 // Output the grid detection result on the screen
@@ -192,11 +192,11 @@ namespace FLImagingExamplesCSharp
 				sArrGridDisplay.i64ImageIdx = 0;
 				sArrGridDisplay.i64ObjectIdx = 0;
 				sArrGridDisplay.sGridData = new CCameraCalibrator.CCalibratorGridResult();
-				long i64ObjectCount = sCC.GetResultGridPointsObjectCnt(0);
+				long i64ObjectCount = orthogonalCalibrator.GetResultGridPointsObjectCnt(0);
 
 				for(long i64ObjectIdx = 0; i64ObjectIdx < i64ObjectCount; ++i64ObjectIdx)
 				{
-					sCC.GetResultGridPoints(i64ObjectIdx, 0, ref sArrGridDisplay.sGridData);
+					orthogonalCalibrator.GetResultGridPoints(i64ObjectIdx, 0, ref sArrGridDisplay.sGridData);
 					sArrGridDisplay.i64ImageIdx = 0;
 					sArrGridDisplay.i64ObjectIdx = sArrGridDisplay.sGridData.i64ID;
 				}
@@ -399,8 +399,8 @@ namespace FLImagingExamplesCSharp
 
 				// calibration data 출력 // Output calibration data 
 				CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
-				COrthogonalCalibrator.CCalibratorIntrinsicParameters sIntrinsicParam = sCC.GetResultIntrinsicParameters();
-				COrthogonalCalibrator.CCalibratorDistortionCoefficients sDistortCoeef = sCC.GetResultDistortionCoefficients();
+				COrthogonalCalibrator.CCalibratorIntrinsicParameters sIntrinsicParam = orthogonalCalibrator.GetResultIntrinsicParameters();
+				COrthogonalCalibrator.CCalibratorDistortionCoefficients sDistortCoeef = orthogonalCalibrator.GetResultDistortionCoefficients();
 
 				string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, 0, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, 0, 0, 1);
 

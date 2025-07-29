@@ -65,22 +65,22 @@ namespace FLImagingExamplesCSharp
 				floSrc.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
 
 				// Perspective Transform 3D 객체 생성 // Create Perspective Transform 3D object
-				CPerspectiveTransform3D alg = new CPerspectiveTransform3D();
+				CPerspectiveTransform3D distanceTransform = new CPerspectiveTransform3D();
 
 				TPoint3<float> tpPosition = new TPoint3<float>(2.0f, 0.0f, 1.5f);
 				TPoint3<float> tpDirection = new TPoint3<float>(-1.0f, 0.0f, -1.0f);
 				TPoint3<float> tpUpVector = new TPoint3<float>(0.0f, 1.0f, 0.0f);
 
 				// 파라미터 설정 // Set parameter
-				alg.SetSourceObject(ref floSrc);
-				alg.SetDestinationObject(ref floDst);
-				alg.SetPosition(tpPosition);
-				alg.SetDirection(tpDirection);
-				alg.SetDirectionType(EDirectionType.Decrement);
-				alg.SetUpVector(tpUpVector);
+				distanceTransform.SetSourceObject(ref floSrc);
+				distanceTransform.SetDestinationObject(ref floDst);
+				distanceTransform.SetPosition(tpPosition);
+				distanceTransform.SetDirection(tpDirection);
+				distanceTransform.SetDirectionType(EDirectionType.Decrement);
+				distanceTransform.SetUpVector(tpUpVector);
 
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = alg.Execute()).IsFail())
+				if((res = distanceTransform.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;

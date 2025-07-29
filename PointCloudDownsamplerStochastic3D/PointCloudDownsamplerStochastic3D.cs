@@ -65,15 +65,15 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				CPointCloudDownsamplerStochastic3D alg = new CPointCloudDownsamplerStochastic3D();
+				CPointCloudDownsamplerStochastic3D pointCloudDownsampler = new CPointCloudDownsamplerStochastic3D();
 
 				// 파라미터 설정 // Set parameter
-				alg.SetSourceObject(ref floSrc);
-				alg.SetDestinationObject(ref floDst);
-				alg.SetSamplingSize(50000);
-				alg.EnableNormalRetainment(true);
-				alg.EnableColorRetainment(true);
-				alg.EnableFaceRetainment(false);
+				pointCloudDownsampler.SetSourceObject(ref floSrc);
+				pointCloudDownsampler.SetDestinationObject(ref floDst);
+				pointCloudDownsampler.SetSamplingSize(50000);
+				pointCloudDownsampler.EnableNormalRetainment(true);
+				pointCloudDownsampler.EnableColorRetainment(true);
+				pointCloudDownsampler.EnableFaceRetainment(false);
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIView3DLayer layer3DSrc = view3DSrc.GetLayer(0);
@@ -93,7 +93,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = alg.Execute()).IsFail())
+				if((res = pointCloudDownsampler.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

@@ -25,7 +25,7 @@ namespace FLImagingExamplesCSharp
 			Console.ReadKey();
 		}
 
-		static bool Undistortion(CCameraCalibrator sCC, CFLImage fliSourceImage, CFLImage fliDestinationImage, CGUIViewImage viewImageSource, CGUIViewImage viewImageDestination)
+		static bool Undistortion(CCameraCalibrator cameraCalibrator, CFLImage fliSourceImage, CFLImage fliDestinationImage, CGUIViewImage viewImageSource, CGUIViewImage viewImageDestination)
 		{
             bool bResult = false;
 
@@ -80,14 +80,14 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Source 이미지 설정 // Set Source image
-                if ((res = sCC.SetSourceImage(ref fliSourceImage)).IsFail())
+                if ((res = cameraCalibrator.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
                     ErrorPrint(res, "Failed to load image");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set destination image
-                if ((res = sCC.SetDestinationImage(ref fliDestinationImage)).IsFail())
+                if ((res = cameraCalibrator.SetDestinationImage(ref fliDestinationImage)).IsFail())
 				{
                     ErrorPrint(res, "Failed to load image");
                     break;
@@ -101,7 +101,7 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Interpolation 알고리즘 설정 // Set the Interpolation Algorithm
-                if ((res = sCC.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
+                if ((res = cameraCalibrator.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
 				{
                     ErrorPrint(res, "Failed to set interpolation method");
                     break;
@@ -111,7 +111,7 @@ namespace FLImagingExamplesCSharp
                 sPC.Start();
 
                 // Undistortion 실행 // Execute Undistortion
-                if ((res = sCC.Execute()).IsFail())
+                if ((res = cameraCalibrator.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Undistortion failed");
                     break;
@@ -172,7 +172,7 @@ namespace FLImagingExamplesCSharp
             CGUIViewImage viewImageSource = new CGUIViewImage(), viewImageDestination = new CGUIViewImage();
 
             // Camera Calibrator 객체 생성 // Create Camera Calibrator object
-            CCameraCalibrator sCC = new CCameraCalibrator();
+            CCameraCalibrator cameraCalibrator = new CCameraCalibrator();
 
 			do
 			{
@@ -194,31 +194,31 @@ namespace FLImagingExamplesCSharp
 				uDist.f64P2 = arrF64Dist[3];
 				uDist.f64K3 = arrF64Dist[4];
 
-				if((res = sCC.SetIntrinsicParameters(uIntrinc)).IsFail())
+				if((res = cameraCalibrator.SetIntrinsicParameters(uIntrinc)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set intrinsic parameters");
 					break;
 				}
 
-				if((res = sCC.SetDistortionCoefficients(uDist)).IsFail())
+				if((res = cameraCalibrator.SetDistortionCoefficients(uDist)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set distortion coefficients");
 					break;
 				}
 
-				if((res = sCC.EnableAutoCalibration(false)).IsFail())
+				if((res = cameraCalibrator.EnableAutoCalibration(false)).IsFail())
 				{
 					ErrorPrint(res, "Failed to auto calibration\n");
 					break;
 				}
 
-				if((res = sCC.Calibrate()).IsFail())
+				if((res = cameraCalibrator.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Failed to calibration\n");
 					break;
 				}
 
-				if(!Undistortion(sCC, fliSourceImage, fliDestinationImage, viewImageSource, viewImageDestination))
+				if(!Undistortion(cameraCalibrator, fliSourceImage, fliDestinationImage, viewImageSource, viewImageDestination))
 					break;
 
 				CGUIViewImageLayer layerSource = viewImageSource.GetLayer(0);
