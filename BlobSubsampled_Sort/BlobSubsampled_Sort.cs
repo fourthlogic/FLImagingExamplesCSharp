@@ -104,7 +104,7 @@ namespace FLImagingExamplesCSharp
 				sBlob.SetSourceImage(ref fliImage);
 
 				// ROI 범위 설정
-				CFLRect<Int32> flrROI = new CFLRect<int>(450, 425, 1024, 800);
+				CFLRect<Int32> flrROI = new CFLRect<Int32>(450, 425, 1024, 800);
 
 				// 처리할 ROI 설정
 				sBlob.SetSourceROI(flrROI);
@@ -149,8 +149,8 @@ namespace FLImagingExamplesCSharp
 				CFLFigureArray flfaSortedBoundaryRects = new CFLFigureArray();
 				CFLFigureArray flfaRecoverBoundaryRects = new CFLFigureArray();
 
-				List<Int32> flaItem = new List<int>();
-				List<Int32> flaOrder = new List<int>();
+				List<Int32> flaItem = new List<Int32>();
+				List<Int32> flaOrder = new List<Int32>();
 
 				// 첫 번째 조건을 Bound rect center y좌표, 내림차순 정렬				
 				flaItem.Add((Int32)CBlob.EFilterItem.BoundaryRectCenterY);

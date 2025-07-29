@@ -107,8 +107,8 @@ namespace FLImagingExamplesCSharp
 				// Blob 결과를 얻어오기 위해 FigureArray 선언
 				CFLFigureArray flfaContour = new CFLFigureArray();
 
-				List<Int32> flaItem = new List<int>();
-				List<Int32> flaOrder = new List<int>();
+				List<Int32> flaItem = new List<Int32>();
+				List<Int32> flaOrder = new List<Int32>();
 
 				// Blob 결과의 Mean, Variance, StandardDeviation 을 얻어오기 위한 Statistics 객체 선언
 				CImageStatistics imgStatistics = new CImageStatistics();

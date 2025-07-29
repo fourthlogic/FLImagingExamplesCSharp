@@ -78,7 +78,7 @@ namespace FLImagingExamplesCSharp
 				sBlob.SetSourceImage(ref fliImage);
 
 				// ROI 범위 설정
-				CFLRect<Int32> flrROI = new CFLRect<int>(450, 425, 1024, 800);
+				CFLRect<Int32> flrROI = new CFLRect<Int32>(450, 425, 1024, 800);
 
 				// 처리할 ROI 설정
 				sBlob.SetSourceROI(flrROI);

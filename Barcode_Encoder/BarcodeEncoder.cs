@@ -145,7 +145,7 @@ namespace FLImagingExamplesCSharp
 					Console.Write("No. {0} Code : {1}\n", i, strDecodedMsg.ToString());
 
 					// String 을 디스플레이 하기 위한 기준 좌표 FLPointL 선언
-					CFLPoint<Int32> flplPos = new CFLPoint<int>();
+					CFLPoint<Int32> flplPos = new CFLPoint<Int32>();
 					flqRegion.GetCenter(ref flplPos);
 
 					// Decoded String 을 디스플레이 한다.
