@@ -145,13 +145,13 @@ namespace FLImagingExamplesCSharp
 
                 string strMedianValue, strLowerQuartileValue, strUpperQuartileValue;
                 strMedianValue = String.Format("Median Of Region : {0}", mvMedian.GetAt(0));
-                strLowerQuartileValue = String.Format("25 Quartile Of Region : {0}", mvLowerQuartile.GetAt(0));
-                strUpperQuartileValue = String.Format("75 Quartile Of Region : {0}", mvUpperQuartile.GetAt(0));
+                strLowerQuartileValue = String.Format("1st Quartile Of Region : {0}", mvLowerQuartile.GetAt(0));
+                strUpperQuartileValue = String.Format("3rd Quartile Of Region : {0}", mvUpperQuartile.GetAt(0));
 
                 string strTrimmingMedianValue, strTrimmingLowerQuartileValue, strTrimmingUpperQuartileValue;
                 strTrimmingMedianValue = String.Format("Median Of Trimmed Region : {0}", mvTrimmingMedian.GetAt(0));
-                strTrimmingLowerQuartileValue = String.Format("25 Quartile Of Trimmed Region : {0}", mvTrimmingLowerQuartile.GetAt(0));
-                strTrimmingUpperQuartileValue = String.Format("75 Quartile Of Trimmed Region : {0}", mvTrimmingUpperQuartile.GetAt(0));
+                strTrimmingLowerQuartileValue = String.Format("1st Quartile Of Trimmed Region : {0}", mvTrimmingLowerQuartile.GetAt(0));
+                strTrimmingUpperQuartileValue = String.Format("3rd Quartile Of Trimmed Region : {0}", mvTrimmingUpperQuartile.GetAt(0));
 
                 Console.WriteLine(strMedianValue);
                 Console.WriteLine(strLowerQuartileValue);
