@@ -552,6 +552,18 @@
        - An example of an algorithm that classifies validation images using a model learned through classifier on training images using class-specific augmentation specifications.
        - 클래스 별 증강 스펙을 사용하여 학습 이미지들에 대해 classifeir를 통하여 학습한 모델을 사용하여 검증 이미지를 분류하는 알고리즘 예제.
 
+    - GenerativeAdversarialNetwork_NoLabel
+       = Example of an algorithm that generates images based on a training dataset
+       - 학습 데이터셋에 기반하여 이미지를 생성하는 알고리즘 예제.
+
+    - GenerativeAdversarialNetwork_Label
+       - An example of an algorithm that generates an image by inputting class-specific weights based on a labeled training dataset.
+       - 라벨링된 학습 데이터셋에 기반하여 클래스별 가중치를 입력받아 이미지를 생성하는 알고리즘 예제.
+
+    - GenerativeAdversarialNetwork_Inpainting
+       - An example algorithm that performs an inpainting operation on a specified area using a model learned on training images with figures.
+       - Figure가 있는 학습 이미지들에 대해 학습한 모델을 사용하여 지정한 영역에 Inpainting 동작을 수행하는 알고리즘 예제. 
+
     - SemanticSegmentation
        - Example of an algorithm for SemanticSegmentation validation images with figures using models learned through SemanticSegmentation for training images with figures.
        - Figure가 있는 학습 이미지들에 대해 SemanticSegmentation을 통하여 학습한 모델을 사용하여 Figure가 있는 검증 이미지를 분류하는 알고리즘 예제.
