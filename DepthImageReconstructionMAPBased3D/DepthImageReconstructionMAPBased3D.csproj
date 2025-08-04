@@ -9,8 +9,8 @@
     <ProjectGuid>{D85416CE-B608-4F7F-A8D9-A256039327B6}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MultiFocusMAPBased3D</RootNamespace>
-    <AssemblyName>MultiFocusMAPBased3D</AssemblyName>
+    <RootNamespace>DepthImageReconstructionMAPBased3D</RootNamespace>
+    <AssemblyName>DepthImageReconstructionMAPBased3D</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -111,7 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MultiFocusMAPBased3D.cs" />
+    <Compile Include="DepthImageReconstructionMAPBased3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

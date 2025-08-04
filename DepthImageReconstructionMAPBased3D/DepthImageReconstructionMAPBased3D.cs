@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace FLImagingExamplesCSharp
 {
-	class MultiFocusDerivativeBased3D
+	class DepthImageReconstructionMAPBased3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -45,12 +45,12 @@ namespace FLImagingExamplesCSharp
 			CGUIView3D view3DDst = new CGUIView3D();
 
 			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult res = new CResult();
+			CResult res;
 
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliSrcImage.Load("../../ExampleImages/MultiFocusDerivativeBased3D/")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/DepthImageReconstructionMAPBased3D/")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -91,7 +91,7 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CMultiFocusDerivativeBased3D algObject = new CMultiFocusDerivativeBased3D();
+				CDepthImageReconstructionMAPBased3D algObject = new CDepthImageReconstructionMAPBased3D();
 
 				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
@@ -99,21 +99,37 @@ namespace FLImagingExamplesCSharp
 					break;
 				if((res = algObject.SetDestinationTextureImage(ref fliTxtImage)).IsFail())
 					break;
+
+				if((res = algObject.SetFMBiasPageIndex(3)).IsFail())
+					break;
+				if((res = algObject.SetFMBiasValue(0.02)).IsFail())
+					break;
+				if((res = algObject.SetFocusMeasureMethod(CDepthImageReconstructionMAPBased3D.EFocusMeasureMethod.DoG)).IsFail())
+					break;
+				if((res = algObject.SetSigma1(0.4)).IsFail())
+					break;
+				if((res = algObject.SetSigma2(0.8)).IsFail())
+					break;
+
+				if((res = algObject.SetLocalRegularizationFactor(0.02)).IsFail())
+					break;
+				if((res = algObject.SetGlobalRegularizationFactor(0.00000000001)).IsFail())
+					break;
+				if((res = algObject.SetCGMTolerance(0.00001)).IsFail())
+					break;
+				if((res = algObject.SetCGMMaxIterations(100)).IsFail())
+					break;
+
+				if((res = algObject.SetDirection(CDepthImageReconstructionMAPBased3D.EDirection.BottomToTop)).IsFail())
+					break;
+				if((res = algObject.SetPixelAccuracy(1.0)).IsFail())
+					break;
+				if((res = algObject.SetDepthPitch(2.0)).IsFail())
+					break;
+
+				if((res = algObject.Enable3DObjectGeneration(true)).IsFail())
+					break;
 				if((res = algObject.SetDestinationObject(ref floDstObject)).IsFail())
-					break;
-				if((res = algObject.SetPixelAccuracy(0.1)).IsFail())
-					break;
-				if((res = algObject.SetDepthPitch(0.2)).IsFail())
-					break;
-				if((res = algObject.SetFilter(CMultiFocusDerivativeBased3D.EFilter.FLDenoisingType1)).IsFail())
-					break;
-				if((res = algObject.SetFLDenoisingKernel(7)).IsFail())
-					break;
-				if((res = algObject.SetFLDenoisingSigma(15.00)).IsFail())
-					break;
-				if((res = algObject.SetFLDenoisingAmplitude(15.00)).IsFail())
-					break;
-				if((res = algObject.EnableGaussianInterpolation(true)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
