@@ -414,18 +414,6 @@
         - Example of an algorithm that explores the shape of a set figure within an image.
         - 설정한 도형을 이미지 내에서 탐색하는 알고리즘 예제.
         
-    - [Mura]
-
-      - Mura_Line
-        - The algorithm example that detects line mura defects.
-        - 선 Mura를 검출하는 Mura 알고리즘의 예제.
-      - Mura_Region
-        - The algorithm example that detects region mura defects.
-        - 영역 Mura를 검출하는 Mura 알고리즘의 예제.
-      - Mura_Spot
-        - The algorithm example that detects spot mura defects.
-        - 점 Mura를 검출하는 Mura 알고리즘의 예제.
-
   - [Object]
 
     - [Blob]
@@ -511,6 +499,18 @@
       - BlobSubsampled_SortClusterMode
         - The example of outputting the result of the connection element detection algorithm as an alignment state based on human judgment in a twodimensional plane.
         - 연결 요소 검출 알고리즘의 결과를 2차원 평면에서 인간의 판단기준에서의 정렬 상태로 출력하는 예제.
+        
+    - [Mura]
+
+      - Mura_Line
+        - The algorithm example that detects line mura defects.
+        - 선 Mura를 검출하는 Mura 알고리즘의 예제.
+      - Mura_Region
+        - The algorithm example that detects region mura defects.
+        - 영역 Mura를 검출하는 Mura 알고리즘의 예제.
+      - Mura_Spot
+        - The algorithm example that detects spot mura defects.
+        - 점 Mura를 검출하는 Mura 알고리즘의 예제.
 
   - [Optical Character]
 
