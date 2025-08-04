@@ -82,10 +82,10 @@ namespace FLImagingExamplesCSharp
 				// 검사 개수 전체로 설정
 				dataMatrixDecoder.SetDetectingCount(EDataCodeDecoderDetectingCount.All);
 				// Decode 데이터 영역 색상 설정
-				// EDataMatrixColor_Auto 로 설정 시 자동으로 Decode 된다.
+				// EDataCodeColor.Auto 로 설정 시 자동으로 Decode 된다.
 				dataMatrixDecoder.SetColorMode(EDataCodeColor.Auto);
 				// 전처리 Blur 설정
-				// EDataMatrixImageProcessingMethod_Normal 입력 시 전처리를 하지 않는다.
+				// EDataCodeDecoderDenoisingMethod.Normal 입력 시 전처리를 하지 않는다.
 				dataMatrixDecoder.SetDenoisingMethod(EDataCodeDecoderDenoisingMethod.Gaussian);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters

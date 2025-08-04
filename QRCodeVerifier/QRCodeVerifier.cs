@@ -85,7 +85,7 @@ namespace FLImagingExamplesCSharp
 				qrCodeVerifier.SetSourceROI(flrROI);
 
 				// Decode 데이터 영역 색상 설정
-				// EQRCodeColors.Auto 로 설정 시 자동으로 Decode 된다.
+				// EDataCodeColor.Auto 로 설정 시 자동으로 Decode 된다.
 				qrCodeVerifier.SetColorMode(EDataCodeColor.WhiteOnBlack);
 
 				// ISO/IEC 15415 양식 인쇄 품질 평가를 활성화합니다. 기본값은 true이며 처리하지 않아도 됩니다.
