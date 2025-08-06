@@ -140,7 +140,7 @@ namespace FLImagingExamplesCSharp
 				morphologyHitOrMiss.SetDestinationROI(flrROI);
 
 				List<List<float>> flarrKernel = new List<List<float>>();
-				List<float> flarrKernelElement = new List<float>();
+				List<float> flarrKernelElement;
 
 				// 커널 생성
 				// 1,  1,  0,  0,  0,  1, 1
@@ -151,12 +151,8 @@ namespace FLImagingExamplesCSharp
 				// 1,  0, -1, -1, -1,  0, 1
 				// 1,  1,  0,  0,  0,  1, 1
 
-				flarrKernelElement.Add(1);
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(-1);
-
 				flarrKernel.Clear();
-				flarrKernelElement.Clear();
+				flarrKernelElement = new List<float>();
 				flarrKernelElement.Add(1);
 				flarrKernelElement.Add(1);
 				flarrKernelElement.Add(0);
@@ -166,57 +162,57 @@ namespace FLImagingExamplesCSharp
 				flarrKernelElement.Add(1);
 				flarrKernel.Add(flarrKernelElement);
 
-				flarrKernelElement.Clear();
+				flarrKernelElement = new List<float>();
 				flarrKernelElement.Add(1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(1);
-				flarrKernel.Add(flarrKernelElement);
-
-				flarrKernelElement.Clear();
 				flarrKernelElement.Add(0);
 				flarrKernelElement.Add(-1);
 				flarrKernelElement.Add(-1);
 				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
 				flarrKernelElement.Add(0);
-				flarrKernel.Add(flarrKernelElement);
-
-				flarrKernelElement.Clear();
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(0);
-				flarrKernel.Add(flarrKernelElement);
-
-				flarrKernelElement.Clear();
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(0);
-				flarrKernel.Add(flarrKernelElement);
-
-				flarrKernelElement.Clear();
-				flarrKernelElement.Add(1);
-				flarrKernelElement.Add(-1);
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(0);
-				flarrKernelElement.Add(-1);
 				flarrKernelElement.Add(1);
 				flarrKernel.Add(flarrKernelElement);
 
-				flarrKernelElement.Clear();
+				flarrKernelElement = new List<float>();
+				flarrKernelElement.Add(0);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(0);
+				flarrKernel.Add(flarrKernelElement);
+
+				flarrKernelElement = new List<float>();
+				flarrKernelElement.Add(0);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(0);
+				flarrKernel.Add(flarrKernelElement);
+
+				flarrKernelElement = new List<float>();
+				flarrKernelElement.Add(0);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(0);
+				flarrKernel.Add(flarrKernelElement);
+
+				flarrKernelElement = new List<float>();
+				flarrKernelElement.Add(1);
+				flarrKernelElement.Add(0);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(-1);
+				flarrKernelElement.Add(0);
+				flarrKernelElement.Add(1);
+				flarrKernel.Add(flarrKernelElement);
+
+				flarrKernelElement = new List<float>();
 				flarrKernelElement.Add(1);
 				flarrKernelElement.Add(1);
 				flarrKernelElement.Add(0);
