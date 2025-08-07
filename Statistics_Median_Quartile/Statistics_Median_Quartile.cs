@@ -74,7 +74,7 @@ namespace FLImagingExamplesCSharp
                 // Source ROI 설정 // Set the Source ROI
                 statistics.SetSourceROI(flrROI);
 
-                // 결과값을 받아올 CMultiVarD 컨테이너 생성 // Create the CMultiVarD object to push the result
+                // 결과값을 받아올 CMultiVar<double> 컨테이너 생성 // Create the CMultiVar<double> object to push the result
                 CMultiVar<double> mvMedian = new CMultiVar<double>();
                 CMultiVar<double> mvUpperQuartile = new CMultiVar<double>();
                 CMultiVar<double> mvLowerQuartile = new CMultiVar<double>();
@@ -104,7 +104,7 @@ namespace FLImagingExamplesCSharp
                 statistics.SetTrimming(0.2, CImageStatistics.ETrimmingLocation.Lower);
                 statistics.SetTrimming(0.4, CImageStatistics.ETrimmingLocation.Upper);
 
-                // trimming 된 결과값을 받아올 CMultiVarD 컨테이너 생성 // Create the CMultiVarD object to push the trimmed result
+                // trimming 된 결과값을 받아올 CMultiVar<double> 컨테이너 생성 // Create the CMultiVar<double> object to push the trimmed result
                 CMultiVar<double> mvTrimmingMedian = new CMultiVar<double>();
                 CMultiVar<double> mvTrimmingUpperQuartile = new CMultiVar<double>();
                 CMultiVar<double> mvTrimmingLowerQuartile = new CMultiVar<double>();

@@ -80,7 +80,7 @@ namespace FLImagingExamplesCSharp
 				// threshold 모드 설정(Dual) // Set Threshold Mode(Dual)
 				pixelCounter.SetThresholdMode(EThresholdMode.Dual_And);
 
-				// 임계값 설정 (다채널 경우 CMultiVar 사용) // Set threshold value(Use CMultiVarD for multi-channel)
+				// 임계값 설정 (다채널 경우 CMultiVar<double> 사용) // Set threshold value(Use CMultiVar<double> for multi-channel)
 				pixelCounter.SetThreshold(120, EThresholdIndex.First);
 				pixelCounter.SetThreshold(230, EThresholdIndex.Second);
 
