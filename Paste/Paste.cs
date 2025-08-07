@@ -81,6 +81,20 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window.\n");
+					break;
+				}
+
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
+				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize view\n");
+					break;
+				}
+
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
 				if((res = viewImageSrc.ZoomFit()).IsFail())
 				{
@@ -89,27 +103,27 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Paste 객체 생성 // Create Paste object
-				CPaste sPaste = new CPaste();
+				CPaste paste = new CPaste();
 
 				// 처리할 이미지 설정 // Set the image to process
-				sPaste.SetSourceImage(ref fliSrcImage);
+				paste.SetSourceImage(ref fliSrcImage);
 
-				// ROI 설정 하기 위해 FLCircleL 생성
+				// ROI 설정 하기 위해 CFLCircle 생성 // Create CFLCircle for ROI setting
 				CFLCircle<double> flcROI = new CFLCircle<double>(256, 169, 25);
 
 				// 처리할 ROI 설정
-				sPaste.SetSourceROI(flcROI);
+				paste.SetSourceROI(flcROI);
 
 				// Destination 이미지 설정 // Set the destination image
-				sPaste.SetDestinationImage(ref fliDstImage);
+				paste.SetDestinationImage(ref fliDstImage);
 				// 항상 공백 영역을 지정한 색으로 채우도록 설정
-				sPaste.EnableFillBlankColorMode(true);
+				paste.EnableFillBlankColorMode(true);
 				// 공백 영역 색상 지정 // Set the blank color
 				CMultiVar<double> mv = new CMultiVar<double>(255, 255, 255);
-				sPaste.SetBlankColor(mv);
+				paste.SetBlankColor(mv);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sPaste.Execute()).IsFail())
+				if((res = paste.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Paste.");
 					break;

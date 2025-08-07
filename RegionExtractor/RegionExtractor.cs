@@ -81,6 +81,13 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				// 두 이미지 뷰 윈도우의 위치를 맞춤 // Synchronize the positions of the two image view windows
+				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window.\n");
+					break;
+				}
+
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
 				if((res = viewImageSrc.ZoomFit()).IsFail())
 				{
@@ -89,27 +96,27 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// RegionExtractor 객체 생성 // Create RegionExtractor object
-				CRegionExtractor sRegionExtractor = new CRegionExtractor();
+				CRegionExtractor regionExtractor = new CRegionExtractor();
 
 				// 처리할 이미지 설정 // Set the image to process
-				sRegionExtractor.SetSourceImage(ref fliSrcImage);
+				regionExtractor.SetSourceImage(ref fliSrcImage);
 
-				// ROI 설정 하기 위해 FLCircleL 생성
+				// ROI 설정 하기 위해 CFLRect 생성 // Create CFLRect for ROI setting
 				CFLRect<int> flrROI = new CFLRect<int>(83, 64, 440,337);
 
 				// 처리할 ROI 설정
-				sRegionExtractor.SetSourceROI(flrROI);
+				regionExtractor.SetSourceROI(flrROI);
 
 				// Destination 이미지 설정 // Set the destination image
-				sRegionExtractor.SetDestinationImage(ref fliDstImage);
+				regionExtractor.SetDestinationImage(ref fliDstImage);
 				// 항상 공백 영역을 지정한 색으로 채우도록 설정
-				sRegionExtractor.EnableFillBlankColorMode(true);
+				regionExtractor.EnableFillBlankColorMode(true);
 				// 공백 영역 색상 지정 // Set the blank color
 				CMultiVar<double> mv = new CMultiVar<double>(0);
-				sRegionExtractor.SetBlankColor(mv);
+				regionExtractor.SetBlankColor(mv);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sRegionExtractor.Execute()).IsFail())
+				if((res = regionExtractor.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute RegionExtractor.");
 					break;
