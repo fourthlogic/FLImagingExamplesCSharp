@@ -192,26 +192,26 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CMultiFocus algObject = new CMultiFocus();
+				CMultiFocus multiFocus = new CMultiFocus();
 
 				// Source 이미지 설정 // Set the source image
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = multiFocus.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
 				// Destination 이미지 설정 // Set the destination image
-				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail())
+				if((res = multiFocus.SetDestinationImage(ref fliDstImage)).IsFail())
 					break;
 				// Kernel Size 설정 // Set the kernel size
-				if((res = algObject.SetKernel(23)).IsFail())
+				if((res = multiFocus.SetKernel(23)).IsFail())
 					break;
 				// 첫번째 페이지 Alignment 설정 // Set first page alignment
-				if((res = algObject.SetFirstPageAlignment(flqFirstPageAlignment)).IsFail())
+				if((res = multiFocus.SetFirstPageAlignment(flqFirstPageAlignment)).IsFail())
 					break;
 				// 마지막 페이지 Alignment 설정 // Set last page alignment
-				if((res = algObject.SetLastPageAlignment(flqLastPageAlignment)).IsFail())
+				if((res = multiFocus.SetLastPageAlignment(flqLastPageAlignment)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = multiFocus.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.\n");
 					break;

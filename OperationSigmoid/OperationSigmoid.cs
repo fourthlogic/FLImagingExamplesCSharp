@@ -91,37 +91,37 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				COperationSigmoid algObject = new COperationSigmoid();
+				COperationSigmoid operationSigmoid = new COperationSigmoid();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = operationSigmoid.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage0)).IsFail())
+				if((res = operationSigmoid.SetDestinationImage(ref fliDstImage0)).IsFail())
 					break;
-				if((res = algObject.SetOperationMode(COperationSigmoid.EOperationMode.Forward)).IsFail())
+				if((res = operationSigmoid.SetOperationMode(COperationSigmoid.EOperationMode.Forward)).IsFail())
 					break;
-				if((res = algObject.EnableGeneralizedMode(true)).IsFail())
+				if((res = operationSigmoid.EnableGeneralizedMode(true)).IsFail())
 					break;
-				if((res = algObject.SetB(1.0)).IsFail())
+				if((res = operationSigmoid.SetB(1.0)).IsFail())
 					break;
-				if((res = algObject.SetM(0.0)).IsFail())
+				if((res = operationSigmoid.SetM(0.0)).IsFail())
 					break;
-				if((res = algObject.SetK(1.0)).IsFail())
+				if((res = operationSigmoid.SetK(1.0)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = operationSigmoid.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
 
-				if((res = algObject.SetDestinationImage(ref fliDstImage1)).IsFail())
+				if((res = operationSigmoid.SetDestinationImage(ref fliDstImage1)).IsFail())
 					break;
-				if((res = algObject.SetOperationMode(COperationSigmoid.EOperationMode.Backward)).IsFail())
+				if((res = operationSigmoid.SetOperationMode(COperationSigmoid.EOperationMode.Backward)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = operationSigmoid.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

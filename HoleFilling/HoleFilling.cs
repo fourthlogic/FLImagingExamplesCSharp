@@ -85,45 +85,45 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CHoleFilling algObject = new CHoleFilling();
+				CHoleFilling holeFilling = new CHoleFilling();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = holeFilling.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail())
+				if((res = holeFilling.SetDestinationImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = algObject.SetMinimumHoleArea(10)).IsFail())
+				if((res = holeFilling.SetMinimumHoleArea(10)).IsFail())
 					break;
-				if((res = algObject.SetMaximumHoleArea(99999999999)).IsFail())
+				if((res = holeFilling.SetMaximumHoleArea(99999999999)).IsFail())
 					break;
-				if((res = algObject.EnableIgnoreBoundaryHole(true)).IsFail())
+				if((res = holeFilling.EnableIgnoreBoundaryHole(true)).IsFail())
 					break;
-				if((res = algObject.SetThresholdPassTarget(CHoleFilling.EThresholdPassTarget.Object)).IsFail())
+				if((res = holeFilling.SetThresholdPassTarget(CHoleFilling.EThresholdPassTarget.Object)).IsFail())
 					break;
-				if((res = algObject.SetThresholdMode(EThresholdMode.Dual_And)).IsFail())
+				if((res = holeFilling.SetThresholdMode(EThresholdMode.Dual_And)).IsFail())
 					break;
-				if((res = algObject.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And)).IsFail())
+				if((res = holeFilling.SetLogicalConditionOfChannels(ELogicalConditionOfChannels.And)).IsFail())
 					break;
-				if((res = algObject.SetFillingMethod(CHoleFilling.EFillingMethod.HarmonicInterpolation)).IsFail())
+				if((res = holeFilling.SetFillingMethod(CHoleFilling.EFillingMethod.HarmonicInterpolation)).IsFail())
 					break;
-				if((res = algObject.SetPrecision(0.1)).IsFail())
+				if((res = holeFilling.SetPrecision(0.1)).IsFail())
 					break;
-				if((res = algObject.SetMaxIteration(100)).IsFail())
+				if((res = holeFilling.SetMaxIteration(100)).IsFail())
 					break;
 				CMultiVar<UInt64> mvThresholdCondition1 = new CMultiVar<UInt64>((UInt64)ELogicalCondition.GreaterEqual, (UInt64)ELogicalCondition.GreaterEqual, (UInt64)ELogicalCondition.GreaterEqual);
-				if((res = algObject.SetThresholdCondition(EThresholdIndex.First, mvThresholdCondition1)).IsFail())
+				if((res = holeFilling.SetThresholdCondition(EThresholdIndex.First, mvThresholdCondition1)).IsFail())
 					break;
 				CMultiVar<UInt64> mvThresholdValue1U64 = new CMultiVar<UInt64>(175, 230, 240);
-				if((res = algObject.SetThresholdValue(EThresholdIndex.First, mvThresholdValue1U64)).IsFail())
+				if((res = holeFilling.SetThresholdValue(EThresholdIndex.First, mvThresholdValue1U64)).IsFail())
 					break;
 				CMultiVar<UInt64> mvThresholdCondition2 = new CMultiVar<UInt64>((UInt64)ELogicalCondition.Less, (UInt64)ELogicalCondition.Less, (UInt64)ELogicalCondition.Less);
-				if((res = algObject.SetThresholdCondition(EThresholdIndex.Second, mvThresholdCondition2)).IsFail())
+				if((res = holeFilling.SetThresholdCondition(EThresholdIndex.Second, mvThresholdCondition2)).IsFail())
 					break;
 				CMultiVar<UInt64> mvThresholdValue2U64 = new CMultiVar<UInt64>(200, 240, 255);
-				if((res = algObject.SetThresholdValue(EThresholdIndex.Second, mvThresholdValue2U64)).IsFail())
+				if((res = holeFilling.SetThresholdValue(EThresholdIndex.Second, mvThresholdValue2U64)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = holeFilling.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
@@ -148,7 +148,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				CFLFigure flfHoleContour = algObject.GetSelectedPageFigureObject();
+				CFLFigure flfHoleContour = holeFilling.GetSelectedPageFigureObject();
 				if((res = (layerSrc.DrawFigureImage(flfHoleContour, EColor.CYAN))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw figure.\n");

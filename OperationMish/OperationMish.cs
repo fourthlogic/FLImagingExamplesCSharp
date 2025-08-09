@@ -91,29 +91,29 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				COperationMish algObject = new COperationMish();
+				COperationMish operationMish = new COperationMish();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = operationMish.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage0)).IsFail())
+				if((res = operationMish.SetDestinationImage(ref fliDstImage0)).IsFail())
 					break;
-				if((res = algObject.SetOperationMode(COperationMish.EOperationMode.Forward)).IsFail())
+				if((res = operationMish.SetOperationMode(COperationMish.EOperationMode.Forward)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = operationMish.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
 
-				if((res = algObject.SetDestinationImage(ref fliDstImage1)).IsFail())
+				if((res = operationMish.SetDestinationImage(ref fliDstImage1)).IsFail())
 					break;
-				if((res = algObject.SetOperationMode(COperationMish.EOperationMode.Backward)).IsFail())
+				if((res = operationMish.SetOperationMode(COperationMish.EOperationMode.Backward)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = operationMish.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

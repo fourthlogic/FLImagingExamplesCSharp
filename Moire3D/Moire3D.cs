@@ -162,42 +162,42 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CMoire3D algObject = new CMoire3D();
+				CMoire3D moire3D = new CMoire3D();
 
-				if((res = algObject.SetWorkingDistance(330)).IsFail())
+				if((res = moire3D.SetWorkingDistance(330)).IsFail())
 					break;
-				if((res = algObject.SetFieldOfView(400)).IsFail())
+				if((res = moire3D.SetFieldOfView(400)).IsFail())
 					break;
 				CMultiVar<double> mvF64AngleOfProjector = new CMultiVar<double>(73, 105);
-				if((res = algObject.SetAngleOfProjector(mvF64AngleOfProjector)).IsFail())
+				if((res = moire3D.SetAngleOfProjector(mvF64AngleOfProjector)).IsFail())
 					break;
 				CMultiVar<double> mvF64SmallBinRange = new CMultiVar<double>(1, 1);
-				if((res = algObject.SetBinInterval(mvF64SmallBinRange)).IsFail())
+				if((res = moire3D.SetBinInterval(mvF64SmallBinRange)).IsFail())
 					break;
-				if((res = algObject.SetPatternType(CMoire3D.EPatternType.SquareWave)).IsFail())
+				if((res = moire3D.SetPatternType(CMoire3D.EPatternType.SquareWave)).IsFail())
 					break;
-				if((res = algObject.EnableNoiseReduction(true)).IsFail())
+				if((res = moire3D.EnableNoiseReduction(true)).IsFail())
 					break;
 
-				if((res = algObject.SetLearnImage(ref vctLrnImages)).IsFail())
+				if((res = moire3D.SetLearnImage(ref vctLrnImages)).IsFail())
 					break;
 
 				// 알고리즘 Calibrate // Calibrate the algorithm
-				if((res = algObject.Calibrate()).IsFail())
+				if((res = moire3D.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Failed to calibrate the algorithm.");
 					break;
 				}
 
-				if((res = algObject.SetSourceImage(ref vctSrcImages)).IsFail())
+				if((res = moire3D.SetSourceImage(ref vctSrcImages)).IsFail())
 					break;
-				if((res = algObject.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
+				if((res = moire3D.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationObject(ref floDstObject)).IsFail())
+				if((res = moire3D.SetDestinationObject(ref floDstObject)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = moire3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

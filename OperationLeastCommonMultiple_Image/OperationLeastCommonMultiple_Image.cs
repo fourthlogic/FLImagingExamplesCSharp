@@ -98,15 +98,15 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				COperationLeastCommonMultiple algObject = new COperationLeastCommonMultiple();
+				COperationLeastCommonMultiple operationLeastCommonMultiple = new COperationLeastCommonMultiple();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail()) break;
-				if((res = algObject.SetOperandImage(ref fliOprImage)).IsFail()) break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail()) break;
-				if((res = algObject.SetOperationSource(EOperationSource.Image)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetSourceImage(ref fliSrcImage)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetOperandImage(ref fliOprImage)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetDestinationImage(ref fliDstImage)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetOperationSource(EOperationSource.Image)).IsFail()) break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (algObject.Execute())).IsFail())
+				if((res = (operationLeastCommonMultiple.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

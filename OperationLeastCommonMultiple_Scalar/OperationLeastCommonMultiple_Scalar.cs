@@ -91,27 +91,27 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				COperationLeastCommonMultiple algObject = new COperationLeastCommonMultiple();
+				COperationLeastCommonMultiple operationLeastCommonMultiple = new COperationLeastCommonMultiple();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail()) break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage0)).IsFail()) break;
-				if((res = algObject.SetOperationSource(EOperationSource.Scalar)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetSourceImage(ref fliSrcImage)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetDestinationImage(ref fliDstImage0)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetOperationSource(EOperationSource.Scalar)).IsFail()) break;
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(5);
-				if((res = algObject.SetScalarValue(mvScalarValue1)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetScalarValue(mvScalarValue1)).IsFail()) break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (algObject.Execute())).IsFail())
+				if((res = (operationLeastCommonMultiple.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
 
-				if((res = algObject.SetDestinationImage(ref fliDstImage1)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetDestinationImage(ref fliDstImage1)).IsFail()) break;
 				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(17);
-				if((res = algObject.SetScalarValue(mvScalarValue2)).IsFail()) break;
+				if((res = operationLeastCommonMultiple.SetScalarValue(mvScalarValue2)).IsFail()) break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (algObject.Execute())).IsFail())
+				if((res = (operationLeastCommonMultiple.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

@@ -83,15 +83,15 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CChannelL1Norm algObject = new CChannelL1Norm();
+				CChannelL1Norm channelL1Norm = new CChannelL1Norm();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = channelL1Norm.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail())
+				if((res = channelL1Norm.SetDestinationImage(ref fliDstImage)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = channelL1Norm.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

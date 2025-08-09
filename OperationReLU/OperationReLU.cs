@@ -90,29 +90,29 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				COperationReLU algObject = new COperationReLU();
+				COperationReLU operationReLU = new COperationReLU();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = operationReLU.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage0)).IsFail())
+				if((res = operationReLU.SetDestinationImage(ref fliDstImage0)).IsFail())
 					break;
-				if((res = algObject.SetOperationMode(COperationReLU.EOperationMode.Forward)).IsFail())
+				if((res = operationReLU.SetOperationMode(COperationReLU.EOperationMode.Forward)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = operationReLU.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
 
-				if((res = algObject.SetDestinationImage(ref fliDstImage1)).IsFail())
+				if((res = operationReLU.SetDestinationImage(ref fliDstImage1)).IsFail())
 					break;
-				if((res = algObject.SetOperationMode(COperationReLU.EOperationMode.Backward)).IsFail())
+				if((res = operationReLU.SetOperationMode(COperationReLU.EOperationMode.Backward)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = operationReLU.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

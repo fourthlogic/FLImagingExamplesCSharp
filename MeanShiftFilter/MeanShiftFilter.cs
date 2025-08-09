@@ -84,23 +84,23 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CMeanShiftFilter algObject = new CMeanShiftFilter();
+				CMeanShiftFilter meanShiftFilter = new CMeanShiftFilter();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = meanShiftFilter.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail())
+				if((res = meanShiftFilter.SetDestinationImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = algObject.SetMaxIteration(2)).IsFail())
+				if((res = meanShiftFilter.SetMaxIteration(2)).IsFail())
 					break;
-				if((res = algObject.SetTolerance(0)).IsFail())
+				if((res = meanShiftFilter.SetTolerance(0)).IsFail())
 					break;
-				if((res = algObject.SetSpatialBandwidth(2)).IsFail())
+				if((res = meanShiftFilter.SetSpatialBandwidth(2)).IsFail())
 					break;
-				if((res = algObject.SetRangeBandwidth(128)).IsFail())
+				if((res = meanShiftFilter.SetRangeBandwidth(128)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = meanShiftFilter.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

@@ -91,49 +91,49 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CDepthImageReconstructionMAPBased3D algObject = new CDepthImageReconstructionMAPBased3D();
+				CDepthImageReconstructionMAPBased3D depthImageReconstructionMAPBased3D = new CDepthImageReconstructionMAPBased3D();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationTextureImage(ref fliTxtImage)).IsFail())
-					break;
-
-				if((res = algObject.SetFMBiasPageIndex(3)).IsFail())
-					break;
-				if((res = algObject.SetFMBiasValue(0.02)).IsFail())
-					break;
-				if((res = algObject.SetFocusMeasureMethod(CDepthImageReconstructionMAPBased3D.EFocusMeasureMethod.DoG)).IsFail())
-					break;
-				if((res = algObject.SetSigma1(0.4)).IsFail())
-					break;
-				if((res = algObject.SetSigma2(0.8)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetDestinationTextureImage(ref fliTxtImage)).IsFail())
 					break;
 
-				if((res = algObject.SetLocalRegularizationFactor(0.02)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetFMBiasPageIndex(3)).IsFail())
 					break;
-				if((res = algObject.SetGlobalRegularizationFactor(0.00000000001)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetFMBiasValue(0.02)).IsFail())
 					break;
-				if((res = algObject.SetCGMTolerance(0.00001)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetFocusMeasureMethod(CDepthImageReconstructionMAPBased3D.EFocusMeasureMethod.DoG)).IsFail())
 					break;
-				if((res = algObject.SetCGMMaxIterations(100)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetSigma1(0.4)).IsFail())
 					break;
-
-				if((res = algObject.SetDirection(CDepthImageReconstructionMAPBased3D.EDirection.BottomToTop)).IsFail())
-					break;
-				if((res = algObject.SetPixelAccuracy(1.0)).IsFail())
-					break;
-				if((res = algObject.SetDepthPitch(2.0)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetSigma2(0.8)).IsFail())
 					break;
 
-				if((res = algObject.Enable3DObjectGeneration(true)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetLocalRegularizationFactor(0.02)).IsFail())
 					break;
-				if((res = algObject.SetDestinationObject(ref floDstObject)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetGlobalRegularizationFactor(0.00000000001)).IsFail())
+					break;
+				if((res = depthImageReconstructionMAPBased3D.SetCGMTolerance(0.00001)).IsFail())
+					break;
+				if((res = depthImageReconstructionMAPBased3D.SetCGMMaxIterations(100)).IsFail())
+					break;
+
+				if((res = depthImageReconstructionMAPBased3D.SetDirection(CDepthImageReconstructionMAPBased3D.EDirection.BottomToTop)).IsFail())
+					break;
+				if((res = depthImageReconstructionMAPBased3D.SetPixelAccuracy(1.0)).IsFail())
+					break;
+				if((res = depthImageReconstructionMAPBased3D.SetDepthPitch(2.0)).IsFail())
+					break;
+
+				if((res = depthImageReconstructionMAPBased3D.Enable3DObjectGeneration(true)).IsFail())
+					break;
+				if((res = depthImageReconstructionMAPBased3D.SetDestinationObject(ref floDstObject)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

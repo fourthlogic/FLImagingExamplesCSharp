@@ -84,28 +84,28 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CActiveContour algObject = new CActiveContour();
+				CActiveContour activeContour = new CActiveContour();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = activeContour.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
 				CFLFigure flfSourceROI = CFigureUtilities.ConvertFigureStringToObject("RG[D(129.22800000000007, 126.67680000000001), D(731.22800000000007, 120.67680000000001), D(733.22800000000007, 262.67680000000001), D(253.22800000000007, 246.67680000000001), D(265.22800000000007, 600.67679999999996), D(603.22800000000007, 594.67679999999996), D(607.22800000000007, 400.67680000000001), D(403.22800000000007, 396.67680000000001), D(409.22800000000007, 448.67680000000001), D(565.22800000000007, 450.67680000000001), D(549.22800000000007, 556.67679999999996), D(289.22800000000007, 558.67679999999996), D(291.22800000000007, 292.67680000000001), D(721.22800000000007, 294.67680000000001), D(721.22800000000007, 720.67679999999996), D(119.22800000000007, 718.67679999999996), D(113.22800000000007, 142.67680000000001)]");
-				if((res = algObject.SetSourceROI(flfSourceROI)).IsFail())
+				if((res = activeContour.SetSourceROI(flfSourceROI)).IsFail())
 					break;
-				if((res = algObject .SetDestinationImage(ref fliDstImage)).IsFail())
+				if((res = activeContour .SetDestinationImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = algObject.SetPointCount(3000)).IsFail())
+				if((res = activeContour.SetPointCount(3000)).IsFail())
 					break;
-				if((res = algObject.SetMaxLength(3)).IsFail())
+				if((res = activeContour.SetMaxLength(3)).IsFail())
 					break;
-				if((res = algObject.SetLowThreshold(20)).IsFail())
+				if((res = activeContour.SetLowThreshold(20)).IsFail())
 					break;
-				if((res = algObject.SetHighThreshold(50)).IsFail())
+				if((res = activeContour.SetHighThreshold(50)).IsFail())
 					break;
-				if((res = algObject.SetFitMargin(3)).IsFail())
+				if((res = activeContour.SetFitMargin(3)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = activeContour.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
@@ -118,33 +118,33 @@ namespace FLImagingExamplesCSharp
 
 				for(Int32 i32Iteration = 0; i32Iteration < 20; ++i32Iteration)
 				{
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Fit();
-					algObject.Spacing();
-					algObject.Spacing();
-					algObject.Spacing();
-					algObject.Spacing();
-					algObject.Spacing();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Fit();
+					activeContour.Spacing();
+					activeContour.Spacing();
+					activeContour.Spacing();
+					activeContour.Spacing();
+					activeContour.Spacing();
 
                     /* PushBack Figure */
 					{
 						viewImageSrc.ClearFigureObject();
-                        viewImageSrc.PushBackFigureObject(algObject.GetContourFigure());
+                        viewImageSrc.PushBackFigureObject(activeContour.GetContourFigure());
 						viewImageSrc.Invalidate(true);
 
 						Thread.Sleep(50);
                     }
 				}
 
-				viewImageSrc.PushBackFigureObject(algObject.GetSourceROI());
+				viewImageSrc.PushBackFigureObject(activeContour.GetSourceROI());
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately

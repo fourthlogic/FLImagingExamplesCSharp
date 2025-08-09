@@ -91,33 +91,33 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CDepthImageReconstruction3D algObject = new CDepthImageReconstruction3D();
+				CDepthImageReconstruction3D depthImageReconstruction3D = new CDepthImageReconstruction3D();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = depthImageReconstruction3D.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
+				if((res = depthImageReconstruction3D.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationTextureImage(ref fliTxtImage)).IsFail())
+				if((res = depthImageReconstruction3D.SetDestinationTextureImage(ref fliTxtImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationObject(ref floDstObject)).IsFail())
+				if((res = depthImageReconstruction3D.SetDestinationObject(ref floDstObject)).IsFail())
 					break;
-				if((res = algObject.SetPixelAccuracy(0.1)).IsFail())
+				if((res = depthImageReconstruction3D.SetPixelAccuracy(0.1)).IsFail())
 					break;
-				if((res = algObject.SetDepthPitch(0.2)).IsFail())
+				if((res = depthImageReconstruction3D.SetDepthPitch(0.2)).IsFail())
 					break;
-				if((res = algObject.SetFilter(CDepthImageReconstruction3D.EFilter.FLDenoisingType1)).IsFail())
+				if((res = depthImageReconstruction3D.SetFilter(CDepthImageReconstruction3D.EFilter.FLDenoisingType1)).IsFail())
 					break;
-				if((res = algObject.SetFLDenoisingKernel(7)).IsFail())
+				if((res = depthImageReconstruction3D.SetFLDenoisingKernel(7)).IsFail())
 					break;
-				if((res = algObject.SetFLDenoisingSigma(15.00)).IsFail())
+				if((res = depthImageReconstruction3D.SetFLDenoisingSigma(15.00)).IsFail())
 					break;
-				if((res = algObject.SetFLDenoisingAmplitude(15.00)).IsFail())
+				if((res = depthImageReconstruction3D.SetFLDenoisingAmplitude(15.00)).IsFail())
 					break;
-				if((res = algObject.EnableGaussianInterpolation(true)).IsFail())
+				if((res = depthImageReconstruction3D.EnableGaussianInterpolation(true)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = depthImageReconstruction3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

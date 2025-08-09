@@ -91,31 +91,31 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				COperationSoftShrinkage algObject = new COperationSoftShrinkage();
+				COperationSoftShrinkage operationSoftShrinkage = new COperationSoftShrinkage();
 
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = operationSoftShrinkage.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = algObject.SetDestinationImage(ref fliDstImage0)).IsFail())
+				if((res = operationSoftShrinkage.SetDestinationImage(ref fliDstImage0)).IsFail())
 					break;
-				if((res = algObject.SetOperationMode(COperationSoftShrinkage.EOperationMode.Forward)).IsFail())
+				if((res = operationSoftShrinkage.SetOperationMode(COperationSoftShrinkage.EOperationMode.Forward)).IsFail())
 					break;
-				if((res = algObject.SetLambda(0.2)).IsFail())
+				if((res = operationSoftShrinkage.SetLambda(0.2)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = operationSoftShrinkage.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
 
-				if((res = algObject.SetDestinationImage(ref fliDstImage1)).IsFail())
+				if((res = operationSoftShrinkage.SetDestinationImage(ref fliDstImage1)).IsFail())
 					break;
-				if((res = algObject.SetOperationMode(COperationSoftShrinkage.EOperationMode.Backward)).IsFail())
+				if((res = operationSoftShrinkage.SetOperationMode(COperationSoftShrinkage.EOperationMode.Backward)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = operationSoftShrinkage.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

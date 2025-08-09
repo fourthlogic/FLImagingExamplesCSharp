@@ -85,20 +85,20 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CMultiFocus algObject = new CMultiFocus();
+				CMultiFocus multiFocus = new CMultiFocus();
 
 				// Source 이미지 설정 // Set the source image
-				if((res = algObject.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = multiFocus.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
 				// Destination 이미지 설정 // Set the destination image
-				if((res = algObject.SetDestinationImage(ref fliDstImage)).IsFail())
+				if((res = multiFocus.SetDestinationImage(ref fliDstImage)).IsFail())
 					break;
 				// Kernel Size 설정 // Set the kernel size
-				if((res = algObject.SetKernel(41)).IsFail())
+				if((res = multiFocus.SetKernel(41)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = algObject.Execute()).IsFail())
+				if((res = multiFocus.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
