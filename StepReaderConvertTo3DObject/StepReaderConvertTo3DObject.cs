@@ -114,7 +114,7 @@ namespace FLImagingExamplesCSharp
 
                 // 방법 2. CStepReader 에서 Step 파일 로드 후 GetResult3DObject() 로 CFL3DObject 에 할당
                 // Method 2. Load the STEP file using CStepReader and then assign it to CFL3DObject using GetResult3DObject().                
-                CStepReader sr = new CStepReader();
+                CStepReader stepReader = new CStepReader();
                 f64ChordalDeviation = 0.00001;
 
 				i32ReturnIndex = -1;
@@ -138,13 +138,13 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if ((res = sr.Load("../../ExampleImages/StepReaderConvertTo3DObject/Cylinder.step")).IsFail())
+				if ((res = stepReader.Load("../../ExampleImages/StepReaderConvertTo3DObject/Cylinder.step")).IsFail())
 				{
                     ErrorPrint(res, "Failed to load step file.\n");
                     break;
                 }
 
-                if ((res = sr.GetResult3DObject(ref fl3DObject2, f64ChordalDeviation)).IsFail())
+                if ((res = stepReader.GetResult3DObject(ref fl3DObject2, f64ChordalDeviation)).IsFail())
 				{
                     ErrorPrint(res, "Failed to get 3D object from the StepReader.\n");
                     break;

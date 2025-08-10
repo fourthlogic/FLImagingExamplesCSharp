@@ -70,16 +70,16 @@ namespace FLImagingExamplesCSharp
                 CFLFigureText<int> figureText = new CFLFigureText<int>();
 
                 // CProjectionUtilities3D 객체 생성 // Create CProjectionUtilities3D object
-                CProjectionUtilities3D pu = new CProjectionUtilities3D();
+                CProjectionUtilities3D projectionUtilities3D = new CProjectionUtilities3D();
 
                 // CProjectionUtilities3D 객체에 3D Object 를 추가 // Add 3D Object to CProjectionUtilities3D object
-                pu.PushBack3DObject(pObj3D);
+                projectionUtilities3D.PushBack3DObject(pObj3D);
 
                 // 결과 이미지 크기 설정 // Set result image size
-                pu.SetResultImageSize(400, 400);
+                projectionUtilities3D.SetResultImageSize(400, 400);
 
                 // 결과 이미지 배경 색상 설정 // Set background color of result image
-                pu.SetBackgroundColorOfResultImage(21, 21, 21);
+                projectionUtilities3D.SetBackgroundColorOfResultImage(21, 21, 21);
 
                 // 1-1. 특정 시점의 투영 이미지 얻기 // 1-1. Get projection image from specific viewpoint
                 // 카메라 시점 설정 // Set camera viewpoint
@@ -94,13 +94,13 @@ namespace FLImagingExamplesCSharp
                 camSet1.SetFarZ((float)459.30);
 
                 // 카메라 설정 // Set camera
-                pu.SetCamera(camSet1);
+                projectionUtilities3D.SetCamera(camSet1);
 
                 // 프로젝션 수행 // Perform projection
-                res = pu.Execute();
+                res = projectionUtilities3D.Execute();
 
                 // 결과 이미지 얻기 // Get result image
-                res = pu.GetResult(ref fliRes);
+                res = projectionUtilities3D.GetResult(ref fliRes);
 
                 // 결과 이미지에 정보 텍스트 추가 // Add information text to result image
                 figureText.Set(new CFLPoint<int>(10, 10), "1. Projection(Camera Set 1)", (uint)EColor.YELLOW, (uint)EColor.BLACK, 20, false, 0.0, EFigureTextAlignment.LEFT_TOP, "", 1, 1, EFigureTextFontWeight.BOLD, false);
@@ -122,13 +122,13 @@ namespace FLImagingExamplesCSharp
                 camSet2.SetFarZ((float)390.77);
 
                 // 카메라 설정 // Set camera
-                pu.SetCamera(camSet2);
+                projectionUtilities3D.SetCamera(camSet2);
 
                 // 프로젝션 수행 // Perform projection
-                res = pu.Execute();
+                res = projectionUtilities3D.Execute();
 
                 // 결과 이미지 얻기 // Get result image
-                res = pu.GetResult(ref fliRes);
+                res = projectionUtilities3D.GetResult(ref fliRes);
 
                 // 결과 이미지에 정보 텍스트 추가 // Add information text to result image
                 figureText.Set(new CFLPoint<int>(10, 10), "1. Projection(Camera Set 2)", (uint)EColor.YELLOW, (uint)EColor.BLACK, 20, false, 0.0, EFigureTextAlignment.LEFT_TOP, "", 1, 1, EFigureTextFontWeight.BOLD, false);
@@ -145,7 +145,7 @@ namespace FLImagingExamplesCSharp
 
 				// 2. 카메라 1과 카메라 2 사이의 시점에 대한 프로젝션 // 2. Projection for viewpoints between Camera 1 and Camera 2		
 
-				pu.SetTopologyType(ETopologyType3D.Wireframe);
+				projectionUtilities3D.SetTopologyType(ETopologyType3D.Wireframe);
 
 				for(int i = 0; i <= 10; ++i)
 				{
@@ -155,13 +155,13 @@ namespace FLImagingExamplesCSharp
                     CFL3DCamera.Interpolate(camSet1, camSet2, f32T, ref camInterpolation);
 
                     // 카메라 설정 // Set camera
-                    pu.SetCamera(camInterpolation);
+                    projectionUtilities3D.SetCamera(camInterpolation);
 
                     // 프로젝션 수행 // Perform projection
-                    res = pu.Execute();
+                    res = projectionUtilities3D.Execute();
 
                     // 결과 이미지 얻기 // Get result image
-                    res = pu.GetResult(ref fliRes);
+                    res = projectionUtilities3D.GetResult(ref fliRes);
 
                     // 결과 이미지에 정보 텍스트 추가 // Add information text to result image
                     String str = String.Format("2. Projection(Camera Interpolation T={1})", i, f32T);
@@ -184,16 +184,16 @@ namespace FLImagingExamplesCSharp
 
 				// 3. Zoom Fit 시점의 이미지 얻기 // 3. Get image at Zoom Fit viewpoint
 
-				pu.SetTopologyType(ETopologyType3D.PointCloud);
-				pu.SetPointSize((float)5);
+				projectionUtilities3D.SetTopologyType(ETopologyType3D.PointCloud);
+				projectionUtilities3D.SetPointSize((float)5);
 
-				pu.ZoomFitCamera();
+				projectionUtilities3D.ZoomFitCamera();
 
                 // 프로젝션 수행 // Perform projection
-                res = pu.Execute();
+                res = projectionUtilities3D.Execute();
 
                 // 결과 이미지 얻기 // Get result image
-                res = pu.GetResult(ref fliFinal[2]);
+                res = projectionUtilities3D.GetResult(ref fliFinal[2]);
 
                 // 결과 이미지에 정보 텍스트 추가 // Add information text to result image
                 figureText.Set(new CFLPoint<int>(10, 10), "3. Projection(ZoomFit)", (uint)EColor.YELLOW, (uint)EColor.BLACK, 20, false, 0.0, EFigureTextAlignment.LEFT_TOP, "", 1, 1, EFigureTextFontWeight.BOLD, false);

@@ -103,26 +103,26 @@ namespace FLImagingExamplesCSharp
 				/////////////////////////////////
 				// CROIUtilities3D 객체 선언
 				// Declare the CROIUtilities3D object
-				CROIUtilities3D roiUtil3D = new CROIUtilities3D();
+				CROIUtilities3D roiUtilities3D = new CROIUtilities3D();
 
 				// CROIUtilities3D 객체에 3D Object 추가 // Add 3D objects to the CROIUtilities3D object
-				roiUtil3D.PushBack3DObject(fl3DObjLeft);
-				roiUtil3D.PushBack3DObject(fl3DObjRight);
+				roiUtilities3D.PushBack3DObject(fl3DObjLeft);
+				roiUtilities3D.PushBack3DObject(fl3DObjRight);
 
 				// CROIUtilities3D 객체에 절두체 ROI 추가 // Add the frustum ROI to the CROIUtilities3D object
-				roiUtil3D.PushBackROI(flfr);
+				roiUtilities3D.PushBackROI(flfr);
 
 				// 선택 타입 설정 : ROI 안에 포함되는 정점만 선택 // Set the selection type to include only vertices inside the ROI
-				roiUtil3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Include);
+				roiUtilities3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Include);
 
 				// CROIUtilities3D 실행 // Execute the CROIUtilities3D object
-				if((res = roiUtil3D.Execute()).IsFail())
+				if((res = roiUtilities3D.Execute()).IsFail())
 					break;
 
 				// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve the results from CROIUtilities3D
 				List<List<int>> arr2ResultROIIndexInclude = new List<List<int>>();
 
-				if((res = roiUtil3D.GetResult(ref arr2ResultROIIndexInclude)).IsFail())
+				if((res = roiUtilities3D.GetResult(ref arr2ResultROIIndexInclude)).IsFail())
 					break;
 
 				if(arr2ResultROIIndexInclude.Count() > 0)
@@ -171,12 +171,12 @@ namespace FLImagingExamplesCSharp
 
 				}
 
-				// EResultSelectionType.Add 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Include 연산으로 얻은 결과값까지 복사됨
+				// EResultSelectionType.Add 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtilities3D 를 복사 생성. Include 연산으로 얻은 결과값까지 복사됨
 				// Declare and copy construct a CROIUtilities3D object for the EResultSelectionType.Add operation. 
 				// The results from the Include operation are also copied.
-				CROIUtilities3D roiUtil3DAdd = new CROIUtilities3D(roiUtil3D);
+				CROIUtilities3D roiUtilities3DAdd = new CROIUtilities3D(roiUtilities3D);
 				// 복사한 객체에서 ROI를 모두 클리어 // Clear all ROIs from the copied object
-				roiUtil3DAdd.ClearROI();
+				roiUtilities3DAdd.ClearROI();
 
 
 				/////////////////////////////////
@@ -184,16 +184,16 @@ namespace FLImagingExamplesCSharp
 				/////////////////////////////////
 				// 선택 타입 설정 : ROI 바깥의 정점만 선택 
 				// Set selection type: Select only vertices outside the ROI
-				roiUtil3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Exclude);
+				roiUtilities3D.SetSelectionType(CROIUtilities3D.EResultSelectionType.Exclude);
 
 				// CROIUtilities3D 실행 // Execute CROIUtilities3D
-				if((res = roiUtil3D.Execute()).IsFail())
+				if((res = roiUtilities3D.Execute()).IsFail())
 					break;
 
 				// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve results from CROIUtilities3D
 				List<List<int>> arr2ResultROIIndexExclude = new List<List<int>>();
 
-				if((res = roiUtil3D.GetResult(ref arr2ResultROIIndexExclude)).IsFail())
+				if((res = roiUtilities3D.GetResult(ref arr2ResultROIIndexExclude)).IsFail())
 					break;
 
 				if(arr2ResultROIIndexExclude.Count() > 0)
@@ -240,13 +240,13 @@ namespace FLImagingExamplesCSharp
 					view3DExclude.UpdateScreen();
 				}
 
-				// EResultSelectionType.Remove 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.Remove operation and copy roiUtil3D. Results from the Exclude operation are also copied.
-				CROIUtilities3D roiUtil3DRemove = new CROIUtilities3D(roiUtil3D);
-				// EResultSelectionType.XOR 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtil3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.XOR operation and copy roiUtil3D. Results from the Exclude operation are also copied.
-				CROIUtilities3D roiUtil3DXOR = new CROIUtilities3D(roiUtil3D);
+				// EResultSelectionType.Remove 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtilities3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.Remove operation and copy roiUtilities3D. Results from the Exclude operation are also copied.
+				CROIUtilities3D roiUtilities3DRemove = new CROIUtilities3D(roiUtilities3D);
+				// EResultSelectionType.XOR 연산을 위해 CROIUtilities3D 객체 선언 및 roiUtilities3D 를 복사 생성. Exclude 연산으로 얻은 결과값까지 복사됨 // Declare a CROIUtilities3D object for EResultSelectionType.XOR operation and copy roiUtilities3D. Results from the Exclude operation are also copied.
+				CROIUtilities3D roiUtilities3DXOR = new CROIUtilities3D(roiUtilities3D);
 				// 복사한 객체에서 ROI를 모두 클리어 // Clear all ROIs from the copied objects
-				roiUtil3DRemove.ClearROI();
-				roiUtil3DXOR.ClearROI();
+				roiUtilities3DRemove.ClearROI();
+				roiUtilities3DXOR.ClearROI();
 
 
 				//////////////////////////////////
@@ -258,21 +258,21 @@ namespace FLImagingExamplesCSharp
 				flfrAdd.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Add.fig");
 
 				// CROIUtilities3D 객체에 절두체 ROI 추가 // Add the frustum ROI to the CROIUtilities3D object
-				roiUtil3DAdd.PushBackROI(flfrAdd);
+				roiUtilities3DAdd.PushBackROI(flfrAdd);
 				// 3D 뷰어에 절두체 ROI 추가 // Add the frustum ROI to the 3D viewer
 				view3DAdd.PushBackROI(flfrAdd);
 
 				// 선택 타입 설정 : 기존 결과에 ROI 안에 포함되는 정점을 추가 // Set selection type: Add vertices within the ROI to the existing results
-				roiUtil3DAdd.SetSelectionType(CROIUtilities3D.EResultSelectionType.Add);
+				roiUtilities3DAdd.SetSelectionType(CROIUtilities3D.EResultSelectionType.Add);
 
 				// CROIUtilities3D 실행 // Execute CROIUtilities3D
-				if((res = roiUtil3DAdd.Execute()).IsFail())
+				if((res = roiUtilities3DAdd.Execute()).IsFail())
 					break;
 
 				// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve results from CROIUtilities3D
 				List<List<int>> arr2ResultROIIndexAdd = new List<List<int>>();
 
-				if((res = roiUtil3DAdd.GetResult(ref arr2ResultROIIndexAdd)).IsFail())
+				if((res = roiUtilities3DAdd.GetResult(ref arr2ResultROIIndexAdd)).IsFail())
 					break;
 
 				if(arr2ResultROIIndexAdd.Count() > 0)
@@ -331,23 +331,23 @@ namespace FLImagingExamplesCSharp
 				flfrRemove2.Load("../../ExampleImages/ROIUtilities3D/frustumROI_Remove2.fig");
 
 				// CROIUtilities3D 객체에 절두체 ROI 추가 // Add the frustum ROIs to the CROIUtilities3D object
-				roiUtil3DRemove.PushBackROI(flfrRemove1);
-				roiUtil3DRemove.PushBackROI(flfrRemove2);
+				roiUtilities3DRemove.PushBackROI(flfrRemove1);
+				roiUtilities3DRemove.PushBackROI(flfrRemove2);
 				// 3D 뷰에 ROI 추가 // Add the frustum ROIs to the 3D view
 				view3DRemove.PushBackROI(flfrRemove1);
 				view3DRemove.PushBackROI(flfrRemove2);
 
 				// 선택 타입 설정 : 기존 결과에서 ROI 안의 정점을 제거 // Set selection type: Remove vertices within the ROI from the existing results
-				roiUtil3DRemove.SetSelectionType(CROIUtilities3D.EResultSelectionType.Remove);
+				roiUtilities3DRemove.SetSelectionType(CROIUtilities3D.EResultSelectionType.Remove);
 
 				// CROIUtilities3D 실행 // Execute CROIUtilities3D
-				if((res = roiUtil3DRemove.Execute()).IsFail())
+				if((res = roiUtilities3DRemove.Execute()).IsFail())
 					break;
 
 				// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve results from CROIUtilities3D
 				List<List<int>> arr2ResultROIIndexRemove = new List<List<int>>();
 
-				if((res = roiUtil3DRemove.GetResult(ref arr2ResultROIIndexRemove)).IsFail())
+				if((res = roiUtilities3DRemove.GetResult(ref arr2ResultROIIndexRemove)).IsFail())
 					break;
 
 				if(arr2ResultROIIndexRemove.Count() > 0)
@@ -405,21 +405,21 @@ namespace FLImagingExamplesCSharp
 				flfrXOR.Load("../../ExampleImages/ROIUtilities3D/frustumROI_XOR.fig");
 
 				// CROIUtilities3D 객체에 절두체 ROI 추가 // Add the frustum ROI to the CROIUtilities3D object
-				roiUtil3DXOR.PushBackROI(flfrXOR);
+				roiUtilities3DXOR.PushBackROI(flfrXOR);
 				// 3D 뷰에 ROI 추가 // Add the frustum ROI to the 3D view
 				view3DXOR.PushBackROI(flfrXOR);
 
 				// 선택 타입 설정 : 기존 결과에서 ROI 안의 정점을 XOR 연산하여 선택 // Set selection type: Perform XOR operation with vertices inside the ROI on the existing results
-				roiUtil3DXOR.SetSelectionType(CROIUtilities3D.EResultSelectionType.XOR);
+				roiUtilities3DXOR.SetSelectionType(CROIUtilities3D.EResultSelectionType.XOR);
 
 				// CROIUtilities3D 실행 // Execute CROIUtilities3D
-				if((res = roiUtil3DXOR.Execute()).IsFail())
+				if((res = roiUtilities3DXOR.Execute()).IsFail())
 					break;
 
 				// CROIUtilities3D 에서 결과 얻어 오기 // Retrieve results from CROIUtilities3D
 				List<List<int>> arr2ResultROIIndexXOR = new List<List<int>>();
 
-				if((res = roiUtil3DXOR.GetResult(ref arr2ResultROIIndexXOR)).IsFail())
+				if((res = roiUtilities3DXOR.GetResult(ref arr2ResultROIIndexXOR)).IsFail())
 					break;
 
 				if(arr2ResultROIIndexXOR.Count() > 0)
