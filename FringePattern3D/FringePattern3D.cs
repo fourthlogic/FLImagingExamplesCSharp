@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace FLImagingExamplesCSharp
 {
-	class Moire3D
+	class FringePattern3D
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -74,35 +74,35 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// Learn 이미지 로드 // Load the reference plane image for calibration
-				if((res = vctLrnImages[0].Load("../../ExampleImages/Moire3D/Learn0/")).IsFail())
+				if((res = vctLrnImages[0].Load("../../ExampleImages/fringePattern3D/Learn0/")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Source 이미지 로드 // Load the source image
-				if((res = vctSrcImages[0].Load("../../ExampleImages/Moire3D/Object0/")).IsFail())
+				if((res = vctSrcImages[0].Load("../../ExampleImages/fringePattern3D/Object0/")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Learn 이미지 로드 // Load the reference plane image for calibration
-				if((res = vctLrnImages[1].Load("../../ExampleImages/Moire3D/Learn1/")).IsFail())
+				if((res = vctLrnImages[1].Load("../../ExampleImages/fringePattern3D/Learn1/")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Source 이미지 로드 // Load the source image
-				if((res = vctSrcImages[1].Load("../../ExampleImages/Moire3D/Object1/")).IsFail())
+				if((res = vctSrcImages[1].Load("../../ExampleImages/fringePattern3D/Object1/")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// Texture 이미지 로드 // Load the texture image
-				if((res = fliTxtImage.Load("../../ExampleImages/Moire3D/text.flif")).IsFail())
+				if((res = fliTxtImage.Load("../../ExampleImages/fringePattern3D/text.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -162,42 +162,42 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CMoire3D moire3D = new CMoire3D();
+				CFringePattern3D fringePattern3D = new CFringePattern3D();
 
-				if((res = moire3D.SetWorkingDistance(330)).IsFail())
+				if((res = fringePattern3D.SetWorkingDistance(330)).IsFail())
 					break;
-				if((res = moire3D.SetFieldOfView(400)).IsFail())
+				if((res = fringePattern3D.SetFieldOfView(400)).IsFail())
 					break;
 				CMultiVar<double> mvF64AngleOfProjector = new CMultiVar<double>(73, 105);
-				if((res = moire3D.SetAngleOfProjector(mvF64AngleOfProjector)).IsFail())
+				if((res = fringePattern3D.SetAngleOfProjector(mvF64AngleOfProjector)).IsFail())
 					break;
 				CMultiVar<double> mvF64SmallBinRange = new CMultiVar<double>(1, 1);
-				if((res = moire3D.SetBinInterval(mvF64SmallBinRange)).IsFail())
+				if((res = fringePattern3D.SetBinInterval(mvF64SmallBinRange)).IsFail())
 					break;
-				if((res = moire3D.SetPatternType(CMoire3D.EPatternType.SquareWave)).IsFail())
+				if((res = fringePattern3D.SetPatternType(CFringePattern3D.EPatternType.SquareWave)).IsFail())
 					break;
-				if((res = moire3D.EnableNoiseReduction(true)).IsFail())
+				if((res = fringePattern3D.EnableNoiseReduction(true)).IsFail())
 					break;
 
-				if((res = moire3D.SetLearnImage(ref vctLrnImages)).IsFail())
+				if((res = fringePattern3D.SetLearnImage(ref vctLrnImages)).IsFail())
 					break;
 
 				// 알고리즘 Calibrate // Calibrate the algorithm
-				if((res = moire3D.Calibrate()).IsFail())
+				if((res = fringePattern3D.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Failed to calibrate the algorithm.");
 					break;
 				}
 
-				if((res = moire3D.SetSourceImage(ref vctSrcImages)).IsFail())
+				if((res = fringePattern3D.SetSourceImage(ref vctSrcImages)).IsFail())
 					break;
-				if((res = moire3D.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
+				if((res = fringePattern3D.SetDestinationHeightMapImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = moire3D.SetDestinationObject(ref floDstObject)).IsFail())
+				if((res = fringePattern3D.SetDestinationObject(ref floDstObject)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = moire3D.Execute()).IsFail())
+				if((res = fringePattern3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

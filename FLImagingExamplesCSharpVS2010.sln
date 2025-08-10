@@ -652,7 +652,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyEntropy", "FuzzyEntrop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoThreshold", "AutoThreshold\AutoThreshold.csproj", "{61C05D65-EE01-4FE7-B153-F12C16871160}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moire3D", "Moire3D\Moire3D.csproj", "{B6AB62E7-D408-4675-A0CD-A5793FF278A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FringePattern3D", "FringePattern3D\FringePattern3D.csproj", "{B6AB62E7-D408-4675-A0CD-A5793FF278A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourierTransformReal", "FourierTransformReal\FourierTransformReal.csproj", "{5C162054-2B92-4F1D-8FB9-1CEC9E82EB08}"
 EndProject
