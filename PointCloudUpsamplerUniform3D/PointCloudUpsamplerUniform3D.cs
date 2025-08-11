@@ -51,6 +51,9 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				view3DSrc.SetTopologyType(ETopologyType3D.PointCloud);
+				view3DDst.SetTopologyType(ETopologyType3D.PointCloud);
+
 				view3DSrc.PushObject(new CFL3DObject());
 				var viewObjectSrc = view3DSrc.GetView3DObject(0);
 				var floSrc = viewObjectSrc.Get3DObject();
@@ -100,9 +103,6 @@ namespace FLImagingExamplesCSharp
 					ErrorPrint(res, "Failed to execute.");
 					break;
 				}
-
-				viewObjectDst.SetTopologyType(ETopologyType3D.PointCloud);
-				viewObjectSrc.SetTopologyType(ETopologyType3D.PointCloud);
 
 				viewObjectSrc.UpdateAll();
 				view3DSrc.UpdateObject(0);
