@@ -123,32 +123,32 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation Modulo 객체 생성 // Create Operation Modulo object
-				COperationModulo modulo = new COperationModulo();
+				COperationModulo operationModulo = new COperationModulo();
 				// Source 이미지 설정 // Set the source image
-				modulo.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationModulo.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				modulo.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				operationModulo.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// 연산 방식 설정 // Set operation source
-				modulo.SetOperationSource(EOperationSource.Scalar);
+				operationModulo.SetOperationSource(EOperationSource.Scalar);
 				// Modulo 값 설정 // Set Modulo value
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(50, 50, 50);
-				modulo.SetScalarValue(mvScalarValue1);
+				operationModulo.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (modulo.Execute())).IsFail())
+				if((res = (operationModulo.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation modulo.");
 					break;
 				}
 
 				// Destination 이미지를 Destination2로 설정
-				modulo.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				operationModulo.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Modulo 값 설정 // Set Modulo value
 				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(200, 200, 200);
-				modulo.SetScalarValue(mvScalarValue2);
+				operationModulo.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (modulo.Execute())).IsFail())
+				if((res = (operationModulo.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation modulo.");
 					break;

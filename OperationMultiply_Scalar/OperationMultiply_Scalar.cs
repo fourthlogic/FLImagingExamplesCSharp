@@ -123,32 +123,32 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation Multiply 객체 생성 // Create Operation Multiply object
-				COperationMultiply multiply = new COperationMultiply();
+				COperationMultiply operationMultiply = new COperationMultiply();
 				// Source 이미지 설정 // Set the source image
-				multiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationMultiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				multiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				operationMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// 연산 방식 설정 // Set operation source
-				multiply.SetOperationSource(EOperationSource.Scalar);
+				operationMultiply.SetOperationSource(EOperationSource.Scalar);
 				// Multiply 값 설정 // Set Multiply value
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(1.5, 1.5, 1.5);
-				multiply.SetScalarValue(mvScalarValue1);
+				operationMultiply.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (multiply.Execute())).IsFail())
+				if((res = (operationMultiply.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation multiply.");
 					break;
 				}
 
 				// Destination 이미지를 Destination2로 설정
-				multiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				operationMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Multiply 값 설정 // Set Multiply value
 				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(2, 2, 2);
-				multiply.SetScalarValue(mvScalarValue2);
+				operationMultiply.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (multiply.Execute())).IsFail())
+				if((res = (operationMultiply.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation multiply.");
 					break;

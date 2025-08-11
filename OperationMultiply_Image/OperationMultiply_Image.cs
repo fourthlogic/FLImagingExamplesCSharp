@@ -126,25 +126,25 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Operation Multiply 객체 생성 // Create Operation Multiply object
-				COperationMultiply multiply = new COperationMultiply();
+				COperationMultiply operationMultiply = new COperationMultiply();
 				// Source 이미지 설정 // Set the source image
-				multiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationMultiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				multiply.SetSourceROI(flrROI);
+				operationMultiply.SetSourceROI(flrROI);
 				// Operand 이미지 설정 // Set the operand image
-				multiply.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				operationMultiply.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Operand ROI 설정
-				multiply.SetOperandROI(flrROI);
+				operationMultiply.SetOperandROI(flrROI);
 				// Destination 이미지 설정 // Set the destination image
-				multiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				operationMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 				// Destination ROI 설정 // Set Destination ROI
-				multiply.SetDestinationROI(flrROI);
+				operationMultiply.SetDestinationROI(flrROI);
 
 				// 연산 방식 설정 // Set operation source
-				multiply.SetOperationSource(EOperationSource.Image);
+				operationMultiply.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (multiply.Execute())).IsFail())
+				if((res = (operationMultiply.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation multiply.");
 					break;

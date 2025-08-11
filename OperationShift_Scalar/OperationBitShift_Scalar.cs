@@ -123,38 +123,38 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation Bit Shift 객체 생성 // Create Operation Bit Shift object
-				COperationBitShift shift = new COperationBitShift();
+				COperationBitShift operationBitShift = new COperationBitShift();
 				// Source 이미지 설정 // Set the source image
-				shift.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationBitShift.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				shift.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				operationBitShift.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Scalar Operation 모드로 설정 // Set operation mode to scalar
-				shift.SetOperationSource(EOperationSource.Scalar);
+				operationBitShift.SetOperationSource(EOperationSource.Scalar);
 				// Shift 방향 설정
-				shift.SetShiftDirection(COperationBitShift.EShiftDirection.Left);
+				operationBitShift.SetShiftDirection(COperationBitShift.EShiftDirection.Left);
 				// Shift 값 설정 // Set Shift value
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(1.0, 1.0, 1.0);
-				shift.SetScalarValue(mvScalarValue1);
+				operationBitShift.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (shift.Execute())).IsFail())
+				if((res = (operationBitShift.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation shift.");
+					ErrorPrint(res, "Failed to execute operation bit shift.");
 					break;
 				}
 
 				// Destination 이미지를 Destination2로 설정
-				shift.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				operationBitShift.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Shift 방향 설정
-				shift.SetShiftDirection(COperationBitShift.EShiftDirection.Right);
+				operationBitShift.SetShiftDirection(COperationBitShift.EShiftDirection.Right);
 				// Shift 값 설정 // Set Shift value
 				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(2.0, 2.0, 2.0);
-				shift.SetScalarValue(mvScalarValue2);
+				operationBitShift.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (shift.Execute())).IsFail())
+				if((res = (operationBitShift.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation shift.");
+					ErrorPrint(res, "Failed to execute operation bit shift.");
 					break;
 				}
 

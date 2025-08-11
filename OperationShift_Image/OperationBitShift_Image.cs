@@ -123,19 +123,19 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation Bit Shift 객체 생성 // Create Operation Bit Shift object
-				COperationBitShift shift = new COperationBitShift();
+				COperationBitShift operationBitShift = new COperationBitShift();
 				// Source 이미지 설정 // Set the source image
-				shift.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationBitShift.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Operand 이미지 설정 // Set the operand image
-				shift.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				operationBitShift.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Destination 이미지 설정 // Set the destination image
-				shift.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				operationBitShift.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 
 				// Image Operation 모드로 설정 // Set operation mode to image
-				shift.SetOperationSource(EOperationSource.Image);
+				operationBitShift.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (shift.Execute())).IsFail())
+				if((res = (operationBitShift.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation shift.");
 					break;

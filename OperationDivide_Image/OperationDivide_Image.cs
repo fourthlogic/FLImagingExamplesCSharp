@@ -140,22 +140,22 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Divide 객체 생성 // Create Operation Divide object
-				COperationDivide divide = new COperationDivide();
+				COperationDivide operationDivide = new COperationDivide();
 
 				// Source 이미지 설정 // Set the source image
-				divide.SetSourceImage(ref fliSourceImage);
+				operationDivide.SetSourceImage(ref fliSourceImage);
 
 				// Operand 이미지 설정 // Set the operand image
-				divide.SetOperandImage(ref fliOperandImage);
+				operationDivide.SetOperandImage(ref fliOperandImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				divide.SetDestinationImage(ref fliDestinationImage);
+				operationDivide.SetDestinationImage(ref fliDestinationImage);
 
 				// 연산 방식 설정 // Set operation source
-				divide.SetOperationSource(EOperationSource.Image);
+				operationDivide.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = divide.Execute()).IsFail())
+				if((res = operationDivide.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation divide. \n");
 					break;

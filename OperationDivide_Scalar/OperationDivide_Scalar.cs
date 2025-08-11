@@ -139,37 +139,37 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Divide 객체 생성 // Create Operation Divide object
-				COperationDivide divide = new COperationDivide();
+				COperationDivide operationDivide = new COperationDivide();
 
 				// Source 이미지 설정 // Set the source image
-				divide.SetSourceImage(ref fliSourceImage);
+				operationDivide.SetSourceImage(ref fliSourceImage);
 
 				// 연산 방식 설정 // Set operation source
-				divide.SetOperationSource(EOperationSource.Scalar);
+				operationDivide.SetOperationSource(EOperationSource.Scalar);
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				divide.SetDestinationImage(ref fliDestinationImage1);
+				operationDivide.SetDestinationImage(ref fliDestinationImage1);
 
 				// 나눌 스칼라 값 지정
 				CMultiVar<double> mvScalar = new CMultiVar<double>(1.5, 1.5, 1.5);
-				divide.SetScalarValue(mvScalar);
+				operationDivide.SetScalarValue(mvScalar);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = divide.Execute()).IsFail())
+				if((res = operationDivide.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation divide.");
 					break;
 				}
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				divide.SetDestinationImage(ref fliDestinationImage2);
+				operationDivide.SetDestinationImage(ref fliDestinationImage2);
 
 				// 나눌 스칼라 값 지정
 				mvScalar = new CMultiVar<double>(3.0, 3.0, 3.0);
-				divide.SetScalarValue(mvScalar);
+				operationDivide.SetScalarValue(mvScalar);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = divide.Execute()).IsFail())
+				if((res = operationDivide.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation divide. \n");
 					break;

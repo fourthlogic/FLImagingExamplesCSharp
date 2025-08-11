@@ -126,25 +126,25 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Operation Modulo 객체 생성 // Create Operation Modulo object
-				COperationModulo modulo = new COperationModulo();
+				COperationModulo operationModulo = new COperationModulo();
 				// Source 이미지 설정 // Set the source image
-				modulo.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationModulo.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				modulo.SetSourceROI(flrROI);
+				operationModulo.SetSourceROI(flrROI);
 				// Operand 이미지 설정 // Set the operand image
-				modulo.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				operationModulo.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Operand ROI 설정
-				modulo.SetOperandROI(flrROI);
+				operationModulo.SetOperandROI(flrROI);
 				// Destination 이미지 설정 // Set the destination image
-				modulo.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				operationModulo.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 				// Destination ROI 설정 // Set Destination ROI
-				modulo.SetDestinationROI(flrROI);
+				operationModulo.SetDestinationROI(flrROI);
 
 				// 연산 방식 설정 // Set operation source
-				modulo.SetOperationSource(EOperationSource.Image);
+				operationModulo.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (modulo.Execute())).IsFail())
+				if((res = (operationModulo.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation modulo.");
 					break;

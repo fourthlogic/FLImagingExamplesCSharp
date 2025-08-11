@@ -123,16 +123,16 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation Overlay 객체 생성 // Create Operation Overlay object
-				COperationOverlay overlay = new COperationOverlay();
+				COperationOverlay operationOverlay = new COperationOverlay();
 				// Source 이미지 설정 // Set the source image
-				overlay.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationOverlay.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Operand 이미지 설정 // Set the operand image
-				overlay.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				operationOverlay.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Destination 이미지 설정 // Set the destination image
-				overlay.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				operationOverlay.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (overlay.Execute())).IsFail())
+				if((res = (operationOverlay.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation overlay.");
 					break;
