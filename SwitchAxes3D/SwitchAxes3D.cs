@@ -65,15 +65,15 @@ namespace FLImagingExamplesCSharp
 				floSrc.Load("../../ExampleImages/DistanceTransform3D/binary-vertex.ply");
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CSwitchAxes3D distanceTransform = new CSwitchAxes3D();
+				CSwitchAxes3D switchAxes3D = new CSwitchAxes3D();
 
 				// 파라미터 설정 // Set parameter
-				distanceTransform.SetSourceObject(ref floSrc);
-				distanceTransform.SetDestinationObject(ref floDst);
-                distanceTransform.SetAxisMappings(CSwitchAxes3D.EAxisMapping.From_PX, CSwitchAxes3D.EAxisMapping.From_NY, CSwitchAxes3D.EAxisMapping.Deduce, false);
+				switchAxes3D.SetSourceObject(ref floSrc);
+				switchAxes3D.SetDestinationObject(ref floDst);
+                switchAxes3D.SetAxisMappings(CSwitchAxes3D.EAxisMapping.From_PX, CSwitchAxes3D.EAxisMapping.From_NY, CSwitchAxes3D.EAxisMapping.Deduce, false);
 
                 // 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = distanceTransform.Execute()).IsFail())
+                if ((res = switchAxes3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;

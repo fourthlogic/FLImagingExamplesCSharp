@@ -90,13 +90,13 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				COperationLeadingOnes clo = new COperationLeadingOnes();
+				COperationLeadingOnes operationLeadingOnes = new COperationLeadingOnes();
 
-				clo.SetSourceImage(ref fliSourceImage);
-				clo.SetDestinationImage(ref fliDestinationImage);
+				operationLeadingOnes.SetSourceImage(ref fliSourceImage);
+				operationLeadingOnes.SetDestinationImage(ref fliDestinationImage);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((res = clo.Execute()).IsFail())
+				if ((res = operationLeadingOnes.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation leading ones.");
 					break;

@@ -53,17 +53,17 @@ namespace FLImagingExamplesCSharp
                 var viewObject = view3DDst.GetView3DObject(0);
                 var floDst = viewObject.Get3DObject();
 
-                CPointCloudGenerator3D pointCloudGenerator = new CPointCloudGenerator3D();
+                CPointCloudGenerator3D pointCloudGenerator3D = new CPointCloudGenerator3D();
 
                 // 파라미터 설정 // Set parameter
-                pointCloudGenerator.SetDestinationObject(ref floDst);
-                pointCloudGenerator.EnableColorGeneration(true);
-				pointCloudGenerator.EnableNormalGeneration(false);
+                pointCloudGenerator3D.SetDestinationObject(ref floDst);
+                pointCloudGenerator3D.EnableColorGeneration(true);
+				pointCloudGenerator3D.EnableNormalGeneration(false);
 
-				pointCloudGenerator.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(true, 0, 0, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 255, 255));
-				pointCloudGenerator.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 4000, 0, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 0, 0));
-				pointCloudGenerator.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 0, 20000, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(0, 255, 0));
-				pointCloudGenerator.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 0, 0, 100000), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(0, 0, 255));
+				pointCloudGenerator3D.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(true, 0, 0, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 255, 255));
+				pointCloudGenerator3D.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 4000, 0, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(255, 0, 0));
+				pointCloudGenerator3D.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 0, 20000, 0), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(0, 255, 0));
+				pointCloudGenerator3D.AddPredefinedObject(new CPointCloudGenerator3D.SCountInfo(false, 0, 0, 100000), EPredefinedObject.Regular_DodecaHedron, new TPoint3<Byte>(0, 0, 255));
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
@@ -85,7 +85,7 @@ namespace FLImagingExamplesCSharp
                 }
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = pointCloudGenerator.Execute()).IsFail())
+				if((res = pointCloudGenerator3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;
@@ -99,7 +99,7 @@ namespace FLImagingExamplesCSharp
                 // 이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
                 while(view3DDst.IsAvailable())
 				{
-					if((res = pointCloudGenerator.Execute()).IsFail())
+					if((res = pointCloudGenerator3D.Execute()).IsFail())
 					{
 						ErrorPrint(res, "Failed to execute.");
 						break;

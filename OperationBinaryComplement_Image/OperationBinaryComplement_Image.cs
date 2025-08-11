@@ -139,7 +139,7 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseAnd 객체 생성 // Create OperationBitwiseAnd object
-                COperationBinaryComplement bc = new COperationBinaryComplement();
+                COperationBinaryComplement operationBinaryComplement = new operationBinaryComplement();
 
                 // Source 이미지 설정 // Set the source image
                 bc.SetSourceImage(ref fliSourceImage);

@@ -84,14 +84,13 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-
-				// lsd 객체 생성 // Create lsd object
-                var lsd = new CLineSegmentDetector();
-                lsd.SetSourceImage(ref fliSrc);
+				// 알고리즘 객체 생성 // Create algorithm object
+				var lineSegmentDetector = new CLineSegmentDetector();
+                lineSegmentDetector.SetSourceImage(ref fliSrc);
                 
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = lsd.Execute()).IsFail())
+				if((res = lineSegmentDetector.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute lsd.");
 					break;
@@ -99,10 +98,10 @@ namespace FLImagingExamplesCSharp
                 
                 CFLFigureArray flfaResults = new CFLFigureArray();
                 List<double> arrScores = new List<double>();
-                double f64ScoreThreshold = lsd.GetScoreThreshold();
+                double f64ScoreThreshold = lineSegmentDetector.GetScoreThreshold();
 
-                lsd.GetResultLineSegments(ref flfaResults);
-                lsd.GetResultScores(ref arrScores);
+                lineSegmentDetector.GetResultLineSegments(ref flfaResults);
+                lineSegmentDetector.GetResultScores(ref arrScores);
 
                 // 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
                 // 따로 해제할 필요 없음 // No need to release separately

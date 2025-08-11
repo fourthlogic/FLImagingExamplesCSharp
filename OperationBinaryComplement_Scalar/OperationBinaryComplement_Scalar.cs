@@ -101,25 +101,25 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseAnd 객체 생성 // Create OperationBitwiseAnd object
-                COperationBinaryComplement bc = new COperationBinaryComplement();
+                COperationBinaryComplement operationBinaryComplement = new COperationBinaryComplement();
 
                 // Source 이미지 설정 // Set the source image
-                bc.SetSourceImage(ref fliDestinationImage);
+                operationBinaryComplement.SetSourceImage(ref fliDestinationImage);
 
                 // ROI 범위 설정 // Set the ROI value
                 CFLCircle<double> flcSourceROI = new CFLCircle<double>(128, 128, 80, 0, 0, 360, EArcClosingMethod.EachOther);
 
                 // Source 이미지의 ROI 지정 // Set the Source ROI
-                bc.SetSourceROI(flcSourceROI);
+                operationBinaryComplement.SetSourceROI(flcSourceROI);
 
                 // Scalar Operation 소스로 설정 // Set Operation Source to scalar
-                bc.SetOperationSource(EOperationSource.Scalar);
+                operationBinaryComplement.SetOperationSource(EOperationSource.Scalar);
 
                 // 스칼라 값 지정 // Set the Scalar value
-                bc.SetScalarValue(1);
+                operationBinaryComplement.SetScalarValue(1);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bc.Execute()).IsFail())
+                if ((res = operationBinaryComplement.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation Binary Complement. \n");
                     break;

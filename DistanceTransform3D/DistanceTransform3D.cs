@@ -178,23 +178,23 @@ namespace FLImagingExamplesCSharp
 				view3DSrc.ZoomFit();
 
 				// Distance Transform 3D 객체 생성 // Create Distance Transform 3D object
-				CDistanceTransform3D distanceTransform = new CDistanceTransform3D();
+				CDistanceTransform3D distanceTransform3D = new CDistanceTransform3D();
 
 				TPoint3<float> tpPosition = new TPoint3<float>(0.000000f, 0.000000f, 0.000000f);
 				TPoint3<float> tpDirection = new TPoint3<float>(-0.100000f, 0.000000f, -1.000000f);
 				TPoint3<float> tpUpVector = new TPoint3<float>(0.000000f, 1.000000f, 0.000000f);
 
 				// Source 객체 설정 // Set the source object
-				distanceTransform.SetSourceObject(ref fl3DObject);
+				distanceTransform3D.SetSourceObject(ref fl3DObject);
 				// 카메라 위치 설정 // Set the camera position
-				distanceTransform.SetPosition(tpPosition);
+				distanceTransform3D.SetPosition(tpPosition);
 				// 카메라 방향 설정 // Set the camera direction
-				distanceTransform.SetDirection(tpDirection);
+				distanceTransform3D.SetDirection(tpDirection);
 				// 카메라 업 벡터 설정 // Set the camera up vector
-				distanceTransform.SetUpVector(tpUpVector);
+				distanceTransform3D.SetUpVector(tpUpVector);
 
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = distanceTransform.Execute()).IsFail())
+				if((res = distanceTransform3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
@@ -202,7 +202,7 @@ namespace FLImagingExamplesCSharp
 
 				List<TPoint3<float>> arrResult = new List<TPoint3<float>>();
 				// 거리 결과 가져오기 // Get the distance
-				res = distanceTransform.GetResultDistanceAxis(ref arrResult);
+				res = distanceTransform3D.GetResultDistanceAxis(ref arrResult);
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately

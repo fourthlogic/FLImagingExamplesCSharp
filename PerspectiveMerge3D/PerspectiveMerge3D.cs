@@ -69,11 +69,11 @@ namespace FLImagingExamplesCSharp
 				res = floSrc1.Load("../../ExampleImages/PerspectiveMerge3D/Left Cam.ply");
 				res = floSrc2.Load("../../ExampleImages/PerspectiveMerge3D/Right Cam.ply");
 
-				CPerspectiveMerge3D distanceTransform = new CPerspectiveMerge3D();
+				CPerspectiveMerge3D perspectiveMerge3D = new CPerspectiveMerge3D();
 
 				CFL3DObject floDst = new CFL3DObject();
 
-				distanceTransform.SetEulerSequence(EEulerSequence.Extrinsic_ZXY);
+				perspectiveMerge3D.SetEulerSequence(EEulerSequence.Extrinsic_ZXY);
 
 				TPoint3<float> tpPosition = new TPoint3<float>(-0.152f, 0.0f, 0f);
 				TPoint3<float> tpRotation = new TPoint3<float>(-90f, 8f, -29f);
@@ -81,13 +81,13 @@ namespace FLImagingExamplesCSharp
 				TPoint3<float> tpRotation2 = new TPoint3<float>(-90f, 8f, 29f);
 
 				// 카메라 1, 2의 Source 객체 설정 // Set the source object of camera 1, 2
-				distanceTransform.AddSourceObject(ref floSrc1, tpPosition, tpRotation);
-				distanceTransform.AddSourceObject(ref floSrc2, tpPosition2, tpRotation2);
+				perspectiveMerge3D.AddSourceObject(ref floSrc1, tpPosition, tpRotation);
+				perspectiveMerge3D.AddSourceObject(ref floSrc2, tpPosition2, tpRotation2);
 				// Destination 객체 설정 // Set the destination object
-				distanceTransform.SetDestinationObject(ref floDst);
+				perspectiveMerge3D.SetDestinationObject(ref floDst);
 
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = distanceTransform.Execute()).IsFail())
+				if((res = perspectiveMerge3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
@@ -95,7 +95,7 @@ namespace FLImagingExamplesCSharp
 
 				view3DSrc1.PushObject(floSrc1);
 				view3DSrc2.PushObject(floSrc2);
-				view3DDst.PushObject(distanceTransform.GetDestinationObject());
+				view3DDst.PushObject(perspectiveMerge3D.GetDestinationObject());
 
 				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
 				view3DSrc1.ZoomFit();
