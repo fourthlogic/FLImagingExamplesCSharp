@@ -137,18 +137,18 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // COperationCompare 객체 생성 // Create COperationCompare object
-                COperationCompare compare = new COperationCompare();
+                COperationCompare operationCompare = new COperationCompare();
                 // Source 이미지 설정 // Set source image
-                compare.SetSourceImage(ref arrFliImage[0]);
+                operationCompare.SetSourceImage(ref arrFliImage[0]);
                 // Operand 이미지 설정 // Set operand image
-                compare.SetOperandImage(ref arrFliImage[1]);
+                operationCompare.SetOperandImage(ref arrFliImage[1]);
                 // Destination 이미지 설정 // Set destination image
-                compare.SetDestinationImage(ref arrFliImage[2]);
+                operationCompare.SetDestinationImage(ref arrFliImage[2]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                compare.SetOperationSource(EOperationSource.Image);
+                operationCompare.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((result = compare.Execute()).IsFail())
+                if ((result = operationCompare.Execute()).IsFail())
 				{
                     ErrorPrint(result, "Failed to execute operation compare.");
                     Console.WriteLine(result.GetString());

@@ -102,43 +102,43 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // HOG 객체 생성 // Create HOG object
-                CHistogramsOfOrientedGradients hog = new CHistogramsOfOrientedGradients();
+                CHistogramsOfOrientedGradients histogramsOfOrientedGradients = new CHistogramsOfOrientedGradients();
 
                 // ROI 범위 생성 // Create ROI area
                 CFLRect<int> flrROI = new CFLRect<int>(200, 10, 300, 200);
 
                 // Source 이미지 설정 // Set the source image
-                if ((res = hog.SetSourceImage(ref fliSrcImage)).IsFail())
+                if ((res = histogramsOfOrientedGradients.SetSourceImage(ref fliSrcImage)).IsFail())
 				{
                     ErrorPrint(res, "Failed to set Source Image.");
                     break;
                 }
 
                 // 연산할 ROI 설정 // Set ROI to Calculate
-                if ((res = hog.SetSourceROI(flrROI)).IsFail())
+                if ((res = histogramsOfOrientedGradients.SetSourceROI(flrROI)).IsFail())
 				{
                     ErrorPrint(res, "Failed to set Source ROI.");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set the destination image
-                if ((res = hog.SetSourceImage(ref fliDstImage)).IsFail())
+                if ((res = histogramsOfOrientedGradients.SetSourceImage(ref fliDstImage)).IsFail())
 				{
                     ErrorPrint(res, "Failed to set Source Image.");
                     break;
                 }
 
                 // Cell Size 설정 // Set Cell Size
-                hog.SetCellSize(4);
+                histogramsOfOrientedGradients.SetCellSize(4);
 
                 // Block Size 설정 // Set Block Size
-                hog.SetBlockSize(3);
+                histogramsOfOrientedGradients.SetBlockSize(3);
 
                 // 비주얼 출력 타입 예측 이미지로 설정 // Set Prediction Image to visual result type
-                hog.SetVisualResultType(CHistogramsOfOrientedGradients.EVisualResultType.PredictionImage);
+                histogramsOfOrientedGradients.SetVisualResultType(CHistogramsOfOrientedGradients.EVisualResultType.PredictionImage);
 
                 // 알고리즘 수행 // Execute the algorithm
-                if ((res = hog.Execute()).IsFail())
+                if ((res = histogramsOfOrientedGradients.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Histograms Of Oriented Gradients.");
                     break;

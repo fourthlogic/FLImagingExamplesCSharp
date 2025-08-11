@@ -72,27 +72,27 @@ namespace FLImagingExamplesCSharp
                 layer.Clear();
 
                 // HOG 객체 생성 // Create HOG object
-                CHistogramsOfOrientedGradients hog = new CHistogramsOfOrientedGradients();
+                CHistogramsOfOrientedGradients histogramsOfOrientedGradients = new CHistogramsOfOrientedGradients();
 
                 // ROI 범위 생성 // Create ROI area
                 CFLRect<int> flrROI = new CFLRect<int>(200, 10, 300, 200);
 
                 // 연산할 이미지 설정 // Set Image to Calculate
-                if ((res = hog.SetSourceImage(ref fliImage)).IsFail())
+                if ((res = histogramsOfOrientedGradients.SetSourceImage(ref fliImage)).IsFail())
 				{
                     ErrorPrint(res, "Failed to set Source Image.");
                     break;
                 }
 
                 // 연산할 ROI 설정 // Set ROI to Calculate
-                if ((res = hog.SetSourceROI(flrROI)).IsFail())
+                if ((res = histogramsOfOrientedGradients.SetSourceROI(flrROI)).IsFail())
 				{
                     ErrorPrint(res, "Failed to set Source ROI.");
                     break;
                 }
 
                 // 알고리즘 수행 // Execute the algorithm
-                if ((res = hog.Execute()).IsFail())
+                if ((res = histogramsOfOrientedGradients.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Histograms Of Oriented Gradients.");
                     break;
@@ -102,7 +102,7 @@ namespace FLImagingExamplesCSharp
                 CFLFigureArray flfaPeakVectors = new CFLFigureArray();
 
                 // 피크 벡터 추출 // Get Peak Vectors
-                if ((res = hog.GetPeakVectorsFigure(0, ref flfaPeakVectors)).IsFail())
+                if ((res = histogramsOfOrientedGradients.GetPeakVectorsFigure(0, ref flfaPeakVectors)).IsFail())
 				{
                     ErrorPrint(res, "Failed to get result.");
                     break;
