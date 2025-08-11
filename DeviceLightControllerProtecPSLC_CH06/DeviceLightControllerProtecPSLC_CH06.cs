@@ -38,7 +38,7 @@ namespace FLImagingExamplesCSharp
 			CResult res = new CResult();
 
 			// 조명 컨트롤러 ProtecPSLC_CH06 선언 // Declare the ProtecPSLC_CH06 Light Controller
-			CDeviceLightControllerProtecPSLC_CH06 lightController = new CDeviceLightControllerProtecPSLC_CH06();
+			CDeviceLightControllerProtecPSLC_CH06 lightControllerProtecPSLCCH06 = new CDeviceLightControllerProtecPSLC_CH06();
 
 			bool bExit = false;
 
@@ -50,10 +50,10 @@ namespace FLImagingExamplesCSharp
 				if(int.TryParse(Console.ReadLine(), out var portNumber))
 				{
 					// 컴포트 번호 설정 // Set the COM port number.
-					lightController.SetComPortNumber(portNumber);
+					lightControllerProtecPSLCCH06.SetComPortNumber(portNumber);
 				}
 
-				if(lightController.Initialize().IsFail())
+				if(lightControllerProtecPSLCCH06.Initialize().IsFail())
 				{
 					Console.WriteLine("Failed to initialize the light controller.");
 					break;
@@ -87,7 +87,7 @@ namespace FLImagingExamplesCSharp
 
 					if(operationMode == 1)
 					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.Live);
+						lightControllerProtecPSLCCH06.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.Live);
 
 						// On/Off 상태를 설정합니다. // Set the On/Off state.
 						Console.WriteLine("\n1. Live On\n2. Live Off");
@@ -98,7 +98,7 @@ namespace FLImagingExamplesCSharp
 
 							if(onOff == 1)
 							{
-								lightController.EnableLiveTurnOn(true);
+								lightControllerProtecPSLCCH06.EnableLiveTurnOn(true);
 
 								Console.Write("Select Channel Index: ");
 
@@ -109,25 +109,25 @@ namespace FLImagingExamplesCSharp
 									if(int.TryParse(Console.ReadLine(), out var lightValue))
 									{
 										// 조명 값을 설정합니다. // Set the light value.
-										lightController.SetLightValue(channel, (byte)lightValue);
+										lightControllerProtecPSLCCH06.SetLightValue(channel, (byte)lightValue);
 									}
 								}
 							}
 							else if(onOff == 2)
-								lightController.EnableLiveTurnOn(false);
+								lightControllerProtecPSLCCH06.EnableLiveTurnOn(false);
 						}
 
 						Console.Clear();
 					}
 					else if(operationMode == 2)
 					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.Strobe);
+						lightControllerProtecPSLCCH06.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.Strobe);
 
 						Console.Write("Select Trigger Index: ");
 
 						if(int.TryParse(Console.ReadLine(), out i32triggerIndex))
 						{
-							lightController.EnableLiveTurnOn(true);
+							lightControllerProtecPSLCCH06.EnableLiveTurnOn(true);
 
 							Console.Write("Select Channel Index: ");
 
@@ -138,7 +138,7 @@ namespace FLImagingExamplesCSharp
 								if(int.TryParse(Console.ReadLine(), out var strobeValue))
 								{
 									// 조명 값을 설정합니다. // Set the light value.
-									lightController.SetStrobe(i32triggerIndex, channel, (UInt16)strobeValue);
+									lightControllerProtecPSLCCH06.SetStrobe(i32triggerIndex, channel, (UInt16)strobeValue);
 								}
 							}
 						}
@@ -147,13 +147,13 @@ namespace FLImagingExamplesCSharp
 					}
 					else if(operationMode == 3)
 					{
-						lightController.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.MultiShotStrobe);
+						lightControllerProtecPSLCCH06.SetOperationMode(CDeviceLightControllerProtecPSLC_CH06.EOperationMode.MultiShotStrobe);
 
 						Console.Write("Select Trigger Index: ");
 
 						if(int.TryParse(Console.ReadLine(), out i32triggerIndex))
 						{
-							lightController.EnableLiveTurnOn(true);
+							lightControllerProtecPSLCCH06.EnableLiveTurnOn(true);
 
 							Console.Write("Select Memory Index: ");
 
@@ -168,7 +168,7 @@ namespace FLImagingExamplesCSharp
 									if(int.TryParse(Console.ReadLine(), out var strobeValue))
 									{
 										// 조명 값을 설정합니다. // Set the light value.
-										lightController.SetMultiShotStrobe(i32triggerIndex, memoryIndex, channel, (UInt16)strobeValue);
+										lightControllerProtecPSLCCH06.SetMultiShotStrobe(i32triggerIndex, memoryIndex, channel, (UInt16)strobeValue);
 									}
 								}
 							}
@@ -178,7 +178,7 @@ namespace FLImagingExamplesCSharp
 					}
 
 					// 입력된 파라미터를 적용합니다. // Apply the configured parameters.
-					if(lightController.Apply(i32triggerIndex).IsFail())
+					if(lightControllerProtecPSLCCH06.Apply(i32triggerIndex).IsFail())
 					{
 						Console.WriteLine("Failed to apply the light controller.");
 						break;
@@ -192,7 +192,7 @@ namespace FLImagingExamplesCSharp
 			while(false);
 
 			// 조명 컨트롤러에 연결을 종료합니다. // Terminate the connection to the light controller.
-			if(lightController.Terminate().IsFail())
+			if(lightControllerProtecPSLCCH06.Terminate().IsFail())
 			{
 				Console.WriteLine("Failed to terminate the motion.\n");
 			}

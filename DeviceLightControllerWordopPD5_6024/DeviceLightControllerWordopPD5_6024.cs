@@ -38,7 +38,7 @@ namespace FLImagingExamplesCSharp
 			CResult res = new CResult();
 
 			// 조명 컨트롤러 WordopPD5_6024 선언 // Declare the WordopPD5_6024 Light Controller
-			CDeviceLightControllerWordopPD5_6024 lightController = new CDeviceLightControllerWordopPD5_6024();
+			CDeviceLightControllerWordopPD5_6024 lightControllerWordopPD56024 = new CDeviceLightControllerWordopPD5_6024();
 
 			bool bExit = false;
 
@@ -85,7 +85,7 @@ namespace FLImagingExamplesCSharp
 					connectionMethod = CDeviceLightControllerWordopPD5_6024.EConnectionMethod.UDP;
 
 				// 연결 방식을 설정합니다. // Set the connection method.
-				lightController.SetConnectionMethod(connectionMethod);
+				lightControllerWordopPD56024.SetConnectionMethod(connectionMethod);
 
 				if(i32connectionType == 1) // RS232C
 				{
@@ -95,7 +95,7 @@ namespace FLImagingExamplesCSharp
 					if(int.TryParse(Console.ReadLine(), out var portNumber))
 					{
 						// 컴포트 번호 설정 // Set the COM port number.
-						lightController.SetConnectionComPortNumber(portNumber);
+						lightControllerWordopPD56024.SetConnectionComPortNumber(portNumber);
 					}
 				}
 				else
@@ -110,12 +110,12 @@ namespace FLImagingExamplesCSharp
 					if(int.TryParse(Console.ReadLine(), out var port))
 					{
 						// IP 주소, Port 설정 // Set the IP address and port.
-						lightController.SetConnectionIPAddress(ipAddress);
-						lightController.SetConnectionPort((ushort)port);
+						lightControllerWordopPD56024.SetConnectionIPAddress(ipAddress);
+						lightControllerWordopPD56024.SetConnectionPort((ushort)port);
 					}
 				}
 
-				if(lightController.Initialize().IsFail())
+				if(lightControllerWordopPD56024.Initialize().IsFail())
 				{
 					Console.WriteLine("Failed to initialize the light controller.");
 					break;
@@ -153,7 +153,7 @@ namespace FLImagingExamplesCSharp
 				CDeviceLightControllerWordopPD5_6024.ELightChannel eLightChannel = i32channelCount == 1 ? CDeviceLightControllerWordopPD5_6024.ELightChannel.Port_8 : CDeviceLightControllerWordopPD5_6024.ELightChannel.Port_4;
 
 				// 채널 갯수 설정 // Set the number of channels.
-				lightController.SetLightChannel(eLightChannel);
+				lightControllerWordopPD56024.SetLightChannel(eLightChannel);
 
 				int i32communicationType = 0;
 
@@ -189,7 +189,7 @@ namespace FLImagingExamplesCSharp
 				CDeviceLightControllerWordopPD5_6024.ECommunicationType commType = i32communicationType == 1 ? CDeviceLightControllerWordopPD5_6024.ECommunicationType.ASCIICode : CDeviceLightControllerWordopPD5_6024.ECommunicationType.Hexadecimal;
 
 				// 통신 방식을 설정합니다. // Set the communication type.
-				lightController.SetCommunicationType(commType);
+				lightControllerWordopPD56024.SetCommunicationType(commType);
 
 				while(true)
 				{
@@ -262,7 +262,7 @@ namespace FLImagingExamplesCSharp
 							eTriggerMethod = CDeviceLightControllerWordopPD5_6024.ETriggerMethod.RisingEdge;
 
 						// 트리거 방식을 설정합니다. // Set the trigger method.
-						lightController.SetTriggerMethod(eTriggerMethod);
+						lightControllerWordopPD56024.SetTriggerMethod(eTriggerMethod);
 					}
 					else
 					{
@@ -278,7 +278,7 @@ namespace FLImagingExamplesCSharp
 								if(int.TryParse(Console.ReadLine(), out var onOff))
 								{
 									// 채널별 On/Off 상태를 설정합니다. // Set the On/Off state for the channel.
-									lightController.SetChannelState(channel, onOff == 1);
+									lightControllerWordopPD56024.SetChannelState(channel, onOff == 1);
 								}
 							}
 							else if(operationMode == 2)
@@ -288,7 +288,7 @@ namespace FLImagingExamplesCSharp
 								if(int.TryParse(Console.ReadLine(), out var lightValue))
 								{
 									// 조명 값을 설정합니다. // Set the light value.
-									lightController.SetLightValue(channel, (byte)lightValue);
+									lightControllerWordopPD56024.SetLightValue(channel, (byte)lightValue);
 								}
 							}
 							else if(operationMode == 3)
@@ -298,7 +298,7 @@ namespace FLImagingExamplesCSharp
 								if(int.TryParse(Console.ReadLine(), out var strobeTime))
 								{
 									// 스토로브 타임을 설정합니다. // Set the strobe time.
-									lightController.SetStrobeTime(channel, (ushort)strobeTime);
+									lightControllerWordopPD56024.SetStrobeTime(channel, (ushort)strobeTime);
 								}
 							}
 						}
@@ -307,7 +307,7 @@ namespace FLImagingExamplesCSharp
 					}
 
 					// 입력된 파라미터를 적용합니다. // Apply the configured parameters.
-					lightController.Apply();
+					lightControllerWordopPD56024.Apply();
 				}
 
 				if(bExit)
@@ -316,7 +316,7 @@ namespace FLImagingExamplesCSharp
 			while(false);
 
 			// 조명 컨트롤러에 연결을 종료합니다. // Terminate the connection to the light controller.
-			if(lightController.Terminate().IsFail())
+			if(lightControllerWordopPD56024.Terminate().IsFail())
 			{
 				Console.WriteLine("Failed to terminate the motion.\n");
 			}
