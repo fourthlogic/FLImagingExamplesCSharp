@@ -138,32 +138,32 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvScalr2 = new CMultiVar<double>(0, 0, 0);
 
 				// Operation hypotenuse 객체 생성 // Create Hypotenuse object
-				COperationHypotenuse hypotenuse = new COperationHypotenuse();
+				COperationHypotenuse operationHypotenuse = new COperationHypotenuse();
 				// Source 이미지 설정 // Set source image
-				hypotenuse.SetSourceImage(ref arrFliImage[0]);
+				operationHypotenuse.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				hypotenuse.SetDestinationImage(ref arrFliImage[1]);
+				operationHypotenuse.SetDestinationImage(ref arrFliImage[1]);
 				// 연산 방식 설정 // Set operation source
-				hypotenuse.SetOperationSource(EOperationSource.Scalar);
+				operationHypotenuse.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				hypotenuse.SetScalarValue(mvScalr);
+				operationHypotenuse.SetScalarValue(mvScalr);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (hypotenuse.Execute())).IsFail())
+				if((res = (operationHypotenuse.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation hypotenuse.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image 
-				hypotenuse.SetDestinationImage(ref arrFliImage[2]);
+				operationHypotenuse.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				hypotenuse.SetOperationSource(EOperationSource.Scalar);
+				operationHypotenuse.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				hypotenuse.SetScalarValue(mvScalr2);
+				operationHypotenuse.SetScalarValue(mvScalr2);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (hypotenuse.Execute())).IsFail())
+				if((res = (operationHypotenuse.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation hypotenuse.");
 					break;

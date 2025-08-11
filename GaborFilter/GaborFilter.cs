@@ -122,14 +122,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Gabor Filter 객체 생성 // Create Gabor Filter
-				CGaborFilter gaborfilter = new CGaborFilter();
+				CGaborFilter gaborFilter = new CGaborFilter();
 				// Source 이미지 설정 // Set source image
-				gaborfilter.SetSourceImage(ref arrFliImage[0]);
+				gaborFilter.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				gaborfilter.SetDestinationImage(ref arrFliImage[2]);
+				gaborFilter.SetDestinationImage(ref arrFliImage[2]);
 
 				// 커널 이미지 // Get Kernel Image 
-				if((res = (gaborfilter.GetKernelImage(ref arrFliImage[1]))).IsFail())
+				if((res = (gaborFilter.GetKernelImage(ref arrFliImage[1]))).IsFail())
 				{
 					ErrorPrint(res, "Failed to Get Kernel Image.");
 					Console.WriteLine(res.GetString());
@@ -137,7 +137,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (gaborfilter.Execute())).IsFail())
+				if((res = (gaborFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute gabor filter.");
 					Console.WriteLine(res.GetString());
@@ -181,6 +181,9 @@ namespace FLImagingExamplesCSharp
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
+
+				// 커널 이미지 뷰 Zoom Fit 합니다. // Zoom fit the kernel image view
+				arrViewImage[1].ZoomFit();
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
 				arrViewImage[0].Invalidate(true);

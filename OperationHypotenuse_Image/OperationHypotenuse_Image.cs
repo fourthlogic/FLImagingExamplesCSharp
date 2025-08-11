@@ -136,18 +136,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Hypotenuse 객체 생성 // Create Hypotenuse object
-				COperationHypotenuse hypotenuse = new COperationHypotenuse();
+				COperationHypotenuse operationHypotenuse = new COperationHypotenuse();
 				// Source 이미지 설정 // Set source image
-				hypotenuse.SetSourceImage(ref arrFliImage[0]);
+				operationHypotenuse.SetSourceImage(ref arrFliImage[0]);
 				// Operand 이미지 설정 // Set Operand image
-				hypotenuse.SetOperandImage(ref arrFliImage[1]);
+				operationHypotenuse.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set destination image 
-				hypotenuse.SetDestinationImage(ref arrFliImage[2]);
+				operationHypotenuse.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				hypotenuse.SetOperationSource(EOperationSource.Image);
+				operationHypotenuse.SetOperationSource(EOperationSource.Image);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (hypotenuse.Execute())).IsFail())
+				if((res = (operationHypotenuse.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation hypotenuse.");
 					Console.WriteLine(res.GetString());

@@ -194,53 +194,53 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// FilterGeneratorGaussFD  객체 생성 // Create FilterGeneratorGaussFD object
-				CFilterGeneratorGaussFD filterGenerator = new CFilterGeneratorGaussFD();
+				CFilterGeneratorGaussFD filterGeneratorGaussFD = new CFilterGeneratorGaussFD();
 
 				// Source 이미지 설정 // Set source image 
-				filterGenerator.SetSourceImage(ref fliISrcImage);
+				filterGeneratorGaussFD.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				filterGenerator.SetDestinationImage(ref fliIFilterImage);
+				filterGeneratorGaussFD.SetDestinationImage(ref fliIFilterImage);
 
 				// 정밀도 설정 (32/64 bit Floating Point 설정 가능) // Set Accuracy(32/64 bit Floating Point) 
-				filterGenerator.SetAccuracy(EFloatingPointAccuracy.Bit32);
+				filterGeneratorGaussFD.SetAccuracy(EFloatingPointAccuracy.Bit32);
 
 				// 필터 타입 설정 // set Filter type
-				filterGenerator.SetType(CFilterGeneratorGaussFD.EFilterBaseFDType.FFT_Shift);
+				filterGeneratorGaussFD.SetType(CFilterGeneratorGaussFD.EFilterBaseFDType.FFT_Shift);
 
 				// Sigma1 설정 // Set Sigma1
-				filterGenerator.SetSigma1(2);
+				filterGeneratorGaussFD.SetSigma1(2);
 
 				// Sigma2 설정 // Set Sigma2
-				filterGenerator.SetSigma2(1);
+				filterGeneratorGaussFD.SetSigma2(1);
 
 				// Phi 설정 // Set Phi
-				filterGenerator.SetPhi(0.785398f);
+				filterGeneratorGaussFD.SetPhi(0.785398f);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (filterGenerator.Execute())).IsFail())
+				if((res = (filterGeneratorGaussFD.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute FilterGeneratorGaussFD.");
 					break;
 				}
 
 				// Operation Multiply 객체 생성 // Create Operation Multiply object
-				COperationMultiply multiply = new COperationMultiply();
+				COperationMultiply operationMultiply = new COperationMultiply();
 
 				// Source 이미지 설정 // Set the source image
-				multiply.SetSourceImage(ref fliIFFTImage);
+				operationMultiply.SetSourceImage(ref fliIFFTImage);
 
 				// Operand 이미지 설정 // Set the operand image
-				multiply.SetOperandImage(ref fliIFilterImage);
+				operationMultiply.SetOperandImage(ref fliIFilterImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				multiply.SetDestinationImage(ref fliIMultiplyImage);
+				operationMultiply.SetDestinationImage(ref fliIMultiplyImage);
 
 				// 연산 방식 설정 // Set operation source
-				multiply.SetOperationSource(EOperationSource.Image);
+				operationMultiply.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (multiply.Execute())).IsFail())
+				if((res = (operationMultiply.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation multiply.");
 					break;
