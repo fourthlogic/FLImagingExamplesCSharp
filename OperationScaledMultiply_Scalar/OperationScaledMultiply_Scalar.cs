@@ -123,32 +123,32 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation ScaledMultiply 객체 생성 // Create Operation ScaledMultiply object
-				COperationScaledMultiply scaledMultiply = new COperationScaledMultiply();
+				COperationScaledMultiply operationScaledMultiply = new COperationScaledMultiply();
 				// Source 이미지 설정 // Set the source image
-				scaledMultiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationScaledMultiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				scaledMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				operationScaledMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// 연산 방식 설정 // Set operation source
-				scaledMultiply.SetOperationSource(EOperationSource.Scalar);
+				operationScaledMultiply.SetOperationSource(EOperationSource.Scalar);
 				// ScaledMultiply 값 설정 // Set ScaledMultiply value
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(128, 128, 128);
-				scaledMultiply.SetScalarValue(mvScalarValue1);
+				operationScaledMultiply.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaledMultiply.Execute())).IsFail())
+				if((res = (operationScaledMultiply.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledMultiply.");
 					break;
 				}
 
 				// Destination 이미지를 Destination2로 설정
-				scaledMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				operationScaledMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// ScaledMultiply 값 설정 // Set ScaledMultiply value
 				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(430, 430, 430);
-				scaledMultiply.SetScalarValue(mvScalarValue2);
+				operationScaledMultiply.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaledMultiply.Execute())).IsFail())
+				if((res = (operationScaledMultiply.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledMultiply.");
 					break;

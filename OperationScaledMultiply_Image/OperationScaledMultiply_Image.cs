@@ -126,25 +126,25 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Operation ScaledMultiply 객체 생성 // Create Operation ScaledMultiply object
-				COperationScaledMultiply scaledMultiply = new COperationScaledMultiply();
+				COperationScaledMultiply operationScaledMultiply = new COperationScaledMultiply();
 				// Source 이미지 설정 // Set the source image
-				scaledMultiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationScaledMultiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				scaledMultiply.SetSourceROI(flrROI);
+				operationScaledMultiply.SetSourceROI(flrROI);
 				// Operand 이미지 설정 // Set the operand image
-				scaledMultiply.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				operationScaledMultiply.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Operand ROI 설정
-				scaledMultiply.SetOperandROI(flrROI);
+				operationScaledMultiply.SetOperandROI(flrROI);
 				// Destination 이미지 설정 // Set the destination image
-				scaledMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				operationScaledMultiply.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 				// Destination ROI 설정 // Set Destination ROI
-				scaledMultiply.SetDestinationROI(flrROI);
+				operationScaledMultiply.SetDestinationROI(flrROI);
 
 				// 연산 방식 설정 // Set operation source
-				scaledMultiply.SetOperationSource(EOperationSource.Image);
+				operationScaledMultiply.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaledMultiply.Execute())).IsFail())
+				if((res = (operationScaledMultiply.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledMultiply.");
 					break;

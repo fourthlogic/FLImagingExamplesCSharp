@@ -138,40 +138,40 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalXnor 객체 생성 // Create OperationLogicalXnor object
-                COperationLogicalXnor logical = new COperationLogicalXnor();
+                COperationLogicalXnor operationLogicalXnor = new COperationLogicalXnor();
 
                 // Source 이미지 설정 // Set the source image
-                logical.SetSourceImage(ref fliSourceImage);
+                operationLogicalXnor.SetSourceImage(ref fliSourceImage);
 
                 // Destination 이미지 설정 // Set the destination image
-                logical.SetDestinationImage(ref fliDestinationImage1);
+                operationLogicalXnor.SetDestinationImage(ref fliDestinationImage1);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                logical.SetOperationSource(EOperationSource.Scalar);
+                operationLogicalXnor.SetOperationSource(EOperationSource.Scalar);
 
                 // LogicalXnor 값 설정 // Set LogicalXnor value
                 CMultiVar<double> mvScalar = new CMultiVar<double>(0, 0, 0);
-                logical.SetScalarValue(mvScalar);
+                operationLogicalXnor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logical.Execute()).IsFail())
+                if ((res = operationLogicalXnor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation LogicalXnor. \n");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set the destination image
-                logical.SetDestinationImage(ref fliDestinationImage2);
+                operationLogicalXnor.SetDestinationImage(ref fliDestinationImage2);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                logical.SetOperationSource(EOperationSource.Scalar);
+                operationLogicalXnor.SetOperationSource(EOperationSource.Scalar);
 
                 // LogicalXnor 값 설정 // Set LogicalXnor value
                 mvScalar = new CMultiVar<double>(255, 255, 255);
-                logical.SetScalarValue(mvScalar);
+                operationLogicalXnor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logical.Execute()).IsFail())
+                if ((res = operationLogicalXnor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation LogicalXnor. \n");
                     break;

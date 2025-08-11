@@ -108,17 +108,17 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Operation FourthRoot 객체 생성 // Create Operation FourthRoot object
-                COperationFourthRoot fourthRoot = new COperationFourthRoot();
+                COperationFourthRoot operationFourthRoot = new COperationFourthRoot();
 
                 // Source 이미지 설정 // Set the source image
-                fourthRoot.SetSourceImage(ref arrFliImage[0]);
+                operationFourthRoot.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                fourthRoot.SetDestinationImage(ref arrFliImage[1]);
+                operationFourthRoot.SetDestinationImage(ref arrFliImage[1]);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				fourthRoot.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationFourthRoot.SetOverflowMethod(EOverflowMethod.Clamping);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = fourthRoot.Execute()).IsFail())
+                if ((res = operationFourthRoot.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation FourthRoot.\n");
                     break;

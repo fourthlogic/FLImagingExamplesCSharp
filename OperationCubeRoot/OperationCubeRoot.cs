@@ -108,17 +108,17 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Operation CubeRoot 객체 생성 // Create Operation CubeRoot object
-                COperationCubeRoot cubeRoot = new COperationCubeRoot();
+                COperationCubeRoot operationCubeRoot = new COperationCubeRoot();
 
                 // Source 이미지 설정 // Set the source image
-                cubeRoot.SetSourceImage(ref arrFliImage[0]);
+                operationCubeRoot.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                cubeRoot.SetDestinationImage(ref arrFliImage[1]);
+                operationCubeRoot.SetDestinationImage(ref arrFliImage[1]);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				cubeRoot.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationCubeRoot.SetOverflowMethod(EOverflowMethod.Clamping);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = cubeRoot.Execute()).IsFail())
+                if ((res = operationCubeRoot.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation CubeRoot.\n");
                     break;

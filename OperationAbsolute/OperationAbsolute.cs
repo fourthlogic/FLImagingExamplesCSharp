@@ -101,14 +101,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation absolute 객체 생성 // Create Absolute object
-				COperationAbsolute absolute = new COperationAbsolute();
+				COperationAbsolute operationAbsolute = new COperationAbsolute();
 				// Source 이미지 설정 // Set source image
-				absolute.SetSourceImage(ref arrFliImage[0]);
+				operationAbsolute.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				absolute.SetDestinationImage(ref arrFliImage[1]);
+				operationAbsolute.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (absolute.Execute())).IsFail())
+				if((res = (operationAbsolute.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation absolute.");
 					break;
