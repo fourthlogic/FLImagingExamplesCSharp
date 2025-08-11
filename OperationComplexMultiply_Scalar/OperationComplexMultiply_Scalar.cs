@@ -103,27 +103,27 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Multiply 객체 생성 // Create Operation Complex Multiply object
-				COperationComplexMultiply complexMultiply = new COperationComplexMultiply();
+				COperationComplexMultiply operationComplexMultiply = new COperationComplexMultiply();
 
 				// Source 이미지 설정 // Set the source image
-				complexMultiply.SetSourceImage(ref fliSourceImage);
+				operationComplexMultiply.SetSourceImage(ref fliSourceImage);
 
 
 				// Destination 이미지 설정 // Set the destination image
-				complexMultiply.SetDestinationImage(ref fliDestinationImage);
+				operationComplexMultiply.SetDestinationImage(ref fliDestinationImage);
 
 				// 연산 방식 스칼라로 설정 // Set operation source to scalar
-				complexMultiply.SetOperationSource(EOperationSource.Scalar);
+				operationComplexMultiply.SetOperationSource(EOperationSource.Scalar);
 
 				// 오버플로 처리 방법 설정 // Set the overflow handling method
-				complexMultiply.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationComplexMultiply.SetOverflowMethod(EOverflowMethod.Clamping);
 
 				// 곱할 스칼라 값 지정 // Set the Scalar multiplier
 				CMultiVar<double> mvScalar = new CMultiVar<double>(2, 1);
-				complexMultiply.SetScalarValue(mvScalar);
+				operationComplexMultiply.SetScalarValue(mvScalar);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = complexMultiply.Execute()).IsFail())
+				if((res = operationComplexMultiply.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation complex multiply.");
 					break;

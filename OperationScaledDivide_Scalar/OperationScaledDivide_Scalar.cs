@@ -123,32 +123,32 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation ScaledDivide 객체 생성 // Create Operation ScaledDivide object
-				COperationScaledDivide scaledDivide = new COperationScaledDivide();
+				COperationScaledDivide operationScaledDivide = new COperationScaledDivide();
 				// Source 이미지 설정 // Set the source image
-				scaledDivide.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationScaledDivide.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				scaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				operationScaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// 연산 방식 설정 // Set operation source
-				scaledDivide.SetOperationSource(EOperationSource.Scalar);
+				operationScaledDivide.SetOperationSource(EOperationSource.Scalar);
 				// ScaledDivide 값 설정 // Set ScaledDivide value
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(192, 192, 192);
-				scaledDivide.SetScalarValue(mvScalarValue1);
+				operationScaledDivide.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaledDivide.Execute())).IsFail())
+				if((res = (operationScaledDivide.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledDivide.");
 					break;
 				}
 
 				// Destination 이미지를 Destination2로 설정
-				scaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				operationScaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// ScaledDivide 값 설정 // Set ScaledDivide value
 				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(512, 512, 512);
-				scaledDivide.SetScalarValue(mvScalarValue2);
+				operationScaledDivide.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaledDivide.Execute())).IsFail())
+				if((res = (operationScaledDivide.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledDivide.");
 					break;

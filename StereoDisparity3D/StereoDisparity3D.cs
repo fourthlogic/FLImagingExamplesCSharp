@@ -169,39 +169,39 @@ namespace FLImagingExamplesCSharp
 				viewImageSrc2.SetFixThumbnailView(true);
 
 				// StereoDisparity 객체 생성 // Create StereoDisparity object
-				CStereoDisparity3D stereoDisparity = new CStereoDisparity3D();
+				CStereoDisparity3D stereoDisparity3D = new CStereoDisparity3D();
 
 				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 
 				// Source 이미지 설정 // Set the source image
-				stereoDisparity.SetSourceImage(ref fliSrcImage);
+				stereoDisparity3D.SetSourceImage(ref fliSrcImage);
 				// Source 이미지 설정 // Set the source image
-				stereoDisparity.SetSourceImage2(ref fliSrcImage2);
+				stereoDisparity3D.SetSourceImage2(ref fliSrcImage2);
 				// Destination Height Map 이미지 설정 // Set the destination height map image
-				stereoDisparity.SetDestinationHeightMapImage(ref fliDstImage);
+				stereoDisparity3D.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destination 객체 설정 // Set the destination object
-				stereoDisparity.SetDestinationObject(ref fl3DOHM);
+				stereoDisparity3D.SetDestinationObject(ref fl3DOHM);
 				// Destination Texture 이미지 설정 // Set the destination texture image
-				stereoDisparity.SetDestinationTextureImage(ref fliTxtImage);
+				stereoDisparity3D.SetDestinationTextureImage(ref fliTxtImage);
 				// 최소 허용 Disparity 값 설정 // Set the minimum allowed disparity value
-				stereoDisparity.SetMinimumDisparity(-20);
+				stereoDisparity3D.SetMinimumDisparity(-20);
 				// Disparity 범위 설정 // Set the range of disparity
-				stereoDisparity.SetMaximumDisparity(0);
+				stereoDisparity3D.SetMaximumDisparity(0);
 				// Matched Block 크기 설정 // Set the matched block size
-				stereoDisparity.SetMatchBlockSize(3);
+				stereoDisparity3D.SetMatchBlockSize(3);
 				// 좌우 간 최대 허용 차이 값 설정 // Set maximum allowed difference value between left and right
-				stereoDisparity.SetMaximumDifference(30);
+				stereoDisparity3D.SetMaximumDifference(30);
 				// 고유비 값 설정 // Set the uniqueness ratio value
-				stereoDisparity.SetUniquenessRatio(0.0);
+				stereoDisparity3D.SetUniquenessRatio(0.0);
 				// P1 값 설정 // Set P1 Value
-				stereoDisparity.SetP1(200);
+				stereoDisparity3D.SetP1(200);
 				// P2 값 설정 // Set P2 Value
-				stereoDisparity.SetP2(800);
+				stereoDisparity3D.SetP2(800);
 				// Median Morphology 커널 사이즈 설정 // Set the median morphology kernel size
-				stereoDisparity.SetFilterSize(5);
+				stereoDisparity3D.SetFilterSize(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = stereoDisparity.Execute()).IsFail())
+				if((res = stereoDisparity3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;
@@ -251,7 +251,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				CFL3DObjectHeightMap fl3DObject = stereoDisparity.GetDestinationObject() as CFL3DObjectHeightMap;
+				CFL3DObjectHeightMap fl3DObject = stereoDisparity3D.GetDestinationObject() as CFL3DObjectHeightMap;
 				fl3DObject.SetTextureImage(fliTxtImage);
 				fl3DObject.ActivateVertexColorTexture(true);
 

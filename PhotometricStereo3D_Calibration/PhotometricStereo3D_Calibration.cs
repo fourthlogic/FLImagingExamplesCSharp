@@ -155,34 +155,34 @@ namespace FLImagingExamplesCSharp
 				viewImageSrc.SetFixThumbnailView(true);
 
 				// PhotometricStereo 객체 생성 // Create PhotometricStereo object
-				CPhotometricStereo3D photometricStereo = new CPhotometricStereo3D();
+				CPhotometricStereo3D photometricStereo3D = new CPhotometricStereo3D();
 
 				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 
 				// Source 이미지 설정 // Set the source image
-				photometricStereo.SetSourceImage(ref fliSrcImage);
+				photometricStereo3D.SetSourceImage(ref fliSrcImage);
 				// Calibration 이미지 설정 // Set the calibration image
-				photometricStereo.SetCalibrationImage(ref fliCalImage);
+				photometricStereo3D.SetCalibrationImage(ref fliCalImage);
 				// Destination Height Map 이미지 설정 // Set the destination height map image
-				photometricStereo.SetDestinationHeightMapImage(ref fliDstImage);
+				photometricStereo3D.SetDestinationHeightMapImage(ref fliDstImage);
 				// Destination 객체 설정 // Set the destination object
-				photometricStereo.SetDestinationObject(ref fl3DOHM);
+				photometricStereo3D.SetDestinationObject(ref fl3DOHM);
 				// Destination Texture 이미지 설정 // Set the destination texture image
-				photometricStereo.SetDestinationTextureImage(ref fliTxtImage);
+				photometricStereo3D.SetDestinationTextureImage(ref fliTxtImage);
 				// 동작 방식 설정 // Set Operation Mode
-				photometricStereo.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
+				photometricStereo3D.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
 				// Calibration 데이터 설정 // Set Calibration Settings
-				photometricStereo.SetCalibrationCircleROI(new CFLCircle<double>(117.210526, 104.842105, 78.736842, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther));
+				photometricStereo3D.SetCalibrationCircleROI(new CFLCircle<double>(117.210526, 104.842105, 78.736842, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther));
 				// Valid 픽셀의 기준 설정 // Set valid pixel ratio
-				photometricStereo.SetValidPixelThreshold(0.25);
+				photometricStereo3D.SetValidPixelThreshold(0.25);
 
 				CMatrix<double> cmatdTemp = new CMatrix<double>(3, 3);
 
 				// Angle Degrees 동작 방식으로 설정 // Set operation method as angle degrees
-				photometricStereo.SetLightAngleDegrees(cmatdTemp);
+				photometricStereo3D.SetLightAngleDegrees(cmatdTemp);
 
 				// 알고리즘 Calibration 실행 // Execute calibration of the algorithm
-				if((res = photometricStereo.Calibrate()).IsFail())
+				if((res = photometricStereo3D.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Failed to calibrate algorithm.\n");
 					break;
@@ -192,13 +192,13 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> cmvdSlant = new CMultiVar<double>();
 				CMultiVar<double> cmvdTilt = new CMultiVar<double>();
 
-				photometricStereo.GetLightAngleDegrees(ref cmvdSlant, ref cmvdTilt);
+				photometricStereo3D.GetLightAngleDegrees(ref cmvdSlant, ref cmvdTilt);
 
 				// 위치 데이터 동작 방식으로 설정 // Set operation method as positions
-				photometricStereo.SetLightPositions(cmatdTemp);
+				photometricStereo3D.SetLightPositions(cmatdTemp);
 
 				// 알고리즘 Calibration 실행 // Execute calibration of the algorithm
-				if((res = photometricStereo.Calibrate()).IsFail())
+				if((res = photometricStereo3D.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Failed to calibrate algorithm.\n");
 					break;
@@ -207,7 +207,7 @@ namespace FLImagingExamplesCSharp
 				// Calibrate 된 위치 데이터 저장 // Save calibrated position data
 				CMatrix<double> cmatdPosition = new CMatrix<double>();
 
-				photometricStereo.GetLightPositions(ref cmatdPosition);
+				photometricStereo3D.GetLightPositions(ref cmatdPosition);
 
 				// Calibrate를 실행한 결과를 Console창에 출력합니다. // Output the calibration result to the console window.
 				int i32CalibPageNum = fliCalImage.GetPageCount();
@@ -227,14 +227,14 @@ namespace FLImagingExamplesCSharp
 					Console.WriteLine("Image {0} ->\tX: {1:#,0.0000000}\tY: {2:#,0.0000000} \tZ: {3:#,0.0000000}", i, cmatdPosition.GetValue(i, 0), cmatdPosition.GetValue(i, 1), cmatdPosition.GetValue(i, 2));
 
 				// 알고리즘 실행 // Execute algorithm
-				if((res = photometricStereo.Execute()).IsFail())
+				if((res = photometricStereo3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to calibrate algorithm.\n");
 					break;
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = photometricStereo.Execute()).IsFail())
+				if((res = photometricStereo3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;
@@ -312,7 +312,7 @@ namespace FLImagingExamplesCSharp
 					viewImage3DDst.PushObject(cgui3dlineTemp);
 				}
 
-				CFL3DObjectHeightMap fl3DObject = photometricStereo.GetDestinationObject() as CFL3DObjectHeightMap;
+				CFL3DObjectHeightMap fl3DObject = photometricStereo3D.GetDestinationObject() as CFL3DObjectHeightMap;
 				fl3DObject.SetTextureImage(fliTxtImage);
 				fl3DObject.ActivateVertexColorTexture(false);
 

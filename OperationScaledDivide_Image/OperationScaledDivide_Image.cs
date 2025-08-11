@@ -126,25 +126,25 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Operation ScaledDivide 객체 생성 // Create Operation ScaledDivide object
-				COperationScaledDivide scaledDivide = new COperationScaledDivide();
+				COperationScaledDivide operationScaledDivide = new COperationScaledDivide();
 				// Source 이미지 설정 // Set the source image
-				scaledDivide.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationScaledDivide.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				scaledDivide.SetSourceROI(flrROI);
+				operationScaledDivide.SetSourceROI(flrROI);
 				// Operand 이미지 설정 // Set the operand image
-				scaledDivide.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				operationScaledDivide.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Operand ROI 설정
-				scaledDivide.SetOperandROI(flrROI);
+				operationScaledDivide.SetOperandROI(flrROI);
 				// Destination 이미지 설정 // Set the destination image
-				scaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				operationScaledDivide.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 				// Destination ROI 설정 // Set Destination ROI
-				scaledDivide.SetDestinationROI(flrROI);
+				operationScaledDivide.SetDestinationROI(flrROI);
 
 				// 연산 방식 설정 // Set operation source
-				scaledDivide.SetOperationSource(EOperationSource.Image);
+				operationScaledDivide.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (scaledDivide.Execute())).IsFail())
+				if((res = (operationScaledDivide.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation ScaledDivide.");
 					break;

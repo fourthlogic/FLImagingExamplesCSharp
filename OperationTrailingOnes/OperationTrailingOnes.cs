@@ -103,17 +103,17 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Trailing Ones 객체 생성 // Create Operation Trailing Ones object
-				COperationTrailingOnes trailingOnes = new COperationTrailingOnes();
+				COperationTrailingOnes operationTrailingOnes = new COperationTrailingOnes();
 
 				// Source 이미지 설정 // Set the source image
-				trailingOnes.SetSourceImage(ref fliSourceImage);
+				operationTrailingOnes.SetSourceImage(ref fliSourceImage);
 
 
 				// Destination 이미지 설정 // Set the destination image
-				trailingOnes.SetDestinationImage(ref fliDestinationImage);
+				operationTrailingOnes.SetDestinationImage(ref fliDestinationImage);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = trailingOnes.Execute()).IsFail())
+				if((res = operationTrailingOnes.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation trailing ones.");
 					break;

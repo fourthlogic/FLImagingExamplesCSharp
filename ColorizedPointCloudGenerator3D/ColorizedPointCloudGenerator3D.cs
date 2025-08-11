@@ -173,45 +173,45 @@ namespace FLImagingExamplesCSharp
 
 
 				// ColorizedPointCloudGenerator3D 객체 생성 // Create ColorizedPointCloudGenerator3D object
-				CColorizedPointCloudGenerator3D colorizedPointCloudGenerator = new CColorizedPointCloudGenerator3D();
+				CColorizedPointCloudGenerator3D colorizedPointCloudGenerator3D = new CColorizedPointCloudGenerator3D();
 
 				// Calibration XYZV 이미지 설정 // Set the calibration XYZV image
-				if((res = colorizedPointCloudGenerator.SetCalibrationImageXYZV(ref fliCaliSrcXYZVImage)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetCalibrationImageXYZV(ref fliCaliSrcXYZVImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set calibration XYZV source.\n");
 					break;
 				}
 
 				// Calibration RGB 이미지 설정 // Set the calibration RGB image
-				if((res = colorizedPointCloudGenerator.SetCalibrationImageRGB(ref fliCaliSrcRGBImage)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetCalibrationImageRGB(ref fliCaliSrcRGBImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set calibration RGB source.\n");
 					break;
 				}
 
 				// Calibration의 Grid Type 설정 // Set the grid type of the calibration
-				if((res = colorizedPointCloudGenerator.SetGridType(FLImagingCLR.AdvancedFunctions.CCameraCalibrator.EGridType.ChessBoard)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetGridType(FLImagingCLR.AdvancedFunctions.CCameraCalibrator.EGridType.ChessBoard)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set calibration grid type.\n");
 					break;
 				}
 
 				// Calibration의 최적해 정확도 값 설정 // Set the optimal solution accuracy of the calibration
-				if((res = colorizedPointCloudGenerator.SetOptimalSolutionAccuracy(0.00001)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetOptimalSolutionAccuracy(0.00001)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set calibration optimal solution accuracy.\n");
 					break;
 				}
 
 				// Coordinate Adjustment 자동 설정 // Coordinate Adjustment Auto Set Flag
-				if((res = colorizedPointCloudGenerator.EnableAutoCoordinateAdjustment(true)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.EnableAutoCoordinateAdjustment(true)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Coordinate Adjustment Flag.\n");
 					break;
 				}
 
 				// 알고리즘 Calibration 실행 // Execute calibration of the algorithm
-				if((res = colorizedPointCloudGenerator.Calibrate()).IsFail())
+				if((res = colorizedPointCloudGenerator3D.Calibrate()).IsFail())
 				{
 					ErrorPrint(res, "Failed to calibrate algorithm.\n");
 					break;
@@ -224,7 +224,7 @@ namespace FLImagingExamplesCSharp
 				// RGB 카메라의 Intrinsic Parameter 출력 // Print the intrinsic parameters of the RGB camera
 				FLImagingCLR.AdvancedFunctions.CCameraCalibrator.CCalibratorIntrinsicParameters cCalibIntrinsic;
 
-				cCalibIntrinsic = colorizedPointCloudGenerator.GetIntrinsicParameters();
+				cCalibIntrinsic = colorizedPointCloudGenerator3D.GetIntrinsicParameters();
 
 				Console.Write(" < Intrinsic Parameters >\n");
 
@@ -237,7 +237,7 @@ namespace FLImagingExamplesCSharp
 				// RGB 카메라의 Distortion Coefficient 출력 // Print the distortion coefficients of the RGB camera
 				FLImagingCLR.AdvancedFunctions.CCameraCalibrator.CCalibratorDistortionCoefficients cCalibDistortion;
 
-				cCalibDistortion = colorizedPointCloudGenerator.GetDistortionCoefficients();
+				cCalibDistortion = colorizedPointCloudGenerator3D.GetDistortionCoefficients();
 
 				Console.Write(" < Distortion Coefficients >\n");
 
@@ -250,7 +250,7 @@ namespace FLImagingExamplesCSharp
 				// 두 카메라 간의 회전 행렬 출력 // Print the relative rotation matrix between both cameras
 				CMatrix<double> cMatRotation = new CMatrix<double>();
 
-				if((res = colorizedPointCloudGenerator.GetRelativeRotation(ref cMatRotation)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.GetRelativeRotation(ref cMatRotation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get relative rotation.\n");
 					break;
@@ -271,7 +271,7 @@ namespace FLImagingExamplesCSharp
 				// 두 카메라 간의 변환 행렬 출력 // Print the relative translation matrix between both cameras
 				CMatrix<double> cMatTranslation = new CMatrix<double>();
 
-				if((res = colorizedPointCloudGenerator.GetRelativeTranslation(ref cMatTranslation)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.GetRelativeTranslation(ref cMatTranslation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get relative translation.\n");
 					break;
@@ -290,35 +290,35 @@ namespace FLImagingExamplesCSharp
 				CFL3DObject fli3DDstObj = new CFL3DObject();
 
 				// Execution XYZV 이미지 설정 // Set the execution XYZV image
-				if((res = colorizedPointCloudGenerator.SetSourceImageXYZV(ref fliExecSrcXYZVImage)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetSourceImageXYZV(ref fliExecSrcXYZVImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set execution XYZV source.\n");
 					break;
 				}
 
 				// Execution RGB 이미지 설정 // Set the execution RGB image
-				if((res = colorizedPointCloudGenerator.SetSourceImageRGB(ref fliExecSrcRGBImage)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetSourceImageRGB(ref fliExecSrcRGBImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set execution RGB source.\n");
 					break;
 				}
 
 				// Destination RGB 이미지 설정 // Set the destination RGB image
-				if((res = colorizedPointCloudGenerator.SetDestinationImageRGB(ref fliExecDstRGBImage)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetDestinationImageRGB(ref fliExecDstRGBImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set destination RGB source.\n");
 					break;
 				}
 
 				// Destination 3D Object 설정 // Set the destination 3D object
-				if((res = colorizedPointCloudGenerator.SetDestination3DObject(ref fli3DDstObj)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetDestination3DObject(ref fli3DDstObj)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set destination 3D point cloud.\n");
 					break;
 				}
 
 				// 알고리즘 실행 // Execute algorithm
-				if((res = colorizedPointCloudGenerator.Execute()).IsFail())
+				if((res = colorizedPointCloudGenerator3D.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute algorithm.\n");
 					break;
