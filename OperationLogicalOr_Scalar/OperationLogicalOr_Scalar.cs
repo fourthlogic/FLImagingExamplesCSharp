@@ -138,40 +138,40 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalOr 객체 생성 // Create OperationLogicalOr object
-                COperationLogicalOr logicalOr = new COperationLogicalOr();
+                COperationLogicalOr operationLogicalOr = new COperationLogicalOr();
 
 				// Source 이미지 설정 // Set the source image
-				logicalOr.SetSourceImage(ref fliSourceImage);
+				operationLogicalOr.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				logicalOr.SetDestinationImage(ref fliDestinationImage1);
+				operationLogicalOr.SetDestinationImage(ref fliDestinationImage1);
 
 				// Image Operation 소스로 설정 // Set Operation Source to image
-				logicalOr.SetOperationSource(EOperationSource.Scalar);
+				operationLogicalOr.SetOperationSource(EOperationSource.Scalar);
 
                 // LogicalOr 값 설정 // Set LogicalOr value
                 CMultiVar<double> mvScalar = new CMultiVar<double>(0, 0, 0);
-				logicalOr.SetScalarValue(mvScalar);
+				operationLogicalOr.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logicalOr.Execute()).IsFail())
+                if ((res = operationLogicalOr.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute. \n");
                     break;
                 }
 
 				// Destination 이미지 설정 // Set the destination image
-				logicalOr.SetDestinationImage(ref fliDestinationImage2);
+				operationLogicalOr.SetDestinationImage(ref fliDestinationImage2);
 
 				// Image Operation 소스로 설정 // Set Operation Source to image
-				logicalOr.SetOperationSource(EOperationSource.Scalar);
+				operationLogicalOr.SetOperationSource(EOperationSource.Scalar);
 
                 // LogicalOr 값 설정 // Set LogicalOr value
                 mvScalar = new CMultiVar<double>(255, 255, 255);
-				logicalOr.SetScalarValue(mvScalar);
+				operationLogicalOr.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logicalOr.Execute()).IsFail())
+                if ((res = operationLogicalOr.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute. \n");
                     break;

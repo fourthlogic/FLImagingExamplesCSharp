@@ -64,15 +64,15 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Statistics 객체 생성 // Create Statistics object
-                CImageStatistics statistics = new CImageStatistics();
+                CImageStatistics imageStatistics = new CImageStatistics();
 
 				// ROI 범위 설정 // Set the ROI value
 				CFLRect<Int32> flrROI = new CFLRect<Int32>(264, 189, 432, 364);
 
 				// Source 이미지 설정 // Set the Source Image
-				statistics.SetSourceImage(ref fliImage);
+				imageStatistics.SetSourceImage(ref fliImage);
                 // Source ROI 설정 // Set the Source ROI
-                statistics.SetSourceROI(flrROI);
+                imageStatistics.SetSourceROI(flrROI);
 
                 // 결과값을 받아올 CMultiVar<double> 컨테이너 생성 // Create the CMultiVar<double> object to push the result
                 CMultiVar<double> mvMedian = new CMultiVar<double>();
@@ -80,29 +80,29 @@ namespace FLImagingExamplesCSharp
                 CMultiVar<double> mvLowerQuartile = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 중간값을 구하는 함수 // Function that calculate the median of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetMedian(ref mvMedian)).IsFail())
+				if((res = imageStatistics.GetMedian(ref mvMedian)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 75사분위수를 구하는 함수 // Function that calculate the upper quartile of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetUpperQuartile(ref mvUpperQuartile)).IsFail())
+                if((res = imageStatistics.GetUpperQuartile(ref mvUpperQuartile)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 25사분위수를 구하는 함수 // Function that calculate the lower quartile of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetLowerQuartile(ref mvLowerQuartile)).IsFail())
+                if((res = imageStatistics.GetLowerQuartile(ref mvLowerQuartile)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // trimming 옵션 설정(Lower:0.2, Upper:0.4) // Set the trimming value(Lower:0.2, Upper:0.4)
-                statistics.SetTrimming(0.2, CImageStatistics.ETrimmingLocation.Lower);
-                statistics.SetTrimming(0.4, CImageStatistics.ETrimmingLocation.Upper);
+                imageStatistics.SetTrimming(0.2, CImageStatistics.ETrimmingLocation.Lower);
+                imageStatistics.SetTrimming(0.4, CImageStatistics.ETrimmingLocation.Upper);
 
                 // trimming 된 결과값을 받아올 CMultiVar<double> 컨테이너 생성 // Create the CMultiVar<double> object to push the trimmed result
                 CMultiVar<double> mvTrimmingMedian = new CMultiVar<double>();
@@ -110,21 +110,21 @@ namespace FLImagingExamplesCSharp
                 CMultiVar<double> mvTrimmingLowerQuartile = new CMultiVar<double>();
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 중간값을 구하는 함수 // Function that calculate the median of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetMedian(ref mvTrimmingMedian)).IsFail())
+                if((res = imageStatistics.GetMedian(ref mvTrimmingMedian)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 75사분위수를 구하는 함수 // Function that calculate the upper quartile of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetUpperQuartile(ref mvTrimmingUpperQuartile)).IsFail())
+                if((res = imageStatistics.GetUpperQuartile(ref mvTrimmingUpperQuartile)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 25사분위수를 구하는 함수 // Function that calculate the lower quartile of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetLowerQuartile(ref mvTrimmingLowerQuartile)).IsFail())
+                if((res = imageStatistics.GetLowerQuartile(ref mvTrimmingLowerQuartile)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -141,7 +141,7 @@ namespace FLImagingExamplesCSharp
                 if ((res = layer.DrawFigureImage(flrROI, EColor.LIME)).IsFail())
                     ErrorPrint(res, "Failed to draw figure");
 
-                string strTrimming = String.Format("Trimming Lower : {0}, Upper : {1}", statistics.GetTrimming(CImageStatistics.ETrimmingLocation.Lower), statistics.GetTrimming(CImageStatistics.ETrimmingLocation.Upper));
+                string strTrimming = String.Format("Trimming Lower : {0}, Upper : {1}", imageStatistics.GetTrimming(CImageStatistics.ETrimmingLocation.Lower), imageStatistics.GetTrimming(CImageStatistics.ETrimmingLocation.Upper));
 
                 string strMedianValue, strLowerQuartileValue, strUpperQuartileValue;
                 strMedianValue = String.Format("Median Of Region : {0}", mvMedian.GetAt(0));
@@ -164,61 +164,61 @@ namespace FLImagingExamplesCSharp
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strMedianValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strMedianValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strLowerQuartileValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strLowerQuartileValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strUpperQuartileValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strUpperQuartileValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimming, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimming, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMedianValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMedianValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingLowerQuartileValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingLowerQuartileValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingUpperQuartileValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingUpperQuartileValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;

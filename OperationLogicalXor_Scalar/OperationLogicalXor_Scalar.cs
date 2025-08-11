@@ -138,40 +138,40 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalXor 객체 생성 // Create OperationLogicalXor object
-                COperationLogicalXor logicalXor = new COperationLogicalXor();
+                COperationLogicalXor operationLogicalXor = new COperationLogicalXor();
 
 				// Source 이미지 설정 // Set the source image
-				logicalXor.SetSourceImage(ref fliSourceImage);
+				operationLogicalXor.SetSourceImage(ref fliSourceImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				logicalXor.SetDestinationImage(ref fliDestinationImage1);
+				operationLogicalXor.SetDestinationImage(ref fliDestinationImage1);
 
 				// Image Operation 소스로 설정 // Set Operation Source to image
-				logicalXor.SetOperationSource(EOperationSource.Scalar);
+				operationLogicalXor.SetOperationSource(EOperationSource.Scalar);
 
                 // LogicalXor 값 설정 // Set LogicalXor value
                 CMultiVar<double> mvScalar = new CMultiVar<double>(0, 0, 0);
-				logicalXor.SetScalarValue(mvScalar);
+				operationLogicalXor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logicalXor.Execute()).IsFail())
+                if ((res = operationLogicalXor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute. \n");
                     break;
                 }
 
 				// Destination 이미지 설정 // Set the destination image
-				logicalXor.SetDestinationImage(ref fliDestinationImage2);
+				operationLogicalXor.SetDestinationImage(ref fliDestinationImage2);
 
 				// Image Operation 소스로 설정 // Set Operation Source to image
-				logicalXor.SetOperationSource(EOperationSource.Scalar);
+				operationLogicalXor.SetOperationSource(EOperationSource.Scalar);
 
                 // LogicalXor 값 설정 // Set LogicalXor value
                 mvScalar = new CMultiVar<double>(255, 255, 255);
-				logicalXor.SetScalarValue(mvScalar);
+				operationLogicalXor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logicalXor.Execute()).IsFail())
+                if ((res = operationLogicalXor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute.\n");
                     break;

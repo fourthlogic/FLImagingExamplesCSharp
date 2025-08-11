@@ -138,22 +138,22 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalXor 객체 생성 // Create OperationLogicalXor object
-                COperationLogicalXor logicalXor = new COperationLogicalXor();
+                COperationLogicalXor operationLogicalXor = new COperationLogicalXor();
 
 				// Source 이미지 설정 // Set the source image
-				logicalXor.SetSourceImage(ref fliSourceImage);
+				operationLogicalXor.SetSourceImage(ref fliSourceImage);
 
 				// Operand 이미지 설정 // Set the operand image
-				logicalXor.SetOperandImage(ref fliOperandImage);
+				operationLogicalXor.SetOperandImage(ref fliOperandImage);
 
 				// Destination 이미지 설정 // Set the destination image
-				logicalXor.SetDestinationImage(ref fliDestinationImage);
+				operationLogicalXor.SetDestinationImage(ref fliDestinationImage);
 
 				// Image Operation 소스로 설정 // Set Operation Source to image
-				logicalXor.SetOperationSource(EOperationSource.Image);
+				operationLogicalXor.SetOperationSource(EOperationSource.Image);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logicalXor.Execute()).IsFail())
+                if ((res = operationLogicalXor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute.\n");
                     break;

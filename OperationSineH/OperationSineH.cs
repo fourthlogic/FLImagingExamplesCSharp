@@ -100,14 +100,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation SineH 객체 생성 // Create SineH object
-				COperationSineH sineH = new COperationSineH();
+				COperationSineH operationSineH = new COperationSineH();
 				// Source 이미지 설정 // Set source image
-				sineH.SetSourceImage(ref arrFliImage[0]);
+				operationSineH.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				sineH.SetDestinationImage(ref arrFliImage[1]);
+				operationSineH.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (sineH.Execute())).IsFail())
+				if((res = (operationSineH.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;

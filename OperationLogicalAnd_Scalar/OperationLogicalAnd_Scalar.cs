@@ -101,25 +101,25 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationLogicalAnd 객체 생성 // Create OperationLogicalAnd object
-                COperationLogicalAnd logicalAnd = new COperationLogicalAnd();
+                COperationLogicalAnd operationLogicalAnd = new COperationLogicalAnd();
 
 				// Source 이미지 설정 // Set the source image
-				logicalAnd.SetSourceImage(ref fliDestinationImage);
+				operationLogicalAnd.SetSourceImage(ref fliDestinationImage);
 
                 // ROI 범위 설정 // Set the ROI value
                 CFLCircle<double> flcSourceROI = new CFLCircle<double>(128, 128, 80, 0, 0, 360, EArcClosingMethod.EachOther);
 
 				// Source 이미지의 ROI 지정 // Set the Source ROI
-				logicalAnd.SetSourceROI(flcSourceROI);
+				operationLogicalAnd.SetSourceROI(flcSourceROI);
 
 				// Scalar Operation 소스로 설정 // Set Operation Source to scalar
-				logicalAnd.SetOperationSource(EOperationSource.Scalar);
+				operationLogicalAnd.SetOperationSource(EOperationSource.Scalar);
 
 				// 스칼라 값 지정 // Set the Scalar value
-				logicalAnd.SetScalarValue(111);
+				operationLogicalAnd.SetScalarValue(111);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = logicalAnd.Execute()).IsFail())
+                if ((res = operationLogicalAnd.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute. \n");
                     break;

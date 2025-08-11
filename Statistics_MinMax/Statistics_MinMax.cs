@@ -64,51 +64,51 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Statistics 객체 생성 // Create Statistics object
-                CImageStatistics statistics = new CImageStatistics();
+                CImageStatistics imageStatistics = new CImageStatistics();
 
 				// ROI 범위 설정 // Set the ROI value
 				CFLRect<Int32> flrROI = new CFLRect<Int32>(264, 189, 432, 364);
 
 				// Source 이미지 설정 // Set the Source Image
-				statistics.SetSourceImage(ref fliImage);
+				imageStatistics.SetSourceImage(ref fliImage);
                 // Source ROI 설정 // Set the Source ROI
-                statistics.SetSourceROI(flrROI);
+                imageStatistics.SetSourceROI(flrROI);
 
                 // 결과값을 받아올 CMultiVar<double> 컨테이너 생성 // Create the CMultiVar<double> object to push the result
                 CMultiVar<double> mvMin = new CMultiVar<double>();
                 CMultiVar<double> mvMax = new CMultiVar<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetMin(ref mvMin)).IsFail())
+				if((res = imageStatistics.GetMin(ref mvMin)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
-				if((res = statistics.GetMax(ref mvMax)).IsFail())
+				if((res = imageStatistics.GetMax(ref mvMax)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // trimming 옵션 설정(Lower:0.2, Upper:0.4) // Set the trimming value(Lower:0.2, Upper:0.4)
-                statistics.SetTrimming(0.2, CImageStatistics.ETrimmingLocation.Lower);
-                statistics.SetTrimming(0.4, CImageStatistics.ETrimmingLocation.Upper);
+                imageStatistics.SetTrimming(0.2, CImageStatistics.ETrimmingLocation.Lower);
+                imageStatistics.SetTrimming(0.4, CImageStatistics.ETrimmingLocation.Upper);
 
                 // trimming 된 결과값을 받아올 CMultiVar<double> 컨테이너 생성 // Create the CMultiVar<double> object to push the trimmed result
                 CMultiVar<double> mvTrimmingMin = new CMultiVar<double>();
                 CMultiVar<double> mvTrimmingMax = new CMultiVar<double>();
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 최소값을 구하는 함수 // Function that calculate the min of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetMin(ref mvTrimmingMin)).IsFail())
+                if((res = imageStatistics.GetMin(ref mvTrimmingMin)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
                 }
 
                 // 이미지 전체(혹은 ROI 영역) 픽셀값의 최대값을 구하는 함수 // Function that calculate the max of the pixel value of the image(or the region of ROI)
-                if((res = statistics.GetMax(ref mvTrimmingMax)).IsFail())
+                if((res = imageStatistics.GetMax(ref mvTrimmingMax)).IsFail())
 				{
                     ErrorPrint(res, "Failed to process.");
                     break;
@@ -133,7 +133,7 @@ namespace FLImagingExamplesCSharp
                 strTrimmingMinValue = String.Format("Min Of Trimmed Region : {0}", mvTrimmingMin.GetAt(0));
                 strTrimmingMaxValue = String.Format("Max Of Trimmed Region : {0}", mvTrimmingMax.GetAt(0));
 
-                string strTrimming = String.Format("Trimming Lower : {0}, Upper : {1}", statistics.GetTrimming(CImageStatistics.ETrimmingLocation.Lower), statistics.GetTrimming(CImageStatistics.ETrimmingLocation.Upper));
+                string strTrimming = String.Format("Trimming Lower : {0}, Upper : {1}", imageStatistics.GetTrimming(CImageStatistics.ETrimmingLocation.Lower), imageStatistics.GetTrimming(CImageStatistics.ETrimmingLocation.Upper));
 
                 Console.WriteLine(strMinValue);
                 Console.WriteLine(strMaxValue);
@@ -144,43 +144,43 @@ namespace FLImagingExamplesCSharp
                 CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strMinValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strMaxValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimming, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimming, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMinValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMinValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
                 }
 
-                flpPoint.Offset(0, 30);
+                flpPoint.Offset(0, 20);
 
                 // 이미지 뷰 정보 표시 // Display image view information
-                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMaxValue, EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if((res = layer.DrawTextCanvas(flpPoint, strTrimmingMaxValue, EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
                     ErrorPrint(res, "Failed to draw text.\n");
                     break;
