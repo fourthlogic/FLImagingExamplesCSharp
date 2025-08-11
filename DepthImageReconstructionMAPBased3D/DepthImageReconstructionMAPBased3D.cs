@@ -50,7 +50,7 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliSrcImage.Load("../../ExampleImages/DepthImageReconstructionMAPBased3D/")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/DepthImageReconstruction3D/")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -100,7 +100,7 @@ namespace FLImagingExamplesCSharp
 				if((res = depthImageReconstructionMAPBased3D.SetDestinationTextureImage(ref fliTxtImage)).IsFail())
 					break;
 
-				if((res = depthImageReconstructionMAPBased3D.SetFMBiasPageIndex(3)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetFMBiasPageIndex(0)).IsFail())
 					break;
 				if((res = depthImageReconstructionMAPBased3D.SetFMBiasValue(0.02)).IsFail())
 					break;
@@ -124,7 +124,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				if((res = depthImageReconstructionMAPBased3D.SetPixelAccuracy(1.0)).IsFail())
 					break;
-				if((res = depthImageReconstructionMAPBased3D.SetDepthPitch(2.0)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetDepthPitch(8.0)).IsFail())
 					break;
 
 				if((res = depthImageReconstructionMAPBased3D.Enable3DObjectGeneration(true)).IsFail())
