@@ -36,6 +36,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
+				CFLImage fliLearnImage = new CFLImage();
 				CFLImage fliImage1 = new CFLImage();
 				CFLImage fliImage2 = new CFLImage();
 
@@ -48,6 +49,12 @@ namespace FLImagingExamplesCSharp
 				CResult res;
 
 				// 이미지 로드 // Load image
+				if((res = fliLearnImage.Load("../../ExampleImages/OCV/FourthLogic Inc_Learn.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
+
 				if((res = fliImage1.Load("../../ExampleImages/OCV/FourthLogic Inc.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
@@ -123,10 +130,48 @@ namespace FLImagingExamplesCSharp
 				layer1.Clear();
 				layer2.Clear();
 
+				// 학습을 진행할 OCR 객체 생성 // Create OCR object to Learn
+				COCR ocr = new COCR();
+
+				// 문자를 학습할 이미지 설정
+				if((res = ocr.SetLearnImage(ref fliLearnImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Learn Image.");
+					break;
+				}
+
+				// 학습할 이미지에 저장되어있는 Figure 학습
+				if((res = ocr.Learn()).IsFail())
+				{
+					ErrorPrint(res, "Failed to train.");
+					break;
+				}
+
+				// 인식할 문자의 각도 범위를 설정
+				if((res = ocr.SetRecognizingAngleTolerance(9.0)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
+					break;
+				}
+
+				// 인식할 문자의 유니코드 여부를 설정
+				if((res = ocr.EnableRecognizingUnicodeByteCharacter(true)).IsFail())
+				{
+					ErrorPrint(res, "Failed to Enable unicode byte character.");
+					break;
+				}
+
+				// 학습 정보 파일 및 입력 파라미터를 저장
+				if((res = ocr.Save("../../ExampleImages/OCV/OCR_FourthLogic.flocr")).IsFail())
+				{
+					ErrorPrint(res, "Failed to save learned file.");
+					break;
+				}
+
 				COCV ocv = new COCV();
 
 				// OCR Font 파일을 로드
-				if((res = ocv.LoadFontData("../../ExampleImages/OCR/OCR_FourthLogic.flocr")).IsFail())
+				if((res = ocv.LoadFontData("../../ExampleImages/OCV/OCR_FourthLogic.flocr")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load Font file.");
 					break;

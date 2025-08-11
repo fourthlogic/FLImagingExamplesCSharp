@@ -36,6 +36,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
+				CFLImage fliLearnImage = new CFLImage();
 				CFLImage fliRecognizeImage = new CFLImage();
 				CFLImage fliRecognizeImageUnicode = new CFLImage();
 				// Declaration of the image view.
@@ -43,6 +44,13 @@ namespace FLImagingExamplesCSharp
 				CGUIViewImage viewImageRecognizeUnicode = new CGUIViewImage();
 
 				CResult res;
+
+				// 이미지 로드 // Load image
+				if((res = fliLearnImage.Load("../../ExampleImages/OCR/FourthLogic Inc_Learn.flif")).IsFail())
+				{
+					ErrorPrint(res, "Failed to load the image file.\n");
+					break;
+				}
 
 				// 이미지 로드 // Load image
 				if((res = fliRecognizeImage.Load("../../ExampleImages/OCR/OCR_Recognition.flif")).IsFail())
@@ -123,38 +131,97 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				COCR ocr = new COCR();
+				// 학습을 진행할 OCR 객체 생성 // Create OCR object to Learn
+				COCR ocrLearn = new COCR();
+
+				// 문자를 학습할 이미지 설정
+				if((res = ocrLearn.SetLearnImage(ref fliLearnImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Learn Image.");
+					break;
+				}
+
+				// 학습할 이미지에 저장되어있는 Figure 학습
+				if((res = ocrLearn.Learn()).IsFail())
+				{
+					ErrorPrint(res, "Failed to train.");
+					break;
+				}
+
+				// 인식할 문자의 각도 범위를 설정
+				if((res = ocrLearn.SetRecognizingAngleTolerance(9.0)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set recognizing angle tolerance.");
+					break;
+				}
+
+				// 인식할 문자의 색상을 설정
+				if((res = ocrLearn.SetRecognizingCharacterColorType(ECharacterColorType.All)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set recognizing character color.");
+					break;
+				}
+
+				// 인식할 최소 점수를 설정
+				if((res = ocrLearn.SetRecognizingMinimumScore(0.7)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set minimum score.");
+					break;
+				}
+
+				// 인식할 최대 개수를 설정
+				if((res = ocrLearn.SetRecognizingMaximumCharacterCount(20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set maximum character count.");
+					break;
+				}
+
+				// 인식할 문자의 유니코드 여부를 설정
+				if((res = ocrLearn.EnableRecognizingUnicodeByteCharacter(true)).IsFail())
+				{
+					ErrorPrint(res, "Failed to Enable unicode byte character.");
+					break;
+				}
+
+				// 학습 정보 파일 및 입력 파라미터를 저장
+				if((res = ocrLearn.Save("../../ExampleImages/OCR/OCR_FourthLogic.flocr")).IsFail())
+				{
+					ErrorPrint(res, "Failed to save learned file.");
+					break;
+				}
+
+				COCR ocrLoad = new COCR();
 
 				// 학습 정보 파일을 로드
-				if((res = ocr.Load("../../ExampleImages/OCR/OCR_FourthLogic.flocr")).IsFail())
+				if((res = ocrLoad.Load("../../ExampleImages/OCR/OCR_FourthLogic.flocr")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load learnt file.");
 					break;
 				}
 
 				// 문자를 인식할 이미지 설정
-				if((res = ocr.SetSourceImage(ref fliRecognizeImage)).IsFail())
+				if((res = ocrLoad.SetSourceImage(ref fliRecognizeImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// 인식할 이미지에서 문자를 찾는 기능을 수행
-				if((res = ocr.Execute()).IsFail())
+				if((res = ocrLoad.Execute()).IsFail())
 				{
 					ErrorPrint(res, res.GetString());
 					break;
 				}
 
 				// 찾은 문자의 개수를 받아오는 함수
-				Int64 i64ResultCount = ocr.GetResultCount();
+				Int64 i64ResultCount = ocrLoad.GetResultCount();
 
 				// 찾은 문자의 정보를 받아올 컨테이너
 				COCR.COCRRecognitionCharacterInfo resultChar = new COCR.COCRRecognitionCharacterInfo();
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{
-					ocr.GetResultRecognizedCharactersInfo(i, ref resultChar);
+					ocrLoad.GetResultRecognizedCharactersInfo(i, ref resultChar);
 
 					string flsResultString = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
@@ -180,25 +247,25 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 문자를 인식할 이미지 설정
-				if((res = ocr.SetSourceImage(ref fliRecognizeImageUnicode)).IsFail())
+				if((res = ocrLoad.SetSourceImage(ref fliRecognizeImageUnicode)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// 인식할 이미지에서 문자를 찾는 기능을 수행
-				if((res = ocr.Execute()).IsFail())
+				if((res = ocrLoad.Execute()).IsFail())
 				{
 					ErrorPrint(res, res.GetString());
 					break;
 				}
 
 				// 찾은 문자의 개수를 받아오는 함수
-				i64ResultCount = ocr.GetResultCount();
+				i64ResultCount = ocrLoad.GetResultCount();
 
 				for(Int64 i = 0; i < i64ResultCount; ++i)
 				{
-					ocr.GetResultRecognizedCharactersInfo(i, ref resultChar);
+					ocrLoad.GetResultRecognizedCharactersInfo(i, ref resultChar);
 
 					string flsResultString = "";
 					string flsResultName = resultChar.flfaCharacter.GetName();
