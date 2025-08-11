@@ -103,25 +103,25 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Mura 객체 생성 // Create Mura object
-				CMura sMura = new CMura();
+				CMura mura = new CMura();
 
 				// 처리할 이미지 설정 // Set the image to process
-				sMura.SetSourceImage(ref fliImageSrc);
+				mura.SetSourceImage(ref fliImageSrc);
 				// Auto Threshold 모드 설정 // Set auto threshold mode
-				sMura.EnableAutoThresholdMode(true);
+				mura.EnableAutoThresholdMode(true);
 				// Kernel Size Rate 설정 // Set kernel size rate
-				sMura.SetKernelSizeRate(0.25);
+				mura.SetKernelSizeRate(0.25);
 				// Mura Color Type 설정 // Set mura color type
-				sMura.SetMuraColorType(CMura.EMuraColorType.All);
+				mura.SetMuraColorType(CMura.EMuraColorType.All);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sMura.Execute()).IsFail())
+				if((res = mura.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Mura.");
 					break;
 				}
 
-				sMura.GetResultMuraImage(ref fliImageDst);
+				mura.GetResultMuraImage(ref fliImageDst);
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 				if((res = viewImageDst.SetImagePtr(ref fliImageDst)).IsFail())
@@ -134,7 +134,7 @@ namespace FLImagingExamplesCSharp
 				CFLFigureArray flfaContours = new CFLFigureArray();
 
 				// Mura 결과들 중 Contour를 얻어옴
-				if((res = sMura.GetResultContours(ref flfaContours)).IsFail())
+				if((res = mura.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Mura object.");
 					break;

@@ -96,35 +96,35 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Mura 객체 생성 // Create Mura object
-				CMura sMura = new CMura();
+				CMura mura = new CMura();
 
 				// 처리할 이미지 설정 // Set the image to process
-				sMura.SetSourceImage(ref fliImageSrc);
+				mura.SetSourceImage(ref fliImageSrc);
 				// Auto Threshold 모드 설정 // Set auto threshold mode
-				sMura.EnableAutoThresholdMode(false);
+				mura.EnableAutoThresholdMode(false);
 				// Kernel Size Rate 설정 // Set kernel size rate
-				sMura.SetKernelSizeRate(1);
+				mura.SetKernelSizeRate(1);
 				// Mura Color Type 설정 // Set mura color type
-				sMura.SetMuraColorType(CMura.EMuraColorType.BlackOnWhite);
+				mura.SetMuraColorType(CMura.EMuraColorType.BlackOnWhite);
 				// 논리 조건 설정
-				sMura.SetLogicalCondition(ELogicalCondition.GreaterEqual);
+				mura.SetLogicalCondition(ELogicalCondition.GreaterEqual);
 
 				CMultiVar<double> mvF64Threshold = new CMultiVar<double>(10, 9, 9);
 
 				// 임계값 설정,  위의 조건과 아래의 조건이 합쳐지면 1.5보다 같거나 큰 객체를 검출
-				sMura.SetThreshold(mvF64Threshold);
+				mura.SetThreshold(mvF64Threshold);
 
 				// 채널 Logical Condition 설정 // Set Logical condition of channels
-				sMura.SetLogicalConditionOfChannels(CBlob.ELogicalConditionOfChannels.Or);
+				mura.SetLogicalConditionOfChannels(CBlob.ELogicalConditionOfChannels.Or);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sMura.Execute()).IsFail())
+				if((res = mura.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Mura.");
 					break;
 				}
 
-				sMura.GetResultMuraImage(ref fliImageDst);
+				mura.GetResultMuraImage(ref fliImageDst);
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display an image in an image view
 				if((res = viewImageDst.SetImagePtr(ref fliImageDst)).IsFail())
@@ -143,10 +143,10 @@ namespace FLImagingExamplesCSharp
 				// Mura 결과를 얻어오기 위해 FigureArray 선언
 				CFLFigureArray flfaContours = new CFLFigureArray();
 
-				sMura.SetContourResultType(CBlob.EContourResultType.Perforated);
+				mura.SetContourResultType(CBlob.EContourResultType.Perforated);
 
 				// Mura 결과들 중 Contour를 얻어옴
-				if((res = sMura.GetResultContours(ref flfaContours)).IsFail())
+				if((res = mura.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Mura object.");
 					break;
