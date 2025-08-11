@@ -138,32 +138,32 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvScalr2 = new CMultiVar<double>(0, 0, 30);
 
 				// Operation Subtract 객체 생성 // Create Operation Subtract object
-				COperationSubtract subtract = new COperationSubtract();
+				COperationSubtract operationSubtract = new COperationSubtract();
 				// Source 이미지 설정 // Set source image
-				subtract.SetSourceImage(ref arrFliImage[0]);
+				operationSubtract.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				subtract.SetDestinationImage(ref arrFliImage[1]);
+				operationSubtract.SetDestinationImage(ref arrFliImage[1]);
 				// 연산 방식 설정 // Set operation source
-				subtract.SetOperationSource(EOperationSource.Scalar);
+				operationSubtract.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				subtract.SetScalarValue(mvScalr);
+				operationSubtract.SetScalarValue(mvScalr);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (subtract.Execute())).IsFail())
+				if((res = (operationSubtract.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation subtract.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image 
-				subtract.SetDestinationImage(ref arrFliImage[2]);
+				operationSubtract.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				subtract.SetOperationSource(EOperationSource.Scalar);
+				operationSubtract.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				subtract.SetScalarValue(mvScalr2);
+				operationSubtract.SetScalarValue(mvScalr2);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (subtract.Execute())).IsFail())
+				if((res = (operationSubtract.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation subtract.");
 					break;

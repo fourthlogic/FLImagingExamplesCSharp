@@ -138,32 +138,32 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvScalr2 = new CMultiVar<double>(200, 200, 200);
 
 				// Operation Minimum 객체 생성 // // Create Operation Minimum object
-				COperationMinimum minimum = new COperationMinimum();
+				COperationMinimum operationMinimum = new COperationMinimum();
 				// Source 이미지 설정 // Set source image
-				minimum.SetSourceImage(ref arrFliImage[0]);
+				operationMinimum.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				minimum.SetDestinationImage(ref arrFliImage[1]);
+				operationMinimum.SetDestinationImage(ref arrFliImage[1]);
 				// 연산 방식 설정 // Set operation source
-				minimum.SetOperationSource(EOperationSource.Scalar);
+				operationMinimum.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				minimum.SetScalarValue(mvScalr);
+				operationMinimum.SetScalarValue(mvScalr);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (minimum.Execute())).IsFail())
+				if((res = (operationMinimum.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation minimum.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image 
-				minimum.SetDestinationImage(ref arrFliImage[2]);
+				operationMinimum.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				minimum.SetOperationSource(EOperationSource.Scalar);
+				operationMinimum.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				minimum.SetScalarValue(mvScalr2);
+				operationMinimum.SetScalarValue(mvScalr2);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (minimum.Execute())).IsFail())
+				if((res = (operationMinimum.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation minimum.");
 					break;

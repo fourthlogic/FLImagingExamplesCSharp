@@ -136,18 +136,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Add 객체 생성 // Create Add object
-				COperationAdd add = new COperationAdd();
+				COperationAdd operationAdd = new COperationAdd();
 				// Source 이미지 설정 // Set source image
-				add.SetSourceImage(ref arrFliImage[0]);
+				operationAdd.SetSourceImage(ref arrFliImage[0]);
 				// Operand 이미지 설정 // Set Operand image
-				add.SetOperandImage(ref arrFliImage[1]);
+				operationAdd.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set destination image 
-				add.SetDestinationImage(ref arrFliImage[2]);
+				operationAdd.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				add.SetOperationSource(EOperationSource.Image);
+				operationAdd.SetOperationSource(EOperationSource.Image);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (add.Execute())).IsFail())
+				if((res = (operationAdd.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation add.");
 					Console.WriteLine(res.GetString());

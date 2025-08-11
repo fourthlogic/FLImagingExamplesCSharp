@@ -135,18 +135,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Maximum 객체 생성 // Create Operation Maximum object
-				COperationMaximum maximum = new COperationMaximum();
+				COperationMaximum operationMaximum = new COperationMaximum();
 				// Source 이미지 설정 // Set source image
-				maximum.SetSourceImage(ref arrFliImage[0]);
+				operationMaximum.SetSourceImage(ref arrFliImage[0]);
 				// Operand 이미지 설정 // Set Operand image
-				maximum.SetOperandImage(ref arrFliImage[1]);
+				operationMaximum.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set destination image 
-				maximum.SetDestinationImage(ref arrFliImage[2]);
+				operationMaximum.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				maximum.SetOperationSource(EOperationSource.Image);
+				operationMaximum.SetOperationSource(EOperationSource.Image);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (res = maximum.Execute())).IsFail())
+				if((res = (res = operationMaximum.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation maximum.");
 					Console.WriteLine(res.GetString());

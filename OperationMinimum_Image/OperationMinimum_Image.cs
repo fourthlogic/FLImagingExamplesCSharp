@@ -135,18 +135,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Minimum 객체 생성 // Create Operation Minimum object
-				COperationMinimum minimum = new COperationMinimum();
+				COperationMinimum operationMinimum = new COperationMinimum();
 				// Source 이미지 설정 // Set source image
-				minimum.SetSourceImage(ref arrFliImage[0]);
+				operationMinimum.SetSourceImage(ref arrFliImage[0]);
 				// Operand 이미지 설정 // Set Operand image
-				minimum.SetOperandImage(ref arrFliImage[1]);
+				operationMinimum.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set destination image 
-				minimum.SetDestinationImage(ref arrFliImage[2]);
+				operationMinimum.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				minimum.SetOperationSource(EOperationSource.Image);
+				operationMinimum.SetOperationSource(EOperationSource.Image);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (minimum.Execute())).IsFail())
+				if((res = (operationMinimum.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation minimum.");
 					Console.WriteLine(res.GetString());

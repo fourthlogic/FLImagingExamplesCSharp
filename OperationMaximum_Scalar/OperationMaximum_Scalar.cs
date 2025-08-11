@@ -138,32 +138,32 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvScalr2 = new CMultiVar<double>(200, 200, 200);
 
 				// Operation Maximum 객체 생성 // Create Operation Maximum object
-				COperationMaximum maximum = new COperationMaximum();
+				COperationMaximum operationMaximum = new COperationMaximum();
 				// Source 이미지 설정 // Set source image
-				maximum.SetSourceImage(ref arrFliImage[0]);
+				operationMaximum.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				maximum.SetDestinationImage(ref arrFliImage[1]);
+				operationMaximum.SetDestinationImage(ref arrFliImage[1]);
 				// 연산 방식 설정 // Set operation source
-				maximum.SetOperationSource(EOperationSource.Scalar);
+				operationMaximum.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				maximum.SetScalarValue(mvScalr);
+				operationMaximum.SetScalarValue(mvScalr);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (maximum.Execute())).IsFail())
+				if((res = (operationMaximum.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation maximum.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image 
-				maximum.SetDestinationImage(ref arrFliImage[2]);
+				operationMaximum.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				maximum.SetOperationSource(EOperationSource.Scalar);
+				operationMaximum.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				maximum.SetScalarValue(mvScalr2);
+				operationMaximum.SetScalarValue(mvScalr2);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (maximum.Execute())).IsFail())
+				if((res = (operationMaximum.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation maximum.");
 					break;
