@@ -138,29 +138,29 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-                // OperationBitwiseAnd 객체 생성 // Create OperationBitwiseAnd object
-                COperationBinaryComplement operationBinaryComplement = new operationBinaryComplement();
-
+                // OperationBinaryComplement 객체 생성 // Create OperationBinaryComplement object
+                COperationBinaryComplement operationBinaryComplement = new COperationBinaryComplement();
+                
                 // Source 이미지 설정 // Set the source image
-                bc.SetSourceImage(ref fliSourceImage);
+                operationBinaryComplement.SetSourceImage(ref fliSourceImage);
 
                 // Operand 이미지 설정 // Set the operand image
-        		bc.SetOperandImage(ref fliOperandImage);
+        		operationBinaryComplement.SetOperandImage(ref fliOperandImage);
 
 		        // Destination 이미지 설정 // Set the destination image
-		        bc.SetDestinationImage(ref fliDestinationImage);
+		        operationBinaryComplement.SetDestinationImage(ref fliDestinationImage);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                bc.SetOperationSource(EOperationSource.Image);
+                operationBinaryComplement.SetOperationSource(EOperationSource.Image);
 
                 // 공백 색상 칠하기 모드 해제
                 // 결과 이미지가 이미 존재할 경우 연산되지 않은 영역을 공백 색상으로 칠하지 않고 원본 그대로 둔다.
-                bc.EnableFillBlankColorMode(false);
+                operationBinaryComplement.EnableFillBlankColorMode(false);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bc.Execute()).IsFail())
+                if ((res = operationBinaryComplement.Execute()).IsFail())
 				{
-                    ErrorPrint(res, "Failed to execute Operation BitwiseAnd.");
+                    ErrorPrint(res, "Failed to execute Operation BinaryComplement.");
                     break;
                 }
 

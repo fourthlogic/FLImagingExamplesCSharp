@@ -100,7 +100,7 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-                // OperationBitwiseAnd 객체 생성 // Create OperationBitwiseAnd object
+                // OperationBinaryComplement 객체 생성 // Create OperationBinaryComplement object
                 COperationBinaryComplement operationBinaryComplement = new COperationBinaryComplement();
 
                 // Source 이미지 설정 // Set the source image
