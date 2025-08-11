@@ -45,7 +45,7 @@ namespace FLImagingExamplesCSharp
 			CResult res;
 
 			// Axl Motion 장치를 선언 // Declare Axl Motion device
-			CDeviceMotionAxl devMotion = new CDeviceMotionAxl();
+			CDeviceMotionAxl motionAxl = new CDeviceMotionAxl();
 
 			do
 			{
@@ -60,28 +60,28 @@ namespace FLImagingExamplesCSharp
 				strMotionPath.Replace("\n", "");
 
 				// 모션 파일의 경로를 설정합니다. // Sets the path to the motion file.
-				if((res = devMotion.SetMotionFilePath(strMotionPath)).IsFail())
+				if((res = motionAxl.SetMotionFilePath(strMotionPath)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set motion file path.");
 					break;
 				}
 
 				// 연결할 축 개수를 설정합니다. // Sets the number of axes to connect to.
-				if((res = devMotion.SetAxisCount(1)).IsFail())
+				if((res = motionAxl.SetAxisCount(1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set axis count.");
 					break;
 				}
 
 				// 모션 장치를 초기화 합니다. // Initialize the motion device.
-				if((res = devMotion.Initialize()).IsFail())
+				if((res = motionAxl.Initialize()).IsFail())
 				{
 					ErrorPrint(res, "Failed to initialize the device.");
 					break;
 				}
 
 				// 모션 축 객체를 얻어옵니다. // Obtain motion axis objects.
-				CDeviceMotionAxlAxis motionAxis = devMotion.GetMotionAxis(0) as CDeviceMotionAxlAxis;
+				CDeviceMotionAxlAxis motionAxis = motionAxl.GetMotionAxis(0) as CDeviceMotionAxlAxis;
 
 				if(motionAxis == null)
 				{
@@ -235,7 +235,7 @@ namespace FLImagingExamplesCSharp
 			while(false);
 
 			// Motion 장치의 초기화를 해제합니다. // Terminate the Motion device.
-			devMotion.Terminate();
+			motionAxl.Terminate();
 
 			if(res.IsFail())
 				Console.ReadLine();
