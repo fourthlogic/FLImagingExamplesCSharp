@@ -54,9 +54,9 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				string[] arrPath = new string[3];
-				arrPath[0] = "../../ExampleImages/Matching/Geometric Mult Learn.flif";
-				arrPath[1] = "../../ExampleImages/Matching/Geometric Mult Learn.flif";
-				arrPath[2] = "../../ExampleImages/Matching/Geometric Mult Learn.flif";
+				arrPath[0] = "../../ExampleImages/Matching/Geometric Multi Learn.flif";
+				arrPath[1] = "../../ExampleImages/Matching/Geometric Multi Learn.flif";
+				arrPath[2] = "../../ExampleImages/Matching/Geometric Multi Learn.flif";
 
 				string[] arrClassName = new string[3];
 				arrClassName[0] = "A";
@@ -166,7 +166,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 이미지 로드 // Load image
-				if((res = fliFindImage.Load("../../ExampleImages/Matching/Geometric Mult Find.flif")).IsFail())
+				if((res = fliFindImage.Load("../../ExampleImages/Matching/Geometric Multi Find.flif")).IsFail())
 					break;
 
 				// 이미지 뷰 생성 // Create image view
