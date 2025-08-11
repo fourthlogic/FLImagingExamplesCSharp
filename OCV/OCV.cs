@@ -41,9 +41,9 @@ namespace FLImagingExamplesCSharp
 				CFLImage fliImage2 = new CFLImage();
 				CFLImage fliImage3 = new CFLImage();
 
-				CFLFigure flqROI1 = new CFLQuad<double>();
-				CFLFigure flqROI2 = new CFLQuad<double>();
-				CFLFigure flrROI3 = new CFLRect<double>();
+				CFLQuad<double> flqROI1 = new CFLQuad<double>();
+				CFLQuad<double> flqROI2 = new CFLQuad<double>();
+				CFLRect<double> flrROI3 = new CFLRect<double>();
 
 				CGUIViewImage viewImage1 = new CGUIViewImage();
 				CGUIViewImage viewImage2 = new CGUIViewImage();
@@ -247,6 +247,18 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				if((res = layer1.DrawFigureImage(flqROI1, EColor.LIME, 5)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw Source ROI");
+					break;
+				}
+
+				if((res = layer1.DrawTextImage(flqROI1.flpPoints[0], flqROI1.GetName(), EColor.LIME, EColor.BLACK, 20, false, 0.0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
+					break;
+				}
+
 				if((res = layer1.DrawTextCanvas(new CFLPoint<double>(0, 0), ocv.GetResultVerificationState() == COCV.EVerificationState.OK ? "Verify" : "Fail", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
@@ -333,6 +345,18 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				if((res = layer2.DrawFigureImage(flqROI2, EColor.LIME, 5)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw Source ROI");
+					break;
+				}
+
+				if((res = layer2.DrawTextImage(flqROI2.flpPoints[0], flqROI2.GetName(), EColor.LIME, EColor.BLACK, 20, false, 0.0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
+					break;
+				}
+
 				if((res = layer2.DrawTextCanvas(new CFLPoint<double>(0, 0), ocv.GetResultVerificationState() == COCV.EVerificationState.OK ? "Verify" : "Fail", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
@@ -412,6 +436,18 @@ namespace FLImagingExamplesCSharp
 				if((res = ocv.Execute()).IsFail())
 				{
 					ErrorPrint(res, res.GetString());
+					break;
+				}
+
+				if((res = layer3.DrawFigureImage(flrROI3, EColor.LIME, 5)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw Source ROI");
+					break;
+				}
+
+				if((res = layer3.DrawTextImage(new CFLPoint<double>(flrROI3.left, flrROI3.top), flrROI3.GetName(), EColor.LIME, EColor.BLACK, 20, false, 0.0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text");
 					break;
 				}
 

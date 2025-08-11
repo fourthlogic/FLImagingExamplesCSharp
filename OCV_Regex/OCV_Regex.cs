@@ -40,8 +40,8 @@ namespace FLImagingExamplesCSharp
 				CFLImage fliImage1 = new CFLImage();
 				CFLImage fliImage2 = new CFLImage();
 
-				CFLFigure flfaROI1 = new CFLFigureArray();
-				CFLFigure flfaROI2 = new CFLFigureArray();
+				CFLFigureArray flfaROI1 = new CFLFigureArray();
+				CFLFigureArray flfaROI2 = new CFLFigureArray();
 
 				CGUIViewImage viewImage1 = new CGUIViewImage();
 				CGUIViewImage viewImage2 = new CGUIViewImage();
@@ -219,6 +219,23 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				if((res = layer1.DrawFigureImage(flfaROI1, EColor.LIME, 5)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw Source ROI");
+					break;
+				}
+
+				for(Int64 i = 0; i < flfaROI1.GetCount(); ++i)
+				{
+					CFLQuad<double> flqROI = new CFLQuad<double>(flfaROI1.GetAt(i));
+
+					if((res = layer1.DrawTextImage(flqROI.flpPoints[0], flqROI.GetName(), EColor.LIME, EColor.BLACK, 20, false, 0.0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw text");
+						break;
+					}
+				}
+
 				if((res = layer1.DrawTextCanvas(new CFLPoint<double>(0, 0), ocv.GetResultVerificationState() == COCV.EVerificationState.OK ? "Verify" : "Fail", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text");
@@ -303,6 +320,23 @@ namespace FLImagingExamplesCSharp
 				{
 					ErrorPrint(res, res.GetString());
 					break;
+				}
+
+				if((res = layer2.DrawFigureImage(flfaROI2, EColor.LIME, 5)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw Source ROI");
+					break;
+				}
+
+				for(Int64 i = 0; i < flfaROI2.GetCount(); ++i)
+				{
+					CFLQuad<double> flqROI = new CFLQuad<double>(flfaROI2.GetAt(i));
+
+					if((res = layer2.DrawTextImage(flqROI.flpPoints[0], flqROI.GetName(), EColor.LIME, EColor.BLACK, 20, false, 0.0, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
+					{
+						ErrorPrint(res, "Failed to draw text");
+						break;
+					}
 				}
 
 				if((res = layer2.DrawTextCanvas(new CFLPoint<double>(0, 0), ocv.GetResultVerificationState() == COCV.EVerificationState.OK ? "Verify" : "Fail", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
