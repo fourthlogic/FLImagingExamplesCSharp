@@ -137,28 +137,28 @@ namespace FLImagingExamplesCSharp
                 }
 
 				// COperationLesser 객체 생성 // Create COperationLesser object
-				COperationLesser lesser = new COperationLesser();
+				COperationLesser operationLesser = new COperationLesser();
                 // Source 이미지 설정 // Set source image
-                lesser.SetSourceImage(ref arrFliImage[0]);
+                operationLesser.SetSourceImage(ref arrFliImage[0]);
                 // Operand 이미지 설정 // Set operand image
-                lesser.SetOperandImage(ref arrFliImage[1]);
+                operationLesser.SetOperandImage(ref arrFliImage[1]);
                 // Destination 이미지 설정 // Set destination image
-                lesser.SetDestinationImage(ref arrFliImage[2]);
+                operationLesser.SetDestinationImage(ref arrFliImage[2]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                lesser.SetOperationSource(EOperationSource.Image);
+                operationLesser.SetOperationSource(EOperationSource.Image);
 
 				// Source가 Scalar보다 작을 경우 값 설정 // Set output value if source is lesser than scalar
 				CMultiVar<double> mvInRange = new CMultiVar<double>(240.0);
 
-				lesser.SetRangeValue(mvInRange);
+				operationLesser.SetRangeValue(mvInRange);
 
 				// Source가 Scalar보다 크거나 같을 경우 값 설정 // Set output value if source is greater than or equal to scalar
 				CMultiVar<double> mvOutOfRange = new CMultiVar<double>(0.0);
 
-                lesser.SetOutOfRangeValue(mvOutOfRange);
+                operationLesser.SetOutOfRangeValue(mvOutOfRange);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((result = lesser.Execute()).IsFail())
+				if ((result = operationLesser.Execute()).IsFail())
 				{
                     ErrorPrint(result, "Failed to execute operation add.");
                     Console.WriteLine(result.GetString());

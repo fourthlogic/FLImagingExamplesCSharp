@@ -137,28 +137,28 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // COperationGreater 객체 생성 // Create COperationGreater object
-                COperationGreater greater = new COperationGreater();
+                COperationGreater operationGreater = new COperationGreater();
                 // Source 이미지 설정 // Set source image
-                greater.SetSourceImage(ref arrFliImage[0]);
+                operationGreater.SetSourceImage(ref arrFliImage[0]);
                 // Operand 이미지 설정 // Set operand image
-                greater.SetOperandImage(ref arrFliImage[1]);
+                operationGreater.SetOperandImage(ref arrFliImage[1]);
                 // Destination 이미지 설정 // Set destination image
-                greater.SetDestinationImage(ref arrFliImage[2]);
+                operationGreater.SetDestinationImage(ref arrFliImage[2]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                greater.SetOperationSource(EOperationSource.Image);
+                operationGreater.SetOperationSource(EOperationSource.Image);
 
 				// Source가 Scalar보다 클 경우 값 설정 // Set output value if source is greater than scalar
 				CMultiVar<double> mvInRange = new CMultiVar<double>(240.0);
 
-                greater.SetRangeValue(mvInRange);
+                operationGreater.SetRangeValue(mvInRange);
 
 				// Source가 Scalar보다 작거나 같을 경우 값 설정 // Set output value if source is less than or equal to scalar
 				CMultiVar<double> mvOutOfRange = new CMultiVar<double>(0.0);
 
-                greater.SetOutOfRangeValue(mvOutOfRange);
+                operationGreater.SetOutOfRangeValue(mvOutOfRange);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if ((result = greater.Execute()).IsFail())
+				if ((result = operationGreater.Execute()).IsFail())
 				{
                     ErrorPrint(result, "Failed to execute operation Greater.");
                     Console.WriteLine(result.GetString());
