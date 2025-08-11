@@ -110,10 +110,10 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Blob 객체 생성 // Create Blob object
-				CBlob sBlob = new CBlob();
+				CBlob blob = new CBlob();
 
 				// 처리할 이미지 설정 // Set the image to process
-				if((res = sBlob.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = blob.SetSourceImage(ref fliSrcImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set source image.\n");
 					break;
@@ -121,26 +121,26 @@ namespace FLImagingExamplesCSharp
 
 				// Threshold 모드 설정. 여기서는 2중 Threshold에 두개의 조건의 And 조건을 참으로 설정한다.
 				// Threshold mode setting. Here, set the AND condition of the two conditions to true in the double threshold.
-				sBlob.SetThresholdMode(EThresholdMode.Dual_And);
+				blob.SetThresholdMode(EThresholdMode.Dual_And);
 				// 논리 조건 설정 // Set logical condition
-				//sBlob.SetLogicalCondition(ELogicalCondition.Greater, EThresholdIndex.First);
-				//sBlob.SetLogicalCondition(ELogicalCondition.Less, EThresholdIndex.Second);
-				sBlob.SetLogicalCondition(ELogicalCondition.Greater, ELogicalCondition.Less);
+				//blob.SetLogicalCondition(ELogicalCondition.Greater, EThresholdIndex.First);
+				//blob.SetLogicalCondition(ELogicalCondition.Less, EThresholdIndex.Second);
+				blob.SetLogicalCondition(ELogicalCondition.Greater, ELogicalCondition.Less);
 				// 임계값 설정,  위의 조건과 아래의 조건이 합쳐지면 130보다 크고 240보다 작은 객체를 검출
 				// Threshold setting, when the above and below conditions are combined, an object greater than 130 and less than 240 is detected
-				sBlob.SetThreshold(130, 240);
+				blob.SetThreshold(130, 240);
 
 				// 2중 임계 값 설정을 아래와 같이 할 수도 있음. // You can set the double threshold as below.
-				//sBlob.SetThreshold(130.0, EThresholdIndex.First);
-				//sBlob.SetThreshold(240.0, EThresholdIndex.Second);
+				//blob.SetThreshold(130.0, EThresholdIndex.First);
+				//blob.SetThreshold(240.0, EThresholdIndex.Second);
 
 				// 가운데 구멍난 Contour를 지원하기 위해 Perforated 모드 설정
 				// Set perforated mode to support perforated contours
-				sBlob.SetResultType(CBlob.EBlobResultType.Contour);
-				sBlob.SetContourResultType(CBlob.EContourResultType.Perforated);
+				blob.SetResultType(CBlob.EBlobResultType.Contour);
+				blob.SetContourResultType(CBlob.EContourResultType.Perforated);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sBlob.Execute()).IsFail())
+				if((res = blob.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Blob.");
 					break;
@@ -150,25 +150,25 @@ namespace FLImagingExamplesCSharp
 				CFLFigureArray flfaContours = new CFLFigureArray();
 
 				// Blob 결과들 중 Contour를 얻어옴 // Get Contour from Blob results
-				if((res = sBlob.GetResultContours(ref flfaContours)).IsFail())
+				if((res = blob.GetResultContours(ref flfaContours)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
 					break;
 				}
 
 				// Mask 객체 생성 // Create Mask object
-				CMask sMask = new CMask();
+				CMask mask = new CMask();
 
 				// Source 이미지 설정 // Set the source image
-				sMask.SetSourceImage(ref fliMaskImage);
+				mask.SetSourceImage(ref fliMaskImage);
 				// Blob 결과인 flfaContours를 Src ROI로 설정 // Set blob result flfaContours as Src ROI
-				sMask.SetSourceROI(flfaContours);
+				mask.SetSourceROI(flfaContours);
 				// Mask 색상 지정 // set mask color
 				CMultiVar<double> mvMaskValue = new CMultiVar<double>(20, 227, 248);
-				sMask.SetMask(mvMaskValue);
+				mask.SetMask(mvMaskValue);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = sMask.Execute()).IsFail())
+				if((res = mask.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute mask.");
 					break;

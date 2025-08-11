@@ -131,67 +131,67 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Laplacian Filter 객체 생성 // Create Laplacian Filter object
-				CLaplacianFilter filterLaplacian = new CLaplacianFilter();
+				CLaplacianFilter laplacianFilter = new CLaplacianFilter();
 				// Source 이미지 설정 // Set the source image
-				filterLaplacian.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				laplacianFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				filterLaplacian.SetSourceROI(flrROI);
+				laplacianFilter.SetSourceROI(flrROI);
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				filterLaplacian.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				laplacianFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Destination1 ROI 설정 // Set the destination1 ROI
-				filterLaplacian.SetDestinationROI(flrROI);
+				laplacianFilter.SetDestinationROI(flrROI);
 
 				// 커널 연산 방법 설정 // Set kernel operation method
-				filterLaplacian.SetKernelMethod(CLaplacianFilter.EKernel.LaplacianX);
+				laplacianFilter.SetKernelMethod(CLaplacianFilter.EKernel.LaplacianX);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterLaplacian.Execute())).IsFail())
+				if((res = (laplacianFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Laplacian filter.");
 					break;
 				}
 
 				// Destination2 이미지 설정 // Set the destination2 image
-				filterLaplacian.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				laplacianFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Destination2 ROI 설정 // Set the destination2 ROI
-				filterLaplacian.SetDestinationROI(flrROI);
+				laplacianFilter.SetDestinationROI(flrROI);
 
 				// 커널 연산 방법 설정 // Set kernel operation method
-				filterLaplacian.SetKernelMethod(CLaplacianFilter.EKernel.LaplacianY);
+				laplacianFilter.SetKernelMethod(CLaplacianFilter.EKernel.LaplacianY);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterLaplacian.Execute())).IsFail())
+				if((res = (laplacianFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Laplacian filter.");
 					break;
 				}
 
 				// Destination3 이미지 설정 // Set the destination3 image
-				filterLaplacian.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
+				laplacianFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
 				// Destination3 ROI 설정 // Set the destination3 ROI
-				filterLaplacian.SetDestinationROI(flrROI);
+				laplacianFilter.SetDestinationROI(flrROI);
 
 				// 커널 연산 방법 설정 // Set kernel operation method
-				filterLaplacian.SetKernelMethod(CLaplacianFilter.EKernel.Laplacian4);
+				laplacianFilter.SetKernelMethod(CLaplacianFilter.EKernel.Laplacian4);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterLaplacian.Execute())).IsFail())
+				if((res = (laplacianFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Laplacian filter.");
 					break;
 				}
 
 				// Destination4 이미지 설정 // Set the destination4 image
-				filterLaplacian.SetDestinationImage(ref arrFliImage[(int)EType.Destination4]);
+				laplacianFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination4]);
 				// Destination4 ROI 설정 // Set the destination4 ROI
-				filterLaplacian.SetDestinationROI(flrROI);
+				laplacianFilter.SetDestinationROI(flrROI);
 
 				// 커널 연산 방법 설정 // Set kernel operation method
-				filterLaplacian.SetKernelMethod(CLaplacianFilter.EKernel.Laplacian8);
+				laplacianFilter.SetKernelMethod(CLaplacianFilter.EKernel.Laplacian8);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterLaplacian.Execute())).IsFail())
+				if((res = (laplacianFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Laplacian filter.");
 					break;

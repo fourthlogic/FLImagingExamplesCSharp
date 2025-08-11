@@ -125,19 +125,19 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(20, 100, 420, 500);
 
 				// Roberts Filter 객체 생성 // Create Roberts Filter object
-				CRobertsFilter filterRoberts = new CRobertsFilter();
+				CRobertsFilter robertsFilter = new CRobertsFilter();
 				// Source 이미지 설정 // Set the source image
-				filterRoberts.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				robertsFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				filterRoberts.SetSourceROI(flrROI);
+				robertsFilter.SetSourceROI(flrROI);
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				filterRoberts.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				robertsFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Destination1 ROI 설정 // Set the destination1 ROI
-				filterRoberts.SetDestinationROI(flrROI);
+				robertsFilter.SetDestinationROI(flrROI);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterRoberts.Execute())).IsFail())
+				if((res = (robertsFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Roberts filter.");
 					break;

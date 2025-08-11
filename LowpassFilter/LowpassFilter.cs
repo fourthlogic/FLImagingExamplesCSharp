@@ -126,37 +126,37 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(20, 100, 420, 500);
 
 				// Lowpass Filter 객체 생성 // Create Lowpass Filter object
-				CLowpassFilter filterLowpass = new CLowpassFilter();
+				CLowpassFilter lowpassFilter = new CLowpassFilter();
 				// Source 이미지 설정 // Set the source image
-				filterLowpass.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				lowpassFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				filterLowpass.SetSourceROI(flrROI);
+				lowpassFilter.SetSourceROI(flrROI);
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				filterLowpass.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				lowpassFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Destination1 ROI 설정 // Set the destination1 ROI
-				filterLowpass.SetDestinationROI(flrROI);
+				lowpassFilter.SetDestinationROI(flrROI);
 
 				// 커널 연산 방법 설정 // Set kernel operation method
-				filterLowpass.SetKernelMethod(CLowpassFilter.EKernel.Lowpass1);
+				lowpassFilter.SetKernelMethod(CLowpassFilter.EKernel.Lowpass1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterLowpass.Execute())).IsFail())
+				if((res = (lowpassFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Lowpass filter.");
 					break;
 				}
 
 				// Destination2 이미지 설정 // Set the destination2 image
-				filterLowpass.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				lowpassFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Destination2 ROI 설정 // Set the destination2 ROI
-				filterLowpass.SetDestinationROI(flrROI);
+				lowpassFilter.SetDestinationROI(flrROI);
 
 				// 커널 연산 방법 설정 // Set kernel operation method
-				filterLowpass.SetKernelMethod(CLowpassFilter.EKernel.Lowpass2);
+				lowpassFilter.SetKernelMethod(CLowpassFilter.EKernel.Lowpass2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterLowpass.Execute())).IsFail())
+				if((res = (lowpassFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Lowpass filter.");
 					break;

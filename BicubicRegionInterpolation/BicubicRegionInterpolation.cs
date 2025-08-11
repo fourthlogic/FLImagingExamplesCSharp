@@ -108,16 +108,16 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Bicubic Region Interpolation 객체 생성 // Create Bicubic Region Interpolation object
-				CBicubicRegionInterpolation sBRI = new CBicubicRegionInterpolation();
+				CBicubicRegionInterpolation bicubicRegionInterpolation = new CBicubicRegionInterpolation();
 				// Source 이미지 설정 // Set the source image
-				sBRI.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				bicubicRegionInterpolation.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				sBRI.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				bicubicRegionInterpolation.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 				// 보정 분할 Depth 설정 // Set calibration division depth
-				sBRI.SetDivisionDepth(5);
+				bicubicRegionInterpolation.SetDivisionDepth(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (sBRI.Execute())).IsFail())
+				if((res = (bicubicRegionInterpolation.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Bicubic Region Interpolation.");
 					break;

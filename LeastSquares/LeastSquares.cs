@@ -97,11 +97,11 @@ namespace FLImagingExamplesCSharp
 					Console.WriteLine(strSampleData);
 					Console.Write("\n");
 
-					// LeastSquaresD 객체 생성 // Create LeastSquaresD object
-					CLeastSquares<double> ls = new CLeastSquares<double>();
+					// LeastSquares<double> 객체 생성 // Create LeastSquares<double> object
+					CLeastSquares<double> leastSquares = new CLeastSquares<double>();
 
 					// 데이터를 할당 // Assign data
-					ls.Assign(arrF64DataX, arrF64DataY, i32DataCount);
+					leastSquares.Assign(arrF64DataX, arrF64DataY, i32DataCount);
 
 					for(int i = 1; i <= 5; ++i)
 					{
@@ -112,7 +112,7 @@ namespace FLImagingExamplesCSharp
 						double f64TRSqr = 0.0;
 
 						// 다항식 계수를 얻는다. // Get polynomial coefficients
-						ls.GetPoly(i, ref listF64Output, ref f64TRSqr);
+						leastSquares.GetPoly(i, ref listF64Output, ref f64TRSqr);
 
 						String strEquation = "";
 

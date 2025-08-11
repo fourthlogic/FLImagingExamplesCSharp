@@ -131,67 +131,67 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Gaussian Filter 객체 생성 // Create Gaussian Filter object
-				CGaussianFilter filterGaussian = new CGaussianFilter();
+				CGaussianFilter gaussianFilter = new CGaussianFilter();
 				// Source 이미지 설정 // Set the source image
-				filterGaussian.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				gaussianFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				filterGaussian.SetSourceROI(flrROI);
+				gaussianFilter.SetSourceROI(flrROI);
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				filterGaussian.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				gaussianFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Destination1 ROI 설정 // Set the destination1 ROI
-				filterGaussian.SetDestinationROI(flrROI);
+				gaussianFilter.SetDestinationROI(flrROI);
 
 				// 커널 크기 설정 // Set kernel size
-				filterGaussian.SetKernel(3);
+				gaussianFilter.SetKernel(3);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterGaussian.Execute())).IsFail())
+				if((res = (gaussianFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Gaussian filter.");
 					break;
 				}
 
 				// Destination2 이미지 설정 // Set the destination2 image
-				filterGaussian.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				gaussianFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Destination2 ROI 설정 // Set the destination2 ROI
-				filterGaussian.SetDestinationROI(flrROI);
+				gaussianFilter.SetDestinationROI(flrROI);
 
 				// 커널 크기 설정 // Set kernel size
-				filterGaussian.SetKernel(5);
+				gaussianFilter.SetKernel(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterGaussian.Execute())).IsFail())
+				if((res = (gaussianFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Gaussian filter.");
 					break;
 				}
 
 				// Destination3 이미지 설정 // Set the destination3 image
-				filterGaussian.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
+				gaussianFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination3]);
 				// Destination3 ROI 설정 // Set the destination3 ROI
-				filterGaussian.SetDestinationROI(flrROI);
+				gaussianFilter.SetDestinationROI(flrROI);
 
 				// 커널 크기 설정 // Set kernel size
-				filterGaussian.SetKernel(7);
+				gaussianFilter.SetKernel(7);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterGaussian.Execute())).IsFail())
+				if((res = (gaussianFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Gaussian filter.");
 					break;
 				}
 
 				// Destination4 이미지 설정 // Set the destination4 image
-				filterGaussian.SetDestinationImage(ref arrFliImage[(int)EType.Destination4]);
+				gaussianFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination4]);
 				// Destination4 ROI 설정 // Set the destination4 ROI
-				filterGaussian.SetDestinationROI(flrROI);
+				gaussianFilter.SetDestinationROI(flrROI);
 
 				// 커널 크기 설정 // Set kernel size
-				filterGaussian.SetKernel(15);
+				gaussianFilter.SetKernel(15);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterGaussian.Execute())).IsFail())
+				if((res = (gaussianFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Gaussian filter.");
 					break;

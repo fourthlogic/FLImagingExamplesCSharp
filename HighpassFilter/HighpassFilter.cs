@@ -126,37 +126,37 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Highpass Filter 객체 생성 // Create Highpass Filter object
-				CHighpassFilter filterHighpass = new CHighpassFilter();
+				CHighpassFilter highpassFilter = new CHighpassFilter();
 				// Source 이미지 설정 // Set the source image
-				filterHighpass.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				highpassFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				filterHighpass.SetSourceROI(flrROI);
+				highpassFilter.SetSourceROI(flrROI);
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				filterHighpass.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				highpassFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Destination1 ROI 설정 // Set the destination1 ROI
-				filterHighpass.SetDestinationROI(flrROI);
+				highpassFilter.SetDestinationROI(flrROI);
 
 				// 커널 연산 방법 설정 // Set kernel operation method
-				filterHighpass.SetKernelMethod(CHighpassFilter.EKernel.Highpass1);
+				highpassFilter.SetKernelMethod(CHighpassFilter.EKernel.Highpass1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterHighpass.Execute())).IsFail())
+				if((res = (highpassFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Highpass filter.");
 					break;
 				}
 
 				// Destination2 이미지 설정 // Set the destination2 image
-				filterHighpass.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				highpassFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// Destination2 ROI 설정 // Set the destination2 ROI
-				filterHighpass.SetDestinationROI(flrROI);
+				highpassFilter.SetDestinationROI(flrROI);
 
 				// 커널 연산 방법 설정 // Set kernel operation method
-				filterHighpass.SetKernelMethod(CHighpassFilter.EKernel.Highpass2);
+				highpassFilter.SetKernelMethod(CHighpassFilter.EKernel.Highpass2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (filterHighpass.Execute())).IsFail())
+				if((res = (highpassFilter.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Highpass filter.");
 					break;
