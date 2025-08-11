@@ -69,7 +69,7 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// 이미지 로드 // Load the image
-				if((eResult = fliSource.Load("../../ExampleImages/CameraPose3D/ChessBoard(9).flif")).IsFail())
+				if((eResult = fliSource.Load("../../ExampleImages/CameraPose3D/ChessBoard(4p).flif")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
@@ -97,17 +97,17 @@ namespace FLImagingExamplesCSharp
 				CFLPoint<double> flpOrigin = new CFLPoint<double>(0, 0);
 
 				CGUIViewImage[] arrViewWrap = new CGUIViewImage[i32PageCount];
-				int i32WindowWidth = 300;
-				int i32WindowHeight = 300;
+				int i32WindowWidth = 500;
+				int i32WindowHeight = 500;
 
-				for(int i = 0; i < i32PageCount / 3; ++i)
+				for(int i = 0; i < i32PageCount / 2; ++i)
 				{
 					int i32Height = i32WindowHeight * i;
 
-					for(int j = 0; j < i32PageCount / 3; ++j)
+					for(int j = 0; j < i32PageCount / 2; ++j)
 					{
 						int i32Width = i32WindowWidth * j;
-						int i32Index = i * 3 + j;
+						int i32Index = i * 2 + j;
 
 						arrViewWrap[i32Index] = new CGUIViewImage();
 						arrViewWrap[i32Index].Create(10 + i32Height, i32Width, 10 + i32Height + i32WindowHeight, i32Width + i32WindowWidth);
