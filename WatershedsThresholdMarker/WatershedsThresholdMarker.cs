@@ -47,7 +47,7 @@ namespace FLImagingExamplesCSharp
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliISrcImage.Load("../../ExampleImages/AnisotropicDiffusion/Source.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/Threshold/Sun.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;

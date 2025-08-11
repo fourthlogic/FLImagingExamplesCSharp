@@ -136,20 +136,20 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Atan2 객체 생성 // Create Atan2 object
-				COperationAtan2 atan2 = new COperationAtan2();
+				COperationAtan2 operationAtan2 = new COperationAtan2();
 				// Source 이미지 설정 // Set source image
-				atan2.SetSourceImage(ref arrFliImage[0]);
+				operationAtan2.SetSourceImage(ref arrFliImage[0]);
 				// Operand 이미지 설정 // Set Operand image
-				atan2.SetOperandImage(ref arrFliImage[1]);
+				operationAtan2.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set destination image 
-				atan2.SetDestinationImage(ref arrFliImage[2]);
+				operationAtan2.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				atan2.SetOperationSource(EOperationSource.Image);
+				operationAtan2.SetOperationSource(EOperationSource.Image);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (atan2.Execute())).IsFail())
+				if((res = (operationAtan2.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation atan2.");
+					ErrorPrint(res, "Failed to execute operation operationAtan2.");
 					Console.WriteLine(res.GetString());
 					break;
 				}

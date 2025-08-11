@@ -138,26 +138,26 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseNand 객체 생성 // Create OperationBitwiseNand object
-                COperationBitwiseNand bitnand = new COperationBitwiseNand();
+                COperationBitwiseNand operationBitwiseNand = new COperationBitwiseNand();
 
                 // Source 이미지 설정 // Set the source image
-                bitnand.SetSourceImage(ref fliSourceImage);
+                operationBitwiseNand.SetSourceImage(ref fliSourceImage);
 
                 // Operand 이미지 설정 // Set the operand image
-        		bitnand.SetOperandImage(ref fliOperandImage);
+        		operationBitwiseNand.SetOperandImage(ref fliOperandImage);
 
 		        // Destination 이미지 설정 // Set the destination image
-		        bitnand.SetDestinationImage(ref fliDestinationImage);
+		        operationBitwiseNand.SetDestinationImage(ref fliDestinationImage);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                bitnand.SetOperationSource(EOperationSource.Image);
+                operationBitwiseNand.SetOperationSource(EOperationSource.Image);
 
                 // 공백 색상 칠하기 모드 해제
                 // 결과 이미지가 이미 존재할 경우 연산되지 않은 영역을 공백 색상으로 칠하지 않고 원본 그대로 둔다.
-                bitnand.EnableFillBlankColorMode(false);
+                operationBitwiseNand.EnableFillBlankColorMode(false);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitnand.Execute()).IsFail())
+                if ((res = operationBitwiseNand.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseNand.");
                     break;

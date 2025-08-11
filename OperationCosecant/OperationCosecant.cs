@@ -101,14 +101,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Cosecant 객체 생성 // Create Cosecant object
-				COperationCosecant cosecant = new COperationCosecant();
+				COperationCosecant operationCosecant = new COperationCosecant();
 				// Source 이미지 설정 // Set source image
-				cosecant.SetSourceImage(ref arrFliImage[0]);
+				operationCosecant.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				cosecant.SetDestinationImage(ref arrFliImage[1]);
+				operationCosecant.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (cosecant.Execute())).IsFail())
+				if((res = (operationCosecant.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation cosecant.");
 					break;

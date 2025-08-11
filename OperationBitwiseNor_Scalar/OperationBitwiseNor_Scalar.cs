@@ -101,25 +101,25 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseNor 객체 생성 // Create OperationBitwiseNor object
-                COperationBitwiseNor bitnor = new COperationBitwiseNor();
+                COperationBitwiseNor operationBitwiseNor = new COperationBitwiseNor();
 
                 // Source 이미지 설정 // Set the source image
-                bitnor.SetSourceImage(ref fliDestinationImage);
+                operationBitwiseNor.SetSourceImage(ref fliDestinationImage);
 
                 // ROI 범위 설정 // Set the ROI value
                 CFLCircle<double> flcSourceROI = new CFLCircle<double>(128, 128, 80, 0, 0, 360, EArcClosingMethod.EachOther);
 
                 // Source 이미지의 ROI 지정 // Set the Source ROI
-                bitnor.SetSourceROI(flcSourceROI);
+                operationBitwiseNor.SetSourceROI(flcSourceROI);
 
                 // Scalar Operation 소스로 설정 // Set Operation Source to scalar
-                bitnor.SetOperationSource(EOperationSource.Scalar);
+                operationBitwiseNor.SetOperationSource(EOperationSource.Scalar);
 
                 // 스칼라 값 지정 // Set the Scalar value
-                bitnor.SetScalarValue(111);
+                operationBitwiseNor.SetScalarValue(111);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitnor.Execute()).IsFail())
+                if ((res = operationBitwiseNor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseNor. \n");
                     break;

@@ -125,36 +125,36 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Symmetric Nearest Neighbor Filter 객체 생성 // Create Symmetric Nearest Neighbor Filter object
-				CSymmetricNearestNeighborFilter snnFilter = new CSymmetricNearestNeighborFilter();
+				CSymmetricNearestNeighborFilter symmetricNearestNeighborFilter = new CSymmetricNearestNeighborFilter();
 
 				// Source 이미지 설정 // Set the source image
-				snnFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				symmetricNearestNeighborFilter.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 
 				// Destination1 이미지 설정 // Set the destination1 image
-				snnFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				symmetricNearestNeighborFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 
 				// Distribution 설정 // Set the Distribution
-				snnFilter.SetDistribution(CSymmetricNearestNeighborFilter.EDistribution.Uniform);
+				symmetricNearestNeighborFilter.SetDistribution(CSymmetricNearestNeighborFilter.EDistribution.Uniform);
 
 				// Kernel Width = 5 설정 // Set the Kernel Width = 5
 				// Kernel Height = 5 설정 // Set the Kernel Height = 5
-				snnFilter.SetKernel(9, 9);
+				symmetricNearestNeighborFilter.SetKernel(9, 9);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = snnFilter.Execute()).IsFail())
+				if((res = symmetricNearestNeighborFilter.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Symmetric Nearest Neighbor Filter.");
 					break;
 				}
 
 				// Destination2 이미지 설정 // Set the destination2 image
-				snnFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				symmetricNearestNeighborFilter.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 
 				// Distribution 설정 // Set the Distribution
-				snnFilter.SetDistribution(CSymmetricNearestNeighborFilter.EDistribution.Gaussian);
+				symmetricNearestNeighborFilter.SetDistribution(CSymmetricNearestNeighborFilter.EDistribution.Gaussian);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = snnFilter.Execute()).IsFail())
+				if((res = symmetricNearestNeighborFilter.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Symmetric Nearest Neighbor Filter.");
 					break;

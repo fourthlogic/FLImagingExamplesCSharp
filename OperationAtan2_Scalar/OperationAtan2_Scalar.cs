@@ -123,35 +123,35 @@ namespace FLImagingExamplesCSharp
 				CMultiVar<double> mvScalr = new CMultiVar<double>(1, 1, 1);
 				CMultiVar<double> mvScalr2 = new CMultiVar<double>(65535, 65535, 65535);
 
-				// Operation atan2 객체 생성 // Create Atan2 object
-				COperationAtan2 atan2 = new COperationAtan2();
+				// Operation Atan2 객체 생성 // Create Atan2 object
+				COperationAtan2 operationAtan2 = new COperationAtan2();
 				// Source 이미지 설정 // Set source image
-				atan2.SetSourceImage(ref arrFliImage[0]);
+				operationAtan2.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				atan2.SetDestinationImage(ref arrFliImage[1]);
+				operationAtan2.SetDestinationImage(ref arrFliImage[1]);
 				// 연산 방식 설정 // Set operation source
-				atan2.SetOperationSource(EOperationSource.Scalar);
+				operationAtan2.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				atan2.SetScalarValue(mvScalr);
+				operationAtan2.SetScalarValue(mvScalr);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (atan2.Execute())).IsFail())
+				if((res = (operationAtan2.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation atan2.");
+					ErrorPrint(res, "Failed to execute operation operationAtan2.");
 					break;
 				}
 
 				// Destination 이미지 설정 // Set destination image 
-				atan2.SetDestinationImage(ref arrFliImage[2]);
+				operationAtan2.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				atan2.SetOperationSource(EOperationSource.Scalar);
+				operationAtan2.SetOperationSource(EOperationSource.Scalar);
 				// Scalar 값 설정 // Set Scalar value
-				atan2.SetScalarValue(mvScalr2);
+				operationAtan2.SetScalarValue(mvScalr2);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (atan2.Execute())).IsFail())
+				if((res = (operationAtan2.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation atan2.");
+					ErrorPrint(res, "Failed to execute operation operationAtan2.");
 					break;
 				}
 
