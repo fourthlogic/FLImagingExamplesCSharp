@@ -108,17 +108,17 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Operation SquareRoot 객체 생성 // Create Operation SquareRoot object
-                COperationSquareRoot squareRoot = new COperationSquareRoot();
+                COperationSquareRoot operationSquareRoot = new COperationSquareRoot();
 
                 // Source 이미지 설정 // Set the source image
-                squareRoot.SetSourceImage(ref arrFliImage[0]);
+                operationSquareRoot.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                squareRoot.SetDestinationImage(ref arrFliImage[1]);
+                operationSquareRoot.SetDestinationImage(ref arrFliImage[1]);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				squareRoot.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationSquareRoot.SetOverflowMethod(EOverflowMethod.Clamping);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = squareRoot.Execute()).IsFail())
+                if ((res = operationSquareRoot.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation SquareRoot.\n");
                     break;

@@ -136,29 +136,29 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Operation Square 객체 생성 // Create Operation Square object
-                COperationSquare square = new COperationSquare();
+                COperationSquare operationSquare = new COperationSquare();
 
                 // Source 이미지 설정 // Set the source image
-                square.SetSourceImage(ref arrFliImage[0]);
+                operationSquare.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                square.SetDestinationImage(ref arrFliImage[1]);
+                operationSquare.SetDestinationImage(ref arrFliImage[1]);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				square.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationSquare.SetOverflowMethod(EOverflowMethod.Clamping);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = square.Execute()).IsFail())
+                if ((res = operationSquare.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation Square.\n");
                     break;
                 }
 
 				// Destination 이미지 설정 // Set the destination image
-				square.SetDestinationImage(ref arrFliImage[2]);
+				operationSquare.SetDestinationImage(ref arrFliImage[2]);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				square.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationSquare.SetOverflowMethod(EOverflowMethod.Clamping);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = square.Execute()).IsFail())
+                if ((res = operationSquare.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation Square.\n");
                     break;

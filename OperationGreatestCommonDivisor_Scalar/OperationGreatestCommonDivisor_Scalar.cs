@@ -123,32 +123,32 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation GreatestCommonDivisor 객체 생성 // Create Operation GreatestCommonDivisor object
-				COperationGreatestCommonDivisor gcd = new COperationGreatestCommonDivisor();
+				COperationGreatestCommonDivisor operationGreatestCommonDivisor = new COperationGreatestCommonDivisor();
 				// Source 이미지 설정 // Set the source image
-				gcd.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationGreatestCommonDivisor.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				gcd.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				operationGreatestCommonDivisor.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// 연산 방식 설정 // Set operation source
-				gcd.SetOperationSource(EOperationSource.Scalar);
-				// gcd 값 설정 // Set GCD value
+				operationGreatestCommonDivisor.SetOperationSource(EOperationSource.Scalar);
+				// GCD 값 설정 // Set GCD value
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(50, 50, 50);
-				gcd.SetScalarValue(mvScalarValue1);
+				operationGreatestCommonDivisor.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (gcd.Execute())).IsFail())
+				if((res = (operationGreatestCommonDivisor.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation GCD.");
 					break;
 				}
 
 				// Destination 이미지를 Destination2로 설정
-				gcd.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				operationGreatestCommonDivisor.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// GCD 값 설정 // Set GCD value
 				CMultiVar<double> mvScalarValue2 = new CMultiVar<double>(200, 200, 200);
-				gcd.SetScalarValue(mvScalarValue2);
+				operationGreatestCommonDivisor.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (gcd.Execute())).IsFail())
+				if((res = (operationGreatestCommonDivisor.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation GCD.");
 					break;

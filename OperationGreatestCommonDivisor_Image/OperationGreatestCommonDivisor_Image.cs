@@ -126,25 +126,25 @@ namespace FLImagingExamplesCSharp
 				CFLRect<int> flrROI = new CFLRect<int>(200, 200, 500, 500);
 
 				// Operation GreatestCommonDivisor 객체 생성 // Create Operation GreatestCommonDivisor object
-				COperationGreatestCommonDivisor gcd = new COperationGreatestCommonDivisor();
+				COperationGreatestCommonDivisor operationGreatestCommonDivisor = new COperationGreatestCommonDivisor();
 				// Source 이미지 설정 // Set the source image
-				gcd.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationGreatestCommonDivisor.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Source ROI 설정 // Set the Source ROI
-				gcd.SetSourceROI(flrROI);
+				operationGreatestCommonDivisor.SetSourceROI(flrROI);
 				// Operand 이미지 설정 // Set the operand image
-				gcd.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				operationGreatestCommonDivisor.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Operand ROI 설정
-				gcd.SetOperandROI(flrROI);
+				operationGreatestCommonDivisor.SetOperandROI(flrROI);
 				// Destination 이미지 설정 // Set the destination image
-				gcd.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				operationGreatestCommonDivisor.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 				// Destination ROI 설정 // Set Destination ROI
-				gcd.SetDestinationROI(flrROI);
+				operationGreatestCommonDivisor.SetDestinationROI(flrROI);
 
 				// 연산 방식 설정 // Set operation source
-				gcd.SetOperationSource(EOperationSource.Image);
+				operationGreatestCommonDivisor.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = (gcd.Execute())).IsFail())
+				if((res = (operationGreatestCommonDivisor.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation GCD.");
 					break;
