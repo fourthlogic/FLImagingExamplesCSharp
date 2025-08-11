@@ -60,7 +60,7 @@ namespace FLImagingExamplesCSharp
 				CDepthMapToPointCloudConverter3D depthMapToPointCloudConverter3D = new CDepthMapToPointCloudConverter3D();
 
 				// SourceROI 설정 // Set the source roi.
-				CFLQuad<double> flfSourceROI = new CFLQuad<double>(926.290236, 549.117967, 1341.038113, 503.567623, 1384.191071, 1083.151113, 974.237967, 1117.298584);
+				CFLQuad<double> flfSourceROI = new CFLQuad<double>(236.258951, 137.611646, 247.605353, 273.171284, 355.694756, 268.393852, 339.570922, 130.445497);
 				depthMapToPointCloudConverter3D.SetSourceROI(flfSourceROI);
 
 				// Source 이미지 설정 // Set the source image.
@@ -73,10 +73,10 @@ namespace FLImagingExamplesCSharp
 				CFLPoint<float> flpFocalLength = new CFLPoint<float>();
 				CFLPoint<float> flpPrincipalPoint = new CFLPoint<float>();
 
-				flpFocalLength.x = 2328.800049f;
-				flpFocalLength.y = 2330.899902f;
-				flpPrincipalPoint.x = 988.599976f;
-				flpPrincipalPoint.y = 750.299988f;
+				flpFocalLength.x = 582.2f;
+				flpFocalLength.y = 582.7f;
+				flpPrincipalPoint.x = 247;
+				flpPrincipalPoint.y = 187.5f;
 
 				depthMapToPointCloudConverter3D.SetIntrinsicParameter(flpFocalLength, flpPrincipalPoint);
 
