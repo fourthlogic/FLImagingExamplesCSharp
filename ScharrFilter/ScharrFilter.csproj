@@ -9,8 +9,8 @@
     <ProjectGuid>{32B1AE13-4A28-4E18-B8F2-5CAF1F85AB3C}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Scharr_Filter</RootNamespace>
-    <AssemblyName>Scharr_Filter</AssemblyName>
+    <RootNamespace>ScharrFilter</RootNamespace>
+    <AssemblyName>ScharrFilter</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -111,7 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scharr_Filter.cs" />
+    <Compile Include="ScharrFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

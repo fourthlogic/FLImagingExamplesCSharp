@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class Scharr_Filter
+	class ScharrFilter
 	{
 		enum EType
 		{
