@@ -112,27 +112,27 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Convolution Scharr 객체 생성 // Create Convolution Scharr object
-				CScharrFilter convolutionScharr = new CScharrFilter();
+				CScharrFilter scharrFilter = new CScharrFilter();
 
 				CFLRect<double> flrROI = new CFLRect<double>(200, 200, 500, 500);
 
 				// Source 이미지 설정 // Set the source image
-				convolutionScharr.SetSourceImage(ref fliSrcImage);
+				scharrFilter.SetSourceImage(ref fliSrcImage);
 
 				// Source ROI 설정 // Set the Source ROI
-				convolutionScharr.SetSourceROI(flrROI);
+				scharrFilter.SetSourceROI(flrROI);
 
 				// Destination 이미지 설정 // Set the destination image
-				convolutionScharr.SetDestinationImage(ref fliDstImage);
+				scharrFilter.SetDestinationImage(ref fliDstImage);
 
 				// Destination ROI 설정 // Set Destination ROI
-				convolutionScharr.SetDestinationROI(flrROI);
+				scharrFilter.SetDestinationROI(flrROI);
 
 				// Convolution Scharr 커널 연산 방법 설정
-				convolutionScharr.SetKernelMethod(CScharrFilter.EKernel.Scharr);
+				scharrFilter.SetKernelMethod(CScharrFilter.EKernel.Scharr);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = convolutionScharr.Execute()).IsFail())
+				if((res = scharrFilter.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute convolution scharr.");
 					break;
