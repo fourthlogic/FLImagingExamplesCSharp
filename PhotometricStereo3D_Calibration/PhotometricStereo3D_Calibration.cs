@@ -172,9 +172,9 @@ namespace FLImagingExamplesCSharp
 				// 동작 방식 설정 // Set Operation Mode
 				photometricStereo.SetReconstructionMode(CPhotometricStereo3D.EReconstructionMode.Poisson_FP32);
 				// Calibration 데이터 설정 // Set Calibration Settings
-				photometricStereo.SetCalibrationCircleROI(new CFLCircle<double>(386.439657, 346.491239, 259.998140, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther));
+				photometricStereo.SetCalibrationCircleROI(new CFLCircle<double>(117.210526, 104.842105, 78.736842, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther));
 				// Valid 픽셀의 기준 설정 // Set valid pixel ratio
-				photometricStereo.SetValidPixelThreshold(0.125);
+				photometricStereo.SetValidPixelThreshold(0.25);
 
 				CMatrix<double> cmatdTemp = new CMatrix<double>(3, 3);
 
@@ -294,7 +294,7 @@ namespace FLImagingExamplesCSharp
 
 				TPoint3<float> tp3dFrom = new TPoint3<float>(f32CenterX, f32CenterY, f32CenterZ);
 
-				float f32MulNum = 2000;
+				float f32MulNum = 800;
 
 				for(long i = 0; i < i32CalibPageNum; i++)
 				{
