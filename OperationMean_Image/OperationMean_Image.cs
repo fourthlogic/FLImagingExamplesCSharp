@@ -136,18 +136,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation Mean 객체 생성 // Create Mean object
-				COperationMean mean = new COperationMean();
+				COperationMean operationMean = new COperationMean();
 				// Source 이미지 설정 // Set source image
-				mean.SetSourceImage(ref arrFliImage[0]);
+				operationMean.SetSourceImage(ref arrFliImage[0]);
 				// Operand 이미지 설정 // Set Operand image
-				mean.SetOperandImage(ref arrFliImage[1]);
+				operationMean.SetOperandImage(ref arrFliImage[1]);
 				// Destination 이미지 설정 // Set destination image 
-				mean.SetDestinationImage(ref arrFliImage[2]);
+				operationMean.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				mean.SetOperationSource(EOperationSource.Image);
+				operationMean.SetOperationSource(EOperationSource.Image);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (mean.Execute())).IsFail())
+				if((res = (operationMean.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation mean.");
 					Console.WriteLine(res.GetString());

@@ -138,40 +138,40 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseXor 객체 생성 // Create OperationBitwiseXor object
-                COperationBitwiseXor bitwiseXor = new COperationBitwiseXor();
+                COperationBitwiseXor operationBitwiseXor = new COperationBitwiseXor();
 
                 // Source 이미지 설정 // Set the source image
-                bitwiseXor.SetSourceImage(ref fliSourceImage);
+                operationBitwiseXor.SetSourceImage(ref fliSourceImage);
 
                 // Destination 이미지 설정 // Set the destination image
-                bitwiseXor.SetDestinationImage(ref fliDestinationImage1);
+                operationBitwiseXor.SetDestinationImage(ref fliDestinationImage1);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                bitwiseXor.SetOperationSource(EOperationSource.Scalar);
+                operationBitwiseXor.SetOperationSource(EOperationSource.Scalar);
 
 				// BitwiseXor 값 설정 // Set BitwiseXor value
 				CMultiVar<double> mvScalar = new CMultiVar<double>(64, 64, 64);
-                bitwiseXor.SetScalarValue(mvScalar);
+                operationBitwiseXor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitwiseXor.Execute()).IsFail())
+                if ((res = operationBitwiseXor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseXor. \n");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set the destination image
-                bitwiseXor.SetDestinationImage(ref fliDestinationImage2);
+                operationBitwiseXor.SetDestinationImage(ref fliDestinationImage2);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                bitwiseXor.SetOperationSource(EOperationSource.Scalar);
+                operationBitwiseXor.SetOperationSource(EOperationSource.Scalar);
 
 				// BitwiseXor 값 설정 // Set BitwiseXor value
 				mvScalar = new CMultiVar<double>(128, 128, 128);
-                bitwiseXor.SetScalarValue(mvScalar);
+                operationBitwiseXor.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitwiseXor.Execute()).IsFail())
+                if ((res = operationBitwiseXor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseXor. \n");
                     break;

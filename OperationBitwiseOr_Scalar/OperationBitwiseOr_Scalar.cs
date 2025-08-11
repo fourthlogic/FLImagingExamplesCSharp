@@ -138,40 +138,40 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseOr 객체 생성 // Create OperationBitwiseOr object
-                COperationBitwiseOr bitwiseOr = new COperationBitwiseOr();
+                COperationBitwiseOr operationBitwiseOr = new COperationBitwiseOr();
 
                 // Source 이미지 설정 // Set the source image
-                bitwiseOr.SetSourceImage(ref fliSourceImage);
+                operationBitwiseOr.SetSourceImage(ref fliSourceImage);
 
                 // Destination 이미지 설정 // Set the destination image
-                bitwiseOr.SetDestinationImage(ref fliDestinationImage1);
+                operationBitwiseOr.SetDestinationImage(ref fliDestinationImage1);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                bitwiseOr.SetOperationSource(EOperationSource.Scalar);
+                operationBitwiseOr.SetOperationSource(EOperationSource.Scalar);
 
                 // BitwiseOr 값 설정 // Set BitwiseOr value
                 CMultiVar<double> mvScalar = new CMultiVar<double>(64, 64, 64);
-                bitwiseOr.SetScalarValue(mvScalar);
+                operationBitwiseOr.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitwiseOr.Execute()).IsFail())
+                if ((res = operationBitwiseOr.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseOr. \n");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set the destination image
-                bitwiseOr.SetDestinationImage(ref fliDestinationImage2);
+                operationBitwiseOr.SetDestinationImage(ref fliDestinationImage2);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                bitwiseOr.SetOperationSource(EOperationSource.Scalar);
+                operationBitwiseOr.SetOperationSource(EOperationSource.Scalar);
 
                 // BitwiseOr 값 설정 // Set BitwiseOr value
                 mvScalar = new CMultiVar<double>(128, 128, 128);
-                bitwiseOr.SetScalarValue(mvScalar);
+                operationBitwiseOr.SetScalarValue(mvScalar);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitwiseOr.Execute()).IsFail())
+                if ((res = operationBitwiseOr.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseOr. \n");
                     break;

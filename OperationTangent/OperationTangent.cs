@@ -101,14 +101,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation tangent 객체 생성 // Create Tangent object
-				COperationTangent tangent = new COperationTangent();
+				COperationTangent operationTangent = new COperationTangent();
 				// Source 이미지 설정 // Set source image
-				tangent.SetSourceImage(ref arrFliImage[0]);
+				operationTangent.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				tangent.SetDestinationImage(ref arrFliImage[1]);
+				operationTangent.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (tangent.Execute())).IsFail())
+				if((res = (operationTangent.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation tangent.");
 					break;

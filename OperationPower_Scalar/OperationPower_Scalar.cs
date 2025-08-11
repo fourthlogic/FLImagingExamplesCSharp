@@ -226,69 +226,69 @@ namespace FLImagingExamplesCSharp
                 CMultiVar<double> mvScalr5 = new CMultiVar<double>(10, 10, 10);
 
                 // Operation Power 객체 생성 // Create Operation Power object
-                COperationPower power = new COperationPower();
+                COperationPower operationPower = new COperationPower();
 
                 // Source 이미지 설정 // Set the source image
-                power.SetSourceImage(ref arrFliImage[0]);
+                operationPower.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                power.SetDestinationImage(ref arrFliImage[1]);
+                operationPower.SetDestinationImage(ref arrFliImage[1]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                power.SetOperationSource(EOperationSource.Scalar);
+                operationPower.SetOperationSource(EOperationSource.Scalar);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				power.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationPower.SetOverflowMethod(EOverflowMethod.Clamping);
                 // Exponent 값 설정 // Set Exponent value
-                power.SetScalarValue(mvScalr1);
+                operationPower.SetScalarValue(mvScalr1);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = power.Execute()).IsFail())
+                if ((res = operationPower.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation Power.\n");
                     break;
                 }
 
 				// Destination 이미지 설정 // Set the destination image
-				power.SetDestinationImage(ref arrFliImage[2]);
+				operationPower.SetDestinationImage(ref arrFliImage[2]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                power.SetOperationSource(EOperationSource.Scalar);
+                operationPower.SetOperationSource(EOperationSource.Scalar);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				power.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationPower.SetOverflowMethod(EOverflowMethod.Clamping);
                 // Exponent 값 설정 // Set Exponent value
-                power.SetScalarValue(mvScalr2);
+                operationPower.SetScalarValue(mvScalr2);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = power.Execute()).IsFail())
+                if ((res = operationPower.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation Power.\n");
                     break;
                 }
 
 				// Destination 이미지 설정 // Set the destination image
-				power.SetDestinationImage(ref arrFliImage[3]);
+				operationPower.SetDestinationImage(ref arrFliImage[3]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                power.SetOperationSource(EOperationSource.Scalar);
+                operationPower.SetOperationSource(EOperationSource.Scalar);
 				// Overflow Method Wrapping 옵션으로 설정 // Set Overflow Method to Wrapping option
-				power.SetOverflowMethod(EOverflowMethod.Wrapping);
+				operationPower.SetOverflowMethod(EOverflowMethod.Wrapping);
                 // Exponent 값 설정 // Set Exponent value
-                power.SetScalarValue(mvScalr3);
+                operationPower.SetScalarValue(mvScalr3);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = power.Execute()).IsFail())
+                if ((res = operationPower.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation Power.\n");
                     break;
                 }
 
 				// Destination 이미지 설정 // Set the destination image
-				power.SetDestinationImage(ref arrFliImage[4]);
+				operationPower.SetDestinationImage(ref arrFliImage[4]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                power.SetOperationSource(EOperationSource.Scalar);
+                operationPower.SetOperationSource(EOperationSource.Scalar);
 				// Overflow Method Clamping 옵션으로 설정 // Set Overflow Method to Clamping option
-				power.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationPower.SetOverflowMethod(EOverflowMethod.Clamping);
                 // Exponent 값 설정 // Set Exponent value
-                power.SetScalarValue(mvScalr4);
+                operationPower.SetScalarValue(mvScalr4);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = power.Execute()).IsFail())
+                if ((res = operationPower.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation Power.");
                     Console.WriteLine(res.GetString());
@@ -296,16 +296,16 @@ namespace FLImagingExamplesCSharp
                 }
 
 				// Destination 이미지 설정 // Set the destination image
-				power.SetDestinationImage(ref arrFliImage[5]);
+				operationPower.SetDestinationImage(ref arrFliImage[5]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                power.SetOperationSource(EOperationSource.Scalar);
+                operationPower.SetOperationSource(EOperationSource.Scalar);
 				// Overflow Method Wrapping 옵션으로 설정 // Set Overflow Method to Wrapping option
-				power.SetOverflowMethod(EOverflowMethod.Wrapping);
+				operationPower.SetOverflowMethod(EOverflowMethod.Wrapping);
                 // Exponent 값 설정 // Set Exponent value
-                power.SetScalarValue(mvScalr5);
+                operationPower.SetScalarValue(mvScalr5);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = power.Execute()).IsFail())
+                if ((res = operationPower.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation Power.\n");
                     break;

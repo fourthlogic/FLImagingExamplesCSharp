@@ -101,16 +101,16 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseOr 객체 생성 // Create OperationBitwiseOr object
-                COperationBitwiseNot bitwiseNot = new COperationBitwiseNot();
+                COperationBitwiseNot operationBitwiseNot = new COperationBitwiseNot();
 
                 // Source 이미지 설정 // Set the source image
-                bitwiseNot.SetSourceImage(ref fliSourceImage);
+                operationBitwiseNot.SetSourceImage(ref fliSourceImage);
 
                 // Destination 이미지 설정 // Set the destination image
-                bitwiseNot.SetDestinationImage(ref fliDestinationImage);
+                operationBitwiseNot.SetDestinationImage(ref fliDestinationImage);
 
                 // OperationBitwiseNot 수행 // Execute the Bitwise Not algorithm
-                if ((res = bitwiseNot.Execute()).IsFail())
+                if ((res = operationBitwiseNot.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseNot. \n");
                     break;

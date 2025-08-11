@@ -138,22 +138,22 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseXor 객체 생성 // Create OperationBitwiseXor object
-                COperationBitwiseXor bitwiseXor = new COperationBitwiseXor();
+                COperationBitwiseXor operationBitwiseXor = new COperationBitwiseXor();
 
                 // Source 이미지 설정 // Set the source image
-                bitwiseXor.SetSourceImage(ref fliSourceImage);
+                operationBitwiseXor.SetSourceImage(ref fliSourceImage);
 
                 // Operand 이미지 설정 // Set the operand image
-                bitwiseXor.SetOperandImage(ref fliOperandImage);
+                operationBitwiseXor.SetOperandImage(ref fliOperandImage);
 
                 // Destination 이미지 설정 // Set the destination image
-                bitwiseXor.SetDestinationImage(ref fliDestinationImage);
+                operationBitwiseXor.SetDestinationImage(ref fliDestinationImage);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                bitwiseXor.SetOperationSource(EOperationSource.Image);
+                operationBitwiseXor.SetOperationSource(EOperationSource.Image);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitwiseXor.Execute()).IsFail())
+                if ((res = operationBitwiseXor.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseXor.");
                     break;

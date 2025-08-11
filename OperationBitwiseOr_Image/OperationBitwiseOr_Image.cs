@@ -138,22 +138,22 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // OperationBitwiseOr 객체 생성 // Create OperationBitwiseOr object
-                COperationBitwiseOr bitwiseOr = new COperationBitwiseOr();
+                COperationBitwiseOr operationBitwiseOr = new COperationBitwiseOr();
 
                 // Source 이미지 설정 // Set the source image
-                bitwiseOr.SetSourceImage(ref fliSourceImage);
+                operationBitwiseOr.SetSourceImage(ref fliSourceImage);
 
                 // Operand 이미지 설정 // Set the operand image
-                bitwiseOr.SetOperandImage(ref fliOperandImage);
+                operationBitwiseOr.SetOperandImage(ref fliOperandImage);
 
                 // Destination 이미지 설정 // Set the destination image
-                bitwiseOr.SetDestinationImage(ref fliDestinationImage);
+                operationBitwiseOr.SetDestinationImage(ref fliDestinationImage);
 
                 // Image Operation 소스로 설정 // Set Operation Source to image
-                bitwiseOr.SetOperationSource(EOperationSource.Image);
+                operationBitwiseOr.SetOperationSource(EOperationSource.Image);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = bitwiseOr.Execute()).IsFail())
+                if ((res = operationBitwiseOr.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute Operation BitwiseOr. \n");
                     break;

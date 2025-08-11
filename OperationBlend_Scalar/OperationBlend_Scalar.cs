@@ -141,36 +141,36 @@ namespace FLImagingExamplesCSharp
                 CMultiVar<double> mvScalr2 = new CMultiVar<double>(0, 30, 0);
 
                 // Operation Blend 객체 생성 // Create Operation Blend object
-                COperationBlend blend = new COperationBlend();
+                COperationBlend operationBlend = new COperationBlend();
                 // Source 이미지 설정 // Set the source image
-                blend.SetSourceImage(ref arrFliImage[0]);
+                operationBlend.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
-                blend.SetDestinationImage(ref arrFliImage[1]);
+                operationBlend.SetDestinationImage(ref arrFliImage[1]);
 				// 연산 방식 설정 // Set operation source
-				blend.SetOperationSource(EOperationSource.Scalar);
+				operationBlend.SetOperationSource(EOperationSource.Scalar);
                 // blend 값 설정 // Set blend value
-                blend.SetScalarValue(mvScalr);
+                operationBlend.SetScalarValue(mvScalr);
                 // SourceRatio 설정 // Set Source Blend Ratio
-                blend.SetSourceRatio(0.75f);
+                operationBlend.SetSourceRatio(0.75f);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = blend.Execute()).IsFail())
+				if((res = operationBlend.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation blend.");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set the destination image
-                blend.SetDestinationImage(ref arrFliImage[2]);
+                operationBlend.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				blend.SetOperationSource(EOperationSource.Scalar);
+				operationBlend.SetOperationSource(EOperationSource.Scalar);
                 // blend 값 설정 // Set blend value
-                blend.SetScalarValue(mvScalr2);
+                operationBlend.SetScalarValue(mvScalr2);
 				//  SourceRatio 설정 // Set Source Blend Ratio
-				blend.SetSourceRatio(0.45f);
+				operationBlend.SetSourceRatio(0.45f);
 
                 // 변경된 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = blend.Execute()).IsFail())
+                if ((res = operationBlend.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation blend.");
                     break;

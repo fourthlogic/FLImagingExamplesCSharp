@@ -140,20 +140,20 @@ namespace FLImagingExamplesCSharp
                 
 
                 // Operation Blend 객체 생성 // Create Operation Blend object
-                COperationBlend blend = new COperationBlend();
+                COperationBlend operationBlend = new COperationBlend();
                 // Source 이미지 설정 // Set the source image
-                blend.SetSourceImage(ref arrFliImage[0]);
+                operationBlend.SetSourceImage(ref arrFliImage[0]);
                 // Operand 이미지 설정 // Set the operand image
-                blend.SetOperandImage(ref arrFliImage[1]);
+                operationBlend.SetOperandImage(ref arrFliImage[1]);
                 // Destination 이미지 설정 // Set the destination image
-                blend.SetDestinationImage(ref arrFliImage[2]);
+                operationBlend.SetDestinationImage(ref arrFliImage[2]);
 				// 연산 방식 설정 // Set operation source
-				blend.SetOperationSource(EOperationSource.Image);
+				operationBlend.SetOperationSource(EOperationSource.Image);
                 // SourceRatio 설정 // Set Source Blend Ratio
-                blend.SetSourceRatio(0.75f);
+                operationBlend.SetSourceRatio(0.75f);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = blend.Execute()).IsFail())
+				if((res = operationBlend.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation blend.");
                     break;

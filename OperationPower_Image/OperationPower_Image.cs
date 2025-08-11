@@ -237,37 +237,37 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Operation Power 객체 생성 // Create Operation Power object
-                COperationPower power = new COperationPower();
+                COperationPower operationPower = new COperationPower();
 
                 // Source 이미지 설정 // Set the source image
-                power.SetSourceImage(ref arrFliImage0[0]);
+                operationPower.SetSourceImage(ref arrFliImage0[0]);
                 // Operand 이미지 설정 // Set the operand image
-                power.SetOperandImage(ref arrFliImage0[1]);
+                operationPower.SetOperandImage(ref arrFliImage0[1]);
                 // Destination 이미지 설정 // Set the destination image
-                power.SetDestinationImage(ref arrFliImage0[2]);
+                operationPower.SetDestinationImage(ref arrFliImage0[2]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                power.SetOperationSource(EOperationSource.Image);
+                operationPower.SetOperationSource(EOperationSource.Image);
              
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = power.Execute()).IsFail())
+                if ((res = operationPower.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation power.");
                     Console.WriteLine(res.GetString());
                     break;
                 }
 
-                power.SetSourceImage(ref arrFliImage1[0]);
+                operationPower.SetSourceImage(ref arrFliImage1[0]);
                 // Operand 이미지 설정 // Set the operand image
-                power.SetOperandImage(ref arrFliImage1[1]);
+                operationPower.SetOperandImage(ref arrFliImage1[1]);
                 // Destination 이미지 설정 // Set the destination image
-                power.SetDestinationImage(ref arrFliImage1[2]);
+                operationPower.SetDestinationImage(ref arrFliImage1[2]);
                 // Image Operation 모드로 설정 // Set operation mode to image
-                power.SetOperationSource(EOperationSource.Image);
+                operationPower.SetOperationSource(EOperationSource.Image);
 				// Overflow Method Wrapping 옵션으로 설정 // Set Overflow Method to Wrapping option
-				power.SetOverflowMethod(EOverflowMethod.Wrapping);
+				operationPower.SetOverflowMethod(EOverflowMethod.Wrapping);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if ((res = power.Execute()).IsFail())
+                if ((res = operationPower.Execute()).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation power.");
                     Console.WriteLine(res.GetString());

@@ -101,14 +101,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Operation cosine 객체 생성 // Create Cosine object
-				COperationCosine cosine = new COperationCosine();
+				COperationCosine operationCosine = new COperationCosine();
 				// Source 이미지 설정 // Set source image
-				cosine.SetSourceImage(ref arrFliImage[0]);
+				operationCosine.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				cosine.SetDestinationImage(ref arrFliImage[1]);
+				operationCosine.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (cosine.Execute())).IsFail())
+				if((res = (operationCosine.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation cosine.");
 					break;

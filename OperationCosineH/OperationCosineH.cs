@@ -101,14 +101,14 @@ namespace FLImagingExamplesCSharp
 				}
 
                 // Operation OperationCosineH 객체 생성 // Create CosineH object
-                COperationCosineH cosineH = new COperationCosineH();
+                COperationCosineH operationCosineH = new COperationCosineH();
 				// Source 이미지 설정 // Set source image
-                cosineH.SetSourceImage(ref arrFliImage[0]);
+                operationCosineH.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-                cosineH.SetDestinationImage(ref arrFliImage[1]);
+                operationCosineH.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (cosineH.Execute())).IsFail())
+                if ((res = (operationCosineH.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation CosineH.");
 					break;

@@ -101,14 +101,14 @@ namespace FLImagingExamplesCSharp
 				}
 
                 // Operation OperationInvertIntensity 객체 생성 // Create Invert Intensity object
-                COperationInvertIntensity invertIntensity = new COperationInvertIntensity();
+                COperationInvertIntensity operationInvertIntensity = new COperationInvertIntensity();
 				// Source 이미지 설정 // Set source image
-				invertIntensity.SetSourceImage(ref arrFliImage[0]);
+				operationInvertIntensity.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-				invertIntensity.SetDestinationImage(ref arrFliImage[1]);
+				operationInvertIntensity.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (invertIntensity.Execute())).IsFail())
+                if ((res = (operationInvertIntensity.Execute())).IsFail())
 				{
                     ErrorPrint(res, "Failed to execute operation Invert Intensity.");
 					break;
