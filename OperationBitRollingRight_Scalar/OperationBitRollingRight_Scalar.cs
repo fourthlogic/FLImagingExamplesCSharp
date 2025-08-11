@@ -119,32 +119,32 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation Bit Rolling 객체 생성 // Create Operation Bit Rolling object
-				COperationBitRollingRight rollingRight = new COperationBitRollingRight();
+				COperationBitRollingRight operationBitRollingRight = new COperationBitRollingRight();
 				// Source 이미지 설정 // Set the source image
-				rollingRight.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationBitRollingRight.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set the destination image
-				rollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
+				operationBitRollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 				// Operation source를 scalar로 설정 // Set operation source to scalar
-				rollingRight.SetOperationSource(EOperationSource.Scalar);
+				operationBitRollingRight.SetOperationSource(EOperationSource.Scalar);
 				// rollingRight 값 설정 // Set rollingRight value
 				CMultiVar<double> mvScalarValue1 = new CMultiVar<double>(1.0, 1.0, 1.0);
-				rollingRight.SetScalarValue(mvScalarValue1);
+				operationBitRollingRight.SetScalarValue(mvScalarValue1);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = rollingRight.Execute()).IsFail())
+				if((res = operationBitRollingRight.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation rollingRight.");
 					break;
 				}
 
 				// Destination 이미지를 Destination2로 설정 // Set Destination image to Destination2
-				rollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
+				operationBitRollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 				// rollingRight 값 설정 // Set rollingRight value
 				CMultiVar<double> mvScalarValue2 = new CMultiVar<double> (7.0, 7.0, 7.0);
-				rollingRight.SetScalarValue(mvScalarValue2);
+				operationBitRollingRight.SetScalarValue(mvScalarValue2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = rollingRight.Execute()).IsFail())
+				if((res = operationBitRollingRight.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation rollingRight.");
 					break;

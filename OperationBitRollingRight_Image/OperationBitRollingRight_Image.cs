@@ -119,19 +119,19 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Operation BitRollingRight 객체 생성 // Create Operation BitRollingRight object
-				COperationBitRollingRight rollingRight = new COperationBitRollingRight();
+				COperationBitRollingRight operationBitRollingRight = new COperationBitRollingRight();
 				// Source 이미지 설정 // Set the source image
-				rollingRight.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				operationBitRollingRight.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Operand 이미지 설정 // Set the operand image
-				rollingRight.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
+				operationBitRollingRight.SetOperandImage(ref arrFliImage[(int)EType.Operand]);
 				// Destination 이미지 설정 // Set the destination image
-				rollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				operationBitRollingRight.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 
 				// Operation source를 이미지로 설정 // Set operation source to image
-				rollingRight.SetOperationSource(EOperationSource.Image);
+				operationBitRollingRight.SetOperationSource(EOperationSource.Image);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = rollingRight.Execute()).IsFail())
+				if((res = operationBitRollingRight.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation rollingRight.");
 					break;
