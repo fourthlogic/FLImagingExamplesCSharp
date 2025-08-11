@@ -121,22 +121,22 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// CLabelRenamerDL 객체 생성 // Create CLabelRenamerDL object
-				CLabelRenamerDL labelRenamer = new CLabelRenamerDL();
+				CLabelRenamerDL labelRenamerDL = new CLabelRenamerDL();
 				
 				// Source 이미지 설정 // Set source image
-				labelRenamer.SetSourceImage(ref fliSourceImage);
+				labelRenamerDL.SetSourceImage(ref fliSourceImage);
 				// Destination 이미지 설정 // Set destination image
-				labelRenamer.SetDestinationImage(ref fliResultImage);
+				labelRenamerDL.SetDestinationImage(ref fliResultImage);
 
 				// 파라미터 값 설정 // Set parameter value
-				labelRenamer.EnablePathMode(false);
-				labelRenamer.EnableRegularExpression(false);
-				labelRenamer.EnableMatchCase(true);
-				labelRenamer.SetCompareMode(CLabelRenamerDL.ECompareMode.TextMode);
-				labelRenamer.SetOriginalName("1(OK)");
-				labelRenamer.SetSubstituteName("1(PASS)");
+				labelRenamerDL.EnablePathMode(false);
+				labelRenamerDL.EnableRegularExpression(false);
+				labelRenamerDL.EnableMatchCase(true);
+				labelRenamerDL.SetCompareMode(CLabelRenamerDL.ECompareMode.TextMode);
+				labelRenamerDL.SetOriginalName("1(OK)");
+				labelRenamerDL.SetSubstituteName("1(PASS)");
 
-				if((res = labelRenamer.Execute()).IsFail())
+				if((res = labelRenamerDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to process\n");
 					break;

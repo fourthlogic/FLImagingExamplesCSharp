@@ -179,26 +179,26 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Generative Adversarial Network 객체 생성 // Create Generative Adversarial Network object
-				CGenerativeAdversarialNetworkInpaintingDL gan = new CGenerativeAdversarialNetworkInpaintingDL();
+				CGenerativeAdversarialNetworkInpaintingDL generativeAdversarialNetworkInpaintingDL = new CGenerativeAdversarialNetworkInpaintingDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				gan.SetLearningImage(ref fliLearnImage);
+				generativeAdversarialNetworkInpaintingDL.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
-				gan.SetLearningValidationImage(ref fliValidateIamge);
+				generativeAdversarialNetworkInpaintingDL.SetLearningValidationImage(ref fliValidateIamge);
 
 				// 학습할 Generative Adversarial Network 모델 설정 // Set up the Generative Adversarial Network model to learn
-				gan.SetModel(CGenerativeAdversarialNetworkInpaintingDL.EModel.FLGenNet_Inpainting);
+				generativeAdversarialNetworkInpaintingDL.SetModel(CGenerativeAdversarialNetworkInpaintingDL.EModel.FLGenNet_Inpainting);
 				// 학습할 Generative Adversarial Network 모델 설정 // Set up the Generative Adversarial Network model to learn
-				gan.SetModelVersion(CGenerativeAdversarialNetworkInpaintingDL.EModelVersion.FLGenNet_Inpainting_V1_256);
+				generativeAdversarialNetworkInpaintingDL.SetModelVersion(CGenerativeAdversarialNetworkInpaintingDL.EModelVersion.FLGenNet_Inpainting_V1_256);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				gan.SetLearningEpoch(500);
+				generativeAdversarialNetworkInpaintingDL.SetLearningEpoch(500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				gan.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				generativeAdversarialNetworkInpaintingDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
-				gan.EnableOptimalLearningStatePreservation(true);
+				generativeAdversarialNetworkInpaintingDL.EnableOptimalLearningStatePreservation(true);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(1e-4f);
@@ -208,10 +208,10 @@ namespace FLImagingExamplesCSharp
 				optSpec.SetBeta1(.5f);
 
 				// Gradient Clipping 옵션 적용 // Set the gradient clipping option
-				gan.EnableLearningGradientClipping(true);
-				gan.SetLearningGradientClippingThreshold(1.0f);
+				generativeAdversarialNetworkInpaintingDL.EnableLearningGradientClipping(true);
+				generativeAdversarialNetworkInpaintingDL.SetLearningGradientClippingThreshold(1.0f);
 				// 설정한 Optimizer를 GAN에 적용 // Apply the Optimizer that we set up to GAN
-				gan.SetLearningOptimizerSpec(optSpec);
+				generativeAdversarialNetworkInpaintingDL.SetLearningOptimizerSpec(optSpec);
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
@@ -226,14 +226,14 @@ namespace FLImagingExamplesCSharp
 				autoSaveSpec.SetAutoSaveCondition("metric > max('metric')");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
-				gan.SetLearningAutoSaveSpec(autoSaveSpec);
+				generativeAdversarialNetworkInpaintingDL.SetLearningAutoSaveSpec(autoSaveSpec);
 
 				// GenerativeAdversarialNetwork learn function을 진행하는 스레드 생성 // Create the GenerativeAdversarialNetwork Learn function thread
 				CResult eLearnResult = new CResult();
 
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					eLearnResult = gan.Learn();
+					eLearnResult = generativeAdversarialNetworkInpaintingDL.Learn();
 					bTerminated = true;
 				}, null);
 
@@ -245,10 +245,10 @@ namespace FLImagingExamplesCSharp
 						bEscape = true;
 				}, null);
 
-				while(!gan.IsRunning() && !bTerminated)
+				while(!generativeAdversarialNetworkInpaintingDL.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
-				int i32MaxEpoch = gan.GetLearningEpoch();
+				int i32MaxEpoch = generativeAdversarialNetworkInpaintingDL.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
 				int i32PrevSSIMCount = 0;
@@ -258,11 +258,11 @@ namespace FLImagingExamplesCSharp
 					Thread.Sleep(1);
 
 					// 마지막 미니 배치 최대 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MaxIteration = gan.GetActualMiniBatchCount();
+					int i32MaxIteration = generativeAdversarialNetworkInpaintingDL.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = gan.GetLearningResultCurrentIteration();
+					int i32Iteration = generativeAdversarialNetworkInpaintingDL.GetLearningResultCurrentIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = gan.GetLastEpoch();
+					int i32Epoch = generativeAdversarialNetworkInpaintingDL.GetLastEpoch();
 
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
@@ -275,7 +275,7 @@ namespace FLImagingExamplesCSharp
 						List<float> vctMRQ = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						gan.GetLearningResultAllHistory(ref vctCosts, ref vctSSIM, ref vctMRQ, ref vctValidationEpoch);
+						generativeAdversarialNetworkInpaintingDL.GetLearningResultAllHistory(ref vctCosts, ref vctSSIM, ref vctMRQ, ref vctValidationEpoch);
 
 						if(vctCosts.Count != 0)
 						{
@@ -299,7 +299,7 @@ namespace FLImagingExamplesCSharp
 								// Graph View 데이터 입력 // Input Graph View Data
 								viewGraph.Plot(vctCosts, EChartType.Line, EColor.RED, "Cost");
 
-								int i32Step = gan.GetLearningValidationStep();
+								int i32Step = generativeAdversarialNetworkInpaintingDL.GetLearningValidationStep();
 								List<float> flaX = new List<float>();
 
 								for(long i = 0; i < vctSSIM.Count() - 1; ++i)
@@ -323,7 +323,7 @@ namespace FLImagingExamplesCSharp
 							}
 
 							if(bEscape)
-								gan.Stop();
+								generativeAdversarialNetworkInpaintingDL.Stop();
 
 							i32PrevEpoch = i32Epoch;
 							i32PrevCostCount = vctCosts.Count();
@@ -332,7 +332,7 @@ namespace FLImagingExamplesCSharp
 					}
 
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
-					if(!gan.IsRunning())
+					if(!generativeAdversarialNetworkInpaintingDL.IsRunning())
 						break;
 				}
 
@@ -343,13 +343,13 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Source 이미지 설정 // Set the Source image
-				gan.SetInferenceImage(ref fliSourceImage);
+				generativeAdversarialNetworkInpaintingDL.SetInferenceImage(ref fliSourceImage);
 
 				// 생성할 이미지 설정 // Set the image to create
-				gan.SetInferenceResultImage(ref fliResultImage);
+				generativeAdversarialNetworkInpaintingDL.SetInferenceResultImage(ref fliResultImage);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = gan.Execute()).IsFail())
+				if((res = generativeAdversarialNetworkInpaintingDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute");
 					break;

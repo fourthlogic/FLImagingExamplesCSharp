@@ -174,35 +174,35 @@ namespace FLImagingExamplesCSharp
 				viewImagesLabel.RedrawWindow();
 
 				// OCR 객체 생성 // Create OCR object
-				CCharacterBasedOCRDL ocr = new CCharacterBasedOCRDL();
+				CCharacterBasedOCRDL characterBasedOCRDL = new CCharacterBasedOCRDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				ocr.SetLearningImage(ref fliLearnImage);
+				characterBasedOCRDL.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
-				ocr.SetLearningValidationImage(ref fliValidationImage);
+				characterBasedOCRDL.SetLearningValidationImage(ref fliValidationImage);
 				// 분류할 이미지 설정 // Set the image to classify
-				ocr.SetInferenceImage(ref fliValidationImage);
-				ocr.SetInferenceResultImage(ref fliResultLabelImage);
+				characterBasedOCRDL.SetInferenceImage(ref fliValidationImage);
+				characterBasedOCRDL.SetInferenceResultImage(ref fliResultLabelImage);
 
 				// 학습할 OCR 모델 설정 // Set up the OCR model to learn
-				ocr.SetModel(CCharacterBasedOCRDL.EModel.R_FLSegNet);
+				characterBasedOCRDL.SetModel(CCharacterBasedOCRDL.EModel.R_FLSegNet);
 				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
-				ocr.SetModelVersion(CCharacterBasedOCRDL.EModelVersion.R_FLSegNet_V1_512);
+				characterBasedOCRDL.SetModelVersion(CCharacterBasedOCRDL.EModelVersion.R_FLSegNet_V1_512);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				ocr.SetLearningEpoch(10000);
+				characterBasedOCRDL.SetLearningEpoch(10000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				ocr.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				characterBasedOCRDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
-				ocr.EnableOptimalLearningStatePreservation(true);
+				characterBasedOCRDL.EnableOptimalLearningStatePreservation(true);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.0001f);
 
 				// 설정한 Optimizer를 OCR에 적용 // Apply Optimizer that we set up to OCR
-				ocr.SetLearningOptimizerSpec(optSpec);
+				characterBasedOCRDL.SetLearningOptimizerSpec(optSpec);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
@@ -215,11 +215,11 @@ namespace FLImagingExamplesCSharp
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
-				ocr.SetLearningAugmentationSpec(augSpec);
+				characterBasedOCRDL.SetLearningAugmentationSpec(augSpec);
 
 				// 학습을 종료할 조건식 설정. mAP값이 0.85 이상인 경우 학습 종료한다. metric와 동일한 값입니다.
 				// Set Conditional Expression to End Learning. If the mAP value is 0.85 or higher, end the learning. Same value as metric.
-				ocr.SetLearningStopCondition("map >= 0.85");
+				characterBasedOCRDL.SetLearningStopCondition("map >= 0.85");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
@@ -234,12 +234,12 @@ namespace FLImagingExamplesCSharp
 				autoSaveSpec.SetAutoSaveCondition("map > max('map')");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
-				ocr.SetLearningAutoSaveSpec(autoSaveSpec);
+				characterBasedOCRDL.SetLearningAutoSaveSpec(autoSaveSpec);
 
 				// OCR learn function을 진행하는 스레드 생성 // Create the OCR Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					if((res = ocr.Learn()).IsFail())
+					if((res = characterBasedOCRDL.Learn()).IsFail())
 						ErrorPrint(res, "Failed to execute Learn.\n");
 
 					bTerminated = true;
@@ -253,10 +253,10 @@ namespace FLImagingExamplesCSharp
 						bEscape = true;
 				}, null);
 
-				while(!ocr.IsRunning() && !bTerminated)
+				while(!characterBasedOCRDL.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
-				int i32MaxEpoch = ocr.GetLearningEpoch();
+				int i32MaxEpoch = characterBasedOCRDL.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
 				int i32PrevValidationCount = 0;
@@ -266,20 +266,20 @@ namespace FLImagingExamplesCSharp
 					Thread.Sleep(1);
 
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MiniBatchCount = ocr.GetActualMiniBatchCount();
+					int i32MiniBatchCount = characterBasedOCRDL.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = ocr.GetLearningResultCurrentIteration();
+					int i32Iteration = characterBasedOCRDL.GetLearningResultCurrentIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = ocr.GetLastEpoch();
+					int i32Epoch = characterBasedOCRDL.GetLastEpoch();
 
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
 					if(i32Epoch != i32PrevEpoch && i32Iteration == i32MiniBatchCount && i32Epoch > 0)
 					{
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
-						float f32CurrCost = ocr.GetLearningResultLastCost();
+						float f32CurrCost = characterBasedOCRDL.GetLearningResultLastCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32ValidationMeanAP = ocr.GetLearningResultLastMeanAP();
+						float f32ValidationMeanAP = characterBasedOCRDL.GetLearningResultLastMeanAP();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Epoch {2} / {3}", f32CurrCost, f32ValidationMeanAP, i32Epoch, i32MaxEpoch);
@@ -290,12 +290,12 @@ namespace FLImagingExamplesCSharp
 						List<float> vctMeanAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						ocr.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch);
+						characterBasedOCRDL.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanAP.Count() != 0 && i32PrevValidationCount != vctMeanAP.Count()))
 						{
-							int i32Step = ocr.GetLearningValidationStep();
+							int i32Step = characterBasedOCRDL.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
 
 							for(long i = 0; i < vctMeanAP.Count() - 1; ++i)
@@ -321,7 +321,7 @@ namespace FLImagingExamplesCSharp
 						// 검증 결과가 0.9 이상 일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is greater than 0.9, stop learning and classify images 
 						if(f32ValidationMeanAP >= 0.9f || bEscape)
-							ocr.Stop();
+							characterBasedOCRDL.Stop();
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = vctCosts.Count();
@@ -329,28 +329,28 @@ namespace FLImagingExamplesCSharp
 					}
 
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
-					if(!ocr.IsRunning())
+					if(!characterBasedOCRDL.IsRunning())
 						break;
 				}
 
 				// Result Label Image에 피겨를 포함하지 않는 Execute
 				// 분류할 이미지 설정 // Set the image to classify
-				ocr.SetInferenceImage(ref fliValidationImage);
+				characterBasedOCRDL.SetInferenceImage(ref fliValidationImage);
 				// 추론 결과 이미지 설정 // Set the inference result Image
-				ocr.SetInferenceResultImage(ref fliResultLabelImage);
+				characterBasedOCRDL.SetInferenceResultImage(ref fliResultLabelImage);
 				// 추론 결과 옵션 설정 // Set the inference result options;
 				// Result item settings enum 설정 // Set the result item settings
-				ocr.SetInferenceResultItemSettings(CCharacterBasedOCRDL.EInferenceResultItemSettings.ClassName_Contour);
+				characterBasedOCRDL.SetInferenceResultItemSettings(CCharacterBasedOCRDL.EInferenceResultItemSettings.ClassName_Contour);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = ocr.Execute()).IsFail())
+				if((res = characterBasedOCRDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
 				}
 
 				// ResultLabl 뷰에 Floating Value Range를 설정
-				viewImagesLabel.SetFloatingImageValueRange(0, (float)ocr.GetLearningResultClassCount());
+				viewImagesLabel.SetFloatingImageValueRange(0, (float)characterBasedOCRDL.GetLearningResultClassCount());
 				viewImagesLabel.ZoomFit();
 
 				// 이미지 뷰를 갱신 // Update the image view.

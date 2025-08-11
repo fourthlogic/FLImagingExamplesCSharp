@@ -202,38 +202,38 @@ namespace FLImagingExamplesCSharp
 				viewImagesContour.RedrawWindow();
 		
 				// InstanceSegmentation 객체 생성 // Create InstanceSegmentation object
-				CInstanceSegmentationDL instanceSegmentation = new CInstanceSegmentationDL();
+				CInstanceSegmentationDL instanceSegmentationDL = new CInstanceSegmentationDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				instanceSegmentation.SetLearningImage(ref fliLearnImage);
+				instanceSegmentationDL.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
-				instanceSegmentation.SetLearningValidationImage(ref fliValidationImage);
+				instanceSegmentationDL.SetLearningValidationImage(ref fliValidationImage);
 				// 분류할 이미지 설정 // Set the image to classify
-				instanceSegmentation.SetInferenceImage(ref fliValidationImage);
-				instanceSegmentation.SetInferenceResultImage(ref fliResultBoxContourImage);
+				instanceSegmentationDL.SetInferenceImage(ref fliValidationImage);
+				instanceSegmentationDL.SetInferenceResultImage(ref fliResultBoxContourImage);
 
 				// 학습할 InstanceSegmentation 모델 설정 // Set up the InstanceSegmentation model to learn
-				instanceSegmentation.SetModel(CInstanceSegmentationDL.EModel.R_FLSegNet);
+				instanceSegmentationDL.SetModel(CInstanceSegmentationDL.EModel.R_FLSegNet);
 				// 학습할 InstanceSegmentation 모델 Version 설정 // Set up the InstanceSegmentation model version to learn
-				instanceSegmentation.SetModelVersion(CInstanceSegmentationDL.EModelVersion.R_FLSegNet_V1_256);
+				instanceSegmentationDL.SetModelVersion(CInstanceSegmentationDL.EModelVersion.R_FLSegNet_V1_256);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				instanceSegmentation.SetLearningEpoch(500);
+				instanceSegmentationDL.SetLearningEpoch(500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				instanceSegmentation.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				instanceSegmentationDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 				// 학습을 종료할 조건식 설정. mAP값이 0.85 이상인 경우 학습 종료한다. metric와 동일한 값입니다.
 				// Set Conditional Expression to End Learning. If the mAP value is 0.85 or higher, end the learning. Same value as metric.
-				instanceSegmentation.SetLearningStopCondition("mAP >= 0.85");
+				instanceSegmentationDL.SetLearningStopCondition("mAP >= 0.85");
 	
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.0001f);
 
 				// 설정한 Optimizer를 InstanceSegmentation에 적용 // Apply Optimizer that we set up to InstanceSegmentation
-				instanceSegmentation.SetLearningOptimizerSpec(optSpec);
+				instanceSegmentationDL.SetLearningOptimizerSpec(optSpec);
 				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
-				instanceSegmentation.EnableOptimalLearningStatePreservation(true);
+				instanceSegmentationDL.EnableOptimalLearningStatePreservation(true);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
@@ -247,7 +247,7 @@ namespace FLImagingExamplesCSharp
 				augSpec.EnableScale(true);
 				augSpec.SetScaleParam(0.91, 1.100000, 0.91, 1.1, true, 1.0);
 
-				instanceSegmentation.SetLearningAugmentationSpec(augSpec);
+				instanceSegmentationDL.SetLearningAugmentationSpec(augSpec);
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
@@ -262,12 +262,12 @@ namespace FLImagingExamplesCSharp
 				autoSaveSpec.SetAutoSaveCondition("map > max('map')");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
-				instanceSegmentation.SetLearningAutoSaveSpec(autoSaveSpec);
+				instanceSegmentationDL.SetLearningAutoSaveSpec(autoSaveSpec);
 
 				// InstanceSegmentation learn function을 진행하는 스레드 생성 // Create the InstanceSegmentation Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					if((res = instanceSegmentation.Learn()).IsFail())
+					if((res = instanceSegmentationDL.Learn()).IsFail())
 						ErrorPrint(res, "Failed to execute Learn.\n");
 					
 					bTerminated = true;
@@ -281,10 +281,10 @@ namespace FLImagingExamplesCSharp
 						bEscape = true;
 				}, null);
 
-				while(!instanceSegmentation.IsRunning() && !bTerminated)
+				while(!instanceSegmentationDL.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
-				int i32MaxEpoch = instanceSegmentation.GetLearningEpoch();
+				int i32MaxEpoch = instanceSegmentationDL.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
 				int i32PrevValidationCount = 0;
@@ -294,20 +294,20 @@ namespace FLImagingExamplesCSharp
 					Thread.Sleep(1);
 
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MiniBatchCount = instanceSegmentation.GetActualMiniBatchCount();
+					int i32MiniBatchCount = instanceSegmentationDL.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = instanceSegmentation.GetLearningResultCurrentIteration();
+					int i32Iteration = instanceSegmentationDL.GetLearningResultCurrentIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = instanceSegmentation.GetLastEpoch();
+					int i32Epoch = instanceSegmentationDL.GetLastEpoch();
 			
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
 					if(i32Epoch != i32PrevEpoch && i32Iteration == i32MiniBatchCount && i32Epoch > 0)
 					{
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
-						float f32CurrCost = instanceSegmentation.GetLearningResultLastCost();
+						float f32CurrCost = instanceSegmentationDL.GetLearningResultLastCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32MeanAP = instanceSegmentation.GetLearningResultLastMeanAP();
+						float f32MeanAP = instanceSegmentationDL.GetLearningResultLastMeanAP();
 		
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Epoch {2} / {3}", f32CurrCost, f32MeanAP, i32Epoch, i32MaxEpoch);
@@ -318,12 +318,12 @@ namespace FLImagingExamplesCSharp
 						List<float> vctMeanAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						instanceSegmentation.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch);
+						instanceSegmentationDL.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanAP.Count() != 0 && i32PrevValidationCount != vctMeanAP.Count()))
 						{
-							int i32Step = instanceSegmentation.GetLearningValidationStep();
+							int i32Step = instanceSegmentationDL.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
 
 							for(long i = 0; i < vctMeanAP.Count() - 1; ++i)
@@ -349,7 +349,7 @@ namespace FLImagingExamplesCSharp
 						// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is 1.0, stop learning and classify images 
 						if(f32MeanAP == 1.0f || bEscape)
-							instanceSegmentation.Stop();
+							instanceSegmentationDL.Stop();
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = vctCosts.Count();
@@ -357,26 +357,26 @@ namespace FLImagingExamplesCSharp
 					}
 
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
-					if(!instanceSegmentation.IsRunning())
+					if(!instanceSegmentationDL.IsRunning())
 						break;
 				}
 
 				// Result Image에 Box & Contour 모두 출력하는 Execute // Execute to print both Box& Contour in Result Image
 				// 분류할 이미지 설정 // Set the image to classify
-				instanceSegmentation.SetInferenceImage(ref fliValidationImage);
+				instanceSegmentationDL.SetInferenceImage(ref fliValidationImage);
 				// 추론 결과 이미지 설정 // Set the inference result Image
-				instanceSegmentation.SetInferenceResultImage(ref fliResultBoxContourImage);
+				instanceSegmentationDL.SetInferenceResultImage(ref fliResultBoxContourImage);
 				// 추론 결과 옵션 설정 // Set the inference result options
 				// Figure 옵션 설정 // Set the option of figures
 				CInstanceSegmentationDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentationDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentationDL.EInferenceResultItemSettings.Objectness | CInstanceSegmentationDL.EInferenceResultItemSettings.BoundaryRect | CInstanceSegmentationDL.EInferenceResultItemSettings.Contour);
-				instanceSegmentation.SetInferenceResultItemSettings(eFigureOption);
+				instanceSegmentationDL.SetInferenceResultItemSettings(eFigureOption);
 				// Objectness Threshold 설정 // Set the obectness threshold
-				instanceSegmentation.SetInferenceResultObjectnessThreshold(0.5f);
+				instanceSegmentationDL.SetInferenceResultObjectnessThreshold(0.5f);
 				// Mask Threshold 설정 // Set The mask threshold
-				instanceSegmentation.SetInferenceResultMaskThreshold(0.5f);
+				instanceSegmentationDL.SetInferenceResultMaskThreshold(0.5f);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = instanceSegmentation.Execute()).IsFail())
+				if((res = instanceSegmentationDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
@@ -384,20 +384,20 @@ namespace FLImagingExamplesCSharp
 
 				// Result Image에 Contour 만 출력하는 Execute // Execute to print both Box& Contour in Result Image
 				// 분류할 이미지 설정 // Set the image to classify
-				instanceSegmentation.SetInferenceImage(ref fliValidationImage);
+				instanceSegmentationDL.SetInferenceImage(ref fliValidationImage);
 				// 추론 결과 이미지 설정 // Set the inference result Image
-				instanceSegmentation.SetInferenceResultImage(ref fliResultContourImage);
+				instanceSegmentationDL.SetInferenceResultImage(ref fliResultContourImage);
 				// 추론 결과 옵션 설정 // Set the inference result options
 				// Figure 옵션 설정 // Set the option of figures
 				eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.Contour);
-				instanceSegmentation.SetInferenceResultItemSettings(eFigureOption);
+				instanceSegmentationDL.SetInferenceResultItemSettings(eFigureOption);
 				// Objectness Threshold 설정 // Set the obectness threshold
-				instanceSegmentation.SetInferenceResultObjectnessThreshold(0.5f);
+				instanceSegmentationDL.SetInferenceResultObjectnessThreshold(0.5f);
 				// Mask Threshold 설정 // Set The mask threshold
-				instanceSegmentation.SetInferenceResultMaskThreshold(0.5f);
+				instanceSegmentationDL.SetInferenceResultMaskThreshold(0.5f);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = instanceSegmentation.Execute()).IsFail())
+				if((res = instanceSegmentationDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;

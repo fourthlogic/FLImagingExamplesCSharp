@@ -173,41 +173,41 @@ namespace FLImagingExamplesCSharp
 				viewImagesLabel.RedrawWindow();
 		
 				// ObjectDetection 객체 생성 // Create ObjectDetection object
-				CObjectDetectionDL objectDetection = new CObjectDetectionDL();
+				CObjectDetectionDL objectDetectionDL = new CObjectDetectionDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				objectDetection.SetLearningImage(ref fliLearnImage);
+				objectDetectionDL.SetLearningImage(ref fliLearnImage);
 				// 검증할 이미지 설정 // Set the image to validate
-				objectDetection.SetLearningValidationImage(ref fliValidationImage);
+				objectDetectionDL.SetLearningValidationImage(ref fliValidationImage);
 				// 분류할 이미지 설정 // Set the image to classify
-				objectDetection.SetInferenceImage(ref fliValidationImage);
-				objectDetection.SetInferenceResultImage(ref fliResultImage);
+				objectDetectionDL.SetInferenceImage(ref fliValidationImage);
+				objectDetectionDL.SetInferenceResultImage(ref fliResultImage);
 
 				// 학습할 ObjectDetection 모델 설정 // Set up the ObjectDetection model to learn
-				objectDetection.SetModel(CObjectDetectionDL.EModel.R_FLNet);
+				objectDetectionDL.SetModel(CObjectDetectionDL.EModel.R_FLNet);
 				// 학습할 ObjectDetection 모델 Version 설정 // Set up the ObjectDetection model version to learn
-				objectDetection.SetModelVersion(CObjectDetectionDL.EModelVersion.R_FLNet_V1_256);
+				objectDetectionDL.SetModelVersion(CObjectDetectionDL.EModelVersion.R_FLNet_V1_256);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				objectDetection.SetLearningEpoch(1024);
+				objectDetectionDL.SetLearningEpoch(1024);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				objectDetection.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				objectDetectionDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 				// 검증을 진행 할 최소 평균 Cost값 설정 // Set the minimum average cost value at which verification will be triggered
-				objectDetection.SetLearningRequiredAvgCostForValidation(5);
+				objectDetectionDL.SetLearningRequiredAvgCostForValidation(5);
 				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
-				objectDetection.EnableOptimalLearningStatePreservation(true);
+				objectDetectionDL.EnableOptimalLearningStatePreservation(true);
 				// 학습을 종료할 조건식 설정. mAP값이 0.85 이상인 경우 학습 종료한다. metric와 동일한 값입니다.
 				// Set Conditional Expression to End Learning. If the mAP value is 0.85 or higher, end the learning. Same value as metric.
-				objectDetection.SetLearningStopCondition("mAP >= 0.85");
+				objectDetectionDL.SetLearningStopCondition("mAP >= 0.85");
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(1e-4f);
 				optSpec.SetWeightDecay(0);
 
 				// 설정한 Optimizer를 ObjectDetection에 적용 // Apply Optimizer that we set up to ObjectDetection
-				objectDetection.SetLearningOptimizerSpec(optSpec);
+				objectDetectionDL.SetLearningOptimizerSpec(optSpec);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
@@ -222,11 +222,11 @@ namespace FLImagingExamplesCSharp
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
-				objectDetection.SetLearningAugmentationSpec(augSpec);
+				objectDetectionDL.SetLearningAugmentationSpec(augSpec);
 
 				// 학습을 종료할 조건식 설정. mAP값이 0.85 이상인 경우 학습 종료한다. metric와 동일한 값입니다.
 				// Set Conditional Expression to End Learning. If the mAP value is 0.85 or higher, end the learning. Same value as metric.
-				objectDetection.SetLearningStopCondition("map >= 0.85");
+				objectDetectionDL.SetLearningStopCondition("map >= 0.85");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
@@ -241,12 +241,12 @@ namespace FLImagingExamplesCSharp
 				autoSaveSpec.SetAutoSaveCondition("map > max('map')");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
-				objectDetection.SetLearningAutoSaveSpec(autoSaveSpec);
+				objectDetectionDL.SetLearningAutoSaveSpec(autoSaveSpec);
 
 				// ObjectDetection learn function을 진행하는 스레드 생성 // Create the ObjectDetection Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					if((res = objectDetection.Learn()).IsFail())
+					if((res = objectDetectionDL.Learn()).IsFail())
 						ErrorPrint(res, "Failed to execute Learn.\n");
 					
 					bTerminated = true;
@@ -260,10 +260,10 @@ namespace FLImagingExamplesCSharp
 						bEscape = true;
 				}, null);
 
-				while(!objectDetection.IsRunning() && !bTerminated)
+				while(!objectDetectionDL.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
-				int i32MaxEpoch = objectDetection.GetLearningEpoch();
+				int i32MaxEpoch = objectDetectionDL.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
 				int i32PrevValidationCount = 0;
@@ -273,21 +273,21 @@ namespace FLImagingExamplesCSharp
 					Thread.Sleep(1);
 
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = objectDetection.GetLastEpoch();
+					int i32Epoch = objectDetectionDL.GetLastEpoch();
 			
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
 					if(i32Epoch != i32PrevEpoch && i32Epoch > 0)
 					{
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
-						float f32CurrCost = objectDetection.GetLearningResultLastCost();
+						float f32CurrCost = objectDetectionDL.GetLearningResultLastCost();
 						// 마지막 평균 학습 결과 비용 받기 // Get the last cost of the learning result
-						float f32AvgCost = objectDetection.GetLearningResultLastAverageCost();
+						float f32AvgCost = objectDetectionDL.GetLearningResultLastAverageCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32Validation = objectDetection.GetLearningResultLastMeanAP();
+						float f32Validation = objectDetectionDL.GetLearningResultLastMeanAP();
 			
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-						if(f32AvgCost < objectDetection.GetLearningRequiredCostForValidation())
+						if(f32AvgCost < objectDetectionDL.GetLearningRequiredCostForValidation())
 							Console.WriteLine("Cost : {0:F6} Avg Cost : {1:F6} mAP : {2:F6} Epoch {3} / {4}", f32CurrCost, f32AvgCost, f32Validation, i32Epoch, i32MaxEpoch);
 						else
 							Console.WriteLine("Cost : {0:F6} Avg Cost : {1:F6} Epoch {2} / {3}", f32CurrCost, f32AvgCost, i32Epoch, i32MaxEpoch);
@@ -299,12 +299,12 @@ namespace FLImagingExamplesCSharp
 						List<float> vctmAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						objectDetection.GetLearningResultAllHistory(ref vctCosts, ref vctAvgCosts, ref vctmAP, ref vctValidationEpoch);
+						objectDetectionDL.GetLearningResultAllHistory(ref vctCosts, ref vctAvgCosts, ref vctmAP, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctmAP.Count() != 0 && i32PrevValidationCount != vctmAP.Count()))
 						{
-							int i32Step = objectDetection.GetLearningValidationStep();
+							int i32Step = objectDetectionDL.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
 
 							for(long i = 0; i < vctmAP.Count() - 1; ++i)
@@ -331,7 +331,7 @@ namespace FLImagingExamplesCSharp
 						// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is 1.0, stop learning and classify images 
 						if(f32Validation == 1.0f || bEscape)
-							objectDetection.Stop();
+							objectDetectionDL.Stop();
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = vctCosts.Count();
@@ -339,21 +339,21 @@ namespace FLImagingExamplesCSharp
 					}
 
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
-					if(!objectDetection.IsRunning())
+					if(!objectDetectionDL.IsRunning())
 						break;
 				}
 
 				// Result Label Image에 피겨를 포함하지 않는 Execute
 				// 분류할 이미지 설정 // Set the image to classify
-				objectDetection.SetInferenceImage(ref fliValidationImage);
+				objectDetectionDL.SetInferenceImage(ref fliValidationImage);
 				// 추론 결과 이미지 설정 // Set the inference result Image
-				objectDetection.SetInferenceResultImage(ref fliResultImage);
+				objectDetectionDL.SetInferenceResultImage(ref fliResultImage);
 				// 추론 결과 옵션 설정 // Set the inference result options;
 				// Result 결과의 옵션 설정 // Set the option of results
-				objectDetection.SetInferenceResultItemSettings(CObjectDetectionDL.EInferenceResultItemSettings.ClassNum_ClassName_Objectness);
+				objectDetectionDL.SetInferenceResultItemSettings(CObjectDetectionDL.EInferenceResultItemSettings.ClassNum_ClassName_Objectness);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = objectDetection.Execute()).IsFail())
+				if((res = objectDetectionDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;

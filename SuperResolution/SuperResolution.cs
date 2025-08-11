@@ -289,41 +289,41 @@ namespace FLImagingExamplesCSharp
 				viewImagesLabelFigure.RedrawWindow();
 
 				// SuperResolution 객체 생성 // Create SuperResolution object
-				CSuperResolutionDL superResolution = new CSuperResolutionDL();
+				CSuperResolutionDL superResolutionDL = new CSuperResolutionDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// 학습할 이미지 설정 // Set the image to learn
-				superResolution.SetLearningLowResolutionImage(ref fliLearnImageLowResolution);
-				superResolution.SetLearningHighResolutionImage(ref fliLearnImageHighResolution);
+				superResolutionDL.SetLearningLowResolutionImage(ref fliLearnImageLowResolution);
+				superResolutionDL.SetLearningHighResolutionImage(ref fliLearnImageHighResolution);
 
 				// 검증할 이미지 설정 // Set the image to validation
-				superResolution.SetLearningLowResolutionValidationImage(ref fliValidationImageLowResolution);
-				superResolution.SetLearningHighResolutionValidationImage(ref fliValidationImageHighResolution);
+				superResolutionDL.SetLearningLowResolutionValidationImage(ref fliValidationImageLowResolution);
+				superResolutionDL.SetLearningHighResolutionValidationImage(ref fliValidationImageHighResolution);
 
 				// 분류할 이미지 설정 // Set the image to classify
-				superResolution.SetInferenceImage(ref fliValidationImageLowResolution);
-				superResolution.SetInferenceResultImage(ref fliResultLabelFigureImage);
+				superResolutionDL.SetInferenceImage(ref fliValidationImageLowResolution);
+				superResolutionDL.SetInferenceResultImage(ref fliResultLabelFigureImage);
 
 				// 학습할 SuperResolution 모델 설정 // Set up the SuperResolution model to learn
-				superResolution.SetModel(CSuperResolutionDL.EModel.SRCNN);
+				superResolutionDL.SetModel(CSuperResolutionDL.EModel.SRCNN);
 				// 학습할 SuperResolution 모델 Version 설정 // Set up the SuperResolution model version to learn
-				superResolution.SetModelVersion(CSuperResolutionDL.EModelVersion.SRCNN_V1_128);
+				superResolutionDL.SetModelVersion(CSuperResolutionDL.EModelVersion.SRCNN_V1_128);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				superResolution.SetLearningEpoch(500);
+				superResolutionDL.SetLearningEpoch(500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
-				superResolution.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				superResolutionDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 				// 이미지 배율 설정 // Set Scale Ratio
-				superResolution.SetScaleRatio(2);
+				superResolutionDL.SetScaleRatio(2);
 				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
-				superResolution.EnableOptimalLearningStatePreservation(true);
+				superResolutionDL.EnableOptimalLearningStatePreservation(true);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.001f);
 
 				// 설정한 Optimizer를 SuperResolution에 적용 // Apply Optimizer that we set up to SuperResolution
-				superResolution.SetLearningOptimizerSpec(optSpec);
+				superResolutionDL.SetLearningOptimizerSpec(optSpec);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
@@ -336,11 +336,11 @@ namespace FLImagingExamplesCSharp
 				augSpec.EnableHorizontalFlip(true);
 				augSpec.EnableVerticalFlip(true);
 
-				superResolution.SetLearningAugmentationSpec(augSpec);
+				superResolutionDL.SetLearningAugmentationSpec(augSpec);
 
 				// 학습을 종료할 조건식 설정. accuracy값이 0.9 이상인 경우 학습 종료한다.
 				// Set Conditional Expression to End Learning. If the accuracy value is 0.9 or more, end learning.
-				superResolution.SetLearningStopCondition("accuracy >= 0.9");
+				superResolutionDL.SetLearningStopCondition("accuracy >= 0.9");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
@@ -355,12 +355,12 @@ namespace FLImagingExamplesCSharp
 				autoSaveSpec.SetAutoSaveCondition("cost < min('cost') & accuracy > max('accuracy')");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
-				superResolution.SetLearningAutoSaveSpec(autoSaveSpec);
+				superResolutionDL.SetLearningAutoSaveSpec(autoSaveSpec);
 
 				// SuperResolution learn function을 진행하는 스레드 생성 // Create the SuperResolution Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
-					if((res = superResolution.Learn()).IsFail())
+					if((res = superResolutionDL.Learn()).IsFail())
 						ErrorPrint(res, "Failed to execute Learn.\n");
 
 					bTerminated = true;
@@ -374,10 +374,10 @@ namespace FLImagingExamplesCSharp
 						bEscape = true;
 				}, null);
 
-				while(!superResolution.IsRunning() && !bTerminated)
+				while(!superResolutionDL.IsRunning() && !bTerminated)
 					Thread.Sleep(1);
 
-				int i32MaxEpoch = superResolution.GetLearningEpoch();
+				int i32MaxEpoch = superResolutionDL.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
 				int i32PrevPSNRCount = 0;
@@ -389,24 +389,24 @@ namespace FLImagingExamplesCSharp
 					Thread.Sleep(1);
 
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
-					int i32MiniBatchCount = superResolution.GetActualMiniBatchCount();
+					int i32MiniBatchCount = superResolutionDL.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = superResolution.GetLearningResultCurrentIteration();
+					int i32Iteration = superResolutionDL.GetLearningResultCurrentIteration();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
-					int i32Epoch = superResolution.GetLastEpoch();
+					int i32Epoch = superResolutionDL.GetLastEpoch();
 
 					// 미니 배치 반복이 완료되면 cost와 validation 값을 디스플레이 
 					// Display cost and validation value if iterations of the mini batch is completed 
 					if(i32Epoch != i32PrevEpoch && i32Iteration == i32MiniBatchCount && i32Epoch > 0)
 					{
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
-						float f32CurrCost = superResolution.GetLearningResultLastCost();
+						float f32CurrCost = superResolutionDL.GetLearningResultLastCost();
 						// 마지막 PSNR 결과 받기 // Get the last PSNR result
-						float f32PSNRPa = superResolution.GetLearningResultLastPSNR();
+						float f32PSNRPa = superResolutionDL.GetLearningResultLastPSNR();
 						// 마지막 SSIM 결과 받기 // Get the last SSIM result
-						float f32SSIMPa = superResolution.GetLearningResultLastSSIM();
+						float f32SSIMPa = superResolutionDL.GetLearningResultLastSSIM();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32ValidationPa = superResolution.GetLearningResultLastAccuracy();
+						float f32ValidationPa = superResolutionDL.GetLearningResultLastAccuracy();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						Console.WriteLine("Cost : {0:F6} PSNR : {1:F6} SSIM : {2:F6} Accuracy : {3:F6}  Epoch {4} / {5}", f32CurrCost, f32PSNRPa, f32SSIMPa, f32ValidationPa, i32Epoch, i32MaxEpoch);
@@ -419,12 +419,12 @@ namespace FLImagingExamplesCSharp
 						List<float> flaValidationHistory = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						superResolution.GetLearningResultAllHistory(ref flaCostHistory, ref flaValidationHistory, ref flaPSNRHistory, ref flaSSIMHistory,  ref vctValidationEpoch);
+						superResolutionDL.GetLearningResultAllHistory(ref flaCostHistory, ref flaValidationHistory, ref flaPSNRHistory, ref flaSSIMHistory,  ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((flaCostHistory.Count() != 0 && i32PrevCostCount != flaCostHistory.Count()) || (flaPSNRHistory.Count() != 0 && i32PrevPSNRCount != flaPSNRHistory.Count()) || (flaSSIMHistory.Count() != 0 && i32PrevSSIMCount != flaSSIMHistory.Count()) || (flaValidationHistory.Count() != 0 && i32PrevValidationCount != flaValidationHistory.Count()))
 						{
-							int i32Step = superResolution.GetLearningValidationStep();
+							int i32Step = superResolutionDL.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
 
 							for(long i = 0; i < flaValidationHistory.Count() - 1; ++i)
@@ -454,7 +454,7 @@ namespace FLImagingExamplesCSharp
 						// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is 1.0, stop learning and classify images 
 						if(f32ValidationPa == 1.0f || bEscape)
-							superResolution.Stop();
+							superResolutionDL.Stop();
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = flaCostHistory.Count();
@@ -462,18 +462,18 @@ namespace FLImagingExamplesCSharp
 					}
 
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
-					if(!superResolution.IsRunning())
+					if(!superResolutionDL.IsRunning())
 						break;
 				}
 
 				// Result Label Image에 피겨를 포함하지 않는 Execute
 				// 분류할 이미지 설정 // Set the image to classify
-				superResolution.SetInferenceImage(ref fliValidationImageLowResolution);
+				superResolutionDL.SetInferenceImage(ref fliValidationImageLowResolution);
 				// 추론 결과 이미지 설정 // Set the inference result Image
-				superResolution.SetInferenceResultImage(ref fliResultLabelFigureImage);
+				superResolutionDL.SetInferenceResultImage(ref fliResultLabelFigureImage);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = superResolution.Execute()).IsFail())
+				if((res = superResolutionDL.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.\n");
 					break;
