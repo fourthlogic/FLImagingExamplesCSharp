@@ -95,35 +95,35 @@ namespace FLImagingExamplesCSharp
 	        	}
 
 	        	// Operation SignedSquareDifference 객체 생성 // Create Operation SignedSquareDifference object
-	        	COperationSignedSquareDifference signedSquareDifference = new COperationSignedSquareDifference();
+	        	COperationSignedSquareDifference operationSignedSquareDifference = new COperationSignedSquareDifference();
 
 	        	// Source 이미지 설정 // Set the source image
-	        	signedSquareDifference.SetSourceImage(ref fliSourceImage);
+	        	operationSignedSquareDifference.SetSourceImage(ref fliSourceImage);
 
 	        	// Destination 이미지 설정 // Set the destination image
-	        	signedSquareDifference.SetDestinationImage(ref fliDestinationImage);
+	        	operationSignedSquareDifference.SetDestinationImage(ref fliDestinationImage);
 
 				// Operand Overflow Method 설정 // Set the overflow method
-				signedSquareDifference.SetOverflowMethod(EOverflowMethod.Wrapping);
+				operationSignedSquareDifference.SetOverflowMethod(EOverflowMethod.Wrapping);
 
 				// Scalar Operation 모드로 설정 // Set operation mode to scalar
-				signedSquareDifference.SetOperationSource(EOperationSource.Scalar);
+				operationSignedSquareDifference.SetOperationSource(EOperationSource.Scalar);
 
 				// 스칼라 색상 지정 // Set scalar operand color
 				CMultiVar<double> mvScalar = new CMultiVar<double> (0);
-	        	signedSquareDifference.SetScalarValue(mvScalar);
+	        	operationSignedSquareDifference.SetScalarValue(mvScalar);
 
 				// 항상 공백 영역을 지정한 색으로 채우도록 설정 // Set the blank area to always be filled with a specified color
-				signedSquareDifference.EnableFillBlankColorMode(true);
+				operationSignedSquareDifference.EnableFillBlankColorMode(true);
 
 	        	// 공백 색상 지정 // Set blank color
                 CMultiVar<double> mvBlank = new CMultiVar<double> (100);
-	        	signedSquareDifference.SetBlankColor(mvBlank);
+	        	operationSignedSquareDifference.SetBlankColor(mvBlank);
 
 	        	// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-	        	if((res = signedSquareDifference.Execute()).IsFail())
+	        	if((res = operationSignedSquareDifference.Execute()).IsFail())
 	        	{
-                    ErrorPrint(res,"Failed to execute Operation SignedSquareDifference. \n");
+                    ErrorPrint(res,"Failed to execute Operation Signed Square Difference. \n");
 	        		break;
 	        	}
 

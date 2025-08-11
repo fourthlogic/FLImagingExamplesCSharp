@@ -133,30 +133,30 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Operation SignedSquareDifference 객체 생성 // Create Operation SignedSquareDifference object
-                COperationSignedSquareDifference signedSquareDifference = new COperationSignedSquareDifference();
+                COperationSignedSquareDifference operationSignedSquareDifference = new COperationSignedSquareDifference();
 
                 // Source 이미지 설정 // Set the source image
-	        	signedSquareDifference.SetSourceImage(ref fliSourceImage);
+	        	operationSignedSquareDifference.SetSourceImage(ref fliSourceImage);
 
 		        // Operand 이미지 설정 // Set the operand image
-		        signedSquareDifference.SetOperandImage(ref fliOperandImage);
+		        operationSignedSquareDifference.SetOperandImage(ref fliOperandImage);
 
 		        // Destination 이미지 설정 // Set the destination image
-		        signedSquareDifference.SetDestinationImage(ref fliDestinationImage);
+		        operationSignedSquareDifference.SetDestinationImage(ref fliDestinationImage);
 
 				// Operand Overflow Method 설정 // Set the overflow method
-				signedSquareDifference.SetOverflowMethod(EOverflowMethod.Clamping);
+				operationSignedSquareDifference.SetOverflowMethod(EOverflowMethod.Clamping);
 
 				// Image Operation 모드로 설정 // Set operation mode to image
-				signedSquareDifference.SetOperationSource(EOperationSource.Image);
+				operationSignedSquareDifference.SetOperationSource(EOperationSource.Image);
 
 		        // 공백 색상 칠하기 모드 해제 // Disable fill blanck color mode
-		        signedSquareDifference.EnableFillBlankColorMode(false);
+		        operationSignedSquareDifference.EnableFillBlankColorMode(false);
 
 		        // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-		        if((res = signedSquareDifference.Execute()).IsFail())
+		        if((res = operationSignedSquareDifference.Execute()).IsFail())
 				{
-                    ErrorPrint(res,"Failed to execute Operation SignedSquareDifference. \n");
+                    ErrorPrint(res,"Failed to execute Operation Signed Square Difference. \n");
                     ErrorPrint(res,"\n");
 
                     break;
