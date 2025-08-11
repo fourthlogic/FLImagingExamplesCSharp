@@ -66,18 +66,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// ModulationTransferFunction 객체 생성 // Create ModulationTransferFunction object
-				CModulationTransferFunction flaGLCM = new CModulationTransferFunction();
+				CModulationTransferFunction modulationTransferFunction = new CModulationTransferFunction();
 
 				// ROI 범위 설정 // Set the ROI value
 				CFLRect<double> flfSourceROI = new CFLRect<double>(349.0, 43.0, 396.0, 85.0);
 
 				// Source 이미지 설정 // Set the Source Image
-				flaGLCM.SetSourceImage(ref fliImage);
+				modulationTransferFunction.SetSourceImage(ref fliImage);
 				// Source ROI 설정 // Set the Source ROI
-				flaGLCM.SetSourceROI(flfSourceROI);
+				modulationTransferFunction.SetSourceROI(flfSourceROI);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (flaGLCM.Execute())).IsFail())
+				if((res = (modulationTransferFunction.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Modulation Transfer Function.");
 					break;
@@ -87,7 +87,7 @@ namespace FLImagingExamplesCSharp
 				List<double> listMTF = new List<double>();
 
 				// 이미지 전체(혹은 ROI 영역) 픽셀값의 MTF를 구하는 함수 // Function that calculate MTF of the image(or the region of ROI)
-				if((res = flaGLCM.GetResults(ref listMTF)).IsFail())
+				if((res = modulationTransferFunction.GetResults(ref listMTF)).IsFail())
 				{
 					ErrorPrint(res, "No Result");
 					break;

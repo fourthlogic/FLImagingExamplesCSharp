@@ -106,16 +106,16 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// Harmonic Interpolation 객체 생성 // Create  Harmonic Interpolation object
-				CHarmonicInterpolation harmo = new CHarmonicInterpolation();
+				CHarmonicInterpolation harmonicInterpolation = new CHarmonicInterpolation();
 				// Source 이미지 설정 // Set source image
-				harmo.SetSourceImage(ref arrFliImage[(int)EType.Source]);
+				harmonicInterpolation.SetSourceImage(ref arrFliImage[(int)EType.Source]);
 				// Destination 이미지 설정 // Set destination image 
-				harmo.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
+				harmonicInterpolation.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
 				// 정밀도 설정 // Set precision value
-				harmo.SetPrecision(0.001);
+				harmonicInterpolation.SetPrecision(0.001);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (harmo.Execute())).IsFail())
+				if((res = (harmonicInterpolation.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Harmonic Interpolation.");
 					break;

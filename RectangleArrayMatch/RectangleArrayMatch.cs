@@ -111,7 +111,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Rectangle Array Match 객체 생성 // Create Rectangle Array Match Object
-				CRectangleArrayMatch arrayMatch = new CRectangleArrayMatch();
+				CRectangleArrayMatch rectangleArrayMatch = new CRectangleArrayMatch();
 
 				// 학습할 영역을 설정합니다. // Set the area to learn.
 				CFLFigureArray flfaMeasurement = new CFLFigureArray();
@@ -130,23 +130,23 @@ namespace FLImagingExamplesCSharp
 
 				// 검출 시 사용될 파라미터를 설정합니다. // Set the parameters to be used for detection.
 				// 탐색할 이미지를 설정합니다. // Set the image to browse.
-				arrayMatch.SetSourceImage(ref fliFindImage);
+				rectangleArrayMatch.SetSourceImage(ref fliFindImage);
 				// 측정 배열을 설정합니다. // Set up the measurement array.
-				arrayMatch.SetArray(flfaMeasurement);
+				rectangleArrayMatch.SetArray(flfaMeasurement);
 				// 탐색 시, MeasurementArray의 기본 각도를 설정합니다. // On navigation, set the default angle of the MeasurementArray.
-				arrayMatch.SetBaseAngle(0.0);
+				rectangleArrayMatch.SetBaseAngle(0.0);
 				// 중심의 초기값을 이미지 중심으로 할지 설정합니다. // Set whether the initial value of the center is the center of the image.
-				arrayMatch.EnablePivotImageCenter(true);
+				rectangleArrayMatch.EnablePivotImageCenter(true);
 				// 중심 오프셋을 설정합니다. // Set the center offset.
-				arrayMatch.SetPivotOffset(flpCameraPivot);
+				rectangleArrayMatch.SetPivotOffset(flpCameraPivot);
 				// 최소 스코어 점수를 설정합니다. // Set the minimum score score.
-				arrayMatch.SetMinScore(0.5);
+				rectangleArrayMatch.SetMinScore(0.5);
 				// 탐색 시, 각도 탐색 범위를 설정합니다. // When searching, set the angle search range.
-				arrayMatch.SetObjectAngleTolerance(180);
+				rectangleArrayMatch.SetObjectAngleTolerance(180);
 				// 탐색 시, Fitting Enable/Disable을 설정합니다. // When searching, set Fitting Enable/Disable.
-				arrayMatch.SetFitting(eFitting);
+				rectangleArrayMatch.SetFitting(eFitting);
 				// 탐색 시, 허용 이동량 범위를 설정합니다. // When searching, set the allowable movement range.
-				arrayMatch.SetAllowingObjectDistanceError(-1);
+				rectangleArrayMatch.SetAllowingObjectDistanceError(-1);
 
 				for(long i64Index = 0; i64Index < flfaMeasurement.GetCount(); ++i64Index)
 				{
@@ -164,7 +164,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 알고리즘 수행 // Execute the Algoritm
-				if((res = arrayMatch.Execute()).IsFail())
+				if((res = rectangleArrayMatch.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;
@@ -172,19 +172,19 @@ namespace FLImagingExamplesCSharp
 
 
 				// 검출 결과 배열의 개수를 가져옵니다. // Get the number of detection result arrays.
-				long i64ResultCount = arrayMatch.GetResultCount();
+				long i64ResultCount = rectangleArrayMatch.GetResultCount();
 				double f64Score = 0, f64Angle = 0;
 				// 검출 결과 배열의 점수를 가져옵니다. // Get the score of the detection result array.
-				arrayMatch.GetResultArrayScore(ref f64Score);
+				rectangleArrayMatch.GetResultArrayScore(ref f64Score);
 				// 검출 결과 배열의 각도를 가져옵니다. // Get the angle of the detection result array.
-				arrayMatch.GetResultArrayAngle(ref f64Angle);
+				rectangleArrayMatch.GetResultArrayAngle(ref f64Angle);
 
 				for(int i = 0; i < i64ResultCount; ++i)
 				{
 					CRectangleArrayMatch.SResult sResult = new CRectangleArrayMatch.SResult();
 
 					// 검출 결과 중 배열 하나를 가져옵니다. // Get an array of detection results.
-					arrayMatch.GetResult(i, ref sResult);
+					rectangleArrayMatch.GetResult(i, ref sResult);
 					CFLPoint<double> flpRegionCenter = sResult.pFlrMeasuredRegion.GetCenter();
 					string strDisplayResult;
 					strDisplayResult = String.Format("Array Element ID : {0}\n Score : {1}\n Angle : {2}", (int)sResult.i64Index, sResult.f64Score, sResult.f64Angle);
