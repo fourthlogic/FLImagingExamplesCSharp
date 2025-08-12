@@ -138,6 +138,9 @@ namespace FLImagingExamplesCSharp
 
 				view3DWorld.SetCamera(cam);
 
+				view3DDst.DesynchronizePointOfView(ref view3DSrc0);
+				view3DDst.DesynchronizePointOfView(ref view3DSrc1);
+
 				CGUIView3DLayer layer3DSrc0 = view3DSrc0.GetLayer(0);
 				CGUIView3DLayer layer3DSrc1 = view3DSrc1.GetLayer(0);
 				CGUIView3DLayer layer3DWorld = view3DWorld.GetLayer(0);
