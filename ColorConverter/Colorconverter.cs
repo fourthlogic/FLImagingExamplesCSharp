@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class Colorconverter
+	class ColorConverter
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
