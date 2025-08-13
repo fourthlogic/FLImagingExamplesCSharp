@@ -51,7 +51,7 @@ namespace FLImagingExamplesCSharp
             CResult res = m_viewSNAP.CreateAndFitParent((ulong)this.Handle);
 
 			// 스냅 파일 로드 // Load SNAP file
-			res = m_viewSNAP.Load("..\\..\\FLImagingExamplesSNAP\\Advanced Functions\\Object\\Blob\\Blob.flsf");
+			res = m_viewSNAP.Load("../../FLImagingExamplesSNAP/Advanced Functions/Object/Blob/Blob.flsf");
 
 			m_viewSNAP.ZoomFit();
 
