@@ -1769,7 +1769,6 @@
       - Fourier Transform
         - The algorithm that transforms images into fourier transforms.
         - 이미지를 푸리에 변환을 하는 알고리즘.
-
       - Fourier Transform Real
         - The algorithm that transforms images into real fourier transforms.
         - 이미지를 실푸리에 변환으로 변환하는 알고리즘.
