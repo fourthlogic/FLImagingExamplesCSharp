@@ -49,11 +49,9 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-                view3DDst.PushObject(new CFL3DObject());
-                var viewObject = view3DDst.GetView3DObject(0);
-                var floDst = viewObject.Get3DObject();
+				CFL3DObject floDst = new CFL3DObject();
 
-                CPointCloudGenerator3D pointCloudGenerator3D = new CPointCloudGenerator3D();
+				CPointCloudGenerator3D pointCloudGenerator3D = new CPointCloudGenerator3D();
 
                 // 파라미터 설정 // Set parameter
                 pointCloudGenerator3D.SetDestinationObject(ref floDst);
@@ -91,13 +89,12 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-                // 출력 뷰의 시점을 계산 // Calculate the viewpoint of destination view
-				viewObject.UpdateAll();
-				view3DDst.UpdateObject(0);
+				view3DDst.PushObject(floDst);
+				// 출력 뷰의 시점을 계산 // Calculate the viewpoint of destination view
 				view3DDst.ZoomFit();
 
-                // 이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
-                while(view3DDst.IsAvailable())
+				// 이미지 뷰, 3D 뷰가 종료될 때까지 계속 반복// Repeat until image and 3D view is closed
+				while(view3DDst.IsAvailable())
 				{
 					if((res = pointCloudGenerator3D.Execute()).IsFail())
 					{
@@ -108,12 +105,17 @@ namespace FLImagingExamplesCSharp
 					if(!view3DDst.IsAvailable())
 						break;
 
-					viewObject.UpdateVertex(true);
-					view3DDst.UpdateObject(0);
+					view3DDst.LockUpdate();
+					view3DDst.ClearObjects();
 
-					view3DDst.UpdateScreen();
+					if(!view3DDst.IsAvailable())
+						break;
 
-					Thread.Sleep(1);
+					view3DDst.PushObject(floDst);
+					if(!view3DDst.IsAvailable())
+						break;
+
+					view3DDst.UnlockUpdate();
                 }
             }
             while (false);
