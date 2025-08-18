@@ -31,6 +31,7 @@ namespace FLImagingExamplesCSharp
 			Src = 0,
 			Opr,
 			Dst,
+			DstExpand,
 			Count,
 		}
 
@@ -71,8 +72,8 @@ namespace FLImagingExamplesCSharp
 
 				for(int i = 0; i < (int)EType.Count; ++i)
 				{
-					int i32X = i % (int)EType.Count;
-					int i32Y = i / (int)EType.Count;
+					int i32X = i % 2;
+					int i32Y = i / 2;
 
 					// 이미지 뷰 생성 // Create image view
 					if((res = arrViewImage[i].Create(i32X * 400 + 400, i32Y * 400, i32X * 400 + 400 + 400, i32Y * 400 + 400)).IsFail())
@@ -88,7 +89,7 @@ namespace FLImagingExamplesCSharp
 						break;
 					}
 
-					if(i != (int)EType.Src && i != (int)EType.Dst)
+					if(i != (int)EType.Src && i != (int)EType.DstExpand)
 					{
 						// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
 						if((res = arrViewImage[(int)EType.Src].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
@@ -115,9 +116,6 @@ namespace FLImagingExamplesCSharp
 				// Operand 이미지 설정 // Set operand image 
 				imageConcatenator.SetOperandImage(ref arrFliImage[(int)EType.Opr]);
 
-				// Destination 이미지 설정 // Set destination image 
-				imageConcatenator.SetDestinationImage(ref arrFliImage[(int)EType.Dst]);
-
 				// ImageConcatenator ROI 지정 // Create ROI range
 				CFLRect<double> flrROI = new CFLRect<double>(arrFliImage[(int)EType.Opr]);
 
@@ -125,6 +123,28 @@ namespace FLImagingExamplesCSharp
 
 				// Operand 이미지 설정 // Set operand image 
 				imageConcatenator.SetOperandROI(flrROI);
+
+				// 결과 이미지 확장 여부 설정 // Enable or disable output image expansion
+				imageConcatenator.EnableResultImageExpansion(false);
+
+				// 이미지를 이어붙일 방향을 설정 // Set image concatenation direction
+				imageConcatenator.SetConcatenationPosition(CImageConcatenator.EConcatenationPosition.Right);
+
+				// Destination 이미지 설정 // Set destination image 
+				imageConcatenator.SetDestinationImage(ref arrFliImage[(int)EType.Dst]);
+
+				// 알고리즘 수행 // Execute the algorithm
+				if((res = (imageConcatenator.Execute())).IsFail())
+				{
+					ErrorPrint(res, "Failed to execute ImageConcatenator.");
+					break;
+				}
+
+				// 결과 이미지 확장 여부 설정 // Enable or disable output image expansion
+				imageConcatenator.EnableResultImageExpansion(true);
+
+				// Destination 이미지 설정 // Set destination image 
+				imageConcatenator.SetDestinationImage(ref arrFliImage[(int)EType.DstExpand]);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (imageConcatenator.Execute())).IsFail())
@@ -143,13 +163,16 @@ namespace FLImagingExamplesCSharp
 
 
 				// Text 출력 // Display Text 
-				if((res = arrLayer[(int)EType.Src].DrawTextImage(flpTmp, "Source Image", EColor.YELLOW, EColor.BLACK)).IsFail())
+				if((res = arrLayer[(int)EType.Src].DrawTextImage(flpTmp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = arrLayer[(int)EType.Opr].DrawTextImage(flpTmp, "Operand Image", EColor.YELLOW, EColor.BLACK)).IsFail())
+				if((res = arrLayer[(int)EType.Opr].DrawTextImage(flpTmp, "Operand Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = arrLayer[(int)EType.Dst].DrawTextImage(flpTmp, "Destination Image", EColor.YELLOW, EColor.BLACK)).IsFail())
+				if((res = arrLayer[(int)EType.Dst].DrawTextImage(flpTmp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+					ErrorPrint(res, "Failed to draw text.\n");
+
+				if((res = arrLayer[(int)EType.DstExpand].DrawTextImage(flpTmp, "Destination Image(Expanded)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// ImageConcatenator 영역 표기 // ImageConcatenator Area draw
