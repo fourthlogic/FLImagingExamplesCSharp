@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DBBE4229-E0E4-4928-A21C-0DB6E321B956}</ProjectGuid>
+    <ProjectGuid>{44386AA3-E955-4CE8-92EE-22B3D0125BA5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Integral_Polynomial</RootNamespace>
-    <AssemblyName>Integral_Polynomial</AssemblyName>
+    <RootNamespace>IntegralImage_LinearConstant</RootNamespace>
+    <AssemblyName>IntegralImage_LinearConstant</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -111,7 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Integral_Polynomial.cs" />
+    <Compile Include="IntegralImage_LinearConstant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

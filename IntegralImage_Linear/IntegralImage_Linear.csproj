@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{046FA7CF-89A7-474F-B2E8-506B037FDBEF}</ProjectGuid>
+    <ProjectGuid>{64B127D8-B34B-4306-8657-014CD6DDE29F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Integral_SumAndSquareSum</RootNamespace>
-    <AssemblyName>Integral_SumAndSquareSum</AssemblyName>
+    <RootNamespace>IntegralImage_Linear</RootNamespace>
+    <AssemblyName>IntegralImage_Linear</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -111,7 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Integral_SumAndSquareSum.cs" />
+    <Compile Include="IntegralImage_Linear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

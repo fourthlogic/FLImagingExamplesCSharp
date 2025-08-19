@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class Integral_SumAndSquareSum
+	class IntegralImage_Linear
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -47,7 +47,7 @@ namespace FLImagingExamplesCSharp
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliISrcImage.Load("../../ExampleImages/Integral/Lake.flif")).IsFail())
+				if((res = fliISrcImage.Load("../../ExampleImages/IntegralImage/Lake.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -94,31 +94,31 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				CMultiVar<double> mvCoefficients = new CMultiVar<double>(1.7, 2.1, 0);
+				CMultiVar<double> mvCoefficients = new CMultiVar<double>(0, 2.1, 0);
 
-				// Integral  객체 생성 // Create Integral  object
-				CIntegral integral = new CIntegral();
+				// IntegralImage 객체 생성 // Create IntegralImage object
+				CIntegralImage integralImage = new CIntegralImage();
 
 				// Source 이미지 설정 // Set source image 
-				integral.SetSourceImage(ref fliISrcImage);
+				integralImage.SetSourceImage(ref fliISrcImage);
 
 				// Destination 이미지 설정 // Set destination image
-				integral.SetDestinationImage(ref fliIDstImage);
+				integralImage.SetDestinationImage(ref fliIDstImage);
 
-				// 적분합 자료형 타입을 설정합니다. // Set integral data type.
-				integral.SetDataType(CIntegral.EDataType.Uint32);
+				// 적분합 자료형 타입을 설정합니다. // Set integralImage data type.
+				integralImage.SetDataType(CIntegral.EDataType.Uint32);
 
-				// Integral 누적합 연산 모드 설정 // Set integration operation method.
-				// ECalculationMode_SquareAndSum : ax^2 + bx 다항식 방식의 합 // ECalculationMode_SquareAndSum : ax^2 + bx Polynomial Sum
-				integral.SetCalculationMode(CIntegral.ECalculationMode.SquareAndSum);
+				// integralImage 누적합 연산 모드 설정 // Set integration operation method.
+				// ECalculationMode.Linear : ax 형태의 선형 누적합 // ECalculationMode.Linear : Linear sum (ax)
+				integralImage.SetCalculationMode(CIntegral.ECalculationMode.Linear);
 
-				// ax^2 + bx + c 계수 설정(a = 1.7, b = 2.1, c = 0) // ax^2 + bx + c Setting the coefficient (a = 1.7, b = 2.1, c = 0)
-				integral.SetCoefficients(mvCoefficients);
+				// ax^2 + bx + c 계수 설정(a = 0, b = 2.1, c = 0) // ax^2 + bx + c Setting the coefficient (a = 0, b = 2.1, c = 0)
+				integralImage.SetCoefficients(mvCoefficients);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (integral.Execute())).IsFail())
+				if((res = (res = integralImage.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Integral.");
+					ErrorPrint(res, "Failed to execute IntegralImage.");
 					break;
 				}
 
@@ -128,7 +128,7 @@ namespace FLImagingExamplesCSharp
 				CGUIViewImageLayer layer2 = viewImage[1].GetLayer(0);
 				CFLPoint<double> flpTemp = new CFLPoint<double>(0, 0);
 
-				// Text 출력 // Display Text 
+				// Text 출력 // Display Text
 				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
