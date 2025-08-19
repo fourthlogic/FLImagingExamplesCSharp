@@ -43,6 +43,10 @@ namespace FLImagingExamplesCSharp
 			{
 				CResult res;
 
+				// Encoding Message 설정
+				Console.WriteLine("Please input encoding message.: ");
+				string strInput = Console.ReadLine();
+
 				// 이미지 뷰 생성 // Create image view
 				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
 				{
@@ -56,10 +60,6 @@ namespace FLImagingExamplesCSharp
 
 				// 처리할 이미지 설정 // Set the image to process
 				qrCodeEncoder.SetSourceImage(ref fliImage);
-
-				// Encoding Message 설정
-				Console.WriteLine("Please input encoding message.: ");
-				string strInput = Console.ReadLine();
 
 				qrCodeEncoder.SetEncodingMessage(strInput);
 

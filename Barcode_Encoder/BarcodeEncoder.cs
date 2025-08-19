@@ -43,16 +43,16 @@ namespace FLImagingExamplesCSharp
 			{
 				CResult res;
 
+				// 입력 받을 문자열 선언
+				Console.WriteLine("Please input encoding message.: ");
+				string strInput = Console.ReadLine();
+
 				// 이미지 뷰 생성 // Create image view
 				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
-
-				// 입력 받을 문자열 선언
-				Console.WriteLine("Please input encoding message.: ");
-				string strInput = Console.ReadLine();
 
 				// Barcode Encoder 객체 생성 // Create Barcode Encoder object
 				CBarcodeEncoder barcode = new CBarcodeEncoder();
