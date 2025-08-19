@@ -106,12 +106,12 @@ namespace FLImagingExamplesCSharp
 				integralImage.SetDestinationImage(ref fliIDstImage);
 
 				// 적분합 자료형 타입을 설정합니다. // Set integralImage data type.
-				integralImage.SetDataType(CIntegral.EDataType.Uint32);
+				integralImage.SetDataType(CIntegralImage.EDataType.Uint32);
 
 				// IntegralImage 누적합 연산 모드 설정 // Set integration operation method.
 				// ECalculationMode.LinearConstant : ax + c 형태의 선형 누적합 
 				// ECalculationMode.LinearConstant : Linear sum with constant (ax + c)
-				integralImage.SetCalculationMode(CIntegral.ECalculationMode.LinearConstant);
+				integralImage.SetCalculationMode(CIntegralImage.ECalculationMode.LinearConstant);
 
 				// ax^2 + bx + c 계수 설정(a = 0, b = 2.1, c = 1) // ax^2 + bx + c Setting the coefficient (a = 0, b = 2.1, c = 1)
 				integralImage.SetCoefficients(mvCoefficients);
