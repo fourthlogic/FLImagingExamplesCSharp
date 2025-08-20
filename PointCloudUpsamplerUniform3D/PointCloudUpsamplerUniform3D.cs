@@ -73,7 +73,7 @@ namespace FLImagingExamplesCSharp
 				// 파라미터 설정 // Set parameter
 				pointCloudUpsamplerUniform3D.SetSourceObject(ref floSrc);
 				pointCloudUpsamplerUniform3D.SetDestinationObject(ref floDst);
-				pointCloudUpsamplerUniform3D.SetColoringMode(CPointCloudUpsampler3DBase.EColoringMode.Interpolate);
+				pointCloudUpsamplerUniform3D.SetColoringMode(EColoringMode.Interpolate);
 				pointCloudUpsamplerUniform3D.EnableNormalInterpolation(true);
 				pointCloudUpsamplerUniform3D.SetSamplingSize((long)1e7);
 				pointCloudUpsamplerUniform3D.EnableCopyVertex(true);
