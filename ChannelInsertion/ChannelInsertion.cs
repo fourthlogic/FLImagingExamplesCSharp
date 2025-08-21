@@ -162,13 +162,13 @@ namespace FLImagingExamplesCSharp
 				// Channel Insertion 객체 생성 // Create Channel Insertion object
 				CChannelInsertion channelInsertion = new CChannelInsertion();
 
-				// 삽입 이미지를 저장할 Array 선언 // Declare an Array to store the insertion image
+				// 삽입 이미지를 저장할 List 선언 // Declare an List to store the insertion image
 				List<CFLImage> vctInsertionImages = new List<CFLImage>();
 
-				// 추출할 채널을 저장할 Array 선언 // Declare an Array to extract the channels
+				// 추출할 채널을 저장할 List 선언 // Declare an List to extract the channels
 				List<Int64> vctInsertionChannels = new List<Int64>();
 
-				// 삽입할 색인을 저장할 Array 선언 // Declare an Array to insert the indices
+				// 삽입할 색인을 저장할 List 선언 // Declare an List to insert the indices
 				List<Int64> vctInsertionIndices = new List<Int64>();
 
 				// 삽입 이미지 입력 // insertion images add
@@ -186,10 +186,10 @@ namespace FLImagingExamplesCSharp
 				// 소스 이미지 설정 // Set source image
 				channelInsertion.SetSourceImage(ref fliSourceImage);
 
-				// 결합할 이미지 및 채널입력 // Set images, channels
+				// 삽입할 이미지 및 채널입력 // Set images, channels
 				channelInsertion.SetInsertionImage(ref vctInsertionImages, vctInsertionChannels, vctInsertionIndices);
 
-				// 결합 결과를 저장할 이미지 설정 // Set destination image
+				// 삽입 결과를 저장할 이미지 설정 // Set destination image
 				channelInsertion.SetDestinationImage(ref fliDstImage);
 
 				// 알고리즘 수행 // Execute the algorithm
