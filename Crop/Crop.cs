@@ -68,13 +68,6 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
-				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize view\n");
-					break;
-				}
-
 				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
 				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail())
 				{
@@ -125,7 +118,7 @@ namespace FLImagingExamplesCSharp
 				if((res = layer1.DrawTextImage(flpTemp, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = layer2.DrawTextImage(flpTemp, "crop Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer2.DrawTextImage(flpTemp, "Crop Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
 				// Crop 영역 표기 // Crop Area draw
