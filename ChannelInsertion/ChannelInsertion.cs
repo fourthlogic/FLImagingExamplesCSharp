@@ -171,15 +171,15 @@ namespace FLImagingExamplesCSharp
 				// 삽입할 색인을 저장할 List 선언 // Declare an List to insert the indices
 				List<Int64> vctInsertionIndices = new List<Int64>();
 
-				// 삽입 이미지 입력 // insertion images add
+				// 삽입 이미지 입력 // Add insertion images 
 				vctInsertionImages.Add(fliInsertionImage[0]);
 				vctInsertionImages.Add(fliInsertionImage[1]);
 
-				// 이미지별 추출할 채널을 입력 // channels add
+				// 이미지별 추출한 채널을 입력 // Add Insertion channels to extract
 				vctInsertionChannels.Add((Int64)EChannelSelection.Channel_0);
 				vctInsertionChannels.Add((Int64)EChannelSelection.Channel_0);
 
-				// 이미지별 삽입할 색인을 입력 // indices add
+				// 이미지별 삽입할 색인을 입력 // Add Insertion indices to insert
 				vctInsertionIndices.Add(0);
 				vctInsertionIndices.Add(1);
 
