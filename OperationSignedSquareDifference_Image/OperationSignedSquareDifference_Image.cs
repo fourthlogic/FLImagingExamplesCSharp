@@ -144,7 +144,7 @@ namespace FLImagingExamplesCSharp
 		        // Destination 이미지 설정 // Set the destination image
 		        operationSignedSquareDifference.SetDestinationImage(ref fliDestinationImage);
 
-				// Operand Overflow Method 설정 // Set the overflow method
+				// Overflow Method 설정 // Set the overflow method
 				operationSignedSquareDifference.SetOverflowMethod(EOverflowMethod.Clamping);
 
 				// Image Operation 모드로 설정 // Set operation mode to image
