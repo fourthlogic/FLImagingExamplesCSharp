@@ -1752,8 +1752,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vertex Match Multi", "Verte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VertexMatch3DMulti", "VertexMatch3DMulti\VertexMatch3DMulti.csproj", "{368B36D0-13EF-46D9-836D-D68A15BF7E47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorConverter", "ColorConverter\ColorConverter.csproj", "{BD87A136-A173-43EE-BACE-AE666A0FF455}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image Concatenator", "Image Concatenator", "{C8D5274F-AC00-46C7-1F8D-E88E81087A52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Socket", "Socket", "{2EAA4A06-5CBA-4E0C-989B-C727CD449451}"
@@ -1773,6 +1771,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegralImage_SquaredLinear", "IntegralImage_SquaredLinear\IntegralImage_SquaredLinear.csproj", "{046FA7CF-89A7-474F-B2E8-506B037FDBEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegralImage_LinearConstant", "IntegralImage_LinearConstant\IntegralImage_LinearConstant.csproj", "{44386AA3-E955-4CE8-92EE-22B3D0125BA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorConverter", "ColorConverter\ColorConverter.csproj", "{BD87A136-A173-43EE-BACE-AE666A0FF455}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -5454,12 +5454,6 @@ Global
 		{368B36D0-13EF-46D9-836D-D68A15BF7E47}.Release|Win32.ActiveCfg = Release|x64
 		{368B36D0-13EF-46D9-836D-D68A15BF7E47}.Release|x64.ActiveCfg = Release|x64
 		{368B36D0-13EF-46D9-836D-D68A15BF7E47}.Release|x64.Build.0 = Release|x64
-		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Debug|Win32.ActiveCfg = Debug|x64
-		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Debug|x64.ActiveCfg = Debug|x64
-		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Debug|x64.Build.0 = Debug|x64
-		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Release|Win32.ActiveCfg = Release|x64
-		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Release|x64.ActiveCfg = Release|x64
-		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Release|x64.Build.0 = Release|x64
 		{34BC78A5-8526-4BE2-A24C-F8FC297363FD}.Debug|Win32.ActiveCfg = Debug|x64
 		{34BC78A5-8526-4BE2-A24C-F8FC297363FD}.Debug|x64.ActiveCfg = Debug|x64
 		{34BC78A5-8526-4BE2-A24C-F8FC297363FD}.Debug|x64.Build.0 = Debug|x64
@@ -5508,6 +5502,12 @@ Global
 		{44386AA3-E955-4CE8-92EE-22B3D0125BA5}.Release|Win32.ActiveCfg = Release|x64
 		{44386AA3-E955-4CE8-92EE-22B3D0125BA5}.Release|x64.ActiveCfg = Release|x64
 		{44386AA3-E955-4CE8-92EE-22B3D0125BA5}.Release|x64.Build.0 = Release|x64
+		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Debug|Win32.ActiveCfg = Debug|x64
+		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Debug|x64.ActiveCfg = Debug|x64
+		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Debug|x64.Build.0 = Debug|x64
+		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Release|Win32.ActiveCfg = Release|x64
+		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Release|x64.ActiveCfg = Release|x64
+		{BD87A136-A173-43EE-BACE-AE666A0FF455}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
