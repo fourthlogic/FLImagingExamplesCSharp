@@ -84,27 +84,27 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CWignerVilleDistribution wvd = new CWignerVilleDistribution();
+				CWignerVilleDistribution wignerVilleDistribution = new CWignerVilleDistribution();
 
-				if((res = wvd.SetSourceImage(ref fliISrcImage)).IsFail())
+				if((res = wignerVilleDistribution.SetSourceImage(ref fliISrcImage)).IsFail())
 					break;
-				if((res = wvd.SetDestinationImage(ref fliIDstImage)).IsFail())
+				if((res = wignerVilleDistribution.SetDestinationImage(ref fliIDstImage)).IsFail())
 					break;
-				if((res = wvd.SetScale(0.00004)).IsFail())
+				if((res = wignerVilleDistribution.SetScale(0.00004)).IsFail())
 					break;
-				if((res = wvd.SetSelfCorrelationHalfSize(511)).IsFail())
+				if((res = wignerVilleDistribution.SetSelfCorrelationHalfSize(511)).IsFail())
 					break;
-				if((res = wvd.SetSelfCorrelationWindow(CWignerVilleDistribution.ESelfCorrelationWindow.Gaussian)).IsFail())
+				if((res = wignerVilleDistribution.SetSelfCorrelationWindow(CWignerVilleDistribution.ESelfCorrelationWindow.Gaussian)).IsFail())
 					break;
-				if((res = wvd.SetSigma(0.3)).IsFail())
+				if((res = wignerVilleDistribution.SetSigma(0.3)).IsFail())
 					break;
-				if((res = wvd.SetOutputMode(CWignerVilleDistribution.EOutputMode.L2Norm)).IsFail())
+				if((res = wignerVilleDistribution.SetOutputMode(CWignerVilleDistribution.EOutputMode.L2Norm)).IsFail())
 					break;
-				if((res = wvd.SetOutputDirection(CWignerVilleDistribution.EOutputDirection.Horizontal)).IsFail())
+				if((res = wignerVilleDistribution.SetOutputDirection(CWignerVilleDistribution.EOutputDirection.Horizontal)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (wvd.Execute())).IsFail())
+				if((res = (wignerVilleDistribution.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
