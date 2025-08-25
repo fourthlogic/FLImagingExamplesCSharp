@@ -9,8 +9,8 @@
     <ProjectGuid>{18A0B069-B96E-456D-A347-65991E8E692D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StationaryConeBeamTranslateCT3D</RootNamespace>
-    <AssemblyName>StationaryConeBeamTranslateCT3D</AssemblyName>
+    <RootNamespace>StationaryConeBeamTranslationCT</RootNamespace>
+    <AssemblyName>StationaryConeBeamTranslationCT</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -111,7 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StationaryConeBeamTranslateCT3D.cs" />
+    <Compile Include="StationaryConeBeamTranslationCT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
