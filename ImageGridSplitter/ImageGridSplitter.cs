@@ -56,7 +56,7 @@ namespace FLImagingExamplesCSharp
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = arrFliImage[(int)EType.Src].Load("../../ExampleImages/Affine/Generator.flif")).IsFail())
+				if((res = arrFliImage[(int)EType.Src].Load("../../ExampleImages/Crop/bacteria.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
