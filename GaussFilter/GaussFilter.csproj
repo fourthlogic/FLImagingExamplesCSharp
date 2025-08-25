@@ -98,6 +98,10 @@
       <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameThreeDim)_X64CLR.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="$(BuildFileNameAIModel)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAIModel)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
