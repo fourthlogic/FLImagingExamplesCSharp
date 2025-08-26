@@ -39,6 +39,7 @@ namespace FLImagingExamplesCSharp
 			CFLImage fliExecSrcXYZVImage = new CFLImage();
 			CFLImage fliExecSrcRGBImage = new CFLImage();
 			CFLImage fliExecDstRGBImage = new CFLImage();
+			CFLImage fliSampDstRGBImage = new CFLImage();
 
 			// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageCaliSrcXYZV = new CGUIViewImage();
@@ -46,6 +47,7 @@ namespace FLImagingExamplesCSharp
 			CGUIViewImage viewImageExecSrcXYZV = new CGUIViewImage();
 			CGUIViewImage viewImageExecSrcRGB = new CGUIViewImage();
 			CGUIViewImage viewImageExecDstRGB = new CGUIViewImage();
+			CGUIViewImage viewImageSampDstRGB = new CGUIViewImage();
 			CGUIView3D view3DDst = new CGUIView3D();
 
 			// 알고리즘 동작 결과 // Algorithm execution result
@@ -156,8 +158,24 @@ namespace FLImagingExamplesCSharp
 				}
 
 
+				// Execution Sampled RGB 이미지 뷰 생성 // Create the execution destination RGB image view
+				if((res = viewImageSampDstRGB.Create(700, 300, 1000, 600)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the execution destination RGB image view
+				if((res = viewImageSampDstRGB.SetImagePtr(ref fliSampDstRGBImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+
+
 				// Destination 3D 이미지 뷰 생성 // Create the destination 3D image view
-				if((res = view3DDst.Create(700, 300, 1300, 900)).IsFail())
+				if((res = view3DDst.Create(1000, 0, 1600, 600)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
@@ -310,6 +328,20 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				// Destination Sampled RGB 이미지 설정 // Set the destination sampled RGB image
+				if((res = colorizedPointCloudGenerator3D.SetSampledImageRGB(ref fliSampDstRGBImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set destination sampled RGB source.\n");
+					break;
+				}
+
+				// Sampled 픽셀 표시 RGB 설정 // Set the color of the sampled pixels in RGB
+				if((res = colorizedPointCloudGenerator3D.SetSampledRGBValue(0, 255, 255)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set destination sampled RGB source.\n");
+					break;
+				}
+
 				// Destination 3D Object 설정 // Set the destination 3D object
 				if((res = colorizedPointCloudGenerator3D.SetDestination3DObject(ref fli3DDstObj)).IsFail())
 				{
@@ -345,8 +377,82 @@ namespace FLImagingExamplesCSharp
 
 				view3DDst.SetCamera(fl3DCam);
 
+				// 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
+				// 따로 해제할 필요 없음 // No need to release separately
+				CGUIViewImageLayer layerImageCaliSrcXYZV = viewImageCaliSrcXYZV.GetLayer(0);
+				CGUIViewImageLayer layerImageCaliSrcRGB = viewImageCaliSrcRGB.GetLayer(0);
+				CGUIViewImageLayer layerImageExecSrcXYZV = viewImageExecSrcXYZV.GetLayer(0);
+				CGUIViewImageLayer layerImageExecSrcRGB = viewImageExecSrcRGB.GetLayer(0);
+				CGUIViewImageLayer layerImageExecDstRGB = viewImageExecDstRGB.GetLayer(0);
+				CGUIViewImageLayer layerImageSampDstRGB = viewImageSampDstRGB.GetLayer(0);
+				CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
+
+				// 기존에 Layer에 그려진 도형들을 삭제 // Delete the shapes drawn on the existing layer
+				layerImageCaliSrcXYZV.Clear();
+				layerImageCaliSrcRGB.Clear();
+				layerImageExecSrcXYZV.Clear();
+				layerImageExecSrcRGB.Clear();
+				layerImageExecDstRGB.Clear();
+				layerImageSampDstRGB.Clear();
+				layer3DDst.Clear();
+
+				// View 정보를 디스플레이 합니다. // Display View information.
+				// 아래 함수 DrawTextCanvas 는 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
+				// 파라미터 순서 : 레이어 -> 기준 좌표 Figure 객체 -> 문자열 -> 폰트 색 -> 면 색 -> 폰트 크기 -> 실제 크기 유무 -> 각도 ->
+				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
+				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
+				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
+				if((res = layerImageCaliSrcXYZV.DrawTextCanvas(new CFLPoint<double>(0, 0), "Calibration Source XYZV Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = layerImageCaliSrcRGB.DrawTextCanvas(new CFLPoint<double>(0, 0), "Calibration Source RGB Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = layerImageExecSrcXYZV.DrawTextCanvas(new CFLPoint<double>(0, 0), "Execution Source XYZV Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = layerImageExecSrcRGB.DrawTextCanvas(new CFLPoint<double>(0, 0), "Execution Source RGB Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = layerImageExecDstRGB.DrawTextCanvas(new CFLPoint<double>(0, 0), "Execution Destination RGB Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = layerImageSampDstRGB.DrawTextCanvas(new CFLPoint<double>(0, 0), "Execution Sampled RGB Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+				if((res = layer3DDst.DrawTextCanvas(new CFLPoint<double>(0, 0), "3D Colored Point Cloud", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text\n");
+					break;
+				}
+
+
 				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다. // With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
 				if((res = viewImageExecDstRGB.ZoomFit()).IsFail())
+				{
+					ErrorPrint(res, "Failed to zoom fit of the image view.\n");
+					break;
+				}
+
+				if((res = viewImageSampDstRGB.ZoomFit()).IsFail())
 				{
 					ErrorPrint(res, "Failed to zoom fit of the image view.\n");
 					break;
@@ -358,10 +464,11 @@ namespace FLImagingExamplesCSharp
 				viewImageExecSrcXYZV.Invalidate(true);
 				viewImageExecSrcRGB.Invalidate(true);
 				viewImageExecDstRGB.Invalidate(true);
+				viewImageSampDstRGB.Invalidate(true);
 				view3DDst.Invalidate(true);
 
 				// 이미지 뷰와 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
-				while(viewImageCaliSrcXYZV.IsAvailable() && viewImageCaliSrcRGB.IsAvailable() && viewImageExecSrcXYZV.IsAvailable() && viewImageExecSrcRGB.IsAvailable() && viewImageExecDstRGB.IsAvailable() && view3DDst.IsAvailable())
+				while(viewImageCaliSrcXYZV.IsAvailable() && viewImageCaliSrcRGB.IsAvailable() && viewImageExecSrcXYZV.IsAvailable() && viewImageExecSrcRGB.IsAvailable() && viewImageExecDstRGB.IsAvailable() && viewImageSampDstRGB.IsAvailable() && view3DDst.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
