@@ -223,10 +223,11 @@ namespace FLImagingExamplesCSharp
 				instanceSegmentationDL.SetLearningEpoch(500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				instanceSegmentationDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
-				// 학습을 종료할 조건식 설정. mAP값이 0.85 이상인 경우 학습 종료한다. metric와 동일한 값입니다.
-				// Set Conditional Expression to End Learning. If the mAP value is 0.85 or higher, end the learning. Same value as metric.
-				instanceSegmentationDL.SetLearningStopCondition("mAP >= 0.85");
-	
+				// 학습을 종료할 조건식 설정. mAP값이 0.95 이상인 경우 학습 종료한다. metric와 동일한 값입니다.
+				// Set Conditional Expression to End Learning. If the mAP value is 0.95 or higher, end the learning. Same value as metric.
+				instanceSegmentationDL.SetLearningStopCondition("mAP >= 0.95");
+				// 검증 IoU Threshold를 0.7로 설정 // Set the verification IoU Threshold to 0.7
+				instanceSegmentationDL.SetValidationIoUThreshold(0.7f);
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.0001f);
 
