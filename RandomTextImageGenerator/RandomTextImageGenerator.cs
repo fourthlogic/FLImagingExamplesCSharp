@@ -136,13 +136,13 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 				
-				if((res = layerResult1.DrawTextCanvas(flpPoint, "RESULT", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerResult1.DrawTextCanvas(flpPoint, "RESULT (String)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layerResult2.DrawTextCanvas(flpPoint, "RESULT", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerResult2.DrawTextCanvas(flpPoint, "RESULT (Character)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
