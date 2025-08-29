@@ -60,7 +60,7 @@ namespace FLImagingExamplesCSharp
 				pointCloudToDepthMapConverter3D.SetDestinationImage(ref fliDestination);
 
 				// Destination Texture 이미지 설정 // Set the texture image.
-				pointCloudToDepthMapConverter3D.SetDestinationImageTexture(ref fliDestinationTexture);
+				pointCloudToDepthMapConverter3D.SetDestinationTextureImage(ref fliDestinationTexture);
 
 				// Camera Matrix 설정 // Set the camera matrix
 				CFLPoint<float> flpFocalLength = new CFLPoint<float>();
