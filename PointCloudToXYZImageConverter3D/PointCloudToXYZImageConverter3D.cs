@@ -57,7 +57,7 @@ namespace FLImagingExamplesCSharp
 				pointCloudToXYZImageConverter3D.SetSourceObject(ref floSource);
 
 				// Texture 결과 이미지 설정 // Set the destination texture image.
-				pointCloudToXYZImageConverter3D.SetDestinationImageTexture(ref fliTexture);
+				pointCloudToXYZImageConverter3D.SetDestinationTextureImage(ref fliTexture);
 
 				// Destination 이미지 설정 // Set the destination image
 				pointCloudToXYZImageConverter3D.SetDestinationImage(ref fliDestination);
