@@ -157,7 +157,7 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-                if ((result = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image(intensityClamping Min 150 Max 200)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((result = arrLayer[1].DrawTextCanvas(tpPosition, "Destination Image(intensityClamping Min 150 Max 200)", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
 				{
                     ErrorPrint(result, "Failed to draw text\n");
                     break;
