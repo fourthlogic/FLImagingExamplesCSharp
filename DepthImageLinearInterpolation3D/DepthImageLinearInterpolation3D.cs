@@ -10,6 +10,7 @@ using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
 using FLImagingCLR.AdvancedFunctions;
+using FLImagingCLR.ThreeDim;
 using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
@@ -103,11 +104,11 @@ namespace FLImagingExamplesCSharp
 				depthImageLinearInterpolation3D.SetDestinationImage(ref fliDestinationImage);
 
 				// Page Position 설정 // Set page position
-				CFLArray<double> flaPagePosition = new CFLArray<double>();
-				flaPagePosition.PushBack(0);
-				flaPagePosition.PushBack(1);
-				flaPagePosition.PushBack(2);
-
+				List<double> flaPagePosition = new List<double>();
+				flaPagePosition.Add(0);
+				flaPagePosition.Add(1);
+				flaPagePosition.Add(2);
+			
 				depthImageLinearInterpolation3D.SetPagePosition(flaPagePosition);
 
 				// Interval 설정 // Set interval
