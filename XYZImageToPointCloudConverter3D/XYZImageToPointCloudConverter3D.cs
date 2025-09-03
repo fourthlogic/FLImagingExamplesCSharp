@@ -100,10 +100,12 @@ namespace FLImagingExamplesCSharp
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
+				CGUIView3DLayer layerView3D = view3D.GetLayer(0);
 				CGUIViewImageLayer layerViewDepth = viewDepthImage.GetLayer(0);
 				CGUIViewImageLayer layerViewTexture = viewTextureImage.GetLayer(0);
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
+				layerView3D.Clear();
 				layerViewDepth.Clear();
 				layerViewTexture.Clear();
 
@@ -126,6 +128,12 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				if((eResult = layerView3D.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Point Cloud", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(eResult, "Failed to draw text.\n");
+					break;
+				}
+
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = xyzImageToPointCloudConverter3D.Execute()).IsFail())
 				{
@@ -133,10 +141,18 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				// 3D View 카메라 설정 // Set 3D view camera
+				CFL3DCamera fl3DCam = new CFL3DCamera();
+
+				fl3DCam.SetDirection(new CFLPoint3<float>(0, 0, -1));
+				fl3DCam.SetDirectionUp(new CFLPoint3<float>(0, 1, 0));
+				fl3DCam.SetPosition(new CFLPoint3<float>(10, -20, 750));
+
+				view3D.SetCamera(fl3DCam);
+
 				view3D.PushObject(floDestination);
 				view3D.UpdateObject(-1);
 				view3D.UpdateScreen();
-				view3D.ZoomFit();
 
 				viewDepthImage.ZoomFit();
 				viewTextureImage.ZoomFit();
