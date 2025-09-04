@@ -1786,6 +1786,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interpolation", "Interpolat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepthImageLinearInterpolation3D", "DepthImageLinearInterpolation3D\DepthImageLinearInterpolation3D.csproj", "{617D9F50-1610-436F-B41A-4DDE60F76CEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepthImageNearestNeighborInterpolation3D", "DepthImageNearestNeighborInterpolation3D\DepthImageNearestNeighborInterpolation3D.csproj", "{14FD2343-E705-4B34-9246-7AB04A46DDFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -5542,6 +5544,12 @@ Global
 		{617D9F50-1610-436F-B41A-4DDE60F76CEE}.Release|Win32.ActiveCfg = Release|x64
 		{617D9F50-1610-436F-B41A-4DDE60F76CEE}.Release|x64.ActiveCfg = Release|x64
 		{617D9F50-1610-436F-B41A-4DDE60F76CEE}.Release|x64.Build.0 = Release|x64
+		{14FD2343-E705-4B34-9246-7AB04A46DDFF}.Debug|Win32.ActiveCfg = Debug|x64
+		{14FD2343-E705-4B34-9246-7AB04A46DDFF}.Debug|x64.ActiveCfg = Debug|x64
+		{14FD2343-E705-4B34-9246-7AB04A46DDFF}.Debug|x64.Build.0 = Debug|x64
+		{14FD2343-E705-4B34-9246-7AB04A46DDFF}.Release|Win32.ActiveCfg = Release|x64
+		{14FD2343-E705-4B34-9246-7AB04A46DDFF}.Release|x64.ActiveCfg = Release|x64
+		{14FD2343-E705-4B34-9246-7AB04A46DDFF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -6427,6 +6435,7 @@ Global
 		{18A0B069-B96E-456D-A347-65991E8E692D} = {B23BE361-BDF0-401E-8EC0-DBC34367FE4D}
 		{4B439334-D639-4A21-AE47-1FB1466A55EF} = {CE3C88EE-177F-4B98-BF9D-26E410FD1B33}
 		{617D9F50-1610-436F-B41A-4DDE60F76CEE} = {A46B7577-496C-4E41-9DBD-975A3896AFB1}
+		{14FD2343-E705-4B34-9246-7AB04A46DDFF} = {A46B7577-496C-4E41-9DBD-975A3896AFB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
