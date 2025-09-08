@@ -46,7 +46,7 @@ namespace FLImagingExamplesCSharp
 			{
 				CResult res;
 				// 이미지 로드 // Load image
-				if((res = fliSourceImage.Load("../../ExampleImages/DepthImageLinearInterpolation3D/Source.flif")).IsFail())
+				if((res = fliSourceImage.Load("../../ExampleImages/DepthImageInterpolation3D/Source.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -108,6 +108,8 @@ namespace FLImagingExamplesCSharp
 				flaPagePosition.Add(0);
 				flaPagePosition.Add(1);
 				flaPagePosition.Add(2);
+				flaPagePosition.Add(3);
+				flaPagePosition.Add(4);
 			
 				depthImageLinearInterpolation3D.SetPagePosition(flaPagePosition);
 
@@ -115,11 +117,11 @@ namespace FLImagingExamplesCSharp
 				depthImageLinearInterpolation3D.SetInterval(0.1);
 
 				// Start Position 설정 // Set start position
-				depthImageLinearInterpolation3D.SetStartPosition(0);
+				depthImageLinearInterpolation3D.SetStartPosition(1);
 
 				// End Position 설정 // Set end position
+				depthImageLinearInterpolation3D.SetEndPosition(3);
 
-				depthImageLinearInterpolation3D.SetEndPosition(2);
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (depthImageLinearInterpolation3D.Execute())).IsFail())
 				{
