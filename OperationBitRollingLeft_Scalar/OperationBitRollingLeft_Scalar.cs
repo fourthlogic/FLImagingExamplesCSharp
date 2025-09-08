@@ -178,13 +178,13 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(BitRollingLeft 1)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = arrLayer[(int)EType.Destination1].DrawTextCanvas(flpZero, "Destination1 Image(BitRollingLeft 1)", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-                if((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(BitRollingLeft 7)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+                if((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(BitRollingLeft 7)", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
