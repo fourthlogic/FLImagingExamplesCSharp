@@ -110,20 +110,20 @@ namespace FLImagingExamplesCSharp
 				flaPagePosition.Add(2);
 				flaPagePosition.Add(3);
 				flaPagePosition.Add(4);
-			
-				depthImageLinearInterpolation3D.SetPagePosition(flaPagePosition);
+
+				depthImageCubicInterpolation3D.SetPagePosition(flaPagePosition);
 
 				// Interval 설정 // Set interval
-				depthImageLinearInterpolation3D.SetInterval(0.1);
+				depthImageCubicInterpolation3D.SetInterval(0.1);
 
 				// Start Position 설정 // Set start position
-				depthImageLinearInterpolation3D.SetStartPosition(1);
+				depthImageCubicInterpolation3D.SetStartPosition(1);
 
 				// End Position 설정 // Set end position
-				depthImageLinearInterpolation3D.SetEndPosition(3);
+				depthImageCubicInterpolation3D.SetEndPosition(3);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (depthImageLinearInterpolation3D.Execute())).IsFail())
+				if((res = (depthImageCubicInterpolation3D.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute Depth Image Cubic Interpolation 3D. \n");
 					break;
