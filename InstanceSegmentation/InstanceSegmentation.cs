@@ -131,7 +131,21 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 다섯 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the four image view windows
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
+				if((res = viewImageValidation.SynchronizePointOfView(ref viewImagesContour)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
+				if((res = viewImageValidation.SynchronizePointOfView(ref viewImagesBoxContour)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				// 다섯 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the five image view windows
 				if((res = viewImageLearn.SynchronizeWindow(ref viewImageValidation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
@@ -145,6 +159,12 @@ namespace FLImagingExamplesCSharp
 				}
 
 				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesContour)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window.\n");
+					break;
+				}
+
+				if((res = viewImageLearn.SynchronizeWindow(ref viewGraph)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window.\n");
 					break;

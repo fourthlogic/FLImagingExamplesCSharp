@@ -126,6 +126,25 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				// 네 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the four image view windows
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageSource)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImageValidate)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				if((res = viewImageLearn.SynchronizeWindow(ref viewGraph)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);

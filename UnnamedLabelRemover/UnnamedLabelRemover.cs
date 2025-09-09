@@ -85,6 +85,13 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
+				if((res = viewImageSource.SynchronizePointOfView(ref viewImageResult)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
 				// 두 개의 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the three image view windows
 				if((res = viewImageSource.SynchronizeWindow(ref viewImageResult)).IsFail())
 				{
