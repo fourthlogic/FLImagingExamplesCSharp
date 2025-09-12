@@ -183,7 +183,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-                if ((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(BitRollingRight 7)", EColor.YELLOW, EColor.BLACK, 25).IsFail())
+                if ((res = arrLayer[(int)EType.Destination2].DrawTextCanvas(flpZero, "Destination2 Image(BitRollingRight 7)", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
