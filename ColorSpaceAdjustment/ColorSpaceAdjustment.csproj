@@ -9,8 +9,8 @@
     <ProjectGuid>{9BBA93CE-9076-4DC0-8A0B-923E1B6DFAFA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ColorAdjustment</RootNamespace>
-    <AssemblyName>ColorAdjustment</AssemblyName>
+    <RootNamespace>ColorSpaceAdjustment</RootNamespace>
+    <AssemblyName>ColorSpaceAdjustment</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,7 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorAdjustment.cs" />
+    <Compile Include="ColorSpaceAdjustment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
