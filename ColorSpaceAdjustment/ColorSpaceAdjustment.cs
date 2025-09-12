@@ -113,7 +113,7 @@ namespace FLImagingExamplesCSharp
 				colorSpaceAdjustment.SetDestinationImage(ref arrFliImage[1]);
 
 				// Color Space 설정 // Set Color Space
-				colorSpaceAdjustment.SetColorSpace(CColorAdjustment.EColorSpace.CIELCh);
+				colorSpaceAdjustment.SetColorSpace(CColorSpaceAdjustment.EColorSpace.CIELCh);
 
 				// Offset 설정 // Set Offset
 				colorSpaceAdjustment.SetOffset(new CMultiVar<double>(-10, 20, -50));
