@@ -1802,6 +1802,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSpaceAdjustment", "Col
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DepthImageLanczosInterpolation3D", "DepthImageLanczosInterpolation3D\DepthImageLanczosInterpolation3D.csproj", "{820BE396-C02E-407B-8D3F-B39864416C15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointCloudResampler3D", "PointCloudResampler3D\PointCloudResampler3D.csproj", "{336FE038-CD59-4B16-9FE1-D134C21E1438}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -5588,6 +5590,12 @@ Global
 		{820BE396-C02E-407B-8D3F-B39864416C15}.Release|Win32.ActiveCfg = Release|x64
 		{820BE396-C02E-407B-8D3F-B39864416C15}.Release|x64.ActiveCfg = Release|x64
 		{820BE396-C02E-407B-8D3F-B39864416C15}.Release|x64.Build.0 = Release|x64
+		{336FE038-CD59-4B16-9FE1-D134C21E1438}.Debug|Win32.ActiveCfg = Debug|x64
+		{336FE038-CD59-4B16-9FE1-D134C21E1438}.Debug|x64.ActiveCfg = Debug|x64
+		{336FE038-CD59-4B16-9FE1-D134C21E1438}.Debug|x64.Build.0 = Debug|x64
+		{336FE038-CD59-4B16-9FE1-D134C21E1438}.Release|Win32.ActiveCfg = Release|x64
+		{336FE038-CD59-4B16-9FE1-D134C21E1438}.Release|x64.ActiveCfg = Release|x64
+		{336FE038-CD59-4B16-9FE1-D134C21E1438}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -6481,6 +6489,7 @@ Global
 		{820BE396-C02E-407B-8D3F-B39864416C15} = {A46B7577-496C-4E41-9DBD-975A3896AFB1}
 		{DB8707B8-02CB-4380-A756-192F66BD3742} = {3511B5BF-03DE-4883-85AD-08A7512D3CDD}
 		{189664EF-C65E-48BD-A37B-61FBE02316C3} = {3511B5BF-03DE-4883-85AD-08A7512D3CDD}
+		{336FE038-CD59-4B16-9FE1-D134C21E1438} = {0DFB586E-F64C-451B-9E20-B7C5EEC15383}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
