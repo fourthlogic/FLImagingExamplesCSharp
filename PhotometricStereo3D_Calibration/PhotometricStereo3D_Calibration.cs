@@ -315,7 +315,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((res = layerTxt.DrawTextCanvas(flp, ("Destination Curvature Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerCur.DrawTextCanvas(flp, ("Destination Curvature Image"), EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
