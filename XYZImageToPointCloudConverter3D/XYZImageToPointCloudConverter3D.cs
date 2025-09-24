@@ -36,7 +36,7 @@ namespace FLImagingExamplesCSharp
 			CFLImage fliSource = new CFLImage(), fliTexture = new CFLImage();
 			CFL3DObject floDestination = new CFL3DObject();
 			CGUIView3D view3D = new CGUIView3D();
-			CGUIViewImage viewDepthImage = new CGUIViewImage();
+			CGUIViewImage viewXYZVImage = new CGUIViewImage();
 			CGUIViewImage viewTextureImage = new CGUIViewImage();
 			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult eResult = new CResult();
@@ -75,7 +75,7 @@ namespace FLImagingExamplesCSharp
 				xyzImageToPointCloudConverter3D.SetDestinationObject(ref floDestination);
 
 				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewDepthImage.Create(100, 0, 612, 512)).IsFail())
+				if((eResult = viewXYZVImage.Create(100, 0, 612, 512)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to create the Source image view.\n");
 					break;
@@ -95,18 +95,18 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 이미지 포인터 설정 // Set image pointer
-				viewDepthImage.SetImagePtr(ref fliSource);
+				viewXYZVImage.SetImagePtr(ref fliSource);
 				viewTextureImage.SetImagePtr(ref fliTexture);
 
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
 				CGUIView3DLayer layerView3D = view3D.GetLayer(0);
-				CGUIViewImageLayer layerViewDepth = viewDepthImage.GetLayer(0);
+				CGUIViewImageLayer layerViewXYZV = viewXYZVImage.GetLayer(0);
 				CGUIViewImageLayer layerViewTexture = viewTextureImage.GetLayer(0);
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerView3D.Clear();
-				layerViewDepth.Clear();
+				layerViewXYZV.Clear();
 				layerViewTexture.Clear();
 
 				// View 정보를 디스플레이 한다. // Display view information
@@ -116,7 +116,7 @@ namespace FLImagingExamplesCSharp
 				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
 				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-				if((eResult = layerViewDepth.DrawTextCanvas(new CFLPoint<double>(0, 0), "Depth Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((eResult = layerViewXYZV.DrawTextCanvas(new CFLPoint<double>(0, 0), "XYZV Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
@@ -154,14 +154,14 @@ namespace FLImagingExamplesCSharp
 				view3D.UpdateObject(-1);
 				view3D.UpdateScreen();
 
-				viewDepthImage.ZoomFit();
+				viewXYZVImage.ZoomFit();
 				viewTextureImage.ZoomFit();
 
-				viewDepthImage.Invalidate();
+				viewXYZVImage.Invalidate();
 				viewTextureImage.Invalidate();
 
 				// 이미지 뷰가 종료될 때 까지 기다림
-				while(viewDepthImage.IsAvailable() && viewTextureImage.IsAvailable() && view3D.IsAvailable())
+				while(viewXYZVImage.IsAvailable() && viewTextureImage.IsAvailable() && view3D.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
