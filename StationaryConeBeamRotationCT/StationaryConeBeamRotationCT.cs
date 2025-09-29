@@ -102,6 +102,11 @@ namespace FLImagingExamplesCSharp
 				if((res = stationaryConeBeamRotationCT.SetObjectRotationAngleDistanceDegree(360.00)).IsFail())
 					break;
 
+				if((res = stationaryConeBeamRotationCT.SetMergeXCoefficient(1.00)).IsFail())
+					break;
+				if((res = stationaryConeBeamRotationCT.SetMergeYCoefficient(1.00)).IsFail())
+					break;
+
 				TPoint3<double> tpObjectRotationPivotUnit = new TPoint3<double>();
 				tpObjectRotationPivotUnit.x = 0.00;
 				tpObjectRotationPivotUnit.y = 0.00;
