@@ -34,132 +34,148 @@ namespace FLImagingExamplesCSharp
 			// before using any features of the FLImaging(R) library
 			CLibraryUtilities.Initialize();
 
-			// 이미지 객체 선언 // Declare the image object
+			// 이미지 객체 선언 // Declare image object
 			CFLImage fliSourceImage = new CFLImage();
 			CFLImage fliDestinationImage = new CFLImage();
 
-			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage viewImageSrc = new CGUIViewImage();
-			CGUIViewImage viewImageDst = new CGUIViewImage();
+			// 이미지 뷰 선언 // Declare image view
+			CGUIViewImage viewSourceImage = new CGUIViewImage();
+			CGUIViewImage viewDestinationImage = new CGUIViewImage();
 
-			CResult res;
+			// 수행 결과 객체 선언 // Declare execution result object
+			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
-				// Source 이미지 로드 // Load the source image
+				// Source 이미지 로드 // Load Source image
 				if((res = fliSourceImage.Load("../../ExampleImages/CensusTransform/Src.flif")).IsFail())
 				{
-					ErrorPrint(res, "Failed to load the image file. \n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Destination 이미지를 Src 이미지와 동일한 이미지로 생성
-				if((res = fliDestinationImage.Assign(fliSourceImage)).IsFail())
+				// Source 이미지 뷰 생성 // Create Source image view
+				if((res = viewSourceImage.Create(100, 0, 600, 545)).IsFail())
 				{
-					ErrorPrint(res, "Failed to assign the image file. \n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// Source 이미지 뷰 생성 // Create source image view
-				if((res = viewImageSrc.Create(100, 0, 600, 545)).IsFail())
+				// Destination 이미지 뷰 생성 // Create Destination image view
+				if((res = viewDestinationImage.Create(600, 0, 1100, 545)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// Destination1 이미지 뷰 생성 // Create destination1 image view
-				if((res = viewImageDst.Create(600, 0, 1100, 545)).IsFail())
+				// 두 이미지 뷰의 시점을 동기화 // Synchronize viewpoints of two image views
+				if((res = viewSourceImage.SynchronizePointOfView(ref viewDestinationImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to synchronize point of view between image views.\n");
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+				// Source 이미지 뷰에 이미지를 디스플레이 // Display image in Source image view
+				if((res = viewSourceImage.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to synchronize view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
+				// Destination 이미지 뷰에 이미지를 디스플레이 // Display image in Destination image view
+				if((res = viewDestinationImage.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				// Destination 이미지 뷰에 이미지를 디스플레이
-				if((res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
+				// 두 뷰 윈도우의 위치를 동기화 // Synchronize positions of two views
+				if((res = viewSourceImage.SynchronizeWindow(ref viewDestinationImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to synchronize window between views.\n");
 					break;
 				}
 
-				// 두 이미지 뷰 윈도우의 위치를 동기화한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window. \n");
-					break;
-				}
-
-				// Operation Multiply 객체 생성 // Create Census Transform object
+				// Census Transform 객체 생성 // Create Census Transform object
 				CCensusTransform censusTransform = new CCensusTransform();
 
-				// Source 이미지 설정 // Set the source image
-				censusTransform.SetSourceImage(ref fliSourceImage);
+				// Source 이미지 설정 // Set Source image
+				if((res = censusTransform.SetSourceImage(ref fliSourceImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Source image.\n");
+					break;
+				}
 
-				// Destination 이미지 설정 // Set the destination image
-				censusTransform.SetDestinationImage(ref fliDestinationImage);
+				// Destination 이미지 설정 // Set Destination image
+				if((res = censusTransform.SetDestinationImage(ref fliDestinationImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Destination image.\n");
+					break;
+				}
 
-				// Kernel의 크기 설정 // Set the size of the kernel
-				censusTransform.SetKernel(9, 7);
+				// Kernel의 크기 설정 // Set kernel size
+				if((res = censusTransform.SetKernel(9, 7)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set kernel size.\n");
+					break;
+				}
 
-				// Kernel의 픽셀 간의 크기를 설정 // Set the width between each pixel in the kernel
-				censusTransform.SetSparseLength(1);
+				// Kernel의 픽셀 간의 거리를 설정 // Set distance between each pixel in kernel
+				if((res = censusTransform.SetSparseLength(1)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set sparse length.\n");
+					break;
+				}
 
 				// 미러 모드 설정 // Set mirror mode
-				censusTransform.EnableMirrorMode(true);
+				if((res = censusTransform.EnableMirrorMode(true)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set mirror mode flag.\n");
+					break;
+				}
 
 				// 데이터 값의 정렬 방향 설정 // Set data alignment direction
-				censusTransform.EnableMSBShiftMode(true);
+				if((res = censusTransform.EnableMSBShiftMode(true)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set MSB shift mode flag.\n");
+					break;
+				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = censusTransform.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute census transform.");
+					ErrorPrint(res, "Failed to execute Census Transform.\n");
 					break;
 				}
 
-				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
-				CGUIViewImageLayer layerSource = viewImageSrc.GetLayer(0);
-				CGUIViewImageLayer layerDestination = viewImageDst.GetLayer(0);
+				// 화면에 출력하기 위해 이미지 뷰에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released
+				CGUIViewImageLayer layerSource = viewSourceImage.GetLayer(0);
+				CGUIViewImageLayer layerDestination = viewDestinationImage.GetLayer(0);
 
-				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
+				// 기존에 Layer에 그려진 도형들을 삭제 // Clear figures drawn on existing layer
 				layerSource.Clear();
 				layerDestination.Clear();
 
 				// 이미지 뷰 정보 표시 // Display image view information
-				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
-
-				if((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSource.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerDestination.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
 				// 이미지 뷰를 갱신 // Update image view
-				viewImageSrc.Invalidate(true);
-				viewImageDst.Invalidate(true);
+				viewSourceImage.Invalidate(true);
+				viewDestinationImage.Invalidate(true);
 
-				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageSrc.IsAvailable() && viewImageDst.IsAvailable())
+				// 뷰가 닫히기 전까지 종료하지 않고 대기 // Wait until a view is closed before exiting
+				while(viewSourceImage.IsAvailable() && viewDestinationImage.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);

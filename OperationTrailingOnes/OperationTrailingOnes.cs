@@ -34,123 +34,130 @@ namespace FLImagingExamplesCSharp
 			// before using any features of the FLImaging(R) library
 			CLibraryUtilities.Initialize();
 
-			// 이미지 객체 선언 // Declare the image object
+			// 이미지 객체 선언 // Declare image object
 			CFLImage fliSourceImage = new CFLImage();
 			CFLImage fliDestinationImage = new CFLImage();
 
-			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage viewImageSrc = new CGUIViewImage();
-			CGUIViewImage viewImageDst = new CGUIViewImage();
+			// 이미지 뷰 선언 // Declare image view
+			CGUIViewImage viewSourceImage = new CGUIViewImage();
+			CGUIViewImage viewDestinationImage = new CGUIViewImage();
 
-			CResult res;
+			// 수행 결과 객체 선언 // Declare execution result object
+			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
-				// Source 이미지 로드 // Load the source image
+				// Source 이미지 로드 // Load Source image
 				if((res = fliSourceImage.Load("../../ExampleImages/OperationTrailingOnes/Src.flif")).IsFail())
 				{
-					ErrorPrint(res, "Failed to load the image file. \n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Destination 이미지를 Src 이미지와 동일한 이미지로 생성
+				// Destination 이미지를 Source 이미지와 동일하도록 설정 // Assign Source image to Destination image
 				if((res = fliDestinationImage.Assign(fliSourceImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to assign the image file. \n");
+					ErrorPrint(res, "Failed to assign the image.\n");
 					break;
 				}
 
-				// Source 이미지 뷰 생성 // Create source image view
-				if((res = viewImageSrc.Create(100, 0, 600, 545)).IsFail())
+				// Source 이미지 뷰 생성 // Create Source image view
+				if((res = viewSourceImage.Create(100, 0, 600, 545)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// Destination1 이미지 뷰 생성 // Create destination1 image view
-				if((res = viewImageDst.Create(600, 0, 1100, 545)).IsFail())
+				// Destination 이미지 뷰 생성 // Create Destination image view
+				if((res = viewDestinationImage.Create(600, 0, 1100, 545)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image view. \n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
+				// 두 이미지 뷰의 시점을 동기화 // Synchronize viewpoints of two image views
+				if((res = viewSourceImage.SynchronizePointOfView(ref viewDestinationImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to synchronize view. \n");
+					ErrorPrint(res, "Failed to synchronize point of view between image views.\n");
 					break;
 				}
 
-				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageSrc.SetImagePtr(ref fliSourceImage)).IsFail())
+				// Source 이미지 뷰에 이미지를 디스플레이 // Display image in Source image view
+				if((res = viewSourceImage.SetImagePtr(ref fliSourceImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				// Destination 이미지 뷰에 이미지를 디스플레이
-				if((res = viewImageDst.SetImagePtr(ref fliDestinationImage)).IsFail())
+				// Destination 이미지 뷰에 이미지를 디스플레이 // Display image in Destination image view
+				if((res = viewDestinationImage.SetImagePtr(ref fliDestinationImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
 					break;
 				}
 
-				// 두 이미지 뷰 윈도우의 위치를 동기화한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
+				// 두 뷰 윈도우의 위치를 동기화 // Synchronize positions of two views
+				if((res = viewSourceImage.SynchronizeWindow(ref viewDestinationImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to synchronize window. \n");
+					ErrorPrint(res, "Failed to synchronize window between views.\n");
 					break;
 				}
 
 				// Operation Trailing Ones 객체 생성 // Create Operation Trailing Ones object
 				COperationTrailingOnes operationTrailingOnes = new COperationTrailingOnes();
 
-				// Source 이미지 설정 // Set the source image
-				operationTrailingOnes.SetSourceImage(ref fliSourceImage);
+				// Source 이미지 설정 // Set Source image
+				if((res = operationTrailingOnes.SetSourceImage(ref fliSourceImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Source image.\n");
+					break;
+				}
 
-
-				// Destination 이미지 설정 // Set the destination image
-				operationTrailingOnes.SetDestinationImage(ref fliDestinationImage);
+				// Destination 이미지 설정 // Set Destination image
+				if((res = operationTrailingOnes.SetDestinationImage(ref fliDestinationImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set Destination image.\n");
+					break;
+				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = operationTrailingOnes.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation trailing ones.");
+					ErrorPrint(res, "Failed to execute Operation Trailing Ones.\n");
 					break;
 				}
 
-				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
-				CGUIViewImageLayer layerSource = viewImageSrc.GetLayer(0);
-				CGUIViewImageLayer layerDestination = viewImageDst.GetLayer(0);
+				// 화면에 출력하기 위해 이미지 뷰에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released
+				CGUIViewImageLayer layerSource = viewSourceImage.GetLayer(0);
+				CGUIViewImageLayer layerDestination = viewDestinationImage.GetLayer(0);
 
-				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
+				// 기존에 Layer에 그려진 도형들을 삭제 // Clear figures drawn on existing layer
 				layerSource.Clear();
 				layerDestination.Clear();
 
 				// 이미지 뷰 정보 표시 // Display image view information
-				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
-
-				if((res = layerSource.DrawTextCanvas(flpPoint, "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerSource.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				if((res = layerDestination.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layerDestination.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					ErrorPrint(res, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
-				viewImageSrc.SetPixelNumberMode(EPixelNumberMode.Binary);
+				// 이미지 뷰 Number Mode 설정 // Set number mode for image view
+				viewSourceImage.SetPixelNumberMode(EPixelNumberMode.Binary);
 
 				// 이미지 뷰를 갱신 // Update image view
-				viewImageSrc.Invalidate(true);
-				viewImageDst.Invalidate(true);
+				viewSourceImage.Invalidate(true);
+				viewDestinationImage.Invalidate(true);
 
-				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageSrc.IsAvailable() && viewImageDst.IsAvailable())
+				// 뷰가 닫히기 전까지 종료하지 않고 대기 // Wait until a view is closed before exiting
+				while(viewSourceImage.IsAvailable() && viewDestinationImage.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
