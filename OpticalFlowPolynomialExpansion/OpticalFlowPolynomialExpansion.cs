@@ -69,12 +69,16 @@ namespace FLImagingExamplesCSharp
 				opticalFlowPolynomialExpansion.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set the destination image
 				opticalFlowPolynomialExpansion.SetDestinationImage(ref arrFliImage[1]);
-				// Pyramid Level 설정
+				// Pyramid Level 설정 // Set Pyramid Level
 				opticalFlowPolynomialExpansion.SetPyramidLevel(2);
-				// Iteration 설정
+				// Iteration 설정 // Set Iteration
 				opticalFlowPolynomialExpansion.SetIteration(3);
-				// Window Size 설정
+				// Window Size 설정 // Set Window Size
 				opticalFlowPolynomialExpansion.SetWindowSize(15);
+				// Binning Size 설정 // Set Binning Size
+				opticalFlowPolynomialExpansion.SetBinningSize(8);
+				// Minimum Vector Size 설정 // Set  Minimum Vector Size
+				opticalFlowPolynomialExpansion.SetMinimumVectorSize(5.000000);
 
 				Console.WriteLine("Processing....");
 
@@ -115,13 +119,6 @@ namespace FLImagingExamplesCSharp
 
 				if(bError)
 					break;
-
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = arrViewImage[0].SynchronizePointOfView(ref arrViewImage[1])).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize view\n");
-					break;
-				}
 
 				// 두 이미지 뷰의 페이지를 동기화 한다
 				if((res = arrViewImage[0].SynchronizePageIndex(ref arrViewImage[1])).IsFail())
@@ -174,19 +171,6 @@ namespace FLImagingExamplesCSharp
 				arrViewImage[0].Invalidate(true);
 				arrViewImage[1].Invalidate(true);
 
-				CFLPoint<double> m_flpStart = new CFLPoint<double>();
-				CFLPoint<double> m_flpEnd = new CFLPoint<double>();
-				CFLLine<double> m_fllDisplay = new CFLLine<double>();
-
-				// 출력할 Optical Flow Vector 크기 최소값 설정
-				double f64MinVectorSize = 1;
-
-				int i32FlowWidth = (int)arrFliImage[0].GetWidth();
-				int i32FlowHeight = (int)arrFliImage[0].GetHeight();
-
-				// Optical Flow Vector 간격 설정
-				int i32GridStep = i32FlowWidth > i32FlowHeight ? i32FlowWidth / 50 : i32FlowHeight / 50;
-
 				// 이미지 페이지 변경으로 인한 Auto Clear Mode 비활성화
 				arrViewImage[0].SetLayerAutoClearMode(0, ELayerAutoClearMode.PageChanged, false);
 				arrViewImage[1].SetLayerAutoClearMode(0, ELayerAutoClearMode.PageChanged, false);
@@ -198,6 +182,13 @@ namespace FLImagingExamplesCSharp
 
 				arrViewImage[0].GetLayer(1).SetLayerDrawingMethod(ELayerDrawingMethod.Manual);
 
+				int i32PageIndex = 0;
+				CPerformanceCounter performanceCounter = new CPerformanceCounter();
+				CFLFigureArray flfaResultArrow = new CFLFigureArray();
+
+				opticalFlowPolynomialExpansion.GetResultMotionVectorsArrowShapeAllScenes(ref flfaResultArrow);
+				performanceCounter.Start();
+
 				// 이미지 뷰에 Optical Flow 출력
 				while(arrViewImage[0].IsAvailable() && arrViewImage[1].IsAvailable())
 				{
@@ -205,48 +196,26 @@ namespace FLImagingExamplesCSharp
 					{
 						arrViewImage[0].MoveToPage(0);
 						arrViewImage[1].MoveToPage(0);
+						i32PageIndex = 0;
 						continue;
 					}
 
+					arrViewImage[0].MoveToPage(i32PageIndex);
+					arrViewImage[1].MoveToPage(i32PageIndex);
 					arrViewImage[0].GetLayer(1).Clear();
-
-					// Destination 이미지 Pixel에 접근을 위한 Buffer 얻기
-					List<float> dstImgBuffer = new List<float>();
-
-					arrFliImage[1].GetBuffer(ref dstImgBuffer);
-
-					for(int i32Width = 0; i32Width < i32FlowWidth; i32Width += i32GridStep)
-					{
-						for(int i32Height = 0; i32Height < i32FlowHeight; i32Height += i32GridStep)
-						{
-							m_flpStart.x = i32Width;
-							m_flpStart.y = i32Height;
-
-							m_flpEnd.x = i32Width + dstImgBuffer[i32Height * i32FlowWidth * 2 + i32Width * 2];
-							m_flpEnd.y = i32Height + dstImgBuffer[i32Height * i32FlowWidth * 2 + i32Width * 2 + 1];
-
-							// Points to Line
-							m_fllDisplay.Set(m_flpStart, m_flpEnd);
-
-							// 이미지 뷰에 화살표(Optical Flow Vector) 그리기
-							if(m_fllDisplay.GetLength() > f64MinVectorSize)
-							{
-								arrViewImage[0].GetLayer(1).DrawFigureImage(m_fllDisplay.MakeArrowWithRatio(0.4, true, 30), EColor.BLACK, 3);
-								arrViewImage[0].GetLayer(1).DrawFigureImage(m_fllDisplay.MakeArrowWithRatio(0.4, true, 30), EColor.YELLOW, 1);
-							}
-						}
-					}
-
-					// 15ms Delay
-					Thread.Sleep(15);
+					arrViewImage[1].GetLayer(1).DrawFigureImage(flfaResultArrow.GetAt(i32PageIndex), EColor.BLACK, 3);
+					arrViewImage[1].GetLayer(1).DrawFigureImage(flfaResultArrow.GetAt(i32PageIndex), EColor.YELLOW, 1);
+					arrViewImage[0].GetLayer(1).Update();
+					arrViewImage[0].RedrawWindow();
 
 					if(!arrViewImage[0].IsAvailable() || !arrViewImage[1].IsAvailable())
 						break;
 
-					arrViewImage[0].MoveToNextPage();
-					arrViewImage[1].MoveToNextPage();
-					arrViewImage[0].GetLayer(1).Update();
-					arrViewImage[0].RedrawWindow();
+					while(performanceCounter.GetElapsedTimeFromStartInMilliSecond() <= 40.0)
+						CThreadUtilities.Sleep(1);
+
+					performanceCounter.Start();
+					i32PageIndex++;
 				}
 			}
 			while(false);
