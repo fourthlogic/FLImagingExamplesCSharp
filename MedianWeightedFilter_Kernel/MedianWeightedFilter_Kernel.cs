@@ -136,38 +136,38 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Utility CMedianWeightedFilter 객체 생성 // Create Utility CMedianWeightedFilter object
-                CMedianWeightedFilter medianWeighted = new CMedianWeightedFilter();
+                CMedianWeightedFilter medianWeightedFilter = new CMedianWeightedFilter();
                 // Source 이미지 설정 // Set the source image
-                medianWeighted.SetSourceImage(ref arrFliImage[0]);
+                medianWeightedFilter.SetSourceImage(ref arrFliImage[0]);
                 // ROI 범위 설정
                 CFLRect<Int32> flrROI = new CFLRect<Int32>(100, 190, 360, 420);
                 // Source ROI 설정 // Set the Source ROI
-                medianWeighted.SetSourceROI(flrROI);
+                medianWeightedFilter.SetSourceROI(flrROI);
                 // Destination 이미지 설정 // Set the destination image
-                medianWeighted.SetDestinationImage(ref arrFliImage[1]);
+                medianWeightedFilter.SetDestinationImage(ref arrFliImage[1]);
                 // Destination ROI 설정 // Set Destination ROI
-                medianWeighted.SetDestinationROI(flrROI);
+                medianWeightedFilter.SetDestinationROI(flrROI);
 
                 // 처리할 MedianWeightedFilter의 Kernel Size 설정 (KernelSize = 11 일 경우, Kernel Size : 11x11, 홀수만 설정가능)
-                medianWeighted.SetKernel(11);
+                medianWeightedFilter.SetKernel(11);
 
                 // Image CMedianWeightedFilter 가중 방식을 Gauss로 설정
-                medianWeighted.SetWeightedMethod(CMedianWeightedFilter.EWeightedMethod.Gauss);
+                medianWeightedFilter.SetWeightedMethod(CMedianWeightedFilter.EWeightedMethod.Gauss);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if (( res =  medianWeighted.Execute()).IsFail())
+                if (( res =  medianWeightedFilter.Execute()).IsFail())
 				{
                     ErrorPrint(res,"Failed to execute weighted median.");
                     break;
                 }
 
                 // Destination 이미지 설정 // Set the destination image
-                medianWeighted.SetDestinationImage(ref arrFliImage[2]);
+                medianWeightedFilter.SetDestinationImage(ref arrFliImage[2]);
                 // Image MedianWeighted 가중 방식을 Inner로 설정
-                medianWeighted.SetWeightedMethod(CMedianWeightedFilter.EWeightedMethod.Inner);
+                medianWeightedFilter.SetWeightedMethod(CMedianWeightedFilter.EWeightedMethod.Inner);
 
                 // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-                if (( res =  medianWeighted.Execute()).IsFail())
+                if (( res =  medianWeightedFilter.Execute()).IsFail())
 				{
                     ErrorPrint(res,"Failed to execute weighted median.");
                     break;

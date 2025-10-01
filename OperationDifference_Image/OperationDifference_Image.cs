@@ -140,38 +140,38 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // Operation Difference 객체 생성 // Create Operation Difference object
-                COperationDifference difference = new COperationDifference();
+                COperationDifference operationDifference = new COperationDifference();
 
                 // Source 이미지 설정 // Set the source image
-	        	difference.SetSourceImage(ref fliSourceImage);
+	        	operationDifference.SetSourceImage(ref fliSourceImage);
 
                 // Source 이미지의 ROI 범위 설정
                 CFLCircle<double> flcSourceROI = new CFLCircle<double>(258, 258, 174, 0, 0, 360, EArcClosingMethod.EachOther);
 
                 // Source 이미지의 ROI 지정
-		        difference.SetSourceROI(flcSourceROI);
+		        operationDifference.SetSourceROI(flcSourceROI);
 
 		        // Operand 이미지 설정 // Set the operand image
-		        difference.SetOperandImage(ref fliOperandImage);
+		        operationDifference.SetOperandImage(ref fliOperandImage);
 
 		        // Destination 이미지 설정 // Set the destination image
-		        difference.SetDestinationImage(ref fliDestinationImage);
+		        operationDifference.SetDestinationImage(ref fliDestinationImage);
 
 		        // Destination 이미지 Pivot 좌표 설정
                 CFLPoint<double> flpDestinationPivot = new CFLPoint<double>(174, 169);
 
 		        // Destination 이미지 Pivot 지정
-		        difference.SetDestinationPivot(flpDestinationPivot);
+		        operationDifference.SetDestinationPivot(flpDestinationPivot);
 
 		        // Image Operation 모드로 설정 // Set operation mode to image
-		        difference.SetOperationSource(EOperationSource.Image);
+		        operationDifference.SetOperationSource(EOperationSource.Image);
 
 		        // 공백 색상 칠하기 모드 해제
 		        // 결과 이미지가 이미 존재할 경우 연산되지 않은 영역을 공백 색상으로 칠하지 않고 원본 그대로 둔다.
-		        difference.EnableFillBlankColorMode(false);
+		        operationDifference.EnableFillBlankColorMode(false);
 
 		        // 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-		        if((res = difference.Execute()).IsFail())
+		        if((res = operationDifference.Execute()).IsFail())
 				{
                     ErrorPrint(res,"Failed to execute Operation Difference. \n");
                     ErrorPrint(res,"\n");

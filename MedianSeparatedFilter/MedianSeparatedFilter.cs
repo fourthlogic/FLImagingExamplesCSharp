@@ -109,28 +109,28 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Median Separated Filter 객체 생성 // Create Median Separated Filter object
-				CMedianSeparatedFilter filterMedianSeparate = new CMedianSeparatedFilter();
+				CMedianSeparatedFilter medianSeparateFilter = new CMedianSeparatedFilter();
 
 				// 처리할 이미지 설정 // Set the image to process
-				filterMedianSeparate.SetSourceImage(ref fliSrcImage);
+				medianSeparateFilter.SetSourceImage(ref fliSrcImage);
 
 				// ROI 범위 설정
 				CFLRect<Int32> flrROI = new CFLRect<Int32>(100, 190, 360, 420);
 
 				// Source ROI 설정 // Set the Source ROI
-				filterMedianSeparate.SetSourceROI(flrROI);
+				medianSeparateFilter.SetSourceROI(flrROI);
 
 				// Destination 이미지 설정 // Set the destination image
-				filterMedianSeparate.SetDestinationImage(ref fliDstImage);
+				medianSeparateFilter.SetDestinationImage(ref fliDstImage);
 
 				// Destination ROI 설정 // Set Destination ROI
-				filterMedianSeparate.SetDestinationROI(flrROI);
+				medianSeparateFilter.SetDestinationROI(flrROI);
 
-				// 처리할 filterMedianSeparate의 Kernel Size 설정 (KernelSize = 11 일 경우, Kernel Size : 11x11, 홀수만 설정가능)
-				filterMedianSeparate.SetKernel(11);
+				// 처리할 medianSeparateFilter의 Kernel Size 설정 (KernelSize = 11 일 경우, Kernel Size : 11x11, 홀수만 설정가능)
+				medianSeparateFilter.SetKernel(11);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = filterMedianSeparate.Execute()).IsFail())
+				if((res = medianSeparateFilter.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute MedianSeparate Filter.");
 					break;

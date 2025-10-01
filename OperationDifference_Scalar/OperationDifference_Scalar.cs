@@ -102,54 +102,54 @@ namespace FLImagingExamplesCSharp
 	        	}
 
 	        	// Operation Difference 객체 생성 // Create Operation Difference object
-	        	COperationDifference difference = new COperationDifference();
+	        	COperationDifference operationDifference = new COperationDifference();
 
 	        	// Source 이미지 설정 // Set the source image
-	        	difference.SetSourceImage(ref fliSourceImage);
+	        	operationDifference.SetSourceImage(ref fliSourceImage);
 
 	        	// Source 이미지의 ROI 범위 설정
                 CFLCircle<double> flcSourceROI = new CFLCircle<double> (284, 278, 206, 0, 0, 360, EArcClosingMethod.EachOther);
 
 	        	// Source 이미지의 ROI 지정
-	        	difference.SetSourceROI(flcSourceROI);
+	        	operationDifference.SetSourceROI(flcSourceROI);
 
 	        	// Source 이미지의 Pivot 범위 설정
                 CFLPoint<double> flpSourcePivot = new CFLPoint<double>(258, 254);
 	        	
 	        	// Source 이미지의 Pivot 지정
-	        	difference.SetSourcePivot(flpSourcePivot);
+	        	operationDifference.SetSourcePivot(flpSourcePivot);
 
 	        	// Destination 이미지 설정 // Set the destination image
-	        	difference.SetDestinationImage(ref fliDestinationImage);
+	        	operationDifference.SetDestinationImage(ref fliDestinationImage);
 
 	        	// Destination 이미지의 ROI 범위 설정
                 CFLRect<double> flrDestinationROI = new CFLRect<double>(1, 105, 331, 368);
 
 	        	// Destination 이미지의 ROI 지정
-	        	difference.SetDestinationROI(flrDestinationROI);
+	        	operationDifference.SetDestinationROI(flrDestinationROI);
 
 	        	// Destination 이미지의 Pivot 범위 설정
                 CFLPoint<double> flpDestinationPivot = new CFLPoint<double>(111, 236);
 
 	        	// Destination 이미지의 Pivot 지정
-	        	difference.SetDestinationPivot(flpDestinationPivot);
+	        	operationDifference.SetDestinationPivot(flpDestinationPivot);
 
 	        	// Scalar Operation 모드로 설정 // Set operation mode to scalar
-	        	difference.SetOperationSource(EOperationSource.Scalar);
+	        	operationDifference.SetOperationSource(EOperationSource.Scalar);
 
 	        	// 스칼라 색상 지정
                 CMultiVar<double> mvScalar = new CMultiVar<double> (100, 150, 200);
-	        	difference.SetScalarValue(mvScalar);
+	        	operationDifference.SetScalarValue(mvScalar);
 
 	        	// 항상 공백 영역을 지정한 색으로 채우도록 설정
-	        	difference.EnableFillBlankColorMode(true);
+	        	operationDifference.EnableFillBlankColorMode(true);
 
 	        	// 공백 색상 지정
                 CMultiVar<double> mvBlank = new CMultiVar<double> (110, 50, 210);
-	        	difference.SetBlankColor(mvBlank);
+	        	operationDifference.SetBlankColor(mvBlank);
 
 	        	// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-	        	if((res = difference.Execute()).IsFail())
+	        	if((res = operationDifference.Execute()).IsFail())
 	        	{
                     ErrorPrint(res,"Failed to execute Operation Difference. \n");
 	        		break;
