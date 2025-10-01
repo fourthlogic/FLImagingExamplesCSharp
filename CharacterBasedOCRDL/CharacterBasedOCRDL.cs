@@ -226,9 +226,13 @@ namespace FLImagingExamplesCSharp
 				augSpec.SetCommonActivationRate(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(-45.0, 45.0, false, true, 1.0);
-				augSpec.EnableHorizontalFlip(true);
-				augSpec.EnableVerticalFlip(true);
+				augSpec.SetRotationParam(-45.0, 45.0, false, false, 1.0);
+
+				augSpec.EnableGaussianNoise(true);
+				augSpec.SetGaussianNoiseParam(0, 0, 0, 0.02, 1.0);
+
+				augSpec.EnableScale(true);
+				augSpec.SetScaleParam(0.95, 1.05, 0.95, 1.05, true, 1.0);
 
 				characterBasedOCRDL.SetLearningAugmentationSpec(augSpec);
 
