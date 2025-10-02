@@ -109,7 +109,7 @@ namespace FLImagingExamplesCSharp
 				CLaserTriangulation3D laserTriangulation3D = new CLaserTriangulation3D();
 
 				// 출력에 사용되는 3D Height Map 객채 생성 // Create 3D height map used as output
-				CFL3DObject fl3DOHM = new CFL3DObject();
+				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 
 				// Source 이미지 설정 // Set Source image
 				if((res = laserTriangulation3D.SetSourceImage(ref fliSourceImage)).IsFail())
@@ -209,7 +209,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 3D 뷰 정보 표시 // Display 3D view information
-				if((res = layer3DDestination.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((res = layer3DDestination.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination 3D Height Map", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;

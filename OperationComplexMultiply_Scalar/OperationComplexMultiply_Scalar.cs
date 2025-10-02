@@ -176,7 +176,7 @@ namespace FLImagingExamplesCSharp
 
 				// 뷰가 닫히기 전까지 종료하지 않고 대기 // Wait until a view is closed before exiting
 				while(viewSourceImage.IsAvailable() && viewDestinationImage.IsAvailable())
-					CThreadUtilities.Sleep(1);
+					Thread.Sleep(1);
 			}
 			while(false);
 		}

@@ -109,7 +109,7 @@ namespace FLImagingExamplesCSharp
 				CLaserTriangulation3D laserTriangulation3D = new CLaserTriangulation3D();
 
 				// 출력에 사용되는 3D Height Map 객채 생성 // Create 3D height map used as output
-				CFL3DObject fl3DOHM = new CFL3DObject();
+				CFL3DObject fl3DOHM = new CFL3DObjectHeightMap();
 
 				// 레이저의 Baseline 생성 // Set base line of laser
 				CFLLine<double> fllBaseLine = new CFLLine<double>(0, 61, 1216, 61);

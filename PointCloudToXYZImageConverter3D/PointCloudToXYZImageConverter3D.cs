@@ -33,102 +33,131 @@ namespace FLImagingExamplesCSharp
 			// before using any features of the FLImaging(R) library
 			CLibraryUtilities.Initialize();
 
+			// 이미지 객체 선언 // Declare image object
+			CFLImage fliDstXYZVImage = new CFLImage();
+			CFLImage fliDstTextureImage = new CFLImage();
+
+			// 3D 객체 선언 // Declare 3D object
 			CFL3DObject floSource = new CFL3DObject();
-			CFLImage fliDestination = new CFLImage(), fliTexture = new CFLImage();
-			CGUIView3D view3D = new CGUIView3D();
-			CGUIViewImage viewXYZImage = new CGUIViewImage();
-			CGUIViewImage viewTextureImage = new CGUIViewImage();
-			// 알고리즘 동작 결과 // Algorithm execution result
-			CResult eResult = new CResult();
+
+			// 이미지 뷰 선언 // Declare image view
+			CGUIViewImage viewDstXYZVImage = new CGUIViewImage();
+			CGUIViewImage viewDstTextureImage = new CGUIViewImage();
+
+			// 3D 뷰 선언 // Declare 3D view
+			CGUIView3D view3DSrc = new CGUIView3D();
 
 			do
 			{
-				// Point Cloud 로드 // Load the point cloud
-				if((eResult = floSource.Load("../../ExampleImages/PointCloudToXYZImageConverter3D/3DSrc.ply")).IsFail())
+				// 수행 결과 객체 선언 // Declare execution result object
+				CResult res = new CResult(EResult.UnknownError);
+
+				// Source Point Cloud 로드 // Load Source Point Cloud
+				if((res = floSource.Load("../../ExampleImages/PointCloudToXYZImageConverter3D/3DSrc.ply")).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to load the point cloud.\n");
+					ErrorPrint(res, "Failed to load the point cloud.\n");
 					break;
 				}
 
-				// PointCloudToXYZImageConverter3D 객체 생성 // Create PointCloudToXYZImageConverter3D object
+				// Source 3D 뷰 생성 // Create Source 3D view
+				if((res = view3DSrc.Create(100, 0, 612, 512)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the 3D view.\n");
+					break;
+				}
+
+				// Destination XYZV 이미지 뷰 생성 // Create Destination XYZV image view
+				if((res = viewDstXYZVImage.Create(100, 512, 612, 1024)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Destination Texture 이미지 뷰 생성 // Create Destination Texture image view
+				if((res = viewDstTextureImage.Create(612, 512, 1124, 1024)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Destination XYZV 이미지 뷰에 이미지를 디스플레이 // Display image in Destination XYZV image view
+				if((res = viewDstXYZVImage.SetImagePtr(ref fliDstXYZVImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+				// Destination Texture 이미지 뷰에 이미지를 디스플레이 // Display image in Destination Texture image view
+				if((res = viewDstTextureImage.SetImagePtr(ref fliDstTextureImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+				// 두 이미지 뷰의 시점을 동기화 // Synchronize viewpoints of two image views
+				if((res = viewDstXYZVImage.SynchronizePointOfView(ref viewDstTextureImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize point of view between image views.\n");
+					break;
+				}
+
+				// 두 뷰 윈도우의 위치를 동기화 // Synchronize positions of two views
+				if((res = view3DSrc.SynchronizeWindow(ref viewDstXYZVImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window between views.\n");
+					break;
+				}
+
+				// 두 뷰 윈도우의 위치를 동기화 // Synchronize positions of two views
+				if((res = view3DSrc.SynchronizeWindow(ref viewDstTextureImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window between views.\n");
+					break;
+				}
+
+				// Point Cloud To XYZ Image Converter 3D 객체 생성 // Create Point Cloud To XYZ Image Converter 3D object
 				CPointCloudToXYZImageConverter3D pointCloudToXYZImageConverter3D = new CPointCloudToXYZImageConverter3D();
 
-				// Source Point Cloud 설정 // Set the source point cloud.
-				pointCloudToXYZImageConverter3D.SetSourceObject(ref floSource);
-
-				// Texture 결과 이미지 설정 // Set the destination texture image.
-				pointCloudToXYZImageConverter3D.SetDestinationTextureImage(ref fliTexture);
-
-				// Destination 이미지 설정 // Set the destination image
-				pointCloudToXYZImageConverter3D.SetDestinationImage(ref fliDestination);
-
-				// 이미지 크기 설정 // Set the size of the destination image
-				pointCloudToXYZImageConverter3D.SetImageSize(140, 200);
-
-				// 입력 3D 뷰 생성 // Create input 3D view
-				if((eResult = view3D.Create(100, 0, 612, 512)).IsFail())
+				// Source Point Cloud 설정 // Set Source Point Cloud.
+				if((res = pointCloudToXYZImageConverter3D.SetSourceObject(ref floSource)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the Source 3D view.\n");
+					ErrorPrint(res, "Failed to set Source 3D object.\n");
 					break;
 				}
 
-				// 이미지 뷰 생성 // Create image view
-				if((eResult = viewXYZImage.Create(100, 512, 612, 1024)).IsFail())
+				// Destination XYZV 이미지 설정 // Set Destination XYZV image
+				if((res = pointCloudToXYZImageConverter3D.SetDestinationImage(ref fliDstXYZVImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the Destination image view.\n");
+					ErrorPrint(res, "Failed to set Destination XYZV image.\n");
 					break;
 				}
 
-				if((eResult = viewTextureImage.Create(612, 512, 1124, 1024)).IsFail())
+				// Destination Texture 이미지 설정 // Set Destination Texture image.
+				if((res = pointCloudToXYZImageConverter3D.SetDestinationTextureImage(ref fliDstTextureImage)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to create the Texture image view.\n");
+					ErrorPrint(res, "Failed to set Destination Texture image.\n");
 					break;
 				}
 
-				// 이미지 포인터 설정 // Set image pointer
-				viewXYZImage.SetImagePtr(ref fliDestination);
-				viewTextureImage.SetImagePtr(ref fliTexture);
-
-				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
-				CGUIView3DLayer layerView3D = view3D.GetLayer(0);
-				CGUIViewImageLayer layerViewDepth = viewXYZImage.GetLayer(0);
-				CGUIViewImageLayer layerViewTexture = viewTextureImage.GetLayer(0);
-
-				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
-				layerView3D.Clear();
-				layerViewDepth.Clear();
-				layerViewTexture.Clear();
-
-				// View 정보를 디스플레이 한다. // Display view information
-				// 아래 함수 DrawTextCanvas 는 Screen좌표를 기준으로 하는 String을 Drawing 한다. // The function DrawTextCanvas below draws a String based on the screen coordinates.
-				// 색상 파라미터를 EGUIViewImageLayerTransparencyColor 으로 넣어주게되면 배경색으로 처리함으로 불투명도를 0으로 한것과 같은 효과가 있다. // If the color parameter is added as EGUIViewImageLayerTransparencyColor, it has the same effect as setting the opacity to 0 by processing it as a background color.
-				// 파라미터 순서 : 레이어 -> 기준 좌표 Figure 객체 -> 문자열 -> 폰트 색 -> 면 색 -> 폰트 크기 -> 실제 크기 유무 -> 각도 ->
-				//                 얼라인 -> 폰트 이름 -> 폰트 알파값(불투명도) -> 면 알파값 (불투명도) -> 폰트 두께 -> 폰트 이텔릭
-				// Parameter order: layer -> reference coordinate Figure object -> string -> font color -> Area color -> font size -> actual size -> angle ->
-				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
-				if((eResult = layerView3D.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Point Cloud", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				// Destination 이미지 크기 설정 // Set size of destination image
+				if((res = pointCloudToXYZImageConverter3D.SetImageSize(140, 200)).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
-					break;
-				}
-
-				if((eResult = layerViewDepth.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination XYZV Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
-					break;
-				}
-
-				if((eResult = layerViewTexture.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Texture Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to set destination image size.\n");
 					break;
 				}
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = pointCloudToXYZImageConverter3D.Execute()).IsFail())
+				if((res = pointCloudToXYZImageConverter3D.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute Point Cloud To XYZ Image Converter 3D.");
+					ErrorPrint(res, "Failed to execute Point Cloud To XYZ Image Converter 3D.\n");
+					break;
+				}
+
+
+				// 입력 3D 객체 출력 // Print source 3D Object
+				if((res = view3DSrc.PushObject(floSource)).IsFail())
+				{
+					ErrorPrint(res, "Failed to display the 3D Object.\n");
 					break;
 				}
 
@@ -139,20 +168,66 @@ namespace FLImagingExamplesCSharp
 				fl3DCam.SetDirectionUp(new CFLPoint3<float>(0, 1, 0));
 				fl3DCam.SetPosition(new CFLPoint3<float>(10, -20, 750));
 
-				view3D.SetCamera(fl3DCam);
+				view3DSrc.SetCamera(fl3DCam);
 
-				view3D.PushObject(floSource);
-				view3D.UpdateObject(-1);
-				view3D.UpdateScreen();
+				// 화면에 출력하기 위해 이미지 뷰에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released
+				CGUIViewImageLayer layerViewXYZV = viewDstXYZVImage.GetLayer(0);
+				CGUIViewImageLayer layerViewTexture = viewDstTextureImage.GetLayer(0);
 
-				viewXYZImage.ZoomFit();
-				viewTextureImage.ZoomFit();
+				// 화면에 출력하기 위해 3D 뷰에서 레이어 0번을 얻어옴 // Obtain layer 0 number from 3D view for display
+				// 이 객체는 3D 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an 3D view and does not need to be released
+				CGUIView3DLayer layerView3D = view3DSrc.GetLayer(0);
 
-				viewXYZImage.Invalidate();
-				viewTextureImage.Invalidate();
+				// 기존에 Layer에 그려진 도형들을 삭제 // Clear figures drawn on existing layer
+				layerView3D.Clear();
+				layerViewXYZV.Clear();
+				layerViewTexture.Clear();
 
-				// 이미지 뷰가 종료될 때 까지 기다림
-				while(viewXYZImage.IsAvailable() && viewTextureImage.IsAvailable() && view3D.IsAvailable())
+				// 이미지 뷰 정보 표시 // Display image view information
+				if((res = layerViewXYZV.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination XYZV Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+				if((res = layerViewTexture.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Texture Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+				// 3D 뷰 정보 표시 // Display 3D view information
+				if((res = layerView3D.DrawTextCanvas(new CFLPoint<double>(0, 0), "Source Point Cloud", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+
+				// 새로 생성한 이미지를 가지는 뷰 Zoom Fit 실행 // Activate Zoom Fit for view with newly created image
+				if((res = viewDstXYZVImage.ZoomFit()).IsFail())
+				{
+					ErrorPrint(res, "Failed to zoom fit image view.\n");
+					break;
+				}
+
+				// 새로 생성한 이미지를 가지는 뷰 Zoom Fit 실행 // Activate Zoom Fit for view with newly created image
+				if((res = viewDstTextureImage.ZoomFit()).IsFail())
+				{
+					ErrorPrint(res, "Failed to zoom fit image view.\n");
+					break;
+				}
+
+				// 이미지 뷰를 갱신 // Update image view
+				viewDstXYZVImage.Invalidate(true);
+				viewDstTextureImage.Invalidate(true);
+
+				// 3D 뷰를 갱신 // Update 3D view
+				view3DSrc.Invalidate(true);
+
+				// 뷰가 닫히기 전까지 종료하지 않고 대기 // Wait until a view is closed before exiting
+				while(viewDstXYZVImage.IsAvailable() && viewDstTextureImage.IsAvailable() && view3DSrc.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);

@@ -29,161 +29,121 @@ namespace FLImagingExamplesCSharp
 		public struct SGridDisplay
 		{
 			public long i64ImageIdx;
-			public CStereoCalibrator3D.SGridResult sGridData;
+			public CStereoCalibrator3D.SGridResult sGridResult;
 		};
 
-		static bool DrawGridPoints(SGridDisplay sGridDisplay, CGUIViewImageLayer pLayer)
+		static CResult DrawGridPoints(SGridDisplay sGridDisplay, CGUIViewImageLayer pLayer)
 		{
-			bool bOK = false;
-
-			// 결과 enum 선언
-			CResult res = new CResult();
+			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
-				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
-				pLayer.Clear();
+				if(sGridDisplay.sGridResult.arrGridData.Count == 0)
+				{
+					res = new CResult(EResult.NoData);
+					break;
+				}
 
 				// 그리기 색상 설정 // Set drawing color
-				EColor[] colorPool = new EColor[3];
-				colorPool[0] = EColor.RED;
-				colorPool[1] = EColor.LIME;
-				colorPool[2] = EColor.CYAN;
+				EColor[] u32ArrColor = { EColor.RED, EColor.LIME, EColor.CYAN };
 
-				int i64GridRow = (int)sGridDisplay.sGridData.i64Rows;
-				int i64GridCol = (int)sGridDisplay.sGridData.i64Columns;
+				long i64GridRow = sGridDisplay.sGridResult.i64Rows;
+				long i64GridCol = sGridDisplay.sGridResult.i64Columns;
+				double f64AvgDistance = sGridDisplay.sGridResult.f64AvgDistance;
+				CFLQuad<double> flqBoardRegion = sGridDisplay.sGridResult.pFlqBoardRegion;
+				double f64Angle = flqBoardRegion.flpPoints[0].GetAngle(flqBoardRegion.flpPoints[1]);
+				double f64Width = flqBoardRegion.flpPoints[0].GetDistance(flqBoardRegion.flpPoints[1]);
 
 				// Grid 그리기 // Draw grid
-				for(int i64Row = 0; i64Row < i64GridRow; ++i64Row)
+				for(long i64Row = 0; i64Row < i64GridRow; ++i64Row)
 				{
-					for(int i64Col = 0; i64Col < i64GridCol - 1; ++i64Col)
+					for(long i64Col = 0; i64Col < i64GridCol - 1; ++i64Col)
 					{
-						int i64GridIdx = i64Row * i64GridCol + i64Col;
-						TPoint<double> pFlpGridPoint1 = (sGridDisplay.sGridData.arrGridData[i64Row][i64Col]);
-						TPoint<double> pFlpGridPoint2 = (sGridDisplay.sGridData.arrGridData[i64Row][i64Col + 1]);
-						CFLLine<double> fllDrawLine = new CFLLine<double>(pFlpGridPoint1, pFlpGridPoint2);
-
-						if((res = pLayer.DrawFigureImage(fllDrawLine, EColor.BLACK, 5)).IsFail())
-						{
-							ErrorPrint(res, "Failed to draw figure.\n");
-							break;
-						}
-
-						if((res = pLayer.DrawFigureImage(fllDrawLine, colorPool[i64GridIdx % 3], 3)).IsFail())
-						{
-							ErrorPrint(res, "Failed to draw figure.\n");
-							break;
-						}
+						long i64GridIdx = i64Row * i64GridCol + i64Col;
+						CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col]);
+						CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col + 1]);
+						CFLLine<double> fllDrawLine = new CFLLine<double>(flpGridPoint1, flpGridPoint2);
+						pLayer.DrawFigureImage(fllDrawLine, EColor.BLACK, 5);
+						pLayer.DrawFigureImage(fllDrawLine, u32ArrColor[i64GridIdx % 3], 3);
 					}
 
 					if(i64Row < i64GridRow - 1)
 					{
-						TPoint<double> pFlpGridPoint1 = (sGridDisplay.sGridData.arrGridData[i64Row][i64GridCol - 1]);
-						TPoint<double> pFlpGridPoint2 = (sGridDisplay.sGridData.arrGridData[i64Row + 1][0]);
-						CFLLine<double> fllDrawLine = new CFLLine<double>();
-						fllDrawLine.Set(pFlpGridPoint1, pFlpGridPoint2);
-
-						if((res = pLayer.DrawFigureImage(fllDrawLine, EColor.BLACK, 5)).IsFail())
-						{
-							ErrorPrint(res, "Failed to draw figure.\n");
-							break;
-						}
-
-						if((res = pLayer.DrawFigureImage(fllDrawLine, EColor.YELLOW, 3)).IsFail())
-						{
-							ErrorPrint(res, "Failed to draw figure.\n");
-							break;
-						}
+						CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64GridCol - 1]);
+						CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row + 1][0]);
+						CFLLine<double> fllDrawLine = new CFLLine<double>(flpGridPoint1, flpGridPoint2);
+						pLayer.DrawFigureImage(fllDrawLine, EColor.BLACK, 5);
+						pLayer.DrawFigureImage(fllDrawLine, EColor.YELLOW, 3);
 					}
 				}
 
-				EColor colorText = EColor.YELLOW;
-				colorPool[2] = EColor.CYAN;
+				EColor u32ColorText = EColor.YELLOW;
 				double f64PointDist = 0;
 				double f64Dx = 0;
 				double f64Dy = 0;
 
 				// Grid Point 인덱싱 // Index Grid Point
-				for(int i64Row = 0; i64Row < i64GridRow; ++i64Row)
+				for(long i64Row = 0; i64Row < i64GridRow; ++i64Row)
 				{
-					TPoint<double> tpGridPoint1 = (sGridDisplay.sGridData.arrGridData[i64Row][0]);
-					TPoint<double> tpGridPoint2 = (sGridDisplay.sGridData.arrGridData[i64Row][1]);
-					CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(tpGridPoint1.x, tpGridPoint1.y);
-					CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(tpGridPoint2.x, tpGridPoint2.y);
+					CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][0]);
+					CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][1]);
+					double f64TempAngle = flpGridPoint1.GetAngle(flpGridPoint2);
 
-					double f64AngleIner = flpGridPoint1.GetAngle(flpGridPoint2);
-
-					for(int i64Col = 0; i64Col < i64GridCol; ++i64Col)
+					for(long i64Col = 0; i64Col < i64GridCol; ++i64Col)
 					{
 						long i64GridIdx = i64Row * i64GridCol + i64Col;
 
 						if(i64Col < i64GridCol - 1)
 						{
-							tpGridPoint1 = (sGridDisplay.sGridData.arrGridData[i64Row][i64Col]);
-							tpGridPoint2 = (sGridDisplay.sGridData.arrGridData[i64Row][i64Col + 1]);
+							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col]);
+							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col + 1]);
 
-							f64Dx = tpGridPoint2.x - tpGridPoint1.x;
-							f64Dy = tpGridPoint2.y - tpGridPoint1.y;
+							f64Dx = flpGridPoint2.x - flpGridPoint1.x;
+							f64Dy = flpGridPoint2.y - flpGridPoint1.y;
 							f64PointDist = Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy);
 						}
 
-						if(i64Row > 0)
+						if(i64Row != 0)
 						{
-							tpGridPoint1 = (sGridDisplay.sGridData.arrGridData[i64Row][i64Col]);
-							tpGridPoint2 = (sGridDisplay.sGridData.arrGridData[i64Row - 1][i64Col]);
+							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col]);
+							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row - 1][(int)i64Col]);
 
-							f64Dx = tpGridPoint2.x - tpGridPoint1.x;
-							f64Dy = tpGridPoint2.y - tpGridPoint1.y;
+							f64Dx = flpGridPoint2.x - flpGridPoint1.x;
+							f64Dy = flpGridPoint2.y - flpGridPoint1.y;
 							f64PointDist = Math.Min(f64PointDist, Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy));
 						}
 						else
 						{
-							tpGridPoint1 = (sGridDisplay.sGridData.arrGridData[0][i64Col]);
-							tpGridPoint2 = (sGridDisplay.sGridData.arrGridData[1][i64Col]);
+							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[0][(int)i64Col]);
+							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[1][(int)i64Col]);
 
-							f64Dx = tpGridPoint2.x - tpGridPoint1.x;
-							f64Dy = tpGridPoint2.y - tpGridPoint1.y;
+							f64Dx = flpGridPoint2.x - flpGridPoint1.x;
+							f64Dy = flpGridPoint2.y - flpGridPoint1.y;
 							f64PointDist = Math.Min(f64PointDist, Math.Sqrt(f64Dx * f64Dx + f64Dy * f64Dy));
 						}
 
-						string wstrGridIdx;
-						wstrGridIdx = String.Format("{0}", i64GridIdx);
-						colorText = colorPool[i64GridIdx % 3];
+						string strGridIdx;
+						strGridIdx = String.Format("{0}", i64GridIdx);
+						u32ColorText = u32ArrColor[i64GridIdx % 3];
 
 						if(i64Col == i64GridCol - 1)
-							colorText = EColor.YELLOW;
+							u32ColorText = EColor.YELLOW;
 
-						if((res = pLayer.DrawTextImage(tpGridPoint1, wstrGridIdx, colorText, EColor.BLACK, (int)(f64PointDist / 2), true, f64AngleIner)).IsFail())
-						{
-							ErrorPrint(res, "Failed to draw figure.\n");
-							break;
-						}
+						pLayer.DrawTextImage(flpGridPoint1, strGridIdx, u32ColorText, EColor.BLACK, (float)(int)(f64PointDist / 2), true, f64TempAngle);
 					}
 				}
 
 				// Board Region 그리기 // Draw Board Region
-				CFLQuad<double> flqBoardRegion = sGridDisplay.sGridData.pFlqBoardRegion;
-				CFLPoint<double> flpPoint1 = new CFLPoint<double>(flqBoardRegion.flpPoints[0]);
-				CFLPoint<double> flpPoint2 = new CFLPoint<double>(flqBoardRegion.flpPoints[1]);
-				double f64Angle = flpPoint1.GetAngle(flpPoint2);
-				string wstringData;
-				wstringData = string.Format("({0} X {1})", sGridDisplay.sGridData.i64Columns, sGridDisplay.sGridData.i64Rows);
+				string stringData = String.Format("({0} X {1})", (int)i64GridCol, (int)i64GridRow);
+				pLayer.DrawFigureImage(flqBoardRegion, EColor.BLACK, 3);
+				pLayer.DrawFigureImage(flqBoardRegion, EColor.YELLOW, 1);
+				pLayer.DrawTextImage(flqBoardRegion.flpPoints[0], stringData, EColor.YELLOW, EColor.BLACK, (float)(int)(f64Width / 16), true, f64Angle, EGUIViewImageTextAlignment.LEFT_BOTTOM, null, 1, 1, EGUIViewImageFontWeight.EXTRABOLD);
 
-				if((res = pLayer.DrawFigureImage(flqBoardRegion, EColor.YELLOW, 3)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw figure.\n");
-					break;
-				}
-
-				if((res = pLayer.DrawTextImage(flpPoint1, wstringData, EColor.YELLOW, EColor.BLACK, 15, false, f64Angle, EGUIViewImageTextAlignment.LEFT_BOTTOM)).IsFail())
-				{
-					ErrorPrint(res, "Failed to draw text.\n");
-					break;
-				}
+				res = new CResult(EResult.OK);
 			}
 			while(false);
 
-			return bOK;
+			return res;
 		}
 
 		public class CMessageReceiver : CFLBase
@@ -193,23 +153,18 @@ namespace FLImagingExamplesCSharp
 			{
 				m_viewImage = viewImage;
 
-				// 메세지를 전달 받기 위해 CBroadcastManager 에 구독 등록 //Subscribe to CBroadcast Manager to receive messages
+				// 메세지를 전달 받기 위해 CBroadcastManager 에 구독 등록 // Subscribe to CBroadcast Manager to receive messages
 				CBroadcastManager.Subscribe(this);
 			}
 
-			// CMessageReceiver 소멸자 // CMessageReceiver Destructor
+			// CMessageReceiver 소멸자 // CMessageReceiver destructor
 			~CMessageReceiver()
 			{
-				// 객체가 소멸할때 메세지 수신을 중단하기 위해 구독을 해제한다. // Unsubscribe to stop receiving messages when the object disappears.
+				// 객체가 소멸할때 메세지 수신을 중단하기 위해 구독을 해제한다. // Unsubscribe to stop receiving messages when object disappears.
 				CBroadcastManager.Unsubscribe(this);
 			}
 
-			public void SetGrid(ref SGridDisplay[] sGridDisplay)
-			{
-				m_vctGridDisplay = sGridDisplay;
-			}
-
-			// 메세지가 들어오면 호출되는 함수 OnReceiveBroadcast 오버라이드하여 구현 // Implemented by overriding the function OnReceive Broadcast that is invoked when a message is received
+			// 메세지가 들어오면 호출되는 함수 OnReceiveBroadcast 오버라이드 하여 구현 // Override OnReceiveBroadcast that is called when a message in called
 			public override void OnReceiveBroadcast(CBroadcastMessage message)
 			{
 				do
@@ -218,43 +173,40 @@ namespace FLImagingExamplesCSharp
 					if(message == null)
 						break;
 
-					// GetCaller() 가 등록한 이미지뷰인지 확인 // Verify that GetCaller() is a registered image view
-					if(message.GetCaller() != m_viewImage)
+					// 설정된 뷰가 null 인지 확인 // Verify view is null
+					if(m_viewImage == null)
 						break;
 
-					// 메세지의 채널을 확인 // Check the channel of the message
+					// 메세지의 채널을 확인 // Check message's channel
 					switch(message.GetChannel())
 					{
-					case (uint)EGUIBroadcast.ViewImage_PostPageChange:
+					case (long)EGUIBroadcast.ViewImage_PostPageChange:
 						{
-							// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅 // Casting the object that called the message as CGUIViewImage
-							CGUIViewImage viewImage = message.GetCaller() as CGUIViewImage;
-
-							// viewImage 가 null 인지 확인 // Verify viewImage is null
-							if(viewImage == null)
+							// GetCaller 가 등록한 이미지뷰인지 확인 // Verify that GetCaller is a registered image view
+							if(message.GetCaller() != m_viewImage)
 								break;
 
-							CFLImage fliTmp = viewImage.GetImage();
+							CFLImage fliLearnImage = m_viewImage.GetImage();
 
-							if(fliTmp == null)
+							if(fliLearnImage == null)
 								break;
 
-							int i64CurPage = fliTmp.GetSelectedPageIndex();
+							long i64CurPage = fliLearnImage.GetSelectedPageIndex();
 
 							// 이미지뷰의 0번 레이어 가져오기 // Get layer 0th of image view
-							CGUIViewImageLayer layer = viewImage.GetLayer((int)(i64CurPage % 10));
+							CGUIViewImageLayer layer = m_viewImage.GetLayer((int)(i64CurPage % 10));
 
-							for(int i = 0; i < 10; ++i)
-								viewImage.GetLayer((int)i).Clear();
+							for(long i = 0; i < 10; ++i)
+								m_viewImage.GetLayer((int)i).Clear();
 
-							for(int i64Idx = 0; i64Idx < (int)fliTmp.GetPageCount(); ++i64Idx)
+							for(long i64Idx = 0; i64Idx < (long)fliLearnImage.GetPageCount(); ++i64Idx)
 							{
-								if(m_vctGridDisplay[(int)i64Idx].i64ImageIdx == i64CurPage)
-									DrawGridPoints(m_vctGridDisplay[(int)i64Idx], layer);
+								if(m_psGridDisplay[(int)i64Idx].i64ImageIdx == i64CurPage)
+									DrawGridPoints(m_psGridDisplay[(int)i64Idx], layer);
 							}
 
-							// 이미지뷰를 갱신 // Update the image view.
-							viewImage.Invalidate();
+							// 이미지 뷰를 갱신 // Update image view
+							m_viewImage.Invalidate(true);
 						}
 						break;
 					}
@@ -262,117 +214,110 @@ namespace FLImagingExamplesCSharp
 				while(false);
 			}
 
-			SGridDisplay[] m_vctGridDisplay;
+			public SGridDisplay[] m_psGridDisplay;
+
 			CGUIViewImage m_viewImage;
-		}
+		};
 
-		static bool Calibration(CStereoCalibrator3D stereoCalibrator3D, CFLImage fliLearnImage, CFLImage fliLearnImage2)
+		static CResult Calibration(CStereoCalibrator3D stereoCalibrator3D, CFLImage fliLearnImage, CFLImage fliLearn2Image)
 		{
-			bool bResult = false;
-
-			// 결과 enum 선언
-			CResult res = new CResult();
+			// 수행 결과 객체 선언 // Declare execution result object
+			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
-				// Learn 이미지 설정 // Set learn image
+				// Learn 이미지 설정 // Set Learn image
 				if((res = stereoCalibrator3D.SetLearnImage(ref fliLearnImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set image.\n");
+					ErrorPrint(res, "Failed to set Learn image.\n");
 					break;
 				}
 
-				// Learn 이미지 설정 // Set learn image 2
-				if((res = stereoCalibrator3D.SetLearnImage2(ref fliLearnImage2)).IsFail())
+				// Learn 2 이미지 설정 // Set Learn 2 image
+				if((res = stereoCalibrator3D.SetLearnImage2(ref fliLearn2Image)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set image.\n");
+					ErrorPrint(res, "Failed to set Learn 2 image.\n");
 					break;
 				}
 
-				// Optimal Solution Accuracy 설정 // Set the optical solution accuracy
+				// Calibration의 최적해 정확도 값 설정 // Set optimal solution accuracy of calibration
 				if((res = stereoCalibrator3D.SetOptimalSolutionAccuracy(1e-5)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set Optimal Solution Accuracy.\n");
+					ErrorPrint(res, "Failed to set calibration optimal solution accuracy.\n");
 					break;
 				}
 
-				// Grid Type 설정 // Set the grid type
+				// Calibration에 사용되는 Grid Type 설정 // Set grid type used in calibration
 				if((res = stereoCalibrator3D.SetGridType(CStereoCalibrator3D.EGridType.ChessBoard)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set Grid Type.\n");
+					ErrorPrint(res, "Failed to set calibration grid type.\n");
 					break;
 				}
 
-				// Calibration 실행 // Execute calibration
+				// 앞서 설정된 파라미터 대로 Calibration 수행 // Calibration algorithm according to previously set parameters
 				if((res = stereoCalibrator3D.Calibrate()).IsFail())
 				{
-					ErrorPrint(res, "Calibration failed.\n");
+					ErrorPrint(res, "Failed to calibrate Stereo Calibrator 3D.\n");
 					break;
 				}
-
-				bResult = true;
 			}
 			while(false);
 
-			return bResult;
+			return res;
 		}
 
-		static bool Undistortion(CStereoCalibrator3D stereoCalibrator3D, CFLImage fliSourceImage, CFLImage fliSourceImage2, CFLImage fliDestinationImage, CFLImage fliDestinationImage2)
+		static CResult Undistortion(CStereoCalibrator3D stereoCalibrator3D, CFLImage fliSourceImage, CFLImage fliSource2Image, CFLImage fliDestinationImage, CFLImage fliDestination2Image)
 		{
-			bool bResult = false;
-
-			// 결과 enum 선언 // Declare result enum;
-			CResult res = new CResult();
+			// 수행 결과 객체 선언 // Declare execution result object
+			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
-				// Source 이미지 설정 // Set source image
+				// Source 이미지 설정 // Set Source image
 				if((res = stereoCalibrator3D.SetSourceImage(ref fliSourceImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to load image.\n");
+					ErrorPrint(res, "Failed to set Source image.\n");
 					break;
 				}
 
-				// Source 이미지 2 설정 // Set source image 2
-				if((res = stereoCalibrator3D.SetSourceImage2(ref fliSourceImage2)).IsFail())
+				// Source 이미지 2 설정 // Set Source 2 image
+				if((res = stereoCalibrator3D.SetSourceImage2(ref fliSource2Image)).IsFail())
 				{
-					ErrorPrint(res, "Failed to load image.\n");
+					ErrorPrint(res, "Failed to set Source 2 image.\n");
 					break;
 				}
 
-				// Destination 이미지 설정 // Set the destination image
+				// Destination 이미지 설정 // Set Destination image
 				if((res = stereoCalibrator3D.SetDestinationImage(ref fliDestinationImage)).IsFail())
 				{
-					ErrorPrint(res, "Failed to load image.\n");
+					ErrorPrint(res, "Failed to set Destination image.\n");
 					break;
 				}
 
-				// Destination 이미지 2 설정 // Set destination image 2
-				if((res = stereoCalibrator3D.SetDestinationImage2(ref fliDestinationImage2)).IsFail())
+				// Destination 이미지 2 설정 // Set Destination 2 image
+				if((res = stereoCalibrator3D.SetDestinationImage2(ref fliDestination2Image)).IsFail())
 				{
-					ErrorPrint(res, "Failed to load image.\n");
+					ErrorPrint(res, "Failed to set Destination 2 image.\n");
 					break;
 				}
 
-				// Interpolation 알고리즘 설정 // Set interpolation algorithm
+				// Interpolation 메소드 설정 // Set interpolation method
 				if((res = stereoCalibrator3D.SetInterpolationMethod(EInterpolationMethod.Bilinear)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set interpolation method.\n");
 					break;
 				}
 
-				// Undistortion 실행 // Execute undistortion
+				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = stereoCalibrator3D.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Undistortion failed.\n");
+					ErrorPrint(res, "Failed to execute Stereo Calibrator 3D.\n");
 					break;
 				}
-
-				bResult = true;
 			}
 			while(false);
 
-			return bResult;
+			return res;
 		}
 
 		[STAThread]
@@ -382,218 +327,204 @@ namespace FLImagingExamplesCSharp
 			// before using any features of the FLImaging(R) library
 			CLibraryUtilities.Initialize();
 
-			// 이미지 객체 선언 // Declare the image object
-			CFLImage fliLearnImage = new CFLImage(), fliSourceImage = new CFLImage(), fliDestinationImage = new CFLImage();
-			CFLImage fliLearnImage2 = new CFLImage(), fliSourceImage2 = new CFLImage(), fliDestinationImage2 = new CFLImage();
+			// 이미지 객체 선언 // Declare image object
+			CFLImage fliLearnImage = new CFLImage();
+			CFLImage fliSourceImage = new CFLImage();
+			CFLImage fliDestinationImage = new CFLImage();
+			CFLImage fliLearn2Image = new CFLImage();
+			CFLImage fliSource2Image = new CFLImage();
+			CFLImage fliDestination2Image = new CFLImage();
 
-			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage viewImageLearn = new CGUIViewImage();
-			CGUIViewImage viewImageLearn2 = new CGUIViewImage();
-			CGUIViewImage viewImageDestination = new CGUIViewImage();
-			CGUIViewImage viewImageDestination2 = new CGUIViewImage();
+			// 이미지 뷰 선언 // Declare image view
+			CGUIViewImage viewLearnImage = new CGUIViewImage();
+			CGUIViewImage viewDestinationImage = new CGUIViewImage();
+			CGUIViewImage viewLearn2Image = new CGUIViewImage();
+			CGUIViewImage viewDestination2Image = new CGUIViewImage();
 
-			// Camera Calibrator 객체 생성 // Create Camera Calibrator object
-			CStereoCalibrator3D stereoCalibrator3D = new CStereoCalibrator3D();
-			CMessageReceiver msgReceiver = new CMessageReceiver(ref viewImageLearn);
-			CMessageReceiver msgReceiver2 = new CMessageReceiver(ref viewImageLearn2);
-
-			// 결과 enum 선언 // Declare result enum;
-			CResult res = new CResult();
+			// 수행 결과 객체 선언 // Declare execution result object
+			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
-				// Learn 이미지 로드 // Load learn image
+				// Learn 이미지 로드 // Load Learn image
 				if((res = fliLearnImage.Load("../../ExampleImages/StereoCalibrator3D/Left.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Learn 이미지 2 로드 // Load learn image 2
-				if((res = fliLearnImage2.Load("../../ExampleImages/StereoCalibrator3D/Right.flif")).IsFail())
+				// Learn2 이미지 로드 // Load Learn2 image
+				if((res = fliLearn2Image.Load("../../ExampleImages/StereoCalibrator3D/Right.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
-				// Page 0 선택 // Select page 0
-				fliLearnImage.SelectPage(0);
-				fliLearnImage2.SelectPage(0);
-
-				Console.WriteLine("Processing....\n");
-
-				// Stereo calibration 수행 // Execute stereo calibration
-				if(!Calibration(stereoCalibrator3D, fliLearnImage, fliLearnImage2))
-					break;
-
-				// Source 이미지에 Learn 이미지를 복사 (얕은 복사) // Copy the learn image to source image (Shallow Copy)
-				fliSourceImage.Assign(fliLearnImage, false);
-
-				// Source 이미지 2에 Learn 이미지 2를 복사 (얕은 복사) // Copy the learn image 2 to source image 2 (Shallow Copy)
-				fliSourceImage2.Assign(fliLearnImage2, false);
-
-				CMultiVar<long> mvBlank = new CMultiVar<long>(0);
-
-				// Destination 이미지 생성 // Create destination image
-				if((res = fliDestinationImage.Create(fliSourceImage.GetWidth(), fliSourceImage.GetHeight(), mvBlank, fliSourceImage.GetPixelFormat())).IsFail())
+				// Learn 이미지 뷰 생성 // Create Learn image view
+				if((res = viewLearnImage.Create(300, 0, 300 + 480 * 1, 360)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image file.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// Destination 이미지 생성 // Create destination image
-				if((res = fliDestinationImage2.Create(fliSourceImage.GetWidth(), fliSourceImage.GetHeight(), mvBlank, fliSourceImage.GetPixelFormat())).IsFail())
+				// Learn 2 이미지 뷰 생성 // Create Learn 2 image view
+				if((res = viewLearn2Image.Create(300 + 480, 0, 300 + 480 * 2, 360)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image file.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// Undistortion 수행 // Execute undistortion
-				if(!Undistortion(stereoCalibrator3D, fliSourceImage, fliSourceImage2, fliDestinationImage, fliDestinationImage2))
+				// Destination 이미지 뷰 생성 // Create Destination image view
+				if((res = viewDestinationImage.Create(300, 360, 780, 720)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Destination 2 이미지 뷰 생성 // Create Destination 2 image view
+				if((res = viewDestination2Image.Create(780, 360, 1260, 720)).IsFail())
+				{
+					ErrorPrint(res, "Failed to create the image view.\n");
+					break;
+				}
+
+				// Learn 이미지 뷰에 이미지를 디스플레이 // Display image in Learn image view
+				if((res = viewLearnImage.SetImagePtr(ref fliLearnImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+				// Learn 2 이미지 뷰에 이미지를 디스플레이 // Display image in Learn 2 image view
+				if((res = viewLearn2Image.SetImagePtr(ref fliLearn2Image)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+				// Destination 이미지 뷰에 이미지를 디스플레이 // Display image in Destination image view
+				if((res = viewDestinationImage.SetImagePtr(ref fliDestinationImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+				// Destination 2 이미지 뷰에 이미지를 디스플레이 // Display image in Destination 2 image view
+				if((res = viewDestination2Image.SetImagePtr(ref fliDestination2Image)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set image object on the image view.\n");
+					break;
+				}
+
+				// 두 뷰 윈도우의 위치를 동기화 // Synchronize positions of two views
+				if((res = viewLearnImage.SynchronizeWindow(ref viewLearn2Image)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window between views.\n");
+					break;
+				}
+
+				// 두 뷰 윈도우의 위치를 동기화 // Synchronize positions of two views
+				if((res = viewLearnImage.SynchronizeWindow(ref viewDestinationImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window between views.\n");
+					break;
+				}
+
+				// 두 뷰 윈도우의 위치를 동기화 // Synchronize positions of two views
+				if((res = viewLearnImage.SynchronizeWindow(ref viewDestination2Image)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window between views.\n");
+					break;
+				}
+
+				// 두 이미지 뷰 윈도우의 Page를 동기화 한다 // Synchronize pages of two image views
+				if((res = viewLearnImage.SynchronizePageIndex(ref viewLearn2Image)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize page index between image views.\n");
+					break;
+				}
+
+				// 두 이미지 뷰 윈도우의 Page를 동기화 한다 // Synchronize pages of two image views
+				if((res = viewLearnImage.SynchronizePageIndex(ref viewDestinationImage)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize page index between image views.\n");
+					break;
+				}
+
+				// 두 이미지 뷰 윈도우의 Page를 동기화 한다 // Synchronize pages of two image views
+				if((res = viewLearnImage.SynchronizePageIndex(ref viewDestination2Image)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize page index between image views.\n");
+					break;
+				}
+
+				Console.WriteLine("Processing.....\n");
+
+				// Stereo Calibrator 3D 객체 생성 // Create Stereo Calibrator 3D object
+				CStereoCalibrator3D stereoCalibrator3D = new CStereoCalibrator3D();
+
+				// Stereo Calibrator 3D Calibration 수행 // Calibrate Stereo Calibrator 3D
+				if(Calibration(stereoCalibrator3D, fliLearnImage, fliLearn2Image).IsFail())
 					break;
 
-				// 화면에 격자 탐지 결과 출력 // Display the result of grid detection
+				// Source 이미지를 Learn 이미지와 동일하도록 설정 (얕은 복사) // Assign Learn image to Source image (Shallow Copy)
+				if((res = fliSourceImage.Assign(fliLearnImage, false)).IsFail())
+				{
+					ErrorPrint(res, "Failed to assign the image.\n");
+					break;
+				}
+
+				// Source 2 이미지를 Learn 2 이미지와 동일하도록 설정 (얕은 복사) // Assign Learn 2 image to Source 2 image (Shallow Copy)
+				if((res = fliSource2Image.Assign(fliLearn2Image, false)).IsFail())
+				{
+					ErrorPrint(res, "Failed to assign the image.\n");
+					break;
+				}
+
+				// Stereo Calibrator 3D Undistortion 수행 // Undistort Stereo Calibrator 3D
+				if(Undistortion(stereoCalibrator3D, fliSourceImage, fliSource2Image, fliDestinationImage, fliDestination2Image).IsFail())
+					break;
+
+				// 뷰에 격자 탐지 결과 출력 // Display grid detection result in view
 				SGridDisplay[] sArrGridDisplay = new SGridDisplay[5];
-				sArrGridDisplay[0] = new SGridDisplay();
-				sArrGridDisplay[1] = new SGridDisplay();
-				sArrGridDisplay[2] = new SGridDisplay();
-				sArrGridDisplay[3] = new SGridDisplay();
-				sArrGridDisplay[4] = new SGridDisplay();
-
-				SGridDisplay[] sArrGridDisplay2 = new SGridDisplay[5];
-				sArrGridDisplay2[0] = new SGridDisplay();
-				sArrGridDisplay2[1] = new SGridDisplay();
-				sArrGridDisplay2[2] = new SGridDisplay();
-				sArrGridDisplay2[3] = new SGridDisplay();
-				sArrGridDisplay2[4] = new SGridDisplay();
 
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage.GetPageCount(); ++i64ImgIdx)
 				{
-					sArrGridDisplay[i64ImgIdx].sGridData = new CStereoCalibrator3D.SGridResult();
-					stereoCalibrator3D.GetResultGridPoints(ref sArrGridDisplay[i64ImgIdx].sGridData, i64ImgIdx);
+					sArrGridDisplay[i64ImgIdx] = new SGridDisplay();
+					sArrGridDisplay[i64ImgIdx].sGridResult = new CStereoCalibrator3D.SGridResult();
+					stereoCalibrator3D.GetResultGridPoints(ref sArrGridDisplay[i64ImgIdx].sGridResult, i64ImgIdx);
 					sArrGridDisplay[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 				}
 
-				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage2.GetPageCount(); ++i64ImgIdx)
+				SGridDisplay[] sArrGridDisplay2 = new SGridDisplay[5];
+
+				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearn2Image.GetPageCount(); ++i64ImgIdx)
 				{
-					sArrGridDisplay2[i64ImgIdx].sGridData = new CStereoCalibrator3D.SGridResult();
-					stereoCalibrator3D.GetResultGridPoints2(ref sArrGridDisplay2[i64ImgIdx].sGridData, i64ImgIdx);
+					sArrGridDisplay2[i64ImgIdx] = new SGridDisplay();
+					sArrGridDisplay2[i64ImgIdx].sGridResult = new CStereoCalibrator3D.SGridResult();
+					stereoCalibrator3D.GetResultGridPoints2(ref sArrGridDisplay2[i64ImgIdx].sGridResult, i64ImgIdx);
 					sArrGridDisplay2[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 				}
 
-				msgReceiver.SetGrid(ref sArrGridDisplay);
-				msgReceiver2.SetGrid(ref sArrGridDisplay2);
+				// Message Receiver 객체 생성 // Create Message Receiver object
+				CMessageReceiver msgReceiver = new CMessageReceiver(ref viewLearnImage);
+				CMessageReceiver msgReceiver2 = new CMessageReceiver(ref viewLearn2Image);
 
-				// Learn 이미지 뷰 생성 // Create learn image view
-				if((res = viewImageLearn.Create(300, 0, 300 + 480 * 1, 360)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
+				msgReceiver.m_psGridDisplay = sArrGridDisplay;
+				msgReceiver2.m_psGridDisplay = sArrGridDisplay2;
 
-				// Learn 이미지 2 뷰 생성 // Create learn image 2 view
-				if((res = viewImageLearn2.Create(300 + 480, 0, 300 + 480 * 2, 360)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
+				// 화면에 출력하기 위해 이미지 뷰에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released
+				CGUIViewImageLayer layerLearn = viewLearnImage.GetLayer(0);
+				CGUIViewImageLayer layerLearn2 = viewLearn2Image.GetLayer(0);
+				CGUIViewImageLayer layerDestination = viewDestinationImage.GetLayer(0);
+				CGUIViewImageLayer layerDestination2 = viewDestination2Image.GetLayer(0);
 
-				// Learn 이미지 뷰에 이미지를 디스플레이 // Display learn image on the image view
-				if((res = viewImageLearn.SetImagePtr(ref fliLearnImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
+				// Chess Board Grid 출력 // Display chess board grid
+				DrawGridPoints(sArrGridDisplay[0], layerLearn);
+				DrawGridPoints(sArrGridDisplay2[0], layerLearn2);
 
-				// Learn 이미지 2 뷰에 이미지를 디스플레이 // Display the image on the learn image 2 view
-				if((res = viewImageLearn2.SetImagePtr(ref fliLearnImage2)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
-				CGUIViewImageLayer pLayer = viewImageLearn.GetLayer(0);
-				CGUIViewImageLayer pLayer2 = viewImageLearn2.GetLayer(0);
-
-				// Chess Board Grid 출력
-				DrawGridPoints(sArrGridDisplay[0], pLayer);
-				DrawGridPoints(sArrGridDisplay2[0], pLayer2);
-
-				viewImageLearn.Invalidate();
-
-				// Source 이미지 뷰 생성 // Create source image view
-				if((res = viewImageDestination.Create(300, 360, 780, 720)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
-				// Destination 이미지 뷰 생성 // Create destination image view
-				if((res = viewImageDestination2.Create(780, 360, 1260, 720)).IsFail())
-				{
-					ErrorPrint(res, "Failed to create the image view.\n");
-					break;
-				}
-
-				// Source 이미지 뷰에 이미지를 디스플레이 // Display the image in the source image view
-				if((res = viewImageDestination.SetImagePtr(ref fliDestinationImage)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				// Destination 이미지 뷰에 이미지를 디스플레이 // Display the image in the destination image view
-				if((res = viewImageDestination2.SetImagePtr(ref fliDestinationImage2)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageLearn.SynchronizePointOfView(ref viewImageLearn2)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize view.\n");
-					break;
-				}
-
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageDestination.SynchronizePointOfView(ref viewImageDestination2)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize view.\n");
-					break;
-				}
-
-				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImageLearn2)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window.\n");
-					break;
-				}
-
-				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImageDestination)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window.\n");
-					break;
-				}
-
-				// 두 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the two image view windows
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImageDestination2)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window.\n");
-					break;
-				}
-
-				// 두 이미지 뷰 윈도우의 페이지 인덱스를 동기화 한다 // Synchronize the page index of the two image view windows
-				if((res = viewImageLearn.SynchronizePageIndex(ref viewImageLearn2)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize view.\n");
-					break;
-				}
-
-				// calibration data 출력 // Display the calibration data
+				// Calibration data 출력 // Display calibration data
 				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam = stereoCalibrator3D.GetResultIntrinsicParameters();
 				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef = stereoCalibrator3D.GetResultDistortionCoefficients();
 
@@ -608,62 +539,170 @@ namespace FLImagingExamplesCSharp
 
 				double f64ReprojError = stereoCalibrator3D.GetResultReProjectionError();
 
-				string strMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, 0, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, 0, 0, 1);
+				string strMatrix = "";
+				string strDistVal = "";
+				string strMatrix2 = "";
+				string strDistVal2 = "";
+				string strRotatMatrix = "";
+				string strTranslVal = "";
+				string strRotatMatrix2 = "";
+				string strTranslVal2 = "";
 
-				string strDistVal = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}", sDistortCoeef.f64K1, sDistortCoeef.f64K2, sDistortCoeef.f64P1, sDistortCoeef.f64P2, sDistortCoeef.f64K3, sDistortCoeef.f64K4, sDistortCoeef.f64K5, sDistortCoeef.f64K6, sDistortCoeef.f64S1, sDistortCoeef.f64S2, sDistortCoeef.f64S3, sDistortCoeef.f64S4, sDistortCoeef.f64Gx, sDistortCoeef.f64Gy);
+				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64FocalLengthX);
+				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64Skew);
+				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64PrincipalPointX);
+				strMatrix += String.Format("{0:N13}, ", 0);
+				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64FocalLengthY);
+				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64PrincipalPointY);
+				strMatrix += String.Format("{0:N13}, ", 0);
+				strMatrix += String.Format("{0:N13}, ", 0);
+				strMatrix += String.Format("{0:N13}", 1);
 
-				string strMatrix2 = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sIntrinsicParam.f64FocalLengthX, sIntrinsicParam.f64Skew, sIntrinsicParam.f64PrincipalPointX, 0, sIntrinsicParam.f64FocalLengthY, sIntrinsicParam.f64PrincipalPointY, 0, 0, 1);
+				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64FocalLengthX);
+				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64Skew);
+				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64PrincipalPointX);
+				strMatrix2 += String.Format("{0:N13}, ", 0);
+				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64FocalLengthY);
+				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64PrincipalPointY);
+				strMatrix2 += String.Format("{0:N13}, ", 0);
+				strMatrix2 += String.Format("{0:N13}, ", 0);
+				strMatrix2 += String.Format("{0:N13}", 1);
 
-				string strDistVal2 = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}", sDistortCoeef2.f64K1, sDistortCoeef2.f64K2, sDistortCoeef2.f64P1, sDistortCoeef2.f64P2, sDistortCoeef2.f64K3, sDistortCoeef2.f64K4, sDistortCoeef2.f64K5, sDistortCoeef2.f64K6, sDistortCoeef2.f64S1, sDistortCoeef2.f64S2, sDistortCoeef2.f64S3, sDistortCoeef2.f64S4, sDistortCoeef2.f64Gx, sDistortCoeef2.f64Gy);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K1);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K2);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64P1);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64P2);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K3);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K4);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K5);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K6);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64S1);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64S2);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64S3);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64S4);
+				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64Gx);
+				strDistVal += String.Format("{0:N13}", sDistortCoeef.f64Gy);
 
-				string strRotatMatrix = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sRotationParam.f64R0, sRotationParam.f64R1, sRotationParam.f64R2, sRotationParam.f64R3, sRotationParam.f64R4, sRotationParam.f64R5, sRotationParam.f64R6, sRotationParam.f64R7, sRotationParam.f64R8);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K1);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K2);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64P1);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64P2);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K3);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K4);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K5);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K6);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64S1);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64S2);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64S3);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64S4);
+				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64Gx);
+				strDistVal2 += String.Format("{0:N13}", sDistortCoeef2.f64Gy);
 
-				string strRotatMatrix2 = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", sRotationParam2.f64R0, sRotationParam2.f64R1, sRotationParam2.f64R2, sRotationParam2.f64R3, sRotationParam2.f64R4, sRotationParam2.f64R5, sRotationParam2.f64R6, sRotationParam2.f64R7, sRotationParam2.f64R8);
+				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R0);
+				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R1);
+				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R2);
+				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R3);
+				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R4);
+				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R5);
+				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R6);
+				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R7);
+				strRotatMatrix += String.Format("{0:N13}", sRotationParam.f64R8);
 
-				string strTranslVal = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}", sTranslationParam.f64T0, sTranslationParam.f64T1, sTranslationParam.f64T2, sTranslationParam.f64T3, sTranslationParam.f64T4, sTranslationParam.f64T5, sTranslationParam.f64T6, sTranslationParam.f64T7, sTranslationParam.f64T8, sTranslationParam.f64T9, sTranslationParam.f64T10, sTranslationParam.f64T11);
+				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R0);
+				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R1);
+				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R2);
+				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R3);
+				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R4);
+				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R5);
+				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R6);
+				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R7);
+				strRotatMatrix2 += String.Format("{0:N13}", sRotationParam2.f64R8);
 
-				string strTranslVal2 = String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}", sTranslationParam2.f64T0, sTranslationParam2.f64T1, sTranslationParam2.f64T2, sTranslationParam2.f64T3, sTranslationParam2.f64T4, sTranslationParam2.f64T5, sTranslationParam2.f64T6, sTranslationParam2.f64T7, sTranslationParam2.f64T8, sTranslationParam2.f64T9, sTranslationParam2.f64T10, sTranslationParam2.f64T11);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T0);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T1);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T2);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T3);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T4);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T5);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T6);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T7);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T8);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T9);
+				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T10);
+				strTranslVal += String.Format("{0:N8}", sTranslationParam.f64T11);
 
-				Console.WriteLine("Intrinsic Parameters");
-				Console.WriteLine("{0}", strMatrix);
-				Console.WriteLine("Distortion Coefficients");
-				Console.WriteLine("{0}", strDistVal);
-				Console.WriteLine("Rotation Parameters");
-				Console.WriteLine("{0}", strRotatMatrix);
-				Console.WriteLine("Translation Parameters");
-				Console.WriteLine("{0}\n", strTranslVal);
-				Console.WriteLine("Intrinsic Parameters 2");
-				Console.WriteLine("{0}", strMatrix2);
-				Console.WriteLine("Distortion Coefficients 2");
-				Console.WriteLine("{0}", strDistVal2);
-				Console.WriteLine("Rotation Parameters 2");
-				Console.WriteLine("{0}", strRotatMatrix2);
-				Console.WriteLine("Translation Parameters 2");
-				Console.WriteLine("{0}\n", strTranslVal2);
-				Console.WriteLine("Re-Projection Error");
-				Console.WriteLine("{0}", f64ReprojError);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T0);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T1);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T2);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T3);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T4);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T5);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T6);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T7);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T8);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T9);
+				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T10);
+				strTranslVal2 += String.Format("{0:N8}", sTranslationParam2.f64T11);
 
-				long i64Height = fliDestinationImage.GetHeight();
-				long i64Width = fliDestinationImage.GetWidth();
+				Console.Write("Intrinsic parameters : {0}\n", strMatrix);
+				Console.Write("Distortion Coefficients : {0}\n", strDistVal);
+				Console.Write("Rotation parameters : {0}\n", strRotatMatrix);
+				Console.Write("Translation parameters : {0}\n\n", strTranslVal);
+				Console.Write("Intrinsic parameters 2 : {0}\n", strMatrix2);
+				Console.Write("Distortion Coefficients 2 : {0}\n", strDistVal2);
+				Console.Write("Rotation parameters 2 : {0}\n", strRotatMatrix2);
+				Console.Write("Translation parameters 2 : {0}\n\n", strTranslVal2);
+				Console.Write("Re-Projection Error : {0:8}", f64ReprojError);
 
-				for(int i32Iter = 0; i32Iter < 2; ++i32Iter)
+				// 이미지 뷰 정보 표시 // Display image view information
+				if((res = layerLearn.DrawTextCanvas(new CFLPoint<double>(0, 0), "Learn Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
 				{
-					for(int i32Index = 0; i32Index < 20; ++i32Index)
-					{
-						CFLLine<double> fllHorizonLine = new CFLLine<double>(0, i64Height / 20 * i32Index, i64Width, i64Height / 20 * i32Index);
-
-						CGUIViewImageLayer layerDst = (i32Iter == 0 ? viewImageDestination.GetLayer(0) : viewImageDestination2.GetLayer(0));
-						layerDst.DrawFigureImage(fllHorizonLine, EColor.LIME, 1);
-					}
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
 				}
 
-				viewImageLearn.Invalidate();
-				viewImageLearn2.Invalidate();
-				viewImageDestination.Invalidate();
-				viewImageDestination2.Invalidate();
+				// 이미지 뷰 정보 표시 // Display image view information
+				if((res = layerLearn2.DrawTextCanvas(new CFLPoint<double>(0, 0), "Learn 2 Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
 
-				////// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageLearn.IsAvailable() && viewImageLearn2.IsAvailable() && viewImageDestination.IsAvailable() && viewImageDestination2.IsAvailable())
+				if((res = layerDestination.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+				if((res = layerDestination2.DrawTextCanvas(new CFLPoint<double>(0, 0), "Destination 2 Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				{
+					ErrorPrint(res, "Failed to draw text.\n");
+					break;
+				}
+
+
+				// 새로 생성한 이미지를 가지는 뷰 Zoom Fit 실행 // Activate Zoom Fit for view with newly created image
+				if((res = viewDestinationImage.ZoomFit()).IsFail())
+				{
+					ErrorPrint(res, "Failed to zoom fit image view.\n");
+					break;
+				}
+
+				// 새로 생성한 이미지를 가지는 뷰 Zoom Fit 실행 // Activate Zoom Fit for view with newly created image
+				if((res = viewDestination2Image.ZoomFit()).IsFail())
+				{
+					ErrorPrint(res, "Failed to zoom fit image view.\n");
+					break;
+				}
+
+				// 이미지 뷰를 갱신 // Update image view
+				viewLearnImage.Invalidate(true);
+				viewLearn2Image.Invalidate(true);
+				viewDestinationImage.Invalidate(true);
+				viewDestination2Image.Invalidate(true);
+
+				// 뷰가 닫히기 전까지 종료하지 않고 대기 // Wait until a view is closed before exiting
+				while(viewLearnImage.IsAvailable() && viewLearn2Image.IsAvailable() && viewDestinationImage.IsAvailable() && viewDestination2Image.IsAvailable())
 					Thread.Sleep(1);
 			}
 			while(false);
