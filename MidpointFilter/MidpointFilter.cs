@@ -107,10 +107,10 @@ namespace FLImagingExamplesCSharp
 				// Destination 이미지 설정 // Set the destination image
 				midpointFilter.SetDestinationImage(ref fliDstImage);
 
-				// 처리할 filter의 Kernel Size 설정 (KernelSize = 5 일 경우, Kernel Size : 5x5, 홀수만 설정가능)
+				// 처리할 Filter의 Kernel Size 설정 // Set the kernel size of the filter
 				midpointFilter.SetKernel(5);
 
-				// 커널 크기보다 작은 영역 처리 방식 설정
+				// 커널 크기보다 작은 영역의 처리 방식 설정 // Set padding method for regions smaller than the kernel size
 				midpointFilter.SetPaddingMethod(EPaddingMethod.DecreasingKernel);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
