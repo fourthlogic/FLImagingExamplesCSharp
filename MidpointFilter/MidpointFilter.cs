@@ -40,7 +40,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// Destination이미지를 Src 이미지와 동일한 이미지로 생성
+				// Destination이미지를 Src 이미지와 동일한 이미지로 생성 // Create destination image as same as source image
 				if(fliDstImage.Assign(fliSrcImage).IsFail())
 				{
 					Console.WriteLine("Failed to assign the image file.\n");
