@@ -572,31 +572,13 @@ namespace FLImagingExamplesCSharp
 				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K2);
 				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64P1);
 				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64P2);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K3);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K4);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K5);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K6);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64S1);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64S2);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64S3);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64S4);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64Gx);
-				strDistVal += String.Format("{0:N13}", sDistortCoeef.f64Gy);
+				strDistVal += String.Format("{0:N13}", sDistortCoeef.f64K3);
 
 				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K1);
 				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K2);
 				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64P1);
 				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64P2);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K3);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K4);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K5);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K6);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64S1);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64S2);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64S3);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64S4);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64Gx);
-				strDistVal2 += String.Format("{0:N13}", sDistortCoeef2.f64Gy);
+				strDistVal2 += String.Format("{0:N13}", sDistortCoeef2.f64K3);
 
 				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R0);
 				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R1);
