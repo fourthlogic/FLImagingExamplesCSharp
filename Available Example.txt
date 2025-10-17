@@ -613,6 +613,10 @@
        - An example of an algorithm that classifies validation images using a model learned through classifier on training images using class-specific augmentation specifications.
        - 클래스 별 증강 스펙을 사용하여 학습 이미지들에 대해 classifeir를 통하여 학습한 모델을 사용하여 검증 이미지를 분류하는 알고리즘 예제.
 
+    - DenoisingDiffusion
+       - Example of an algorithm that generates images based on a training dataset (Diffusion Model)
+       - 학습 데이터셋에 기반하여 이미지를 생성하는 알고리즘 예제 (확산 모델).
+
     - GenerativeAdversarialNetwork_NoLabel
        - Example of an algorithm that generates images based on a training dataset
        - 학습 데이터셋에 기반하여 이미지를 생성하는 알고리즘 예제.
