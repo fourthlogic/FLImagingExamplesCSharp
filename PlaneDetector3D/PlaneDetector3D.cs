@@ -37,7 +37,7 @@ namespace FLImagingExamplesCSharp
 			CFL3DObject floSrcObject = new CFL3DObject();
 			CFL3DObject floDstObject = new CFL3DObject();
 
-			// 이미지 뷰 선언 // Declare image view
+			// 뷰 선언 // Declare view
 			CGUIView3D view3DSrc = new CGUIView3D();
 			CGUIView3D view3DDst = new CGUIView3D();
 
@@ -46,36 +46,36 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// Source Object 로드 // Load the Source object
+				// Source 3D Object 로드 // Load the Source 3D object
 				if((res = floSrcObject.Load("../../ExampleImages/PlaneDetector3D/Source.ply")).IsFail())
 				{
-					ErrorPrint(res, "Failed to load the object file.\n");
+					ErrorPrint(res, "Failed to load the 3D object file.\n");
 					break;
 				}
 
-				// 이미지 뷰 생성 // Create image view
+				// 뷰 생성 // Create view
 				if((res = view3DSrc.Create(0, 0, 500, 500)).IsFail() ||
 				   (res = view3DDst.Create(500, 0, 1000, 500)).IsFail())
 				{
-					ErrorPrint(res, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the view.\n");
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
+				// 두 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two views
 				if((res = view3DSrc.SynchronizePointOfView(ref view3DDst)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
-				// Source Object 3D 뷰 생성 // Create the source object 3D view
+				// View 에 source 3D object 디스플레이 // Display source 3D object on the view
 				if((res = view3DSrc.PushObject(floSrcObject)).IsFail())
 				{
 					ErrorPrint(res, "Failed to display the 3D object.\n");
 					break;
 				}
 
-				// PlaneDetector3D 객체 생성 // Create PlaneDetector3D object
+				// 알고리즘 객체 생성 // Create algorithm object
 				CPlaneDetector3D planeDetector3D = new CPlaneDetector3D();
 
 				if((res = planeDetector3D.SetSourceObject(ref floSrcObject)).IsFail())
@@ -116,7 +116,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 3D 이미지 뷰에 3d object 를 디스플레이 // Display the 3d object on the 3D image view
+				// 뷰에 3D object 를 디스플레이 // Display the 3D object on the view
 				CGUIView3DObject gvoDst = new CGUIView3DObject();
 				if((res = (gvoDst.Get3DObject()).Swap(ref floDstObject)).IsFail())
 					break;
@@ -130,8 +130,8 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
-				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
+				// 화면에 출력하기 위해 View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from view for display
+				// 이 레이어 객체는 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This layer object belongs to an view and does not need to be released separately
 				CGUIView3DLayer layer3DSrc = view3DSrc.GetLayer(0);
 				CGUIView3DLayer layer3DDst = view3DDst.GetLayer(0);
 
@@ -139,7 +139,7 @@ namespace FLImagingExamplesCSharp
 				layer3DSrc.Clear();
 				layer3DDst.Clear();
 
-				// 이미지 뷰 정보 표시 // Display image view information
+				// 뷰 정보 표시 // Display view information
 				int i32PlaneCount = planeDetector3D.GetResultPlaneCount();
 				CFLPoint<double> flp = new CFLPoint<double>(0, 0);
 				String strDstLayerString;
@@ -154,6 +154,7 @@ namespace FLImagingExamplesCSharp
 				bool bDrawTextIndex = true;
 				bool bDrawTextCount = true;
 				bool bDrawTextArea = false;
+
 				// text
 				if(bDrawTextIndex || bDrawTextCount || bDrawTextArea)
 				{
@@ -195,7 +196,7 @@ namespace FLImagingExamplesCSharp
 							str = String.Format("Area {0:F3}\n", f32PlaneArea);
 							strTotal += str;
 						}
-						layer3DDst.DrawText3D(tp3Centroid, strTotal, EColor.YELLOW, 0, 9);
+						layer3DDst.DrawText3D(tp3Centroid, strTotal, EColor.YELLOW, EColor.BLACK, 9);
 					}
 				}
 
@@ -203,11 +204,11 @@ namespace FLImagingExamplesCSharp
 				view3DSrc.ZoomFit();
 				view3DDst.ZoomFit();
 
-				// 이미지 뷰를 갱신 합니다. // Update image view
+				// 뷰를 갱신 합니다. // Update view
 				view3DSrc.Invalidate(true);
 				view3DDst.Invalidate(true);
 
-				//이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
+				// 뷰가 종료될 때 까지 기다림
 				while(view3DSrc.IsAvailable() && view3DDst.IsAvailable())
 					Thread.Sleep(1);
 
