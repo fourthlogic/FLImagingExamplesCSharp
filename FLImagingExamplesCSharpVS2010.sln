@@ -1822,6 +1822,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DenoisingDiffusion_Inpainti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaneDetector3D", "PlaneDetector3D\PlaneDetector3D.csproj", "{B6B50BBC-B9C0-4374-944D-A8E7705DEC9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceLightControllerNARATECH_NRT_PH", "DeviceLightControllerNARATECH_NRT_PH\DeviceLightControllerNARATECH_NRT_PH.csproj", "{2BABAE24-E90C-4E54-8ABC-73C2BEC08053}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -5656,6 +5658,12 @@ Global
 		{B6B50BBC-B9C0-4374-944D-A8E7705DEC9F}.Release|Win32.ActiveCfg = Release|x64
 		{B6B50BBC-B9C0-4374-944D-A8E7705DEC9F}.Release|x64.ActiveCfg = Release|x64
 		{B6B50BBC-B9C0-4374-944D-A8E7705DEC9F}.Release|x64.Build.0 = Release|x64
+		{2BABAE24-E90C-4E54-8ABC-73C2BEC08053}.Debug|Win32.ActiveCfg = Debug|x64
+		{2BABAE24-E90C-4E54-8ABC-73C2BEC08053}.Debug|x64.ActiveCfg = Debug|x64
+		{2BABAE24-E90C-4E54-8ABC-73C2BEC08053}.Debug|x64.Build.0 = Debug|x64
+		{2BABAE24-E90C-4E54-8ABC-73C2BEC08053}.Release|Win32.ActiveCfg = Release|x64
+		{2BABAE24-E90C-4E54-8ABC-73C2BEC08053}.Release|x64.ActiveCfg = Release|x64
+		{2BABAE24-E90C-4E54-8ABC-73C2BEC08053}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -6559,6 +6567,7 @@ Global
 		{DB8707B8-02CB-4380-A756-192F66BD3742} = {3511B5BF-03DE-4883-85AD-08A7512D3CDD}
 		{189664EF-C65E-48BD-A37B-61FBE02316C3} = {3511B5BF-03DE-4883-85AD-08A7512D3CDD}
 		{4DF8B080-0175-48A0-8342-418E6668068C} = {4A4CF886-2C82-4D8D-9776-EDD7EA505D2E}
+		{2BABAE24-E90C-4E54-8ABC-73C2BEC08053} = {4A4CF886-2C82-4D8D-9776-EDD7EA505D2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4239AB04-ECDF-4498-97CC-C51877AFA854}
