@@ -168,7 +168,7 @@ namespace FLImagingExamplesCSharp
 				filterGeneratorGaussFD.SetSigma1(5.000000);
 				filterGeneratorGaussFD.SetSigma2(5.000000);
 
-				CFilterGeneratorBaseFD filterGeneratorBaseFD = filterGeneratorGaussFD;
+				filterGeneratorBaseFD = filterGeneratorGaussFD;
 				convolutionFD.SetFilterGenerator(ref filterGeneratorBaseFD);
 
 				// 알고리즘 수행 // Execute the algorithm
