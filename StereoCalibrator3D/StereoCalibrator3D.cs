@@ -29,7 +29,7 @@ namespace FLImagingExamplesCSharp
 		public struct SGridDisplay
 		{
 			public long i64ImageIdx;
-			public CStereoCalibrator3D.SGridResult sGridResult;
+			public CStereoCalibrator3D.CGridResult gridResult;
 		};
 
 		static CResult DrawGridPoints(SGridDisplay sGridDisplay, CGUIViewImageLayer pLayer)
@@ -38,7 +38,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				if(sGridDisplay.sGridResult.arrGridData.Count == 0)
+				if(sGridDisplay.gridResult.flaGridData.Count == 0)
 				{
 					res = new CResult(EResult.NoData);
 					break;
@@ -47,10 +47,10 @@ namespace FLImagingExamplesCSharp
 				// 그리기 색상 설정 // Set drawing color
 				EColor[] u32ArrColor = { EColor.RED, EColor.LIME, EColor.CYAN };
 
-				long i64GridRow = sGridDisplay.sGridResult.i64Rows;
-				long i64GridCol = sGridDisplay.sGridResult.i64Columns;
-				double f64AvgDistance = sGridDisplay.sGridResult.f64AvgDistance;
-				CFLQuad<double> flqBoardRegion = sGridDisplay.sGridResult.pFlqBoardRegion;
+				long i64GridRow = sGridDisplay.gridResult.i64Rows;
+				long i64GridCol = sGridDisplay.gridResult.i64Columns;
+				double f64AvgDistance = sGridDisplay.gridResult.f64AvgDistance;
+				CFLQuad<double> flqBoardRegion = sGridDisplay.gridResult.pFlqBoardRegion;
 				double f64Angle = flqBoardRegion.flpPoints[0].GetAngle(flqBoardRegion.flpPoints[1]);
 				double f64Width = flqBoardRegion.flpPoints[0].GetDistance(flqBoardRegion.flpPoints[1]);
 
@@ -60,8 +60,8 @@ namespace FLImagingExamplesCSharp
 					for(long i64Col = 0; i64Col < i64GridCol - 1; ++i64Col)
 					{
 						long i64GridIdx = i64Row * i64GridCol + i64Col;
-						CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col]);
-						CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col + 1]);
+						CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row][(int)i64Col]);
+						CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row][(int)i64Col + 1]);
 						CFLLine<double> fllDrawLine = new CFLLine<double>(flpGridPoint1, flpGridPoint2);
 						pLayer.DrawFigureImage(fllDrawLine, EColor.BLACK, 5);
 						pLayer.DrawFigureImage(fllDrawLine, u32ArrColor[i64GridIdx % 3], 3);
@@ -69,8 +69,8 @@ namespace FLImagingExamplesCSharp
 
 					if(i64Row < i64GridRow - 1)
 					{
-						CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64GridCol - 1]);
-						CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row + 1][0]);
+						CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row][(int)i64GridCol - 1]);
+						CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row + 1][0]);
 						CFLLine<double> fllDrawLine = new CFLLine<double>(flpGridPoint1, flpGridPoint2);
 						pLayer.DrawFigureImage(fllDrawLine, EColor.BLACK, 5);
 						pLayer.DrawFigureImage(fllDrawLine, EColor.YELLOW, 3);
@@ -85,8 +85,8 @@ namespace FLImagingExamplesCSharp
 				// Grid Point 인덱싱 // Index Grid Point
 				for(long i64Row = 0; i64Row < i64GridRow; ++i64Row)
 				{
-					CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][0]);
-					CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][1]);
+					CFLPoint<double> flpGridPoint1 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row][0]);
+					CFLPoint<double> flpGridPoint2 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row][1]);
 					double f64TempAngle = flpGridPoint1.GetAngle(flpGridPoint2);
 
 					for(long i64Col = 0; i64Col < i64GridCol; ++i64Col)
@@ -95,8 +95,8 @@ namespace FLImagingExamplesCSharp
 
 						if(i64Col < i64GridCol - 1)
 						{
-							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col]);
-							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col + 1]);
+							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row][(int)i64Col]);
+							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row][(int)i64Col + 1]);
 
 							f64Dx = flpGridPoint2.x - flpGridPoint1.x;
 							f64Dy = flpGridPoint2.y - flpGridPoint1.y;
@@ -105,8 +105,8 @@ namespace FLImagingExamplesCSharp
 
 						if(i64Row != 0)
 						{
-							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row][(int)i64Col]);
-							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[(int)i64Row - 1][(int)i64Col]);
+							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row][(int)i64Col]);
+							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[(int)i64Row - 1][(int)i64Col]);
 
 							f64Dx = flpGridPoint2.x - flpGridPoint1.x;
 							f64Dy = flpGridPoint2.y - flpGridPoint1.y;
@@ -114,8 +114,8 @@ namespace FLImagingExamplesCSharp
 						}
 						else
 						{
-							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[0][(int)i64Col]);
-							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.sGridResult.arrGridData[1][(int)i64Col]);
+							flpGridPoint1 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[0][(int)i64Col]);
+							flpGridPoint2 = new CFLPoint<double>(sGridDisplay.gridResult.flaGridData[1][(int)i64Col]);
 
 							f64Dx = flpGridPoint2.x - flpGridPoint1.x;
 							f64Dy = flpGridPoint2.y - flpGridPoint1.y;
@@ -491,8 +491,8 @@ namespace FLImagingExamplesCSharp
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearnImage.GetPageCount(); ++i64ImgIdx)
 				{
 					sArrGridDisplay[i64ImgIdx] = new SGridDisplay();
-					sArrGridDisplay[i64ImgIdx].sGridResult = new CStereoCalibrator3D.SGridResult();
-					stereoCalibrator3D.GetResultGridPoints(ref sArrGridDisplay[i64ImgIdx].sGridResult, i64ImgIdx);
+					sArrGridDisplay[i64ImgIdx].gridResult = new CStereoCalibrator3D.CGridResult();
+					stereoCalibrator3D.GetResultGridPoints(ref sArrGridDisplay[i64ImgIdx].gridResult, i64ImgIdx);
 					sArrGridDisplay[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 				}
 
@@ -501,8 +501,8 @@ namespace FLImagingExamplesCSharp
 				for(long i64ImgIdx = 0; i64ImgIdx < (long)fliLearn2Image.GetPageCount(); ++i64ImgIdx)
 				{
 					sArrGridDisplay2[i64ImgIdx] = new SGridDisplay();
-					sArrGridDisplay2[i64ImgIdx].sGridResult = new CStereoCalibrator3D.SGridResult();
-					stereoCalibrator3D.GetResultGridPoints2(ref sArrGridDisplay2[i64ImgIdx].sGridResult, i64ImgIdx);
+					sArrGridDisplay2[i64ImgIdx].gridResult = new CStereoCalibrator3D.CGridResult();
+					stereoCalibrator3D.GetResultGridPoints2(ref sArrGridDisplay2[i64ImgIdx].gridResult, i64ImgIdx);
 					sArrGridDisplay2[i64ImgIdx].i64ImageIdx = i64ImgIdx;
 				}
 
@@ -525,116 +525,248 @@ namespace FLImagingExamplesCSharp
 				DrawGridPoints(sArrGridDisplay2[0], layerLearn2);
 
 				// Calibration data 출력 // Display calibration data
-				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam = stereoCalibrator3D.GetResultIntrinsicParameters();
-				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef = stereoCalibrator3D.GetResultDistortionCoefficients();
+				CStereoCalibrator3D.CIntrinsicParameters intrinsicOptimizedParam = stereoCalibrator3D.GetResultCalibratedIntrinsicParameters();
+				CStereoCalibrator3D.CIntrinsicParameters intrinsicOptimizedParam2 = stereoCalibrator3D.GetResultCalibratedIntrinsicParameters2();
 
-				CStereoCalibrator3D.SIntrinsicParameters sIntrinsicParam2 = stereoCalibrator3D.GetResultIntrinsicParameters2();
-				CStereoCalibrator3D.SDistortionCoefficients sDistortCoeef2 = stereoCalibrator3D.GetResultDistortionCoefficients2();
+				CStereoCalibrator3D.CDistortionCoefficients distortOptimizedCoeef = stereoCalibrator3D.GetResultCalibratedDistortionCoefficients();
+				CStereoCalibrator3D.CDistortionCoefficients distortOptimizedCoeef2 = stereoCalibrator3D.GetResultCalibratedDistortionCoefficients2();
 
-				CStereoCalibrator3D.SRotationParameters sRotationParam = stereoCalibrator3D.GetResultRotationParameters();
-				CStereoCalibrator3D.SRotationParameters sRotationParam2 = stereoCalibrator3D.GetResultRotationParameters2();
+				CStereoCalibrator3D.CRotationParameters rotationOptimizedParam = stereoCalibrator3D.GetResultCalibratedRotationParameters();
 
-				CStereoCalibrator3D.STranslationParameters sTranslationParam = stereoCalibrator3D.GetResultTranslationParameters();
-				CStereoCalibrator3D.STranslationParameters sTranslationParam2 = stereoCalibrator3D.GetResultTranslationParameters2();
+				CStereoCalibrator3D.CTranslationParameters translationOptimizedParam = stereoCalibrator3D.GetResultCalibratedTranslationParameters();
+
+
+				CStereoCalibrator3D.CIntrinsicParameters intrinsicRectifiedParam = stereoCalibrator3D.GetResultRectifiedIntrinsicParameters();
+				CStereoCalibrator3D.CIntrinsicParameters intrinsicRectifiedParam2 = stereoCalibrator3D.GetResultRectifiedIntrinsicParameters2();
+
+				CStereoCalibrator3D.CRotationParameters rotationRectifiedParam = stereoCalibrator3D.GetResultRectifiedRotationParameters();
+				CStereoCalibrator3D.CRotationParameters rotationRectifiedParam2 = stereoCalibrator3D.GetResultRectifiedRotationParameters2();
+
+				CStereoCalibrator3D.CTranslationParameters translationRectifiedParam = stereoCalibrator3D.GetResultRectifiedTranslationParameters();
+				CStereoCalibrator3D.CTranslationParameters translationRectifiedParam2 = stereoCalibrator3D.GetResultRectifiedTranslationParameters2();
 
 				double f64ReprojError = stereoCalibrator3D.GetResultReProjectionError();
 
-				string strMatrix = "";
-				string strDistVal = "";
-				string strMatrix2 = "";
-				string strDistVal2 = "";
-				string strRotatMatrix = "";
-				string strTranslVal = "";
-				string strRotatMatrix2 = "";
-				string strTranslVal2 = "";
+				string strFocalLengthX = "";
+				string strFocalLengthY = "";
+				string strPrincipalPointX = "";
+				string strPrincipalPointY = "";
+				string strDistortionK1 = "";
+				string strDistortionK2 = "";
+				string strDistortionP1 = "";
+				string strDistortionP2 = "";
+				string strDistortionK3 = "";
+				string strRotation0 = "";
+				string strRotation1 = "";
+				string strRotation2 = "";
+				string strTranslationX = "";
+				string strTranslationY = "";
+				string strTranslationZ = "";
 
-				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64FocalLengthX);
-				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64Skew);
-				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64PrincipalPointX);
-				strMatrix += String.Format("{0:N13}, ", 0);
-				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64FocalLengthY);
-				strMatrix += String.Format("{0:N13}, ", sIntrinsicParam.f64PrincipalPointY);
-				strMatrix += String.Format("{0:N13}, ", 0);
-				strMatrix += String.Format("{0:N13}, ", 0);
-				strMatrix += String.Format("{0:N13}", 1);
 
-				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64FocalLengthX);
-				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64Skew);
-				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64PrincipalPointX);
-				strMatrix2 += String.Format("{0:N13}, ", 0);
-				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64FocalLengthY);
-				strMatrix2 += String.Format("{0:N13}, ", sIntrinsicParam2.f64PrincipalPointY);
-				strMatrix2 += String.Format("{0:N13}, ", 0);
-				strMatrix2 += String.Format("{0:N13}, ", 0);
-				strMatrix2 += String.Format("{0:N13}", 1);
+				Console.Write("\n\n");
 
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K1);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64K2);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64P1);
-				strDistVal += String.Format("{0:N13}, ", sDistortCoeef.f64P2);
-				strDistVal += String.Format("{0:N13}", sDistortCoeef.f64K3);
+				Console.Write("**************************** Calibration ****************************");
 
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K1);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64K2);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64P1);
-				strDistVal2 += String.Format("{0:N13}, ", sDistortCoeef2.f64P2);
-				strDistVal2 += String.Format("{0:N13}", sDistortCoeef2.f64K3);
+				Console.Write("\n\n\n");
 
-				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R0);
-				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R1);
-				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R2);
-				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R3);
-				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R4);
-				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R5);
-				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R6);
-				strRotatMatrix += String.Format("{0:N13}, ", sRotationParam.f64R7);
-				strRotatMatrix += String.Format("{0:N13}", sRotationParam.f64R8);
+				Console.Write("---------------------------- Camera 0 ----------------------------");
 
-				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R0);
-				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R1);
-				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R2);
-				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R3);
-				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R4);
-				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R5);
-				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R6);
-				strRotatMatrix2 += String.Format("{0:N13}, ", sRotationParam2.f64R7);
-				strRotatMatrix2 += String.Format("{0:N13}", sRotationParam2.f64R8);
+				Console.Write("\n\n");
 
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T0);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T1);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T2);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T3);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T4);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T5);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T6);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T7);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T8);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T9);
-				strTranslVal += String.Format("{0:N8}, ", sTranslationParam.f64T10);
-				strTranslVal += String.Format("{0:N8}", sTranslationParam.f64T11);
+				strFocalLengthX = String.Format("{0:N13}", intrinsicOptimizedParam.f64FocalLengthX);
+				strFocalLengthY = String.Format("{0:N13}", intrinsicOptimizedParam.f64FocalLengthY);
+				strPrincipalPointX = String.Format("{0:N13}", intrinsicOptimizedParam.f64PrincipalPointX);
+				strPrincipalPointY = String.Format("{0:N13}", intrinsicOptimizedParam.f64PrincipalPointY);
 
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T0);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T1);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T2);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T3);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T4);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T5);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T6);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T7);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T8);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T9);
-				strTranslVal2 += String.Format("{0:N8}, ", sTranslationParam2.f64T10);
-				strTranslVal2 += String.Format("{0:N8}", sTranslationParam2.f64T11);
+				Console.Write("Calibrated Intrinsic Parameters:\n");
+				Console.Write("\tFocal Length X: {0}\n", strFocalLengthX);
+				Console.Write("\tFocal Length Y: {0}\n", strFocalLengthY);
+				Console.Write("\tPrincipal Point X: {0}\n", strPrincipalPointX);
+				Console.Write("\tPrincipal Point Y: {0}\n", strPrincipalPointY);
 
-				Console.Write("Intrinsic parameters : {0}\n", strMatrix);
-				Console.Write("Distortion Coefficients : {0}\n", strDistVal);
-				Console.Write("Rotation parameters : {0}\n", strRotatMatrix);
-				Console.Write("Translation parameters : {0}\n\n", strTranslVal);
-				Console.Write("Intrinsic parameters 2 : {0}\n", strMatrix2);
-				Console.Write("Distortion Coefficients 2 : {0}\n", strDistVal2);
-				Console.Write("Rotation parameters 2 : {0}\n", strRotatMatrix2);
-				Console.Write("Translation parameters 2 : {0}\n\n", strTranslVal2);
-				Console.Write("Re-Projection Error : {0:8}", f64ReprojError);
+				Console.Write("\n");
+
+				strDistortionK1 = String.Format("{0:N13}", distortOptimizedCoeef.f64K1);
+				strDistortionK2 = String.Format("{0:N13}", distortOptimizedCoeef.f64K2);
+				strDistortionP1 = String.Format("{0:N13}", distortOptimizedCoeef.f64P1);
+				strDistortionP2 = String.Format("{0:N13}", distortOptimizedCoeef.f64P2);
+				strDistortionK3 = String.Format("{0:N13}", distortOptimizedCoeef.f64K3);
+
+				Console.Write("Calibrated Distortion Coefficients:\n");
+				Console.Write("\tK1: {0}\n", strDistortionK1);
+				Console.Write("\tK2: {0}\n", strDistortionK2);
+				Console.Write("\tP1: {0}\n", strDistortionP1);
+				Console.Write("\tP2: {0}\n", strDistortionP2);
+				Console.Write("\tK3: {0}\n", strDistortionK3);
+
+				Console.Write("\n");
+
+
+				Console.Write("---------------------------- Camera 1 ----------------------------");
+
+				Console.Write("\n\n");
+
+				strFocalLengthX = String.Format("{0:N13}", intrinsicOptimizedParam2.f64FocalLengthX);
+				strFocalLengthY = String.Format("{0:N13}", intrinsicOptimizedParam2.f64FocalLengthY);
+				strPrincipalPointX = String.Format("{0:N13}", intrinsicOptimizedParam2.f64PrincipalPointX);
+				strPrincipalPointY = String.Format("{0:N13}", intrinsicOptimizedParam2.f64PrincipalPointY);
+
+				Console.Write("Calibrated Intrinsic Parameters:\n");
+				Console.Write("\tFocal Length X: {0}\n", strFocalLengthX);
+				Console.Write("\tFocal Length Y: {0}\n", strFocalLengthY);
+				Console.Write("\tPrincipal Point X: {0}\n", strPrincipalPointX);
+				Console.Write("\tPrincipal Point Y: {0}\n", strPrincipalPointY);
+
+				Console.Write("\n");
+
+				strDistortionK1 = String.Format("{0:N13}", distortOptimizedCoeef2.f64K1);
+				strDistortionK2 = String.Format("{0:N13}", distortOptimizedCoeef2.f64K2);
+				strDistortionP1 = String.Format("{0:N13}", distortOptimizedCoeef2.f64P1);
+				strDistortionP2 = String.Format("{0:N13}", distortOptimizedCoeef2.f64P2);
+				strDistortionK3 = String.Format("{0:N13}", distortOptimizedCoeef2.f64K3);
+
+				Console.Write("Calibrated Distortion Coefficients:\n");
+				Console.Write("\tK1: {0}\n", strDistortionK1);
+				Console.Write("\tK2: {0}\n", strDistortionK2);
+				Console.Write("\tP1: {0}\n", strDistortionP1);
+				Console.Write("\tP2: {0}\n", strDistortionP2);
+				Console.Write("\tK3: {0}\n", strDistortionK3);
+
+				Console.Write("\n");
+
+
+				Console.Write("---------------------------- Common ----------------------------");
+
+				Console.Write("\n\n");
+
+				strRotation0 = String.Format("{0:N13}, ", rotationOptimizedParam.f64R0);
+				strRotation0 += String.Format("{0:N13}, ", rotationOptimizedParam.f64R1);
+				strRotation0 += String.Format("{0:N13}", rotationOptimizedParam.f64R2);
+				strRotation1 = String.Format("{0:N13}, ", rotationOptimizedParam.f64R3);
+				strRotation1 += String.Format("{0:N13}, ", rotationOptimizedParam.f64R4);
+				strRotation1 += String.Format("{0:N13}", rotationOptimizedParam.f64R5);
+				strRotation2 = String.Format("{0:N13}, ", rotationOptimizedParam.f64R6);
+				strRotation2 += String.Format("{0:N13}, ", rotationOptimizedParam.f64R7);
+				strRotation2 += String.Format("{0:N13}", rotationOptimizedParam.f64R8);
+
+				Console.Write("Relative Rotation Parameters:\n");
+				Console.Write("\t{0}\n", strRotation0);
+				Console.Write("\t{0}\n", strRotation1);
+				Console.Write("\t{0}\n", strRotation2);
+
+				Console.Write("\n");
+
+				strTranslationX = String.Format("{0:N13}", translationOptimizedParam.f64X);
+				strTranslationY = String.Format("{0:N13}", translationOptimizedParam.f64Y);
+				strTranslationZ = String.Format("{0:N13}", translationOptimizedParam.f64Z);
+
+				Console.Write("Relative Translation Parameters:\n");
+				Console.Write("\tX: {0}\n", strTranslationX);
+				Console.Write("\tY: {0}\n", strTranslationY);
+				Console.Write("\tZ: {0}\n", strTranslationZ);
+
+				Console.Write("\n\n");
+
+
+				Console.Write("**************************** Rectification ****************************");
+
+				Console.Write("\n\n\n");
+
+				Console.Write("---------------------------- Camera 0 ----------------------------");
+
+				Console.Write("\n\n");
+
+				strFocalLengthX = String.Format("{0:N13}", intrinsicRectifiedParam.f64FocalLengthX);
+				strFocalLengthY = String.Format("{0:N13}", intrinsicRectifiedParam.f64FocalLengthY);
+				strPrincipalPointX = String.Format("{0:N13}", intrinsicRectifiedParam.f64PrincipalPointX);
+				strPrincipalPointY = String.Format("{0:N13}", intrinsicRectifiedParam.f64PrincipalPointY);
+
+				Console.Write("Rectified Intrinsic Parameters:\n");
+				Console.Write("\tFocal Length X: {0}\n", strFocalLengthX);
+				Console.Write("\tFocal Length Y: {0}\n", strFocalLengthY);
+				Console.Write("\tPrincipal Point X: {0}\n", strPrincipalPointX);
+				Console.Write("\tPrincipal Point Y: {0}\n", strPrincipalPointY);
+
+				Console.Write("\n");
+
+				strRotation0 = String.Format("{0:N13}, ", rotationRectifiedParam.f64R0);
+				strRotation0 += String.Format("{0:N13}, ", rotationRectifiedParam.f64R1);
+				strRotation0 += String.Format("{0:N13}", rotationRectifiedParam.f64R2);
+				strRotation1 = String.Format("{0:N13}, ", rotationRectifiedParam.f64R3);
+				strRotation1 += String.Format("{0:N13}, ", rotationRectifiedParam.f64R4);
+				strRotation1 += String.Format("{0:N13}", rotationRectifiedParam.f64R5);
+				strRotation2 = String.Format("{0:N13}, ", rotationRectifiedParam.f64R6);
+				strRotation2 += String.Format("{0:N13}, ", rotationRectifiedParam.f64R7);
+				strRotation2 += String.Format("{0:N13}", rotationRectifiedParam.f64R8);
+
+				Console.Write("Rectified Rotation Parameters:\n");
+				Console.Write("\t{0}\n", strRotation0);
+				Console.Write("\t{0}\n", strRotation1);
+				Console.Write("\t{0}\n", strRotation2);
+
+				Console.Write("\n");
+
+				strTranslationX = String.Format("{0:N13}", translationRectifiedParam.f64X);
+				strTranslationY = String.Format("{0:N13}", translationRectifiedParam.f64Y);
+				strTranslationZ = String.Format("{0:N13}", translationRectifiedParam.f64Z);
+
+				Console.Write("Rectified Translation Parameters:\n");
+				Console.Write("\tX: {0}\n", strTranslationX);
+				Console.Write("\tY: {0}\n", strTranslationY);
+				Console.Write("\tZ: {0}\n", strTranslationZ);
+
+				Console.Write("\n");
+
+
+				Console.Write("---------------------------- Camera 1 ----------------------------");
+
+				Console.Write("\n\n");
+
+				strFocalLengthX = String.Format("{0:N13}", intrinsicRectifiedParam2.f64FocalLengthX);
+				strFocalLengthY = String.Format("{0:N13}", intrinsicRectifiedParam2.f64FocalLengthY);
+				strPrincipalPointX = String.Format("{0:N13}", intrinsicRectifiedParam2.f64PrincipalPointX);
+				strPrincipalPointY = String.Format("{0:N13}", intrinsicRectifiedParam2.f64PrincipalPointY);
+
+				Console.Write("Rectified Intrinsic Parameters:\n");
+				Console.Write("\tFocal Length X: {0}\n", strFocalLengthX);
+				Console.Write("\tFocal Length Y: {0}\n", strFocalLengthY);
+				Console.Write("\tPrincipal Point X: {0}\n", strPrincipalPointX);
+				Console.Write("\tPrincipal Point Y: {0}\n", strPrincipalPointY);
+
+				Console.Write("\n");
+
+				strRotation0 = String.Format("{0:N13}, ", rotationRectifiedParam2.f64R0);
+				strRotation0 += String.Format("{0:N13}, ", rotationRectifiedParam2.f64R1);
+				strRotation0 += String.Format("{0:N13}", rotationRectifiedParam2.f64R2);
+				strRotation1 = String.Format("{0:N13}, ", rotationRectifiedParam2.f64R3);
+				strRotation1 += String.Format("{0:N13}, ", rotationRectifiedParam2.f64R4);
+				strRotation1 += String.Format("{0:N13}", rotationRectifiedParam2.f64R5);
+				strRotation2 = String.Format("{0:N13}, ", rotationRectifiedParam2.f64R6);
+				strRotation2 += String.Format("{0:N13}, ", rotationRectifiedParam2.f64R7);
+				strRotation2 += String.Format("{0:N13}", rotationRectifiedParam2.f64R8);
+
+				Console.Write("Rectified Rotation Parameters:\n");
+				Console.Write("\t{0}\n", strRotation0);
+				Console.Write("\t{0}\n", strRotation1);
+				Console.Write("\t{0}\n", strRotation2);
+
+				Console.Write("\n");
+
+				strTranslationX = String.Format("{0:N13}", translationRectifiedParam2.f64X);
+				strTranslationY = String.Format("{0:N13}", translationRectifiedParam2.f64Y);
+				strTranslationZ = String.Format("{0:N13}", translationRectifiedParam2.f64Z);
+
+				Console.Write("Rectified Translation Parameters:\n");
+				Console.Write("\tX: {0}\n", strTranslationX);
+				Console.Write("\tY: {0}\n", strTranslationY);
+				Console.Write("\tZ: {0}\n", strTranslationZ);
+
+				Console.Write("\n");
+
+				Console.Write("Re-Projection Error : {0:N13}\n", f64ReprojError);
+
+				Console.Write("\n");
 
 				// 이미지 뷰 정보 표시 // Display image view information
 				if((res = layerLearn.DrawTextCanvas(new CFLPoint<double>(0, 0), "Learn Image", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
