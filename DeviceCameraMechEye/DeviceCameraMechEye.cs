@@ -41,7 +41,7 @@ namespace FLImagingExamplesCSharp
 	            if(!m_view3D.IsAvailable())
 		            break;
 
-                CDeviceCameraMechEye camera = pDeviceImage as CDeviceCameraMechEye;
+                CDeviceCameraMechEye_2_5_2 camera = pDeviceImage as CDeviceCameraMechEye_2_5_2;
 
 	            if(camera == null)
 		            break;
@@ -92,7 +92,7 @@ namespace FLImagingExamplesCSharp
         CGUIView3D m_view3D;
     }
 
-    class DeviceCameraMechEye
+    class DeviceCameraMechEye_2_5_2
 	{
         [STAThread]
         static void Main(string[] args)
@@ -107,7 +107,7 @@ namespace FLImagingExamplesCSharp
 	        CGUIView3D view3D = new CGUIView3D();
 
 	        // MechEye 카메라 선언
-	        CDeviceCameraMechEye camMechEye = new CDeviceCameraMechEye();
+	        CDeviceCameraMechEye_2_5_2 camMechEye = new CDeviceCameraMechEye_2_5_2();
 
 	        do
 			{
