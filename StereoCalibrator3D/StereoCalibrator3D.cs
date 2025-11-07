@@ -525,25 +525,42 @@ namespace FLImagingExamplesCSharp
 				DrawGridPoints(sArrGridDisplay2[0], layerLearn2);
 
 				// Calibration data 출력 // Display calibration data
-				CStereoCalibrator3D.CIntrinsicParameters intrinsicOptimizedParam = stereoCalibrator3D.GetResultCalibratedIntrinsicParameters();
-				CStereoCalibrator3D.CIntrinsicParameters intrinsicOptimizedParam2 = stereoCalibrator3D.GetResultCalibratedIntrinsicParameters2();
+				CStereoCalibrator3D.CIntrinsicParameters intrinsicOptimizedParam = new CStereoCalibrator3D.CIntrinsicParameters();
+				stereoCalibrator3D.GetResultCalibratedIntrinsicParameters(ref intrinsicOptimizedParam);
 
-				CStereoCalibrator3D.CDistortionCoefficients distortOptimizedCoeef = stereoCalibrator3D.GetResultCalibratedDistortionCoefficients();
-				CStereoCalibrator3D.CDistortionCoefficients distortOptimizedCoeef2 = stereoCalibrator3D.GetResultCalibratedDistortionCoefficients2();
+				CStereoCalibrator3D.CIntrinsicParameters intrinsicOptimizedParam2 = new CStereoCalibrator3D.CIntrinsicParameters();
+				stereoCalibrator3D.GetResultCalibratedIntrinsicParameters2(ref intrinsicOptimizedParam2);
 
-				CStereoCalibrator3D.CRotationParameters rotationOptimizedParam = stereoCalibrator3D.GetResultCalibratedRotationParameters();
+				CStereoCalibrator3D.CDistortionCoefficients distortOptimizedCoeef = new CStereoCalibrator3D.CDistortionCoefficients();
+				stereoCalibrator3D.GetResultCalibratedDistortionCoefficients(ref distortOptimizedCoeef);
 
-				CStereoCalibrator3D.CTranslationParameters translationOptimizedParam = stereoCalibrator3D.GetResultCalibratedTranslationParameters();
+				CStereoCalibrator3D.CDistortionCoefficients distortOptimizedCoeef2 = new CStereoCalibrator3D.CDistortionCoefficients();
+				stereoCalibrator3D.GetResultCalibratedDistortionCoefficients2(ref distortOptimizedCoeef2);
+
+				CStereoCalibrator3D.CRotationParameters rotationOptimizedParam = new CStereoCalibrator3D.CRotationParameters();
+				stereoCalibrator3D.GetResultCalibratedRotationParameters(ref rotationOptimizedParam);
+
+				CStereoCalibrator3D.CTranslationParameters translationOptimizedParam = new CStereoCalibrator3D.CTranslationParameters();
+				stereoCalibrator3D.GetResultCalibratedTranslationParameters(ref translationOptimizedParam);
 
 
-				CStereoCalibrator3D.CIntrinsicParameters intrinsicRectifiedParam = stereoCalibrator3D.GetResultRectifiedIntrinsicParameters();
-				CStereoCalibrator3D.CIntrinsicParameters intrinsicRectifiedParam2 = stereoCalibrator3D.GetResultRectifiedIntrinsicParameters2();
+				CStereoCalibrator3D.CIntrinsicParameters intrinsicRectifiedParam = new CStereoCalibrator3D.CIntrinsicParameters();
+				stereoCalibrator3D.GetResultRectifiedIntrinsicParameters(ref intrinsicRectifiedParam);
 
-				CStereoCalibrator3D.CRotationParameters rotationRectifiedParam = stereoCalibrator3D.GetResultRectifiedRotationParameters();
-				CStereoCalibrator3D.CRotationParameters rotationRectifiedParam2 = stereoCalibrator3D.GetResultRectifiedRotationParameters2();
+				CStereoCalibrator3D.CIntrinsicParameters intrinsicRectifiedParam2 = new CStereoCalibrator3D.CIntrinsicParameters();
+				stereoCalibrator3D.GetResultRectifiedIntrinsicParameters2(ref intrinsicRectifiedParam2);
 
-				CStereoCalibrator3D.CTranslationParameters translationRectifiedParam = stereoCalibrator3D.GetResultRectifiedTranslationParameters();
-				CStereoCalibrator3D.CTranslationParameters translationRectifiedParam2 = stereoCalibrator3D.GetResultRectifiedTranslationParameters2();
+				CStereoCalibrator3D.CRotationParameters rotationRectifiedParam = new CStereoCalibrator3D.CRotationParameters();
+				stereoCalibrator3D.GetResultRectifiedRotationParameters(ref rotationRectifiedParam);
+
+				CStereoCalibrator3D.CRotationParameters rotationRectifiedParam2 = new CStereoCalibrator3D.CRotationParameters();
+				stereoCalibrator3D.GetResultRectifiedRotationParameters2(ref rotationRectifiedParam2);
+
+				CStereoCalibrator3D.CTranslationParameters translationRectifiedParam = new CStereoCalibrator3D.CTranslationParameters();
+				stereoCalibrator3D.GetResultRectifiedTranslationParameters(ref translationRectifiedParam);
+
+				CStereoCalibrator3D.CTranslationParameters translationRectifiedParam2 = new CStereoCalibrator3D.CTranslationParameters();
+				stereoCalibrator3D.GetResultRectifiedTranslationParameters2(ref translationRectifiedParam2);
 
 				double f64ReprojError = stereoCalibrator3D.GetResultReProjectionError();
 
