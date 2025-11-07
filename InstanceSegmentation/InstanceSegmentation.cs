@@ -329,7 +329,11 @@ namespace FLImagingExamplesCSharp
 						float f32CurrCost = instanceSegmentationDL.GetLearningResultLastCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
 						float f32MeanAP = instanceSegmentationDL.GetLearningResultLastMeanAP();
-		
+						// 마지막 Recall 결과 받기 // Get the last recall result
+						float f32Recall = instanceSegmentationDL.GetLearningResultLastRecall();
+						// 마지막 검증 결과 받기 // Get the last validation result
+						float f32Precision = instanceSegmentationDL.GetLearningResultLastPrecision();
+
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Epoch {2} / {3}", f32CurrCost, f32MeanAP, i32Epoch, i32MaxEpoch);
 
@@ -337,9 +341,11 @@ namespace FLImagingExamplesCSharp
 						// Get the history of cost and validation and print it at graph view
 						List<float> vctCosts = new List<float>();
 						List<float> vctMeanAP = new List<float>();
+						List<float> vctRecall = new List<float>();
+						List<float> vctPrecision = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
-
-						instanceSegmentationDL.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch);
+					
+						instanceSegmentationDL.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch, ref vctRecall, ref vctPrecision);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanAP.Count() != 0 && i32PrevValidationCount != vctMeanAP.Count()))
@@ -360,6 +366,8 @@ namespace FLImagingExamplesCSharp
 							viewGraph.Plot(vctCosts, EChartType.Line, EColor.RED, "Cost");
 							// Graph View 데이터 입력 // Input Graph View Data
 							viewGraph.Plot(flaX, vctMeanAP, EChartType.Line, EColor.CYAN, "mAP");
+							viewGraph.Plot(flaX, vctRecall, EChartType.Line, EColor.GREEN, "recall");
+							viewGraph.Plot(flaX, vctPrecision, EChartType.Line, EColor.PURPLE, "precision");
 							viewGraph.UnlockUpdate();
 
 							viewGraph.UpdateWindow();
