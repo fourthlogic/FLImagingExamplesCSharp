@@ -347,7 +347,7 @@ namespace FLImagingExamplesCSharp
 						float f32Precision = instanceSegmentationDL.GetLearningResultLastPrecision();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Epoch {2} / {3}", f32CurrCost, f32MeanAP, i32Epoch, i32MaxEpoch);
+						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Recall : {2:F6} Precision : {3:F6} Epoch {4} / {5}", f32CurrCost, f32MeanAP, f32Recall, f32Precision, i32Epoch, i32MaxEpoch);
 
 						// 학습 결과 비용과 검증 결과 기록을 받아 그래프 뷰에 출력  
 						// Get the history of cost and validation and print it at graph view
