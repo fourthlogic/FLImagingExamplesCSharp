@@ -298,10 +298,14 @@ namespace FLImagingExamplesCSharp
 						float f32AvgCost = objectDetectionDL.GetLearningResultLastAverageCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
 						float f32Validation = objectDetectionDL.GetLearningResultLastMeanAP();
-			
+						// 마지막 Recall 결과 받기 // Get the last recall result
+						float f32Recall = objectDetectionDL.GetLearningResultLastRecall();
+						// 마지막 검증 결과 받기 // Get the last validation result
+						float f32Precision = objectDetectionDL.GetLearningResultLastPrecision();
+
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
 						if(f32AvgCost < objectDetectionDL.GetLearningRequiredCostForValidation())
-							Console.WriteLine("Cost : {0:F6} Avg Cost : {1:F6} mAP : {2:F6} Epoch {3} / {4}", f32CurrCost, f32AvgCost, f32Validation, i32Epoch, i32MaxEpoch);
+							Console.WriteLine("Cost : {0:F6} Avg Cost : {1:F6} mAP : {2:F6} Recall : {3:F6} Precision : {4:F6} Epoch {5} / {6}", f32CurrCost, f32AvgCost, f32Validation, f32Recall, f32Precision, i32Epoch, i32MaxEpoch);
 						else
 							Console.WriteLine("Cost : {0:F6} Avg Cost : {1:F6} Epoch {2} / {3}", f32CurrCost, f32AvgCost, i32Epoch, i32MaxEpoch);
 
@@ -310,12 +314,14 @@ namespace FLImagingExamplesCSharp
 						List<float> vctCosts = new List<float>();
 						List<float> vctAvgCosts = new List<float>();
 						List<float> vctmAP = new List<float>();
+						List<float> vctRecall = new List<float>();
+						List<float> vctPrecision = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						objectDetectionDL.GetLearningResultAllHistory(ref vctCosts, ref vctAvgCosts, ref vctmAP, ref vctValidationEpoch);
+						objectDetectionDL.GetLearningResultAllHistory(ref vctCosts, ref vctAvgCosts, ref vctmAP, ref vctValidationEpoch, ref vctRecall, ref vctPrecision);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
-						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctmAP.Count() != 0 && i32PrevValidationCount != vctmAP.Count()))
+						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctmAP.Count() != 0 && vctRecall.Count() != 0 && vctPrecision.Count() != 0 && i32PrevValidationCount != vctmAP.Count()))
 						{
 							int i32Step = objectDetectionDL.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
@@ -334,6 +340,8 @@ namespace FLImagingExamplesCSharp
 							// Graph View 데이터 입력 // Input Graph View Data
 							viewGraph.Plot(vctAvgCosts, EChartType.Line, EColor.CYAN, "Avg Cost");
 							viewGraph.Plot(flaX, vctmAP, EChartType.Line, EColor.PINK, "mAP");
+							viewGraph.Plot(flaX, vctmAP, EChartType.Line, EColor.GREEN, "Recall");
+							viewGraph.Plot(flaX, vctmAP, EChartType.Line, EColor.PURPLE, "Precision");
 							viewGraph.UnlockUpdate();
 
 							viewGraph.UpdateWindow();
