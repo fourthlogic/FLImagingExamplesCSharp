@@ -298,18 +298,24 @@ namespace FLImagingExamplesCSharp
 						// 마지막 학습 결과 비용 받기 // Get the last cost of the learning result
 						float f32CurrCost = characterBasedOCRDL.GetLearningResultLastCost();
 						// 마지막 검증 결과 받기 // Get the last validation result
-						float f32ValidationMeanAP = characterBasedOCRDL.GetLearningResultLastMeanAP();
+						float f32MeanAP = characterBasedOCRDL.GetLearningResultLastMeanAP();
+						// 마지막 Recall 결과 받기 // Get the last recall result
+						float f32Recall = characterBasedOCRDL.GetLearningResultLastRecall();
+						// 마지막 검증 결과 받기 // Get the last validation result
+						float f32Precision = characterBasedOCRDL.GetLearningResultLastPrecision();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Epoch {2} / {3}", f32CurrCost, f32ValidationMeanAP, i32Epoch, i32MaxEpoch);
+						Console.WriteLine("Cost : {0:F6} mAP : {1:F6} Recall : {2:F6} Precision : {3:F6} Epoch {4} / {5}", f32CurrCost, f32MeanAP, f32Recall, f32Precision, i32Epoch, i32MaxEpoch);
 
 						// 학습 결과 비용과 검증 결과 기록을 받아 그래프 뷰에 출력  
 						// Get the history of cost and validation and print it at graph view
 						List<float> vctCosts = new List<float>();
 						List<float> vctMeanAP = new List<float>();
+						List<float> vctRecall = new List<float>();
+						List<float> vctPrecision = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						characterBasedOCRDL.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch);
+						characterBasedOCRDL.GetLearningResultAllHistory(ref vctCosts, ref vctMeanAP, ref vctValidationEpoch, ref vctRecall, ref vctPrecision);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanAP.Count() != 0 && i32PrevValidationCount != vctMeanAP.Count()))
@@ -330,6 +336,8 @@ namespace FLImagingExamplesCSharp
 							viewGraph.Plot(vctCosts, EChartType.Line, EColor.RED, "Cost");
 							// Graph View 데이터 입력 // Input Graph View Data
 							viewGraph.Plot(flaX, vctMeanAP, EChartType.Line, EColor.PINK, "mAP");
+							viewGraph.Plot(flaX, vctRecall, EChartType.Line, EColor.GREEN, "recall");
+							viewGraph.Plot(flaX, vctPrecision, EChartType.Line, EColor.PURPLE, "precision");
 							viewGraph.UnlockUpdate();
 
 							viewGraph.UpdateWindow();
@@ -339,7 +347,7 @@ namespace FLImagingExamplesCSharp
 
 						// 검증 결과가 0.9 이상 일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is greater than 0.9, stop learning and classify images 
-						if(f32ValidationMeanAP >= 0.9f || bEscape)
+						if(f32MeanAP >= 0.9f || bEscape)
 							characterBasedOCRDL.Stop();
 
 						i32PrevEpoch = i32Epoch;
