@@ -114,15 +114,7 @@ namespace FLImagingExamplesCSharp
 				view3DSrc.SynchronizePointOfView(ref view3DDst);
 				view3DSrc.SynchronizeWindow(ref view3DDst);
 
-				CFL3DCamera cam = new CFL3DCamera();
-
-				cam.SetProjectionType(E3DCameraProjectionType.Perspective);
-				cam.SetDirection(new CFLPoint3<float>(0.327705, 0.066764, -0.942418));
-				cam.SetDirectionUp(new CFLPoint3<float>(0.311277, 0.839746, -0.444896));
-				cam.SetPosition(new CFLPoint3<float>(-1.825832, 0.425620, 1.548716));
-				cam.SetAngleOfViewY(45);
-
-				view3DDst.SetCamera(cam);
+				view3DSrc.ZoomFit();
 
 				// 이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
 				while(view3DDst.IsAvailable())
