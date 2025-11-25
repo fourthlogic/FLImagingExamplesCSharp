@@ -253,8 +253,6 @@ namespace FLImagingExamplesCSharp
 
 				// 설정한 Optimizer를 InstanceSegmentation에 적용 // Apply Optimizer that we set up to InstanceSegmentation
 				instanceSegmentationDL.SetLearningOptimizerSpec(optSpec);
-				// 모델의 최적의 상태를 추적 후 마지막에 최적의 상태로 적용할 지 여부 설정 // Set whether to track the optimal state of the model and apply it as the optimal state at the end.
-				instanceSegmentationDL.EnableOptimalLearningStatePreservation(true);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
 				CAugmentationSpec augSpec = new CAugmentationSpec();
