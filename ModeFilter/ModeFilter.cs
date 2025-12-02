@@ -34,7 +34,7 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// 이미지 로드 // Load image
-				if(fliSrcImage.Load("../../ExampleImages/NoiseImage/Cat_Noise.flif").IsFail())
+				if(fliSrcImage.Load("../../ExampleImages/NoiseImage/NoiseImage1.flif").IsFail())
 				{
 					Console.WriteLine("Failed to load the image file.\n");
 					break;
@@ -104,11 +104,20 @@ namespace FLImagingExamplesCSharp
 				// 처리할 이미지 설정 // Set the image to process
 				filterMode.SetSourceImage(ref fliSrcImage);
 
+				// ROI 범위 설정
+				CFLRect<Int32> flrROI = new CFLRect<Int32>(100, 190, 360, 420);
+
+				// Source ROI 설정 // Set the Source ROI
+				filterMode.SetSourceROI(flrROI);
+
 				// Destination 이미지 설정 // Set the destination image
 				filterMode.SetDestinationImage(ref fliDstImage);
 
-				// Kernel Size 설정 // Set Kernel Size
-				filterMode.SetKernel(9, 9);
+				// Destination ROI 설정 // Set Destination ROI
+				filterMode.SetDestinationROI(flrROI);
+
+				// 처리할 filter의 Kernel Size 설정 (KernelSize = 5 일 경우, Kernel Size : 5x5)
+				filterMode.SetKernel(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((ipResult = filterMode.Execute()).IsFail())
@@ -127,6 +136,20 @@ namespace FLImagingExamplesCSharp
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerSrc.Clear();
 				layerDst.Clear();
+
+				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to find out where ROI is
+				// FLImaging의 Figure객체들은 어떤 도형모양이든 상관없이 하나의 함수로 디스플레이가 가능
+				if(layerSrc.DrawFigureImage(flrROI, EColor.BLUE).IsFail())
+				{
+					Console.WriteLine("Failed to draw figures objects on the image view.\n");
+					break;
+				}
+
+				if(layerDst.DrawFigureImage(flrROI, EColor.BLUE).IsFail())
+				{
+					Console.WriteLine("Failed to draw figures objects on the image view.\n");
+					break;
+				}
 
 				CFLPoint<double> flp = new CFLPoint<double>();
 
