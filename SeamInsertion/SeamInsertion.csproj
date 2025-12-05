@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B5D9D30E-C72B-4A02-AF45-50028AF71B76}</ProjectGuid>
+    <ProjectGuid>{4FD207F3-A16A-41B4-98B7-064C07B66521}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageConcatenator</RootNamespace>
-    <AssemblyName>ImageConcatenator</AssemblyName>
+    <RootNamespace>SeamInsertion</RootNamespace>
+    <AssemblyName>SeamInsertion</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -103,6 +103,10 @@
       <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameThreeDim)_X64CLR.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="$(BuildFileNameAI)_X64CLR">
+      <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAI)_X64CLR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="$(BuildFileNameAIModel)_X64CLR">
       <HintPath>C:\Program Files\FLImaging\FLImaging\BinaryX64\$(BuildFileNameAIModel)_X64CLR.dll</HintPath>
       <Private>True</Private>
@@ -116,7 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageConcatenator.cs" />
+    <Compile Include="SeamInsertion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

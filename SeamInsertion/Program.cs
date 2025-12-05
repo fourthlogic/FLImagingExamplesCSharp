@@ -14,7 +14,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class ImageConcatenator
+	class SeamInsertion
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -31,7 +31,6 @@ namespace FLImagingExamplesCSharp
 			Src = 0,
 			Opr,
 			Dst,
-			DstExpand,
 			Count,
 		}
 
@@ -89,7 +88,7 @@ namespace FLImagingExamplesCSharp
 						break;
 					}
 
-					if(i != (int)EType.Src && i != (int)EType.DstExpand)
+					if(i != (int)EType.Src)
 					{
 						// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
 						if((res = arrViewImage[(int)EType.Src].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
@@ -107,49 +106,33 @@ namespace FLImagingExamplesCSharp
 					}
 				}
 
-				// ImageConcatenator  객체 생성 // Create ImageConcatenator object
-				CImageConcatenator imageConcatenator = new CImageConcatenator();
+				// SeamInsertion  객체 생성 // Create SeamInsertion object
+				CSeamInsertion seamInsertion = new CSeamInsertion();
 
 				// Source 이미지 설정 // Set source image 
-				imageConcatenator.SetSourceImage(ref arrFliImage[(int)EType.Src]);
+				seamInsertion.SetSourceImage(ref arrFliImage[(int)EType.Src]);
 
 				// Operand 이미지 설정 // Set operand image 
-				imageConcatenator.SetOperandImage(ref arrFliImage[(int)EType.Opr]);
+				seamInsertion.SetOperandImage(ref arrFliImage[(int)EType.Opr]);
 
-				// ImageConcatenator ROI 지정 // Create ROI range
+				// SeamInsertion ROI 지정 // Create ROI range
 				CFLRect<double> flrROI = new CFLRect<double>(arrFliImage[(int)EType.Opr]);
 
 				flrROI.left = (int)(flrROI.GetWidth() * 0.7);
 
 				// Operand 이미지 설정 // Set operand image 
-				imageConcatenator.SetOperandROI(flrROI);
-
-				// 결과 이미지 확장 여부 설정 // Enable or disable output image expansion
-				imageConcatenator.EnableResultImageExpansion(false);
+				seamInsertion.SetOperandROI(flrROI);
 
 				// 이미지를 이어붙일 방향을 설정 // Set image concatenation direction
-				imageConcatenator.SetConcatenationPosition(CImageConcatenator.EConcatenationPosition.Right);
+				seamInsertion.SetSlidePosition(CSeamInsertion.ESlidePosition.Right);
 
 				// Destination 이미지 설정 // Set destination image 
-				imageConcatenator.SetDestinationImage(ref arrFliImage[(int)EType.Dst]);
+				seamInsertion.SetDestinationImage(ref arrFliImage[(int)EType.Dst]);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = (imageConcatenator.Execute())).IsFail())
+				if((res = (seamInsertion.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute ImageConcatenator.");
-					break;
-				}
-
-				// 결과 이미지 확장 여부 설정 // Enable or disable output image expansion
-				imageConcatenator.EnableResultImageExpansion(true);
-
-				// Destination 이미지 설정 // Set destination image 
-				imageConcatenator.SetDestinationImage(ref arrFliImage[(int)EType.DstExpand]);
-
-				// 알고리즘 수행 // Execute the algorithm
-				if((res = (imageConcatenator.Execute())).IsFail())
-				{
-					ErrorPrint(res, "Failed to execute ImageConcatenator.");
+					ErrorPrint(res, "Failed to execute SeamInsertion.");
 					break;
 				}
 
@@ -172,10 +155,7 @@ namespace FLImagingExamplesCSharp
 				if((res = arrLayer[(int)EType.Dst].DrawTextImage(flpTmp, "Destination Image", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 					ErrorPrint(res, "Failed to draw text.\n");
 
-				if((res = arrLayer[(int)EType.DstExpand].DrawTextImage(flpTmp, "Destination Image(Expanded)", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-					ErrorPrint(res, "Failed to draw text.\n");
-
-				// ImageConcatenator 영역 표기 // ImageConcatenator Area draw
+				// SeamInsertion 영역 표기 // SeamInsertion Area draw
 				if((res = arrLayer[(int)EType.Opr].DrawFigureImage(flrROI, EColor.LIME)).IsFail())
 					ErrorPrint(res, "Failed to draw figure.\n");
 
@@ -190,8 +170,8 @@ namespace FLImagingExamplesCSharp
 				bool bRun = true;
 				while(bRun)
 				{
-					for(int i = 0; i < (int)EType.Count; ++i)					
-						bRun &= arrViewImage[i].IsAvailable();					
+					for(int i = 0; i < (int)EType.Count; ++i)
+						bRun &= arrViewImage[i].IsAvailable();
 
 					Thread.Sleep(1);
 				}
