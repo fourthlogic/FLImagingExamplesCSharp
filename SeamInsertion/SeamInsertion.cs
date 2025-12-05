@@ -124,7 +124,7 @@ namespace FLImagingExamplesCSharp
 				seamInsertion.SetOperandROI(flrROI);
 
 				// 이미지를 이어붙일 방향을 설정 // Set image concatenation direction
-				seamInsertion.SetSlidePosition(CSeamInsertion.ESlidePosition.Right);
+				seamInsertion.SetInsertionPosition(CSeamInsertion.EInsertionPosition.Right);
 
 				// Destination 이미지 설정 // Set destination image 
 				seamInsertion.SetDestinationImage(ref arrFliImage[(int)EType.Dst]);
