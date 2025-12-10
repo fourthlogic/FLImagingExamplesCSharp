@@ -2058,6 +2058,9 @@
     - SeamInsertion
       - Example of an algorithm that inserts the ROI of the operand image from the source image into the destination image.
       - 소스 이미지에서 피연산 이미지의 관심 영역을 대상 이미지에 삽입하는 알고리즘 예제.
+    - ImageConcatenator 
+      - Example of an algorithm that connects the Source Image and Operand Image in a specified direction.
+      - 소스 이미지에서 피연산 이미지의 관심 영역을 대상 이미지에 삽입하는 알고리즘 예제.
     - ImageGridSplitter
       - Example of an algorithm that splits a source image into grids of a set size.
       - 소스 이미지를 설정한 크기의 격자로 분할하는 알고리즘 예제
