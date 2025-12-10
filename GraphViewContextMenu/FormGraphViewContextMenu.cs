@@ -34,7 +34,7 @@ namespace FLImagingExamplesCSharp
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Copy, "Copy"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ClearThenPaste, "Clear The nPaste"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Paste, "Paste"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ClearDisplayedValue, "Clear Displayed Value"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ClearPointAnnotation, "Clear Point Annotation"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ChangeChartType, "Change Chart Type"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowToolBar, "Show Toolbar"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Zoom, "Zoom"),
