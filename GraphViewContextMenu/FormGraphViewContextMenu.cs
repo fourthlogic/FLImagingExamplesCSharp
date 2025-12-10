@@ -48,6 +48,7 @@ namespace FLImagingExamplesCSharp
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.EditChartName, "Edit ChartName"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowCrosshair, "Show Crosshair"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowLegend, "Show Legend"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowPointAnnotation, "Show Point Annotation"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.MagnetCrosshair, "Magnet Crosshair"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ChangeGraphOrder, "Change Graph Order"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.GetTrendline, "Get Trendline"),
@@ -70,7 +71,15 @@ namespace FLImagingExamplesCSharp
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ThemeLightMode, "Theme Light Mode"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ThemeDarkMode, "Theme Dark Mode"),
 			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SyncView, "Synchronize View"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SyncWindow, "Synchronize Window")
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SyncWindow, "Synchronize Window"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraphComponents_Axis_Horz, "Show Graph Components: Axis_Horz"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraphComponents_Axis_Vert, "Show Graph Components: Axis_Vert"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraphComponents_AxisLabel_Horz, "Show Graph Components: AxisLabel_Horz"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraphComponents_AxisLabel_Vert, "Show Graph Components: AxisLabel_Vert"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraphComponents_AxisTick_Horz, "Show Graph Components: AxisTick_Horz"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraphComponents_AxisTick_Vert, "Show Graph Components: AxisTick_Vert"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraphComponents_AxisTickLabels_Horz, "Show Graph Components: AxisTickLabels_Horz"),
+			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraphComponents_AxisTickLabels_Vert, "Show Graph Components: AxisTickLabels_Vert")
 		};
 		public void ErrorMessageBox(CResult cResult, string str)
 		{
