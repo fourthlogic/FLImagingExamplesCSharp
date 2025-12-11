@@ -111,7 +111,7 @@ namespace FLImagingExamplesCSharp
 				IterativeClosestPoint3D.SetSamplingDistance(0.01f);
 
 				// 이상치 판정 배율 설정 // Set the outlier scale
-				IterativeClosestPoint3D.SetOutlierScale(3);
+				IterativeClosestPoint3D.SetOutlierScale(2);
 
 				// 최적해 정확도 값 설정 // Set the optimal solution accuracy
 				IterativeClosestPoint3D.SetOptimalSolutionAccuracy(1e-5);
