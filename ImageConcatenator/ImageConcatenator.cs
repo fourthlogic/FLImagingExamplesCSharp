@@ -88,7 +88,7 @@ namespace FLImagingExamplesCSharp
 						break;
 					}
 
-					if(i != (int)EType.Src)
+					if(i == (int)EType.Opr)
 					{
 						// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views. 
 						if((res = arrViewImage[(int)EType.Src].SynchronizePointOfView(ref arrViewImage[i])).IsFail())
