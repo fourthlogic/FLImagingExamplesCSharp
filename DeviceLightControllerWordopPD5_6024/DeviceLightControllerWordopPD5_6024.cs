@@ -66,7 +66,10 @@ namespace FLImagingExamplesCSharp
 					Console.Clear();
 
 					if(i32connectionType == 0)
+					{
 						bExit = true;
+						break;
+					}
 
 					break;
 				}
@@ -141,7 +144,10 @@ namespace FLImagingExamplesCSharp
 					Console.Clear();
 
 					if(i32channelCount == 0)
+					{
 						bExit = true;
+						break;
+					}
 
 					break;
 				} 
@@ -177,6 +183,7 @@ namespace FLImagingExamplesCSharp
 					if(i32communicationType == 0)
 					{
 						bExit = true;
+						break;
 					}
 
 					break;
@@ -242,6 +249,7 @@ namespace FLImagingExamplesCSharp
 							if(triggerMethod == 0)
 							{
 								bExit = true;
+								break;
 							}
 
 							break;
