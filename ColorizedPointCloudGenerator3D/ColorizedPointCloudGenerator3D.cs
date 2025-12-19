@@ -286,7 +286,7 @@ namespace FLImagingExamplesCSharp
 				// Color 카메라의 Intrinsic Parameter 출력 // Print intrinsic parameters of color camera
 				FLImagingCLR.AdvancedFunctions.CCameraCalibrator.CCalibratorIntrinsicParameters calibIntrinsic;
 
-				calibIntrinsic = colorizedPointCloudGenerator3D.GetIntrinsicParameters();
+				calibIntrinsic = colorizedPointCloudGenerator3D.GetResultIntrinsicParameters();
 
 				Console.Write(" < Intrinsic Parameters >\n");
 
@@ -301,7 +301,7 @@ namespace FLImagingExamplesCSharp
 				// Color 카메라의 Distortion Coefficient 출력 // Print distortion coefficients of color camera
 				FLImagingCLR.AdvancedFunctions.CCameraCalibrator.CCalibratorDistortionCoefficients calibDistortion;
 
-				calibDistortion = colorizedPointCloudGenerator3D.GetDistortionCoefficients();
+				calibDistortion = colorizedPointCloudGenerator3D.GetResultDistortionCoefficients();
 
 				Console.Write(" < Distortion Coefficients >\n");
 
@@ -316,7 +316,7 @@ namespace FLImagingExamplesCSharp
 				// 두 카메라 간의 회전 행렬 출력 // Print relative rotation matrix between both cameras
 				CMatrix<double> matRotation = new CMatrix<double>();
 
-				if((res = colorizedPointCloudGenerator3D.GetRelativeRotation(ref matRotation)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.GetResultRelativeRotation(ref matRotation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get relative rotation.\n");
 					break;
@@ -339,7 +339,7 @@ namespace FLImagingExamplesCSharp
 				// 두 카메라 간의 변환 행렬 출력 // Print relative translation matrix between both cameras
 				CMatrix<double> matTranslation = new CMatrix<double>();
 
-				if((res = colorizedPointCloudGenerator3D.GetRelativeTranslation(ref matTranslation)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.GetResultRelativeTranslation(ref matTranslation)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get relative translation.\n");
 					break;
