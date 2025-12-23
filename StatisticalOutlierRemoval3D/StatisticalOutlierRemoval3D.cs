@@ -88,7 +88,7 @@ namespace FLImagingExamplesCSharp
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = statisticalOutlierRemoval3D.Execute()).IsFail())
 				{
-					ErrorPrint(eResult, "Failed to execute StatisticalOutlierRemoval 3D.");
+					ErrorPrint(eResult, "Failed to execute Statistical Outlier Removal 3D.");
 					break;
 				}
 
