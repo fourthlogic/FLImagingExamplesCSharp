@@ -1235,6 +1235,9 @@
     - ShenCastanEdgeDetector
       - The example of Shen-Castan Edge Detection Algorithm.
       - Shen-Castan 엣지 검출 알고리즘 예제
+    - FringePatternDefectDetector
+      - The example of an algorithms that detecting defects in fringe pattern images.
+      - 프린지 패턴 이미지에서 결함을 검출하는 알고리즘 예제
    
   - [Filter]
 
