@@ -307,7 +307,7 @@ namespace FLImagingExamplesCSharp
 						fasterCharacterBasedOCRDL.GetLearningResultAllHistory(ref vctCosts, ref vctValidations, ref vctMeanIoU, ref vctValidationsZE, ref vctMeanIoUZE, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
-						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanAP.Count() != 0 && i32PrevValidationCount != vctMeanAP.Count()))
+						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanIoU.Count() != 0 && i32PrevValidationCount != vctMeanIoU.Count()))
 						{
 							int i32Step = fasterCharacterBasedOCRDL.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
@@ -336,7 +336,7 @@ namespace FLImagingExamplesCSharp
 						// 검증 결과가 1.0일 경우 학습을 중단하고 분류 진행 
 						// If the validation result is 1.0, stop learning and classify images 
 						if(f32ValidationPa == 1.0f || bEscape)
-							semanticSegmentationDL.Stop();
+							fasterCharacterBasedOCRDL.Stop();
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = vctCosts.Count();
