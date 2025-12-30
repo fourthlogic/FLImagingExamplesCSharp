@@ -252,7 +252,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Calibration에 사용되는 Grid Type 설정 // Set grid type used in calibration
-				if((res = colorizedPointCloudGenerator3D.SetGridType(FLImagingCLR.AdvancedFunctions.CCameraCalibrator.EGridType.ChessBoard)).IsFail())
+				if((res = colorizedPointCloudGenerator3D.SetGridType(FLImagingCLR.ThreeDim.CColorizedPointCloudGenerator3D.EGridType.ChessBoard)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set calibration grid type.\n");
 					break;
@@ -284,7 +284,7 @@ namespace FLImagingExamplesCSharp
 				Console.Write(" < Calibration Result >\n\n");
 
 				// Color 카메라의 Intrinsic Parameter 출력 // Print intrinsic parameters of color camera
-				FLImagingCLR.AdvancedFunctions.CCameraCalibrator.CCalibratorIntrinsicParameters calibIntrinsic;
+				FLImagingCLR.ThreeDim.CColorizedPointCloudGenerator3D.CCalibratorIntrinsicParameters calibIntrinsic;
 
 				calibIntrinsic = colorizedPointCloudGenerator3D.GetResultIntrinsicParameters();
 
@@ -299,7 +299,7 @@ namespace FLImagingExamplesCSharp
 				Console.Write("\n");
 
 				// Color 카메라의 Distortion Coefficient 출력 // Print distortion coefficients of color camera
-				FLImagingCLR.AdvancedFunctions.CCameraCalibrator.CCalibratorDistortionCoefficients calibDistortion;
+				FLImagingCLR.ThreeDim.CColorizedPointCloudGenerator3D.CCalibratorDistortionCoefficients calibDistortion;
 
 				calibDistortion = colorizedPointCloudGenerator3D.GetResultDistortionCoefficients();
 
@@ -314,42 +314,34 @@ namespace FLImagingExamplesCSharp
 				Console.Write("\n");
 
 				// 두 카메라 간의 회전 행렬 출력 // Print relative rotation matrix between both cameras
-				CMatrix<double> matRotation = new CMatrix<double>();
+				FLImagingCLR.ThreeDim.CColorizedPointCloudGenerator3D.CCalibratorRelativeRotation calibRotation;
 
-				if((res = colorizedPointCloudGenerator3D.GetResultRelativeRotation(ref matRotation)).IsFail())
-				{
-					ErrorPrint(res, "Failed to get relative rotation.\n");
-					break;
-				}
+				calibRotation = colorizedPointCloudGenerator3D.GetResultRelativeRotation();
 
 				Console.Write(" < Relative Rotation >\n");
 
-				Console.Write("R00 ->\t{0:N7}\n", matRotation.GetValue(0, 0));
-				Console.Write("R01 ->\t{0:N7}\n", matRotation.GetValue(0, 1));
-				Console.Write("R02 ->\t{0:N7}\n", matRotation.GetValue(0, 2));
-				Console.Write("R10 ->\t{0:N7}\n", matRotation.GetValue(1, 0));
-				Console.Write("R11 ->\t{0:N7}\n", matRotation.GetValue(1, 1));
-				Console.Write("R12 ->\t{0:N7}\n", matRotation.GetValue(1, 2));
-				Console.Write("R20 ->\t{0:N7}\n", matRotation.GetValue(2, 0));
-				Console.Write("R21 ->\t{0:N7}\n", matRotation.GetValue(2, 1));
-				Console.Write("R22 ->\t{0:N7}\n", matRotation.GetValue(2, 2));
+				Console.Write("R00 ->\t{0:N7}\n", calibRotation.f64R0);
+				Console.Write("R01 ->\t{0:N7}\n", calibRotation.f64R1);
+				Console.Write("R02 ->\t{0:N7}\n", calibRotation.f64R2);
+				Console.Write("R10 ->\t{0:N7}\n", calibRotation.f64R3);
+				Console.Write("R11 ->\t{0:N7}\n", calibRotation.f64R4);
+				Console.Write("R12 ->\t{0:N7}\n", calibRotation.f64R5);
+				Console.Write("R20 ->\t{0:N7}\n", calibRotation.f64R6);
+				Console.Write("R21 ->\t{0:N7}\n", calibRotation.f64R7);
+				Console.Write("R22 ->\t{0:N7}\n", calibRotation.f64R8);
 
 				Console.Write("\n");
 
 				// 두 카메라 간의 변환 행렬 출력 // Print relative translation matrix between both cameras
-				CMatrix<double> matTranslation = new CMatrix<double>();
+				FLImagingCLR.ThreeDim.CColorizedPointCloudGenerator3D.CCalibratorRelativeTranslation calibTranslation;
 
-				if((res = colorizedPointCloudGenerator3D.GetResultRelativeTranslation(ref matTranslation)).IsFail())
-				{
-					ErrorPrint(res, "Failed to get relative translation.\n");
-					break;
-				}
+				calibTranslation = colorizedPointCloudGenerator3D.GetResultRelativeTranslation();
 
 				Console.Write(" < Relative Translation >\n");
 
-				Console.Write("TX ->\t{0:N7}\n", matTranslation.GetValue(0, 0));
-				Console.Write("TY ->\t{0:N7}\n", matTranslation.GetValue(1, 0));
-				Console.Write("TZ ->\t{0:N7}\n", matTranslation.GetValue(2, 0));
+				Console.Write("TX ->\t{0:N7}\n", calibTranslation.f64X);
+				Console.Write("TY ->\t{0:N7}\n", calibTranslation.f64Y);
+				Console.Write("TZ ->\t{0:N7}\n", calibTranslation.f64Z);
 
 				Console.Write("\n");
 
