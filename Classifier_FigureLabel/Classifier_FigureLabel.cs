@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Runtime.InteropServices;
-
-using FLImagingCLR;
+﻿using FLImagingCLR;
+using FLImagingCLR.AdvancedFunctions;
+using FLImagingCLR.AI;
 using FLImagingCLR.Base;
 using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ImageProcessing;
-using FLImagingCLR.AdvancedFunctions;
 using FLImagingCLR.ThreeDim;
-using FLImagingCLR.AI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
 
 namespace FLImagingExamplesCSharp
 {
@@ -254,10 +254,13 @@ namespace FLImagingExamplesCSharp
 						// Get the history of cost and validation and print it at graph view
 						List<float> listCosts = new List<float>();
 						List<float> listValidations = new List<float>();
-						List<float> listF1Score = new List<float>();
+						List<float> listF1 = new List<float>();
+						List<float> listMacroAccruacy = new List<float>();
+						List<float> listMetric = new List<float>();
+
 						List<int> listValidationEpoch = new List<int>();
 
-						classifierDL.GetLearningResultAllHistory(ref listCosts, ref listValidations, ref listF1Score, ref listValidationEpoch);
+						classifierDL.GetLearningResultAllHistory(ref listCosts, ref listValidations, ref listF1, ref listMacroAccruacy, ref listMetric,ref listValidationEpoch);
 
 						if(listCosts.Count != 0)
 						{
@@ -265,11 +268,15 @@ namespace FLImagingExamplesCSharp
 							float f32CurrCost = listCosts.Last();
 							// 마지막 검증 결과 받기 // Get the last validation result
 							float f32Validation = listValidations.Count != 0 ? listValidations.Last() : 0;
-							// 마지막 F1점수 결과 받기 // Get the last F1 Score result
-							float f32F1Score = listF1Score.Count != 0 ? listF1Score.Last() : 0;
+							// 마지막 MacroAccuracy 결과 받기 // Get the last MacroAccuracy result
+							float f32MacroAccuracy = listMacroAccruacy.Count != 0 ? listMacroAccruacy.Last() : 0;
+							// 마지막 F1 결과 받기 // Get the last F1 result
+							float f32F1 = listF1.Count != 0 ? listF1.Last() : 0;
+							// 마지막 Metric 결과 받기 // Get the last Metric result
+							float f32Metric = listMacroAccruacy.Count != 0 ? listMacroAccruacy.Last() : 0;
 
 							// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-							Console.WriteLine("Cost : {0:F6} Validation : {1:F6} F1 Score : {2:F6} Epoch {3} / {4}", f32CurrCost, f32Validation, f32F1Score, i32Epoch, i32MaxEpoch);
+							Console.WriteLine("Cost : {0:F6} Validation : {1:F6} Macro Accuracy : {2:F6} F1 Score : {3:F6} Metric : {4:F7} Epoch {5} / {6}", f32CurrCost, f32Validation, f32MacroAccuracy, f32F1, f32Metric, i32Epoch, i32MaxEpoch);
 
 							// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 							if((listCosts.Count() != 0 && i32PrevCostCount != listCosts.Count()) || (listValidations.Count() != 0 && i32PrevValidationCount != listValidations.Count()))
@@ -290,6 +297,9 @@ namespace FLImagingExamplesCSharp
 								listX.Add((float)(listCosts.Count() - 1));
 								// Graph View 데이터 입력 // Input Graph View Data
 								viewGraph.Plot(listX, listValidations, EChartType.Line, EColor.BLUE, "Validation");
+								viewGraph.Plot(listX, listF1, EChartType.Line, EColor.GREEN, "F1");
+								viewGraph.Plot(listX, listMacroAccruacy, EChartType.Line, EColor.PURPLE, "MacroAccuracy");
+								viewGraph.Plot(listX, listMetric, EChartType.Line, EColor.PINK, "Metric");
 
 								viewGraph.UnlockUpdate();
 								viewGraph.Invalidate();
