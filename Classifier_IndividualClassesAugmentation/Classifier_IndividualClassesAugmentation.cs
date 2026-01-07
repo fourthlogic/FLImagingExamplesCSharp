@@ -387,10 +387,10 @@ namespace FLImagingExamplesCSharp
 
 								flaX.Add((float)(listCosts.Count() - 1));
 								// Graph View 데이터 입력 // Input Graph View Data
-								viewGraph.Plot(listX, listValidations, EChartType.Line, EColor.BLUE, "Validation");
-								viewGraph.Plot(listX, listF1, EChartType.Line, EColor.GREEN, "F1");
-								viewGraph.Plot(listX, listMacroAccruacy, EChartType.Line, EColor.PURPLE, "MacroAccuracy");
-								viewGraph.Plot(listX, listMetric, EChartType.Line, EColor.PINK, "Metric");
+								viewGraph.Plot(flaX, listValidations, EChartType.Line, EColor.BLUE, "Validation");
+								viewGraph.Plot(flaX, listF1, EChartType.Line, EColor.GREEN, "F1");
+								viewGraph.Plot(flaX, listMacroAccruacy, EChartType.Line, EColor.PURPLE, "MacroAccuracy");
+								viewGraph.Plot(flaX, listMetric, EChartType.Line, EColor.PINK, "Metric");
 
 								viewGraph.UnlockUpdate();
 								viewGraph.Invalidate();
