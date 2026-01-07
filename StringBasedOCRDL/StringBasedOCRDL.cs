@@ -183,7 +183,7 @@ namespace FLImagingExamplesCSharp
 				stringBasedOCRDL.SetLearningValidationImage(ref fliValidationImage);
 
 				// 학습할 OCR 모델 설정 // Set up the OCR model to learn
-				stringBasedOCRDL.SetModel(CStringBasedOCRDL.EModel.FLOcrNet_S);
+				stringBasedOCRDL.SetModel(CStringBasedOCRDL.EModel.FLOcrNet_S_V1);
 				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
 				stringBasedOCRDL.SetModelVersion(CStringBasedOCRDL.EModelVersion.FLOcrNet_S_V1_32_256_B2);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
