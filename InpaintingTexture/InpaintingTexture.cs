@@ -171,18 +171,20 @@ namespace FLImagingExamplesCSharp
 				inpaintingTexture.SetSearchStepSize(1);
 				// 매치를 위한 Gradient Value 곱 계수 설정 // Set a coefficient multiplied by gradient value for match
 				inpaintingTexture.SetAnisotropy(1);
+				// Image figure 를 inpainting region으로 설정하지 않음 // Do not set image figure as inpainting region
+				inpaintingTexture.EnableImageFiguresAsInpaintingRegions(false);
 
-				CFLFigureArray flfaPaintingRegion = new CFLFigureArray();
+				CFLFigureArray flfaInpaintingRegion = new CFLFigureArray();
 
-                // 미리 그려둔 Painting region Figure Array 불러오기 // Load Pre-drawn Painting Region Figure Array
-				if((res = flfaPaintingRegion.Load("../../ExampleImages/InpaintingTexture/PaintingRegion.fig")).IsFail())
+                // 미리 그려둔 Inpainting region Figure Array 불러오기 // Load Pre-drawn Inpainting Region Figure Array
+				if((res = flfaInpaintingRegion.Load("../../ExampleImages/InpaintingTexture/PaintingRegion.fig")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the figure file.");
 					break;
 				}
 
-				// Inpainting을 위한 Painting region 설정 // Set painting region for Inpainting
-				inpaintingTexture.SetPaintingRegion(flfaPaintingRegion);
+				// Inpainting을 위한 Inpainting region 설정 // Set inpainting region for Inpainting
+				inpaintingTexture.SetInpaintingRegion(flfaInpaintingRegion);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = inpaintingTexture.Execute()).IsFail())
@@ -204,17 +206,17 @@ namespace FLImagingExamplesCSharp
 				// 매치를 위한 Gradient Value 곱 계수 설정 // Set a coefficient multiplied by gradient value for match
 				inpaintingTexture.SetAnisotropy(0);
 
-				CFLFigureArray flfaPaintingRegion2 = new CFLFigureArray();
+				CFLFigureArray flfaInpaintingRegion2 = new CFLFigureArray();
 
-				// 미리 그려둔 Painting region 2 Figure Array 불러오기 // Load Pre-drawn Painting Region 2 Figure Array
-				if((res = flfaPaintingRegion2.Load("../../ExampleImages/InpaintingTexture/PaintingRegion2.fig")).IsFail())
+				// 미리 그려둔 Inpainting region 2 Figure Array 불러오기 // Load Pre-drawn Inpainting Region 2 Figure Array
+				if((res = flfaInpaintingRegion2.Load("../../ExampleImages/InpaintingTexture/PaintingRegion2.fig")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the figure file.");
 					break;
 				}
 
-				// Inpainting을 위한 Painting region 2 설정 // Set painting region 2 for Inpainting
-				inpaintingTexture.SetPaintingRegion(flfaPaintingRegion2);
+				// Inpainting을 위한 Inpainting region 2 설정 // Set inpainting region 2 for Inpainting
+				inpaintingTexture.SetInpaintingRegion(flfaInpaintingRegion2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = inpaintingTexture.Execute()).IsFail())
@@ -268,15 +270,15 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// Painting region을 source image에 디스플레이 // Display painting region on the source image
-				if(arrFliImage[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flfaPaintingRegion)) == -1)
+				// Inpainting region을 source image에 디스플레이 // Display inpainting region on the source image
+				if(arrFliImage[0].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flfaInpaintingRegion)) == -1)
 				{
 					ErrorPrint(res, "Failed to push figure on image\n");
 					break;
 				}
 
-				// Painting region 2을 source image 2에 디스플레이 // Display painting region on the source image
-				if(arrFliImage[2].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flfaPaintingRegion2)) == -1)
+				// Inpainting region 2을 source image 2에 디스플레이 // Display inpainting region on the source image
+				if(arrFliImage[2].PushBackFigure(CFigureUtilities.ConvertFigureObjectToString(flfaInpaintingRegion2)) == -1)
 				{
 					ErrorPrint(res, "Failed to push figure on image\n");
 					break;
