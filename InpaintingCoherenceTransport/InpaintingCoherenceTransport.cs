@@ -125,6 +125,8 @@ namespace FLImagingExamplesCSharp
                 // Channel 가중치 // Channel Weight
                 CMultiVar<double> mvChannelWeight = new CMultiVar<double>(0.114, 0.587, 0.299);
 				inpaintingCoherenceTransport.SetWeightOfChannels(mvChannelWeight);
+				// Image figure 를 inpainting region으로 설정하지 않음 // Do not set image figure as inpainting region
+				inpaintingCoherenceTransport.EnableImageFiguresAsInpaintingRegions(false);
 
 				CFLRegion flrInpaintingRegion = new CFLRegion();
 
@@ -136,7 +138,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Inpainting을 위한 Painting region 설정 // Set painting region for Inpainting
-				inpaintingCoherenceTransport.SetPaintingRegion(flrInpaintingRegion);
+				inpaintingCoherenceTransport.SetInpaintingRegion(flrInpaintingRegion);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = inpaintingCoherenceTransport.Execute()).IsFail())

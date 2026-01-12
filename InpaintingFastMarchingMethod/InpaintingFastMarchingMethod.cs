@@ -116,6 +116,8 @@ namespace FLImagingExamplesCSharp
 				inpaintingFastMarchingMethod.SetDestinationImage(ref arrFliImage[1]);
 				// Inpainting에 사용될 픽셀 영역 설정 // Setting the pixel area to be used for Inpainting
 				inpaintingFastMarchingMethod.SetEpsilon(5);
+				// Image figure 를 inpainting region으로 설정하지 않음 // Do not set image figure as inpainting region
+				inpaintingFastMarchingMethod.EnableImageFiguresAsInpaintingRegions(false);
 
 				CFLRegion flrInpaintingRegion = new CFLRegion();
 
@@ -127,7 +129,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Inpainting을 위한 Painting region 설정 // Set painting region for Inpainting
-				inpaintingFastMarchingMethod.SetPaintingRegion(flrInpaintingRegion);
+				inpaintingFastMarchingMethod.SetInpaintingRegion(flrInpaintingRegion);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = inpaintingFastMarchingMethod.Execute()).IsFail())
