@@ -170,7 +170,7 @@ namespace FLImagingExamplesCSharp
 				// Destination 이미지 설정 // Set the destination image
 				kMeansClusterThreshold.SetDestinationImage(ref arrFliImage[1]);
 
-				// Cluster 갯수 설정 // Set the number of clusters
+				// Cluster 개수 설정 // Set the number of clusters
 				kMeansClusterThreshold.SetNumOfCluster(2);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
@@ -183,7 +183,7 @@ namespace FLImagingExamplesCSharp
 				// Destination 이미지 설정 // Set the destination image
 				kMeansClusterThreshold.SetDestinationImage(ref arrFliImage[2]);
 
-				// Cluster 갯수 설정 // Set the number of clusters
+				// Cluster 개수 설정 // Set the number of clusters
 				kMeansClusterThreshold.SetNumOfCluster(4);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
@@ -196,7 +196,7 @@ namespace FLImagingExamplesCSharp
 				// Destination 이미지 설정 // Set the destination image
 				kMeansClusterThreshold.SetDestinationImage(ref arrFliImage[3]);
 
-				// Cluster 갯수 설정 // Set the number of clusters
+				// Cluster 개수 설정 // Set the number of clusters
 				kMeansClusterThreshold.SetNumOfCluster(8);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
