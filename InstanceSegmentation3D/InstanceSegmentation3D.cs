@@ -185,25 +185,25 @@ namespace FLImagingExamplesCSharp
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if((res = layerLearn.DrawTextCanvas(flpPoint, "LEARN & Validation & Inference", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerLearn.DrawTextCanvas(flpPoint, "LEARN & VALIDATION & INFERENCE", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layerDepthMap.DrawTextCanvas(flpPoint, "Learn & Inference Depth Map", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerDepthMap.DrawTextCanvas(flpPoint, "LEARN & INFERENCE DEPTH MAP", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layerResultLabel.DrawTextCanvas(flpPoint, "RESULT BOX CONTOUR", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerResultLabel.DrawTextCanvas(flpPoint, "RESULT BOX CONTOUR", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-				if((res = layer3DResult.DrawTextCanvas(flpPoint, "Match 3D RESULT", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layer3DResult.DrawTextCanvas(flpPoint, "MATCH 3D RESULT", EColor.YELLOW, EColor.BLACK, 25)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
