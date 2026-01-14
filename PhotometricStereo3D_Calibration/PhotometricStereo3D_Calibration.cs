@@ -389,7 +389,7 @@ namespace FLImagingExamplesCSharp
 				{
 					string strText;
 
-					strText = String.Format("X: {0:N4}lf    \nY: {1:N4}lf    \nZ: {2:N4}lf\n", matPosition.GetValue(i, 0), matPosition.GetValue(i, 1), matPosition.GetValue(i, 2));
+					strText = String.Format("X: {0:N4}    \nY: {1:N4}    \nZ: {2:N4}\n", matPosition.GetValue(i, 0), matPosition.GetValue(i, 1), matPosition.GetValue(i, 2));
 
 					TPoint3<float> tp3dTo = new TPoint3<float>(f32MulNum * (float)matPosition.GetValue(i, 0) + f32CenterX, f32MulNum * (float)matPosition.GetValue(i, 1) + f32CenterY, f32MulNum * (float)matPosition.GetValue(i, 2) + f32CenterZ);
 
