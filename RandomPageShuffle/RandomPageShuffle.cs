@@ -47,14 +47,14 @@ namespace FLImagingExamplesCSharp
 				CResult res;
 
 				// 알고리즘을 수행 할 Source 이미지 로드 // Load Source image to execute algorithm
-				if((res = fliSrcAfterImage.Load("../../ExampleImages/RandomPageShuffle/Landscape.flif")).IsFail())
+				if((res = fliSrcAfterImage.Load("../../ExampleImages/PageReorder/Landscape.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				// 알고리즘 수행 결과 비교를 위한 Source 이미지 로드 // Load Source image for Comparing algorithm result
-				if((res = fliSrcBeforeImage.Load("../../ExampleImages/RandomPageShuffle/Landscape.flif")).IsFail())
+				if((res = fliSrcBeforeImage.Load("../../ExampleImages/PageReorder/Landscape.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
