@@ -353,9 +353,8 @@ namespace FLImagingExamplesCSharp
 				fasterCharacterBasedOCRDL.SetInferenceImage(ref fliValidationImage);
 				// 추론 결과 이미지 설정 // Set the inference result Image
 				fasterCharacterBasedOCRDL.SetInferenceResultImage(ref fliResultLabelImage);
-				// 추론 결과 옵션 설정 // Set the inference result options;
-				// Result item settings enum 설정 // Set the result item settings
-				fasterCharacterBasedOCRDL.SetInferenceResultItemSettings(CFasterCharacterBasedOCRDL.EInferenceResultItemSettings.ClassName_RegionType_Contour);
+				// 결과 도형 타입 설정 // Set the result figure type
+				fasterCharacterBasedOCRDL.SetInferenceResultRegionFigureType(CFasterCharacterBasedOCRDL.EInferenceResultRegionFigureType.Region);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = fasterCharacterBasedOCRDL.Execute()).IsFail())

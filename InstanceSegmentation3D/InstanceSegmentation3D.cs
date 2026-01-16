@@ -399,7 +399,7 @@ namespace FLImagingExamplesCSharp
 				instanceSegmentation3DDL.SetInferenceResultImage(ref fliResultBoxContourImage);
 				// 추론 결과 옵션 설정 // Set the inference result options
 				// Figure 옵션 설정 // Set the option of figures
-				CInstanceSegmentation3DDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentation3DDL.EInferenceResultItemSettings)(CInstanceSegmentation3DDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentation3DDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentation3DDL.EInferenceResultItemSettings.Objectness | CInstanceSegmentation3DDL.EInferenceResultItemSettings.BoundaryRect | CInstanceSegmentation3DDL.EInferenceResultItemSettings.Contour);
+				CInstanceSegmentation3DDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentation3DDL.EInferenceResultItemSettings)(CInstanceSegmentation3DDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentation3DDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentation3DDL.EInferenceResultItemSettings.Objectness | CInstanceSegmentation3DDL.EInferenceResultItemSettings.BoundaryRect | CInstanceSegmentation3DDL.EInferenceResultItemSettings.Region);
 				instanceSegmentation3DDL.SetInferenceResultItemSettings(eFigureOption);
 
 				// 추론 시의 Camera Calibrator 설정 // Set the camera calibrator to inference

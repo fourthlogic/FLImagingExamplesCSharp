@@ -408,7 +408,7 @@ namespace FLImagingExamplesCSharp
 				instanceSegmentationDL.SetInferenceResultImage(ref fliResultBoxContourImage);
 				// 추론 결과 옵션 설정 // Set the inference result options
 				// Figure 옵션 설정 // Set the option of figures
-				CInstanceSegmentationDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentationDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentationDL.EInferenceResultItemSettings.Objectness | CInstanceSegmentationDL.EInferenceResultItemSettings.BoundaryRect | CInstanceSegmentationDL.EInferenceResultItemSettings.Contour);
+				CInstanceSegmentationDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentationDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentationDL.EInferenceResultItemSettings.Objectness | CInstanceSegmentationDL.EInferenceResultItemSettings.BoundaryRect | CInstanceSegmentationDL.EInferenceResultItemSettings.Region);
 				instanceSegmentationDL.SetInferenceResultItemSettings(eFigureOption);
 				// Objectness Threshold 설정 // Set the obectness threshold
 				instanceSegmentationDL.SetInferenceResultObjectnessThreshold(0.5f);
@@ -429,7 +429,7 @@ namespace FLImagingExamplesCSharp
 				instanceSegmentationDL.SetInferenceResultImage(ref fliResultContourImage);
 				// 추론 결과 옵션 설정 // Set the inference result options
 				// Figure 옵션 설정 // Set the option of figures
-				eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.Contour);
+				eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.Region);
 				instanceSegmentationDL.SetInferenceResultItemSettings(eFigureOption);
 				// Objectness Threshold 설정 // Set the obectness threshold
 				instanceSegmentationDL.SetInferenceResultObjectnessThreshold(0.5f);
