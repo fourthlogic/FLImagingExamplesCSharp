@@ -117,7 +117,7 @@ namespace FLImagingExamplesCSharp
 				CFLRegion flrgResult1 = new CFLRegion();
 				double f64Epsilon1 = 10.0;
 
-				if((res = flrgSourceFig.Reduce(f64Epsilon1, true, ref flrgResult1)).IsFail())
+				if((res = flrgSourceFig.Reduce(f64Epsilon1, EReduceCriterion.Epsilon, ref flrgResult1)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
@@ -127,7 +127,7 @@ namespace FLImagingExamplesCSharp
 				CFLRegion flrgResult2 = new CFLRegion();
 				double f64Epsilon2 = 15.0;
 
-				if((res = flrgSourceFig.Reduce(f64Epsilon2, true, ref flrgResult2)).IsFail())
+				if((res = flrgSourceFig.Reduce(f64Epsilon2, EReduceCriterion.Epsilon, ref flrgResult2)).IsFail())
 				{
 					ErrorPrint(res, "Failed to calculate.\n");
 					break;
