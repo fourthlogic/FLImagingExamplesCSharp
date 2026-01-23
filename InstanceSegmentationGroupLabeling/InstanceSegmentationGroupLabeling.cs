@@ -408,8 +408,11 @@ namespace FLImagingExamplesCSharp
 				instanceSegmentationDL.SetInferenceResultImage(ref fliResultBoxContourImage);
 				// 추론 결과 옵션 설정 // Set the inference result options
 				// Figure 옵션 설정 // Set the option of figures
-				CInstanceSegmentationDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentationDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentationDL.EInferenceResultItemSettings.Objectness | CInstanceSegmentationDL.EInferenceResultItemSettings.BoundaryRect | CInstanceSegmentationDL.EInferenceResultItemSettings.Region);
+				CInstanceSegmentationDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentationDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentationDL.EInferenceResultItemSettings.Objectness);
 				instanceSegmentationDL.SetInferenceResultItemSettings(eFigureOption);
+				CInstanceSegmentationDL.EInferenceResultRegionFigureType eFigureType =
+				(CInstanceSegmentationDL.EInferenceResultRegionFigureType)(CInstanceSegmentationDL.EInferenceResultRegionFigureType.Region | CInstanceSegmentationDL.EInferenceResultRegionFigureType.BoundaryRectangle);
+				instanceSegmentationDL.SetInferenceResultRegionFigureType(eFigureType);
 				// Objectness Threshold 설정 // Set the obectness threshold
 				instanceSegmentationDL.SetInferenceResultObjectnessThreshold(0.5f);
 				// Mask Threshold 설정 // Set The mask threshold
@@ -429,8 +432,10 @@ namespace FLImagingExamplesCSharp
 				instanceSegmentationDL.SetInferenceResultImage(ref fliResultContourImage);
 				// 추론 결과 옵션 설정 // Set the inference result options
 				// Figure 옵션 설정 // Set the option of figures
-				eFigureOption = (CInstanceSegmentationDL.EInferenceResultItemSettings)(CInstanceSegmentationDL.EInferenceResultItemSettings.Region);
+				eFigureOption = CInstanceSegmentationDL.EInferenceResultItemSettings.None;
+				eFigureType = CInstanceSegmentationDL.EInferenceResultRegionFigureType.Region;
 				instanceSegmentationDL.SetInferenceResultItemSettings(eFigureOption);
+				instanceSegmentationDL.SetInferenceResultRegionFigureType(eFigureType);
 				// Objectness Threshold 설정 // Set the obectness threshold
 				instanceSegmentationDL.SetInferenceResultObjectnessThreshold(0.5f);
 				// Mask Threshold 설정 // Set The mask threshold
