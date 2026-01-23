@@ -60,13 +60,13 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliLearnImage.Load("C://Users/shtmd/FLImagingDevelopment/ExampleImages/InstanceSegmentation3D/Texture(Labeled).flif")).IsFail())
+				if((res = fliLearnImage.Load("../../ExampleImages/InstanceSegmentation3D/Texture(Labeled).flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file. \n");
 					break;
 				}
 
-				if((res = fliDepthMapImage.Load("C://Users/shtmd/FLImagingDevelopment/ExampleImages/InstanceSegmentation3D/Depth.flif")).IsFail())
+				if((res = fliDepthMapImage.Load("../../ExampleImages/InstanceSegmentation3D/Depth.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -399,8 +399,12 @@ namespace FLImagingExamplesCSharp
 				instanceSegmentation3DDL.SetInferenceResultImage(ref fliResultBoxContourImage);
 				// 추론 결과 옵션 설정 // Set the inference result options
 				// Figure 옵션 설정 // Set the option of figures
-				CInstanceSegmentation3DDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentation3DDL.EInferenceResultItemSettings)(CInstanceSegmentation3DDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentation3DDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentation3DDL.EInferenceResultItemSettings.Objectness | CInstanceSegmentation3DDL.EInferenceResultItemSettings.BoundaryRect | CInstanceSegmentation3DDL.EInferenceResultItemSettings.Region);
+				CInstanceSegmentation3DDL.EInferenceResultItemSettings eFigureOption = (CInstanceSegmentation3DDL.EInferenceResultItemSettings)(CInstanceSegmentation3DDL.EInferenceResultItemSettings.ClassNum | CInstanceSegmentation3DDL.EInferenceResultItemSettings.ClassName | CInstanceSegmentation3DDL.EInferenceResultItemSettings.Objectness);
+				CInstanceSegmentation3DDL.EInferenceResultRegionFigureType eFigureType =
+				(CInstanceSegmentation3DDL.EInferenceResultRegionFigureType)(CInstanceSegmentation3DDL.EInferenceResultRegionFigureType.Region | CInstanceSegmentation3DDL.EInferenceResultRegionFigureType.BoundaryRectangle);
+				
 				instanceSegmentation3DDL.SetInferenceResultItemSettings(eFigureOption);
+				instanceSegmentation3DDL.SetInferenceResultRegionFigureType(eFigureType);
 
 				// 추론 시의 Camera Calibrator 설정 // Set the camera calibrator to inference
 				instanceSegmentation3DDL.SetInferenceCameraCalibrator(flpFocalLength, flpPrincipalPoint, 1.0f, mvDistortionCoefficient, EDirectionType.Decrement);
