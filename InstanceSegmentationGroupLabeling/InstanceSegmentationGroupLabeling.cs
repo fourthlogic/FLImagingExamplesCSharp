@@ -274,6 +274,10 @@ namespace FLImagingExamplesCSharp
 				augSpec.EnableScale(true);
 				augSpec.SetScaleParam(0.91, 1.100000, 0.91, 1.1, true, 1.0);
 
+				CObjectAugmentationSpec objectAugSpec = new CObjectAugmentationSpec();
+				objectAugSpec.EnableAugmentation(false);
+				augSpec.SetObjectAugmentationSpec(objectAugSpec);
+
 				instanceSegmentationDL.SetLearningAugmentationSpec(augSpec);
 
 				// 학습을 종료할 조건식 설정. mAP값이 0.85 이상인 경우 학습 종료한다. metric와 동일한 값입니다.
