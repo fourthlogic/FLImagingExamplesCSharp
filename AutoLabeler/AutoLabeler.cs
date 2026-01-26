@@ -345,7 +345,8 @@ namespace FLImagingExamplesCSharp
 				autoLabelerDL.SetSourceImage(ref fliResultAutotLabelImage);
 				autoLabelerDL.EnableOverwriting(true);
 				autoLabelerDL.EnableBatchProcessing(true);
-				autoLabelerDL.SetLabelOptions(CAutoLabelerDL.ELabelOptions.ClassName_RegionType_BoundaryRect);
+				autoLabelerDL.SetLabelOptions(CAutoLabelerDL.ELabelOptions.None);
+				autoLabelerDL.SetRegionFigureType(CAutoLabelerDL.ERegionFigureType.BoundaryRectangle);
 				autoLabelerDL.SetMinimumScore(0.5f);
 				autoLabelerDL.SetMinimumArea(50.0f);
 				autoLabelerDL.SetMaximumArea(50000.0f);
