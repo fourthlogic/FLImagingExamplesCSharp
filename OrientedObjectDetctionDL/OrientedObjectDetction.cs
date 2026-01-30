@@ -294,7 +294,7 @@ namespace FLImagingExamplesCSharp
 						float f32Validation = orientedObjectDetectionDL.GetLearningResultLastMeanAP();
 						// 마지막 Recall 결과 받기 // Get the last recall result
 						float f32Recall = orientedObjectDetectionDL.GetLearningResultLastRecall();
-						// 마지막 검증 결과 받기 // Get the last validation result
+						// 마지막 Precision 결과 받기 // Get the last precision result
 						float f32Precision = orientedObjectDetectionDL.GetLearningResultLastPrecision();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
@@ -334,8 +334,8 @@ namespace FLImagingExamplesCSharp
 							// Graph View 데이터 입력 // Input Graph View Data
 							viewGraph.Plot(vctAvgCosts, EChartType.Line, EColor.CYAN, "Avg Cost");
 							viewGraph.Plot(flaX, vctmAP, EChartType.Line, EColor.PINK, "mAP");
-							viewGraph.Plot(flaX, vctmAP, EChartType.Line, EColor.GREEN, "Recall");
-							viewGraph.Plot(flaX, vctmAP, EChartType.Line, EColor.PURPLE, "Precision");
+							viewGraph.Plot(flaX, vctRecall, EChartType.Line, EColor.GREEN, "Recall");
+							viewGraph.Plot(flaX, vctPrecision, EChartType.Line, EColor.PURPLE, "Precision");
 							viewGraph.UnlockUpdate();
 
 							viewGraph.UpdateWindow();
