@@ -1815,6 +1815,10 @@
 
   - [Page]
   
+    - Image Transpose
+      - The example of an algorithm that transpose an image by thinking of a page as a 3D z-axis
+      - 페이지를 3차원 z축으로 생각해 이미지를 Transpose하는 알고리즘 예제
+
     - [Page Pooling]	 
       - PagePooling_Max
         - The example of an algorithm that outputs the maximum value among the input images as the result image.
