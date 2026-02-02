@@ -333,7 +333,7 @@ namespace FLImagingExamplesCSharp
 						float f32MeanAP = instanceSegmentation3DDL.GetLearningResultLastMeanAP();
 						// 마지막 Recall 결과 받기 // Get the last recall result
 						float f32Recall = instanceSegmentation3DDL.GetLearningResultLastRecall();
-						// 마지막 검증 결과 받기 // Get the last validation result
+						// 마지막 Precision 결과 받기 // Get the last precision result
 						float f32Precision = instanceSegmentation3DDL.GetLearningResultLastPrecision();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
