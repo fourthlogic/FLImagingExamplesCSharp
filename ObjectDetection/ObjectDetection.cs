@@ -200,9 +200,9 @@ namespace FLImagingExamplesCSharp
 				objectDetectionDL.SetInferenceResultImage(ref fliResultImage);
 
 				// 학습할 ObjectDetection 모델 설정 // Set up the ObjectDetection model to learn
-				objectDetectionDL.SetModel(CObjectDetectionDL.EModel.R_FLNet);
+				objectDetectionDL.SetModel(CObjectDetectionDL.EModel.R_FLNet_V2);
 				// 학습할 ObjectDetection 모델 Version 설정 // Set up the ObjectDetection model version to learn
-				objectDetectionDL.SetModelVersion(CObjectDetectionDL.EModelVersion.R_FLNet_V1_256);
+				objectDetectionDL.SetModelVersion(CObjectDetectionDL.EModelVersion.R_FLNet_V2_256);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				objectDetectionDL.SetLearningEpoch(1024);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
