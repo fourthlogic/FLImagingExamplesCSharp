@@ -102,14 +102,17 @@ namespace FLImagingExamplesCSharp
 				// Destination 이미지 설정 // Set destination image
 				contrastEnhancement.SetDestinationImage(ref fliDestinationImage);
 
+				// Channel Method 설정 // Set the Channel Method
+				contrastEnhancement.SetChannelMethod(EChannelMethod.Combined);
+
 				// Intensity 설정 // Set the Intensity
 				contrastEnhancement.SetIntensity(10.0);
 
 				// Iteration 설정 // Set the Iteration
 				contrastEnhancement.SetIteration(10);
 
-				// Channel Method 설정 // Set the Channel Method
-				contrastEnhancement.SetChannelMethod(EChannelMethod.Combined);
+				// Gain 설정 // Set the Gain
+				contrastEnhancement.SetGain(1.0);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (contrastEnhancement.Execute())).IsFail())
