@@ -125,7 +125,7 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// ROI 설정을 위한 CFLEllipse 객체 생성 // Create a CFLEllipse object for setting ROI
-				CFLEllipse<double> fleROI = new CFLEllipse<double>(370, 260, 100, 50, 34);
+				CFLEllipse<double> fleROI = new CFLEllipse<double>(370, 300, 100, 130);
 
 				// Move 객체 생성 // Create Move object
 				CMove move = new CMove();
@@ -135,10 +135,12 @@ namespace FLImagingExamplesCSharp
 				move.SetSourceROI(fleROI);
 				// Destination 이미지 설정 // Set the destination image
 				move.SetDestinationImage(ref arrFliImage[(int)EType.Destination]);
-				// Destination ROI 설정 // Set Destination ROI
-				move.SetDestinationROI(fleROI);
 				// 이동할 크기 설정 // Set movement parameter
-				move.SetMovement(15.0f, 15.0f);
+				move.SetMovement(-220.0f, 15.0f);
+
+				// 결과를 확인하기 위한 Ellipse 객체 생성 및 위치 이동 // Create an Ellipse object and move its position to check the results
+				CFLEllipse<double> fleResult = new CFLEllipse<double>(fleROI);
+				fleResult.Offset(-220.0f, 15.0f);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = (move.Execute())).IsFail())
@@ -165,6 +167,12 @@ namespace FLImagingExamplesCSharp
 					// 파라미터 순서 : 레이어 -> Figure 객체 -> 선 색 -> 선 두께 -> 면 색 -> 펜 스타일 -> 선 알파값(불투명도) -> 면 알파값 (불투명도) // Parameter order: Layer -> Figure object -> Line color -> Line thickness -> Face color -> Pen style -> Line alpha value (opacity) -> Area alpha value (opacity)
 					if((res = (arrLayer[i].DrawFigureImage(fleROI, EColor.LIME))).IsFail())
 						ErrorPrint(res, "Failed to draw figure.\n");
+
+					if(i == (int)EType.Destination)
+					{
+						if((res = (arrLayer[i].DrawFigureImage(fleResult, EColor.RED))).IsFail())
+							ErrorPrint(res, "Failed to draw figure.\n");
+					}
 				}
 
 				// View 정보를 디스플레이 한다. // Display view information
