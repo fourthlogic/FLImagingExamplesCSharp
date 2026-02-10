@@ -99,28 +99,28 @@ namespace FLImagingExamplesCSharp
 				CResult ipResult;
 
 				// Mode Filter 객체 생성 // Create Mode Filter object
-				CModeFilter filterMode = new CModeFilter();
+				CModeFilter modeFilter = new CModeFilter();
 
 				// 처리할 이미지 설정 // Set the image to process
-				filterMode.SetSourceImage(ref fliSrcImage);
+				modeFilter.SetSourceImage(ref fliSrcImage);
 
 				// ROI 범위 설정
 				CFLRect<Int32> flrROI = new CFLRect<Int32>(100, 190, 360, 420);
 
 				// Source ROI 설정 // Set the Source ROI
-				filterMode.SetSourceROI(flrROI);
+				modeFilter.SetSourceROI(flrROI);
 
 				// Destination 이미지 설정 // Set the destination image
-				filterMode.SetDestinationImage(ref fliDstImage);
+				modeFilter.SetDestinationImage(ref fliDstImage);
 
 				// Destination ROI 설정 // Set Destination ROI
-				filterMode.SetDestinationROI(flrROI);
+				modeFilter.SetDestinationROI(flrROI);
 
 				// 처리할 filter의 Kernel Size 설정 (KernelSize = 5 일 경우, Kernel Size : 5x5)
-				filterMode.SetKernel(5);
+				modeFilter.SetKernel(5);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((ipResult = filterMode.Execute()).IsFail())
+				if((ipResult = modeFilter.Execute()).IsFail())
 				{
 					Console.WriteLine("Failed to execute mode filter.");
 					Console.WriteLine(ipResult.GetString());
