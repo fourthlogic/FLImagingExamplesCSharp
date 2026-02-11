@@ -201,7 +201,7 @@ namespace FLImagingExamplesCSharp
 				measurementDL.SetInferenceResultImage(ref fliResultLabelImage);
 
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				measurementDL.SetLearningEpoch(2000);
+				measurementDL.SetLearningEpoch(1000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				measurementDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
@@ -211,6 +211,11 @@ namespace FLImagingExamplesCSharp
 				// 학습을 종료할 조건식 설정. mIoU.ze값이 0.95 이상인 경우 학습 종료한다. metric.ze와 동일한 값입니다.
 				// Set Conditional Expression to End Learning. If the mIoU.ze value is 0.95 or higher, end the learning. Same value as metric.
 				measurementDL.SetLearningStopCondition("mIoU.ze >= 0.95");
+
+				CAugmentationSpec augSpec = new CAugmentationSpec();
+
+				augSpec.EnableAugmentation(false);
+				measurementDL.SetLearningAugmentationSpec(augSpec);
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
