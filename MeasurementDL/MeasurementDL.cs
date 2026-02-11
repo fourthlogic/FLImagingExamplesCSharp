@@ -186,7 +186,7 @@ namespace FLImagingExamplesCSharp
 				viewImageValidation.RedrawWindow();
 				viewImagesLabel.RedrawWindow();
 
-				// OCR 객체 생성 // Create OCR object
+				// Measurement 객체 생성 // Create Measurement object
 				CMeasurementDL measurementDL = new CMeasurementDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
@@ -205,7 +205,7 @@ namespace FLImagingExamplesCSharp
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				measurementDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
-				// 설정한 Optimizer를 OCR에 적용 // Apply Optimizer that we set up to OCR
+				// 설정한 Optimizer를 Measurement에 적용 // Apply Optimizer that we set up to Measurement
 				measurementDL.SetLearningOptimizerSpec(optSpec);
 
 				// 학습을 종료할 조건식 설정. mIoU.ze값이 0.95 이상인 경우 학습 종료한다. metric.ze와 동일한 값입니다.
@@ -227,7 +227,7 @@ namespace FLImagingExamplesCSharp
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				measurementDL.SetLearningAutoSaveSpec(autoSaveSpec);
 
-				// OCR learn function을 진행하는 스레드 생성 // Create the OCR Learn function thread
+				// Measurement learn function을 진행하는 스레드 생성 // Create the Measurement Learn function thread
 				ThreadPool.QueueUserWorkItem((arg) =>
 				{
 					if((res = measurementDL.Learn()).IsFail())
