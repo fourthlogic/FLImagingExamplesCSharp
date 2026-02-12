@@ -148,7 +148,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				CFLFigure flfHoleContour = holeFilling.GetSelectedPageFigureObject();
+				CFLFigure flfHoleContour = holeFilling.GetHoleFigure();
 				if((res = (layerSrc.DrawFigureImage(flfHoleContour, EColor.CYAN))).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw figure.\n");
