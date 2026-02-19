@@ -1541,15 +1541,15 @@
     - FLColorBoostingType1
       - The example of the color contrast boosting.
       - 색상 대비를 강화해 주는 알고리즘 예제.
+    - FLLowLuminanceCorrectionType1
+      - The example of an algorithm that processes a low luminance correction.
+      - 저휘도 이미지를 보정하는 알고리즘 예제.
+    - FLLowLuminanceCorrectionType2
+      - The example of an algorithm that processes a low luminance correction.
+      - 저휘도 이미지를 보정하는 알고리즘 예제.
     - HighDynamicRange
       - The example of an algorithm that converts multiple exposure images with different exposure into a single image of even brightness.
       - 노출 정도가 다른 다중 노출 이미지들을 한장의 밝기가 고른 이미지로 만드는 알고리즘 예제.
-    - LowLuminanceCorrectionType1
-      - The example of an algorithm that processes a low luminance correction.
-      - 저휘도 이미지를 보정하는 알고리즘 예제.
-    - LowLuminanceCorrectionType2
-      - The example of an algorithm that processes a low luminance correction.
-      - 저휘도 이미지를 보정하는 알고리즘 예제.
     - Retinex
       - The example of an algorithm that increases the brightness of dark areas due to weak light or shadows in an image.
       - 이미지에서 빛이 닿지 않아 어두운 영역의 밝기를 증가시키는 알고리즘 예제

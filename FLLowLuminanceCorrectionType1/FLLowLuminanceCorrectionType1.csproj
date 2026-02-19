@@ -9,8 +9,8 @@
     <ProjectGuid>{1AD53E46-F30E-467C-8240-82A4EE40837D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LowLuminanceCorrectionType1</RootNamespace>
-    <AssemblyName>LowLuminanceCorrectionType1</AssemblyName>
+    <RootNamespace>FLLowLuminanceCorrectionType1</RootNamespace>
+    <AssemblyName>FLLowLuminanceCorrectionType1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,7 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LowLuminanceCorrectionType1.cs" />
+    <Compile Include="FLLowLuminanceCorrectionType1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
