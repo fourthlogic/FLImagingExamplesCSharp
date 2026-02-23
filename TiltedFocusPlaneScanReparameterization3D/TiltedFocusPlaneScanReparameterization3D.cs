@@ -97,7 +97,7 @@ namespace FLImagingExamplesCSharp
 				tiltedFocusPlaneScanReparameterization3D.SetDestinationImage(ref fliDestinationImage);
 
 				// Scroll Direction 설정 // Set scroll direction
-				tiltedFocusPlaneScanReparameterization3D.SetScrollDirection(CTiltedFocusPlaneScanReparameterization3D::EScrollDirection_TopToBottom);
+				tiltedFocusPlaneScanReparameterization3D.SetScrollDirection(CTiltedFocusPlaneScanReparameterization3D.EScrollDirection.TopToBottom);
 
 				// Pixel Accuracy 설정 // Set pixel accuracy
 				tiltedFocusPlaneScanReparameterization3D.SetPixelAccuracy(5.);
