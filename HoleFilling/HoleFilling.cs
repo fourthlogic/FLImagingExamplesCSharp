@@ -109,17 +109,17 @@ namespace FLImagingExamplesCSharp
 					break;
 				if((res = holeFilling.SetMaxIteration(100)).IsFail())
 					break;
-				CMultiVar<UInt64> mvThresholdCondition1 = new CMultiVar<UInt64>((UInt64)ELogicalCondition.GreaterEqual, (UInt64)ELogicalCondition.GreaterEqual, (UInt64)ELogicalCondition.GreaterEqual);
-				if((res = holeFilling.SetThresholdCondition(EThresholdIndex.First, mvThresholdCondition1)).IsFail())
+				CMultiVar<Int64> mvThresholdCondition1 = new CMultiVar<Int64>((Int64)ELogicalCondition.GreaterEqual, (Int64)ELogicalCondition.GreaterEqual, (Int64)ELogicalCondition.GreaterEqual);
+				if((res = holeFilling.SetLogicalCondition(mvThresholdCondition1, EThresholdIndex.First)).IsFail())
 					break;
-				CMultiVar<UInt64> mvThresholdValue1U64 = new CMultiVar<UInt64>(175, 230, 240);
-				if((res = holeFilling.SetThresholdValue(EThresholdIndex.First, mvThresholdValue1U64)).IsFail())
+				CMultiVar<double> mvThresholdValue1 = new CMultiVar<double>(175, 230, 240);
+				if((res = holeFilling.SetThreshold(mvThresholdValue1, EThresholdIndex.First)).IsFail())
 					break;
-				CMultiVar<UInt64> mvThresholdCondition2 = new CMultiVar<UInt64>((UInt64)ELogicalCondition.Less, (UInt64)ELogicalCondition.Less, (UInt64)ELogicalCondition.Less);
-				if((res = holeFilling.SetThresholdCondition(EThresholdIndex.Second, mvThresholdCondition2)).IsFail())
+				CMultiVar<Int64> mvThresholdCondition2 = new CMultiVar<Int64>((Int64)ELogicalCondition.Less, (Int64)ELogicalCondition.Less, (Int64)ELogicalCondition.Less);
+				if((res = holeFilling.SetLogicalCondition(mvThresholdCondition2, EThresholdIndex.Second)).IsFail())
 					break;
-				CMultiVar<UInt64> mvThresholdValue2U64 = new CMultiVar<UInt64>(200, 240, 255);
-				if((res = holeFilling.SetThresholdValue(EThresholdIndex.Second, mvThresholdValue2U64)).IsFail())
+				CMultiVar<double> mvThresholdValue2 = new CMultiVar<double>(200, 240, 255);
+				if((res = holeFilling.SetThreshold(mvThresholdValue2, EThresholdIndex.Second)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
