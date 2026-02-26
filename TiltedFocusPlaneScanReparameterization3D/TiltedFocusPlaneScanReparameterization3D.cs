@@ -100,7 +100,7 @@ namespace FLImagingExamplesCSharp
 				tiltedFocusPlaneScanReparameterization3D.SetScrollDirection(CTiltedFocusPlaneScanReparameterization3D.EScrollDirection.TopToBottom);
 
 				// Pixel Accuracy 설정 // Set pixel accuracy
-				tiltedFocusPlaneScanReparameterization3D.SetPixelAccuracy(5.);
+				tiltedFocusPlaneScanReparameterization3D.SetPixelAccuracy(5);
 
 				// Scan Accuracy 설정 // Set scan accuracy
 				tiltedFocusPlaneScanReparameterization3D.SetScanAccuracy(3.83);
