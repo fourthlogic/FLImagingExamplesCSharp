@@ -33,13 +33,16 @@ namespace FLImagingExamplesCSharp
 			// before using any features of the FLImaging(R) library
 			CLibraryUtilities.Initialize();
 
-			// 이미지 뷰 선언 // Declare image view	
+			// 3D 뷰 선언 // Declare 3d view	
 			int i32SourceCount = 6;
 			CGUIView3D view3DDst = new CGUIView3D();
 			CGUIView3D[] arrSourceView = new CGUIView3D[6];
+
+			// 3D 객체 선언 // Declare 3D object
 			CFL3DObject[] arrSourceObjects = new CFL3DObject[6];
 			CFL3DObject floDst = new CFL3DObject();
 
+			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult res = new CResult();
 
 			do
@@ -57,13 +60,14 @@ namespace FLImagingExamplesCSharp
 
 					if((res = arrSourceObjects[i].Load(strPath)).IsFail())
 					{
-						//ErrorPrint(res, L"Failed to load the object.\n");
+						ErrorPrint(res, L"Failed to load the object.\n");
 						break;
 					}
 
 					scannedObjectFusion3D.AddSourceObject(ref arrSourceObjects[i]);
 				}
 
+				// Source Object 3D 뷰 생성 // Create the source object 3D view
 				int i32WindowWidth = 300;
 				int i32WindowHeight = 300;
 
@@ -79,6 +83,7 @@ namespace FLImagingExamplesCSharp
 					}
 				}
 
+				// Destination Object 3D 뷰 생성 // Create the destination object 3D view
 				if((res = view3DDst.Create(910, 10, 1510, 610)).IsFail())
 					break;
 
@@ -110,7 +115,7 @@ namespace FLImagingExamplesCSharp
 
 				if((res = scannedObjectFusion3D.Calibrate()).IsFail())
 				{
-					//ErrorPrint(res, "Failed to Calibrate\n");
+					ErrorPrint(res, "Failed to Calibrate\n");
 					break;
 				}
 
@@ -120,7 +125,7 @@ namespace FLImagingExamplesCSharp
 
 				if((res = layer3DDst.DrawTextCanvas(flpTopLeft, "Calibration Result", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					//ErrorPrint(res, "Failed to draw text.\n");
+					ErrorPrint(res, "Failed to draw text.\n");
 					break;
 				}
 
