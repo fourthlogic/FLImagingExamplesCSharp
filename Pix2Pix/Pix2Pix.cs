@@ -198,12 +198,6 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((res = viewImageLearnInput.SynchronizeWindow(ref viewGraph)).IsFail())
-				{
-					ErrorPrint(res, "Failed to synchronize window. \n");
-					break;
-				}
-
 				if((res = viewImageLearnInput.SynchronizePageIndex(ref viewImageLearnTarget)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
@@ -211,6 +205,30 @@ namespace FLImagingExamplesCSharp
 				}
 
 				if((res = viewImageValidationInput.SynchronizePageIndex(ref viewImageValidationTarget)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				if((res = viewImageValidationInput.SynchronizePageIndex(ref viewImagesResult)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				if((res = viewImageLearnInput.SynchronizePointOfView(ref viewImageLearnTarget)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				if((res = viewImageValidationInput.SynchronizePointOfView(ref viewImageValidationTarget)).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window. \n");
+					break;
+				}
+
+				if((res = viewImageValidationInput.SynchronizePointOfView(ref viewImagesResult)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
