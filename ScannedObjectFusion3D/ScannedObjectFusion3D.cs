@@ -60,7 +60,7 @@ namespace FLImagingExamplesCSharp
 
 					if((res = arrSourceObjects[i].Load(strPath)).IsFail())
 					{
-						ErrorPrint(res, L"Failed to load the object.\n");
+						ErrorPrint(res, "Failed to load the object.\n");
 						break;
 					}
 
