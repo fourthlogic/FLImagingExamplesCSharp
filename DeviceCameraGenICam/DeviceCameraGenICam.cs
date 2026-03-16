@@ -82,7 +82,7 @@ namespace FLImagingExamplesCSharp
 		        CDeviceGenICamBase.EConnectionMethod eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
 		        String strConnection = "";
 
-				// 장치의 제조사를 선택합니다.
+				// 장치의 벤더를 선택합니다.
 				while(true)
 				{
 					Console.Write("1. Basler\n");
