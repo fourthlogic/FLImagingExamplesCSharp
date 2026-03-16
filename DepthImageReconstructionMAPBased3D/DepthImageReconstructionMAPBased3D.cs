@@ -124,9 +124,9 @@ namespace FLImagingExamplesCSharp
 
 				if((res = depthImageReconstructionMAPBased3D.SetDirection(CDepthImageReconstructionMAPBased3D.EDirection.BottomToTop)).IsFail())
 					break;
-				if((res = depthImageReconstructionMAPBased3D.SetPixelAccuracy(1.0)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetPixelAccuracy(0.1)).IsFail())
 					break;
-				if((res = depthImageReconstructionMAPBased3D.SetDepthPitch(8.0)).IsFail())
+				if((res = depthImageReconstructionMAPBased3D.SetDepthPitch(0.8)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
