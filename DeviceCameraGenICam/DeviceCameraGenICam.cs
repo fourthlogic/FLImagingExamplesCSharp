@@ -75,14 +75,82 @@ namespace FLImagingExamplesCSharp
 			{
 		        String strInput = "";
 
-		        CDeviceGenICamTypeBase.EDeviceType eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
+				CDeviceCameraGenICam.EVendor eVendor = CDeviceCameraGenICam.EVendor.Undefined;
+				CDeviceGenICamTypeBase.EDeviceType eDeviceType = CDeviceGenICamTypeBase.EDeviceType.GigE;
 		        bool bAutoDetect = false;
 		        int i32SelectDevice = -1;
 		        CDeviceGenICamBase.EConnectionMethod eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
 		        String strConnection = "";
 
-		        // 장치 타입을 선택합니다.
-		        while(true)
+				// 장치의 제조사를 선택합니다.
+				while(true)
+				{
+					Console.Write("1. Basler\n");
+					Console.Write("2. Crevis\n");
+					Console.Write("3. FLIR Systems\n");
+					Console.Write("4. Huaray Technology\n");
+					Console.Write("5. Hikrobot\n");
+					Console.Write("6. Jai\n");
+					Console.Write("7. Lucid Vision Labs\n");
+					Console.Write("Select Vendor: ");
+
+					strInput = Console.ReadLine();
+
+					int i32Select = 0;
+
+					if(Int32.TryParse(strInput, out i32Select) == true)
+					{
+						bool bSelected = true;
+
+						switch(i32Select)
+						{
+						case 1:
+							eVendor = CDeviceCameraGenICam.EVendor.Basler;
+							break;
+
+						case 2:
+							eVendor = CDeviceCameraGenICam.EVendor.Crevis;
+							break;
+
+						case 3:
+							eVendor = CDeviceCameraGenICam.EVendor.FLIRSystems;
+							break;
+
+						case 4:
+							eVendor = CDeviceCameraGenICam.EVendor.HuarayTechnology;
+							break;
+
+						case 5:
+							eVendor = CDeviceCameraGenICam.EVendor.Hikrobot;
+							break;
+
+						case 6:
+							eVendor = CDeviceCameraGenICam.EVendor.Jai;
+							break;
+
+						case 7:
+							eVendor = CDeviceCameraGenICam.EVendor.LucidVisionLabs;
+							break;
+
+						default:
+							bSelected = false;
+							break;
+						}
+
+						if(bSelected)
+							break;
+					}
+
+					Console.Write("Incorrect input. Please select again.\n\n");
+				}
+
+				Console.Write("\n");
+
+				// 카메라에 벤더 설정
+				camGenICam.SetVendor(eVendor);
+
+				// 장치 타입을 선택합니다.
+				while(true)
 				{
 			        Console.Write("1. GigE\n");
 			        Console.Write("2. IEEE 1394\n");
