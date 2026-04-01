@@ -29,7 +29,7 @@ namespace FLImagingExamplesCSharp
 			// before using any features of the FLImaging(R) library
 			CLibraryUtilities.Initialize();
 
-			// 3D 뷰 선언 // Declare 3D views
+			// 3D 뷰 선언 // Declare 3D view
 			CGUIView3D view3DResult = new CGUIView3D();
 
 			CResult res = new CResult(EResult.UnknownError);
@@ -61,13 +61,15 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// Random sequence list 파라미터 설정 // Set the Random sequence parameters
+				// Random sequence 파라미터 설정 // Set the random sequence parameters
+				// itemChances: 각 아이템 타입의 상대적 출현 비율 // Relative appearance ratio of each item type
+				// Lookahead: 다음 배치 결정 시 고려할 선택지 수 // Number of candidates to consider for next placement
 				CSpacePlanningBaseSP.SRandomSequenceParameters parameters =
 					CSpacePlanningBaseSP.SRandomSequenceParameters.CreateInfinite(new List<float>() { 4f, 3f, 2f }, 1);
 
 				if((res = alg.SetRandomSequenceParameters(parameters)).IsFail())
 				{
-					ErrorPrint(res, "Failed to set Random sequence parameters.\n");
+					ErrorPrint(res, "Failed to set random sequence parameters.\n");
 					break;
 				}
 
@@ -78,21 +80,19 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 배치 결과 3D 오브젝트 그룹 취득 // Get the placement result 3D object group
-				// 구조: [0, ItemCount) = 배치된 아이템, [ItemCount, end) = 빈(bin) * 2개씩 (속 채움, 외곽선)
-				// Structure: [0, ItemCount) = placed items, [ItemCount, end) = bins * 2 each (filled, wireframe)
-				CFL3DObjectGroup flog = new CFL3DObjectGroup();
+				// 학습된 전략 중 최적 전략 선택 // Select the optimal strategy among learned strategies
+				int i32OptimalStrategyIndex = alg.GetOptimalStrategyIndex();
 
-				if((res = alg.Get3DObject(ref flog)).IsFail())
+				if((res = alg.SelectStrategy(i32OptimalStrategyIndex)).IsFail())
 				{
-					ErrorPrint(res, "Failed to get 3D object.\n");
+					ErrorPrint(res, "Failed to select strategy.\n");
 					break;
 				}
 
-				int i32BinCount = alg.GetBinSpecCount();
-				int i32ItemCount = alg.GetItemSpecCount();
+				Console.WriteLine("Optimal strategy index: {0}", i32OptimalStrategyIndex);
 
-				if((res = view3DResult.Create(600, 0, 1100, 500)).IsFail())
+				// 3D 뷰 생성 // Create 3D view
+				if((res = view3DResult.Create(600, 0, 1200, 600)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the 3D view.\n");
 					break;
@@ -101,79 +101,153 @@ namespace FLImagingExamplesCSharp
 				view3DResult.SetRenderingTransparencyMode(ERenderingTransparencyMode.DepthPeelingOIT);
 				view3DResult.SetRenderingResolutionScale(2);
 
-				// 결과 뷰에 아이템 및 Bin 오브젝트 추가 // Push item and bin objects to the result view
-				for(int i = 0; i < i32ItemCount; ++i)
+				int i32BinCount  = alg.GetBinSpecCount();
+				int i32ItemCount = alg.GetItemSpecCount();
+
+				// 타이틀은 layer 0에 한 번만 그림 // Draw title once on layer 0
+				// 매 스텝마다 갱신되는 상태 텍스트는 layer 1을 Clear 후 재작성 // Per-step status goes on layer 1, cleared each step
+				view3DResult.GetLayer(0).DrawTextCanvas(new CFLPoint<double>(0, 0), "Dynamic SP - Interactive Placement", EColor.YELLOW, EColor.BLACK, 20);
+
+				// 인터랙티브 모드 실행 // Run in interactive mode
+				if((res = alg.Execute()).IsFail())
 				{
-					int i32ObjIndex = -1;
-					if((res = view3DResult.PushObject(flog.GetObjectByIndex(i), ref i32ObjIndex)).IsFail())
-					{
-						ErrorPrint(res, "Failed to push 3D object.\n");
-						break;
-					}
-
-					CGUIView3DObject objView3D = view3DResult.GetView3DObject(i32ObjIndex);
-					if(objView3D != null)
-						objView3D.SetOpacity(0.6f);
-				}
-
-				if(res.IsFail())
-					break;
-
-				for(int i = 0; i < i32BinCount; ++i)
-				{
-					int i32ObjIndex = -1;
-
-					if((res = view3DResult.PushObject(flog.GetObjectByIndex(i32ItemCount + 2 * i), ref i32ObjIndex)).IsFail())
-					{
-						ErrorPrint(res, "Failed to push 3D object.\n");
-						break;
-					}
-
-					CGUIView3DObject objFilled = view3DResult.GetView3DObject(i32ObjIndex);
-					if(objFilled != null)
-						objFilled.SetOpacity(0.2f);
-
-					if((res = view3DResult.PushObject(flog.GetObjectByIndex(i32ItemCount + 2 * i + 1), ref i32ObjIndex)).IsFail())
-					{
-						ErrorPrint(res, "Failed to push 3D object.\n");
-						break;
-					}
-
-					CGUIView3DObject objWireframe = view3DResult.GetView3DObject(i32ObjIndex);
-					if(objWireframe != null)
-						objWireframe.SetOpacity(0.6f);
-				}
-
-				if(res.IsFail())
-					break;
-
-				// 화면에 출력하기 위해 3D 뷰에서 레이어 0번을 얻어옴 // Obtain layer 0 from the 3D view for display
-				// 이 객체는 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to the view and does not need to be released separately
-				CGUIView3DLayer layer3DResult = view3DResult.GetLayer(0);
-
-				CFLPoint<double> flpLeftTop = new CFLPoint<double>(0, 0);
-				layer3DResult.DrawTextCanvas(flpLeftTop, "Result 3D View", EColor.YELLOW, EColor.BLACK, 20);
-
-				// 결과 정보를 3D 뷰에 텍스트로 표시 // Draw result summary text on the 3D view
-				float f32TotalVolume = 0f;
-				float f32UsedVolume = 0f;
-				if((res = alg.GetCurrentVolumeUsage(0, ref f32TotalVolume, ref f32UsedVolume)).IsFail())
-				{
-					ErrorPrint(res, "Failed to get volume usage.\n");
+					ErrorPrint(res, "Failed to execute the algorithm.\n");
 					break;
 				}
 
-				float f32VolumeUsage = f32TotalVolume > 0f ? 100f * f32UsedVolume / f32TotalVolume : 0f;
-				string strResultInfo = string.Format( "Optimal strategy index: {0}\nVolume Usage: {1:F1}%({2:F1}/{3:F1})", alg.GetOptimalStrategyIndex(), f32VolumeUsage, f32UsedVolume, f32TotalVolume);
+				// 아이템 도착 시뮬레이션 (컨베이어 벨트 상황) // Simulate item arrival (conveyor belt scenario)
+				// 아이템 타입을 무작위로 생성하여 빈이 꽉 찰 때까지 계속 배치
+				// Randomly generate item types and keep placing until the bin is full (EResult.FullOfCapacity)
+				Random rng = new Random();
 
-				layer3DResult.DrawTextCanvas(new CFLPoint<double>(0, 25), strResultInfo, EColor.YELLOW, EColor.BLACK, 16);
+				int i32ArrivalIdx  = 0;
+				int i32PlacedCount = 0;
 
-				// Destination 이미지가 새로 생성됨으로 Zoom fit 을 통해 디스플레이 되는 이미지 배율을 화면에 맞춰준다.
-				// With the newly created Destination image, the image magnification displayed through Zoom fit is adjusted to the screen.
-				view3DResult.ZoomFit();
+				for(;;)
+				{
+					if(!view3DResult.IsAvailable())
+						break;
 
-				// 이미지 뷰를 갱신 합니다. // Update image view
-				view3DResult.Invalidate(true);
+					int i32ItemType = rng.Next(0, i32ItemCount);
+
+					// 아이템을 대기열에 추가하고 권장 위치에 자동 배치
+					// Push item to queue and automatically place it at the recommended position
+					// 대기 중인 다른 아이템이 있을 경우 i32ActualItemIndex가 i32ItemType과 다를 수 있음
+					// i32ActualItemIndex may differ from i32ItemType if other items are already pending
+					int i32BinIndex        = 0;
+					int i32ActualItemIndex = 0;
+					CSpacePlanningBaseSP.EAxisRotation eAxisRotation = CSpacePlanningBaseSP.EAxisRotation.XYZ;
+					TPoint3<float> tpPosition = new TPoint3<float>();
+
+					res = alg.PushAndPlace(i32ItemType, true, ref i32BinIndex, ref i32ActualItemIndex, ref eAxisRotation, ref tpPosition);
+
+					++i32ArrivalIdx;
+
+					if(res.IsFail())
+					{
+						if(res == new CResult(EResult.FullOfCapacity))
+						{
+							// 빈이 꽉 참 — 정상 종료 // Bin is full — normal termination
+							Console.WriteLine("Arrival {0}: bin is full. Stopping.", i32ArrivalIdx);
+							break;
+						}
+						// 예상치 못한 오류 // Unexpected error
+						ErrorPrint(res, "Failed to push and place.\n");
+						break;
+					}
+
+					++i32PlacedCount;
+
+					Console.WriteLine("Arrival {0}: placed item type {1} at bin {2} (rotation={3}, pos=[{4:F1}, {5:F1}, {6:F1}])", i32ArrivalIdx, i32ActualItemIndex, i32BinIndex, (int)eAxisRotation, tpPosition.x, tpPosition.y, tpPosition.z);
+
+					// 현재 배치 상태 전체를 3D 오브젝트 그룹으로 취득
+					// Get the current placement state as a 3D object group
+					// 구조: [0, i32ItemCount) = 아이템 타입별 그룹, [i32ItemCount, end) = 빈 * 2개씩 (속 채움, 외곽선)
+					// Structure: [0, i32ItemCount) = grouped by item type, [i32ItemCount, end) = bins * 2 each (filled, wireframe)
+					CFL3DObjectGroup flog = new CFL3DObjectGroup();
+
+					if((res = alg.Get3DObject(ref flog)).IsFail())
+					{
+						ErrorPrint(res, "Failed to get 3D object.\n");
+						break;
+					}
+
+					view3DResult.Lock();
+
+					// 매 스텝마다 뷰를 초기화하고 현재 상태로 재등록
+					// Clear and re-register all objects with the current state on each step
+					view3DResult.ClearObjects();
+
+					for(int i = 0; i < i32ItemCount; ++i)
+					{
+						int i32ObjIndex = -1;
+						view3DResult.PushObject(flog.GetObjectByIndex(i), ref i32ObjIndex);
+						CGUIView3DObject obj = view3DResult.GetView3DObject(i32ObjIndex);
+						if(obj != null)
+							obj.SetOpacity(0.6f);
+					}
+
+					for(int i = 0; i < i32BinCount; ++i)
+					{
+						int i32ObjIndex = -1;
+
+						view3DResult.PushObject(flog.GetObjectByIndex(i32ItemCount + 2 * i), ref i32ObjIndex);
+						CGUIView3DObject objFilled = view3DResult.GetView3DObject(i32ObjIndex);
+						if(objFilled != null)
+							objFilled.SetOpacity(0.2f);
+
+						view3DResult.PushObject(flog.GetObjectByIndex(i32ItemCount + 2 * i + 1), ref i32ObjIndex);
+						CGUIView3DObject objWireframe = view3DResult.GetView3DObject(i32ObjIndex);
+						if(objWireframe != null)
+							objWireframe.SetOpacity(0.6f);
+					}
+
+					// 상태 텍스트는 layer 1에 매 스텝 Clear 후 재작성 // Clear layer 1 each step and redraw status text
+					// 이 객체는 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to the view and does not need to be released separately
+					CGUIView3DLayer layer3DStatus = view3DResult.GetLayer(1);
+					layer3DStatus.Clear();
+
+					float f32TotalVolume = 0f;
+					float f32UsedVolume  = 0f;
+					alg.GetCurrentVolumeUsage(0, ref f32TotalVolume, ref f32UsedVolume);
+					float f32VolumeUsage = f32TotalVolume > 0f ? 100f * f32UsedVolume / f32TotalVolume : 0f;
+
+					string strStatus = string.Format("Arrival {0}  |  Placed: {1}  |  Volume Usage: {2:F1}% ({3:F1} / {4:F1})", i32ArrivalIdx, i32PlacedCount, f32VolumeUsage, f32UsedVolume, f32TotalVolume);
+
+					layer3DStatus.DrawTextCanvas(new CFLPoint<double>(0, 25), strStatus, EColor.YELLOW, EColor.BLACK, 16);
+
+					// 첫 아이템 배치 시 카메라를 전체에 맞게 조정 // Fit camera to all objects on first placement
+					if(i32PlacedCount == 1)
+						view3DResult.ZoomFit();
+
+					view3DResult.Unlock();
+
+					// 이미지 뷰를 갱신 합니다. // Update image view
+					view3DResult.Invalidate(true);
+
+					// 배치 과정을 눈으로 확인할 수 있도록 잠시 대기 // Pause briefly so the placement process is visible
+					CThreadUtilities.Sleep(600);
+				}
+
+				if(!view3DResult.IsAvailable())
+					break;
+
+				// 최종 결과 요약 출력 // Print final result summary
+				{
+					float f32TotalVolume = 0f;
+					float f32UsedVolume  = 0f;
+					alg.GetCurrentVolumeUsage(0, ref f32TotalVolume, ref f32UsedVolume);
+					float f32VolumeUsage = f32TotalVolume > 0f ? 100f * f32UsedVolume / f32TotalVolume : 0f;
+
+					CGUIView3DLayer layer3DStatus = view3DResult.GetLayer(1);
+					layer3DStatus.Clear();
+
+					string strFinalInfo = string.Format("Done  |  Arrivals: {0}  |  Placed: {1}  |  Volume Usage: {2:F1}% ({3:F1} / {4:F1})", i32ArrivalIdx, i32PlacedCount, f32VolumeUsage, f32UsedVolume, f32TotalVolume);
+
+					layer3DStatus.DrawTextCanvas(new CFLPoint<double>(0, 25), strFinalInfo, EColor.YELLOW, EColor.BLACK, 16);
+
+					view3DResult.Invalidate(true);
+				}
 
 				// 3D 뷰가 종료될 때 까지 기다림 // Wait for the 3D view to close
 				while(view3DResult.IsAvailable())
