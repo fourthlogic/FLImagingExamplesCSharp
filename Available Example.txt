@@ -221,6 +221,17 @@
         - The example of an algorithm that estimates underlying distribution of a point cloud and augments the data using uniform random sampling.
         - 포인트 클라우드의 기저 분포를 추정하여 균등난수추출을 통해 데이터를 증강하는 알고리즘 예제.
 
+  - [Space Planning]
+  
+    - [Space Planning Static SP]
+      - SpacePlanningStaticSP
+        - The example of an algorithm that performs static space planning.
+        - 정적 공간 계획을 수행하는 알고리즘 예제.
+
+    - [Space Planning Dynamic SP]
+      - SpacePlanningDynamicSP
+        - The example of an algorithm that performs dynamic space planning.
+        - 동적 공간 계획을 수행하는 알고리즘 예제.
 
   - [Transform]
     
