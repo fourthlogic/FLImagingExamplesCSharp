@@ -155,7 +155,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 인식할 문자의 유니코드 여부를 설정
-				if((res = ocr.EnableRecognizingUnicodeByteCharacter(true)).IsFail())
+				if((res = ocr.EnableRecognizingUnicodeCharacter(true)).IsFail())
 				{
 					ErrorPrint(res, "Failed to Enable unicode byte character.");
 					break;
