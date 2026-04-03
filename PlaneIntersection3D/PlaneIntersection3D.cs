@@ -71,15 +71,15 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				CPlaneIntersection3D heightMeasurement3D = new CPlaneIntersection3D();
+				CPlaneIntersection3D planeIntersection3D = new CPlaneIntersection3D();
 
 				// Reference plane 설정 // Set the reference plane
-				heightMeasurement3D.SetReferencePlane(ref floReferenceObject);
+				planeIntersection3D.SetReferencePlane(ref floReferenceObject);
 				// Measurement plane 설정 // Set the Measurement plane
-				heightMeasurement3D.SetMeasurementPlane(ref floMeasurementObject);
+				planeIntersection3D.SetMeasurementPlane(ref floMeasurementObject);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((eResult = heightMeasurement3D.Execute()).IsFail())
+				if((eResult = planeIntersection3D.Execute()).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to execute Plane Intersection 3D.");
 					break;
@@ -128,7 +128,7 @@ namespace FLImagingExamplesCSharp
 				TPoint3<float> tp3Start = new TPoint3<float>();
 				TPoint3<float> tp3End = new TPoint3<float>();
 
-				heightMeasurement3D.GetResultIntersectionLine(ref tp3Start, ref tp3End);
+				planeIntersection3D.GetResultIntersectionLine(ref tp3Start, ref tp3End);
 
 				CGUIView3DObjectLine viewObjLine = new CGUIView3DObjectLine(tp3Start, tp3End, EColor.LIGHTGREEN, 3, EGUIViewImagePenStyle.Solid);
 
