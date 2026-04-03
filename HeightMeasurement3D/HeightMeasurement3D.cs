@@ -35,12 +35,11 @@ namespace FLImagingExamplesCSharp
 
 			// 3D 객체 선언 // Declare 3D object
 			CFL3DObject floMeasurementObject = new CFL3DObject();
-			CFL3DObject floSourceObject = new CFL3DObject();
+			CFL3DObject floReferenceObject = new CFL3DObject();
 
 			// 3D 뷰 선언 // Declare 3D view	
 			CGUIView3D view3DMeasurement = new CGUIView3D();
-			CGUIView3D view3DSource = new CGUIView3D();
-			CGUIView3D view3DDestination = new CGUIView3D();
+			CGUIView3D view3DReference = new CGUIView3D();
 
 			// 알고리즘 동작 결과 // Algorithm execution result
 			CResult eResult = new CResult();
@@ -48,7 +47,7 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// 3D Object 로드 // Load the 3D object
-				if((eResult = floSourceObject.Load("../../ExampleImages/HeightMeasurement3D/Source.fl3do")).IsFail() ||
+				if((eResult = floReferenceObject.Load("../../ExampleImages/HeightMeasurement3D/Source.fl3do")).IsFail() ||
 					(eResult = floMeasurementObject.Load("../../ExampleImages/HeightMeasurement3D/Measurement.fl3do")).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to load the object file.\n");
@@ -56,15 +55,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 3D 뷰 생성 // Create the 3D view
-				if((eResult = view3DSource.Create(0, 0, 512, 512)).IsFail() ||
-					(eResult = view3DMeasurement.Create(512, 0, 1024, 512)).IsFail() ||
-					(eResult = view3DDestination.Create(1024, 0, 1536, 512)).IsFail())
+				if((eResult = view3DReference.Create(0, 0, 512, 512)).IsFail() ||
+					(eResult = view3DMeasurement.Create(512, 0, 1024, 512)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to create the 3D view.\n");
 					break;
 				}
 
-				if((eResult = view3DSource.PushObject(floSourceObject)).IsFail() ||
+				if((eResult = view3DReference.PushObject(floReferenceObject)).IsFail() ||
 					(eResult = view3DMeasurement.PushObject(floMeasurementObject)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to display the 3D object.\n");
@@ -73,8 +71,8 @@ namespace FLImagingExamplesCSharp
 
 				CHeightMeasurement3D heightMeasurement3D = new CHeightMeasurement3D();
 
-				// Source plane 설정 // Set the source plane
-				heightMeasurement3D.SetSourcePlane(ref floSourceObject);
+				// Reference plane 설정 // Set the source plane
+				heightMeasurement3D.SetReferencePlane(ref floReferenceObject);
 				// Measurement plane 설정 // Set the Measurement plane
 				heightMeasurement3D.SetMeasurementPlane(ref floMeasurementObject);
 
@@ -88,14 +86,13 @@ namespace FLImagingExamplesCSharp
 				// 화면에 출력하기 위해 Image View에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately		
 				CGUIView3DLayer layer3DMeasurement = view3DMeasurement.GetLayer(0);
-				CGUIView3DLayer layer3DDestination = view3DDestination.GetLayer(0);
-				CGUIView3DLayer layer3DSource = view3DSource.GetLayer(0);
+				CGUIView3DLayer layer3DReference = view3DReference.GetLayer(0);
 
 
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
-				layer3DDestination.Clear();
+				
 				layer3DMeasurement.Clear();
-				layer3DSource.Clear();
+				layer3DReference.Clear();
 
 				// View 정보를 디스플레이 합니다. // Display View information.
 				// 아래 함수 DrawTextCanvas은 Screen좌표를 기준으로 하는 String을 Drawing 한다.// The function DrawTextCanvas below draws a String based on the screen coordinates.
@@ -106,7 +103,7 @@ namespace FLImagingExamplesCSharp
 				CFLPoint<double> flpLeftTop = new CFLPoint<double>();
 				CFLPoint<double> flpResultPosition = new CFLPoint<double>(0, 30);
 
-				if((eResult = layer3DSource.DrawTextCanvas(flpLeftTop, "Source Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				if((eResult = layer3DReference.DrawTextCanvas(flpLeftTop, "Reference Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
@@ -118,56 +115,33 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((eResult = layer3DDestination.DrawTextCanvas(flpLeftTop, "Destination 3D View", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to draw text.\n");
-					break;
-				}
-
 				// 결과 출력 // Display the results.
-				TPoint3<float> tp3Start = new TPoint3<float>();
-				TPoint3<float> tp3End = new TPoint3<float>();
-
-				heightMeasurement3D.GetResultIntersectionLine(ref tp3Start, ref tp3End);
-
-				CGUIView3DObjectLine viewObjLine = new CGUIView3DObjectLine(tp3Start, tp3End, EColor.LIGHTGREEN, 3, EGUIViewImagePenStyle.Solid);
-
-				// 3D 오브젝트 뷰에 결과 오브젝트 디스플레이
-				if((eResult = view3DDestination.PushObject(floMeasurementObject)).IsFail() ||
-					(eResult = view3DDestination.PushObject(floSourceObject)).IsFail() ||
-					(eResult = view3DDestination.PushObject(viewObjLine)).IsFail())
-				{
-					ErrorPrint(eResult, "Failed to set object on the 3D View.\n");
-					break;
-				}
-
+				
 				float f32ResultDihedralAngle = heightMeasurement3D.GetResultDihedralAngle();
 				float f32ResultDistance = heightMeasurement3D.GetResultDistance();
-				float f32ResultIntersectionLineLength = heightMeasurement3D.GetResultIntersectionLineLength();
+				float f32ResultMeasurementToReference = heightMeasurement3D.GetResultReferenceToMeasurementDistance();
+				float f32ResultReferenceToMeasurement = heightMeasurement3D.GetResultMeasurementToReferenceDistance();
 				TPoint3<float> tp3Increment = heightMeasurement3D.GetResultIncrement();
 
-				string strResult = string.Format("Dihedral Angle : {0,6:0.000000}\nDistance : {1,6:0.000000}\nIncrement : {2,6:0.000000}, {3,6:0.000000}, {4,6:0.000000}\nIntersection Line Length : {5,6:0.000000}", f32ResultDihedralAngle, f32ResultDistance, tp3Increment.x, tp3Increment.y, tp3Increment.z, f32ResultIntersectionLineLength);
+				string strResult = string.Format("Dihedral Angle : {0,6:0.000000}\nDistance : {1,6:0.000000}\nIncrement : {2,6:0.000000}, {3,6:0.000000}, {4,6:0.000000}\nMeasurement To Reference : {5,6:0.000000}\nReference To Measurement : {5,6:0.000000}", f32ResultDihedralAngle, f32ResultDistance, tp3Increment.x, tp3Increment.y, tp3Increment.z, f32ResultMeasurementToReference, f32ResultReferenceToMeasurement);
 
-				if((eResult = layer3DDestination.DrawTextCanvas(flpResultPosition, strResult, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
+				if((eResult = layer3DMeasurement.DrawTextCanvas(flpResultPosition, strResult, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
 				{
 					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
 				view3DMeasurement.ZoomFit();
-				view3DSource.ZoomFit();
-				view3DDestination.ZoomFit();
+				view3DReference.ZoomFit();
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
-				view3DSource.Invalidate(true);
+				view3DReference.Invalidate(true);
 				view3DMeasurement.Invalidate(true);
-				view3DDestination.Invalidate(true);
 
-				view3DMeasurement.SynchronizePointOfView(ref view3DSource);
-				view3DMeasurement.SynchronizePointOfView(ref view3DDestination);
+				view3DMeasurement.SynchronizePointOfView(ref view3DReference);
 
 				//이미지 뷰, 3D 뷰가 종료될 때 까지 기다림 // Wait for the image and 3D view to close
-				while(view3DSource.IsAvailable() && view3DMeasurement.IsAvailable() && view3DDestination.IsAvailable())
+				while(view3DReference.IsAvailable() && view3DMeasurement.IsAvailable())
 					CThreadUtilities.Sleep(1);
 
 			}
