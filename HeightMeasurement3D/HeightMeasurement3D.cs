@@ -123,7 +123,7 @@ namespace FLImagingExamplesCSharp
 				float f32ResultReferenceToMeasurement = heightMeasurement3D.GetResultMeasurementToReferenceDistance();
 				TPoint3<float> tp3Increment = heightMeasurement3D.GetResultIncrement();
 
-				string strResult = string.Format("Dihedral Angle : {0,6:0.000000}\nDistance : {1,6:0.000000}\nIncrement : {2,6:0.000000}, {3,6:0.000000}, {4,6:0.000000}\nMeasurement To Reference : {5,6:0.000000}\nReference To Measurement : {5,6:0.000000}", f32ResultDihedralAngle, f32ResultDistance, tp3Increment.x, tp3Increment.y, tp3Increment.z, f32ResultMeasurementToReference, f32ResultReferenceToMeasurement);
+				string strResult = string.Format("Dihedral Angle : {0,6:0.000000}\nDistance : {1,6:0.000000}\nIncrement : {2,6:0.000000}, {3,6:0.000000}, {4,6:0.000000}\nMeasurement To Reference : {5,6:0.000000}\nReference To Measurement : {6,6:0.000000}", f32ResultDihedralAngle, f32ResultDistance, tp3Increment.x, tp3Increment.y, tp3Increment.z, f32ResultMeasurementToReference, f32ResultReferenceToMeasurement);
 
 				if((eResult = layer3DMeasurement.DrawTextCanvas(flpResultPosition, strResult, EColor.YELLOW, EColor.BLACK, 15)).IsFail())
 				{
