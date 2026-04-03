@@ -107,7 +107,7 @@ namespace FLImagingExamplesCSharp
                 }
 
                 // EdgeEnhancement 객체 생성 // Create EdgeEnhancement object
-                CEdgeEnhancement edgeEnhancement = new CEdgeEnhancement();
+                CFLEdgeEnhancement edgeEnhancement = new CFLEdgeEnhancement();
                 // Source 이미지 설정 // Set the source image
                 edgeEnhancement.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
