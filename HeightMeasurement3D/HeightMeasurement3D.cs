@@ -71,7 +71,7 @@ namespace FLImagingExamplesCSharp
 
 				CHeightMeasurement3D heightMeasurement3D = new CHeightMeasurement3D();
 
-				// Reference plane 설정 // Set the source plane
+				// Reference plane 설정 // Set the reference plane
 				heightMeasurement3D.SetReferencePlane(ref floReferenceObject);
 				// Measurement plane 설정 // Set the Measurement plane
 				heightMeasurement3D.SetMeasurementPlane(ref floMeasurementObject);
