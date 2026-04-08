@@ -430,9 +430,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stereo Camera", "Stereo Cam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonicInterpolation", "HarmonicInterpolation\HarmonicInterpolation.csproj", "{A9B3869F-B59C-4242-9FF2-3865BD0ED424}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Edge Enhancement", "Edge Enhancement", "{C8E977CF-9C36-4995-9E08-3818AD5A7BB3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FL Edge Enhancement", "FL Edge Enhancement", "{C8E977CF-9C36-4995-9E08-3818AD5A7BB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeEnhancement", "EdgeEnhancement\EdgeEnhancement.csproj", "{1B1C840B-EB32-4B40-BB68-72162E975832}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLEdgeEnhancement", "EdgeEnhancement\FLEdgeEnhancement.csproj", "{1B1C840B-EB32-4B40-BB68-72162E975832}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShockFilter", "ShockFilter", "{0CF03D25-13AA-437E-A732-DDF9434FB4DF}"
 EndProject
