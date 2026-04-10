@@ -182,8 +182,8 @@ namespace FLImagingExamplesCSharp
 
 					string flsFlip = datamatrixLearnInfo.bFlip ? "Yes" : "No";
 
-					Console.Write("Flip : %s\n", flsFlip);
-					Console.Write("Code : %s\n", flsLearnedCode);
+					Console.Write("Flip : {0}\n", flsFlip);
+					Console.Write("Code : {0}\n", flsLearnedCode);
 				}
 
 				// Data Matrix Decoder 결과 개수를 얻는다. // Gets the number of results from the Data Matrix decoder.
