@@ -22,6 +22,47 @@ namespace FLImagingExamplesCSharp
 			Console.ReadKey();
 		}
 
+		static CResult InitializeCoordinateConverter(CSpacePlanningBaseSP alg, ref CSpacePlanningCoordinateConverterSP converter)
+		{
+			CResult res = new CResult(EResult.UnknownError);
+
+			do
+			{
+				if((res = alg.GetCoordinateConverter(ref converter)).IsFail())
+					break;
+
+				int i32BinCount = alg.GetBinSpecCount();
+				for(int i = 0; i < i32BinCount; ++i)
+				{
+					TPoint3<float> tpWorldPivot = new TPoint3<float>(16f * i, 0f, 0f);
+					TPoint3<float> tpBinPivot = new TPoint3<float>(0f, 0f, 0f);
+					TPoint3<float> tpDirectionZ = new TPoint3<float>(0.03f, 0f, 1f);
+					TPoint3<float> tpUpY = new TPoint3<float>(0f, 1f, 0.3f);
+
+					if((res = converter.SetBinTransform(i, tpWorldPivot, tpBinPivot, tpDirectionZ, tpUpY)).IsFail())
+						break;
+				}
+
+				if(res.IsFail())
+					break;
+
+				int i32ItemCount = alg.GetItemSpecCount();
+				for(int i = 0; i < i32ItemCount; ++i)
+				{
+					if((res = converter.SetItemPivotNormalized(i, new TPoint3<float>(0.5f, 0.5f, 0.5f))).IsFail())
+						break;
+				}
+
+				if(res.IsFail())
+					break;
+
+				res = converter.Learn();
+			}
+			while(false);
+
+			return res;
+		}
+
 		[STAThread]
 		static void Main(string[] args)
 		{
@@ -89,6 +130,20 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				CSpacePlanningCoordinateConverterSP converter = new CSpacePlanningCoordinateConverterSP();
+				if((res = InitializeCoordinateConverter(alg, ref converter)).IsFail())
+				{
+					ErrorPrint(res, "Failed to initialize the coordinate converter.\n");
+					break;
+				}
+
+				CFL3DObjectGroup flogBins = new CFL3DObjectGroup();
+				if((res = converter.MakeBinObjectGroup(ref flogBins)).IsFail())
+				{
+					ErrorPrint(res, "Failed to build world-space bin objects.\n");
+					break;
+				}
+
 				Console.WriteLine("Optimal strategy index: {0}", i32OptimalStrategyIndex);
 
 				// 3D 뷰 생성 // Create 3D view
@@ -119,6 +174,7 @@ namespace FLImagingExamplesCSharp
 				// 아이템 타입을 무작위로 생성하여 빈이 꽉 찰 때까지 계속 배치
 				// Randomly generate item types and keep placing until the bin is full (EResult.FullOfCapacity)
 				Random rng = new Random();
+				List<CSpacePlanningBaseSP.SPlacementInfo> placementResults = new List<CSpacePlanningBaseSP.SPlacementInfo>();
 
 				int i32ArrivalIdx  = 0;
 				int i32PlacedCount = 0;
@@ -132,14 +188,9 @@ namespace FLImagingExamplesCSharp
 
 					// 아이템을 대기열에 추가하고 권장 위치에 자동 배치
 					// Push item to queue and automatically place it at the recommended position
-					// 대기 중인 다른 아이템이 있을 경우 i32ActualItemIndex가 i32ItemType과 다를 수 있음
-					// i32ActualItemIndex may differ from i32ItemType if other items are already pending
-					int i32BinIndex        = 0;
-					int i32ActualItemIndex = 0;
-					CSpacePlanningBaseSP.EAxisRotation eAxisRotation = CSpacePlanningBaseSP.EAxisRotation.XYZ;
-					TPoint3<float> tpPosition = new TPoint3<float>();
+					CSpacePlanningBaseSP.SPlacementInfo placement = null;
 
-					res = alg.PushAndPlace(i32ItemType, true, ref i32BinIndex, ref i32ActualItemIndex, ref eAxisRotation, ref tpPosition);
+					res = alg.PushAndPlace(i32ItemType, true, ref placement);
 
 					++i32ArrivalIdx;
 
@@ -157,31 +208,41 @@ namespace FLImagingExamplesCSharp
 					}
 
 					++i32PlacedCount;
+					placementResults.Add(placement);
 
-					Console.WriteLine("Arrival {0}: placed item type {1} at bin {2} (rotation={3}, pos=[{4:F1}, {5:F1}, {6:F1}])", i32ArrivalIdx, i32ActualItemIndex, i32BinIndex, (int)eAxisRotation, tpPosition.x, tpPosition.y, tpPosition.z);
-
-					// 현재 배치 상태 전체를 3D 오브젝트 그룹으로 취득
-					// Get the current placement state as a 3D object group
-					// 구조: [0, i32ItemCount) = 아이템 타입별 그룹, [i32ItemCount, end) = 빈 * 2개씩 (속 채움, 외곽선)
-					// Structure: [0, i32ItemCount) = grouped by item type, [i32ItemCount, end) = bins * 2 each (filled, wireframe)
-					CFL3DObjectGroup flog = new CFL3DObjectGroup();
-
-					if((res = alg.Get3DObject(ref flog)).IsFail())
+					TPoint3<float> tpWorldPosition = new TPoint3<float>();
+					if((res = converter.Convert(placement, ref tpWorldPosition)).IsFail())
 					{
-						ErrorPrint(res, "Failed to get 3D object.\n");
+						ErrorPrint(res, "Failed to convert placement coordinates.\n");
+						break;
+					}
+
+					Console.WriteLine(
+						"Arrival {0}: placed item type {1} at bin {2} (rotation={3}, bin pos=[{4:F1}, {5:F1}, {6:F1}], world center=[{7:F1}, {8:F1}, {9:F1}])",
+						i32ArrivalIdx,
+						placement.i32ItemIndex,
+						placement.i32BinIndex,
+						(int)placement.eRotation,
+						placement.tpPosition.x, placement.tpPosition.y, placement.tpPosition.z,
+						tpWorldPosition.x, tpWorldPosition.y, tpWorldPosition.z);
+
+					CFL3DObjectGroup flogItems = new CFL3DObjectGroup();
+					if((res = converter.MakeItemObjectGroup(placementResults, ref flogItems)).IsFail())
+					{
+						ErrorPrint(res, "Failed to build world-space item objects.\n");
 						break;
 					}
 
 					view3DResult.Lock();
 
-					// 매 스텝마다 뷰를 초기화하고 현재 상태로 재등록
-					// Clear and re-register all objects with the current state on each step
+					// 매 스텝마다 world-space 오브젝트로 뷰를 재구성
+					// Rebuild the view with world-space objects on each step
 					view3DResult.ClearObjects();
 
-					for(int i = 0; i < i32ItemCount; ++i)
+					for(int i = 0; i < i32PlacedCount; ++i)
 					{
 						int i32ObjIndex = -1;
-						view3DResult.PushObject(flog.GetObjectByIndex(i), ref i32ObjIndex);
+						view3DResult.PushObject(flogItems.GetObjectByIndex(i), ref i32ObjIndex);
 						CGUIView3DObject obj = view3DResult.GetView3DObject(i32ObjIndex);
 						if(obj != null)
 							obj.SetOpacity(0.6f);
@@ -191,15 +252,10 @@ namespace FLImagingExamplesCSharp
 					{
 						int i32ObjIndex = -1;
 
-						view3DResult.PushObject(flog.GetObjectByIndex(i32ItemCount + 2 * i), ref i32ObjIndex);
+						view3DResult.PushObject(flogBins.GetObjectByIndex(i), ref i32ObjIndex);
 						CGUIView3DObject objFilled = view3DResult.GetView3DObject(i32ObjIndex);
 						if(objFilled != null)
 							objFilled.SetOpacity(0.2f);
-
-						view3DResult.PushObject(flog.GetObjectByIndex(i32ItemCount + 2 * i + 1), ref i32ObjIndex);
-						CGUIView3DObject objWireframe = view3DResult.GetView3DObject(i32ObjIndex);
-						if(objWireframe != null)
-							objWireframe.SetOpacity(0.6f);
 					}
 
 					// 상태 텍스트는 layer 1에 매 스텝 Clear 후 재작성 // Clear layer 1 each step and redraw status text
@@ -212,7 +268,9 @@ namespace FLImagingExamplesCSharp
 					alg.GetCurrentVolumeUsage(0, ref f32TotalVolume, ref f32UsedVolume);
 					float f32VolumeUsage = f32TotalVolume > 0f ? 100f * f32UsedVolume / f32TotalVolume : 0f;
 
-					string strStatus = string.Format("Arrival {0}  |  Placed: {1}  |  Volume Usage: {2:F1}% ({3:F1} / {4:F1})", i32ArrivalIdx, i32PlacedCount, f32VolumeUsage, f32UsedVolume, f32TotalVolume);
+					string strStatus = string.Format(
+						"Arrival {0}  |  Placed: {1}  |  Volume Usage: {2:F1}% ({3:F1} / {4:F1})\nWorld-space rendering enabled",
+						i32ArrivalIdx, i32PlacedCount, f32VolumeUsage, f32UsedVolume, f32TotalVolume);
 
 					layer3DStatus.DrawTextCanvas(new CFLPoint<double>(0, 25), strStatus, EColor.YELLOW, EColor.BLACK, 16);
 
