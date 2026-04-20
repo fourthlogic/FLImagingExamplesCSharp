@@ -128,17 +128,7 @@ namespace FLImagingExamplesCSharp
 								if(j != 0)
 									stringBuilderProfile.Append("\n");
 
-								stringBuilderProfile.Append("{");
-
-								for(int k = 0; k < listProfile[i][j].Count; ++k)
-								{
-									if(k != 0)
-										stringBuilderProfile.Append(", ");
-
-									stringBuilderProfile.AppendFormat("({0},{1},{2})", listProfile[i][j][(int)CDeviceLaserProfileSensorLMI.EProfileDataElement.PositionX], listProfile[i][j][(int)CDeviceLaserProfileSensorLMI.EProfileDataElement.PositionZ], listProfile[i][j][(int)CDeviceLaserProfileSensorLMI.EProfileDataElement.Intensity]);
-								}
-
-								stringBuilderProfile.Append("}");
+								stringBuilderProfile.AppendFormat("({0}, {1}, {2})", listProfile[i][j][(int)CDeviceLaserProfileSensorLMI.EProfileDataElement.PositionX], listProfile[i][j][(int)CDeviceLaserProfileSensorLMI.EProfileDataElement.PositionZ], listProfile[i][j][(int)CDeviceLaserProfileSensorLMI.EProfileDataElement.Intensity]);
 							}
 
 							stringBuilderProfile.Append("]");
