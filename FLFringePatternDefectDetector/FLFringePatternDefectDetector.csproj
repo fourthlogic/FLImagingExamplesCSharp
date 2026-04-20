@@ -9,8 +9,8 @@
     <ProjectGuid>{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FringePatternDefectDetector</RootNamespace>
-    <AssemblyName>FringePatternDefectDetector</AssemblyName>
+    <RootNamespace>FLFringePatternDefectDetector</RootNamespace>
+    <AssemblyName>FLFringePatternDefectDetector</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,7 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FringePatternDefectDetector.cs" />
+    <Compile Include="FLFringePatternDefectDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

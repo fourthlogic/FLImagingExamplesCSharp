@@ -1864,8 +1864,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FasterCharacterBasedOCRDL",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointCloudResamplerEdgePreserving3D", "PointCloudResamplerEdgePreserving3D\PointCloudResamplerEdgePreserving3D.csproj", "{BD29E783-C8F3-49D7-933E-F5F47EB15393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FringePatternDefectDetector", "FringePatternDefectDetector\FringePatternDefectDetector.csproj", "{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BM3D Filter", "BM3D Filter", "{D25EA6C4-F261-481C-A0FA-63E9998A2482}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BM3DFilter", "BM3DFilter\BM3DFilter.csproj", "{E4BFAB10-745E-4FF3-B574-F386077C11B3}"
@@ -1921,6 +1919,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaneIntersection3D", "PlaneIntersection3D\PlaneIntersection3D.csproj", "{069E9162-EC65-4644-A895-C77D5DA6DD75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointCloudClustering3D", "PointCloudClustering3D\PointCloudClustering3D.csproj", "{40BEE92E-78E1-4733-B326-0CA753A55EE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FLFringePatternDefectDetector", "FLFringePatternDefectDetector\FLFringePatternDefectDetector.csproj", "{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9734,18 +9734,6 @@ Global
 		{BD29E783-C8F3-49D7-933E-F5F47EB15393}.Release|x64.ActiveCfg = Release|x64
 		{BD29E783-C8F3-49D7-933E-F5F47EB15393}.Release|x64.Build.0 = Release|x64
 		{BD29E783-C8F3-49D7-933E-F5F47EB15393}.Release|x86.ActiveCfg = Release|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|Mixed Platforms.Build.0 = Debug|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|Win32.ActiveCfg = Debug|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|x64.ActiveCfg = Debug|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|x64.Build.0 = Debug|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|x86.ActiveCfg = Debug|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|Mixed Platforms.ActiveCfg = Release|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|Mixed Platforms.Build.0 = Release|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|Win32.ActiveCfg = Release|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|x64.ActiveCfg = Release|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|x64.Build.0 = Release|x64
-		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|x86.ActiveCfg = Release|x64
 		{E4BFAB10-745E-4FF3-B574-F386077C11B3}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
 		{E4BFAB10-745E-4FF3-B574-F386077C11B3}.Debug|Mixed Platforms.Build.0 = Debug|x64
 		{E4BFAB10-745E-4FF3-B574-F386077C11B3}.Debug|Win32.ActiveCfg = Debug|x64
@@ -10036,6 +10024,18 @@ Global
 		{40BEE92E-78E1-4733-B326-0CA753A55EE2}.Release|x64.ActiveCfg = Release|x64
 		{40BEE92E-78E1-4733-B326-0CA753A55EE2}.Release|x64.Build.0 = Release|x64
 		{40BEE92E-78E1-4733-B326-0CA753A55EE2}.Release|x86.ActiveCfg = Release|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|Mixed Platforms.Build.0 = Debug|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|Win32.ActiveCfg = Debug|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|x64.ActiveCfg = Debug|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|x64.Build.0 = Debug|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Debug|x86.ActiveCfg = Debug|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|Mixed Platforms.ActiveCfg = Release|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|Mixed Platforms.Build.0 = Release|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|Win32.ActiveCfg = Release|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|x64.ActiveCfg = Release|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|x64.Build.0 = Release|x64
+		{CC1A9DB5-AAC9-47E5-846C-CF9B67262D79}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
