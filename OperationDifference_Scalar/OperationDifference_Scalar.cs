@@ -108,7 +108,7 @@ namespace FLImagingExamplesCSharp
 	        	operationDifference.SetSourceImage(ref fliSourceImage);
 
 	        	// Source 이미지의 ROI 범위 설정
-                CFLCircle<double> flcSourceROI = new CFLCircle<double> (284, 278, 206, 0, 0, 360, EArcClosingMethod.EachOther);
+                CFLCircle<double> flcSourceROI = new CFLCircle<double> (284, 278, 206, 0, 0, 360, ERadialShapeType.Segment);
 
 	        	// Source 이미지의 ROI 지정
 	        	operationDifference.SetSourceROI(flcSourceROI);

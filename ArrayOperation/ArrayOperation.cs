@@ -97,8 +97,8 @@ namespace FLImagingExamplesCSharp
 				// Figure 생성 // Create figure
 				CFLRect<double> flr = new CFLRect<double>(50, 50, 100, 100, 15);
 				CFLQuad<double> flq = new CFLQuad<double>(200, 50, 360, 50, 400, 160, 150, 110);
-				CFLCircle<double> flc = new CFLCircle<double>(100.0, 150.0, 30.0, 0, 30, 90, EArcClosingMethod.Center);
-				CFLEllipse<double> fle = new CFLEllipse<double>(300, 250, 100, 50, 0, 30, 200, EArcClosingMethod.Center);
+				CFLCircle<double> flc = new CFLCircle<double>(100.0, 150.0, 30.0, 0, 30, 90, ERadialShapeType.Sector);
+				CFLEllipse<double> fle = new CFLEllipse<double>(300, 250, 100, 50, 0, 30, 200, ERadialShapeType.Sector);
 
 				CFLFigureArray flfa = new CFLFigureArray();
 

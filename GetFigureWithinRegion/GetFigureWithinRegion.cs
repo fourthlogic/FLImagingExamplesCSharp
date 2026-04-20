@@ -115,9 +115,9 @@ namespace FLImagingExamplesCSharp
 
 				CFLRect<double> flr = new CFLRect<double>(50, 50, 100, 100);
 
-				CFLCircle<double> flc = new CFLCircle<double>(150.0, 100.0, 30.0, 0.0, 0.0, 80.0, EArcClosingMethod.Center);
+				CFLCircle<double> flc = new CFLCircle<double>(150.0, 100.0, 30.0, 0.0, 0.0, 80.0, ERadialShapeType.Sector);
 
-				CFLEllipse<double> fle = new CFLEllipse<double>(300, 150, 100, 50, 0, 180, 60, EArcClosingMethod.EachOther);
+				CFLEllipse<double> fle = new CFLEllipse<double>(300, 150, 100, 50, 0, 180, 60, ERadialShapeType.Segment);
 
 				CFLComplexRegion flcr = new CFLComplexRegion();
 				flcr.PushBack(new CFLPoint<double>(270, 100));

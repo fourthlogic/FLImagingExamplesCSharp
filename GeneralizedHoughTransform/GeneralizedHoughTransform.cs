@@ -71,7 +71,7 @@ namespace FLImagingExamplesCSharp
 				// Source 이미지 설정 // Set the source image
 				generalizedHoughTransform.SetSourceImage(ref fliISrcImage);
 
-				CFLCircle<long> flfPatternROI = new CFLCircle<long>(575, 755, 71, 0, 0, 360, EArcClosingMethod.EachOther);
+				CFLCircle<long> flfPatternROI = new CFLCircle<long>(575, 755, 71, 0, 0, 360, ERadialShapeType.Segment);
 				generalizedHoughTransform.SetPatternROI(flfPatternROI);
 
 				// Threshold 값 설정 // Set Threshold value

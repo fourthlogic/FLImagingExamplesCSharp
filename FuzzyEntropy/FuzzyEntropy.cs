@@ -67,7 +67,7 @@ namespace FLImagingExamplesCSharp
 				CFuzzyEntropy fuzzyEntropy = new CFuzzyEntropy();
 
 				// ROI 범위 설정 // Set the ROI value
-				CFLCircle<double> flrROI = new CFLCircle<double>(310.466830, 81.769042, 81.769042, 0.000000, 0.000000, 360.000000, EArcClosingMethod.EachOther);
+				CFLCircle<double> flrROI = new CFLCircle<double>(310.466830, 81.769042, 81.769042, 0.000000, 0.000000, 360.000000, ERadialShapeType.Segment);
 
 				// Source 이미지 설정 // Set the Source Image
 				fuzzyEntropy.SetSourceImage(ref fliImage);

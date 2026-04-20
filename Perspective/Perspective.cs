@@ -111,7 +111,7 @@ namespace FLImagingExamplesCSharp
 				perspective.SetDestinationImage(ref fliDestinationImage);
 
 				// Destination 이미지의 출력 대상 영역 범위 설정 // Set the output destination area range of Destination image
-				CFLCircle<double> flcDestinationROI = new CFLCircle<double>(243, 261, 188, 0, 0, 360, EArcClosingMethod.EachOther);
+				CFLCircle<double> flcDestinationROI = new CFLCircle<double>(243, 261, 188, 0, 0, 360, ERadialShapeType.Segment);
 
 				// Destination 이미지의 출력 대상 영역 지정 // Destination Specify the output target area of the image
 				perspective.SetDestinationROI(flcDestinationROI);
