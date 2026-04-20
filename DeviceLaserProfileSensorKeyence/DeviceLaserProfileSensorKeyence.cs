@@ -53,12 +53,18 @@ namespace FLImagingExamplesCSharp
 		// 카메라에서 이미지 취득 시 호출 되는 함수
 		public override void OnAcquisition(CDeviceProfileBase pDeviceImage)
 		{
+			CDeviceLaserProfileSensorKeyence pDeviceKeyence = pDeviceImage as CDeviceLaserProfileSensorKeyence;
+
+			// 2. 캐스팅 실패 시(Keyence 장비가 아닐 때) 바로 리턴
+			if(pDeviceKeyence == null)
+				return;
+
 			// 이미지 뷰의 유효성을 확인한다. // Check the validity of the image view.
 			if(m_viewHeightImage != null && m_viewHeightImage.IsAvailable())
 			{
 				// 센서에서 취득 한 프로파일 이미지를 얻어온다. // Retrieves the profile image acquired from the sensor.
 				m_fliHeight.Lock();
-				pDeviceImage.GetAcquiredHeightProfile(ref m_fliHeight);
+				pDeviceKeyence.GetAcquiredHeightProfile(ref m_fliHeight);
 				m_fliHeight.Unlock();
 
 				// 이미지 뷰를 재갱신 한다. // Invalidate the image view.
@@ -70,7 +76,7 @@ namespace FLImagingExamplesCSharp
 			{
 				// 센서에서 취득 한 프로파일 이미지를 얻어온다. // Retrieves the profile image acquired from the sensor.
 				m_fliLuminance.Lock();
-				pDeviceImage.GetAcquiredLuminanceProfile(ref m_fliLuminance);
+				pDeviceKeyence.GetAcquiredLuminanceProfile(ref m_fliLuminance);
 				m_fliLuminance.Unlock();
 
 				// 이미지 뷰를 재갱신 한다. // Invalidate the image view.
