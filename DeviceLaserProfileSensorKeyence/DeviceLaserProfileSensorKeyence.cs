@@ -36,7 +36,7 @@ namespace FLImagingExamplesCSharp
 		{
 			m_viewHeightImage = viewHeightImage;
 
-			// 이미지 뷰에 이미지 포인터 설정
+			// 이미지 뷰에 이미지 참조 설정 // Set image reference to the image view
 			m_viewHeightImage.SetImagePtr(ref m_fliHeight);
 		}
 
@@ -46,16 +46,15 @@ namespace FLImagingExamplesCSharp
 		{
 			m_viewLuminanceImage = viewHeightImage;
 
-			// 이미지 뷰에 이미지 포인터 설정
+			// 이미지 뷰에 이미지 참조 설정 // Set image reference to the image view
 			m_viewLuminanceImage.SetImagePtr(ref m_fliLuminance);
 		}
 
-		// 카메라에서 이미지 취득 시 호출 되는 함수
+		// 카메라에서 이미지 취득 시 호출 되는 함수 // Function called when acquiring an image from the camera
 		public override void OnAcquisition(CDeviceProfileBase pDeviceImage)
 		{
 			CDeviceLaserProfileSensorKeyence pDeviceKeyence = pDeviceImage as CDeviceLaserProfileSensorKeyence;
 
-			// 2. 캐스팅 실패 시(Keyence 장비가 아닐 때) 바로 리턴
 			if(pDeviceKeyence == null)
 				return;
 
