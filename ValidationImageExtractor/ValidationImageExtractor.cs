@@ -181,8 +181,6 @@ namespace FLImagingExamplesCSharp
 				validationImageExtractorDL.SetDatasetType(CValidationImageExtractorDL.EDatasetType.SemanticSegmentation);
 				// Validation Image 비율 설정 // Set ratio of validation image
 				validationImageExtractorDL.SetValidationRatio(0.4f);
-				// Validation Set에 최소한 몇 개의 클래스가 1개 이상 씩 포함될 것인지 설정 // Set how many classes each will be included in the Validation Set
-				validationImageExtractorDL.SetMinimumClassesIncluded(2);
 
 				if((res = validationImageExtractorDL.Execute()).IsFail())
 				{
