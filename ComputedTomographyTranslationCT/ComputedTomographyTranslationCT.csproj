@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4B439334-D639-4A21-AE47-1FB1466A55EF}</ProjectGuid>
+    <ProjectGuid>{18A0B069-B96E-456D-A347-65991E8E692D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StationaryConeBeamRotationCT</RootNamespace>
-    <AssemblyName>StationaryConeBeamRotationCT</AssemblyName>
+    <RootNamespace>ComputedTomographyTranslationCT</RootNamespace>
+    <AssemblyName>ComputedTomographyTranslationCT</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,7 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StationaryConeBeamRotationCT.cs" />
+    <Compile Include="ComputedTomographyTranslationCT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

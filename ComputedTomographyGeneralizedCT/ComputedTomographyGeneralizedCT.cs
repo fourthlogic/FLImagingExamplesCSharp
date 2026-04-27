@@ -14,7 +14,7 @@ using FLImagingCLR.ThreeDim;
 
 namespace FLImagingExamplesCSharp
 {
-	class StationaryConeBeamGeneralizedCT
+	class ComputedTomographyGeneralizedCT
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -49,7 +49,7 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				// 이미지 로드 // Load image
-				if((res = fliSrcImage.Load("../../ExampleImages/StationaryConeBeamGeneralizedCT/p360 240x145.flif")).IsFail())
+				if((res = fliSrcImage.Load("../../ExampleImages/ComputedTomographyGeneralizedCT/p360 240x145.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -78,65 +78,65 @@ namespace FLImagingExamplesCSharp
 
 
 				// 알고리즘 객체 생성 // Create algorithm object
-				CStationaryConeBeamGeneralizedCT stationaryConeBeamGeneralizedCT = new CStationaryConeBeamGeneralizedCT();
+				CComputedTomographyGeneralizedCT computedTomographyGeneralizedCT = new CComputedTomographyGeneralizedCT();
 
-				if((res = stationaryConeBeamGeneralizedCT.LoadCSV("../../ExampleImages/StationaryConeBeamGeneralizedCT/geometry.csv")).IsFail())
+				if((res = computedTomographyGeneralizedCT.LoadCSV("../../ExampleImages/ComputedTomographyGeneralizedCT/geometry.csv")).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetSourceImage(ref fliSrcImage)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetSourceImage(ref fliSrcImage)).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetDestinationImage(ref fliDstImage)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetDestinationImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetDestinationObject(ref floDestination)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetDestinationObject(ref floDestination)).IsFail())
 					break;
 
-				if((res = stationaryConeBeamGeneralizedCT.SetAngleUnit(EAngleUnit.Degree)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetAngleUnit(EAngleUnit.Degree)).IsFail())
 					break;
 
 				TPoint3<double> tpObjectVoxelSize = new TPoint3<double>();
 				tpObjectVoxelSize.x = 0.02;
 				tpObjectVoxelSize.y = 0.02;
 				tpObjectVoxelSize.z = 0.02;
-				if((res = stationaryConeBeamGeneralizedCT.SetObjectVoxelSize(tpObjectVoxelSize)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetObjectVoxelSize(tpObjectVoxelSize)).IsFail())
 					break;
 				TPoint3<Int32> tpObjectVoxelCount = new TPoint3<Int32>();
 				tpObjectVoxelCount.x = 150;
 				tpObjectVoxelCount.y = 150;
 				tpObjectVoxelCount.z = 150;
-				if((res = stationaryConeBeamGeneralizedCT.SetObjectVoxelCount(tpObjectVoxelCount)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetObjectVoxelCount(tpObjectVoxelCount)).IsFail())
 					break;
 				TPoint3<Int32> tpObjectVoxelSubdivisionCount = new TPoint3<Int32>();
 				tpObjectVoxelSubdivisionCount.x = 1;
 				tpObjectVoxelSubdivisionCount.y = 1;
 				tpObjectVoxelSubdivisionCount.z = 1;
-				if((res = stationaryConeBeamGeneralizedCT.SetObjectVoxelSubdivisionCount(tpObjectVoxelSubdivisionCount)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetObjectVoxelSubdivisionCount(tpObjectVoxelSubdivisionCount)).IsFail())
 					break;
 				TPoint3<Int32> tpObjectVoxelOffset = new TPoint3<Int32>();
 				tpObjectVoxelOffset.x = 0;
 				tpObjectVoxelOffset.y = 0;
 				tpObjectVoxelOffset.z = 0;
-				if((res = stationaryConeBeamGeneralizedCT.SetObjectVoxelOffset(tpObjectVoxelOffset)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetObjectVoxelOffset(tpObjectVoxelOffset)).IsFail())
 					break;
 
-				if((res = stationaryConeBeamGeneralizedCT.EnableFrequencyRampFilter(true)).IsFail())
+				if((res = computedTomographyGeneralizedCT.EnableFrequencyRampFilter(true)).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetFrequencyWindow(CStationaryConeBeamGeneralizedCT.EFrequencyWindow.Gaussian)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetFrequencyWindow(CComputedTomographyGeneralizedCT.EFrequencyWindow.Gaussian)).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetSigma(0.50)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetSigma(0.50)).IsFail())
 					break;
 
-				if((res = stationaryConeBeamGeneralizedCT.SetOutputFormat(CStationaryConeBeamGeneralizedCT.EOutputFormat.U8)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetOutputFormat(CComputedTomographyGeneralizedCT.EOutputFormat.U8)).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetSigmoidB(1000.00)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetSigmoidB(1000.00)).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetSigmoidM(0.00)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetSigmoidM(0.00)).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetIntensityThreshold(200)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetIntensityThreshold(200)).IsFail())
 					break;
-				if((res = stationaryConeBeamGeneralizedCT.SetSlicingPlane(CStationaryConeBeamGeneralizedCT.ESlicingPlane.Coronal)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetSlicingPlane(CComputedTomographyGeneralizedCT.ESlicingPlane.Coronal)).IsFail())
 					break;
 
 				// 알고리즘 수행 // Execute the algorithm
-				if((res = stationaryConeBeamGeneralizedCT.Execute()).IsFail())
+				if((res = computedTomographyGeneralizedCT.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;

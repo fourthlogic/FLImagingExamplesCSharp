@@ -9,8 +9,8 @@
     <ProjectGuid>{D9BB0C4A-EF2C-49A5-AC44-B6DEC892F530}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StationaryConeBeamGeneralizedCT</RootNamespace>
-    <AssemblyName>StationaryConeBeamGeneralizedCT</AssemblyName>
+    <RootNamespace>ComputedTomographyGeneralizedCT</RootNamespace>
+    <AssemblyName>ComputedTomographyGeneralizedCT</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,7 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StationaryConeBeamGeneralizedCT.cs" />
+    <Compile Include="ComputedTomographyGeneralizedCT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
