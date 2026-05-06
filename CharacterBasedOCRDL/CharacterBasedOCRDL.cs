@@ -201,7 +201,8 @@ namespace FLImagingExamplesCSharp
 				characterBasedOCRDL.SetInferenceResultImage(ref fliResultLabelImage);
 
 				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
-				characterBasedOCRDL.SetModelVersion(CCharacterBasedOCRDL.EModelVersion.R_FLSegNet_V1_512);
+				characterBasedOCRDL.SetModel(CCharacterBasedOCRDL.EModel.R_FLSegNet_V2);
+				characterBasedOCRDL.SetModelVersion(CCharacterBasedOCRDL.EModelVersion.R_FLSegNet_V2_512);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
 				characterBasedOCRDL.SetLearningEpoch(10000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
