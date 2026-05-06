@@ -195,7 +195,7 @@ namespace FLImagingExamplesCSharp
 				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
-				optSpec.SetLearningRate(.001f);
+				optSpec.SetLearningRate(.0001f);
 
 				// 설정한 Optimizer를 OCR에 적용 // Apply Optimizer that we set up to OCR
 				stringBasedOCRDL.SetLearningOptimizerSpec(optSpec);
@@ -204,10 +204,10 @@ namespace FLImagingExamplesCSharp
 				CAugmentationSpec augSpec = new CAugmentationSpec();
 
 				augSpec.EnableAugmentation(true);
-				augSpec.SetCommonActivationRate(0.8);
+				augSpec.SetCommonActivationRate(1.0);
 				augSpec.SetCommonIoUThreshold(0.8);
 				augSpec.EnableRotation(true);
-				augSpec.SetRotationParam(-10.0, 10.0, false, false, 1.0);
+				augSpec.SetRotationParam(-15.0, 15.0, false, false, 1.0);
 
 				augSpec.EnableScale(true);
 				augSpec.SetScaleParam(.8, 1.2, .8, 1.2, false, 1.0);
