@@ -210,7 +210,7 @@ namespace FLImagingExamplesCSharp
 				// 학습할 Denoising Diffusion 모델 설정 // Set up the Denoising Diffusion model to learn
 				denoisingDiffusionDL.SetModelVersion(CDenoisingDiffusionDL.EModelVersion.FLGenNet_Diffusion_Label_V1_32);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				denoisingDiffusionDL.SetLearningEpoch(500);
+				denoisingDiffusionDL.SetLearningEpoch(1500);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				denoisingDiffusionDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
@@ -224,6 +224,13 @@ namespace FLImagingExamplesCSharp
 				denoisingDiffusionDL.SetLearningGradientClippingThreshold(1.0f);
 				// 설정한 Optimizer를 GAN에 적용 // Apply the Optimizer that we set up to GAN
 				denoisingDiffusionDL.SetLearningOptimizerSpec(optSpec);
+
+				// AugmentationSpec 설정 // Set the AugmentationSpec
+				CAugmentationSpec augSpec = new CAugmentationSpec();
+
+				augSpec.EnableAugmentation(false);
+
+				denoisingDiffusionDL.SetLearningAugmentationSpec(augSpec);
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();

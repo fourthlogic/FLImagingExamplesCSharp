@@ -188,7 +188,7 @@ namespace FLImagingExamplesCSharp
 				// 학습할 Generative Adversarial Network 모델 설정 // Set up the Generative Adversarial Network model to learn
 				generativeAdversarialNetworkDL.SetModelVersion(CGenerativeAdversarialNetworkDL.EModelVersion.FLGenNet_Label_V1_64);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				generativeAdversarialNetworkDL.SetLearningEpoch(500);
+				generativeAdversarialNetworkDL.SetLearningEpoch(1000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				generativeAdversarialNetworkDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
@@ -204,6 +204,13 @@ namespace FLImagingExamplesCSharp
 				generativeAdversarialNetworkDL.SetLearningGradientClippingThreshold(1.0f);
 				// 설정한 Optimizer를 GAN에 적용 // Apply the Optimizer that we set up to GAN
 				generativeAdversarialNetworkDL.SetLearningOptimizerSpec(optSpec);
+
+				// AugmentationSpec 설정 // Set the AugmentationSpec
+				CAugmentationSpec augSpec = new CAugmentationSpec();
+
+				augSpec.EnableAugmentation(false);
+
+				generativeAdversarialNetworkDL.SetLearningAugmentationSpec(augSpec);
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
 				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
