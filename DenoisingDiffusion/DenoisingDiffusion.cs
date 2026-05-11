@@ -214,6 +214,9 @@ namespace FLImagingExamplesCSharp
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				denoisingDiffusionDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
+				// Mini Batch 크기 설정 // Set size of Mini Batch
+				optSpec.SetMiniBatchSizeMode(EMiniBatchSizeMode.UserDefinedSize);
+				optSpec.SetMiniBatchSize(128);
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(1e-4f);
 				// Optimizer의 Weight Decay 설정 // Set weight decay of Optimizer
