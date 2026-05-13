@@ -112,8 +112,8 @@ namespace FLImagingExamplesCSharp
 
 				// 생성할 노이즈 설정 // Set the noise to generate
 				noiseGenerator.SetNoiseType(CNoiseGenerator.ENoiseType.SpeckleNoise);
-				// 간섭 잡음의 비율 설정 // Set the ratio of speckle noise
-				noiseGenerator.SetSpeckleNoise(0.05);
+				// 간섭 잡음의 분포 감마값 설정 // Set the distribution gamma value of speckle noise
+				noiseGenerator.SetSpeckleIntensity(0.05);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = noiseGenerator.Execute()).IsFail())
