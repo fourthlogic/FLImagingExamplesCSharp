@@ -92,10 +92,10 @@ namespace FLImagingExamplesCSharp
 				if((res = computedTomographyGeneralizedCT.SetAngleUnit(EAngleUnit.Degree)).IsFail())
 					break;
 
-				TPoint3<double> tpObjectVoxelSize = new TPoint3<double>();
-				tpObjectVoxelSize.x = 0.02;
-				tpObjectVoxelSize.y = 0.02;
-				tpObjectVoxelSize.z = 0.02;
+				TPoint3<float> tpObjectVoxelSize = new TPoint3<float>();
+				tpObjectVoxelSize.x = 0.02f;
+				tpObjectVoxelSize.y = 0.02f;
+				tpObjectVoxelSize.z = 0.02f;
 				if((res = computedTomographyGeneralizedCT.SetObjectVoxelSize(tpObjectVoxelSize)).IsFail())
 					break;
 				TPoint3<Int32> tpObjectVoxelCount = new TPoint3<Int32>();
@@ -126,9 +126,9 @@ namespace FLImagingExamplesCSharp
 
 				if((res = computedTomographyGeneralizedCT.SetOutputFormat(CComputedTomographyGeneralizedCT.EOutputFormat.U8)).IsFail())
 					break;
-				if((res = computedTomographyGeneralizedCT.SetSigmoidB(1000.00)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetSigmoidB(1000.00f)).IsFail())
 					break;
-				if((res = computedTomographyGeneralizedCT.SetSigmoidM(0.00)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetSigmoidM(0.00f)).IsFail())
 					break;
 				if((res = computedTomographyGeneralizedCT.SetIntensityThreshold(200)).IsFail())
 					break;
