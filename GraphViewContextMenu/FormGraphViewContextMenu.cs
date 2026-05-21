@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -14,8 +13,6 @@ using FLImagingCLR;
 using FLImagingCLR.Base;
 using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
-using FLImagingCLR.ImageProcessing;
-using FLImagingCLR.AdvancedFunctions;
 using System.Text.RegularExpressions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -24,63 +21,104 @@ namespace FLImagingExamplesCSharp
 	public partial class FormGraphViewContextMenu : Form
 	{
 		private List<CheckBox> checkBoxes = new List<CheckBox>();
-		private List<KeyValuePair<EAvailableViewGraphContextMenu, string>> menuItems = new List<KeyValuePair<EAvailableViewGraphContextMenu, string>>
+		private List<KeyValuePair<EViewGraphMenuItem, string>> menuItems = new List<KeyValuePair<EViewGraphMenuItem, string>>
 		{
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Load, "Load"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Append, "Append"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Save, "Save"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Close, "Close"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Clear, "Clear"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Copy, "Copy"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ClearThenPaste, "Clear Then Paste"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Paste, "Paste"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ClearPointAnnotation, "Clear Point Annotation"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ChangeChartType, "Change Chart Type"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowToolBar, "Show Toolbar"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Zoom, "Zoom"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ZoomAxisNone, "Zoom Axis None"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ZoomAxisHorz, "Zoom Axis Horizontal"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ZoomAxisVert, "Zoom Axis Vertical"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Panning, "Panning"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ViewSettings, "View Settings"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.Help, "Help"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ChangeColor, "Change Color"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.EditChartName, "Edit ChartName"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowCrosshair, "Show Crosshair"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowLegend, "Show Legend"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowPointAnnotation, "Show Point Annotation"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.MagnetCrosshair, "Magnet Crosshair"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ChangeGraphOrder, "Change Graph Order"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.GetTrendline, "Get Trendline"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.EditAxisLabel, "Edit Axis Label"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SwitchAxis, "Switch Axis"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.EditExpression, "Edit Expression"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.AddExpression, "Add Expression"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.AddData, "Add Data"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.AddDataByClick, "Add Data By Click"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowGraph, "Show Graph"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.RemoveGraph, "Remove Graph"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.RemoveData, "Remove Data"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.EditData, "Edit Data"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.IndicateMinMax, "Indicate Min/Max"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SetRange, "Set Range"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SetOpacityOfLegend, "Set Opacity Of Legend"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowLayers, "Show layers"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.LayerProperties, "Layer Properties"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ClearLayers, "Clear Layer"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ThemeLightMode, "Theme Light Mode"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ThemeDarkMode, "Theme Dark Mode"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SyncView, "Synchronize View"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.SyncWindow, "Synchronize Window"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowAxis_Horz, "Show Axis_Horz"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowAxis_Vert, "Show Axis_Vert"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowAxisLabel_Horz, "Show AxisLabel_Horz"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowAxisLabel_Vert, "Show AxisLabel_Vert"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowAxisTick_Horz, "Show AxisTick_Horz"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowAxisTick_Vert, "Show AxisTick_Vert"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowAxisTickLabel_Horz, "Show AxisTickLabel_Horz"),
-			new KeyValuePair<EAvailableViewGraphContextMenu, string>(EAvailableViewGraphContextMenu.ShowAxisTickLabel_Vert, "Show AxisTickLabel_Vert")
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Load, "Load File"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Append, "Append"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Save, "Save"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Close, "Close"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Clear, "Clear"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Copy, "Copy && Paste@Copy to Clipboard"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ClearThenPaste, "Copy && Paste@Paste from Clipboard (Clear then Paste)"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Paste, "Copy && Paste@Paste from Clipboard (Append)"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ToggleLogScale, "Log Scale Mode"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ClearPointAnnotation, "Clear Point Annotations"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_ChangeChartType, "Chart Settings@Change Chart Type"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowToolBar, "Show@Show ToolBar"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_Zoom, "Zoom"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ZoomIn, "Point of View@Zoom In Mode"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ZoomOut, "Point of View@Zoom Out Mode"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ZoomFit, "Point of View@Zoom Fit"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ViewSettings, "View Settings.."),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Help, "Help"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_ChangeColor, "Change Color"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ChangeColor, "Change Color"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_EditChartName, "Edit Chart Name"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.EditChartName, "Edit Chart Name"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowCrosshair, "Show@Show Crosshair"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowLegend, "Show@Show Legend"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowPointAnnotation, "Show@Show Point Annotations"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MagnetCrosshair, "Show@Magnet Crosshair"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ChangeGraphOrder, "Change Graph Order"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.GetTrendline, "Get Trendline"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ZoomAxisNone, "Point of View@Select Zoom Axis@Both"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ZoomAxisHorz, "Point of View@Select Zoom Axis@Horizontal"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ZoomAxisVert, "Point of View@Select Zoom Axis@Vertical"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.EditAxisLabel, "Edit Axis Label"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.SwitchAxis, "Switch Axis"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_ViewAndEditExpression, "View && Edit Expression"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.EditExpression, "Edit Expression"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.AddExpression, "Add Graph@Expression"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.AddData, "Add Graph@Data"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.AddDataByClick, "Add Graph@Add Data By Click"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.SetAxisTickSpacing, "Set Axis Tick Spacing"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.SetAxisTickDecimalPlaces, "Set Axis Tick Decimal Places"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_ShowGraph, "Show Graph"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowMultipleGraph, "Show Graph@Show Multiple Graph"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowGraph, "Show Graph"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_RemoveGraph, "Remove Graph"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.RemoveMultipleGraph, "Remove Graph@Remove Multiple Graph"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.RemoveGraph, "Remove Graph"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.RemoveData, "Remove"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.EditData, "Edit"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.Panning, "Point of View@Panning Mode"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.IndicateMinMax, "Indicate Chart Min Max"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.SetAxisRange, "Set Range"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.SetOpacityOfLegend, "Set Opacity of Legend"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_ShowLayers, "Layer@Show Layers"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAllLayers, "Layer@Show Layers@Show All Layers"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.HideAllLayers, "Layer@Show Layers@Hide All Layers"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowLayer_Drawing, "Layer@Show Layers@Layer #"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.LayerProperties, "Layer Properties"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_ClearLayers, "Clear Layers"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ClearAllLayers, "Layer@Clear All Layers"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ClearLayer, "Clear Layer"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ClearNamedLayer, "Clear Named Layer"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowNamedLayer, "Show Named Layer"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ThemeLightMode, "Show@Theme@Light Mode"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ThemeDarkMode, "Show@Theme@Dark Mode"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_Synchronization, "Synchronization"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_SyncPointOfView, "Synchronization@Point of View"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.SyncViewPointOfView, "Synchronization@Point of View"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_SyncWindow, "Synchronization@Window"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.SyncWindow, "Synchronization@Window"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAxis_Horz, "Show@Show Axis Components@Horizontal Axis"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAxis_Vert, "Show@Show Axis Components@Vertical Axis"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAxisLabel_Horz, "Show@Show Axis Components@Horizontal Axis Label"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAxisLabel_Vert, "Show@Show Axis Components@Vertical Axis Label"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAxisTick_Horz, "Show@Show Axis Components@Horizontal Axis Tick"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAxisTick_Vert, "Show@Show Axis Components@Vertical Axis Tick"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAxisTickLabel_Horz, "Show@Show Axis Components@Horizontal Axis Tick Labels"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ShowAxisTickLabel_Vert, "Show@Show Axis Components@Vertical Axis Tick Labels"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_ChartSettings, "Chart Settings"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ChangeType_BarChart, "Chart Settings@Change Chart Type@Bar"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ChangeType_LineGraph, "Chart Settings@Change Chart Type@Line"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.ChangeType_ScatterChart, "Chart Settings@Change Chart Type@Scatter"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_LineGraphMarkerType, "Line Graph Marker Type"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.LineGraphMarker_ZoomInOnly, "Chart Settings@Line Graph Marker Type@Zoom-in Only"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.LineGraphMarker_Always, "Chart Settings@Line Graph Marker Type@Always"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.LineGraphMarker_Never, "Chart Settings@Line Graph Marker Type@Never"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.LineGraphMarkerSettings, "Chart Settings@Marker Settings.."),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.SetLogBase, "Set Log Base"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_AddGraph, "Add Graph"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_Layer, "Layer"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_CopyAndPaste, "Copy && Paste"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_Show, "Show"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_Theme, "Show@Theme"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_ShowAxisComponents, "Show Axis Components"),
+			new KeyValuePair<EViewGraphMenuItem, string>(EViewGraphMenuItem.MenuGroup_SelectZoomAxis, "Select Zoom Axis")
 		};
+
 		public void ErrorMessageBox(CResult cResult, string str)
 		{
 			string strMessage = String.Format("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
@@ -145,25 +183,48 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				// 사용 가능한 그래프 뷰 메뉴 // Available Graph View Context Menu 
-				EAvailableViewGraphContextMenu eMenu = EAvailableViewGraphContextMenu.None;
+				var listAvailableMenu = new List<EViewGraphMenuItem> { };
 
 				int i = 0;
 				foreach(var checkBox in checkBoxes)
 				{
-					// 체크 선택된 메뉴 아이템을 eMenu 에 OR 연산하여 추가
-					// Add the checked menu item to eMenu using OR operation
+					// 체크 선택된 메뉴 아이템을 추가
+					// Add the checked menu item
 					if(checkBox.Checked)
-						eMenu |= (EAvailableViewGraphContextMenu)menuItems[i].Key;
+						listAvailableMenu.Add((EViewGraphMenuItem)menuItems[i].Key);
 					i++;
 				}
 				// 선택된 메뉴 아이템들을 그래프 뷰의 이용 가능한 메뉴에 적용
 				// Apply the selected menu items to the available menu in the graph view
-				m_viewGraph.SetAvailableViewGraphContextMenu(eMenu);
+				m_viewGraph.SetAvailableViewGraphContextMenu(listAvailableMenu);
+
+
+
+				//////////////////////////////////////////
+				// Whether to execute the "Tip" code below
+				// 아래 "팁" 코드를 수행할지 여부
+				bool bTipCodeExecute = false;
+
+				if(!bTipCodeExecute)
+					break;
 
 				// 팁: 아래와 같이 기존 메뉴에서 한두 개의 메뉴만 제외 가능
-				// Tip: It is possible to exclude only one or two menus from the existing menu as shown below
-				eMenu = m_viewGraph.GetAvailableViewGraphContextMenu();
-				eMenu &= ~(EAvailableViewGraphContextMenu.IndicateMinMax | EAvailableViewGraphContextMenu.SetOpacityOfLegend);
+				// Tip: It is possible to exclude only few menus from the existing menu as shown below
+				var listAvailableMenuToRemove = new List<EViewGraphMenuItem>
+				{
+					EViewGraphMenuItem.IndicateMinMax,
+					EViewGraphMenuItem.SetOpacityOfLegend
+				};
+				m_viewGraph.RemoveAvailableViewGraphContextMenu(listAvailableMenuToRemove);
+
+				// 팁: 아래와 같이 기존 메뉴에서 한두 개의 메뉴만 추가 가능
+				// Tip: It is possible to add only few menus from the existing menu as shown below
+				var listAvailableMenuToAdd = new List<EViewGraphMenuItem>
+				{
+					EViewGraphMenuItem.IndicateMinMax,
+					EViewGraphMenuItem.SetOpacityOfLegend
+				};
+				m_viewGraph.AddAvailableViewGraphContextMenu(listAvailableMenuToAdd);
 			}
 			while(false);
 		}
@@ -213,25 +274,31 @@ namespace FLImagingExamplesCSharp
 					radioButtonHide.Checked = true;
 				}
 
-				EAvailableViewGraphContextMenu eAvailableMenu = m_viewGraph.GetAvailableViewGraphContextMenu();
+				var listAvailableMenu = m_viewGraph.GetAvailableViewGraphContextMenu();
 
-				int i = 0;
+				foreach(var checkBox in checkBoxes)
+					checkBox.Checked = false;
+
 				foreach(var checkBox in checkBoxes)
 				{
-					if((menuItems[i].Key & eAvailableMenu) != EAvailableViewGraphContextMenu.None)
-						checkBox.Checked = true;
+					// 안전한 타입 캐스팅 (Tag에 저장된 EViewGraphMenuItem 가져오기)
+					if(checkBox.Tag is EViewGraphMenuItem eMenu)
+					{
+						// m_viewGraph에서 받은 활성화 리스트에 현재 체크박스의 메뉴가 포함되어 있는지 확인
+						checkBox.Checked = listAvailableMenu.Contains(eMenu);
+					}
 					else
+					{
 						checkBox.Checked = false;
-
-					i++;
+					}
 				}
 
-				if(m_viewGraph.GetAvailableViewGraphContextMenu() == EAvailableViewGraphContextMenu.All)
+				if(m_viewGraph.GetAvailableViewGraphContextMenu().Count == (int)EViewGraphMenuItem.Count)
 				{
 					radioButtonAll.Checked = true;
 					radioButtonNone.Checked = false;
 				}
-				else if(m_viewGraph.GetAvailableViewGraphContextMenu() == EAvailableViewGraphContextMenu.None)
+				else if(m_viewGraph.GetAvailableViewGraphContextMenu().Count == (int)EViewGraphMenuItem.None)
 				{
 					radioButtonAll.Checked = false;
 					radioButtonNone.Checked = true;
