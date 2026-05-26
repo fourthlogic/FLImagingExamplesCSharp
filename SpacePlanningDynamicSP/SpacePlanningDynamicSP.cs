@@ -7,6 +7,7 @@ using FLImagingCLR.Base;
 using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ThreeDim;
+using FLImagingCLR.ThreeDim.SpacePlanning;
 
 namespace FLImagingExamplesCSharp
 {
@@ -81,7 +82,7 @@ namespace FLImagingExamplesCSharp
 				CSpacePlanningDynamicSP alg = new CSpacePlanningDynamicSP();
 
 				// Bin spec 설정 // Set the bin spec
-				CSpacePlanningBaseSP.SBinSpec<float> binSpec = new CSpacePlanningBaseSP.SBinSpec<float>(12f, 9f, 10f);
+				SBinSpec<float> binSpec = new SBinSpec<float>(12f, 9f, 10f);
 
 				if((res = alg.AddBinSpec(binSpec)).IsFail())
 				{
@@ -90,9 +91,9 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Item spec 설정 (회전 없음) // Set the item specs (no rotation)
-				CSpacePlanningBaseSP.SItemSpec<float> itemSpec1 = new CSpacePlanningBaseSP.SItemSpec<float>(3f, 3f, 4f, 1f, CSpacePlanningBaseSP.ERotationType.NoRotation);
-				CSpacePlanningBaseSP.SItemSpec<float> itemSpec2 = new CSpacePlanningBaseSP.SItemSpec<float>(4f, 3f, 3f, 1f, CSpacePlanningBaseSP.ERotationType.NoRotation);
-				CSpacePlanningBaseSP.SItemSpec<float> itemSpec3 = new CSpacePlanningBaseSP.SItemSpec<float>(5f, 3f, 2f, 1f, CSpacePlanningBaseSP.ERotationType.NoRotation);
+				SItemSpec<float> itemSpec1 = new SItemSpec<float>(3f, 3f, 4f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec2 = new SItemSpec<float>(4f, 3f, 3f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec3 = new SItemSpec<float>(5f, 3f, 2f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
 
 				if((res = alg.AddItemSpec(itemSpec1)).IsFail() ||
 				   (res = alg.AddItemSpec(itemSpec2)).IsFail() ||
@@ -113,6 +114,7 @@ namespace FLImagingExamplesCSharp
 					ErrorPrint(res, "Failed to set random sequence parameters.\n");
 					break;
 				}
+				alg.EnableFallbackPolicy(true);
 
 				// 앞서 설정된 파라미터 대로 학습 수행 // Perform learning according to previously set parameters
 				if((res = alg.Learn()).IsFail())
@@ -122,9 +124,9 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 학습된 전략 중 최적 전략 선택 // Select the optimal strategy among learned strategies
-				int i32OptimalStrategyIndex = alg.GetOptimalStrategyIndex();
+				SSpacePlanningStrategyId optimalStrategyId = alg.GetOptimalStrategyId();
 
-				if((res = alg.SelectStrategy(i32OptimalStrategyIndex)).IsFail())
+				if((res = alg.SelectStrategy(optimalStrategyId)).IsFail())
 				{
 					ErrorPrint(res, "Failed to select strategy.\n");
 					break;
@@ -144,7 +146,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				Console.WriteLine("Optimal strategy index: {0}", i32OptimalStrategyIndex);
+				Console.WriteLine("Optimal strategy: group={0}, id={1}", optimalStrategyId.eGroup, optimalStrategyId.i32IDInStrategy);
 
 				// 3D 뷰 생성 // Create 3D view
 				if((res = view3DResult.Create(600, 0, 1200, 600)).IsFail())
@@ -156,7 +158,7 @@ namespace FLImagingExamplesCSharp
 				view3DResult.SetRenderingTransparencyMode(ERenderingTransparencyMode.DepthPeelingOIT);
 				view3DResult.SetRenderingResolutionScale(2);
 
-				int i32BinCount  = alg.GetBinSpecCount();
+				int i32BinCount = alg.GetBinSpecCount();
 				int i32ItemCount = alg.GetItemSpecCount();
 
 				// 타이틀은 layer 0에 한 번만 그림 // Draw title once on layer 0
@@ -176,10 +178,10 @@ namespace FLImagingExamplesCSharp
 				Random rng = new Random();
 				List<CSpacePlanningBaseSP.SPlacementInfo> placementResults = new List<CSpacePlanningBaseSP.SPlacementInfo>();
 
-				int i32ArrivalIdx  = 0;
+				int i32ArrivalIdx = 0;
 				int i32PlacedCount = 0;
 
-				for(;;)
+				for(; ; )
 				{
 					if(!view3DResult.IsAvailable())
 						break;
@@ -264,7 +266,7 @@ namespace FLImagingExamplesCSharp
 					layer3DStatus.Clear();
 
 					float f32TotalVolume = 0f;
-					float f32UsedVolume  = 0f;
+					float f32UsedVolume = 0f;
 					alg.GetCurrentVolumeUsage(0, ref f32TotalVolume, ref f32UsedVolume);
 					float f32VolumeUsage = f32TotalVolume > 0f ? 100f * f32UsedVolume / f32TotalVolume : 0f;
 
@@ -293,7 +295,7 @@ namespace FLImagingExamplesCSharp
 				// 최종 결과 요약 출력 // Print final result summary
 				{
 					float f32TotalVolume = 0f;
-					float f32UsedVolume  = 0f;
+					float f32UsedVolume = 0f;
 					alg.GetCurrentVolumeUsage(0, ref f32TotalVolume, ref f32UsedVolume);
 					float f32VolumeUsage = f32TotalVolume > 0f ? 100f * f32UsedVolume / f32TotalVolume : 0f;
 

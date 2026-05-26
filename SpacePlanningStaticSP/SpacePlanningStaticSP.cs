@@ -7,6 +7,7 @@ using FLImagingCLR.Base;
 using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
 using FLImagingCLR.ThreeDim;
+using FLImagingCLR.ThreeDim.SpacePlanning;
 
 namespace FLImagingExamplesCSharp
 {
@@ -81,7 +82,7 @@ namespace FLImagingExamplesCSharp
 				CSpacePlanningStaticSP alg = new CSpacePlanningStaticSP();
 
 				// Bin spec 설정 // Set the bin spec
-				CSpacePlanningBaseSP.SBinSpec<float> binSpec = new CSpacePlanningBaseSP.SBinSpec<float>(12f, 9f, 10f);
+				SBinSpec<float> binSpec = new SBinSpec<float>(12f, 9f, 10f);
 
 				if((res = alg.AddBinSpec(binSpec)).IsFail())
 				{
@@ -90,9 +91,9 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Item spec 설정 (회전 없음) // Set the item specs (no rotation)
-				CSpacePlanningBaseSP.SItemSpec<float> itemSpec1 = new CSpacePlanningBaseSP.SItemSpec<float>(3f, 3f, 4f, 1f, CSpacePlanningBaseSP.ERotationType.NoRotation);
-				CSpacePlanningBaseSP.SItemSpec<float> itemSpec2 = new CSpacePlanningBaseSP.SItemSpec<float>(4f, 3f, 3f, 1f, CSpacePlanningBaseSP.ERotationType.NoRotation);
-				CSpacePlanningBaseSP.SItemSpec<float> itemSpec3 = new CSpacePlanningBaseSP.SItemSpec<float>(5f, 3f, 2f, 1f, CSpacePlanningBaseSP.ERotationType.NoRotation);
+				SItemSpec<float> itemSpec1 = new SItemSpec<float>(3f, 3f, 4f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec2 = new SItemSpec<float>(4f, 3f, 3f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec3 = new SItemSpec<float>(5f, 3f, 2f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
 
 				if((res = alg.AddItemSpec(itemSpec1)).IsFail() ||
 				   (res = alg.AddItemSpec(itemSpec2)).IsFail() ||
@@ -228,11 +229,13 @@ namespace FLImagingExamplesCSharp
 				}
 
 				float f32VolumeUsage = f32TotalVolume > 0f ? 100f * f32UsedVolume / f32TotalVolume : 0f;
+				SSpacePlanningStrategyId optimalStrategyId = alg.GetOptimalStrategyId();
 				string strResultInfo = string.Format(
-					"Optimal strategy index: {0}\n"
-					+ "Volume Usage: {1:F1}%({2:F1}/{3:F1})\n"
+					"Optimal strategy: group={0}, id={1}\n"
+					+ "Volume Usage: {2:F1}%({3:F1}/{4:F1})\n"
 					+ "Coordinate converter: world-space center pivot",
-					alg.GetOptimalStrategyIndex(), f32VolumeUsage, f32UsedVolume, f32TotalVolume);
+					optimalStrategyId.eGroup, optimalStrategyId.i32IDInStrategy,
+					f32VolumeUsage, f32UsedVolume, f32TotalVolume);
 
 				layer3DResult.DrawTextCanvas(new CFLPoint<double>(0, 25), strResultInfo, EColor.YELLOW, EColor.BLACK, 16);
 
