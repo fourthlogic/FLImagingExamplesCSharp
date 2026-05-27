@@ -91,9 +91,9 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Item spec 설정 (회전 없음) // Set the item specs (no rotation)
-				SItemSpec<float> itemSpec1 = new SItemSpec<float>(3f, 3f, 4f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
-				SItemSpec<float> itemSpec2 = new SItemSpec<float>(4f, 3f, 3f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
-				SItemSpec<float> itemSpec3 = new SItemSpec<float>(5f, 3f, 2f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec1 = new SItemSpec<float>(3f, 3f, 4f, 1f, ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec2 = new SItemSpec<float>(4f, 3f, 3f, 1f, ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec3 = new SItemSpec<float>(5f, 3f, 2f, 1f, ERotationAllowance.NoRotation);
 
 				if((res = alg.AddItemSpec(itemSpec1)).IsFail() ||
 				   (res = alg.AddItemSpec(itemSpec2)).IsFail() ||
@@ -106,8 +106,8 @@ namespace FLImagingExamplesCSharp
 				// Random sequence 파라미터 설정 // Set the random sequence parameters
 				// itemChances: 각 아이템 타입의 상대적 출현 비율 // Relative appearance ratio of each item type
 				// Lookahead: 다음 배치 결정 시 고려할 선택지 수 // Number of candidates to consider for next placement
-				CSpacePlanningBaseSP.SRandomSequenceParameters parameters =
-					CSpacePlanningBaseSP.SRandomSequenceParameters.CreateInfinite(new List<float>() { 4f, 3f, 2f }, 1);
+				SRandomSequenceParameters parameters =
+					SRandomSequenceParameters.CreateInfinite(new List<float>() { 4f, 3f, 2f }, 1);
 
 				if((res = alg.SetRandomSequenceParameters(parameters)).IsFail())
 				{
@@ -176,7 +176,7 @@ namespace FLImagingExamplesCSharp
 				// 아이템 타입을 무작위로 생성하여 빈이 꽉 찰 때까지 계속 배치
 				// Randomly generate item types and keep placing until the bin is full (EResult.FullOfCapacity)
 				Random rng = new Random();
-				List<CSpacePlanningBaseSP.SPlacementInfo> placementResults = new List<CSpacePlanningBaseSP.SPlacementInfo>();
+				List<SPlacementInfo> placementResults = new List<SPlacementInfo>();
 
 				int i32ArrivalIdx = 0;
 				int i32PlacedCount = 0;
@@ -190,7 +190,7 @@ namespace FLImagingExamplesCSharp
 
 					// 아이템을 대기열에 추가하고 권장 위치에 자동 배치
 					// Push item to queue and automatically place it at the recommended position
-					CSpacePlanningBaseSP.SPlacementInfo placement = null;
+					SPlacementInfo placement = null;
 
 					res = alg.PushAndPlace(i32ItemType, true, ref placement);
 

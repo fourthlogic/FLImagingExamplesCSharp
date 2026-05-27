@@ -91,9 +91,9 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Item spec 설정 (회전 없음) // Set the item specs (no rotation)
-				SItemSpec<float> itemSpec1 = new SItemSpec<float>(3f, 3f, 4f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
-				SItemSpec<float> itemSpec2 = new SItemSpec<float>(4f, 3f, 3f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
-				SItemSpec<float> itemSpec3 = new SItemSpec<float>(5f, 3f, 2f, 1f, FLImagingCLR.ThreeDim.SpacePlanning.ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec1 = new SItemSpec<float>(3f, 3f, 4f, 1f, ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec2 = new SItemSpec<float>(4f, 3f, 3f, 1f, ERotationAllowance.NoRotation);
+				SItemSpec<float> itemSpec3 = new SItemSpec<float>(5f, 3f, 2f, 1f, ERotationAllowance.NoRotation);
 
 				if((res = alg.AddItemSpec(itemSpec1)).IsFail() ||
 				   (res = alg.AddItemSpec(itemSpec2)).IsFail() ||
@@ -104,7 +104,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Static list 파라미터 설정 // Set the static list parameters
-				CSpacePlanningBaseSP.SStaticListParameters parameters = new CSpacePlanningBaseSP.SStaticListParameters(new List<int>() { 8, 8, 4 });
+				SStaticListParameters parameters = new SStaticListParameters(new List<int>() { 8, 8, 4 });
 
 				if((res = alg.SetStaticListParameters(parameters)).IsFail())
 				{
@@ -128,7 +128,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				var placementResults = new List<CSpacePlanningBaseSP.SPlacementInfo>();
+				var placementResults = new List<SPlacementInfo>();
 				if((res = alg.GetLearnedPlacements(ref placementResults)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get learned placements.\n");
