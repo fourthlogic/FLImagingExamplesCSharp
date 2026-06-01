@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{34BC78A5-8526-4BE2-A24C-F8FC297363FD}</ProjectGuid>
+    <ProjectGuid>{EB44501A-518C-4A94-99C0-42954B1239A7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServerClient</RootNamespace>
-    <AssemblyName>ServerClient</AssemblyName>
+    <RootNamespace>DeviceRS232C</RootNamespace>
+    <AssemblyName>DeviceRS232C</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -116,7 +116,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ServerClient.cs" />
+    <Compile Include="DeviceRS232C.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
