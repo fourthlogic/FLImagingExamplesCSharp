@@ -62,7 +62,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 이미지 뷰 유효성 체크
+				// 이미지 뷰 유효성 체크 // Available the image view.
 				if(!m_viewImage.IsAvailable())
 					break;
 
@@ -84,13 +84,13 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 이미지 뷰의 캔버스 영역을 얻어온다.
+				// 이미지 뷰의 캔버스 영역을 얻어온다. // Get the canvas region of the image view.
 				CFLRect<int> flrlCanvas = m_viewImage.GetClientRectCanvasRegion();
 
-				// 캔버스 영역의 좌표계를 이미지 영역의 좌표계로 변환한다.
+				// 캔버스 영역의 좌표계를 이미지 영역의 좌표계로 변환한다. // Convert canvas coordinates to image coordinates.
 				CFLRect<double> flrdImage = m_viewImage.ConvertCanvasCoordToImageCoord(flrlCanvas);
 
-				// 이미지 영역을 기준으로 생성될 Figure 의 크기와 모양을 사각형으로 설정한다.
+				// 이미지 영역을 기준으로 생성될 Figure 의 크기와 모양을 사각형으로 설정한다. // Set the size and shape of the figure to be created as a rectangle based on the image area.
 				double f64Width = flrdImage.GetWidth() / 10;
 				double f64Height = flrdImage.GetHeight() / 10;
 				double f64Size = Math.Min(f64Width, f64Height);
@@ -100,8 +100,8 @@ namespace FLImagingExamplesCSharp
 
 				CFLRect<double> flrdFigureShape = new CFLRect<double>(flpdCenter.x - f64Size, flpdCenter.y - f64Size, flpdCenter.x + f64Size, flpdCenter.y + f64Size);
 
-				// 선택한 Decl Type, Template Type 으로 Figure 를 생성한다.
-				// CubicSpline, ComplexRegion 같은 경우에는 Template Type 이 double 형으로 고정이다.
+				// 선택한 Decl Type, Template Type 으로 Figure 를 생성한다. // Create a figure based on the selected Decl Type and Template Type.
+				// CubicSpline, ComplexRegion 같은 경우에는 Template Type 이 double 형으로 고정이다. // The Template Type is fixed to double for figures such as CubicSpline and ComplexRegion.
 				switch(SelectedDeclType())
 				{
 				case EFigureDeclType.Point:
@@ -311,21 +311,24 @@ namespace FLImagingExamplesCSharp
 				if(flFigure == null)
 					break;
 
-				// 생성된 Figure 에 사각형을 설정함으로써 각 형상에 맞게 구성한다.
+				// 생성된 Figure 에 사각형을 설정함으로써 각 형상에 맞게 구성한다. // Configure the created figure by assigning a rectangle to it.
 				flFigure.Set(flrdFigureShape);
 
-				// 이미지 뷰에 Figure object 를 생성한다.
-				// 가장 마지막 파라미터는 활성화 되는 메뉴의 구성이며, EAvailableFigureContextMenu.All 가 기본 메뉴를 활성화 한다.
-				// 활성화 하고자 하는 메뉴를 추가 혹은 제거 하기 위해서는 enum 값을 비트 연산으로 넣어주면 된다.
-				// ex) EAvailableFigureContextMenu.None . 활성화 되는 메뉴 없음
-				//     EAvailableFigureContextMenu.All . 전체 메뉴 활성화
-				//     EAvailableFigureContextMenu.DeclType | EAvailableFigureContextMenu.TemplateType . Decl Type, Template Type 변환 메뉴 활성화
+				// 이미지 뷰에 Figure object 를 생성한다. // Create a figure object in the image view.
+				// 가장 마지막 파라미터는 활성화 되는 메뉴의 구성이며, EAvailableFigureContextMenu_All 가 기본 메뉴를 활성화 한다. // The last parameter specifies the set of context menu items to be enabled. EAvailableFigureContextMenu_All enables the default context menu.
+				// 활성화 하고자 하는 메뉴를 추가 혹은 제거 하기 위해서는 enum 값을 비트 연산으로 넣어주면 된다. // To add or remove specific menu items, combine enum values using bitwise operations.
+				// ex) EAvailableFigureContextMenu_None -> 활성화 되는 메뉴 없음
+				//     EAvailableFigureContextMenu_All -> 전체 메뉴 활성화
+				//     EAvailableFigureContextMenu_DeclType | EAvailableFigureContextMenu_TemplateType -> Decl Type, Template Type 변환 메뉴 활성화
+				// ex) EAvailableFigureContextMenu_None -> No menu items are enabled.
+				//     EAvailableFigureContextMenu_All -> All menu items are enabled.
+				//     EAvailableFigureContextMenu_DeclType | EAvailableFigureContextMenu_TemplateType -> Enables the Decl Type and Template Type conversion menu items.
 				m_viewImage.PushBackFigureObject(flFigure, EAvailableFigureContextMenu.All);
 
 				// 이미지 뷰를 갱신한다. // Update the image view.
 				m_viewImage.Invalidate(true);
 
-				// 콤보 박스에 Figure Object 항목을 설정한다.
+				// 콤보 박스에 Figure Object 항목을 설정한다. // Update the figure object items in the combo box.
 				UpdateFigureObjectList();
 			}
 			while(false);
@@ -337,13 +340,13 @@ namespace FLImagingExamplesCSharp
 				if(!m_viewImage.IsAvailable())
 					break;
 
-				// 현재 이미지 뷰에 있는 Figure Objects 를 제거한다.
+				// 현재 이미지 뷰에 있는 Figure Objects 를 제거한다. // Remove all figure objects from the current image view.
 				m_viewImage.ClearFigureObject();
 
 				// 이미지 뷰를 갱신한다. // Update the image view.
 				m_viewImage.Invalidate(true);
 
-				// 콤보 박스에 Figure Object 항목을 설정한다.
+				// 콤보 박스에 Figure Object 항목을 설정한다. // Update the figure object items in the combo box.
 				UpdateFigureObjectList();
 			}
 			while(false);
@@ -364,7 +367,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 선택된 Figure Object 를 얻어온다.
+				// 선택된 Figure Object 를 얻어온다. // Get the selected figure object.
 				flFigure1 = GetSelectedFigure1();
 				flFigure2 = GetSelectedFigure2();
 
@@ -374,33 +377,33 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// Operation 결과를 얻기 위해 FLFigureArray 를 생성한다.
+				// Operation 결과를 얻기 위해 FLFigureArray 를 생성한다. // Create an FLFigureArray to retrieve the operation result.
 				CFLFigureArray flfaRes = new CFLFigureArray();
 
 				switch(comboBoxOperation.SelectedIndex)
 				{
 				case 0:
-					// Intersection Operation 수행
+					// Intersection Operation 수행 // Execute the Intersection operation.
 					cResult = flFigure1.GetRegionOfIntersection(flFigure2, ref flfaRes);
 					break;
 
 				case 1:
-					// Union Operation 수행
+					// Union Operation 수행 // Execute the Union operation.
 					cResult = flFigure1.GetRegionOfUnion(flFigure2, ref flfaRes);
 					break;
 
 				case 2:
-					// Subtraction Operation 수행
+					// Subtraction Operation 수행 // Execute the Subtraction operation.
 					cResult = flFigure1.GetRegionOfSubtraction(flFigure2, ref flfaRes);
 					break;
 
 				case 3:
-					// Exclusive Or Operation 수행
+					// Exclusive Or Operation 수행 // Execute the Exclusive Or operation.
 					cResult = flFigure1.GetRegionOfExclusiveOr(flFigure2, ref flfaRes);
 					break;
 				}
 
-				// 수행 결과를 확인한다.
+				// 수행 결과를 확인한다. // Check the operation result.
 				if(cResult.IsFail())
 					break;
 
@@ -409,7 +412,7 @@ namespace FLImagingExamplesCSharp
 				if(flfa.GetCount() == 0)
 					break;
 
-				// 이미지 뷰에 Figure object 를 생성한다.
+				// 이미지 뷰에 Figure object 를 생성한다. // Create a figure object in the image view.
 				if(flfa.GetCount() == 1)
 					m_viewImage.PushBackFigureObject(flfa.GetAt(0), EAvailableFigureContextMenu.All);
 				else
@@ -418,12 +421,12 @@ namespace FLImagingExamplesCSharp
 				// 이미지 뷰를 갱신한다. // Update the image view.
 				m_viewImage.Invalidate(true);
 
-				// 콤보 박스에 Figure Object 항목을 설정한다.
+				// 콤보 박스에 Figure Object 항목을 설정한다. // Update the figure object items in the combo box.
 				UpdateFigureObjectList();
 			}
 			while(false);
 
-			// 수행 결과 메세지를 표시한다.
+			// 수행 결과 메세지를 표시한다. // Display the operation result message.
 			DisplayMessage(cResult.GetString());
 		}
 
@@ -439,7 +442,7 @@ namespace FLImagingExamplesCSharp
 		}
 		private void UpdateControls()
 		{
-			// 이미지 뷰 유효성 체크
+			// 이미지 뷰 유효성 체크 // Available the image view.
 			if(!m_viewImage.IsAvailable())
 			{
 				comboBoxDeclType.Enabled = false;
@@ -468,7 +471,7 @@ namespace FLImagingExamplesCSharp
 
 				buttonCreate.Enabled = true;
 
-				// 이미지 뷰의 Figure object 개수를 얻어온다.
+				// 이미지 뷰의 Figure object 개수를 얻어온다. // Gets the number of figure objects in the image view.
 				buttonClear.Enabled = (m_viewImage.GetFigureObjectCount() == 0 ? false : true);
 
 				comboBoxSrc.Enabled = true;
@@ -479,13 +482,13 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 이미지 뷰의 Figure object 개수를 얻어온다.
+				// 이미지 뷰의 Figure object 개수를 얻어온다. // Gets the number of figure objects in the image view.
 				int i32Count = m_viewImage.GetFigureObjectCount();
 
 				if(comboBoxSrc.Items.Count == i32Count && comboBoxDst.Items.Count == i32Count)
 					break;
 
-				// 콤보 박스에 Figure Object 항목을 설정한다.
+				// 콤보 박스에 Figure Object 항목을 설정한다. // Update the figure object items in the combo box.
 				UpdateFigureObjectList();
 			}
 			while(false);
@@ -497,7 +500,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 이미지 뷰 유효성 체크
+				// 이미지 뷰 유효성 체크 // Available the image view.
 				if(!m_viewImage.IsAvailable())
 					break;
 
@@ -604,7 +607,7 @@ namespace FLImagingExamplesCSharp
 				comboBoxSrc.Items.Clear();
 				comboBoxDst.Items.Clear();
 
-				// 이미지 뷰의 Figure object 개수를 얻어온다.
+				// 이미지 뷰의 Figure object 개수를 얻어온다. // Gets the number of figure objects in the image view.
 				int i32Count = m_viewImage.GetFigureObjectCount();
 
 				if(i32Count == 0)
@@ -612,17 +615,17 @@ namespace FLImagingExamplesCSharp
 
 				for(int i = 0; i < i32Count; ++i)
 				{
-					// 해당 인덱스의 Figure Object 를 얻어온다.
+					// 해당 인덱스의 Figure Object 를 얻어온다. // Get the figure object at the specified index.
 					CFLFigure flFigure = m_viewImage.GetFigureObject((int)i);
 					if(flFigure == null)
 						continue;
 
-					// Figure Object 의 이름을 설정한다.
+					// Figure Object 의 이름을 설정한다. // Set the name of the figure object.
 					string strFigureName = MakeFigureObjectName((int)i, flFigure);
 					if(strFigureName == "")
 						break;
 
-					// 콤보 박스에 항목을 추가한다.                    
+					// 콤보 박스에 항목을 추가한다. // Add an item to the combo box.
 					comboBoxSrc.Items.Add(strFigureName);
 					comboBoxDst.Items.Add(strFigureName);
 				}
@@ -648,7 +651,7 @@ namespace FLImagingExamplesCSharp
 
 				strReturn = "[" + i32Index.ToString() + "] ";
 
-				// Figure 의 DeclType 에 따른 이름 설정
+				// Figure 의 DeclType 에 따른 이름 설정 // Set the figure name based on its Decl Type.
 				switch(flFigure.GetDeclType())
 				{
 				case EFigureDeclType.Point:
@@ -703,7 +706,7 @@ namespace FLImagingExamplesCSharp
 				if(bError)
 					break;
 
-				// Figure 의 Template Type 에 따른 이름 설정
+				// Figure 의 Template Type 에 따른 이름 설정 // Set the figure name based on its Template Type.
 				switch(flFigure.GetTemplateType())
 				{
 				case EFigureTemplateType.Int32:
@@ -740,7 +743,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 이미지 뷰 유효성 체크
+				// 이미지 뷰 유효성 체크 // Available the image view.
 				if(!m_viewImage.IsAvailable())
 					break;
 
@@ -749,7 +752,7 @@ namespace FLImagingExamplesCSharp
 				if(i32Selected < 0)
 					break;
 
-				// 해당 인덱스의 Figure Object 를 얻어온다.
+				// 해당 인덱스의 Figure Object 를 얻어온다. // Get the figure object at the specified index.
 				flfReturn = m_viewImage.GetFigureObject(i32Selected);
 			}
 			while(false);
@@ -762,7 +765,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 이미지 뷰 유효성 체크
+				// 이미지 뷰 유효성 체크 // Available the image view.
 				if(!m_viewImage.IsAvailable())
 					break;
 
@@ -771,7 +774,7 @@ namespace FLImagingExamplesCSharp
 				if(i32Selected < 0)
 					break;
 
-				// 해당 인덱스의 Figure Object 를 얻어온다.
+				// 해당 인덱스의 Figure Object 를 얻어온다. // Get the figure object at the specified index.
 				flfReturn = m_viewImage.GetFigureObject(i32Selected);
 			}
 			while(false);
