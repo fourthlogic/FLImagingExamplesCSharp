@@ -188,10 +188,7 @@ namespace DeviceRS232C
 
 			// RS232C 연결을 종료합니다. // Terminate the connection to the RS232C.
 			if((res = rs232C.Terminate()).IsFail())
-			{
-				// [오류 수정] 기존 "Failed to terminate the motion." 주석 및 문자열을 통신 종료에 맞게 변경
 				ErrorPrint(res, "Failed to terminate the communication.\n");
-			}
 		}
 
 		// 경고 코드 출력 함수 // Error print function
