@@ -49,11 +49,11 @@ namespace FLImagingExamplesCSharp
 		{
 			do
 			{
-				// 3D 뷰 유효성 체크
+				// 3D 뷰 유효성 체크 // Check the validity of the 3D view.
 				if(!m_view3D.IsAvailable())
 					break;
 
-				// 높이 프로파일의 좌표를 Edit box 로부터 얻어 와 지정한다.
+				// 높이 프로파일의 좌표를 Edit box 로부터 얻어 와 지정한다. // Sets the height profile coordinates obtained from the Edit box.
 				long i64StartX = long.Parse(this.textBoxStartX.Text);
 				long i64StartY = long.Parse(this.textBoxStartY.Text);
 				long i64EndX = long.Parse(this.textBoxEndX.Text);
@@ -63,7 +63,7 @@ namespace FLImagingExamplesCSharp
 				CFLPoint<long> flpEnd = new CFLPoint<long>(i64EndX, i64EndY);
 				List<double> listF64HP = new List<double>();
 
-				// 높이 프로파일 정보를 얻어 온다.
+				// 높이 프로파일 정보를 얻어 온다. // Retrieves the height profile information.
 				CResult gr = m_view3D.GetHeightProfile(flpStart, flpEnd, ref listF64HP);
 
 				if(gr.IsOK())
@@ -95,7 +95,7 @@ namespace FLImagingExamplesCSharp
 		{
 			m_view3D = new CGUIView3D();
 
-			// 3D 뷰 생성
+			// 3D 뷰 생성 // Create 3D View
 			CResult res = m_view3D.CreateAndFitParent((ulong)pictureBoxView.Handle);
 
 			if(res.IsFail())

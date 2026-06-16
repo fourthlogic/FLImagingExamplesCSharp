@@ -131,7 +131,7 @@ namespace FLImagingExamplesCSharp
 
 				CFL3DObjectHeightMap fl3DOHM = new CFL3DObjectHeightMap(arrFliImage[(int)EType.Model], arrFliImage[(int)EType.Texture]);
 
-				// 3D 뷰에 높이 맵과 텍스쳐를 로드하여 디스플레이
+				// 3D 뷰에 모델과 텍스처를 로드하여 디스플레이 // Load the model and texture into the 3D view and display them.
 				if(view3D.PushObject(fl3DOHM).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the 3D view.\n");
