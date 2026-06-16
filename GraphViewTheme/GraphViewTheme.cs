@@ -74,7 +74,7 @@ namespace FLImagingExamplesCSharp
 				// Graph 뷰 테마를 라이트모드로 설정 // Sets the theme of the graph view to light mode.
 				viewGraphLight.SetLightMode();
 
-				// 랜덤으로 100개의 데이터를 생성한다.
+				// 랜덤으로 100개의 데이터를 생성한다. // Generates 100 random data points.
 				Random rand = new Random();
 				const int i32DataCount = 100;
 				double[] arrF64DataX = new double[i32DataCount];
@@ -100,7 +100,7 @@ namespace FLImagingExamplesCSharp
 
 				string strName = "Chart";
 
-				// 그래프에 생성한 데이터를 추가한다.
+				// 그래프에 생성한 데이터를 추가한다. // Adds the generated data to the graph.
 				viewGraphDark.Plot(arrF64DataX, arrF64DataY, i32DataCount, EChartType.Scatter, eColor, strName);
 				viewGraphLight.Plot(arrF64DataX, arrF64DataY, i32DataCount, EChartType.Scatter, eColor, strName);
 
@@ -108,7 +108,7 @@ namespace FLImagingExamplesCSharp
 				viewGraphDark.ZoomFit();
 				viewGraphLight.ZoomFit();
 
-				// 그래프 뷰가 종료될 때 까지 기다림
+				// 그래프 뷰가 종료될 때 까지 기다림 // Wait until at least one view is closed
 				while(viewGraphDark.IsAvailable() && viewGraphLight.IsAvailable())
 					Thread.Sleep(1);
 			}

@@ -90,7 +90,7 @@ namespace FLImagingExamplesCSharp
 				// 3 개의 차트를 생성 // Create 3 charts.
 				for(int k = 0; k < 3; ++k)
 				{
-					// 랜덤으로 100개의 데이터를 생성
+					// 랜덤으로 100개의 데이터를 생성 // Generates 100 random data points.
 					Random rand = new Random(k * 2 + Environment.TickCount);
 					const int i32DataCount = 100;
 					double[] arrF64DataX = new double[i32DataCount];

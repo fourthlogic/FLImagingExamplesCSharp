@@ -26,7 +26,8 @@ namespace FLImagingExamplesCSharp
             var formImageView = new FormGraphLeastSquares();
 
             Application.Run(formImageView);
-            // 예제 코드는 FormGraphLeastSquares.cs 에 있습니다.
-        }
-    }
+			// 예제 코드는 FormGraphLeastSquares.cs 에 있습니다.
+			// Example code can be found in FormGraphLeastSquares.cs.
+		}
+	}
 }

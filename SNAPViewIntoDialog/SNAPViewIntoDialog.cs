@@ -27,7 +27,8 @@ namespace FLImagingExamplesCSharp
 
             Application.Run(formSNAPView);
 
-            // 예제 코드는 FormSNAPViewInToDialog.cs 에 있습니다.
-        }
-    }
+			// 예제 코드는 FormSNAPViewInToDialog.cs 에 있습니다.
+			// Example code can be found in FormSNAPViewInToDialog.cs.
+		}
+	}
 }

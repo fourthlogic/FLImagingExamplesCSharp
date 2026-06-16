@@ -49,7 +49,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 그래프 뷰 유효성 체크
+				// 그래프 뷰 유효성 체크 // Check the validity of the graph view.
 				if(!m_viewGraph.IsAvailable())
 					break;
 
@@ -96,7 +96,7 @@ namespace FLImagingExamplesCSharp
 				if(strEquation == "")
 					break;
 
-				// 방정식의 해를 얻어올 객체 생성 // Create 방정식의 해를 얻어올 object
+				// 방정식의 해를 얻어올 객체 생성 // Create an object to receive the roots of the equation.
 				List<System.Numerics.Complex> listEquationResult = new List<System.Numerics.Complex>();
 
 				CResult cResult = CEquation.Quartic(arrCpxCoef[0], arrCpxCoef[1], arrCpxCoef[2], arrCpxCoef[3], arrCpxCoef[4], ref listEquationResult);
@@ -118,19 +118,19 @@ namespace FLImagingExamplesCSharp
 					}
 				}
 
-				// 수식 객체 생성 // Create 수식 object
+				// 수식 객체 생성 // Create an expression object.
 				CExpression exp = new CExpression();
 
-				// 수식 문자열을 설정한다
+				// 수식 문자열을 설정한다 // Set the expression string.
 				exp.SetExpression(strEquation);
 
-				// 그래프 뷰에 수식 데이터를 추가한다
+				// 그래프 뷰에 수식 데이터를 추가한다 // Add the expression data to the graph view.
 				EColor eColor = new EColor();
 				eColor = (EColor)((uint)(((char)(rand.Next() % 255) | ((uint)((char)(rand.Next() % 255)) << 8)) | (((uint)(char)(rand.Next() % 255)) << 16)));
 
 				m_viewGraph.Plot(exp, eColor);
 
-				// 그래프 뷰를 갱신한다
+				// 그래프 뷰를 갱신한다 // Invalidate the graph view.
 				m_viewGraph.Invalidate();
 			}
 			while(false);
@@ -142,14 +142,14 @@ namespace FLImagingExamplesCSharp
 		{
 			do
 			{
-				// 그래프 뷰 유효성 체크
+				// 그래프 뷰 유효성 체크 // Check the validity of the graph view.
 				if(!m_viewGraph.IsAvailable())
 					break;
 
-				// 그래프 뷰의 데이터를 초기화한다
+				// 그래프 뷰의 데이터를 초기화한다 // Clear the graph view data.
 				m_viewGraph.Clear();
 
-				// 그래프 뷰를 갱신한다
+				// 그래프 뷰를 갱신한다 // Invalidate the graph view.
 				m_viewGraph.Invalidate();
 			}
 			while(false);
@@ -177,10 +177,10 @@ namespace FLImagingExamplesCSharp
 		}
 		private void UpdateControls()
 		{
-			// 그래프 뷰 유효성 체크
+			// 그래프 뷰 유효성 체크 // Check the validity of the graph view.
 			buttonAdd.Enabled = m_viewGraph.IsAvailable();
 
-			// 그래프 뷰 유효성 체크, 그래프 뷰 데이터 존재 여부 체크
+			// 그래프 뷰 유효성 체크, 그래프 뷰 데이터 존재 여부 체크 // Check the validity of the graph view and the existence of graph data.
 			buttonClear.Enabled = (m_viewGraph.IsAvailable() && m_viewGraph.DoesGraphExist());
 		}
 		private void TimerTick(object sender, EventArgs e)

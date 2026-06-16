@@ -49,7 +49,7 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 그래프 뷰 유효성 체크
+				// 그래프 뷰 유효성 체크 // Check the validity of the graph view.
 				if(!m_viewGraph.IsAvailable())
 					break;
 
@@ -62,7 +62,7 @@ namespace FLImagingExamplesCSharp
 				int i32Degree = 0;
 				int.TryParse(strDegree, out i32Degree);
 
-				// 랜덤으로 100개의 데이터를 생성한다.
+				// 랜덤으로 100개의 데이터를 생성한다. // Generate 100 random data points.
 				const int i32DataCount = 100;
 				double[] arrF64DataX = new double[i32DataCount];
 				double[] arrF64DataY = new double[i32DataCount];
@@ -82,7 +82,7 @@ namespace FLImagingExamplesCSharp
 					f64PrevY = arrF64DataY[i];
 				}
 
-				// 그래프에 생성한 데이터를 추가한다.
+				// 그래프에 생성한 데이터를 추가한다. // Add the generated data points to the graph.
 				m_viewGraph.Plot(arrF64DataX, arrF64DataY, i32DataCount, EChartType.Scatter, eColor, strName);
 
 				if(i32Degree == 0)
@@ -91,17 +91,17 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// LeastSquares<double> 객체 생성 // Create LeastSquares<double> object
+				// CLeastSquares<double> 객체 생성 // Create CLeastSquares<double> object
 				CLeastSquares<double> ls = new CLeastSquares<double>();
-				// 데이터를 할당
+				// 데이터를 할당 // Assign the data.
 				ls.Assign(arrF64DataX, arrF64DataY, i32DataCount);
 
-				// 계수 값을 받기 위해 List 생성
+				// 계수 값을 받기 위해 List 생성 // Create a List for the coefficient values.
 				List<double> listOutput = new List<double>();
-				// R square 값을 받기 위해double 생성
+				// R square 값을 받기 위해double 생성 // Create a double variable to receive the R-squared value.
 				double f64TRSqr = 0;
 
-				// 다항식 계수를 얻는다.
+				// 다항식 계수를 얻는다. // Get the polynomial coefficients.
 				ls.GetPoly(i32Degree, ref listOutput, ref f64TRSqr);
 
 				string strEquation = "";
@@ -115,11 +115,14 @@ namespace FLImagingExamplesCSharp
 
 				// 차수가 높아질수록 계수의 정도를 높인다.
 				// 예를 들어 4차식인 경우, 4 + 12 = 16, 즉 소수점 16째 자리까지 계수를 표현한다.
+				// Increase the coefficient precision as the polynomial degree increases.
+				// For example, for a 4th-degree polynomial, the precision is set to 16 (4 + 12),
+				// allowing the coefficients to be represented up to 16 decimal places.
 				int i32Precision = i32Degree + 12;
 				string strPrecision = String.Format("F{0}", i32Precision);
 				strPrecision = "{0:" + strPrecision + "}";
 
-				// 얻어온 계수로 다항식을 만든다.
+				// 얻어온 계수로 다항식을 만든다. // Create a polynomial using the obtained coefficients.
 				for(int i = 0; i < (int)i64Count; ++i)
 				{
 					double f64Coef = listOutput[i];
@@ -146,16 +149,16 @@ namespace FLImagingExamplesCSharp
 
 				strInfo = String.Format("R square value: {0}", f64TRSqr);
 
-				// 수식 객체 생성 // Create 수식 object
+				// 수식 객체 생성 // Create CExpression object
 				CExpression exp = new CExpression();
 
-				// 수식 문자열을 설정한다
+				// 수식 문자열을 설정한다 // Set the polynomial expression string.
 				exp.SetExpression(strEquation);
 
-				// 그래프 뷰에 수식 데이터를 추가한다
+				// 그래프 뷰에 수식 데이터를 추가한다 // Add the polynomial data to the graph view.
 				m_viewGraph.Plot(exp, eColor);
 
-				// 그래프 뷰를 갱신한다
+				// 그래프 뷰를 갱신한다 // Invalidate the graph view.
 				m_viewGraph.Invalidate();
 			}
 			while(false);
@@ -166,14 +169,14 @@ namespace FLImagingExamplesCSharp
 		{
 			do
 			{
-				// 그래프 뷰 유효성 체크
+				// 그래프 뷰 유효성 체크 // Check the validity of the graph view.
 				if(!m_viewGraph.IsAvailable())
 					break;
 
-				// 그래프 뷰의 데이터를 초기화한다
+				// 그래프 뷰의 데이터를 초기화한다 // Clear the graph view data.
 				m_viewGraph.Clear();
 
-				// 그래프 뷰를 갱신한다
+				// 그래프 뷰를 갱신한다 // Invalidate the graph view.
 				m_viewGraph.Invalidate();
 			}
 			while(false);
@@ -193,7 +196,7 @@ namespace FLImagingExamplesCSharp
 		{
 			m_viewGraph = new CGUIViewGraph();
 
-			// 그래프 뷰 생성
+			// 그래프 뷰 생성 // Create a graph view.
 			CResult res = m_viewGraph.CreateAndFitParent((ulong)pictureBoxView.Handle);
 
 			if(res.IsFail())
@@ -201,10 +204,10 @@ namespace FLImagingExamplesCSharp
 		}
 		private void UpdateControls()
 		{
-			// 그래프 뷰 유효성 체크
+			// 그래프 뷰 유효성 체크 // Check the validity of the graph view.
 			buttonAdd.Enabled = m_viewGraph.IsAvailable();
 
-			// 그래프 뷰 유효성 체크, 그래프 뷰 데이터 존재 여부 체크
+			// 그래프 뷰 유효성 체크, 그래프 뷰 데이터 존재 여부 체크 // Check the validity of the graph view and the existence of graph data.
 			buttonClear.Enabled = (m_viewGraph.IsAvailable() && m_viewGraph.DoesGraphExist());
 		}
 		private void TimerTick(object sender, EventArgs e)

@@ -131,7 +131,7 @@ namespace FLImagingExamplesCSharp
 
 		private void CreateDynamicCheckboxes()
 		{
-			int top = 10; // 체크박스의 초기 Y 좌표
+			int top = 10; // 체크박스의 초기 Y 좌표 // Initial Y-coordinate of the check box.
 
 			foreach(var menuItem in menuItems)
 			{
@@ -147,7 +147,7 @@ namespace FLImagingExamplesCSharp
 				panelAvailableContextMenu.Controls.Add(checkBox);
 				checkBoxes.Add(checkBox);
 
-				top += 20; // 다음 체크박스의 Y 위치
+				top += 20; // 다음 체크박스의 Y 위치 // Y-position of the next check box.
 			}
 		}
 
@@ -178,7 +178,7 @@ namespace FLImagingExamplesCSharp
 		{
 			do
 			{
-				// 그래프 뷰 유효성 체크
+				// 그래프 뷰 유효성 체크 // Check the validity of the graph view.
 				if(!m_viewGraph.IsAvailable())
 					break;
 
@@ -245,7 +245,7 @@ namespace FLImagingExamplesCSharp
 		{
 			m_viewGraph = new CGUIViewGraph();
 
-			// 그래프 뷰 생성
+			// 그래프 뷰 생성 // Create a graph view.
 			CResult res = m_viewGraph.CreateAndFitParent((ulong)pictureBoxView.Handle);
 
 			if(res.IsFail())
@@ -253,7 +253,7 @@ namespace FLImagingExamplesCSharp
 		}
 		private void UpdateControls()
 		{
-			// 그래프 뷰 유효성 체크
+			// 그래프 뷰 유효성 체크 // Check the validity of the graph view.
 			buttonApply.Enabled = m_viewGraph.IsAvailable();
 
 		}
@@ -282,9 +282,11 @@ namespace FLImagingExamplesCSharp
 				foreach(var checkBox in checkBoxes)
 				{
 					// 안전한 타입 캐스팅 (Tag에 저장된 EViewGraphMenuItem 가져오기)
+					// Safely casts and retrieves the EViewGraphMenuItem stored in Tag.
 					if(checkBox.Tag is EViewGraphMenuItem eMenu)
 					{
 						// m_viewGraph에서 받은 활성화 리스트에 현재 체크박스의 메뉴가 포함되어 있는지 확인
+						// Checks whether the menu corresponding to the current check box is included in the active menu list obtained from m_viewGraph.
 						checkBox.Checked = listAvailableMenu.Contains(eMenu);
 					}
 					else

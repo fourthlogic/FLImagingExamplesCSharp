@@ -26,7 +26,8 @@ namespace FLImagingExamplesCSharp
             var formImageView = new FormFigureOperation();
 
             Application.Run(formImageView);
-            // 예제 코드는 FormFigureOperation.cs 에 있습니다.
-        }
-    }
+			// 예제 코드는 FormFigureOperation.cs 에 있습니다.
+			// Example code can be found in FormFigureOperation.cs.
+		}
+	}
 }
