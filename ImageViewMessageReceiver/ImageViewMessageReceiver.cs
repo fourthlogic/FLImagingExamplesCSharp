@@ -13,64 +13,64 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace FLImagingExamplesCSharp
 {
-	// 메세지를 전달 받기 위해 CFLBase 를 상속 받아서 구현
+	// 메세지를 전달 받기 위해 CFLBase 를 상속 받아서 구현 // Implements a class derived from CFLBase to receive messages.
 	public class CMessageReceiver : CFLBase
 	{
-		// CMessageReceiver 생성자
+		// CMessageReceiver 생성자 // CMessageReceiver constructor.
 		public CMessageReceiver(ref CGUIViewImage viewImage)
 		{
             m_viewImage = viewImage;
 
-			// 메세지를 전달 받기 위해 CBroadcastManager 에 구독 등록
+			// 메세지를 전달 받기 위해 CBroadcastManager 에 구독 등록 // Subscribe to CBroadcastManager to receive messages.
 			CBroadcastManager.Subscribe(this);
 		}
 
 		// CMessageReceiver 소멸자
 		~CMessageReceiver()
 		{
-			// 객체가 소멸할때 메세지 수신을 중단하기 위해 구독을 해제한다.
+			// 객체가 소멸할때 메세지 수신을 중단하기 위해 구독을 해제한다. // Unsubscribe to stop receiving messages when the object is destroyed.
 			CBroadcastManager.Unsubscribe(this);
 		}
 
-		// 메세지가 들어오면 호출되는 함수 OnReceiveBroadcast 오버라이드 하여 구현
+		// 메세지가 들어오면 호출되는 함수 OnReceiveBroadcast 오버라이드 하여 구현 // Override OnReceiveBroadcast, which is called when a message is received.
 		public override void OnReceiveBroadcast(CBroadcastMessage message)
 		{
 			do
 			{
-				// message 가 null 인지 확인
+				// message 가 null 인지 확인 // Check whether message is null.
 				if(message == null)
 					break;
 
-                // GetCaller() 가 등록한 이미지뷰인지 확인
-                if (message.GetCaller() != m_viewImage)
+				// GetCaller() 가 등록한 이미지뷰인지 확인 // Check whether GetCaller() is a registered image view.
+				if(message.GetCaller() != m_viewImage)
                     break;
 
-				// 메세지의 채널을 확인
+				// 메세지의 채널을 확인 // Check the message channel.
 				switch(message.GetChannel())
 				{
 				case (uint)EGUIBroadcast.ViewImage_PostMouseMove:
 					{
-						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅
+						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅 // Cast message to CBroadcastMessage_GUI_ViewImage_MouseEvent.
 						CBroadcastMessage_GUI_ViewImage_MouseEvent msgMouseEvent = message as CBroadcastMessage_GUI_ViewImage_MouseEvent;
 
-						// msgMouseEvent 가 null 인지 확인
+						// msgMouseEvent 가 null 인지 확인 // Check whether msgMouseEvent is null.
 						if(msgMouseEvent == null)
 							break;
 
-						// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅
+						// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅 // Casts the object that invoked the message to CGUIViewImage.
 						CGUIViewImage viewImage = msgMouseEvent.GetCaller() as CGUIViewImage;
 
-						// viewImage 가 null 인지 확인
+						// viewImage 가 null 인지 확인 // Checks whether viewImage is null.
 						if(viewImage == null)
 							break;
 
-						// 이미지뷰의 0번 레이어 가져오기
+						// 이미지뷰의 0번 레이어 가져오기 // Get layer 0 of the image view.
 						CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
-						// 기존에 Layer 에 그려진 도형들을 삭제
+						// 기존에 Layer 에 그려진 도형들을 삭제 // Clear all figures from the layer.
 						layer.Clear();
 
-						// 마우스 좌표를 표시할 문자열 생성
+						// 마우스 좌표를 표시할 문자열 생성 // Create a string to display the mouse coordinates.
 						String strPosition = String.Format("Move X: {0}, Y: {1}", msgMouseEvent.m_i32CursorX, msgMouseEvent.m_i32CursorY);
 
 						// 아래 함수 DrawTextCanvas는 스크린 좌표를 기준으로 문자열을 뷰어에 출력한다.
@@ -79,34 +79,34 @@ namespace FLImagingExamplesCSharp
 						// Parameter order: reference coordinate (Figure object) -> text string -> text color -> text outline color -> font size -> render in real-world size (bool) -> angle -> alignment -> font name -> text alpha (opacity) -> text outline alpha (opacity) -> font thickness -> italic font (bool)
 						layer.DrawTextCanvas(new CFLPoint<double>(10, 10), strPosition, EColor.LIME, EColor.BLACK);
 
-						// 이미지뷰를 갱신
+						// 이미지뷰를 갱신 // Invalidate the image view.
 						viewImage.Invalidate();
 					}
 					break;
 
 				case (uint)EGUIBroadcast.ViewImage_PostLButtonDown:
 					{
-						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅
+						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅 // Cast message to CBroadcastMessage_GUI_ViewImage_MouseEvent.
 						CBroadcastMessage_GUI_ViewImage_MouseEvent msgMouseEvent = message as CBroadcastMessage_GUI_ViewImage_MouseEvent;
 
-						// msgMouseEvent 가 null 인지 확인
+						// msgMouseEvent 가 null 인지 확인 // Check whether msgMouseEvent is null.
 						if(msgMouseEvent == null)
 							break;
 
-						// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅
+						// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅 // Casts the object that invoked the message to CGUIViewImage.
 						CGUIViewImage viewImage = msgMouseEvent.GetCaller() as CGUIViewImage;
 
-						// viewImage 가 null 인지 확인
+						// viewImage 가 null 인지 확인 // Checks whether viewImage is null.
 						if(viewImage == null)
 							break;
 
-						// 이미지뷰의 0번 레이어 가져오기
+						// 이미지뷰의 0번 레이어 가져오기 // Get layer 0 of the image view.
 						CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
-						// 기존에 Layer 에 그려진 도형들을 삭제
+						// 기존에 Layer 에 그려진 도형들을 삭제 // Clear all figures from the layer.
 						layer.Clear();
 
-						// 마우스 좌표를 표시할 문자열 생성
+						// 마우스 좌표를 표시할 문자열 생성 // Create a string to display the mouse coordinates.
 						String strPosition = String.Format("LButtonDown X: {0}, Y: {1}", msgMouseEvent.m_i32CursorX, msgMouseEvent.m_i32CursorY);
 
 						// 아래 함수 DrawTextCanvas는 스크린 좌표를 기준으로 문자열을 뷰어에 출력한다.
@@ -115,34 +115,34 @@ namespace FLImagingExamplesCSharp
 						// Parameter order: reference coordinate (Figure object) -> text string -> text color -> text outline color -> font size -> render in real-world size (bool) -> angle -> alignment -> font name -> text alpha (opacity) -> text outline alpha (opacity) -> font thickness -> italic font (bool)
 						layer.DrawTextCanvas(new CFLPoint<double>(10, 10), strPosition, EColor.RED, EColor.BLACK);
 
-						// 이미지뷰를 갱신
+						// 이미지뷰를 갱신 // Invalidate the image view.
 						viewImage.Invalidate();
 					}
 					break;
 
 				case (uint)EGUIBroadcast.ViewImage_PostLButtonUp:
 					{
-						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅
+						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅 // Cast message to CBroadcastMessage_GUI_ViewImage_MouseEvent.
 						CBroadcastMessage_GUI_ViewImage_MouseEvent msgMouseEvent = message as CBroadcastMessage_GUI_ViewImage_MouseEvent;
 
-						// msgMouseEvent 가 null 인지 확인
+						// msgMouseEvent 가 null 인지 확인 // Check whether msgMouseEvent is null.
 						if(msgMouseEvent == null)
 							break;
 
-						// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅
+						// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅 // Casts the object that invoked the message to CGUIViewImage.
 						CGUIViewImage viewImage = msgMouseEvent.GetCaller() as CGUIViewImage;
 
-						// viewImage 가 null 인지 확인
+						// viewImage 가 null 인지 확인 // Checks whether viewImage is null.
 						if(viewImage == null)
 							break;
 
-						// 이미지뷰의 0번 레이어 가져오기
+						// 이미지뷰의 0번 레이어 가져오기 // Get layer 0 of the image view.
 						CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
-						// 기존에 Layer 에 그려진 도형들을 삭제
+						// 기존에 Layer 에 그려진 도형들을 삭제 // Clear all figures from the layer.
 						layer.Clear();
 
-						// 마우스 좌표를 표시할 문자열 생성
+						// 마우스 좌표를 표시할 문자열 생성 // Create a string to display the mouse coordinates.
 						String strPosition = String.Format("LButtonUp X: {0}, Y: {1}", msgMouseEvent.m_i32CursorX, msgMouseEvent.m_i32CursorY);
 
 						// 아래 함수 DrawTextCanvas는 스크린 좌표를 기준으로 문자열을 뷰어에 출력한다.
@@ -151,7 +151,7 @@ namespace FLImagingExamplesCSharp
 						// Parameter order: reference coordinate (Figure object) -> text string -> text color -> text outline color -> font size -> render in real-world size (bool) -> angle -> alignment -> font name -> text alpha (opacity) -> text outline alpha (opacity) -> font thickness -> italic font (bool)
 						layer.DrawTextCanvas(new CFLPoint<double>(10, 10), strPosition, EColor.BLUE, EColor.BLACK);
 
-						// 이미지뷰를 갱신
+						// 이미지뷰를 갱신 // Invalidate the image view.
 						viewImage.Invalidate();
 					}
 					break;
@@ -187,8 +187,8 @@ namespace FLImagingExamplesCSharp
 			viewImage[0] = new CGUIViewImage();
 			viewImage[1] = new CGUIViewImage();
 
-            // 메세지를 전달 받을 CMessageReceiver 객체 생성 // Create 메세지를 전달 받을 CMessageReceiver object
-            CMessageReceiver msgReceiver = new CMessageReceiver(ref viewImage[0]);
+			// 메세지를 전달 받을 CMessageReceiver 객체 생성 // Create a CMessageReceiver object to receive messages.
+			CMessageReceiver msgReceiver = new CMessageReceiver(ref viewImage[0]);
 
 			do
 			{
@@ -208,7 +208,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 뷰의 시점을 동기화 한다
+				// 뷰의 시점을 동기화 한다 // Synchronize the view point.
 				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize view\n");

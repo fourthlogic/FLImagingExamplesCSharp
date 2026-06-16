@@ -55,17 +55,17 @@ namespace FLImagingExamplesCSharp
 		{
 			do
 			{
-				// 이미지 뷰 유효성 체크
+				// 이미지 뷰 유효성 체크 // Available the image view.
 				if(!m_viewImage.IsAvailable())
 					break;
 
-				// 이미지 뷰의 캔버스 영역을 얻어온다.
+				// 이미지 뷰의 캔버스 영역을 얻어온다. // Get the canvas region of the image view.
 				CFLRect<int> flrlCanvas = m_viewImage.GetClientRectCanvasRegion();
 
-				// 캔버스 영역의 좌표계를 이미지 영역의 좌표계로 변환한다.
+				// 캔버스 영역의 좌표계를 이미지 영역의 좌표계로 변환한다. // Convert the canvas region coordinates to image region coordinates.
 				CFLRect<double> flrdImage = m_viewImage.ConvertCanvasCoordToImageCoord(flrlCanvas);
 
-				// 이미지 영역을 기준으로 생성될 Figure 의 크기와 모양을 사각형으로 설정한다.
+				// 이미지 영역을 기준으로 생성될 Figure 의 크기와 모양을 사각형으로 설정한다. // Set the size and shape of the figure to be created as a rectangle based on the image region.
 				double f64Width = flrdImage.GetWidth() / (double)10;
 				double f64Height = flrdImage.GetHeight() / (double)10;
 				double f64Size = Math.Min(f64Width, f64Height);
@@ -81,6 +81,17 @@ namespace FLImagingExamplesCSharp
 				// ex) EAvailableFigureContextMenu.None -> 활성화 되는 메뉴 없음
 				//     EAvailableFigureContextMenu.All -> 전체 메뉴 활성화
 				//     EAvailableFigureContextMenu.DeclType | EAvailableFigureContextMenu.TemplateType -> Decl Type, Template Type 변환 메뉴 활성화
+				// Create a figure object in the image view.
+				// The last parameter specifies the configuration of the enabled context menus.
+				// EAvailableFigureContextMenu.All enables the default context menus.
+				// To add or remove specific menus, combine enum values using bitwise operations.
+				// Examples:
+				// EAvailableFigureContextMenu.None
+				//     -> No context menus are enabled.
+				// EAvailableFigureContextMenu.All
+				//     -> All context menus are enabled.
+				// EAvailableFigureContextMenu.DeclType | EAvailableFigureContextMenu.TemplateType
+				//     -> Enables the Decl Type and Template Type conversion menus.
 				m_viewImage.PushBackFigureObject(flrdFigure, EAvailableFigureContextMenu.All);
 			}
 			while(false);
@@ -92,16 +103,16 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 이미지 뷰 유효성 체크
+				// 이미지 뷰 유효성 체크 // Available the image view.
 				if(!m_viewImage.IsAvailable())
 					break;
 
-				// 이미지 뷰의 맨 앞의 Figure 를 제거하면서 얻어온다.
+				// 이미지 뷰의 맨 앞의 Figure 를 제거하면서 얻어온다. // Get and remove the first figure object from the image view.
 				flFigure = m_viewImage.PopFrontFigureObject();
 				if(flFigure == null)
 					break;
 
-				// Figure 를 문자열로 얻어온다.
+				// Figure 를 문자열로 변환합니다. // Convert the figure to a string.
 				string strFigure = CFigureUtilities.ConvertFigureObjectToString(flFigure);
 
 				strFigureInfo = strFigure;
@@ -126,11 +137,11 @@ namespace FLImagingExamplesCSharp
 
 			do
 			{
-				// 이미지 뷰 유효성 체크
+				// 이미지 뷰 유효성 체크 // Available the image view.
 				if(!m_viewImage.IsAvailable())
 					break;
 
-				// 이미지 뷰의 Figure object 개수를 얻어온다.
+				// 이미지 뷰의 Figure object 개수를 얻어온다. // Get the number of figure objects in the image view.
 				if(m_viewImage.GetFigureObjectCount() == 0)
 					break;
 

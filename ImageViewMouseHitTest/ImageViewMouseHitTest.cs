@@ -13,56 +13,56 @@ using FLImagingCLR.AdvancedFunctions;
 
 namespace FLImagingExamplesCSharp
 {
-	// 메세지를 전달 받기 위해 CFLBase 를 상속 받아서 구현
+	// 메세지를 전달 받기 위해 CFLBase 를 상속 받아서 구현 // Implements a class derived from CFLBase to receive messages.
 	public class CMessageReceiver : CFLBase
 	{
-		// CMessageReceiver 생성자
+		// CMessageReceiver 생성자 // CMessageReceiver constructor.
 		public CMessageReceiver()
 		{
-			// 메세지를 전달 받기 위해 CBroadcastManager 에 구독 등록
+			// 메세지를 전달 받기 위해 CBroadcastManager 에 구독 등록 // Subscribe to CBroadcastManager to receive messages.
 			CBroadcastManager.Subscribe(this);
 		}
 
 		// CMessageReceiver 소멸자
 		~CMessageReceiver()
 		{
-			// 객체가 소멸할때 메세지 수신을 중단하기 위해 구독을 해제한다.
+			// 객체가 소멸할때 메세지 수신을 중단하기 위해 구독을 해제한다. // Unsubscribe to stop receiving messages when the object is destroyed.
 			CBroadcastManager.Unsubscribe(this);
 		}
 
-		// 메세지가 들어오면 호출되는 함수 OnReceiveBroadcast 오버라이드 하여 구현
+		// 메세지가 들어오면 호출되는 함수 OnReceiveBroadcast 오버라이드 하여 구현 // Override OnReceiveBroadcast, which is called when a message is received.
 		public override void OnReceiveBroadcast(CBroadcastMessage message)
 		{
 			do
 			{
-				// message 가 null 인지 확인
+				// message 가 null 인지 확인 // Check whether message is null.
 				if(message == null)
 					break;
 
-				// 메세지의 채널을 확인
+				// 메세지의 채널을 확인 // Check the message channel.
 				switch(message.GetChannel())
 				{
 				case (uint)EGUIBroadcast.ViewImage_PostMouseMove:
 					{
-						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅
+						// message 객체를 CBroadcastMessage_GUI_ViewImage_MouseEvent 로 캐스팅 // Cast pMessage to CBroadcastMessage_GUI_ViewImage_MouseEvent.
 						CBroadcastMessage_GUI_ViewImage_MouseEvent msgMouseEvent = message as CBroadcastMessage_GUI_ViewImage_MouseEvent;
 
-						// msgMouseEvent 가 null 인지 확인
+						// msgMouseEvent 가 null 인지 확인 // Check whether msgMouseEvent is null.
 						if(msgMouseEvent == null)
 							break;
 
-						// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅
+						// 메세지를 호출한 객체를 CGUIViewImage 로 캐스팅 // Casts the object that invoked the message to CGUIViewImage.
 						CGUIViewImage viewImage = msgMouseEvent.GetCaller() as CGUIViewImage;
 
-						// viewImage 가 null 인지 확인
+						// viewImage 가 null 인지 확인 // Checks whether viewImage is null.
 						if(viewImage == null)
 							break;
 
-						// 현재 마우스가 위치한 영역을 표시할 문자열 생성
+						// 현재 마우스가 위치한 영역을 표시할 문자열 생성 // Creates a string to display the area currently under the mouse cursor.
 						String strHitArea;
 						String str;
 
-						// 현재 마우스가 위치한 영역을 얻어 옵니다.
+						// 현재 마우스가 위치한 영역을 얻어 옵니다. // Retrieves the area currently under the mouse cursor.
 						EGUIViewImageHitArea eHitArea = viewImage.GetHitArea();
 
 						if(eHitArea == EGUIViewImageHitArea.None)
@@ -140,10 +140,10 @@ namespace FLImagingExamplesCSharp
 							strHitArea += ".";
 						}
 
-						// 이미지뷰의 0번 레이어 가져오기
+						// 이미지뷰의 0번 레이어 가져오기 // Get layer 0 of the image view.
 						CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
-						// 기존에 Layer 에 그려진 도형들을 삭제
+						// 기존에 Layer 에 그려진 도형들을 삭제 // Clear all figures from the layer.
 						layer.Clear();
 
 						// 아래 함수 DrawTextCanvas는 스크린 좌표를 기준으로 문자열을 뷰어에 출력한다.
@@ -152,7 +152,7 @@ namespace FLImagingExamplesCSharp
 						// Parameter order: reference coordinate (Figure object) -> text string -> text color -> text outline color -> font size -> render in real-world size (bool) -> angle -> alignment -> font name -> text alpha (opacity) -> text outline alpha (opacity) -> font thickness -> italic font (bool)
 						layer.DrawTextCanvas(new CFLPoint<double>(80, 10), strHitArea, EColor.LIME, EColor.BLACK);
 
-						// 이미지뷰를 갱신
+						// 이미지뷰를 갱신 // Invalidate the image view.
 						viewImage.Invalidate();
 					}
 					break;
@@ -180,7 +180,7 @@ namespace FLImagingExamplesCSharp
 			// before using any features of the FLImaging(R) library
 			CLibraryUtilities.Initialize();
 
-			// 메세지를 전달 받을 CMessageReceiver 객체 생성 // Create 메세지를 전달 받을 CMessageReceiver object
+			// 메세지를 전달 받을 CMessageReceiver 객체 생성 // Create a CMessageReceiver object to receive messages.
 			CMessageReceiver msgReceiver = new CMessageReceiver();
 
 			// 이미지 객체 선언 // Declare the image object
@@ -222,13 +222,13 @@ namespace FLImagingExamplesCSharp
 				}
 
 
-				// 이미지 뷰의 캔버스 영역을 얻어온다.
+				// 이미지 뷰의 캔버스 영역을 얻어온다. // Get the canvas region of the image view.
 				CFLRect<int> flrlCanvas = viewImage.GetClientRectCanvasRegion();
 
-				// 캔버스 영역의 좌표계를 이미지 영역의 좌표계로 변환한다.
+				// 캔버스 영역의 좌표계를 이미지 영역의 좌표계로 변환한다. // Convert the canvas region coordinates to image region coordinates.
 				CFLRect<double> flrdImage = viewImage.ConvertCanvasCoordToImageCoord(flrlCanvas);
 
-				// 이미지 영역을 기준으로 생성될 Figure 의 크기와 모양을 사각형으로 설정한다.
+				// 이미지 영역을 기준으로 생성될 Figure 의 크기와 모양을 사각형으로 설정한다. // Set the size and shape of the figure to be created as a rectangle based on the image region.
 				double f64Width = flrdImage.GetWidth() / 10;
 				double f64Height = flrdImage.GetHeight() / 10;
 				double f64Size = Math.Min(f64Width, f64Height);
@@ -241,16 +241,27 @@ namespace FLImagingExamplesCSharp
 				// 이미지 뷰에 Figure object 를 생성한다.
 				// 가장 마지막 파라미터는 활성화 되는 메뉴의 구성이며, EAvailableFigureContextMenu.All 가 기본 메뉴를 활성화 한다.
 				// 활성화 하고자 하는 메뉴를 추가 혹은 제거 하기 위해서는 enum 값을 비트 연산으로 넣어주면 된다.
-				// ex) EAvailableFigureContextMenu.None . 활성화 되는 메뉴 없음
-				//     EAvailableFigureContextMenu.All . 전체 메뉴 활성화
-				//     EAvailableFigureContextMenu.DeclType | EAvailableFigureContextMenu.TemplateType . Decl Type, Template Type 변환 메뉴 활성화
+				// ex) EAvailableFigureContextMenu.None -> 활성화 되는 메뉴 없음
+				//     EAvailableFigureContextMenu.All -> 전체 메뉴 활성화
+				//     EAvailableFigureContextMenu.DeclType | EAvailableFigureContextMenu.TemplateType -> Decl Type, Template Type 변환 메뉴 활성화
+				// Create a figure object in the image view.
+				// The last parameter specifies the configuration of the enabled context menus.
+				// EAvailableFigureContextMenu.All enables the default context menus.
+				// To add or remove specific menus, combine enum values using bitwise operations.
+				// Examples:
+				// EAvailableFigureContextMenu.None
+				//     -> No context menus are enabled.
+				// EAvailableFigureContextMenu.All
+				//     -> All context menus are enabled.
+				// EAvailableFigureContextMenu.DeclType | EAvailableFigureContextMenu.TemplateType
+				//     -> Enables the Decl Type and Template Type conversion menus.
 				viewImage.PushBackFigureObject(flrdFigureShape, EAvailableFigureContextMenu.None);
 
 
 				// 이미지 뷰를 갱신 // Update image view
 				viewImage.Invalidate(true);
 
-				// 다중 페이지 이미지의 썸네일 미리보기 뷰를 고정
+				// 다중 페이지 이미지의 썸네일 미리보기 뷰를 고정 // Keep the thumbnail preview view fixed for a multi-page image.
 				viewImage.SetFixThumbnailView(true);
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close

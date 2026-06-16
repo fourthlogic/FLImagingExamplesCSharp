@@ -54,7 +54,7 @@ namespace FLImagingExamplesCSharp
 			{
                 m_viewImage = new CGUIViewImage();
 
-				// 메인 윈도우의 핸들을 얻어옵니다.
+				// 메인 윈도우의 핸들을 얻어옵니다. // Retrieves the handle of the main window.
 				IntPtr hWindow = new WindowInteropHelper(this).Handle;
 
                 if (hWindow == null)
@@ -63,21 +63,21 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-				// 이미지 뷰를 생성합니다.
+				// 이미지 뷰를 생성합니다. // Creates an image view.
 				if((res = m_viewImage.CreateAndFitParent((ulong)hWindow)).IsFail())
 					break;
 
-				// 키 이벤트를 부모에게 통지하도록 설정합니다.
+				// 키 이벤트를 부모에게 통지하도록 설정합니다. // Configures key events to be forwarded to the parent window.
 				m_viewImage.EnableKeyEventParentNotification(true);
 
-                // 이미지 뷰에 Ctrl + S 단축키가 동작하지 않도록 설정합니다.
-                List<int> listIgnoreShortcut = new List<int>();
+				// 이미지 뷰에 Ctrl + S 단축키가 동작하지 않도록 설정합니다. // Disables the Ctrl+S shortcut key in the image view.
+				List<int> listIgnoreShortcut = new List<int>();
                 listIgnoreShortcut.Add((int)System.Windows.Forms.Keys.ControlKey);
                 listIgnoreShortcut.Add((int)System.Windows.Forms.Keys.S);
                 m_viewImage.AddIgnoreShortcut(listIgnoreShortcut);
 
-                // 키 다운 이벤트 핸들러를 등록합니다.
-                m_viewImage.AddKeyDownEventHandler(this.ViewImage_KeyDownEvent);
+				// 키 다운 이벤트 핸들러를 등록합니다. // Registers a key-down event handler.
+				m_viewImage.AddKeyDownEventHandler(this.ViewImage_KeyDownEvent);
             }
             while (false);
 
