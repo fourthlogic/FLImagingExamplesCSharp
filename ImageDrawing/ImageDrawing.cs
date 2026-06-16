@@ -56,8 +56,8 @@ namespace FLImagingExamplesCSharp
 			        break;
 		        }
 
-		        // Drawing 이미지를 Src 이미지와 동일한 이미지로 생성
-		        if((res = fliImageDrawing.Assign(fliImage)).IsFail())
+				// Drawing 이미지를 Src 이미지와 동일한 이미지로 생성 // Create the drawing image from the source image.
+				if((res = fliImageDrawing.Assign(fliImage)).IsFail())
 				{
 			        ErrorPrint(res, "Failed to assign the image file.\n");
 			        break;

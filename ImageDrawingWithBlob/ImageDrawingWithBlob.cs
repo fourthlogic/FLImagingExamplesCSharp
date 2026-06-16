@@ -56,8 +56,8 @@ namespace FLImagingExamplesCSharp
 			        break;
 		        }
 
-		        // Drawing 이미지를 Src 이미지와 동일한 이미지로 생성
-		        if((res = fliImageDrawing.Assign(fliImage)).IsFail())
+				// Drawing 이미지를 Src 이미지와 동일한 이미지로 생성 // Create the drawing image from the source image.
+				if((res = fliImageDrawing.Assign(fliImage)).IsFail())
 				{
 			        ErrorPrint(res, "Failed to assign the image file.\n");
 			        break;
@@ -103,9 +103,11 @@ namespace FLImagingExamplesCSharp
 
 				// 처리할 이미지 설정 // Set the image to process
 				sBlob.SetSourceImage(ref fliImage);
-				// 논리 조건 설정
+				// 논리 조건 설정 // Set the logical condition.
 				sBlob.SetLogicalCondition(ELogicalCondition.Less);
 				// 임계값 설정,  위의 조건과 아래의 조건이 합쳐지면 127보다 작은 객체를 검출
+				// Set the threshold value.
+				// Combined with the logical condition above, objects with values less than 127 are detected.
 				sBlob.SetThreshold(127);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
@@ -115,17 +117,18 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 면적이 500보다 작은 객체들을 제거
+				// 결과 객체들 중 해당되는 조건을 가진 객체를 제거 // Remove objects that match the specified condition from the result objects.
+				// 면적이 500 이하의 작은 객체들을 제거 // Remove objects with an area less than or equal to 500.
 				if((res = sBlob.Filter(CBlob.EFilterItem.Area, 500, ELogicalCondition.LessEqual)).IsFail())
 				{
 					ErrorPrint(res, "Blob filtering algorithm error occurred.");
 					break;
 				}
 
-				// Blob 결과를 얻어오기 위해 FigureArray 선언
+				// Blob 결과를 얻어오기 위해 FigureArray 선언 // Create a FigureArray for the blob results.
 				CFLFigureArray flfaBoundaryRects = new CFLFigureArray();
 
-				// Blob 결과들 중 Boundary Rectangle 을 얻어옴
+				// Blob 결과들 중 Boundary Rectangle 을 얻어옴 // Get the bounding rectangles from the blob results.
 				if((res = sBlob.GetResultBoundaryRects(ref flfaBoundaryRects)).IsFail())
 				{
 					ErrorPrint(res, "Failed to get boundary rects from the Blob object.");
@@ -161,7 +164,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// Rect 정보값을 각각 확인하는 코드
+				// Rect 정보값을 각각 확인하는 코드 // Code for examining each rectangle information value.
 				for(Int64 i = 0; i < flfaBoundaryRects.GetCount(); ++i)
 				{
 					CFLRect<Int32> flrRect = (CFLRect<Int32>)flfaBoundaryRects.GetAt(i);
@@ -186,6 +189,9 @@ namespace FLImagingExamplesCSharp
 
 						// 아래 함수 DrawTextImage는 Image좌표를 기준으로 하는 Text를 Drawing 한다는 것을 의미한다.
 						// 파라미터 순서 : 레이어 -> 문자열 좌표 -> 문자열 지정 -> 문자열 색 -> 면 색 -> 폰트 크기 -> 실제 크기로 그릴지의 여부 -> 각도 -> 문자열의 위치 기준
+						// The DrawTextImage function draws text based on image coordinates.
+						// Parameter order:
+						// Layer -> text position -> text string -> text color -> fill color -> font size -> whether to render in real-world size -> angle -> text alignment
 						layer2.DrawTextImage(flrRect.GetCenter(), strNumber, EColor.CYAN, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.CENTER_CENTER);
 						layer2.DrawTextImage(flpLeftTop, strLeftTop, EColor.YELLOW, EColor.BLACK, 12, false, 0, EGUIViewImageTextAlignment.RIGHT_BOTTOM);
 						layer2.DrawTextImage(flpRightBottom, strRightBottom, EColor.YELLOW, EColor.BLACK);
