@@ -184,14 +184,14 @@ namespace FLImagingExamplesCSharp
 
 					if(eMotionType == EMotion.SearchOriginPosition)
 					{
-						// 원점 복귀 운전을 진행합니다. // 
+						// 원점 복귀 운전을 진행합니다. // Execute a homing operation.
 						if((res = pDMAxis.SearchOriginPosition()).IsFail())
 						{
 							ErrorPrint(res, "Failed to search origin position.\n");
 							break;
 						}
 
-						// 모션이 정지 될때까지 대기 // Wait until motion stops/
+						// 모션이 정지 될때까지 대기 // Wait until motion stops
 						do
 						{
 							Thread.Sleep(100);
@@ -229,7 +229,7 @@ namespace FLImagingExamplesCSharp
 								break;
 							}
 
-							// 모션이 정지 될때까지 대기 // Wait until motion stops/
+							// 모션이 정지 될때까지 대기 // Wait until motion stops
 							do
 							{
 								Thread.Sleep(100);
@@ -249,7 +249,7 @@ namespace FLImagingExamplesCSharp
 								break;
 							}
 
-							// 모션이 정지 될때까지 대기 // Wait until motion stops/
+							// 모션이 정지 될때까지 대기 // Wait until motion stops
 							do
 							{
 								Thread.Sleep(100);
