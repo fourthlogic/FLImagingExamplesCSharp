@@ -15,29 +15,30 @@ using FLImagingCLR.Devices;
 
 namespace FLImagingExamplesCSharp
 {
-    // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
-    public class CDeviceEventImageEx : CDeviceEventImageBase
+	// 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
+	// Inherit from CDeviceEventImageBase to receive image acquisition events from the camera.
+	public class CDeviceEventImageEx : CDeviceEventImageBase
 	{
-        // CDeviceEvent3DEx 생성자
-        public CDeviceEventImageEx()
+		// CDeviceEventImageEx 생성자 // Constructor of CDeviceEventImageEx
+		public CDeviceEventImageEx()
 		{
         }
 
-        // 취득한 이미지를 표시할 이미지 뷰를 설정하는 함수
-        public void SetView3D(CGUIView3D view3D)
+		// 취득한 데이터를 표시할 3D 뷰를 설정하는 함수 // Sets the 3D view used to display the acquired data.
+		public void SetView3D(CGUIView3D view3D)
 		{
             m_view3D = view3D;
         }
 
-        // 카메라에서 이미지 취득 시 호출 되는 함수
-        public override void OnAcquisition(CDeviceImageBase pDeviceImage)
+		// 카메라에서 데이터 취득 시 호출 되는 함수 // Callback function called when a data is acquired from the camera.
+		public override void OnAcquisition(CDeviceImageBase pDeviceImage)
 		{
             do
 			{
 	            if(m_view3D == null)
 		            break;
 
-	            // 3D 뷰의 유효성을 확인한다.
+	            // 3D 뷰의 유효성을 확인한다. // Check the validity of the 3D view.
 	            if(!m_view3D.IsAvailable())
 		            break;
 
@@ -46,43 +47,43 @@ namespace FLImagingExamplesCSharp
 	            if(camera == null)
 		            break;
 
-	            // 데이터 객체 선언
+	            // 데이터 객체 선언 // Declare a 3D data object.
 	            CFL3DObject floData = new CFL3DObject();
 
-	            // 카메라에서 취득 한 데이터를 얻어온다.
+	            // 카메라에서 취득 한 데이터를 얻어온다. // Get the 3D data acquired from the camera.
 	            camera.GetAcquired3DData(ref floData);
 
                 if(floData == null)
                     break;
 
-	            // 3D 뷰의 업데이트를 막습니다.
+	            // 3D 뷰의 업데이트를 막습니다. // Lock updates to the 3D view.
 	            m_view3D.LockUpdate();
 
-	            // 3D 뷰의 유효성을 확인한다.
+	            // 3D 뷰의 유효성을 확인한다. // Check the validity of the 3D view.
 	            if(!m_view3D.IsAvailable())
 		            break;
 
-	            // 3D 뷰의 객체 개수를 얻어옵니다.
+	            // 3D 뷰의 객체 개수를 얻어옵니다. // Get the number of objects in the 3D view.
 	            int i32ObjectCount = m_view3D.GetObjectCount();
 
-	            // 3D 뷰의 객체들을 모두 클리어합니다.
+	            // 3D 뷰의 객체들을 모두 클리어합니다. // Clear all objects in the 3D view.
 	            m_view3D.ClearObjects();
 
-	            // 3D 뷰의 유효성을 확인한다.
+	            // 3D 뷰의 유효성을 확인한다. // Check the validity of the 3D view.
 	            if(!m_view3D.IsAvailable())
 		            break;
 
-	            // 3D 뷰에 객체를 추가합니다.
+	            // 3D 뷰에 객체를 추가합니다. // Push objects to the 3D view.
 	            m_view3D.PushObject(floData);
 
-	            // 3D 뷰의 유효성을 확인한다.
+	            // 3D 뷰의 유효성을 확인한다. // Check the validity of the 3D view.
 	            if(!m_view3D.IsAvailable())
 		            break;
 
-	            // 3D 뷰의 업데이트 막은 것을 해제합니다.
+	            // 3D 뷰의 업데이트 막은 것을 해제합니다. // Unlock 3D view updates.
 	            m_view3D.UnlockUpdate();
 
-	            // 3D 뷰의 스케일을 조정합니다.
+	            // 3D 뷰의 스케일을 조정합니다. // Adjust the scale of the 3D view.
 	            if(i32ObjectCount == 0)
 		            m_view3D.ZoomFit();
             }
@@ -106,8 +107,8 @@ namespace FLImagingExamplesCSharp
             // 이미지 뷰 선언 // Declare the 3D view
 	        CGUIView3D view3D = new CGUIView3D();
 
-	        // Arena3D 카메라 선언
-	        CDeviceCameraArena3D camArena3D = new CDeviceCameraArena3D();
+			// Arena3D 카메라 선언 // Declare an Arena3D camera.
+			CDeviceCameraArena3D camArena3D = new CDeviceCameraArena3D();
 
 	        do
 			{
@@ -116,7 +117,7 @@ namespace FLImagingExamplesCSharp
 		        int i32SelectDevice = -1;
 		        String strConnection = "";
 
-		        // 장치 찾기 방법을 선택합니다.
+		        // 장치 찾기 방법을 선택합니다. // Select the detection method
 		        while(true)
 				{
 			        Console.Write("1. Auto Detect\n");
@@ -159,7 +160,7 @@ namespace FLImagingExamplesCSharp
 				{
                     List<String> listSerialNumbers = new List<String>();
 
-                    // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
+                    // 연결되어 있는 카메라의 시리얼 번호를 얻는다. // Get the serial number of the connected camera.
                     drResult = camArena3D.GetAutoDetectCameraSerialNumbers(ref listSerialNumbers);
 
 			        if(drResult.IsFail() || listSerialNumbers == null || listSerialNumbers.Count == 0)
@@ -169,7 +170,7 @@ namespace FLImagingExamplesCSharp
 				        break;
 			        }
 
-			        // 연결 할 카메라를 선택합니다.
+			        // 연결 할 카메라를 선택합니다. // Select the camera to connect to.
 			        while(true)
 					{
 				        for(int i = 0; i < listSerialNumbers.Count; ++i)
@@ -202,27 +203,26 @@ namespace FLImagingExamplesCSharp
 		        }
 		        else
 				{
-			        // 시리얼 번호를 입력 받는다.
+			        // 시리얼 번호를 입력 받습니다. // Enter the serial number.
                     Console.Write("Input Serial Number: ");
 
                     strConnection = Console.ReadLine();
 		        }
 
-		        // 이벤트를 받을 객체 선언
+		        // 이벤트를 받을 객체 선언 // Declare an event object.
                 CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
 
-		        // 카메라에 이벤트 객체 설정
+		        // 카메라에 이벤트 객체 설정 // Set the event object for the camera.
                 camArena3D.RegisterDeviceEvent(eventImage);
 
-		        // 인덱스에 해당하는 카메라로 연결을 설정한다.
 		        if(bAutoDetect)
-                    // 인덱스에 해당하는 카메라로 연결을 설정합니다.
-                    drResult = camArena3D.AutoDetectCamera(i32SelectDevice);
+					// 인덱스에 해당하는 카메라로 연결을 설정합니다. // Set the camera specified by the index for connection.
+					drResult = camArena3D.AutoDetectCamera(i32SelectDevice);
 		        else
-                    // 시리얼 번호를 설정합니다.
+                    // 시리얼 번호를 설정합니다. // Set the serial number.
                     camArena3D.SetSerialNumber(strConnection);
 
-		        // 카메라를 초기화 합니다.
+		        // 카메라를 초기화 합니다. // Initialize the camera.
                 drResult = camArena3D.Initialize();
 
                 if (drResult.IsFail())
@@ -241,7 +241,7 @@ namespace FLImagingExamplesCSharp
 
                 eventImage.SetView3D(view3D);
 
-		        // 카메라를 Live 합니다.
+		        // 카메라를 Live 합니다. // Start live acquisition.
                 drResult = camArena3D.Live();
 
                 if (drResult.IsFail())
@@ -256,7 +256,7 @@ namespace FLImagingExamplesCSharp
 	        }
 	        while(false);
 
-	        // 카메라의 초기화를 해제합니다.
+	        // 카메라의 초기화를 해제합니다. // Terminate the camera.
 	        camArena3D.Terminate();
 			camArena3D.ClearDeviceEvents();
 

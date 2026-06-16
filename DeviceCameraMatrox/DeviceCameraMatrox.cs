@@ -15,40 +15,41 @@ using FLImagingCLR.Devices;
 
 namespace FLImagingExamplesCSharp
 {
-    // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
-    public class CDeviceEventImageEx : CDeviceEventImageBase
+	// 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
+	// Inherit from CDeviceEventImageBase to receive image acquisition events from the camera.
+	public class CDeviceEventImageEx : CDeviceEventImageBase
 	{
-        // CDeviceEventImageEx 생성자
+        // CDeviceEventImageEx 생성자 // Constructor of CDeviceEventImageEx
         public CDeviceEventImageEx()
 		{
-            // 이미지를 받을 객체 생성 // Create 이미지를 받을 object
+            // 이미지를 받을 객체 생성 // Create an object to receive images.
             m_fliImage = new CFLImage();
         }
 
-        // 취득한 이미지를 표시할 이미지 뷰를 설정하는 함수
+        // 취득한 이미지를 표시할 이미지 뷰를 설정하는 함수 // Sets the image view to display acquired images.
         public void SetViewImage(CGUIViewImage viewImage)
 		{
             m_viewImage = viewImage;
         }
 
-        // 카메라에서 이미지 취득 시 호출 되는 함수
+        // 카메라에서 이미지 취득 시 호출 되는 함수 // Callback function called when an image is acquired from the camera.
         public override void OnAcquisition(CDeviceImageBase pDeviceImage)
 		{
-            // 이미지 뷰의 유효성을 확인한다.
+            // 이미지 뷰의 유효성을 확인한다. // Check the validity of the image view.
             if (m_viewImage.IsAvailable())
 			{
-				// 카메라에서 취득 한 이미지를 얻어온다.
+				// 카메라에서 취득 한 이미지를 얻어온다. // Get the image acquired from the camera.
 				m_fliImage.Lock();
 				pDeviceImage.GetAcquiredImage(ref m_fliImage);
 				m_fliImage.Unlock();
 
 				if (m_viewImage.GetImage() != m_fliImage)
 				{
-                    // 이미지 뷰에 이미지 포인터 설정
+                    // 이미지 뷰에 이미지 포인터 설정 // Set the image pointer for the image view.
                     m_viewImage.SetImagePtr(ref m_fliImage);
                 }
 
-                // 이미지 뷰를 재갱신 한다.
+                // 이미지 뷰를 재갱신 한다. // Invalidate the image view.
                 m_viewImage.Invalidate();
             }
         }
@@ -81,8 +82,8 @@ namespace FLImagingExamplesCSharp
 	        // 이미지 뷰 선언 // Declare image view
 	        CGUIViewImage viewImage = new CGUIViewImage();
 
-	        // Matrox 카메라 선언
-	        CDeviceCameraMatrox camMatrox = new CDeviceCameraMatrox();
+			// Matrox 카메라 선언 // Declare Matrox camera
+			CDeviceCameraMatrox camMatrox = new CDeviceCameraMatrox();
 
 	        do
 			{
@@ -93,11 +94,11 @@ namespace FLImagingExamplesCSharp
 		        int i32DeviceIndex = 0;
 		        int i32ModuleIndex = 0;
 
-                // Cam file 의 전체 경로를 입력합니다.
+                // Cam file 의 전체 경로를 입력합니다. // Enter the full path of the CAM file.
                 Console.Write("Enter camfile full path (e.g. C:/Camfile/AnyCamfile.cam): ");
                 strCamfilePath = Console.ReadLine();
 
-                // 장치 타입을 입력합니다.
+                // 장치 타입을 입력합니다. // Enter the device type.
                 Console.Write("Device type\n");
                 Console.Write("1.Clarity UHD\t\t2.Concord POE\t\t3.GenTL\n");
                 Console.Write("4.GevIQ\t\t\t5.GigE\t\t\t6.Host\n");
@@ -112,14 +113,14 @@ namespace FLImagingExamplesCSharp
                 if (Int32.TryParse(strInput, out i32DeviceType) == true)
                     eDeviceType = (CDeviceCameraMatrox.EDeviceType)i32DeviceType;
 
-                // 장치의 인덱스를 입력합니다.
+                // 장치의 인덱스를 입력합니다. // Enter the device index.
                 Console.Write("Enter device index: ");
                 strInput = Console.ReadLine();
 
                 if(Int32.TryParse(strInput, out i32DeviceIndex) == false)
                     i32DeviceIndex = 0;
 
-                // 모듈의 인덱스를 입력합니다.
+                // 모듈의 인덱스를 입력합니다. // Enter the module index.
                 Console.Write("Enter module index: ");
                 strInput = Console.ReadLine();
 
@@ -128,19 +129,19 @@ namespace FLImagingExamplesCSharp
 
 		        Console.Write("\n");
 
-		        // 이벤트를 받을 객체 선언
+		        // 이벤트를 받을 객체 선언 // Declare an event object.
 		        CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
 
-		        // 카메라에 이벤트 객체 설정
+		        // 카메라에 이벤트 객체 설정 // Set the event object for the camera.
 		        camMatrox.RegisterDeviceEvent(eventImage);
 
-		        // 카메라에 장치 설정
-                camMatrox.SetCamFilePath(strCamfilePath);
+				// 카메라에 장치 설정 // Configure the camera device.
+				camMatrox.SetCamFilePath(strCamfilePath);
                 camMatrox.SetDeviceType(eDeviceType);
                 camMatrox.SetDeviceIndex(i32DeviceIndex);
                 camMatrox.SetModuleIndex(i32ModuleIndex);
 
-		        // 카메라를 초기화 합니다.
+		        // 카메라를 초기화 합니다. // Initialize the camera.
 		        if((res = camMatrox.Initialize()).IsFail())
 				{
 			        ErrorPrint(res, "Failed to initialize the camera.\n");
@@ -156,7 +157,7 @@ namespace FLImagingExamplesCSharp
 
 		        eventImage.SetViewImage(viewImage);
 
-		        // 카메라를 Live 합니다.
+		        // 카메라를 Live 합니다. // Start live acquisition.
 		        if((res = camMatrox.Live()).IsFail())
 				{
 			        ErrorPrint(res, "Failed to live the camera.\n");
@@ -169,7 +170,7 @@ namespace FLImagingExamplesCSharp
 	        }
 	        while(false);
 
-	        // 카메라의 초기화를 해제합니다.
+	        // 카메라의 초기화를 해제합니다. // Terminate the camera.
 	        camMatrox.Terminate();
 			camMatrox.ClearDeviceEvents();
 		}

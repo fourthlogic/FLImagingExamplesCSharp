@@ -15,37 +15,38 @@ using FLImagingCLR.Devices;
 
 namespace FLImagingExamplesCSharp
 {
-    // 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
-    public class CDeviceEventImageEx : CDeviceEventImageBase
+	// 카메라에서 이미지 취득 이벤트를 받기 위해 CDeviceEventImageBase 를 상속 받아서 구현
+	// Inherit from CDeviceEventImageBase to receive image acquisition events from the camera.
+	public class CDeviceEventImageEx : CDeviceEventImageBase
 	{
-        // CDeviceEventImageEx 생성자
+        // CDeviceEventImageEx 생성자 // Constructor of CDeviceEventImageEx
         public CDeviceEventImageEx()
 		{
-            // 이미지를 받을 객체 생성 // Create 이미지를 받을 object
+            // 이미지를 받을 객체 생성 // Create an object to receive images.
             m_fliImage = new CFLImage();
         }
 
-        // 취득한 이미지를 표시할 이미지 뷰를 설정하는 함수
+        // 취득한 이미지를 표시할 이미지 뷰를 설정하는 함수 // Sets the image view to display acquired images.
         public void SetViewImage(CGUIViewImage viewImage)
 		{
             m_viewImage = viewImage;
 
-            // 이미지 뷰에 이미지 포인터 설정
+            // 이미지 뷰에 이미지 포인터 설정 // Set the image pointer for the image view.
             m_viewImage.SetImagePtr(ref m_fliImage);
         }
 
-        // 카메라에서 이미지 취득 시 호출 되는 함수
+        // 카메라에서 이미지 취득 시 호출 되는 함수 // Callback function called when an image is acquired from the camera.
         public override void OnAcquisition(CDeviceImageBase pDeviceImage)
 		{
-            // 이미지 뷰의 유효성을 확인한다.
+            // 이미지 뷰의 유효성을 확인한다. // Check the validity of the image view.
             if (m_viewImage.IsAvailable())
 			{
-				// 카메라에서 취득 한 이미지를 얻어온다.
+				// 카메라에서 취득 한 이미지를 얻어온다. // Get the image acquired from the camera.
 				m_fliImage.Lock();
 				pDeviceImage.GetAcquiredImage(ref m_fliImage);
 				m_fliImage.Unlock();
 
-				// 이미지 뷰를 재갱신 한다.
+				// 이미지 뷰를 재갱신 한다. // Invalidate the image view.
 				m_viewImage.Invalidate();
             }
         }
@@ -68,8 +69,8 @@ namespace FLImagingExamplesCSharp
             // 이미지 뷰 선언 // Declare the image view
 	        CGUIViewImage viewImage = new CGUIViewImage();
 
-	        // Crevis 카메라 선언
-	        CDeviceCameraCrevis camCrevis = new CDeviceCameraCrevis();
+			// Crevis 카메라 선언 // Declare Crevis camera
+			CDeviceCameraCrevis camCrevis = new CDeviceCameraCrevis();
 
 	        do
 			{
@@ -81,7 +82,7 @@ namespace FLImagingExamplesCSharp
 		        CDeviceGenICamBase.EConnectionMethod eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
 		        String strConnection = "";
 
-		        // 장치 타입을 선택합니다.
+		        // 장치 타입을 선택합니다. // Select the device type.
 		        while(true)
 				{
 			        Console.Write("1. GigE\n");
@@ -120,7 +121,7 @@ namespace FLImagingExamplesCSharp
 
 		        Console.Write("\n");
 
-		        // 장치 찾기 방법을 선택합니다.
+		        // 장치 찾기 방법을 선택합니다. // Select the detection method
 		        while(true)
 				{
 			        Console.Write("1. Auto Detect\n");
@@ -163,7 +164,7 @@ namespace FLImagingExamplesCSharp
 				{
                     List<String> listSerialNumbers = new List<String>();
 
-			        // 연결되어 있는 카메라의 시리얼 번호를 얻는다.
+			        // 연결되어 있는 카메라의 시리얼 번호를 얻는다. // Get the serial number of the connected camera.
 			        switch(eDeviceType)
 					{
 			        case CDeviceGenICamTypeBase.EDeviceType.GigE:
@@ -185,7 +186,7 @@ namespace FLImagingExamplesCSharp
 				        break;
 			        }
 
-			        // 연결 할 카메라를 선택합니다.
+			        // 연결 할 카메라를 선택합니다. // Select the camera to connect to.
 			        while(true)
 					{
 				        for(int i = 0; i < listSerialNumbers.Count; ++i)
@@ -220,7 +221,7 @@ namespace FLImagingExamplesCSharp
 				{
 			        if(eDeviceType == CDeviceGenICamTypeBase.EDeviceType.GigE)
 					{
-				        // 연결 방법을 선택합니다.
+				        // 연결 방법을 선택합니다. // Select the connection method.
 				        while(true)
 						{
 					        Console.Write("1. Serial Number\n");
@@ -261,7 +262,7 @@ namespace FLImagingExamplesCSharp
 			        else
 				        eConnectionMethod = CDeviceGenICamBase.EConnectionMethod.SerialNumber;
 
-			        // 시리얼 번호 혹은 IP 주소를 입력 받는다.
+			        // 시리얼 번호 혹은 IP 주소를 입력 받는다. // Enter the serial number or IP address.
 			        if(eConnectionMethod == CDeviceGenICamBase.EConnectionMethod.SerialNumber)
 				        Console.Write("Input Serial Number: ");
 			        else
@@ -270,16 +271,16 @@ namespace FLImagingExamplesCSharp
                     strConnection = Console.ReadLine();
 		        }
 
-		        // 이벤트를 받을 객체 선언
+		        // 이벤트를 받을 객체 선언 // Declare an event object.
 		        CDeviceEventImageEx eventImage = new CDeviceEventImageEx();
 
-		        // 카메라에 이벤트 객체 설정
+		        // 카메라에 이벤트 객체 설정 // Set the event object for the camera.
 		        camCrevis.RegisterDeviceEvent(eventImage);
 
-		        // 카메라에 장치 타입 설정
+		        // 카메라에 장치 타입 설정 // Set the device type for the camera.
 		        camCrevis.SetDeviceType(eDeviceType);
 
-		        // 인덱스에 해당하는 카메라로 연결을 설정한다.
+		        // 인덱스에 해당하는 카메라로 연결을 설정합니다. // Set the camera specified by the index for connection.
 		        if(bAutoDetect)
 				{
 			        switch(eDeviceType)
@@ -298,18 +299,18 @@ namespace FLImagingExamplesCSharp
 		        }
 		        else
 				{
-			        // 장치 연결 방법을 설정합니다.
+			        // 장치 연결 방법을 설정합니다. // Set the device connection method.
 			        camCrevis.SetConnectionMethod(eConnectionMethod);
 
 			        if(eConnectionMethod == CDeviceGenICamBase.EConnectionMethod.SerialNumber)
-				        // 시리얼 번호를 설정합니다.
+				        // 시리얼 번호를 설정합니다. // Set the serial number.
 				        camCrevis.SetSerialNumber(strConnection);
 			        else
-				        // IP 주소를 설정합니다.
+				        // IP 주소를 설정합니다. // Set the IP address.
                         camCrevis.SetIPAddress(strConnection);
 		        }
 
-		        // 카메라를 초기화 합니다.
+		        // 카메라를 초기화 합니다. // Initialize the camera.
                 drResult = camCrevis.Initialize();
                 if (drResult.IsFail())
 				{
@@ -327,7 +328,7 @@ namespace FLImagingExamplesCSharp
 
                 eventImage.SetViewImage(viewImage);
 
-		        // 카메라를 Live 합니다.
+		        // 카메라를 Live 합니다. // Start live acquisition.
                 drResult = camCrevis.Live();
                 if (drResult.IsFail())
 				{
@@ -341,7 +342,7 @@ namespace FLImagingExamplesCSharp
 	        }
 	        while(false);
 
-	        // 카메라의 초기화를 해제합니다.
+	        // 카메라의 초기화를 해제합니다. // Terminate the camera.
 	        camCrevis.Terminate();
 			camCrevis.ClearDeviceEvents();
 
