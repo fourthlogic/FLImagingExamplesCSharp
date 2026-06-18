@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -138,6 +138,8 @@ namespace FLImagingExamplesCSharp
 					ErrorPrint(eResult, "Failed to display the result object.\n");
 					break;
 				}
+
+				view3D.GetView3DObject(0).SetOpacity(0.5f);
 
 				CGUIView3DLayer layer3D = view3D.GetLayer(0);
 				layer3D.Clear();
