@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0AFA5EDA-4D2B-4BD4-9024-A840DEFC11B1}</ProjectGuid>
+    <ProjectGuid>{39919C86-0393-4A7D-9849-480CA2A0947E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SaliencyMap</RootNamespace>
-    <AssemblyName>SaliencyMap</AssemblyName>
+    <RootNamespace>SaliencyMapGraphBased</RootNamespace>
+    <AssemblyName>SaliencyMapGraphBased</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,7 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SaliencyMap.cs" />
+    <Compile Include="SaliencyMapGraphBased.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
