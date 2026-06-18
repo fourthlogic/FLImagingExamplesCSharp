@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class SaliencyMap
+	class SaliencyMapGraphBased
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -100,8 +100,8 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-                // SaliencyMap 객체 생성 // Create SaliencyMap object
-                CSaliencyMap saliencyMap = new CSaliencyMap();
+				// SaliencyMapGraphBased 객체 생성 // Create SaliencyMapGraphBased object
+				CSaliencyMapGraphBased saliencyMap = new CSaliencyMapGraphBased();
                 // Source 이미지 설정 // Set source image
                 saliencyMap.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set destination image 
@@ -110,8 +110,8 @@ namespace FLImagingExamplesCSharp
                 // 알고리즘 수행 // Execute the algorithm
                 if ((res = (saliencyMap.Execute())).IsFail())
 				{
-                    //ErrorPrint(res, "Failed to execute SaliencyMap.");
-                    Console.WriteLine(res.GetString());
+					//ErrorPrint(res, "Failed to execute Saliency Map Graph Based.");
+					Console.WriteLine(res.GetString());
                     break;
                 }
 
