@@ -27,6 +27,18 @@ namespace FLImagingExamplesCSharp
 		{
 			CResult res = new CResult(EResult.UnknownError);
 
+
+			CMatrixFor3DTransform<float> mat3D = new CMatrixFor3DTransform<float>();
+			CFLGeometry3DAxis<float> axisOfSym = new CFLGeometry3DAxis<float>(
+				new CFLPoint3<float>(1, 2, 3), new CFLGeometry3DDirection<float>(3, 4, 5));
+			mat3D.SetReflectionTransform(axisOfSym);
+			mat3D.GetScaleFactor();
+			mat3D.GetTransformType();
+			mat3D.GetTranslationPart();
+			mat3D.Invert();
+			//System.Console.Write("{e}");
+
+			//ETransformType
 			do
 			{
 				if((res = alg.GetCoordinateConverter(ref converter)).IsFail())
