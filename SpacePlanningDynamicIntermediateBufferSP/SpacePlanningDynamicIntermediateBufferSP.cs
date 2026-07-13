@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 
 using FLImagingCLR;
 using FLImagingCLR.Base;
@@ -517,12 +519,32 @@ namespace FLImagingExamplesCSharp
 			itemChances.Add(2f);
 		}
 
-		static CResult LearnDefaultModel(CSpacePlanningDynamicSP alg, List<float> itemChances)
+		static bool IsCacheUpToDate(string strCache, string strReference)
+		{
+			if(!File.Exists(strCache))
+				return false;
+
+			if(!File.Exists(strReference))
+				return false;
+
+			return File.GetLastWriteTimeUtc(strCache) > File.GetLastWriteTimeUtc(strReference);
+		}
+
+		static string DescribeStrategy(CSpacePlanningDynamicSP alg, SSpacePlanningStrategyId sStrategyId)
+		{
+			SStrategyInfo info = new SStrategyInfo();
+			string strName = (alg.GetStrategyInfo(sStrategyId, ref info).IsOK() && info.strStrategyName != null) ? info.strStrategyName : "?";
+			return "\"" + strName + "\" {" + sStrategyId.eGroup.ToString() + ", " + sStrategyId.i32IDInStrategy + "}";
+		}
+
+		static CResult ConfigureAndLearnDefaultModel(CSpacePlanningDynamicSP alg, List<float> itemChances)
 		{
 			CResult res = new CResult(EResult.UnknownError);
 
 			do
 			{
+				alg.Clear();
+
 				SBinSpec<float>[] arrDefaultBinSpecs = new SBinSpec<float>[]
 				{
 					new SBinSpec<float>(9f, 12f, 10f),
@@ -555,17 +577,54 @@ namespace FLImagingExamplesCSharp
 				if(res.IsFail())
 					break;
 
-				InitializeDefaultSourceItemChances(itemChances);
 				SRandomSequenceParameters parameters = SRandomSequenceParameters.CreateInfinite(itemChances, 2);
 				if((res = alg.SetRandomSequenceParameters(parameters)).IsFail())
 					break;
 
-				if((res = alg.Learn()).IsFail())
-					break;
-
-				res = alg.SelectStrategy(alg.GetOptimalStrategyId());
+				res = alg.Learn();
 			}
 			while(false);
+
+			return res;
+		}
+
+		static CResult LearnOrLoadDefaultModel(CSpacePlanningDynamicSP alg, List<float> itemChances, string strCache, string strSource)
+		{
+			CResult res = new CResult(EResult.UnknownError);
+
+			if(IsCacheUpToDate(strCache, strSource))
+			{
+				res = alg.Load(strCache);
+
+				if(res.IsOK() && alg.IsLearned())
+				{
+					SRandomSequenceParameters parameters = new SRandomSequenceParameters();
+					if((res = alg.GetRandomSequenceParameters(ref parameters)).IsFail())
+						return res;
+
+					itemChances.Clear();
+					itemChances.AddRange(parameters.itemChances);
+
+					SSpacePlanningStrategyId sSelected = alg.GetSelectedStrategyId();
+					Console.WriteLine("Loaded cached model: {0} (strategy {1})", strCache, DescribeStrategy(alg, sSelected));
+					return res;
+				}
+			}
+
+			InitializeDefaultSourceItemChances(itemChances);
+
+			if((res = ConfigureAndLearnDefaultModel(alg, itemChances)).IsFail())
+				return res;
+
+			SSpacePlanningStrategyId sOptimal = alg.GetOptimalStrategyId();
+			if((res = alg.SelectStrategy(sOptimal)).IsFail())
+				return res;
+
+			CResult resSave = alg.Save(strCache);
+			if(resSave.IsFail())
+				Console.WriteLine("Warning: failed to cache model ({0}): {1}", strCache, resSave.GetString());
+			else
+				Console.WriteLine("Learned and cached model: {0} (strategy {1})", strCache, DescribeStrategy(alg, sOptimal));
 
 			return res;
 		}
@@ -1070,10 +1129,13 @@ namespace FLImagingExamplesCSharp
 			{
 				CSpacePlanningDynamicSP alg = new CSpacePlanningDynamicSP();
 
+				string strSource = Assembly.GetExecutingAssembly().Location;
+				string strCache = string.Format("SpacePlanningDynamicIntermediateBuffer.{0}", alg.GetFileExtension());
+
 				List<float> itemChances = new List<float>();
-				if((res = LearnDefaultModel(alg, itemChances)).IsFail())
+				if((res = LearnOrLoadDefaultModel(alg, itemChances, strCache, strSource)).IsFail())
 				{
-					ErrorPrint(res, "Failed to learn the default model.\n");
+					ErrorPrint(res, "Failed to prepare the default model.\n");
 					break;
 				}
 

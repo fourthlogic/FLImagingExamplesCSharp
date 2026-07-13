@@ -361,3 +361,7 @@ ASALocalRun/
 *flmm
 *flg
 *.flmg
+
+# Space Planning Files
+*.flsps
+*.flspd
