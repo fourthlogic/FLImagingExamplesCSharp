@@ -186,7 +186,7 @@ namespace FLImagingExamplesCSharp
 				CClassifierDL classifierDL = new CClassifierDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
-				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
+				COptimizerSpecAdamGradientDescentDL optSpec = new COptimizerSpecAdamGradientDescentDL();
 
 				// 학습할 이미지 설정 // Set the image to learn
 				classifierDL.SetLearningImage(ref fliLearnImage);
@@ -215,7 +215,7 @@ namespace FLImagingExamplesCSharp
 				classifierDL.SetLearningStopCondition("f1score >= 0.999");
 
 				// 자동 저장 옵션 설정 // Set Auto-Save Options
-				CAutoSaveSpec autoSaveSpec = new CAutoSaveSpec();
+				CAutoSaveSpecDL autoSaveSpec = new CAutoSaveSpecDL();
 
 				// 자동 저장 활성화 // Enable Auto-Save
 				// 저장 때문에 발생하는 속도 저하를 막기 위해 예제에서는 코드 사용법만 표시하고 옵션은 끔 // To prevent performance degradation caused by saving, the examples only demonstrate how to use the code, with the saving option disabled.
@@ -230,12 +230,12 @@ namespace FLImagingExamplesCSharp
 				classifierDL.SetLearningAutoSaveSpec(autoSaveSpec);
 
 				// 공통 증강 스펙 설정 // Set common Augmentation Spec
-				CAugmentationSpec augCommonSpec = new CAugmentationSpec();
+				CAugmentationSpecDL augCommonSpec = new CAugmentationSpecDL();
 				augCommonSpec.EnableAugmentation(false);
 				classifierDL.SetLearningAugmentationSpec(augCommonSpec);
 
 				// 클래스 0,1 번에 대한 증강 Preset 설정 // Setting the augmentation preset for classes 0 and 1
-				CAugmentationSpec augSpec1 = new CAugmentationSpec();
+				CAugmentationSpecDL augSpec1 = new CAugmentationSpecDL();
 
 				augSpec1.EnableAugmentation(true);
 				augSpec1.SetCommonActivationRate(1.000000);
@@ -253,7 +253,7 @@ namespace FLImagingExamplesCSharp
 				augmentationPreset1.SetName("Class 0");
 				augmentationPreset1.SetAugmentationSpec(augSpec1);
 				classifierDL.AddLearningAugmentationPreset(augmentationPreset1);
-				CAugmentationSpec augSpec2 = new CAugmentationSpec();
+				CAugmentationSpecDL augSpec2 = new CAugmentationSpecDL();
 
 				augSpec2.EnableAugmentation(true);
 				augSpec2.SetCommonActivationRate(0.500000);
@@ -271,7 +271,7 @@ namespace FLImagingExamplesCSharp
 				augmentationPreset2.SetName("Class 2");
 				augmentationPreset2.SetAugmentationSpec(augSpec2);
 				classifierDL.AddLearningAugmentationPreset(augmentationPreset2);
-				CAugmentationSpec augSpec3 = new CAugmentationSpec();
+				CAugmentationSpecDL augSpec3 = new CAugmentationSpecDL();
 
 				augSpec3.EnableAugmentation(true);
 				augSpec3.SetCommonActivationRate(1.000000);
@@ -291,7 +291,7 @@ namespace FLImagingExamplesCSharp
 				classifierDL.AddLearningAugmentationPreset(augmentationPreset3);
 
 				// 클래스 4,5 번에 대한 증강 Preset 설정 // Setting the augmentation preset for class 4
-				CAugmentationSpec augSpec4 = new CAugmentationSpec();
+				CAugmentationSpecDL augSpec4 = new CAugmentationSpecDL();
 
 				augSpec4.EnableAugmentation(true);
 				augSpec4.SetCommonActivationRate(1.000000);

@@ -197,7 +197,7 @@ namespace FLImagingExamplesCSharp
 				CSemanticSegmentationDL semanticSegmentationDL = new CSemanticSegmentationDL();
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
-				COptimizerSpecAdamGradientDescent optSpec = new COptimizerSpecAdamGradientDescent();
+				COptimizerSpecAdamGradientDescentDL optSpec = new COptimizerSpecAdamGradientDescentDL();
 
 				// 학습할 이미지 설정 // Set the image to learn
 				semanticSegmentationDL.SetLearningImage(ref fliLearnImage);
@@ -222,7 +222,7 @@ namespace FLImagingExamplesCSharp
 				semanticSegmentationDL.SetLearningOptimizerSpec(optSpec);
 
 				// AugmentationSpec 설정 // Set the AugmentationSpec
-				CAugmentationSpec augSpec = new CAugmentationSpec();
+				CAugmentationSpecDL augSpec = new CAugmentationSpecDL();
 
 				augSpec.SetCommonActivationRate(0.5);
 				augSpec.SetCommonInterpolationMethod(EInterpolationMethod.Bilinear);
