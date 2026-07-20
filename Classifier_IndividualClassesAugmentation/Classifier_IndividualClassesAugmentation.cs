@@ -245,7 +245,7 @@ namespace FLImagingExamplesCSharp
 				augSpec1.EnableRotation(true);
 				augSpec1.SetRotationParam(-30.000000, 30.000000, false, false, 1.000000);
 
-				CAugmentationPreset augmentationPreset1 = new CAugmentationPreset();
+				CAugmentationPresetDL augmentationPreset1 = new CAugmentationPresetDL();
 				List<int> flaClassNum1 = new List<int>();
 				flaClassNum1.Add(0);
 				flaClassNum1.Add(1);
@@ -264,7 +264,7 @@ namespace FLImagingExamplesCSharp
 				augSpec2.SetRotationParam(-180.000000, 180.000000, false, false, 1.000000);
 
 				// 클래스 2 번에 대한 증강 Preset 설정 // Setting the augmentation preset for class 2
-				CAugmentationPreset augmentationPreset2 = new CAugmentationPreset();
+				CAugmentationPresetDL augmentationPreset2 = new CAugmentationPresetDL();
 				List<int> flaClassNum2 = new List<int>();
 				flaClassNum2.Add(2);
 				augmentationPreset2.SetClassNumbers(flaClassNum2);
@@ -282,7 +282,7 @@ namespace FLImagingExamplesCSharp
 				augSpec3.SetScaleParam(0.670000, 1.500000, 0.670000, 1.500000, true, 1.000000);
 
 				// 클래스 3 번에 대한 증강 Preset 설정 // Setting the augmentation preset for class 3
-				CAugmentationPreset augmentationPreset3 = new CAugmentationPreset();
+				CAugmentationPresetDL augmentationPreset3 = new CAugmentationPresetDL();
 				List<int> flaClassNum3 = new List<int>();
 				flaClassNum3.Add(3);
 				augmentationPreset3.SetClassNumbers(flaClassNum3);
@@ -301,7 +301,7 @@ namespace FLImagingExamplesCSharp
 				augSpec4.EnableQuarterRotation(true);
 				augSpec4.SetQuarterRotationParam(true, true, true, true, 1.000000);
 
-				CAugmentationPreset augmentationPreset4 = new CAugmentationPreset();
+				CAugmentationPresetDL augmentationPreset4 = new CAugmentationPresetDL();
 				List<int> flaClassNum4 = new List<int>();
 				flaClassNum4.Add(4);
 				flaClassNum4.Add(5);
