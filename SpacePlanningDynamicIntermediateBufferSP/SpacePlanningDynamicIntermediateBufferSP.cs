@@ -314,54 +314,6 @@ namespace FLImagingExamplesCSharp
 			return MakeQuaternionFromRotationVector(tpRotationVector);
 		}
 
-		static CFLGeometry3DQuaternion<float> GetAxisRotationLocalQuaternion(EAxisRotation eRotation)
-		{
-			SRotationBasis basis;
-
-			switch(eRotation)
-			{
-			case EAxisRotation.ZYX:
-				basis = MakeRotationBasis(
-					new TPoint3<float>(0f, 0f, 1f),
-					new TPoint3<float>(0f, 1f, 0f),
-					new TPoint3<float>(-1f, 0f, 0f));
-				break;
-			case EAxisRotation.XZY:
-				basis = MakeRotationBasis(
-					new TPoint3<float>(1f, 0f, 0f),
-					new TPoint3<float>(0f, 0f, 1f),
-					new TPoint3<float>(0f, -1f, 0f));
-				break;
-			case EAxisRotation.ZXY:
-				basis = MakeRotationBasis(
-					new TPoint3<float>(0f, 1f, 0f),
-					new TPoint3<float>(0f, 0f, 1f),
-					new TPoint3<float>(1f, 0f, 0f));
-				break;
-			case EAxisRotation.YXZ:
-				basis = MakeRotationBasis(
-					new TPoint3<float>(0f, 1f, 0f),
-					new TPoint3<float>(-1f, 0f, 0f),
-					new TPoint3<float>(0f, 0f, 1f));
-				break;
-			case EAxisRotation.YZX:
-				basis = MakeRotationBasis(
-					new TPoint3<float>(0f, 0f, 1f),
-					new TPoint3<float>(1f, 0f, 0f),
-					new TPoint3<float>(0f, 1f, 0f));
-				break;
-			case EAxisRotation.XYZ:
-			default:
-				basis = MakeRotationBasis(
-					new TPoint3<float>(1f, 0f, 0f),
-					new TPoint3<float>(0f, 1f, 0f),
-					new TPoint3<float>(0f, 0f, 1f));
-				break;
-			}
-
-			return MakeQuaternionFromBasis(basis);
-		}
-
 		static TPoint3<float> ApplyTransform(CMatrixFor3D<float> matRotation, TPoint3<float> tpOffset, TPoint3<float> tpLocal)
 		{
 			return new TPoint3<float>(
@@ -893,7 +845,7 @@ namespace FLImagingExamplesCSharp
 			return res;
 		}
 
-		static CResult TryPlaceSourceInBuffer(CSpacePlanningDynamicSP alg, SBinState[] arrBins, List<SItemSpec<float>> listItemSpecs, SBinSpec<float> binSpecBuffer, SSourceSlot sourceSlot, ref bool bPlaced, Action fnOnStep, FnAnimateMove fnAnimateMove)
+		static CResult TryPlaceSourceInBuffer(CSpacePlanningDynamicSP alg, CSpacePlanningCoordinateConverterSP converter, SBinState[] arrBins, List<SItemSpec<float>> listItemSpecs, SBinSpec<float> binSpecBuffer, SSourceSlot sourceSlot, ref bool bPlaced, Action fnOnStep, FnAnimateMove fnAnimateMove)
 		{
 			CResult res = new CResult(EResult.UnknownError);
 			bPlaced = false;
@@ -929,21 +881,23 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((res = alg.AddPlacement(placement)).IsFail())
-					break;
-
+				SAnimationPose poseStart = null;
+				SAnimationPose poseEnd = null;
 				if(fnAnimateMove != null)
 				{
 					SItemSpec<float> itemSpec = listItemSpecs[placement.i32ItemIndex];
-					SAnimationPose poseStart = MakePoseFromBinLocalAabbMin(itemSpec, i32BinBuffer, GetSourcePreviewLocalPos(itemSpec, binSpecBuffer), sourceSlot.quatLocalRotation);
-					SAnimationPose poseEnd = MakePoseFromBinLocalAabbMin(itemSpec, placement.i32BinIndex, placement.tpPosition, GetAxisRotationLocalQuaternion(placement.eRotation));
-					sourceSlot.eState = ESourceState.NeedNewSource;
+					poseStart = MakePoseFromBinLocalAabbMin(itemSpec, i32BinBuffer, GetSourcePreviewLocalPos(itemSpec, binSpecBuffer), sourceSlot.quatLocalRotation);
+					poseEnd = new SAnimationPose();
+					if((res = converter.ConvertPose(placement, ref poseEnd.tpWorldCenter, ref poseEnd.quatRotation)).IsFail())
+						break;
+				}
+
+				if((res = alg.AddPlacement(placement)).IsFail())
+					break;
+
+				sourceSlot.eState = ESourceState.NeedNewSource;
+				if(fnAnimateMove != null)
 					fnAnimateMove(placement.i32ItemIndex, poseStart, poseEnd);
-				}
-				else
-				{
-					sourceSlot.eState = ESourceState.NeedNewSource;
-				}
 
 				arrBins[i32BinBuffer].AddInstance(item);
 
@@ -963,7 +917,7 @@ namespace FLImagingExamplesCSharp
 			return res;
 		}
 
-		static CResult MoveOnePendingItemToDestination(CSpacePlanningDynamicSP alg, SBinState[] arrBins, List<SItemSpec<float>> listItemSpecs, SBinSpec<float> binSpecBuffer, SSourceSlot sourceSlot, Action fnOnStep, FnAnimateMove fnAnimateMove)
+		static CResult MoveOnePendingItemToDestination(CSpacePlanningDynamicSP alg, CSpacePlanningCoordinateConverterSP converter, SBinState[] arrBins, List<SItemSpec<float>> listItemSpecs, SBinSpec<float> binSpecBuffer, SSourceSlot sourceSlot, Action fnOnStep, FnAnimateMove fnAnimateMove)
 		{
 			CResult res = new CResult(EResult.UnknownError);
 			int i32SourceItemType = sourceSlot.i32ItemType;
@@ -1002,46 +956,50 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((res = alg.AddPlacement(placement)).IsFail())
-					break;
-
 				int i32BufferPickIndex = -1;
 				bool bUseBufferedItem = arrBins[i32BinBuffer].GetFirstPickableIndexOfType(placement.i32ItemIndex, ref i32BufferPickIndex).IsOK();
 
-				int i32StartBinIndex = i32BinBuffer;
-				TPoint3<float> tpStartMinBinLocal;
-				CFLGeometry3DQuaternion<float> quatStartLocal;
+				if(!bUseBufferedItem && placement.i32ItemIndex != i32SourceItemType)
+				{
+					res = new CResult(EResult.DoesNotExist);
+					break;
+				}
+
+				SAnimationPose poseStart = null;
+				SAnimationPose poseEnd = null;
+				if(fnAnimateMove != null)
+				{
+					if(bUseBufferedItem)
+					{
+						SPlacementInfo placementStart = MakePlacementInfo(i32BinBuffer, arrBins[i32BinBuffer].listItems[i32BufferPickIndex]);
+						poseStart = new SAnimationPose();
+						if((res = converter.ConvertPose(placementStart, ref poseStart.tpWorldCenter, ref poseStart.quatRotation)).IsFail())
+							break;
+					}
+					else
+					{
+						SItemSpec<float> itemSpec = listItemSpecs[placement.i32ItemIndex];
+						poseStart = MakePoseFromBinLocalAabbMin(itemSpec, i32BinBuffer, GetSourcePreviewLocalPos(itemSpec, binSpecBuffer), sourceSlot.quatLocalRotation);
+					}
+
+					poseEnd = new SAnimationPose();
+					if((res = converter.ConvertPose(placement, ref poseEnd.tpWorldCenter, ref poseEnd.quatRotation)).IsFail())
+						break;
+				}
+
+				if((res = alg.AddPlacement(placement)).IsFail())
+					break;
 
 				if(bUseBufferedItem)
 				{
-					SItemInstance itemStart = arrBins[i32BinBuffer].listItems[i32BufferPickIndex];
-					tpStartMinBinLocal = itemStart.tpMin;
-					quatStartLocal = GetAxisRotationLocalQuaternion(itemStart.eRotation);
-
 					if((res = arrBins[i32BinBuffer].RemovePickableAt(i32BufferPickIndex)).IsFail())
 						break;
 				}
 				else
-				{
-					if(placement.i32ItemIndex != i32SourceItemType)
-					{
-						res = new CResult(EResult.DoesNotExist);
-						break;
-					}
-
-					SItemSpec<float> itemSpec = listItemSpecs[placement.i32ItemIndex];
-					tpStartMinBinLocal = GetSourcePreviewLocalPos(itemSpec, binSpecBuffer);
-					quatStartLocal = sourceSlot.quatLocalRotation;
 					sourceSlot.eState = ESourceState.NeedNewSource;
-				}
 
 				if(fnAnimateMove != null)
-				{
-					SItemSpec<float> itemSpec = listItemSpecs[placement.i32ItemIndex];
-					SAnimationPose poseStart = MakePoseFromBinLocalAabbMin(itemSpec, i32StartBinIndex, tpStartMinBinLocal, quatStartLocal);
-					SAnimationPose poseEnd = MakePoseFromBinLocalAabbMin(itemSpec, placement.i32BinIndex, placement.tpPosition, GetAxisRotationLocalQuaternion(placement.eRotation));
 					fnAnimateMove(placement.i32ItemIndex, poseStart, poseEnd);
-				}
 
 				arrBins[i32BinDestination].AddInstance(MakeItemInstance(listItemSpecs, placement));
 
@@ -1064,7 +1022,7 @@ namespace FLImagingExamplesCSharp
 			return res;
 		}
 
-		static CResult ProcessSourceArrival(CSpacePlanningDynamicSP alg, SBinState[] arrBins, List<SItemSpec<float>> listItemSpecs, SBinSpec<float> binSpecBuffer, SSourceSlot sourceSlot, Action fnOnStep, FnAnimateMove fnAnimateMove)
+		static CResult ProcessSourceArrival(CSpacePlanningDynamicSP alg, CSpacePlanningCoordinateConverterSP converter, SBinState[] arrBins, List<SItemSpec<float>> listItemSpecs, SBinSpec<float> binSpecBuffer, SSourceSlot sourceSlot, Action fnOnStep, FnAnimateMove fnAnimateMove)
 		{
 			CResult res = new CResult(EResult.UnknownError);
 
@@ -1072,13 +1030,13 @@ namespace FLImagingExamplesCSharp
 			for(int i32Attempt = 0; i32Attempt < i32MaxAttemptCount; ++i32Attempt)
 			{
 				bool bPlacedInBuffer = false;
-				if((res = TryPlaceSourceInBuffer(alg, arrBins, listItemSpecs, binSpecBuffer, sourceSlot, ref bPlacedInBuffer, fnOnStep, fnAnimateMove)).IsFail())
+				if((res = TryPlaceSourceInBuffer(alg, converter, arrBins, listItemSpecs, binSpecBuffer, sourceSlot, ref bPlacedInBuffer, fnOnStep, fnAnimateMove)).IsFail())
 					return res;
 
 				if(bPlacedInBuffer)
 					return new CResult(EResult.OK);
 
-				if((res = MoveOnePendingItemToDestination(alg, arrBins, listItemSpecs, binSpecBuffer, sourceSlot, fnOnStep, fnAnimateMove)).IsFail())
+				if((res = MoveOnePendingItemToDestination(alg, converter, arrBins, listItemSpecs, binSpecBuffer, sourceSlot, fnOnStep, fnAnimateMove)).IsFail())
 					return res;
 
 				if(sourceSlot.eState == ESourceState.NeedNewSource)
@@ -1308,7 +1266,7 @@ namespace FLImagingExamplesCSharp
 						Console.WriteLine("[source] arrival {0,2}: item type {1}", sourceSlot.i32ArrivalIndex, sourceSlot.i32ItemType);
 					}
 
-					if((res = ProcessSourceArrival(alg, arrBins, modelSpecs.listItemSpecs, modelSpecs.arrBinSpecs[i32BinBuffer], sourceSlot, fnRender, fnAnimateMove)).IsFail())
+					if((res = ProcessSourceArrival(alg, converter, arrBins, modelSpecs.listItemSpecs, modelSpecs.arrBinSpecs[i32BinBuffer], sourceSlot, fnRender, fnAnimateMove)).IsFail())
 					{
 						if(res == new CResult(EResult.FullOfCapacity))
 							Console.WriteLine("Arrival {0}: Destination and Buffer cannot accept the source item. Stopping.", sourceSlot.i32ArrivalIndex);
