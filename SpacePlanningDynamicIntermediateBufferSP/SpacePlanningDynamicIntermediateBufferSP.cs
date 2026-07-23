@@ -355,6 +355,40 @@ namespace FLImagingExamplesCSharp
 			return pose;
 		}
 
+		static CFLGeometry3DQuaternion<float> FindClosestEquivalentCuboidRotation(CFLGeometry3DQuaternion<float> quatStart, CFLGeometry3DQuaternion<float> quatTarget)
+		{
+			// A centered cuboid is invariant under a 180-degree rotation about any local principal axis.
+			CFLGeometry3DQuaternion<float>[] arrLocalSymmetries = {
+				MakeQuaternionFromRotationVector(new TPoint3<float>(0f, 0f, 0f)),
+				MakeQuaternionFromRotationVector(new TPoint3<float>(f32Pi, 0f, 0f)),
+				MakeQuaternionFromRotationVector(new TPoint3<float>(0f, f32Pi, 0f)),
+				MakeQuaternionFromRotationVector(new TPoint3<float>(0f, 0f, f32Pi)),
+			};
+
+			CFLGeometry3DQuaternion<float> quatClosest = quatTarget;
+			double f64ClosestDot = -1.0;
+			for(int i = 0; i < arrLocalSymmetries.Length; ++i)
+			{
+				CFLGeometry3DQuaternion<float> quatCandidate = quatTarget * arrLocalSymmetries[i];
+				quatCandidate.Normalize();
+
+				double f64Dot = quatStart.Dot(quatCandidate);
+				if(f64Dot < 0.0)
+				{
+					quatCandidate = new CFLGeometry3DQuaternion<float>(-quatCandidate.x, -quatCandidate.y, -quatCandidate.z, -quatCandidate.w);
+					f64Dot = -f64Dot;
+				}
+
+				if(f64Dot > f64ClosestDot)
+				{
+					quatClosest = quatCandidate;
+					f64ClosestDot = f64Dot;
+				}
+			}
+
+			return quatClosest;
+		}
+
 		static TPoint3<float> GetRotatedItemSize(SItemSpec<float> itemSpec, EAxisRotation eRotation)
 		{
 			switch(eRotation)
@@ -1204,6 +1238,10 @@ namespace FLImagingExamplesCSharp
 					if(!view3DResult.IsAvailable())
 						return;
 
+					SAnimationPose poseEndMinimumMotion = new SAnimationPose();
+					poseEndMinimumMotion.tpWorldCenter = poseEnd.tpWorldCenter;
+					poseEndMinimumMotion.quatRotation = FindClosestEquivalentCuboidRotation(poseStart.quatRotation, poseEnd.quatRotation);
+
 					fnDraw();
 
 					int i32InFlightObjIndex = -1;
@@ -1220,7 +1258,7 @@ namespace FLImagingExamplesCSharp
 					while(view3DResult.IsAvailable())
 					{
 						float f32T = Clamp01(swAnimation.Elapsed.TotalMilliseconds / f64AnimationDurationMs);
-						SAnimationPose poseNext = LerpArc(poseStart, poseEnd, f32T, f32AnimationArcHeight);
+						SAnimationPose poseNext = LerpArc(poseStart, poseEndMinimumMotion, f32T, f32AnimationArcHeight);
 
 						view3DResult.LockUpdate();
 						CResult resUpdate = UpdateItemObjectPose(view3DResult, i32InFlightObjIndex, listLocalVertices, poseNext);
