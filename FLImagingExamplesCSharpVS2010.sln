@@ -1,5 +1,5 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigureSaveLoad", "FigureSaveLoad\FigureSaveLoad.csproj", "{1BA5E9C7-A411-4956-A52E-0242584A7A64}"
 EndProject
@@ -1963,6 +1963,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaptiveThresholdSauvola", "AdaptiveThresholdSauvola\AdaptiveThresholdSauvola.csproj", "{E78DFC48-23BD-49F1-8925-9A3B6856A3EC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdaptiveThresholdWolfJolion", "AdaptiveThresholdWolfJolion\AdaptiveThresholdWolfJolion.csproj", "{70649B9A-5717-44E2-A9C4-F91B805958FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelRemover", "LabelRemover\LabelRemover.csproj", "{140841B9-6999-477B-B9F5-535E6F40AC76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -4726,6 +4728,10 @@ Global
 		{70649B9A-5717-44E2-A9C4-F91B805958FD}.Debug|x64.Build.0 = Debug|x64
 		{70649B9A-5717-44E2-A9C4-F91B805958FD}.Release|x64.ActiveCfg = Release|x64
 		{70649B9A-5717-44E2-A9C4-F91B805958FD}.Release|x64.Build.0 = Release|x64
+		{140841B9-6999-477B-B9F5-535E6F40AC76}.Debug|x64.ActiveCfg = Debug|x64
+		{140841B9-6999-477B-B9F5-535E6F40AC76}.Debug|x64.Build.0 = Debug|x64
+		{140841B9-6999-477B-B9F5-535E6F40AC76}.Release|x64.ActiveCfg = Release|x64
+		{140841B9-6999-477B-B9F5-535E6F40AC76}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -5465,6 +5471,7 @@ Global
 		{B203F44A-E383-4C1F-AE05-8B3A0584A190} = {CE5FF808-7D8A-4F06-84AC-AD42A048E4E7}
 		{95D4949A-BDE5-440A-B9AF-A4BA36C46654} = {CE5FF808-7D8A-4F06-84AC-AD42A048E4E7}
 		{397AA4FF-75D2-4B6A-8292-0A921A626422} = {CE5FF808-7D8A-4F06-84AC-AD42A048E4E7}
+		{140841B9-6999-477B-B9F5-535E6F40AC76} = {CE5FF808-7D8A-4F06-84AC-AD42A048E4E7}
 		{6C138355-DC44-481C-8942-98EB6251F522} = {AAE3976E-3F8E-4EA9-B97E-4A037E3C5784}
 		{D632798E-3832-4014-8FDC-1A6A6B5AB176} = {AAE3976E-3F8E-4EA9-B97E-4A037E3C5784}
 		{22D37D56-7BE3-49C5-9C90-32B6A53CD896} = {3C9E13DF-B188-4918-AE35-A01AC1F529C0}
