@@ -177,8 +177,10 @@ namespace FLImagingExamplesCSharp
 				validationImageExtractorDL.SetResultLearningImage(ref fliResultLearnImage);
 				// 결과 검증 이미지 설정 // Set the result validation image
 				validationImageExtractorDL.SetResultValidationImage(ref fliResultValidationImage);
-				// 데이터 셋 타입 설정 // Set the dataset type
-				validationImageExtractorDL.SetDatasetType(CValidationImageExtractorDL.EDatasetType.SemanticSegmentation);
+				// 데이터 유닛 설정 // Set the unit of data
+				validationImageExtractorDL.SetDataUnit(CValidationImageExtractorDL.EDataUnit.Image);
+				// 클래스 평활화 여부 설정 // Set whether to apply class equalization
+				validationImageExtractorDL.EnableClassEqualization(true);
 				// Validation Image 비율 설정 // Set ratio of validation image
 				validationImageExtractorDL.SetValidationRatio(0.4f);
 
