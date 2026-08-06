@@ -69,24 +69,22 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-
-				// 이미지 뷰에서 이용 가능한 컨텍스트 메뉴를 설정합니다. 
-				// EAvailableViewImageContextMenu.All 이 기본값이며, 이 값으로 설정하면 모든 메뉴를 사용 가능한 상태가 됩니다.
-				// 아래와 같이 EAvailableViewImageContextMenu.None 으로 설정할 경우 모든 메뉴가 비활성화됩니다.
+				// 이미지 뷰에서 이용 가능한 컨텍스트 메뉴를 설정합니다.
+				// 기본값은 모든 메뉴가 사용 가능한 상태이며,
+				// 아래와 같이 EnableAvailableViewImageContextMenuAll(false) 를 호출하면 모든 메뉴가 비활성화됩니다.
 				// Sets the context menus available in the image view.
-				// EAvailableViewImageContextMenu.All is the default value, and setting this value enables all context menu items.
-				// As shown below, setting EAvailableViewImageContextMenu.None disables all context menu items.
-				viewImage[0].SetAvailableViewImageContextMenu(EAvailableViewImageContextMenu.None);
+				// By default all context menu items are enabled.
+				// As shown below, calling EnableAvailableViewImageContextMenuAll(false) disables all context menu items.
+				viewImage[0].EnableAvailableViewImageContextMenuAll(false);
 
 				// 이미지뷰의 0번 레이어 가져오기 // Retrieves layer 0 from the image view.
 				CGUIViewImageLayer layer = viewImage[0].GetLayer(0);
-
 				// 기존에 Layer 에 그려진 도형들을 삭제 // Clear all figures previously drawn on the layer.
 				layer.Clear();
 
 				// 안내 문자열 생성 // Creates a guidance message.
 				String strInformation = "RIGHT BUTTON CLICK ON MOUSE AND SEE THE CONTEXT MENU\n";
-				String strInformation2 = "Option : EAvailableViewImageContextMenu.None";
+				String strInformation2 = "Option : EnableAvailableViewImageContextMenuAll(false)";
 
 				// 아래 함수 DrawTextCanvas는 스크린 좌표를 기준으로 문자열을 뷰어에 출력한다.
 				// The function DrawTextCanvas displays a string on the viewer using screen coordinates.
@@ -95,20 +93,45 @@ namespace FLImagingExamplesCSharp
 				layer.DrawTextCanvas(new CFLPoint<double>(10, 10), strInformation, EColor.LIME, EColor.BLACK, 15);
 				layer.DrawTextCanvas(new CFLPoint<double>(10, 30), strInformation2, EColor.CYAN, EColor.BLACK, 15);
 
-
-				// 이미지 뷰에서 이용 가능한 컨텍스트 메뉴를 설정합니다. 
-				// EAvailableViewImageContextMenu.All 이 기본값이며, 이 값으로 설정하면 모든 메뉴를 사용 가능한 상태가 됩니다.
-				// 아래와 같이 여러 조합을 이용하여 설정할 수 있으며, 
-				// EAvailableViewImageContextMenu.All & ~(EAvailableViewImageContextMenu.Load | EAvailableViewImageContextMenu.ClearFile | EAvailableViewImageContextMenu.Save | EAvailableViewImageContextMenu.CreateImage) 으로 설정할 경우 
-				// 파일 열기, 닫기, 저장, 이미지 생성 메뉴가 비활성화됩니다.
+				// 이미지 뷰에서 이용 가능한 컨텍스트 메뉴를 설정합니다.
+				// 기본값은 모든 메뉴가 사용 가능한 상태이며, EnableAvailableViewImageContextMenuAll(true) 로 언제든 전체 활성화할 수 있습니다.
+				// 아래와 같이 EMenuItem 리스트를 만들어 RemoveAvailableViewImageContextMenu 를 호출하면
+				// 전달한 항목들만 비활성화됩니다.
+				// 아래 예제에서는 파일 열기, 닫기, 저장, 이미지 생성 관련 메뉴가 비활성화됩니다.
 				// Sets the context menus available in the image view.
-				// EAvailableViewImageContextMenu.All is the default value, and setting this value enables all context menu items.
-				// As shown below, multiple menu combinations can be configured using bitwise operations.
-				// For example, setting
-				// EAvailableViewImageContextMenu.All & ~(EAvailableViewImageContextMenu.Load | EAvailableViewImageContextMenu.ClearFile | EAvailableViewImageContextMenu.Save | EAvailableViewImageContextMenu.CreateImage)
-				// disables the Open File, Close File, Save, and Create Image menu items.
-				viewImage[1].SetAvailableViewImageContextMenu(EAvailableViewImageContextMenu.All & ~(EAvailableViewImageContextMenu.Load | EAvailableViewImageContextMenu.ClearFile | EAvailableViewImageContextMenu.Save | EAvailableViewImageContextMenu.CreateImage));
+				// By default all context menu items are enabled; call EnableAvailableViewImageContextMenuAll(true) to enable them all at any time.
+				// As shown below, build an EMenuItem list and pass it to RemoveAvailableViewImageContextMenu
+				// to disable only the items you list.
+				// The example below disables the Open File, Close File, Save, and Create Image menu items.
+				var listRemoveMenu = new List<EMenuItem>
+				{
+					// Load
+					EMenuItem.LoadFile,
+					EMenuItem.LoadFile_Raw,
+					EMenuItem.LoadFolder,
+					EMenuItem.AppendFile,
+					EMenuItem.InsertFile,
+					EMenuItem.AppendFolder,
+					EMenuItem.InsertFolder,
 
+					// ClearFile
+					EMenuItem.ClearFile,
+					EMenuItem.ClearSelectedPage,
+
+					// Save
+					EMenuItem.Save,
+					EMenuItem.SavePages,
+					EMenuItem.SaveCurrentPage,
+					EMenuItem.SaveCurrentPageWithLayers,
+
+					// CreateImage
+					EMenuItem.CreateImage,
+					EMenuItem.InsertPage,
+					EMenuItem.AppendPage,
+				};
+
+				viewImage[1].EnableAvailableViewImageContextMenuAll(true); // 전체 메뉴 활성화 // Enable all menu items
+				viewImage[1].RemoveAvailableViewImageContextMenu(listRemoveMenu);
 
 				// 이미지뷰의 0번 레이어 가져오기 // Retrieves layer 0 from the image view.
 				layer = viewImage[1].GetLayer(0);
