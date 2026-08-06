@@ -141,8 +141,7 @@ namespace FLImagingExamplesCSharp
 
 				// 안내 문자열 지정 // Sets the guidance message.
 				strInformation = "RIGHT BUTTON CLICK ON MOUSE AND SEE THE CONTEXT MENU\n";
-				strInformation2 = "Option: EAvailableViewImageContextMenu.All & \n           ~(EAvailableViewImageContextMenu.Load | \n              EAvailableViewImageContextMenu.ClearFile | \n              EAvailableViewImageContextMenu.Save | \n              EAvailableViewImageContextMenu.CreateImage)";
-
+				strInformation2 = "Option: RemoveAvailableViewImageContextMenu\n           (LoadFile, LoadFile_Raw, LoadFolder\n           ClearFile, Save, CreateImage, ...)";
 				// 아래 함수 DrawTextCanvas는 스크린 좌표를 기준으로 문자열을 뷰어에 출력한다.
 				// The function DrawTextCanvas displays a string on the viewer using screen coordinates.
 				// 파라미터 순서 : 기준 좌표 Figure 객체 -> 문자열 -> 텍스트 색 -> 텍스트 테두리 색 -> 폰트 크기 -> 실제 크기로 출력 유무 -> 각도 -> 정렬 -> 폰트 이름 -> 텍스트 알파값(불투명도) -> 텍스트 테두리 알파값 (불투명도) -> 폰트 두께 -> 폰트 이탤릭 여부
