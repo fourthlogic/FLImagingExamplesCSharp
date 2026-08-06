@@ -73,7 +73,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-                if ((res = viewImagesResultRegex.Create(1100, 0, 1700, 500)).IsFail())
+                if ((res = viewImagesResultRegex.Create(1100, 0, 1600, 500)).IsFail())
                 {
                     ErrorPrint(res, "Failed to create the image view.\n");
                     break;
@@ -115,7 +115,7 @@ namespace FLImagingExamplesCSharp
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageSource.GetLayer(0);
 				CGUIViewImageLayer layerResult = viewImageResult.GetLayer(0);
-                CGUIViewImageLayer layerResultRegex = viewImageResult.GetLayer(0);
+                CGUIViewImageLayer layerResultRegex = viewImagesResultRegex.GetLayer(0);
 	
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
@@ -130,19 +130,19 @@ namespace FLImagingExamplesCSharp
 				//                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
 				CFLPoint<double> flpPoint = new CFLPoint<double>(0, 0);
 
-				if((res = layerLearn.DrawTextCanvas(flpPoint, "ORIGINAL", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = layerLearn.DrawTextCanvas(flpPoint, "ORIGINAL", EColor.YELLOW, EColor.BLACK, 15)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-                if ((res = layerResult.DrawTextCanvas(flpPoint, "RESULT(By Text)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerResult.DrawTextCanvas(flpPoint, "RESULT(Remove Label 1 By Text)", EColor.GREEN, EColor.BLACK, 15)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text\n");
 					break;
 				}
 
-                if ((res = layerResultRegex.DrawTextCanvas(flpPoint, "RESULT(By Regex)", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+                if ((res = layerResultRegex.DrawTextCanvas(flpPoint, "RESULT(Remove Label 1, 2 By Regex)", EColor.PURPLE, EColor.BLACK, 15)).IsFail())
                 {
                     ErrorPrint(res, "Failed to draw text\n");
                     break;
@@ -161,7 +161,7 @@ namespace FLImagingExamplesCSharp
 				LabelRemoverDL.EnableRegularExpression(false);
 				LabelRemoverDL.EnableMatchCase(true);
 				LabelRemoverDL.SetCompareMode(CLabelRemoverDL.ECompareMode.TextMode);
-                LabelRemoverDL.SetRemovalLabelName("1");
+                LabelRemoverDL.SetRemovalLabelName("1 Bread");
 			
                 // LabelRenamer 실행 // LabelRenamer Execute 
 				if((res = LabelRemoverDL.Execute()).IsFail())
@@ -174,8 +174,14 @@ namespace FLImagingExamplesCSharp
                 // Destination 이미지 설정 // Set destination image
                 LabelRemoverDL.SetDestinationImage(ref fliResultRegexImage);
                 LabelRemoverDL.EnableRegularExpression(true);
+                LabelRemoverDL.SetRemovalLabelName("[1-2].*");
 
-                LabelRemoverDL.SetRemovalLabelName("[0-1]");
+				// LabelRenamer 실행 // LabelRenamer Execute 
+				if((res = LabelRemoverDL.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to process\n");
+					break;
+				}
 
 				// 두 개의 이미지 뷰 윈도우의 페이지 인덱스를 동기화 한다 // Synchronize the page index of the two image view windows
 				if((res = viewImageSource.SynchronizePageIndex(ref viewImageResult)).IsFail())
