@@ -116,10 +116,24 @@ namespace FLImagingExamplesCSharp
 				}
 				alg.EnableFallbackPolicy(true);
 
-				// 앞서 설정된 파라미터 대로 학습 수행 // Perform learning according to previously set parameters
-				if((res = alg.Learn()).IsFail())
+				// 전략 준비와 score evaluation을 분리 // Separate strategy preparation from score evaluation
+				if((res = alg.EnableImmediateScoreEvaluation(false)).IsFail() ||
+				   (res = alg.Learn()).IsFail())
 				{
 					ErrorPrint(res, "Failed to learn.\n");
+					break;
+				}
+
+				if((res = alg.SetExecutionMode(EExecutionMode.EvaluateScore)).IsFail() ||
+				   (res = alg.Execute()).IsFail())
+				{
+					ErrorPrint(res, "Failed to evaluate scores.\n");
+					break;
+				}
+
+				if(!alg.HasValidOptimalStrategy())
+				{
+					ErrorPrint(new CResult(EResult.NoResult), "Score evaluation did not produce an optimal strategy.\n");
 					break;
 				}
 
@@ -166,7 +180,8 @@ namespace FLImagingExamplesCSharp
 				view3DResult.GetLayer(0).DrawTextCanvas(new CFLPoint<double>(0, 0), "Dynamic SP - Interactive Placement", EColor.YELLOW, EColor.BLACK, 20);
 
 				// 인터랙티브 모드 실행 // Run in interactive mode
-				if((res = alg.Execute()).IsFail())
+				if((res = alg.SetExecutionMode(EExecutionMode.Interactive)).IsFail() ||
+				   (res = alg.Execute()).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute the algorithm.\n");
 					break;

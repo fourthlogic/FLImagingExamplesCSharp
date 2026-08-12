@@ -187,10 +187,17 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				SStaticListParameters parameters = new SStaticListParameters(listItemCounts);
-				if((res = alg.SetStaticListParameters(parameters)).IsFail())
+				if((res = alg.SetStaticListParameters(parameters)).IsFail() ||
+				   (res = alg.EnableImmediateScoreEvaluation(false)).IsFail())
 					break;
 
-				res = alg.Learn();
+				if((res = alg.Learn()).IsFail() ||
+				   (res = alg.SetExecutionMode(EExecutionMode.EvaluateScore)).IsFail() ||
+				   (res = alg.Execute()).IsFail())
+					break;
+
+				if(!alg.HasValidOptimalStrategy())
+					res = new CResult(EResult.NoResult);
 			}
 			while(false);
 
@@ -209,7 +216,7 @@ namespace FLImagingExamplesCSharp
 				res = alg.Load(strCache);
 
 				// PartialOK 는 파라미터만 로드된 상태이므로 재학습 필요 // PartialOK means parameters were loaded but learning is required
-				if(res.IsOK() && alg.IsLearned())
+				if(res.IsOK() && alg.IsLearned() && alg.HasValidOptimalStrategy())
 				{
 					Console.WriteLine("Loaded cached model: {0}", strCache);
 					return res;
@@ -332,7 +339,8 @@ namespace FLImagingExamplesCSharp
 			if((res = dstAlg.ClearInteractiveStates()).IsFail())
 				return res;
 
-			if((res = dstAlg.Execute()).IsFail())
+			if((res = dstAlg.SetExecutionMode(EExecutionMode.Interactive)).IsFail() ||
+			   (res = dstAlg.Execute()).IsFail())
 				return res;
 
 			// 현재 상단 물품을 목적지 대기열에 추가 // Push currently top-pickable items into the destination queue

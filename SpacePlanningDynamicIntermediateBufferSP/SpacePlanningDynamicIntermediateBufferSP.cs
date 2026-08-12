@@ -564,10 +564,17 @@ namespace FLImagingExamplesCSharp
 					break;
 
 				SRandomSequenceParameters parameters = SRandomSequenceParameters.CreateInfinite(itemChances, 2);
-				if((res = alg.SetRandomSequenceParameters(parameters)).IsFail())
+				if((res = alg.SetRandomSequenceParameters(parameters)).IsFail() ||
+				   (res = alg.EnableImmediateScoreEvaluation(false)).IsFail())
 					break;
 
-				res = alg.Learn();
+				if((res = alg.Learn()).IsFail() ||
+				   (res = alg.SetExecutionMode(EExecutionMode.EvaluateScore)).IsFail() ||
+				   (res = alg.Execute()).IsFail())
+					break;
+
+				if(!alg.HasValidOptimalStrategy())
+					res = new CResult(EResult.NoResult);
 			}
 			while(false);
 
@@ -582,7 +589,7 @@ namespace FLImagingExamplesCSharp
 			{
 				res = alg.Load(strCache);
 
-				if(res.IsOK() && alg.IsLearned())
+				if(res.IsOK() && alg.IsLearned() && alg.HasValidOptimalStrategy())
 				{
 					SRandomSequenceParameters parameters = new SRandomSequenceParameters();
 					if((res = alg.GetRandomSequenceParameters(ref parameters)).IsFail())
@@ -818,7 +825,8 @@ namespace FLImagingExamplesCSharp
 				if((res = alg.ClearInteractiveStates()).IsFail())
 					break;
 
-				if((res = alg.Execute()).IsFail())
+				if((res = alg.SetExecutionMode(EExecutionMode.Interactive)).IsFail() ||
+				   (res = alg.Execute()).IsFail())
 					break;
 
 				bool bFailed = false;
