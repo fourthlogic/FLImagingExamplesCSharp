@@ -49,14 +49,14 @@ namespace CircleArrayGauge
 					break;
 				}
 
-				// 이미지 뷰 생성 // Creates imageview		
+				// 이미지 뷰 생성 // Creates image view		
 				if((res = viewImage.Create(100, 100, 600, 600)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
-				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the imageview
+				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
 				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view.\n");
@@ -74,8 +74,8 @@ namespace CircleArrayGauge
 
                 flfaMeasurementRegion.Load("../../ExampleImages/Gauge/Circle Array Measurement Region");
 
-				double tolerance = 15.0;
-				circleArrayGauge.SetMeasurementRegion(flfaMeasurementRegion, tolerance);
+				double f64Tolerance = 15.0;
+				circleArrayGauge.SetMeasurementRegion(flfaMeasurementRegion, f64Tolerance);
 
 				// 추출하기위한 파라미터를 설정합니다. // Set parameters for extraction.
 				// 원을 추정하기위해 추출할 경계점의 변화 임계값에 대해 설정합니다. // Set the threshold change of the boundary point to be extracted to estimate the circle.
@@ -98,7 +98,7 @@ namespace CircleArrayGauge
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = circleArrayGauge.Execute()).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute Circle gauge.\n");
+					ErrorPrint(res, "Failed to execute Circle Array Gauge.\n");
 					break;
 				}
 
