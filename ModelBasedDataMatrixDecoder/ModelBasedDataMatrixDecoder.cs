@@ -158,7 +158,7 @@ namespace FLImagingExamplesCSharp
 
 				// Learn 동작 결과를 얻어온다 // Gets the result of the learn result.
 				CModelBasedDataMatrixDecoder.CDataMatrixLearnInformation datamatrixLearnInfo = new CModelBasedDataMatrixDecoder.CDataMatrixLearnInformation();
-				modelBasedDataMatrixDecoder.GetLearnResult(datamatrixLearnInfo);
+				modelBasedDataMatrixDecoder.GetLearnResult(ref datamatrixLearnInfo);
 				{
 					Console.Write("\n[Model Based Learn Result]\n");
 
