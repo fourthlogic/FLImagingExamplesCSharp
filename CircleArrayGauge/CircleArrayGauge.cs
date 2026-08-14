@@ -82,7 +82,7 @@ namespace CircleArrayGauge
 				circleArrayGauge.SetThreshold(20);
 				// 원을 추정하기위해 추출할 경계점의 변화 임계값에 보정값을 설정합니다. // Set the correction value to the threshold change of the boundary point to be extracted to estimate the circle.
 				circleArrayGauge.SetMinimumAmplitude(10);
-				// 원을 추정하기위해 추출할 경계점들의 대표값 표본 개수를 설정합니다. // Set the number of representative sample values ??of the boundary points to be extracted to estimate the circle.
+				// 원을 추정하기위해 추출할 경계점들의 대표값 표본 개수를 설정합니다. // Set the number of representative sample values of the boundary points to be extracted to estimate the circle.
 				circleArrayGauge.SetThickness(3);
 				// 원을 추정하기위해 추출할 경계점들의 추출 간격을 설정합니다. // Set the extraction interval of boundary points to be extracted to estimate the circle.
 				circleArrayGauge.SetSamplingStep(1.0);
