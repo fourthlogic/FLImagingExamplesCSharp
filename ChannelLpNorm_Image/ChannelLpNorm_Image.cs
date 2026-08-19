@@ -49,13 +49,13 @@ namespace FLImagingExamplesCSharp
 				// 이미지 로드 // Load image
 				if((res = fliSrcImage.Load("../../ExampleImages/ChannelLpNorm/Coord.flif")).IsFail())
 				{
-					//ErrorPrint(res, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
 				if((res = fliOprImage.Load("../../ExampleImages/ChannelLpNorm/Gradation.flif")).IsFail())
 				{
-					//ErrorPrint(res, "Failed to load the image file.\n");
+					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
 				}
 
@@ -64,33 +64,33 @@ namespace FLImagingExamplesCSharp
 					(res = viewImageOpr.Create(600, 0, 1100, 500)).IsFail() ||
 					(res = viewImageDst.Create(1100, 0, 1600, 500)).IsFail())
 				{
-					//ErrorPrint(res, "Failed to create the image view.\n");
+					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
 				}
 
 				// 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the image views. .
 				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageOpr)).IsFail())
 				{
-					//ErrorPrint(res, "Failed to synchronize view. \n");
+					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst)).IsFail())
 				{
-					//ErrorPrint(res, "Failed to synchronize view. \n");
+					ErrorPrint(res, "Failed to synchronize view. \n");
 					break;
 				}
 
 				// 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the positions of the image view windows
 				if((res = viewImageSrc.SynchronizeWindow(ref viewImageOpr)).IsFail())
 				{
-					//ErrorPrint(res, "Failed to synchronize window. \n");
+					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
 				if((res = viewImageSrc.SynchronizeWindow(ref viewImageDst)).IsFail())
 				{
-					//ErrorPrint(res, "Failed to synchronize window. \n");
+					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
 				}
 
@@ -99,7 +99,7 @@ namespace FLImagingExamplesCSharp
 					(res = viewImageOpr.SetImagePtr(ref fliOprImage)).IsFail() ||
 					(res = viewImageDst.SetImagePtr(ref fliDstImage)).IsFail())
 				{
-					//ErrorPrint(res, "Failed to set image object on the image view. \n");
+					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
 				}
 
@@ -126,7 +126,7 @@ namespace FLImagingExamplesCSharp
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = channelLpNorm.Execute()).IsFail())
 				{
-					//ErrorPrint(res, "Failed to execute the algorithm.");
+					ErrorPrint(res, "Failed to execute the algorithm.");
 					break;
 				}
 
@@ -147,7 +147,7 @@ namespace FLImagingExamplesCSharp
 					(res = layerOpr.DrawTextCanvas(flpPoint, "Operand Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail() ||
 					(res = layerDst.DrawTextCanvas(flpPoint, "Destination Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
-					//ErrorPrint(res, "Failed to draw text. \n");
+					ErrorPrint(res, "Failed to draw text. \n");
 					break;
 				}
 
@@ -159,7 +159,7 @@ namespace FLImagingExamplesCSharp
 				// image 가 view 크기에 맞도록 확대 또는 축소합니다. // Zoom image to fit the view.
 				if((res = (viewImageDst.ZoomFit())).IsFail())
 				{
-					//ErrorPrint(res, "Failed to zoom fit. \n");
+					ErrorPrint(res, "Failed to zoom fit. \n");
 					break;
 				}
 
