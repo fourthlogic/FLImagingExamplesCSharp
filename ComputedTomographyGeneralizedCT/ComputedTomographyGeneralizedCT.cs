@@ -121,7 +121,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				if((res = computedTomographyGeneralizedCT.SetFrequencyWindow(CComputedTomographyGeneralizedCT.EFrequencyWindow.Gaussian)).IsFail())
 					break;
-				if((res = computedTomographyGeneralizedCT.SetSigma(0.50)).IsFail())
+				if((res = computedTomographyGeneralizedCT.SetSigma(0.50f)).IsFail())
 					break;
 
 				if((res = computedTomographyGeneralizedCT.SetOutputFormat(CComputedTomographyGeneralizedCT.EOutputFormat.U8)).IsFail())
