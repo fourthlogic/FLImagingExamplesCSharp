@@ -361,6 +361,14 @@ namespace FLImagingExamplesCSharp
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImageSource.IsAvailable() && viewImageDestinationXY.IsAvailable() && viewImageDestinationXZ.IsAvailable() && viewImageDestinationYX.IsAvailable() && viewImageDestinationYZ.IsAvailable() && viewImageDestinationZX.IsAvailable() && viewImageDestinationZY.IsAvailable() )
 					Thread.Sleep(1);
+
+				viewImageSource.Destroy();
+				viewImageDestinationXY.Destroy();
+				viewImageDestinationXZ.Destroy();
+				viewImageDestinationYX.Destroy();
+				viewImageDestinationYZ.Destroy();
+				viewImageDestinationZX.Destroy();
+				viewImageDestinationZY.Destroy();
 			}
 			while(false);
 		}
