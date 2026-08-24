@@ -15,7 +15,7 @@ using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
-	class FLLocalExtremaDetection
+	class FLLocalExtremaDetector
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -73,41 +73,41 @@ namespace FLImagingExamplesCSharp
 				layer.Clear();
 
 				// 객체 생성
-				CFLLocalExtremaDetection flLocalExtremaDetection = new CFLLocalExtremaDetection();
+				CFLLocalExtremaDetector flLocalExtremaDetector = new CFLLocalExtremaDetector();
 
 				// ROI 범위 설정
 				CFLRect<int> flrROI = new CFLRect<int>(100, 50, 450, 450);
 
 				// 처리할 이미지 설정 // Set the image to process
-                if ((res = flLocalExtremaDetection.SetSourceImage(ref fliImage)).IsFail())
+                if ((res = flLocalExtremaDetector.SetSourceImage(ref fliImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source Image.");
 					break;
 				}
 
 				// 처리할 ROI 설정
-                if ((res = (flLocalExtremaDetection.SetSourceROI(flrROI))).IsFail())
+                if ((res = (flLocalExtremaDetector.SetSourceROI(flrROI))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Source ROI.");
 					break;
 				}
 
 				// 검출을 위한 Suppression Radius 설정
-				if((res = (flLocalExtremaDetection.SetSuppressionRadius(11))).IsFail())
+				if((res = (flLocalExtremaDetector.SetSuppressionRadius(11))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Suppression Radius.");
 					break;
 				}
 
 				// Reference Surface Check 설정
-				if((res = (flLocalExtremaDetection.EnableReferenceSurfaceCheck(true))).IsFail())
+				if((res = (flLocalExtremaDetector.EnableReferenceSurfaceCheck(true))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Reference Surface Check.");
 					break;
 				}
 
 				// 실행 함수
-				if ((res = (flLocalExtremaDetection.Execute())).IsFail())
+				if ((res = (flLocalExtremaDetector.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute.");
 					break;
@@ -117,7 +117,7 @@ namespace FLImagingExamplesCSharp
 				CFLFigureArray flfaResultPoints = new CFLFigureArray();
 
 				// 검출 결과 받아오기
-				if((res = (flLocalExtremaDetection.GetResultPoints(ref flfaResultPoints))).IsFail())
+				if((res = (flLocalExtremaDetector.GetResultPoints(ref flfaResultPoints))).IsFail())
 				{
 					ErrorPrint(res, "Failed to get result.");
 					break;

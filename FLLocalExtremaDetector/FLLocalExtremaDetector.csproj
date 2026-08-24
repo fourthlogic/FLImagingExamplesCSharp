@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{15D9953C-2CB1-4ACE-A513-06B995373485}</ProjectGuid>
+    <ProjectGuid>{F6FC881A-A2D1-4942-98F7-3FC093589331}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FLLocalExtremaDetection</RootNamespace>
-    <AssemblyName>FLLocalExtremaDetection</AssemblyName>
+    <RootNamespace>FLLocalExtremaDetector</RootNamespace>
+    <AssemblyName>FLLocalExtremaDetector</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -115,7 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FLLocalExtremaDetection.cs" />
+    <Compile Include="FLLocalExtremaDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
