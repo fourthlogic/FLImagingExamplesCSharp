@@ -271,6 +271,9 @@ namespace FLImagingExamplesCSharp
 				// The image view is waiting until close.
 				while(arrViewImage[(int)EViewList.Learn].IsAvailable() && arrViewImage[(int)EViewList.ModelBaseFind].IsAvailable() && arrViewImage[(int)EViewList.NormalFind].IsAvailable())
 					CThreadUtilities.Sleep(1);
+
+				for(int i = 0; i < (int)EViewList.Count; ++i)
+					arrViewImage[i].Destroy();
 			}
 			while(false);
 		}

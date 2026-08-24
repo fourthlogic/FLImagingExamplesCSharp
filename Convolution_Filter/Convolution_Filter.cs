@@ -305,6 +305,8 @@ namespace FLImagingExamplesCSharp
 					Thread.Sleep(1);
 				}
 
+				for(int i = 0; i < (int)EType.ETypeCount; ++i)
+					arrViewImage[i].Destroy();
 			}
 			while(false);
 		}

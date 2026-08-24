@@ -267,6 +267,10 @@ namespace FLImagingExamplesCSharp
 					&& arrViewImageDst[(int)EDst.Prewitt].IsAvailable() && arrViewImageDst[(int)EDst.Sobel].IsAvailable())
 					Thread.Sleep(1);
 
+				for(int i = 0; i < (int)EDst.EDstCount; ++i)
+					arrViewImageDst[i].Destroy();
+
+				viewImageSrc.Destroy();
 			}
 			while(false);
 		}
