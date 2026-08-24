@@ -109,12 +109,12 @@ namespace FLImagingExamplesCSharp
 				// FL Auto Shading Correction 객체 생성 // Create FL Auto Shading Correction object
 				CFLAutoShadingCorrection flAutoShadingCorrection = new CFLAutoShadingCorrection();
 				// Source 이미지 설정 // Set source image
-                flAutoShadingCorrection.SetSourceImage(ref arrFliImage[0]);
+				flAutoShadingCorrection.SetSourceImage(ref arrFliImage[0]);
 				// Destination 이미지 설정 // Set destination image 
-                flAutoShadingCorrection.SetDestinationImage(ref arrFliImage[1]);
+				flAutoShadingCorrection.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (flAutoShadingCorrection.Execute())).IsFail())
+				if((res = (flAutoShadingCorrection.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute FL Auto Shading Correction.");
 					break;
@@ -162,6 +162,9 @@ namespace FLImagingExamplesCSharp
 				while(arrViewImage[0].IsAvailable()
 					  && arrViewImage[1].IsAvailable())
 					Thread.Sleep(1);
+
+				for(int i = 0; i < 2; ++i)
+					arrViewImage[i].Destroy();
 			}
 			while(false);
 		}

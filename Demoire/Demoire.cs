@@ -114,7 +114,7 @@ namespace FLImagingExamplesCSharp
 				demoire.SetDestinationImage(ref arrFliImage[1]);
 
 				// 알고리즘 수행 // Execute the algorithm
-                if ((res = (demoire.Execute())).IsFail())
+				if((res = (demoire.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute operation add.");
 					break;
@@ -162,6 +162,9 @@ namespace FLImagingExamplesCSharp
 				while(arrViewImage[0].IsAvailable()
 					  && arrViewImage[1].IsAvailable())
 					Thread.Sleep(1);
+
+				for(int i = 0; i < 2; ++i)
+					arrViewImage[i].Destroy();
 			}
 			while(false);
 		}

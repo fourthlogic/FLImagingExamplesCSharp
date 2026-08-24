@@ -194,7 +194,11 @@ namespace FLImagingExamplesCSharp
 				while(arrViewImage[0].IsAvailable()
 					  && arrViewImage[1].IsAvailable()
 					  && arrViewImage[2].IsAvailable())
-					Thread.Sleep(1);				
+					Thread.Sleep(1);
+
+				arrViewImage[0].Destroy();
+				arrViewImage[1].Destroy();
+				arrViewImage[2].Destroy();
 			}
 			while(false);
 		}

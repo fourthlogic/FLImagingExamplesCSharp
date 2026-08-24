@@ -116,7 +116,7 @@ namespace FLImagingExamplesCSharp
 				flLowLuminanceCorrectionType1.EnableNoiseReduction(true);
 
 				// 알고리즘 수행 // Execute the algorithm
-				if ((res = (flLowLuminanceCorrectionType1.Execute())).IsFail())
+				if((res = (flLowLuminanceCorrectionType1.Execute())).IsFail())
 				{
 					ErrorPrint(res, "Failed to execute FL Low Luminance Correction Type 1.");
 					break;
@@ -164,6 +164,9 @@ namespace FLImagingExamplesCSharp
 				while(arrViewImage[0].IsAvailable()
 					  && arrViewImage[1].IsAvailable())
 					Thread.Sleep(1);
+
+				for(int i = 0; i < 2; ++i)
+					arrViewImage[i].Destroy();
 			}
 			while(false);
 		}

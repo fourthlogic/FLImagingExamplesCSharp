@@ -106,11 +106,11 @@ namespace FLImagingExamplesCSharp
 				// Kernel 사이즈 입력 // set kernel size
 				varianceThreshold.SetKernel(15, 15);
 
-                // StdDevScale 설정 // set StdDevScale
-                varianceThreshold.SetStdDevScale(0.2);
+				// StdDevScale 설정 // set StdDevScale
+				varianceThreshold.SetStdDevScale(0.2);
 
-                // AbsThreshold 설정 // Set AbsThreshold
-                varianceThreshold.SetAbsThreshold(2);
+				// AbsThreshold 설정 // Set AbsThreshold
+				varianceThreshold.SetAbsThreshold(2);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (varianceThreshold.Execute())).IsFail())
@@ -140,6 +140,9 @@ namespace FLImagingExamplesCSharp
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImage[0].IsAvailable())
 					Thread.Sleep(1);
+
+				for(int i = 0; i < 2; i++)
+					viewImage[i].Destroy();
 			}
 			while(false);
 
