@@ -17,16 +17,6 @@ namespace FLImagingExamplesCSharp
 {
 	class ScharrFilter
 	{
-		enum EType
-		{
-			Source = 0,
-			Destination1,
-			Destination2,
-			Destination3,
-			Destination4,
-			ETypeCount,
-		}
-
 		public static void ErrorPrint(CResult cResult, string str)
 		{
 			if(str.Length > 1)
@@ -185,6 +175,9 @@ namespace FLImagingExamplesCSharp
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImageSrc.IsAvailable() && viewImageDst.IsAvailable())
 					Thread.Sleep(1);
+
+				viewImageSrc.Destroy();
+				viewImageDst.Destroy();
 			}
 			while(false);
 		}

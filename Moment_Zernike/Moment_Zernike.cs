@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 
 namespace FLImagingExamplesCSharp
 {
-    class Moment_Zernike
+	class Moment_Zernike
 	{
 		public static void ErrorPrint(CResult cResult, string str)
 		{
@@ -40,28 +40,28 @@ namespace FLImagingExamplesCSharp
 			CGUIViewImage viewImage = new CGUIViewImage();
 			CResult res = new CResult();
 
-            do
+			do
 			{
 				// 이미지 로드 // Load image
 				if((res = fliImage.Load("../../ExampleImages/Moment/airEdge.flif")).IsFail())
 				{
-                    ErrorPrint(res, "Failed to load the image file.");
-                    break;
-                }
+					ErrorPrint(res, "Failed to load the image file.");
+					break;
+				}
 
 				// 이미지 뷰 생성 // Create imageview
 				if((res = viewImage.Create(400, 0, 1424, 768)).IsFail())
 				{
-                    ErrorPrint(res, "Failed to create the image view.");
-                    break;
-                }
+					ErrorPrint(res, "Failed to create the image view.");
+					break;
+				}
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the imageview
 				if((res = viewImage.SetImagePtr(ref fliImage)).IsFail())
 				{
-                    ErrorPrint(res, "Failed to set image object on the image view.");
-                    break;
-                }
+					ErrorPrint(res, "Failed to set image object on the image view.");
+					break;
+				}
 
 				// Moment 객체 생성 // Create Moment object
 				CMoment moment = new CMoment();
@@ -78,32 +78,32 @@ namespace FLImagingExamplesCSharp
 
 				// 계산 대상에 저니키 모멘트 N, M 파라미터를 추가합니다. // Add Zernike Moment N, M parameters to the calculation target.
 				moment.AddZernike(1, -1);
-                moment.AddZernike(1, 1);
-                moment.AddZernike(3, -3);
-                moment.AddZernike(3, -1);
-                moment.AddZernike(3, 1);
-                moment.AddZernike(3, 3);
+				moment.AddZernike(1, 1);
+				moment.AddZernike(3, -3);
+				moment.AddZernike(3, -1);
+				moment.AddZernike(3, 1);
+				moment.AddZernike(3, 3);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = moment.Execute()).IsFail())
 				{
-                    ErrorPrint(res, "Failed to execute moment.");
-                    break;
-                }
+					ErrorPrint(res, "Failed to execute moment.");
+					break;
+				}
 
 				// 모멘트 결과들을 가져옵니다. // Get the moment results.
 				CMoment.SZernike zernike = new CMoment.SZernike();
-                long i64ZernikeCount = (long)moment.GetZernikeCount();
+				long i64ZernikeCount = (long)moment.GetZernikeCount();
 
-                for (int i = 0; i < i64ZernikeCount; ++i)
+				for(int i = 0; i < i64ZernikeCount; ++i)
 				{
-                    moment.GetZernike(ref zernike, i);
+					moment.GetZernike(ref zernike, i);
 					Console.WriteLine("Zernike N = {0}, M = {1}, RealValue : {2}, Imaginary : {3}", zernike.i32N, zernike.i32M, zernike.f64ZernikeReal, zernike.f64ZernikeImag);
-                }
+				}
 
-                CGUIViewImageLayer layer = viewImage.GetLayer(0);
+				CGUIViewImageLayer layer = viewImage.GetLayer(0);
 
-                layer.Clear();
+				layer.Clear();
 
 				// ROI영역이 어디인지 알기 위해 디스플레이 한다 // Display to know where the ROI area is
 				if((res = layer.DrawFigureImage(flrROI, EColor.BLUE)).IsFail())
@@ -117,9 +117,11 @@ namespace FLImagingExamplesCSharp
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the imageview to close
 				while(viewImage.IsAvailable())
-                    Thread.Sleep(1);
-            }
-            while (false);
-        }
-    }
+					Thread.Sleep(1);
+
+				viewImage.Destroy();
+			}
+			while(false);
+		}
+	}
 }
