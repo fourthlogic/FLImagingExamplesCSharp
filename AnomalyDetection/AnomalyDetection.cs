@@ -361,7 +361,12 @@ namespace FLImagingExamplesCSharp
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
 				while(viewImageLearn.IsAvailable() && viewImageInference.IsAvailable() &&  viewImagesLabelFigure.IsAvailable() && viewGraph.IsAvailable())
-					Thread.Sleep(1);
+                    Thread.Sleep(1);
+
+                viewImageLearn.Destroy();
+                viewImageInference.Destroy();
+                viewImagesLabelFigure.Destroy();
+                viewGraph.Destroy();
 			}
 			while(false);
 		}

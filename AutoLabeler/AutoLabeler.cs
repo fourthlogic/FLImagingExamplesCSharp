@@ -44,7 +44,7 @@ namespace FLImagingExamplesCSharp
 			/// 이미지 뷰 선언 // Declare the image view
 			CGUIViewImage viewImageLearn = new CGUIViewImage();
 			CGUIViewImage viewImageValidation = new CGUIViewImage();
-			CGUIViewImage viewImagresAutoLabel = new CGUIViewImage();
+			CGUIViewImage viewImagesAutoLabel = new CGUIViewImage();
 
 			// 그래프 뷰 선언 // Declare the graph view
 			CGUIViewGraph viewGraph = new CGUIViewGraph();
@@ -89,7 +89,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((res = viewImagresAutoLabel.Create(100, 500, 600, 1000)).IsFail())
+				if((res = viewImagesAutoLabel.Create(100, 500, 600, 1000)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
 					break;
@@ -117,7 +117,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((res = viewImagresAutoLabel.SetImagePtr(ref fliResultAutotLabelImage)).IsFail())
+				if((res = viewImagesAutoLabel.SetImagePtr(ref fliResultAutotLabelImage)).IsFail())
 				{
 					ErrorPrint(res, "Failed to set image object on the image view. \n");
 					break;
@@ -126,7 +126,7 @@ namespace FLImagingExamplesCSharp
 				fliResultAutotLabelImage.ClearFigures();
 
 				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageValidation.SynchronizePointOfView(ref viewImagresAutoLabel)).IsFail())
+				if((res = viewImageValidation.SynchronizePointOfView(ref viewImagesAutoLabel)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
@@ -139,7 +139,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				if((res = viewImageLearn.SynchronizeWindow(ref viewImagresAutoLabel)).IsFail())
+				if((res = viewImageLearn.SynchronizeWindow(ref viewImagesAutoLabel)).IsFail())
 				{
 					ErrorPrint(res, "Failed to synchronize window. \n");
 					break;
@@ -155,7 +155,7 @@ namespace FLImagingExamplesCSharp
 				// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
 				CGUIViewImageLayer layerLearn = viewImageLearn.GetLayer(0);
 				CGUIViewImageLayer layerValidation = viewImageValidation.GetLayer(0);
-				CGUIViewImageLayer layerResultLabel = viewImagresAutoLabel.GetLayer(0);
+				CGUIViewImageLayer layerResultLabel = viewImagesAutoLabel.GetLayer(0);
 	
 				// 기존에 Layer에 그려진 도형들을 삭제 // Clear the figures drawn on the existing layer
 				layerLearn.Clear();
@@ -191,7 +191,7 @@ namespace FLImagingExamplesCSharp
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
-				viewImagresAutoLabel.RedrawWindow();
+				viewImagesAutoLabel.RedrawWindow();
 
 				// SemanticSegmentation 객체 생성 // Create SemanticSegmentation object
 				CSemanticSegmentationDL semanticSegmentationDL = new CSemanticSegmentationDL();
@@ -361,15 +361,20 @@ namespace FLImagingExamplesCSharp
 				// 이미지 뷰를 갱신 // Update the image view.
 				viewImageLearn.RedrawWindow();
 				viewImageValidation.RedrawWindow();
-				viewImagresAutoLabel.RedrawWindow();
+				viewImagesAutoLabel.RedrawWindow();
 
 				
 				// 그래프 뷰를 갱신 // Update the Graph view.
 				viewGraph.RedrawWindow();
 
 				// 이미지 뷰가 종료될 때 까지 기다림 // Wait for the image view to close
-				while(viewImageLearn.IsAvailable() && viewGraph.IsAvailable())
-					Thread.Sleep(1);
+                while (viewImageLearn.IsAvailable() && viewImageValidation.IsAvailable() && viewImagesAutoLabel.IsAvailable() && viewGraph.IsAvailable())
+                    Thread.Sleep(1);
+
+                viewImageLearn.Destroy();
+                viewImageValidation.Destroy();
+                viewImagesAutoLabel.Destroy();
+                viewGraph.Destroy();
 			}
 			while(false);
 		}
