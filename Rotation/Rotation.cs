@@ -229,9 +229,7 @@ namespace FLImagingExamplesCSharp
 				}
 
                 for (int i = 0; i < (int)EType.ETypeCount; ++i)
-                {
                     arrViewImage[i].Destroy();
-                }
 			}
 			while(false);
 		}

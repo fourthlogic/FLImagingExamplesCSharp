@@ -210,6 +210,9 @@ namespace FLImagingExamplesCSharp
 					performanceCounter.Start();
 					i32PageIndex++;
 				}
+
+				arrViewImage[0].Destroy();
+				arrViewImage[1].Destroy();
 			}
 			while(false);
 		}
