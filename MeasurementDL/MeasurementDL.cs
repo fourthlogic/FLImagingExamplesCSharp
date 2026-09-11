@@ -291,9 +291,10 @@ namespace FLImagingExamplesCSharp
 						List<float> vctMeanIoU = new List<float>();
 						List<float> vctValidationsZE = new List<float>();
 						List<float> vctMeanIoUZE = new List<float>();
+						List<float> vctMeanAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						measurementDL.GetLearningResultAllHistory(ref vctCosts, ref vctValidations, ref vctMeanIoU, ref vctValidationsZE, ref vctMeanIoUZE, ref vctValidationEpoch);
+						measurementDL.GetLearningResultAllHistory(ref vctCosts, ref vctValidations, ref vctMeanIoU, ref vctValidationsZE, ref vctMeanIoUZE, ref vctMeanAP, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctMeanIoU.Count() != 0 && i32PrevValidationCount != vctMeanIoU.Count()))

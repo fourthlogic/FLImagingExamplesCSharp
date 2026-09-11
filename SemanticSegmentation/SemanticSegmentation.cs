@@ -249,6 +249,8 @@ namespace FLImagingExamplesCSharp
 				semanticSegmentationDL.SetLearningEpoch(120);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				semanticSegmentationDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
+				// 검증 시 Mean AP 활성 화 // Enable Mean AP during validating.
+				semanticSegmentationDL.EnableValidationMeanAP(true);
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.001f);
@@ -333,9 +335,10 @@ namespace FLImagingExamplesCSharp
 						// 마지막 검증 결과 받기 // Get the last validation result
 						float f32ValidationPa = semanticSegmentationDL.GetLearningResultLastAccuracy();
 						float f32ValidationPaMeanIoU = semanticSegmentationDL.GetLearningResultLastMeanIoU();
+						float f32ValidationPaMeanAP = semanticSegmentationDL.GetLearningResultLastMeanAP();
 
 						// 해당 epoch의 비용과 검증 결과 값 출력 // Print cost and validation value for the relevant epoch
-						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Epoch {3} / {4}", f32CurrCost, f32ValidationPa, f32ValidationPaMeanIoU, i32Epoch, i32MaxEpoch);
+						Console.WriteLine("Cost : {0:F6} Pixel Accuracy : {1:F6} mIoU : {2:F6} Mean AP : {3:F6} Epoch {4} / {5}", f32CurrCost, f32ValidationPa, f32ValidationPaMeanIoU, f32ValidationPaMeanAP, i32Epoch, i32MaxEpoch);
 
 						// 학습 결과 비용과 검증 결과 기록을 받아 그래프 뷰에 출력  
 						// Get the history of cost and validation and print it at graph view
@@ -344,9 +347,10 @@ namespace FLImagingExamplesCSharp
 						List<float> vctMeanIoU = new List<float>();
 						List<float> vctValidationsZE = new List<float>();
 						List<float> vctMeanIoUZE = new List<float>();
+						List<float> vctMeanAP = new List<float>();
 						List<int> vctValidationEpoch = new List<int>();
 
-						semanticSegmentationDL.GetLearningResultAllHistory(ref vctCosts, ref vctValidations, ref vctMeanIoU, ref vctValidationsZE, ref vctMeanIoUZE, ref vctValidationEpoch);
+						semanticSegmentationDL.GetLearningResultAllHistory(ref vctCosts, ref vctValidations, ref vctMeanIoU, ref vctValidationsZE, ref vctMeanIoUZE, ref vctMeanAP, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
 						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vctValidations.Count() != 0 && i32PrevValidationCount != vctValidations.Count()))
@@ -368,6 +372,7 @@ namespace FLImagingExamplesCSharp
 							// Graph View 데이터 입력 // Input Graph View Data
 							viewGraph.Plot(flaX, vctValidations, EChartType.Line, EColor.CYAN, "Validation");
 							viewGraph.Plot(flaX, vctMeanIoU, EChartType.Line, EColor.PINK, "mIoU");
+							viewGraph.Plot(flaX, vctMeanAP, EChartType.Line, EColor.BROWN, "map");
 							viewGraph.UnlockUpdate();
 
 							viewGraph.UpdateWindow();
