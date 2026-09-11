@@ -9,8 +9,8 @@
     <ProjectGuid>{877E2453-78A7-4A17-B916-AECD4DBD388B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SeamInsertion</RootNamespace>
-    <AssemblyName>SeamInsertion</AssemblyName>
+    <RootNamespace>ImageConcatenator</RootNamespace>
+    <AssemblyName>ImageConcatenator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
