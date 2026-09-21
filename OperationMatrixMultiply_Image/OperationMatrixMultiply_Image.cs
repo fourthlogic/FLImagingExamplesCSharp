@@ -122,7 +122,7 @@ namespace FLImagingExamplesCSharp
 				if(bError)
 					break;
 
-				// Operation Multiply 객체 생성 // Create Operation Multiply object
+				// Operation Matrix Multiply 객체 생성 // Create Operation Matrix Multiply object
 				COperationMatrixMultiply operationMatrixMultiply = new COperationMatrixMultiply();
 				// Source 이미지 설정 // Set the source image
 				operationMatrixMultiply.SetSourceImage(ref arrFliImage[(int)EType.Source]);
@@ -140,7 +140,7 @@ namespace FLImagingExamplesCSharp
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = (operationMatrixMultiply.Execute())).IsFail())
 				{
-					ErrorPrint(res, "Failed to execute operation multiply.");
+					ErrorPrint(res, "Failed to execute operation matrix multiply.");
 					break;
 				}
 
