@@ -277,7 +277,7 @@ namespace FLImagingExamplesCSharp
 			}
 			while(false);
 
-			return 0;
+			return;
 		}
 	}
 }
