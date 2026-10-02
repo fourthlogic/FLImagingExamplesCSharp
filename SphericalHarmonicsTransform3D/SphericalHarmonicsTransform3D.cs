@@ -80,7 +80,7 @@ namespace FLImagingExamplesCSharp
 				// 파라미터 설정 // Set parameter
 				sphericalHarmonicsTransform3D.SetSourceObject(ref floSrc);
 				sphericalHarmonicsTransform3D.SetDestinationObject(ref floDst1);
-				sphericalHarmonicsTransform3D.SetDirectionType(CSphericalHarmonicsTransform3D.Forward);
+				sphericalHarmonicsTransform3D.SetDirectionType(CSphericalHarmonicsTransform3D.ETransformDirection.Forward);
 				sphericalHarmonicsTransform3D.SetMaxDegree(15);
 				
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
@@ -93,7 +93,7 @@ namespace FLImagingExamplesCSharp
 				// 파라미터 설정 // Set parameter
 				sphericalHarmonicsTransform3D.SetSourceObject(ref floDst1);
 				sphericalHarmonicsTransform3D.SetDestinationObject(ref floDst2);
-				sphericalHarmonicsTransform3D.SetDirectionType(CSphericalHarmonicsTransform3D.Inverse);
+				sphericalHarmonicsTransform3D.SetDirectionType(CSphericalHarmonicsTransform3D.ETransformDirection.Inverse);
 
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = sphericalHarmonicsTransform3D.Execute()).IsFail())
