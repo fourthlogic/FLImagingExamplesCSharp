@@ -118,9 +118,13 @@ namespace FLImagingExamplesCSharp
 				view3DSrc.ZoomFit();
 
 				view3DDst1.PushObject(floDst1);
+				view3DDst1.SetPointSize(10);
 				view3DDst1.ZoomFit();
 
 				view3DDst2.PushObject(floDst2);
+				view3DDst2.SetPointSize(2);
+				view3DDst2.SetShadingType(EShadingType3D.Shadeless);
+				view3DDst2.SynchronizePointOfView(ref view3DSrc);
 				view3DDst2.ZoomFit();
 
 				CFLPoint<double> flp = new CFLPoint<double>();
