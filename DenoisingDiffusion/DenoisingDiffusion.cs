@@ -208,9 +208,9 @@ namespace FLImagingExamplesCSharp
 				// 학습할 Denoising Diffusion 모델 설정 // Set up the Denoising Diffusion model to learn
 				denoisingDiffusionDL.SetModel(CDenoisingDiffusionDL.EModel.FLGenNet_Diffusion_Label);
 				// 학습할 Denoising Diffusion 모델 설정 // Set up the Denoising Diffusion model to learn
-				denoisingDiffusionDL.SetModelVersion(CDenoisingDiffusionDL.EModelVersion.FLGenNet_Diffusion_Label_V1_32);
+				denoisingDiffusionDL.SetModelVersion(CDenoisingDiffusionDL.EModelVersion.FLGenNet_Diffusion_Label_V2_32);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				denoisingDiffusionDL.SetLearningEpoch(1500);
+				denoisingDiffusionDL.SetLearningEpoch(3000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				denoisingDiffusionDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 

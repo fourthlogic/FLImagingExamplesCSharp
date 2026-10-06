@@ -187,7 +187,7 @@ namespace FLImagingExamplesCSharp
 				// 학습할 OCR 모델 Version 설정 // Set up the OCR model version to learn
 				stringBasedOCRDL.SetModelVersion(CStringBasedOCRDL.EModelVersion.FLOcrNet_S_V1_32_256_B2);
 				// 학습 epoch 값을 설정 // Set the learn epoch value 
-				stringBasedOCRDL.SetLearningEpoch(500);
+				stringBasedOCRDL.SetLearningEpoch(1000);
 				// 학습 이미지 Interpolation 방식 설정 // Set Interpolation method of learn image
 				stringBasedOCRDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
@@ -341,6 +341,9 @@ namespace FLImagingExamplesCSharp
 				// 인식할 이미지 설정 // Set the image to Recognize
 				stringBasedOCRDL.SetInferenceImage(ref fliValidationImage);
 				stringBasedOCRDL.SetInferenceResultImage(ref fliResultImage);
+
+				// 결과 항목 설정 // Set the result item
+				stringBasedOCRDL.SetInferenceResultItemSettings(CStringBasedOCRDL.EInferenceResultItemSettings.Quadrangle);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = stringBasedOCRDL.Execute()).IsFail())
