@@ -98,7 +98,7 @@ namespace FLImagingExamplesCSharp
 				CFLPoint<double> flp = new CFLPoint<double>();
 
 				if((res = layer3DSrc.DrawTextCanvas(flp, "Source Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail() ||
-				   (res = layer3DDst1.DrawTextCanvas(flp, "Forward Result", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
+				   (res = layer3DDst1.DrawTextCanvas(flp, "Sampling Result", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
