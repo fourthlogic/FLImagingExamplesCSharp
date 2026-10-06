@@ -192,7 +192,7 @@ namespace FLImagingExamplesCSharp
 				stringBasedOCRDL.SetInterpolationMethod(EInterpolationMethod.Bilinear);
 
 				// OptimizerSpec 객체 생성 // Create OptimizerSpec object
-				COptimizerSpecAdamGradientDescentDL optSpec = new COptimizerSpecAdamGradientDescentDL();
+				COptimizerSpecAdamWGradientDescentDL optSpec = new COptimizerSpecAdamWGradientDescentDL();
 
 				// Optimizer의 학습률 설정 // Set learning rate of Optimizer
 				optSpec.SetLearningRate(.0001f);
