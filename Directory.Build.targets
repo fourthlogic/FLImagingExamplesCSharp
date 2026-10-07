@@ -1,0 +1,10 @@
+﻿<Project>
+  <Target Name="FLSegmentHeapManifest"
+          BeforeTargets="CoreCompile"
+          Condition="'$(MSBuildProjectExtension)' == '.csproj' And '$(Win32Manifest)' == '' And '$(NoWin32Manifest)' != 'true' And ('$(OutputType)' == 'Exe' Or '$(OutputType)' == 'WinExe')">
+    <PropertyGroup>
+      <ApplicationManifest>$(MSBuildThisFileDirectory)SegmentHeapCs.manifest</ApplicationManifest>
+      <Win32Manifest>$(MSBuildThisFileDirectory)SegmentHeapCs.manifest</Win32Manifest>
+    </PropertyGroup>
+  </Target>
+</Project>
