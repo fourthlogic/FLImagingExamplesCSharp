@@ -73,17 +73,20 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// Barcode 객체 생성 // Create Barcode object
-				CBarcodeDecoder barcode = new CBarcodeDecoder();
+				CBarcodeDecoder barcodeDecoder = new CBarcodeDecoder();
 
 				// 처리할 이미지 설정 // Set the image to process
-				barcode.SetSourceImage(ref fliImage);
+				barcodeDecoder.SetSourceImage(ref fliImage);
 
 				// Barcode 타입 설정
 				// 미 설정시 EBarcodeDecodingType.Auto 로 모든 심볼을 탐색한다 동작한다.
-				barcode.SetSymbolType(EBarcodeSymbolType.EAN13);
+				barcodeDecoder.SetSymbolType(EBarcodeSymbolType.EAN13);
+
+				// Barcode 디코딩 수준 설정 
+				barcodeDecoder.SetDecodingLevel(EDataCodeDecoderDecodingLevel.Fast);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
-				if((res = barcode.Execute()).IsFail())
+				if((res = barcodeDecoder.Execute()).IsFail())
 					ErrorPrint(res, "Failed to execute Barcode decoder.");
 
 
@@ -95,7 +98,7 @@ namespace FLImagingExamplesCSharp
 				layer.Clear();
 
 				// 검출된 총 바코드 개수
-				Int64 i64Results = barcode.GetResultCount();
+				Int64 i64Results = barcodeDecoder.GetResultCount();
 
 				// 바코드 정보 출력
 				for(Int32 i = 0; i < i64Results; i++)
@@ -104,9 +107,9 @@ namespace FLImagingExamplesCSharp
 					CFLQuad<double> flqRegion = new CFLQuad<double>();
 
 					// Barcode Decoder 결과들 중 Data Region 을 얻어옴
-					if((res = barcode.GetResultDataRegion(i, ref flqRegion)).IsFail())
+					if((res = barcodeDecoder.GetResultDataRegion(i, ref flqRegion)).IsFail())
 					{
-						ErrorPrint(res, "Failed to get data region from the barcode decoder object.");
+						ErrorPrint(res, "Failed to get data region from the barcodeDecoder decoder object.");
 						continue;
 					}
 
@@ -125,14 +128,14 @@ namespace FLImagingExamplesCSharp
 					StringBuilder strDecodedMsg = new StringBuilder();
 
 					// Barcode Decoder 결과들 중 Decoded String 을 얻어옴
-					if((res = barcode.GetResultDecodedString(i, ref strDecodedMsg)).IsFail())
+					if((res = barcodeDecoder.GetResultDecodedString(i, ref strDecodedMsg)).IsFail())
 					{
-						ErrorPrint(res, "Failed to get decoded string from the barcode decoder object.");
+						ErrorPrint(res, "Failed to get decoded string from the barcodeDecoder decoder object.");
 						continue;
 					}
 
 					CBarcodeSpec bcs = new CBarcodeSpec();
-					barcode.GetResultBarcodeSpec(i, ref bcs);
+					barcodeDecoder.GetResultBarcodeSpec(i, ref bcs);
 
 					EBarcodeSymbolType eSymbol = bcs.GetSymbolType();
 
