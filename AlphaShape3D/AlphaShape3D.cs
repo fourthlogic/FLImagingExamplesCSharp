@@ -70,7 +70,7 @@ namespace FLImagingExamplesCSharp
 				// 파라미터 설정 // Set parameter
 				alphaShape3D.SetSourceObject(ref floSrc);
 				alphaShape3D.SetDestinationObject(ref floDst);
-				alphaShape3D.SetBatchSize(CAlphaShape3D.Size64);
+				alphaShape3D.SetBatchSize(CAlphaShape3D.EBatchSize.Size64);
 				alphaShape3D.SetAlphaRadius(0.01);
 
 				// 앞서 설정된 파라미터대로 알고리즘 수행 // Execute algorithm according to previously set parameters
