@@ -46,6 +46,7 @@ namespace FLImagingExamplesCSharp
 			do
 			{
 				CResult res;
+
 				// 이미지 로드 // Load image
 				if((res = fliSrcImage.Load("../../ExampleImages/Threshold/Sun.flif")).IsFail())
 				{
