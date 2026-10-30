@@ -50,8 +50,8 @@ namespace FLImagingExamplesCSharp
 
             do
 			{
-				// Learn 이미지 로드 // Load the learn image
-				if((res = arrFliImage[0].Load("../../ExampleImages/ShadingCalibrator/Learn.flif")).IsFail())
+				// Calibration 이미지 로드 // Load the Calibration image
+				if((res = arrFliImage[0].Load("../../ExampleImages/ShadingCalibrator/Calibration.flif")).IsFail())
 				{
 					ErrorPrint(res, "Failed to load the image file.\n");
 					break;
@@ -71,7 +71,7 @@ namespace FLImagingExamplesCSharp
                     break;
                 }
 
-				// Learn 이미지 뷰 생성 // Create learn image view
+				// Calibration 이미지 뷰 생성 // Create Calibration image view
 				if((res = arrViewImage[0].Create(100, 0, 612, 512)).IsFail())
 				{
 					ErrorPrint(res, "Failed to create the image view.\n");
@@ -138,8 +138,8 @@ namespace FLImagingExamplesCSharp
 
 				// ShadingCalibrator 객체 생성 // Create ShadingCalibrator object
 				CShadingCalibrator shadingCalibrator = new CShadingCalibrator();
-				// Learn 이미지 설정 // Set the learn image
-				shadingCalibrator.SetLearnImageForShadingCalibration(ref arrFliImage[0]);
+				// Calibration 이미지 설정 // Set the Calibration image
+				shadingCalibrator.SetCalibrationImage(ref arrFliImage[0]);
 
 				// 앞서 설정된 이미지로 Calibration을 수행 // Perform Calibration with the previously set image
 				if((res = shadingCalibrator.Calibrate()).IsFail())
@@ -183,7 +183,7 @@ namespace FLImagingExamplesCSharp
                 //                  Align -> Font Name -> Font Alpha Value (Opaqueness) -> Cotton Alpha Value (Opaqueness) -> Font Thickness -> Font Italic
                 TPoint<double> tpPosition = new TPoint<double>(0, 0);
 
-				if((res = arrLayer[0].DrawTextCanvas(tpPosition, "Learn Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
+				if((res = arrLayer[0].DrawTextCanvas(tpPosition, "Calibration Image", EColor.YELLOW, EColor.BLACK, 30)).IsFail())
 				{
 					ErrorPrint(res, "Failed to draw text.\n");
 					break;
