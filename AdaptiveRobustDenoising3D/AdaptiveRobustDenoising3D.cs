@@ -65,7 +65,7 @@ namespace FLImagingExamplesCSharp
 				floSrc.Load("../../ExampleImages/AlphaShape3D/Bunny.fl3do");
 
 				// 객체 생성 // Create object
-				CAdaptiveRobustDenoising3DalphaShape3D adaptiveRobustDenoising = new CAdaptiveRobustDenoising3DalphaShape3D();
+				CAdaptiveRobustDenoising3D adaptiveRobustDenoising = new CAdaptiveRobustDenoising3D();
 
 				// 파라미터 설정 // Set parameter
 				adaptiveRobustDenoising.SetSourceObject(ref floSrc);
