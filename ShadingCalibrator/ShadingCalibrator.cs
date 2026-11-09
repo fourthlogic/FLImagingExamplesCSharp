@@ -140,6 +140,8 @@ namespace FLImagingExamplesCSharp
 				CShadingCalibrator shadingCalibrator = new CShadingCalibrator();
 				// Calibration 이미지 설정 // Set the Calibration image
 				shadingCalibrator.SetCalibrationImage(ref arrFliImage[0]);
+				// Batch Processing 설정 // Set Batch Processing
+				shadingCalibrator.EnableBatchProcessing(true);
 
 				// 앞서 설정된 이미지로 Calibration을 수행 // Perform Calibration with the previously set image
 				if((res = shadingCalibrator.Calibrate()).IsFail())
