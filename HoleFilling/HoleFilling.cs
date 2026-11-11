@@ -107,7 +107,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				if((res = holeFilling.SetPrecision(0.1)).IsFail())
 					break;
-				if((res = holeFilling.SetMaxIteration(100)).IsFail())
+				if((res = holeFilling.SetMaxIterationCount(100)).IsFail())
 					break;
 				CMultiVar<Int64> mvThresholdCondition1 = new CMultiVar<Int64>((Int64)ELogicalCondition.GreaterEqual, (Int64)ELogicalCondition.GreaterEqual, (Int64)ELogicalCondition.GreaterEqual);
 				if((res = holeFilling.SetLogicalCondition(mvThresholdCondition1, EThresholdIndex.First)).IsFail())
