@@ -72,7 +72,7 @@ namespace FLImagingExamplesCSharp
 				adaptiveRobustDenoising.SetDestinationObject(ref floDst);
 
 				adaptiveRobustDenoising.SetNeighborCount(24);
-				adaptiveRobustDenoising.SetIteration(2);
+				adaptiveRobustDenoising.SetIterationCount(2);
 				adaptiveRobustDenoising.SetNormalBandwidth(0.1f);
 				adaptiveRobustDenoising.SetOutlierThreshold(3.0f);
 				adaptiveRobustDenoising.SetPositionUpdate(0.3f);

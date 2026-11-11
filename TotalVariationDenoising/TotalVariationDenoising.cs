@@ -147,7 +147,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 연산 반복 횟수 설정 // Set the Iteration
-				if((res = (totalVariationDenoising.SetIteration(3))).IsFail())
+				if((res = (totalVariationDenoising.SetIterationCount(3))).IsFail())
 				{
 					ErrorPrint(res, "Failed to set Iteration.");
 					break;
