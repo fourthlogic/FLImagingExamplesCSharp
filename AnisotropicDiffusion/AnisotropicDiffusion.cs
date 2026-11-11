@@ -142,8 +142,8 @@ namespace FLImagingExamplesCSharp
 				// Theta = 2 설정 // Set the Theta value(2.0)
 				anisotropicDiffusion.SetTheta(2.0);
 
-				// Iteration = 10 설정 // Set the Iteration value(10)
-				anisotropicDiffusion.SetIteration(10);
+				// Iteration Count = 10 설정 // Set the Iteration Count value(10)
+				anisotropicDiffusion.SetIterationCount(10);
 
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = anisotropicDiffusion.Execute()).IsFail())

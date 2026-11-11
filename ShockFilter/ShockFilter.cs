@@ -114,8 +114,8 @@ namespace FLImagingExamplesCSharp
                 shockFilter.SetSourceImage(ref arrFliImage[0]);
                 // Destination 이미지 설정 // Set the destination image
                 shockFilter.SetDestinationImage(ref arrFliImage[1]);
-				// Algorithm 반복 수행 횟수 설정 // Set the number of iterations of an algorithm
-				shockFilter.SetIteration(15);
+				// Algorithm 반복 수행 횟수 설정 // Set the number of iteration count of an algorithm
+				shockFilter.SetIterationCount(15);
 				// Time Step 설정 // Set the time step value
 				shockFilter.SetTimeStep(0.5f);
 				// Sigma 설정 // Set the sigma value
