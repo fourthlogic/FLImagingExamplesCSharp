@@ -308,6 +308,13 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
+				// Batch Processing 설정 // Set Batch Processing
+				if((res = stereoCalibrator3D.EnableBatchProcessing(true)).IsFail())
+				{
+					ErrorPrint(res, "Failed to set batch processing.\n");
+					break;
+				}
+
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((res = stereoCalibrator3D.Execute()).IsFail())
 				{
