@@ -90,7 +90,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				if((res = meanShiftFilter.SetDestinationImage(ref fliDstImage)).IsFail())
 					break;
-				if((res = meanShiftFilter.SetMaxIteration(1)).IsFail())
+				if((res = meanShiftFilter.SetMaxIterationCount(1)).IsFail())
 					break;
 				if((res = meanShiftFilter.SetTolerance(0.0)).IsFail())
 					break;
