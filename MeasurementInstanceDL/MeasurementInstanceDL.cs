@@ -267,7 +267,7 @@ namespace FLImagingExamplesCSharp
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
 					int i32MiniBatchCount = measurementInstanceDL.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = measurementInstanceDL.GetLearningResultCurrentIteration();
+					int i32Iteration = measurementInstanceDL.GetLearningResultCurrentIterationCount();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
 					int i32Epoch = measurementInstanceDL.GetLastEpoch();
 

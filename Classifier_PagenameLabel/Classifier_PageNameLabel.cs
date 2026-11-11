@@ -215,7 +215,7 @@ namespace FLImagingExamplesCSharp
 					// 마지막 미니 배치 최대 반복 횟수 받기 // Get the last maximum number of iterations of the last mini batch 
 					int i32MaxIteration = classifierDL.GetActualMiniBatchCount();
 					// 마지막 미니 배치 반복 횟수 받기 // Get the last number of mini batch iterations
-					int i32Iteration = classifierDL.GetLearningResultCurrentIteration();
+					int i32Iteration = classifierDL.GetLearningResultCurrentIterationCount();
 					// 마지막 학습 횟수 받기 // Get the last epoch learning
 					int i32Epoch = classifierDL.GetLastEpoch();
 
