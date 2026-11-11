@@ -110,8 +110,8 @@ namespace FLImagingExamplesCSharp
 				// Theta 업데이트 비율 설정 // Set update rate
 				coherenceEnhancingDiffusionNonNeg.SetTheta(0.5);
 
-				// 반복횟수 설정 // Number of iterations
-				coherenceEnhancingDiffusionNonNeg.SetIteration(15);
+				// 반복횟수 설정 // Set Iteration Count
+				coherenceEnhancingDiffusionNonNeg.SetIterationCount(15);
 
 				// 알고리즘 수행 // Execute the algorithm
 				if((res = (coherenceEnhancingDiffusionNonNeg.Execute())).IsFail())
