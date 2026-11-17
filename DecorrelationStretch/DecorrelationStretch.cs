@@ -94,13 +94,6 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// 두 이미지 뷰의 시점을 동기화 한다 // Synchronize the viewpoints of the two image views
-				if((res = viewImageSrc.SynchronizePointOfView(ref viewImageDst2)).IsFail())
-				{
-					ErrorPrint(res, "Failed to set image object on the image view.\n");
-					break;
-				}
-
 				// Image 크기에 맞게 view의 크기를 조정 // Zoom the view to fit the image size
 				if((res = viewImageSrc.ZoomFit()).IsFail())
 				{
