@@ -137,10 +137,10 @@ namespace FLImagingExamplesCSharp
 				// 연결 영역이 아닌 영역의 출력값 설정 // Set output value of out of connected region
 				floodFill.SetOutOfRangeValue(new CMultiVar<double>(0));
 
-				// Floating Range 결과 이미지 설정 // Set destination image for Floating Range
+				// Destination1 이미지 설정 // Set Destination1 image
 				floodFill.SetDestinationImage(ref arrFliImage[(int)EType.Destination1]);
 
-				// 기준 픽셀 지정 방식을 Floating Range로 설정 // Set reference pixel specification method to Floating Range
+				// Floating Range Mode 설정 // Set Floating Range Mode
 				floodFill.SetRangeMode(CFloodFill.ERangeMode.FloatingRange);
 
 				// 알고리즘 수행 // Execute the algorithm
@@ -150,10 +150,10 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				// Fixed Range 결과 이미지 설정 // Set destination image for Fixed Range
+				// Destination2 이미지 설정 // Set Destination2 image
 				floodFill.SetDestinationImage(ref arrFliImage[(int)EType.Destination2]);
 
-				// 기준 픽셀 지정 방식을 Fixed Range로 설정 // Set reference pixel specification method to Fixed Range
+				// Fixed Range Mode 설정 // Set Fixed Range Mode
 				floodFill.SetRangeMode(CFloodFill.ERangeMode.FixedRange);
 
 				// 알고리즘 수행 // Execute the algorithm
