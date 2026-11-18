@@ -31,7 +31,7 @@ namespace FLImagingExamplesCSharp
 			Src = 0,
 			Opr,
 			Dst,
-			Count,
+			COUNT,
 		}
 
 		[STAThread]
@@ -42,12 +42,12 @@ namespace FLImagingExamplesCSharp
 			CLibraryUtilities.Initialize();
 
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage[] arrFliImage = new CFLImage[(int)EType.Count];
+			CFLImage[] arrFliImage = new CFLImage[(int)EType.COUNT];
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage[] arrViewImage = new CGUIViewImage[(int)EType.Count];
+			CGUIViewImage[] arrViewImage = new CGUIViewImage[(int)EType.COUNT];
 
-			for(int i = 0; i < (int)EType.Count; ++i)
+			for(int i = 0; i < (int)EType.COUNT; ++i)
 			{
 				arrFliImage[i] = new CFLImage();
 				arrViewImage[i] = new CGUIViewImage();
@@ -69,7 +69,7 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				for(int i = 0; i < (int)EType.Count; ++i)
+				for(int i = 0; i < (int)EType.COUNT; ++i)
 				{
 					int i32X = i % 2;
 					int i32Y = i / 2;
@@ -139,9 +139,9 @@ namespace FLImagingExamplesCSharp
 				// 출력을 위한 이미지 레이어를 얻어옵니다. //  Gets the image layer for output.
 				// 따로 해제할 필요 없음 // No need to release separately
 				CFLPoint<double> flpTmp = new CFLPoint<double>(0, 0);
-				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[(int)EType.Count];
+				CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[(int)EType.COUNT];
 
-				for(int i = 0; i < (int)EType.Count; ++i)
+				for(int i = 0; i < (int)EType.COUNT; ++i)
 					arrLayer[i] = arrViewImage[i].GetLayer(0);
 
 
@@ -160,7 +160,7 @@ namespace FLImagingExamplesCSharp
 					ErrorPrint(res, "Failed to draw figure.\n");
 
 				// 이미지 뷰를 갱신 합니다. // Update the image view.
-				for(int i = (int)EType.Count - 1; i >= 0; --i)
+				for(int i = (int)EType.COUNT - 1; i >= 0; --i)
 				{
 					arrViewImage[i].ZoomFit();
 					arrViewImage[i].Invalidate(true);
@@ -170,7 +170,7 @@ namespace FLImagingExamplesCSharp
 				bool bRun = true;
 				while(bRun)
 				{
-					for(int i = 0; i < (int)EType.Count; ++i)
+					for(int i = 0; i < (int)EType.COUNT; ++i)
 						bRun &= arrViewImage[i].IsAvailable();
 
 					Thread.Sleep(1);

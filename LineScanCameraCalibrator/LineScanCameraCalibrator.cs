@@ -32,7 +32,7 @@ namespace FLImagingExamplesCSharp
 			Calibration,
 			Source,
 			Destination,
-			Count
+			COUNT
 		};
 
 		[STAThread]
@@ -74,7 +74,7 @@ namespace FLImagingExamplesCSharp
 
 				fliImage[(int)EView.Source].Assign(fliImage[(int)EView.Calibration]);
 
-				for(int i = 0; i < (int)EView.Count; ++i)
+				for(int i = 0; i < (int)EView.COUNT; ++i)
 				{
 					// Learn 이미지 뷰 생성 // Create the Learn image view
 					if((res = arrViewImage[i].Create(300 + 480 * i, 0, 300 + 480 * (i + 1), 360)).IsFail())
@@ -168,7 +168,7 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 뷰 이름 출력 // display view name
-				for(int i = 0; i < (int)EView.Count; ++i)
+				for(int i = 0; i < (int)EView.COUNT; ++i)
 				{
 					CGUIViewImageLayer currentLayer = arrViewImage[i].GetLayer(0);
 
@@ -181,7 +181,7 @@ namespace FLImagingExamplesCSharp
 
 				while(bAvailable)
 				{
-					for(int i = 0; i < (int)EView.Count; ++i)
+					for(int i = 0; i < (int)EView.COUNT; ++i)
 						bAvailable &= arrViewImage[i].IsAvailable();
 
 					CThreadUtilities.Sleep(1);

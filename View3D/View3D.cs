@@ -28,7 +28,7 @@ namespace FLImagingExamplesCSharp
 		{
 			Model = 0,
 			Texture,
-			Count,
+			COUNT,
 		};
 
 		[STAThread]
@@ -39,10 +39,10 @@ namespace FLImagingExamplesCSharp
 			CLibraryUtilities.Initialize();
 
 			// 이미지 객체 선언 // Declare the image object
-			CFLImage[] arrFliImage = new CFLImage[(int)EType.Count];
+			CFLImage[] arrFliImage = new CFLImage[(int)EType.COUNT];
 
 			// 이미지 뷰 선언 // Declare the image view
-			CGUIViewImage[] arrViewImage = new CGUIViewImage[(int)EType.Count];
+			CGUIViewImage[] arrViewImage = new CGUIViewImage[(int)EType.COUNT];
 
 			for(int i = 0; i < 2; ++i)
 			{
@@ -95,7 +95,7 @@ namespace FLImagingExamplesCSharp
 				bool bError = false;
 
 				// 이미지 뷰에 이미지를 디스플레이 // Display the image in the image view
-				for(int i = 0; i < (int)EType.Count; ++i)
+				for(int i = 0; i < (int)EType.COUNT; ++i)
 				{
 					if((res = (arrViewImage[i].SetImagePtr(ref arrFliImage[i]))).IsFail())
 					{

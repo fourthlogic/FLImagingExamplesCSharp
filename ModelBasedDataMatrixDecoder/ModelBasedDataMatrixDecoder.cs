@@ -32,7 +32,7 @@ namespace FLImagingExamplesCSharp
 			ModelBaseFind,
 			NormalFind,
 
-			Count
+			COUNT
 		};
 
 		[STAThread]
@@ -43,19 +43,19 @@ namespace FLImagingExamplesCSharp
 			CLibraryUtilities.Initialize();
 
 			// Declaration of the image view 
-			CGUIViewImage[] arrViewImage = new CGUIViewImage[(int)EViewList.Count];
+			CGUIViewImage[] arrViewImage = new CGUIViewImage[(int)EViewList.COUNT];
 
-			CFLImage[] arrFliImage = new CFLImage[(int)EViewList.Count];
-			CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[(int)EViewList.Count];
+			CFLImage[] arrFliImage = new CFLImage[(int)EViewList.COUNT];
+			CGUIViewImageLayer[] arrLayer = new CGUIViewImageLayer[(int)EViewList.COUNT];
 
-			for(int i = 0; i < (int)EViewList.Count; ++i)
+			for(int i = 0; i < (int)EViewList.COUNT; ++i)
 			{
 				arrViewImage[i] = new CGUIViewImage();
 				arrFliImage[i] = new CFLImage();
 				arrLayer[i] = new CGUIViewImageLayer();
 			}
 
-			string[] arrWcsViewText = new string[(int)EViewList.Count];
+			string[] arrWcsViewText = new string[(int)EViewList.COUNT];
 
 			arrWcsViewText[(int)EViewList.Learn] = "Learn View";
 			arrWcsViewText[(int)EViewList.ModelBaseFind] = "Model Based Decoder Result View";
@@ -88,7 +88,7 @@ namespace FLImagingExamplesCSharp
 				const int i32ViewSize = 450;
 				const int i32Start = 100;
 
-				for(int i = 0; i < (int)EViewList.Count; ++i)
+				for(int i = 0; i < (int)EViewList.COUNT; ++i)
 				{
 					int i32X = i32ViewSize * i;
 					int i32Y = i32Start;
@@ -265,14 +265,14 @@ namespace FLImagingExamplesCSharp
 				}
 
 				// 이미지 뷰를 갱신 합니다. // Update image view
-				for(int i = 0; i < (int)EViewList.Count; ++i)
+				for(int i = 0; i < (int)EViewList.COUNT; ++i)
 					arrViewImage[i].Invalidate();
 
 				// The image view is waiting until close.
 				while(arrViewImage[(int)EViewList.Learn].IsAvailable() && arrViewImage[(int)EViewList.ModelBaseFind].IsAvailable() && arrViewImage[(int)EViewList.NormalFind].IsAvailable())
 					CThreadUtilities.Sleep(1);
 
-				for(int i = 0; i < (int)EViewList.Count; ++i)
+				for(int i = 0; i < (int)EViewList.COUNT; ++i)
 					arrViewImage[i].Destroy();
 			}
 			while(false);
