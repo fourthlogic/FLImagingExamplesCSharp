@@ -295,7 +295,7 @@ namespace FLImagingExamplesCSharp
 					}
 				}
 
-				if(m_viewGraph.GetAvailableViewGraphContextMenu().Count == (int)EViewGraphMenuItem.Count)
+				if(m_viewGraph.GetAvailableViewGraphContextMenu().Count == (int)EViewGraphMenuItem.COUNT)
 				{
 					radioButtonAll.Checked = true;
 					radioButtonNone.Checked = false;
