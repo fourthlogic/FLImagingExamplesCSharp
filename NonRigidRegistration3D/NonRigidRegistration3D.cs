@@ -53,49 +53,49 @@ namespace FLImagingExamplesCSharp
 				// Learn Object 로드 // Load the Learn object
 				if((eResult = floLearnObject.Load("../../ExampleImages/NonRigidRegistration3D/hand0Sample.fl3do")).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to load the object file.\n");
+					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
 				}
 
 				// Source Object 로드 // Load the Source object
 				if((eResult = floSourceObject.Load("../../ExampleImages/NonRigidRegistration3D/hand1Sample.fl3do")).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to load the object file.\n");
+					ErrorPrint(eResult, "Failed to load the object file.\n");
 					break;
 				}
 
 				// Learn 3D 뷰 생성 // Create the Learn 3D view
 				if((eResult = view3DLearn.Create(0, 0, 500, 500)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to create the Learn 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Learn 3D view.\n");
 					break;
 				}
 
 				// Source 3D 뷰 생성 // Create the Source 3D view
 				if((eResult = view3DSource.Create(500, 0, 1000, 512)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to create the Source 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Source 3D view.\n");
 					break;
 				}
 
 				// Destination 3D 뷰 생성 // Create the Destination 3D view
 				if((eResult = view3DDst.Create(0, 500, 500, 1000)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to create the Destination 3D view.\n");
+					ErrorPrint(eResult, "Failed to create the Destination 3D view.\n");
 					break;
 				}
 
 				// Learn 3D 뷰에 Learn Object 디스플레이 // Display the Learn object in the Learn 3D view
 				if((eResult = view3DLearn.PushObject(floLearnObject)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to display the 3D object.\n");
+					ErrorPrint(eResult, "Failed to display the 3D object.\n");
 					break;
 				}
 
 				// Source 3D 뷰에 Source Object 디스플레이 // Display the Source object in the Source 3D view
 				if((eResult = view3DSource.PushObject(floSourceObject)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to display the 3D object.\n");
+					ErrorPrint(eResult, "Failed to display the 3D object.\n");
 					break;
 				}
 
@@ -111,7 +111,7 @@ namespace FLImagingExamplesCSharp
 				// 앞서 설정된 파라미터 대로 알고리즘 수행 // Execute algorithm according to previously set parameters
 				if((eResult = nonRigidRegistration3D.Execute()).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to execute Non-Rigid Registration 3D.");
+					ErrorPrint(eResult, "Failed to execute Non-Rigid Registration 3D.");
 					break;
 				}
 
@@ -143,19 +143,19 @@ namespace FLImagingExamplesCSharp
 
 				if((eResult = layer3DLearn.DrawTextCanvas(flp, "Learn Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
 				if((eResult = layer3DSource.DrawTextCanvas(flp, "Source Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
 				if((eResult = layer3DDst.DrawTextCanvas(flp, "Destination Object", EColor.YELLOW, EColor.BLACK, 20)).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to draw text.\n");
+					ErrorPrint(eResult, "Failed to draw text.\n");
 					break;
 				}
 
@@ -175,7 +175,7 @@ namespace FLImagingExamplesCSharp
 				if(view3DDst.PushObject(view3DObject, ref i32ResultObjectIndex).IsFail() ||
 				   view3DDst.PushObject(floSourceObject).IsFail())
 				{
-					//ErrorPrint(eResult, "Failed to set object on the 3d view.\n");
+					ErrorPrint(eResult, "Failed to set object on the 3d view.\n");
 					break;
 				}
 
