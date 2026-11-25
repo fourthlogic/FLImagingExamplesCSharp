@@ -159,8 +159,6 @@ namespace FLImagingExamplesCSharp
 					break;
 				}
 
-				TPoint3<byte> tp3LearnColor = new TPoint3<byte>(0, 255, 255);
-
 				// 정합 결과 3D 객체 얻기 // Get the registration result 3D object
 				CFL3DObject floResult = new CFL3DObject();
 
@@ -168,7 +166,6 @@ namespace FLImagingExamplesCSharp
 
 				// 결과 객체를 3D 뷰에 표시하기 위한 객체 생성 // Create an object to display the result object in the 3D view
 				CGUIView3DObject view3DObject = new CGUIView3DObject(floResult);
-
 				int i32ResultObjectIndex = 0;
 
 				// Destination 3D 뷰에 결과 객체와 Source 객체 디스플레이 // Display the result object and the Source object in the Destination 3D view
@@ -241,6 +238,10 @@ namespace FLImagingExamplesCSharp
 				// 3D 뷰가 종료될 때 까지 기다림 // Wait for the 3D views to close
 				while(view3DLearn.IsAvailable() && view3DSource.IsAvailable() && view3DDst.IsAvailable())
 					CThreadUtilities.Sleep(1);
+
+				view3DLearn.Destroy();
+				view3DSource.Destroy();
+				view3DDst.Destroy();
 			}
 			while(false);
 		}
