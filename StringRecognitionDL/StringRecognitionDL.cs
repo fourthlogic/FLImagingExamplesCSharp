@@ -256,7 +256,7 @@ namespace FLImagingExamplesCSharp
 				int i32MaxEpoch = stringRecognitionDL.GetLearningEpoch();
 				int i32PrevEpoch = 0;
 				int i32PrevCostCount = 0;
-				int i32PrevSourceCount = 0;
+				int i32PrevValidationCount = 0;
 
 				while(true)
 				{
@@ -285,12 +285,12 @@ namespace FLImagingExamplesCSharp
 						// Get the history of cost and validation and print it at graph view
 						List<float> vctCosts = new List<float>();
 						List<float> vct1MNED = new List<float>();
-						List<int> vctSourceEpoch = new List<int>();
+						List<int> vctValidationEpoch = new List<int>();
 
-						stringRecognitionDL.GetLearningResultAllHistory(ref vctCosts, ref vct1MNED, ref vctSourceEpoch);
+						stringRecognitionDL.GetLearningResultAllHistory(ref vctCosts, ref vct1MNED, ref vctValidationEpoch);
 
 						// 비용 기록이나 검증 결과 기록이 있다면 출력 // Print results if cost or validation history exists
-						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vct1MNED.Count() != 0 && i32PrevSourceCount != vct1MNED.Count()))
+						if((vctCosts.Count() != 0 && i32PrevCostCount != vctCosts.Count()) || (vct1MNED.Count() != 0 && i32PrevValidationCount != vct1MNED.Count()))
 						{
 							int i32Step = stringRecognitionDL.GetLearningValidationStep();
 							List<float> flaX = new List<float>();
@@ -322,7 +322,7 @@ namespace FLImagingExamplesCSharp
 
 						i32PrevEpoch = i32Epoch;
 						i32PrevCostCount = vctCosts.Count();
-						i32PrevSourceCount = vct1MNED.Count();
+						i32PrevValidationCount = vct1MNED.Count();
 					}
 
 					// epoch만큼 학습이 완료되면 종료 // End when learning progresses as much as epoch
