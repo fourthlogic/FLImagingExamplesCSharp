@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Numerics;
 
 using FLImagingCLR;
 using FLImagingCLR.Base;
 using FLImagingCLR.Foundation;
 using FLImagingCLR.GUI;
-using FLImagingCLR.ImageProcessing;
-using FLImagingCLR.AdvancedFunctions;
+using CResult = FLImagingCLR.CResult;
 
 namespace FLImagingExamplesCSharp
 {
 	class LeastSquares
 	{
+		public static void ErrorPrint(CResult cResult, string str)
+		{
+			if(str.Length > 1)
+				Console.WriteLine(str);
+
+			Console.WriteLine("Error code : {0}\nError name : {1}\n", cResult.GetResultCode(), cResult.GetString());
+			Console.WriteLine("\n");
+			Console.ReadKey();
+		}
+
 		[STAThread]
 		static void Main(string[] args)
 		{
@@ -23,180 +31,175 @@ namespace FLImagingExamplesCSharp
 			// before using any features of the FLImaging(R) library
 			CLibraryUtilities.Initialize();
 
-			String[] arrStrEquation = {
-				"Linear equation",
-				"Quadratic equation",
-				"Cubic equation",
-				"Quartic equation",
-				"Quintic equation"
-			};
+			// 이미지 뷰 선언 // Declare image view
+			CGUIViewImage[] viewImage = { new CGUIViewImage(), new CGUIViewImage(), new CGUIViewImage() };
 
-			while(true)
+			// 수행 결과 객체 선언 // Declare the execution result object
+			CResult res = new CResult(EResult.UnknownError);
+
+			do
 			{
-				do
+				// 이미지 뷰 생성 // Create image views
+				for(int i = 0; i < 3; ++i)
 				{
-					Console.Write("Please input generate sample data count: ");
-
-					// 계수 문자열을 입력 받는다. // Receive the count string.
-					String strInput = Console.ReadLine();
-
-					if(strInput.Length == 0)
+					if((res = viewImage[i].Create(200 + i * 500, 0, 700 + i * 500, 500)).IsFail())
 					{
-						Console.WriteLine("Please check the input.\n");
+						ErrorPrint(res, "Failed to create the image view.\n");
+						break;
+					}
+				}
+
+				if(res.IsFail())
+					break;
+
+				// 각 이미지 뷰의 시점을 동기화 한다. // Synchronize the viewpoint of each image view.
+				if((res = viewImage[0].SynchronizePointOfView(ref viewImage[1])).IsFail() || (res = viewImage[1].SynchronizePointOfView(ref viewImage[2])).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize view\n");
+					break;
+				}
+
+				// 각 이미지 뷰 윈도우의 위치를 동기화 한다 // Synchronize the position of each image view window
+				if((res = viewImage[0].SynchronizeWindow(ref viewImage[1])).IsFail() || (res = viewImage[1].SynchronizeWindow(ref viewImage[2])).IsFail())
+				{
+					ErrorPrint(res, "Failed to synchronize window.\n");
+					break;
+				}
+
+				// 곡선 y = 0.004 * (x - 250)^2 + 200 위의 점들에 노이즈를 추가하여 데이터 생성
+				// Generate data by adding noise to points on the curve y = 0.004 * (x - 250)^2 + 200
+				CFLPointArray flpaData = new CFLPointArray();
+
+				for(int i = 0; i <= 40; ++i)
+				{
+					double f64X = 50.0 + i * 10.0;
+					double f64Y = 0.004 * (f64X - 250.0) * (f64X - 250.0) + 200.0 + CRandomGenerator.Double(-5.0, 5.0);
+
+					// 일부 점은 곡선에서 크게 벗어나도록 만든다. // Make some points deviate greatly from the curve.
+					if(i == 6)
+						f64Y -= 90.0;
+					else if(i == 20)
+						f64Y += 110.0;
+					else if(i == 33)
+						f64Y += 100.0;
+
+					// 일부 점은 곡선에서 조금 벗어나도록 만든다. (임계값이 작을 때만 제외됨)
+					// Make some points deviate slightly from the curve. (Excluded only when the threshold is small)
+					if(i == 13)
+						f64Y -= 25.0;
+					else if(i == 27)
+						f64Y += 25.0;
+
+					flpaData.PushBack(new CFLPoint<double>(f64X, f64Y));
+				}
+
+				// CLeastSquares<double> 객체 생성 // Create CLeastSquares<double> object
+				CLeastSquares<double> leastSquares = new CLeastSquares<double>();
+
+				// 데이터를 할당 // Assign data
+				if((res = leastSquares.Assign(flpaData)).IsFail())
+				{
+					ErrorPrint(res, "Failed to assign data.\n");
+					break;
+				}
+
+				// 피팅할 다항식의 차수 // Degree of the polynomial to fit
+				const int i32Degree = 2;
+
+				// 각 뷰에서 사용할 Outlier 파라미터 // Outlier parameters for each view
+				string[] arrStrViewName = { "Default", "Parameter 1", "Parameter 2" };
+				long[] arrI64OutlierThresholdCount = { 0, 1, 3 };
+				double[] arrF64OutlierThreshold = { 3.0, 3.0, 1.5 };
+
+				Console.WriteLine("Source Points");
+				Console.WriteLine("{0}\n", CFigureUtilities.ConvertFigureObjectToString(flpaData));
+
+				for(int i = 0; i < 3; ++i)
+				{
+					// 계수 값을 받기 위해 List 생성 // Create List to receive coefficient values
+					List<double> listCoef = new List<double>();
+					// R square 값을 받기 위해 double 선언 // Declare double to receive R square value
+					double f64RSquare = 0.0;
+					// 제외된 Outlier 점들의 인덱스를 받기 위해 List 생성 // Create List to receive the indices of excluded outlier points
+					List<long> listOutlierIndices = new List<long>();
+
+					// 다항식 계수를 얻는다. (내림차순 : a, b, c → y = ax^2 + bx + c)
+					// Get polynomial coefficients. (Descending order : a, b, c -> y = ax^2 + bx + c)
+					if((res = leastSquares.GetPoly(i32Degree, ref listCoef, ref f64RSquare, ECoefficientOrder.Descending, ELeastSqauresAccuracy.TemplateType, arrI64OutlierThresholdCount[i], arrF64OutlierThreshold[i], ref listOutlierIndices)).IsFail())
+					{
+						ErrorPrint(res, "Failed to calculate.\n");
 						break;
 					}
 
-					int i32DataCount = 0;
+					// Outlier 인덱스로 Outlier PointArray 생성 // Create Outlier PointArray from the outlier indices
+					CFLPointArray flpaOutlier = new CFLPointArray();
 
-					if(int.TryParse(strInput, out i32DataCount) == false)
-					{
-						Console.WriteLine("Please check the input.\n");
-						break;
-					}
+					foreach(long i64Index in listOutlierIndices)
+						flpaOutlier.PushBack(flpaData.GetAt(i64Index));
 
-					if(i32DataCount <= 0)
-					{
-						Console.WriteLine("Please check the input.\n");
-						break;
-					}
-
-					// 입력 받은 개수만큼 데이터를 생성한다. // Generate data as many as the input number.
-
-					double[] arrF64DataX = new double[i32DataCount];
-					double[] arrF64DataY = new double[i32DataCount];
-
-					String strSampleData = "";
-
+					// 얻어온 계수로 곡선을 계산하여 짧은 선분들로 표현 // Calculate the curve with the obtained coefficients and represent it with short line segments
+					CFLFigureArray flfaCurve = new CFLFigureArray();
 					double f64PrevX = 0.0;
 					double f64PrevY = 0.0;
 
-					Random random = new Random();
-
-					for(int i = 0; i < i32DataCount; ++i)
+					for(int x = 30; x <= 470; x += 4)
 					{
-						if(strSampleData.Length != 0)
-							strSampleData += ", ";
+						double f64X = x;
+						double f64Y = 0.0;
 
-						arrF64DataX[i] = f64PrevX + (random.Next(i32DataCount) / 10.0);
+						foreach(double f64Coef in listCoef)
+							f64Y = f64Y * f64X + f64Coef;
 
-						if(random.Next() % 2 != 0)
-							arrF64DataY[i] = f64PrevY + (random.Next(i32DataCount) / 10.0);
-						else
-							arrF64DataY[i] = f64PrevY - (random.Next(i32DataCount) / 10.0);
+						if(x != 30)
+							flfaCurve.PushBack(new CFLLine<double>(f64PrevX, f64PrevY, f64X, f64Y));
 
-						f64PrevX = arrF64DataX[i];
-						f64PrevY = arrF64DataY[i];
-
-						String strFormat = "";
-						strFormat = String.Format("({0}, {1})", arrF64DataX[i], arrF64DataY[i]);
-
-						strSampleData += strFormat;
+						f64PrevX = f64X;
+						f64PrevY = f64Y;
 					}
 
-					Console.WriteLine("Sample Data");
-					Console.WriteLine(strSampleData);
-					Console.Write("\n");
+					// 화면에 출력하기 위해 Image View 에서 레이어 0번을 얻어옴 // Obtain layer 0 number from image view for display
+					// 이 객체는 이미지 뷰에 속해있기 때문에 따로 해제할 필요가 없음 // This object belongs to an image view and does not need to be released separately
+					CGUIViewImageLayer layer = viewImage[i].GetLayer(0);
 
-					// LeastSquares<double> 객체 생성 // Create LeastSquares<double> object
-					CLeastSquares<double> leastSquares = new CLeastSquares<double>();
+					string strParameter;
 
-					// 데이터를 할당 // Assign data
-					leastSquares.Assign(arrF64DataX, arrF64DataY, i32DataCount);
+					if(arrI64OutlierThresholdCount[i] != 0)
+						strParameter = String.Format("Outlier Threshold Count : {0}\r\nOutlier Threshold : {1:F3}", arrI64OutlierThresholdCount[i], arrF64OutlierThreshold[i]);
+					else
+						strParameter = String.Format("Outlier Threshold Count : {0}", arrI64OutlierThresholdCount[i]);
 
-					for(int i = 1; i <= 5; ++i)
-					{
-						// 계수 값을 받기 위해 List 생성 // Create List to receive coefficient values
-						List<double> listF64Output = new List<double>();
+					string strResult = String.Format("y = {0:F6}x^2 {1:+0.000000;-0.000000}x {2:+0.000000;-0.000000}\r\nR square : {3:F6}\r\nOutlier Count : {4}", listCoef[0], listCoef[1], listCoef[2], f64RSquare, listOutlierIndices.Count);
 
-						// R square 값을 받기 위해 double 선언 // Declare double to receive R square value
-						double f64TRSqr = 0.0;
+					// 레이어에 Figure 와 Text 를 출력 // Draw Figure and Text to the layer
+					// 피팅 결과 곡선 : CYAN, 데이터 : LIME, 제외된 Outlier 점 : RED
+					// Fitted curve : CYAN, Data : LIME, Excluded outlier points : RED
+					layer.DrawFigureImage(flfaCurve, EColor.BLACK, 5);
+					layer.DrawFigureImage(flfaCurve, EColor.CYAN, 3);
+					layer.DrawFigureImage(flpaData, EColor.BLACK, 3);
+					layer.DrawFigureImage(flpaData, EColor.LIME, 1);
+					layer.DrawFigureImage(flpaOutlier, EColor.RED, 1);
+					layer.DrawTextCanvas(new CFLPoint<int>(0, 0), arrStrViewName[i], EColor.YELLOW, EColor.BLACK, 30);
+					layer.DrawTextCanvas(new CFLPoint<int>(0, 40), strParameter, EColor.YELLOW, EColor.BLACK, 15);
+					layer.DrawTextCanvas(new CFLPoint<int>(0, 80), strResult, EColor.YELLOW, EColor.BLACK, 15);
 
-						// 다항식 계수를 얻는다. // Get polynomial coefficients
-						leastSquares.GetPoly(i, ref listF64Output, ref f64TRSqr);
-
-						String strEquation = "";
-
-						int i32Count = listF64Output.Count();
-
-						if(i32Count == 0)
-							continue;
-
-						List<Complex> listCoef = new List<Complex>();
-
-						// 얻어온 계수로 다항식을 만든다. // Create a polynomial with the obtained coefficients.
-						for(int j = 0; j < i32Count; ++j)
-						{
-							double f64Coef = listF64Output[j];
-
-							listCoef.Add(new Complex(f64Coef, 0.0));
-
-							if(f64Coef == 0.0)
-								continue;
-
-							if(strEquation.Length != 0 && f64Coef > 0.0)
-								strEquation += " + ";
-
-							String strFormat = "";
-
-							if(j == i32Count - 2)
-							{
-								strFormat = String.Format("{0}*x", f64Coef);
-							}
-							else if(j == i32Count - 1)
-							{
-								strFormat = String.Format("{0}", f64Coef);
-							}
-							else
-							{
-								strFormat = String.Format("{0}*x^{1}", f64Coef, i32Count - 1 - j);
-							}
-
-							strEquation += strFormat;
-						}
-
-						if(strEquation.Length == 0)
-							continue;
-
-						String strDegree = arrStrEquation[i - 1];
-
-						String strR = "";
-						strR = String.Format("R square value: {0}", f64TRSqr);
-
-						Console.WriteLine(strDegree);
-						Console.WriteLine(strR);
-						Console.WriteLine(strEquation);
-
-						// 방정식의 해를 얻기위해 List<Complex> 생성 // Create List<Complex> to get solution of equation
-						List<Complex> listEquationResult = new List<Complex>();
-
-						// 방정식의 해를 얻어온다. // Get the solution of the equation.
-						CEquation.Solve(listCoef, ref listEquationResult);
-
-						// 방정식의 해를 표시한다. // Display the solution of the equation.
-						String strResult = "Result \n";
-
-						for(int j = 0; j < listEquationResult.Count; ++j)
-						{
-							Complex cpxResult = listEquationResult[j];
-
-							String strCpx = "";
-							if(cpxResult.Imaginary == 0.0)
-								strCpx = String.Format("{0}", cpxResult.Real);
-							else if(cpxResult.Imaginary > 0.0)
-								strCpx = String.Format("{0}+{1}i", cpxResult.Real, cpxResult.Imaginary);
-							else
-								strCpx = String.Format("{0}{1}i", cpxResult.Real, cpxResult.Imaginary);
-
-							strResult += strCpx + "\n";
-						}
-
-						strResult += "\n";
-
-						Console.WriteLine(strResult);
-					}
+					// Console 출력 // Console output
+					Console.WriteLine("[{0}]", arrStrViewName[i]);
+					Console.WriteLine(strParameter);
+					Console.WriteLine("{0}\n", strResult);
 				}
-				while(false);
+
+				if(res.IsFail())
+					break;
+
+				// 이미지 뷰들을 갱신 합니다. // Update the image views.
+				for(int i = 0; i < 3; ++i)
+					viewImage[i].Invalidate(true);
+
+				// 이미지 뷰가 셋중에 하나라도 꺼지면 종료로 간주 // Consider closed when any of the three image views are turned off
+				while(viewImage[0].IsAvailable() && viewImage[1].IsAvailable() && viewImage[2].IsAvailable())
+					CThreadUtilities.Sleep(1);
 			}
+			while(false);
 		}
 	}
 }
